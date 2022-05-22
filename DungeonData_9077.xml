@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9077" name="@dungeon:9077" startPos="18157.4609,-171150.8281,1449.4584" exitContinentId="7003" exitPos="-40035,-62883,2254">
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="58" />
+  <EventGroup type="enterTerritory" uniqueId="477, 47700157" repeat="true">
+    <!-- 던전 입장시 각네임드 분신 스폰 체크-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700143" next="none" />
+        <!-- 1네임드 분신        -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700144" next="none" />
+        <!-- 2네임드 분신        -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700145" next="none" />
+        <!-- 3네임드 분신        -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700154" next="none" />
+        <!-- 1지역 모래폭풍 위험메시지 테리토리 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700161" next="none" />
+        <!-- 1지역 모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700162" next="none" />
+        <!-- 1지역 모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700163" next="none" />
+        <!-- 1지역 모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700164" next="none" />
+        <!-- 1지역 모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700165" next="none" />
+        <!-- 1지역 모래폭풍 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="477, 47700154" repeat="true">
+    <!-- 1지역 모래폭풍지역 경고 메시지-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077011" style="alert" next="none" />
+        <!--캠프가 수상합니다. -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="477, 47700090" repeat="false">
+    <!-- 부락 입장시 1네임드 스폰 체크-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700006" next="none" />
+        <!-- 1네임드          -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="477,1006" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700006" next="none" />
+        <!-- 1네임드 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700006" next="none" />
+        <!-- 1네임드 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,1006" value="70" repeat="true">
+    <!-- 1네임드와 70%일때 스폰 전투 시작 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077001" style="alert" next="none" />
+        <!--걸려 들었구나. -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700156" startAggro="100" next="none" />
+        <!--목책주위로 몬스터 스폰 -->
+        <!--			<EventTask type="message" string="@dungeon:9077005" style="alert" next="time" nextValue="0"/>						어딘가에서 발자국 소리가 들립니다!!!! -->
+        <!--			<EventTask type="spawn" huntingZoneId="477" territoryId="47700007" startAggro="100" next="time" nextValue="30"/>	 -->
+        <!--			<EventTask type="spawn" huntingZoneId="477" territoryId="47700008" startAggro="100" next="time" nextValue="1"/>		 -->
+        <!--			<EventTask type="spawn" huntingZoneId="477" territoryId="47700009" startAggro="100" next="time" nextValue="1"/>		 -->
+        <!--			<EventTask type="spawn" huntingZoneId="477" territoryId="47700010" startAggro="100" next="time" nextValue="1"/>		 -->
+        <!--			<EventTask type="spawn" huntingZoneId="477" territoryId="47700011" next="none"/>					-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,1006" value="30" repeat="true">
+    <!-- 1네임드와 30%일때 스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077010" style="alert" next="none" />
+        <!--이게 끝이 아니다. -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700155" startAggro="100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,1006" value="0" repeat="true">
+    <!-- 1네임드 죽으면 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077999" style="default" next="time" nextValue="3" />
+        <!-- 리셋시 드랍안되는것 방지용 -->
+        <EventTask type="message" string="@dungeon:9077012" style="default" next="time" nextValue="1" />
+        <!-- 모래폭풍이 사라졌습니다. -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700006" next="time" nextValue="1" />
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700155" next="time" nextValue="1" />
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700156" next="time" nextValue="1" />
+        <EventTask type="Spawn" huntingZoneId="477" territoryId="47700149" next="time" nextValue="1" />
+        <!-- 버프(스턴시 해제) 스폰       -->
+        <EventTask type="Spawn" huntingZoneId="477" territoryId="47700150" next="time" nextValue="1" />
+        <!-- 버프(스턴시 해제) 스폰       -->
+        <EventTask type="Spawn" huntingZoneId="477" territoryId="47700151" next="time" nextValue="1" />
+        <!-- 버프(스턴시 해제) 스폰       -->
+        <EventTask type="Spawn" huntingZoneId="477" territoryId="47700152" next="time" nextValue="1" />
+        <!-- 버프(스턴시 해제) 스폰       -->
+        <EventTask type="Spawn" huntingZoneId="477" territoryId="47700153" next="time" nextValue="1" />
+        <!-- 10초후 0.1초 스턴 디버프       -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700154" next="time" nextValue="1" />
+        <!-- 1지역 모래폭풍 테리토리 디스폰      -->
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700161" next="time" nextValue="1" />
+        <!-- 1지역 모래폭풍 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700162" next="time" nextValue="1" />
+        <!-- 1지역 모래폭풍 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700163" next="time" nextValue="1" />
+        <!-- 1지역 모래폭풍 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700164" next="time" nextValue="1" />
+        <!-- 1지역 모래폭풍 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700165" next="time" nextValue="1" />
+        <!-- 1지역 모래폭풍 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700143" next="none" />
+        <!-- 1네임드 분신 디스폰       -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="477, 47700091">
+    <!-- 2지역 입장 안내-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077002" style="alert" next="none" />
+        <!--캠프가 수상합니다. -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700094" next="none" />
+        <!-- 돌연변이 마석1 스폰       -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="477, 47700092">
+    <!-- 2번째 캠프 입장시 2네임드 스폰-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077004" style="alert" next="time" nextValue="1" />
+        <!--마석에서 수상한 기운이 감돕니다. 빨리 처치해야 할것 같습니다. -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700018" startAggro="100" next="none" />
+        <!-- 2네임드 스폰         -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="477,2009" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700018" next="none" />
+        <!-- 리셋시 2네임드 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700018" next="none" />
+        <!-- 2네임드 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,2009" value="0" repeat="true">
+    <!-- 2네임드 죽으면 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077999" style="default" next="time" nextValue="3" />
+        <!-- 리셋시 드랍안되는것 방지용 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700018" next="none" />
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700144" next="none" />
+        <!-- 2네임드 분신 디스폰       -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,5001" value="0" repeat="true">
+    <!-- 돌연변이 마석1 죽으면 정화의 마석1 스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077007" style="alert" next="none" />
+        <!--마석이 정화되었습니다. -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700094" next="none" />
+        <EventTask type="Spawn" huntingZoneId="477" territoryId="47700096" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="477,5001" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700094" next="none" />
+        <!-- 리셋시 돌연변이 마석 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700094" next="none" />
+        <!-- 돌연변이 마석 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="477, 47700159">
+    <!-- 3네임드 입장 체크 테리토리-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700019" next="none" />
+        <!-- 3네임드 스폰         -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="477,3007" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700019" next="none" />
+        <!-- 리셋시 3네임드 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700019" next="none" />
+        <!-- 3네임드 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,3007" value="0" repeat="true">
+    <!-- 3네임드 죽으면 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077999" style="default" next="time" nextValue="3" />
+        <!-- 리셋시 드랍안되는것 방지용 -->
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700145" next="none" />
+        <!-- 3네임드 분신 디스폰       -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="477, 47700127">
+    <!-- 모래폭풍 경고 메시지-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077008" style="alert" next="time" nextValue="3" />
+        <!--마법의 결계가 느껴집니다. 마법의 결계장치를 찾아서 부셔야 할것 같습니다. -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700097" next="none" />
+        <!--결계장치 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700109" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700110" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700111" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700112" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700113" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700114" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700115" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700116" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700117" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700118" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700119" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700120" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700121" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700122" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700123" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700124" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700125" next="none" />
+        <!--모래폭풍 스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700126" next="none" />
+        <!--모래폭풍 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,5005" value="0" repeat="true">
+    <!-- 결계장치 부서지면 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077009" style="alert" next="time" nextValue="3" />
+        <!--마법이 풀렸습니다. -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700109" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700110" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700111" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700112" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700113" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700114" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700115" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700116" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700117" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700118" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700119" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700120" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700121" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700122" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700123" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700124" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700125" next="none" />
+        <!--모래폭풍 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700126" next="none" />
+        <!--모래폭풍 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="477, 47700093">
+    <!-- 콜로세움지역 입장 체크-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700028" next="none" />
+        <!--4네임드 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="477,4001" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700028" next="none" />
+        <!-- 리셋시 4네임드 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700028" next="none" />
+        <!-- 4네임드 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,4001" value="0" repeat="true">
+    <!-- 4네임드 죽으면 5네임드 출현 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077006" style="alert" next="time" nextValue="3" />
+        <!--이게 끝이 아니다!!! -->
+        <EventTask type="Spawn" huntingZoneId="477" territoryId="47700029" startAggro="100" next="none" />
+        <!--5네임드 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="477,4002" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="477" territoryId="47700029" next="none" />
+        <!-- 리셋시 5네임드 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700032" next="time" nextValue="3" />
+        <!--특수공간 몬스터 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700029" next="none" />
+        <!-- 5네임드 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,4002" value="99" repeat="true">
+    <!-- 5네임드와 전투시작하면 1분마다 스폰(총 10회) -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9077999" style="default" next="time" nextValue="60" />
+        <!--전투 시작후 1분지나기용 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700032" startAggro="100" next="time" nextValue="60" />
+        <!--전투시작후 1분경과 특수공간 몬스터 스폰 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700226" startAggro="100" next="time" nextValue="60" />
+        <!--전투시작후 2분경과 특수공간 몬스터 스폰 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700227" startAggro="100" next="time" nextValue="60" />
+        <!--전투시작후 3분경과 특수공간 몬스터 스폰 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700228" startAggro="100" next="time" nextValue="60" />
+        <!--전투시작후 4분경과 특수공간 몬스터 스폰 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700229" startAggro="100" next="time" nextValue="60" />
+        <!--전투시작후 5분경과 특수공간 몬스터 스폰 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700230" startAggro="100" next="time" nextValue="60" />
+        <!--전투시작후 6분경과 특수공간 몬스터 스폰 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700231" startAggro="100" next="time" nextValue="60" />
+        <!--전투시작후 7분경과 특수공간 몬스터 스폰 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700232" startAggro="100" next="time" nextValue="60" />
+        <!--전투시작후 8분경과 특수공간 몬스터 스폰 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700233" startAggro="100" next="time" nextValue="60" />
+        <!--전투시작후 9분경과 특수공간 몬스터 스폰 -->
+        <EventTask type="message" string="@dungeon:9077005" style="alert" next="none" />
+        <!--어딘가에서 발자국 소리가 들립니다!!!! -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700234" startAggro="100" next="time" nextValue="0" />
+        <!--전투시작후 10분경과 특수공간 몬스터 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="477,4002" value="0" repeat="true">
+    <!-- 5네임드죽으면 마법석 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="477" territoryId="47700032" next="none" />
+        <!--특수공간 몬스터 디스폰 -->
+        <EventTask type="message" string="@dungeon:9077003" style="alert" next="none" />
+        <!--마법석 위치 안내 -->
+        <EventTask type="spawn" huntingZoneId="477" territoryId="47700002" next="none" />
+        <!--마법석 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

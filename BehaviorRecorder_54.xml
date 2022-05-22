@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<BehaviorRecorder huntingZoneId="54">
+
+	<Recorder templateId="260" >
+		<Root>
+			<Pin id="1" slot="1" effect="1" next="1" desc="시작 1번 - 1번 트리-도발의 포효">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="4"/>
+			</Pin>
+
+			<Pin id="2" slot="1" effect="1" next="2" desc="시작 1번 - 2번 트리-도발의 포효">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="4"/>
+			</Pin>			
+		</Root>
+		
+		<Record id="1">
+			<Pin id="1" slot="1" effect="2" desc="1번 트리 - 도발의 포효 - 끝">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="4"/>
+			</Pin>	
+		</Record>
+				
+		<Record id="2">
+			<Pin id="1" slot="1" effect="2" next="9" desc="2번 트리 - 기본 공격1">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="1"/>
+			</Pin>
+		</Record>
+				
+		<Record id="9">
+			<Pin id="1" slot="1" effect="2" next="3" desc="2번 트리 - 기본 공격2'">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="1"/>
+			</Pin>
+		</Record>
+		
+		<Record id="3">
+			<Pin id="1" exclusiveId="1" slot="1" effect="1" next="4" desc="2번트리 - 분기 시작 - 기본 공격">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="1"/>
+			</Pin>
+					
+			<Pin id="2" exclusiveId="1" slot="1" effect="3" desc="2번 트리 - 분기 01 - 방어구 부수기 끝">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="10"/>
+			</Pin>	
+		</Record>
+
+		<Record id="4">
+			<Pin id="1" slot="1" effect="1" next="5" desc="2번트리 - 분기 10 - 기본 공격3">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="1"/>
+			</Pin>
+		</Record>
+		
+		<Record id="5">
+			<Pin id="1" slot="1" effect="1" next="6" desc="2번트리 - 분기 20 - 기본 공격4">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="1"/>
+			</Pin>
+		</Record>
+
+		<Record id="6">
+			<Pin id="1" slot="1" effect="1" next="7" timeLimit="10000" desc="2번트리 - 분기 30- 10초 안에 방패 치기 사용">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="5"/>
+			</Pin>
+		</Record>
+
+		<Record id="7">
+			<Pin id="1" slot="1" next="8" timeLimit="5000" desc="2번트리 - 분기 40 - 춤">
+				<CompareCondition target="socialId" kind="equal" value="춤"/>
+			</Pin>
+		</Record>
+				
+		<Record id="8">
+			<Pin id="1" slot="1" effect="1" next="10" timeLimit="10000" desc="2번트리 - 분기 50- 춤 유지">
+				<CompareCondition target="socialId" kind="equal" value="춤"/>
+				<CompareCondition target="socialDuration" kind="greaterThanEqual" value="2000"/>
+			</Pin>
+		</Record>
+
+		<Record id="10">
+			<Pin id="1" slot="1" effect="4" timeLimit="10000" desc="2번트리 - 분기 50- 맹렬한 돌진">
+				<CompareCondition target="doerUserClass" kind="Lancer"/>
+				<CompareCondition target="actionType" kind="equal" strValue="skill"/>
+				<CompareCondition target="skillId" kind="equal" value="3"/>
+			</Pin>
+		</Record>
+
+			
+		<Effect id="1" desc="사제 힘의 축복II">
+			<DoerAbnormality id="202" duration="0" rate="0" maxStack="0"/> 
+		</Effect>
+				
+		<Effect id="2" desc="PC-사제 힘의 축복II, NPC-분노" >
+			<DoerAbnormality id="202" duration="0" rate="0" maxStack="0"/> 
+			<DoeeAbnormality id="분노 유발" duration="0" rate="0" maxStack="0"/> 
+		</Effect>
+
+		<Effect id="3" desc="후덜덜 버프">
+			<DoerAbnormality id="2" duration="2000" rate="0" maxStack="0"/> 
+		</Effect>		
+		
+		<Effect id="4" desc="몬스터 킬(데미지)">
+			<DoeeBonusDamage Value="1000000"/> 
+		</Effect>		
+		
+	</Recorder>
+	
+</BehaviorRecorder>
+

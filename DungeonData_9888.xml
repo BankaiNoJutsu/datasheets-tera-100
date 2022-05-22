@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9888" name="@dungeon:9888" startPos="73711,15565,2605" exitContinentId="7002" exitPos="-5175, 71910, 4610" coolTime="0" coolTimeForPartyMatching="0" enterLimitCount="30" needBattlePoint="11"  coolTimeApplyType="enter" >
+<ClearCondition huntingZoneId="888" templateId="13" amount="1"/> 
+<ClearCondition huntingZoneId="888" templateId="18" amount="1"/> 
+<ClearCondition huntingZoneId="888" templateId="23" amount="1"/> 
+  <!-- 밤피르 저택 -->
+  <RandomStart pos="73711,15565,2605" />
+  <RandomStart pos="70264,27520,3322" />
+  <RandomStart pos="70253,23022,2963" />
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="26" />
+  <EventGroup type="npcHp" uniqueId="888,22" value="80">
+    <!-- 호위 중 자넬라의 상태를 표현하는 팝업 대사 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9888002" targetNpcId="888,22" next="npcHp" nextValue="50" />
+        <EventTask type="message" string="@dungeon:9888003" targetNpcId="888,22" next="npcHp" nextValue="30" />
+        <EventTask type="message" string="@dungeon:9888004" targetNpcId="888,22" next="npcHp" nextValue="0" />
+        <EventTask type="message" string="@dungeon:9888005" targetNpcId="888,22" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="888,21" value="0">
+    <!-- 보스 몬스터 스폰 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="playMovie" id="14" next="time" nextValue="10" />
+        <EventTask type="message" string="@dungeon:9888006" targetNpcId="888,1008" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800343" next="time" nextValue="10" />
+        <EventTask type="message" string="@dungeon:9888007" targetNpcId="888,1008" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800345" startAggro="50" next="complete" />
+        <EventTask type="message" string="@dungeon:9888008" targetNpcId="888,1008" next="time" nextValue="10" />
+        <EventTask type="despawn" huntingZoneId="888" territoryId="88800343" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="888,18" value="0">
+    <!-- 보스 몬스터 사망 시 아키아 출현 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="888" territoryId="88800353" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="888,88800390" repeat="false">
+    <Event>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800390" next="none" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800393" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800390" next="none" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800394" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800390" next="none" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800395" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.4">
+        <EventTask type="dynamicGeo" objectId="98881" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="888,88800391" repeat="false">
+    <Event>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800391" next="none" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800396" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800391" next="none" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800397" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800391" next="none" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800398" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.4">
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="888,88800392" repeat="false">
+    <Event>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="dynamicGeo" objectId="98881" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800392" next="none" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800399" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="dynamicGeo" objectId="98881" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800392" next="none" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800400" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="dynamicGeo" objectId="98881" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800392" next="none" />
+        <EventTask type="spawn" huntingZoneId="888" territoryId="88800401" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.4">
+        <EventTask type="dynamicGeo" objectId="98881" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="3" />
+</Dungeon>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BuyMenuData>
+	<!--
+	BuyMenu ID 규칙
+	1000~9999 : 전국가 공통 이벤트
+	10000~19999 : 공통
+	20000~29999 : 한국
+	30000~39999 : 일본
+	40000~49999 : 북미
+	50000~59999 : 유럽
+	60000~69999 : 러시아
+	70000~79999 : 대만
+	80000~89999 : 태국(동남아)
+	
+	스트링 ID 규칙
+	상점 스트링 ID = BuyMenu ID끝에 0 붙이기
+	상점 탭 스트링 ID = BuyMenu 끝에 1부터 붙이기(10개 넘기지 말자!)
+	예시) BuyMenu ID="10000", 상점 스트링 ID ="100000", 상점 1번탭 ID ="100001", 상점 2번탭 ID="100002"
+	예외) 매우 자주 쓰는 탭 3종은 아래 아이디로 써서 데이터 양 줄임
+	        교환목록 = "1000", 기타 = "2000", 이벤트 = "3000"
+			
+	resetType
+		none : 초기화되지 않음. 운영툴로만 초기화 가능
+		day : resetTime 노드값 입력 필요. 매일 해당 시간(24시간 기준)에 초기화됨
+		instanceNpc : Npc마다 구매 제한이 별도로 계산되어, Npc가 사라질 때 해당 Npc가 들고 있던 상점만 초기화
+	resetTime
+		매일 해당 시간(24시간 기준)에 초기화됨
+		국가별로 설정해야 하는 값이 다름. 공용 데이터시트에는 resetTime에 어떤 값을 입력하더라도 컨버터를 이용하여 아래 시간으로 변경하고 있음
+		EU : 6
+		NA : 12
+		JP : 9
+		RUS : 6
+		TW : 5
+		THA : 5
+	needMedalItemId : VillagerMenu.xml에서 BuyMenuMedal로 지정한 상점만 입력. 구매에 필요한 토큰의 TID
+	needPointNpcGuildId : VillagerMenu.xml에서 BuyMenuPoint로 지정한 상점만 입력. 구매에 필요한 평판 포인트의 ID, 이 경우 품목마다 구매 시 평판 등급 조건인 grade 노드를 입력해야 함. 또한 아이템 툴팁에 조건을 노출시키려면 ReputationItem.xml에 입력해야 함(가격은 더미로)
+	-->
+	<BuyMenu id="60000" desc="RU 신년 이벤트 상점" stringId="600000" resetType="day" resetTime="9"> <!-- 매일 정해진 시간에 리셋 -->
+		<Menu id="1" desc="탭1" probability="1">
+			<ItemList stringed="1000">
+				<Item itemTemplateId="216950" buyPrice="50000000" limitType="account" limitCount="1" /> 
+				<Item itemTemplateId="216951" buyPrice="500000000" limitType="account" limitCount="1" /> 
+				<Item itemTemplateId="216952" buyPrice="1000000000" limitType="account" limitCount="1" /> 
+			</ItemList>
+		</Menu>
+	</BuyMenu>
+</BuyMenuData>

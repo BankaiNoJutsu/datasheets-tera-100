@@ -1,0 +1,841 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AccountTrait>
+  <PackageList>
+    <!-- default package -->
+    <Package id="0" order="0" publisher="ALL">
+      <!--######### RestrictedAccountInfo #########-->
+      <Property name="freeTrial" enable="false" limitLevel="59" disconnectNotifyMinBefore="5" />
+      <Property name="growthServerUser" enable="false" limitLevel="0" notifyMsgIntervalSec="3600" abnormalityList="1103,1135" />
+      <Property name="limitMoney" max="0" />
+      <Property name="limitExp" max="0" />
+      <!--freeFriend는 restrictedChannelMaxLevel의 값을 참조하여 유저 레벨이 해당 값을 초월하면 friendOnlyChannel 패러미터를 무시한다-->
+      <Property name="chat" closedChannel="" friendOnlyChannel="" restrictedChannel="CHATTYPE_GUARD,CHATTYPE_BARGAIN,CHATTYPE_PARTY_SEARCH,CHATTYPE_GENERAL,CHATTYPE_UNION,CHATTYPE_UNIONELITE,CHATTYPE_UNION_NOTICE,CHATTYPE_UNION_POST" restrictedChannelMaxLevel="10" />
+      <Property name="trade" request="true" accept="true" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBroker" enable="true" />
+      <Property name="warehouse" request="true" accept="true" />
+      <Property name="styleWarehouse" request="true" accept="true" />
+      <Property name="guildWarehouse" request="true" accept="true" />
+      <Property name="parcel" enable="true" />
+      <Property name="store" enable="true" />
+      <Property name="useCoupon" enable="true" />
+      <Property name="destoryItem" enable="true" />
+      <Property name="party" request="true" accept="true" />
+      <Property name="guild" request="true" accept="true" />
+      <Property name="duel" request="true" accept="true" />
+      <Property name="groupDuel" request="true" accept="true" />
+      <Property name="pkDeclare" enable="true" />
+      <Property name="enterDungeon" allowAllContinent="true" continentList="" />
+      <Property name="returnSkill" allowAllContinent="true" continentList="" />
+      <Property name="pegasus" allowAllContinent="true" continentList="" />
+      <Property name="teleportScroll" allowAllContinent="true" continentList="" />
+      <Property name="partySummon" allowAllContinent="true" continentList="" />
+      <Property name="friend" request="true" accept="true" />
+      <Property name="lord" candidate="true" vote="true" />
+      <Property name="partyMatch" enable="true" />
+      <Property name="blockUser" enable="true" />
+      <Property name="battleField" enable="true" />
+      <!--######### 계정 혜택 #########-->
+      <Property name="tradeBrokerRegisterFee" fee="0.05" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.15" />
+      <Property name="tradeBrokerMaxRegisterItem" max="10" />
+      <Property name="dungeonNewbie" enable="false" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dungeonEnterLimit" enterLimitType="0" />
+      <!-- 0 이면 기본 쿨타임/횟수 사용 -->
+      <!-- 1 부터 DungeonData_*.xml 의 Dungeon/@coolTimeForAccountTrait, @enterLimitCountForAccountTrait 의 값을 사용함 -->
+      <Property name="deliveryLimit" />
+      <Property name="tradeBrokerBargain" enable="false" />
+      <Property name="oldbie" chatIcon="false" />
+      <!-- 비상탈출 -->
+      <Property name="nearTown" cooltime="1800" />
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 이상상태들 -->
+      <Property name="abnormalityWhenEnter" abnormalityIdList="" />
+      <Property name="abnormalityWhenEnterDungeon" abnormalityIdList="" />
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 active skill들  이것들은 디비에 기록되지 않는다-->
+      <Property name="activeSkillWhenEnter" skillIdList="" />
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 permanent한 업적들 이것들은 디비에 디록된다 -->
+      <Property name="permanentAchievementWhenEnter" achievementIdList="" />
+      <!-- 소포로 보낼수 있는 골드 제약들 한번에 최대 얼마까지 보낼수 있는지  1골드는 100*100=10000 코퍼   코퍼 단위로 써야 한다  -->
+      <Property name="parcelGold" maxForOneParcel="" />
+      <!-- 아무것도 없으면 골드 제한 없다-->
+      <!-- 캐릭터가 프리미엄 슬롯을 사용 할 수 있는지  -->
+      <Property name="canUsePremiumSlot" enable="false" />
+      <!-- 캐릭터가 프리미엄 던전(Ex. 길리안의 숲(프리미엄))을 이용할 수 있는지  -->
+      <Property name="canUsePremiumDungeon" enable="false" />
+      <!-- 일일퀘를 할수 있는 회수 제한 조절
+			하루에 10번씩 갈수 있는데 그걸 2배 갈수 있게 해주려면 2.0 쓰면 된다
+			-->
+      <Property name="dailyQuest" limitAccomplishCountBoost="1.0" />
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="expandCharacterSlot" slot="3" />
+      <Property name="expandWarehouseTab" tab="1" />
+      <Property name="expandStyleWarehouseTab" tab="1" />
+      <Property name="rightBaseItem" index="0" />
+      <!-- RightBaseSystem(EME/GF)와 연동되는 Index -->
+      <Property name="playTimeReward" enable="false" />
+      <!-- PC방 프로모션 이벤트 -->
+      <Property name="freeStyleShop" enable="false" />
+      <!-- PC방 스타일샵 무료이용 -->
+      <Property name="HuddleAdding" enable="false" level="0" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="maxActPoint" enable="false" />
+      <!-- 모험의 주화 충전 속도 -->
+      <Property name="actPointRecoveryRate" enable="false" />
+    </Package>
+    <!-- 여기까지는 기본 값 -->
+    <!-- 34 프론티어 -->
+    <Package id="34" order="1" product="true" publisher="NHN">
+      <Property name="chat" closedChannel="" friendOnlyChannel="" restrictedChannel="CHATTYPE_GUARD,CHATTYPE_BARGAIN,CHATTYPE_PARTY_SEARCH,CHATTYPE_GENERAL,CHATTYPE_UNION,CHATTYPE_UNIONELITE,CHATTYPE_UNION_NOTICE,CHATTYPE_UNION_POST" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.05" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.15" />
+      <Property name="tradeBrokerMaxRegisterItem" max="10" />
+      <Property name="tradeBrokerBargain" enable="false" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dungeonEnterLimit" enterLimitType="1" />
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 permanent한 업적들 이것들은 디비에 디록된다 -->
+      <Property name="permanentAchievementWhenEnter" achievementIdList="482" />
+      <Property name="expandCharacterSlot" slot="9" />
+      <Property name="expandWarehouseTab" tab="4" />
+      <Property name="eliteDiscount" enable="false" />
+    </Package>
+    <!-- 35 특성 부스터 -->
+    <Package id="35" order="1" product="true" publisher="ALL">
+      <Property name="abnormalityWhenEnter" abnormalityIdList="81000002" />
+    </Package>
+    <!-- 102 프론티어 -->
+    <!-- 일본 혜택 -->
+    <Package id="102" order="1" product="true" publisher="NHNJ">
+      <Property name="chat" closedChannel="" friendOnlyChannel="CHATTYPE_WHISPER_SEND" restrictedChannel="CHATTYPE_GUARD,CHATTYPE_BARGAIN,CHATTYPE_TEAM,CHATTYPE_DEALING,CHATTYPE_PARTY_SEARCH,CHATTYPE_GENERAL,CHATTYPE_UNION,CHATTYPE_UNIONELITE,CHATTYPE_UNION_NOTICE,CHATTYPE_UNION_POST" restrictedChannelMaxLevel="15" freeFriend="true" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.05" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.15" />
+      <Property name="tradeBrokerMaxRegisterItem" max="10" />
+      <Property name="tradeBrokerBargain" enable="false" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dungeonEnterLimit" enterLimitType="1" />
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 permanent한 업적들 이것들은 디비에 디록된다 -->
+      <Property name="permanentAchievementWhenEnter" achievementIdList="482" />
+      <Property name="expandCharacterSlot" slot="8" />
+      <Property name="expandWarehouseTab" tab="4" />
+    </Package>
+    <!-- 33 VIP -->
+    <Package id="33" order="2" product="true" publisher="NHN">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="" restrictedChannel="" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.05" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000089, 8000090" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="33" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+    </Package>
+    <!-- 70 일반 월간 패스 -->
+    <Package id="70" order="3" product="true" publisher="NHN">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="" restrictedChannel="" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000089, 8000120, 8000121, 8000156" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="70" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+    </Package>
+    <!-- 77 혜택 개편 VIP -->
+    <Package id="77" order="4" product="true" publisher="NHN">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="" restrictedChannel="" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000089, 8000120, 8000121, 8000156, 8000159, 8000748, 8000749" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="77" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+    </Package>
+    <!--350 한국 신규 성장서버(미스텔의 가호)-->
+    <Package id="350" order="1" product="true" publisher="NHN">
+      <Property name="growthServerUser" enable="true" limitLevel="66" notifyMsgIntervalSec="3600" abnormalityList="1106" sendMsg="false" />
+      <!--경험치 2배-->
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+    </Package>
+    <!-- 360 루키 서버 (경험치 2배) -->
+    <Package id="360" order="1" product="false" publisher="NHNJ">
+      <Property name="growthServerUser" enable="true" limitLevel="65" notifyMsgIntervalSec="3600" abnormalityList="1106,5010068,5010069" />
+    </Package>
+    <!-- 101 VIP -->
+    <!-- 일본 혜택-->
+    <Package id="101" order="2" product="true" publisher="NHNJ">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="CHATTYPE_WHISPER_SEND" restrictedChannel="CHATTYPE_GUARD,CHATTYPE_BARGAIN,CHATTYPE_TEAM,CHATTYPE_DEALING,CHATTYPE_PARTY_SEARCH,CHATTYPE_GENERAL,CHATTYPE_UNION,CHATTYPE_UNIONELITE,CHATTYPE_UNION_NOTICE,CHATTYPE_UNION_POST" restrictedChannelMaxLevel="15" freeFriend="true" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000091,8000092,48,5010039,8000156,5010074" />
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="101" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+    </Package>
+    <!-- 1000 테라 PC방 -->
+    <Package id="1000" order="3" product="true" publisher="NHN">
+      <Property name="chat" closedChannel="" friendOnlyChannel="" restrictedChannel="CHATTYPE_GUARD,CHATTYPE_BARGAIN,CHATTYPE_PARTY_SEARCH,CHATTYPE_GENERAL,CHATTYPE_UNION,CHATTYPE_UNIONELITE,CHATTYPE_UNION_NOTICE,CHATTYPE_UNION_POST" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="freeStyleShop" enable="true" />
+      <!-- PC방 스타일샵 무료이용 -->
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 이상상태들 -->
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000118,8900003,8900004,81000005" />
+      <!-- 캐릭터가 pc방 인벤토리를 사용 할 수 있는지  -->
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="2" slotSetId="1000" />
+        <!-- PC방 인벤 -->
+      </Property>
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 activeSkillWhenEnter 들  이것들은 디비에 기록되지 않는다-->
+      <Property name="activeSkillWhenEnter" skillIdList="" />
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 permanent한 업적들 이것들은 디비에 디록된다 -->
+      <Property name="permanentAchievementWhenEnter" achievementIdList="" />
+      <!-- 소포로 보낼수 있는 골드 제약들 한번에 최대 얼마까지 보낼수 있는지 1골드는 100*100=10000 코퍼   코퍼 단위로 써야 한다     -->
+      <Property name="parcelGold" maxForOneParcel="" />
+    </Package>
+    <!-- 1001 JP PC방 -->
+    <Package id="1001" order="3" product="true" publisher="NHNJ">
+      <Property name="chat" closedChannel="" friendOnlyChannel="CHATTYPE_WHISPER_SEND" restrictedChannel="CHATTYPE_GUARD,CHATTYPE_BARGAIN,CHATTYPE_PARTY_SEARCH,CHATTYPE_GENERAL,CHATTYPE_UNION,CHATTYPE_UNIONELITE,CHATTYPE_UNION_NOTICE,CHATTYPE_UNION_POST" restrictedChannelMaxLevel="15" freeFriend="true" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="freeStyleShop" enable="true" />
+      <!-- PC방 스타일샵 무료이용 -->
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 이상상태들 -->
+      <Property name="abnormalityWhenEnter" abnormalityIdList="48" />
+      <!-- 캐릭터가 pc방 인벤토리를 사용 할 수 있는지  -->
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="2" slotSetId="1001" />
+        <!-- PC방 인벤 -->
+      </Property>
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 activeSkillWhenEnter 들  이것들은 디비에 기록되지 않는다-->
+      <Property name="activeSkillWhenEnter" skillIdList="" />
+      <!-- 캐릭터가 월드에 들어 올때 기본으로 넣어줄 permanent한 업적들 이것들은 디비에 디록된다 -->
+      <Property name="permanentAchievementWhenEnter" achievementIdList="" />
+      <!-- 소포로 보낼수 있는 골드 제약들 한번에 최대 얼마까지 보낼수 있는지 1골드는 100*100=10000 코퍼   코퍼 단위로 써야 한다     -->
+      <Property name="parcelGold" maxForOneParcel="" />
+    </Package>
+    <!-- 31 원정대 포상 -->
+    <Package id="31" order="4" product="true">
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="eliteDiscount" enable="false" />
+    </Package>
+    <!-- 32 인던 쿨타임 및 도전 횟수 -->
+    <Package id="32" order="5" product="true">
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="eliteDiscount" enable="false" />
+    </Package>
+    <!-- 103 JPN 복귀자 -->
+    <Package id="103" order="6" product="true" publisher="NHNJ">
+      <Property name="abnormalityWhenEnter" abnormalityIdList="5010023" />
+    </Package>
+    <Package id="10001" order="1000" product="true">
+      <Property name="tradeBrokerRegisterFee" fee="0.05" />
+      <Property name="eliteDiscount" enable="false" />
+    </Package>
+    <!-- 104 VIP 3개월 -->
+    <!-- 일본 혜택-->
+    <Package id="104" order="7" product="true" publisher="NHNJ">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="CHATTYPE_WHISPER_SEND" restrictedChannel="CHATTYPE_GUARD,CHATTYPE_BARGAIN,CHATTYPE_TEAM,CHATTYPE_DEALING,CHATTYPE_PARTY_SEARCH,CHATTYPE_GENERAL,CHATTYPE_UNION,CHATTYPE_UNIONELITE,CHATTYPE_UNION_NOTICE,CHATTYPE_UNION_POST" restrictedChannelMaxLevel="15" freeFriend="true" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000091,8000092,48,4614,5010074,5010039" />
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="101" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+    </Package>
+    <!-- 105 골드 프리미엄 -->
+    <!-- 일본 혜택-->
+    <Package id="105" order="8" product="true" publisher="NHNJ">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="CHATTYPE_WHISPER_SEND" restrictedChannel="CHATTYPE_GUARD,CHATTYPE_BARGAIN,CHATTYPE_TEAM,CHATTYPE_DEALING,CHATTYPE_PARTY_SEARCH,CHATTYPE_GENERAL,CHATTYPE_UNION,CHATTYPE_UNIONELITE,CHATTYPE_UNION_NOTICE,CHATTYPE_UNION_POST" restrictedChannelMaxLevel="15" freeFriend="true" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000091,8000092,48,4614,5010075,5010039" />
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="105" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+    </Package>
+    <!-- 106 JPN 신규 유저 -->
+    <Package id="106" order="9" product="true" publisher="NHNJ">
+      <Property name="abnormalityWhenEnterDungeon" abnormalityIdList="5010022" />
+    </Package>
+    <!-- 107 JP VIP -->
+    <!-- 일본 신규 VIP 혜택-->
+    <Package id="107" order="10" product="true" publisher="NHNJ">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="CHATTYPE_WHISPER_SEND" restrictedChannel="CHATTYPE_GUARD,CHATTYPE_BARGAIN,CHATTYPE_TEAM,CHATTYPE_DEALING,CHATTYPE_PARTY_SEARCH,CHATTYPE_GENERAL,CHATTYPE_UNION,CHATTYPE_UNIONELITE,CHATTYPE_UNION_NOTICE,CHATTYPE_UNION_POST" restrictedChannelMaxLevel="15" freeFriend="true" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.05" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+    </Package>
+    <!-- TW 500 VIP HappyTuk / 이전 VIP -->
+    <Package id="500" order="4" product="true" publisher="OMG">
+      <Property name="chat" order="8" closedChannel="" friendOnlyChannel="" restrictedChannel="" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <!-- 던전입장 2배 -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <!-- 거래소 등록 수수료 -->
+      <Property name="tradeBrokerBuyItNowFee" fee="0.1" />
+      <!-- 구매 수수료 감소 -->
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <!-- 거래소 등록 아이템 개수 -->
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="500" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000089, 8000120, 8000121,8000156,8000159,8000748,8000749" />
+      <!-- 버프3개+신뢰의 증표50+완크보+해결사 -->
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="eliteDiscount" enable="false" />
+    </Package>
+    <!-- TW 루키 서버 (경험치 3배) -->
+    <Package id="510" order="1" product="true" publisher="OMG">
+      <Property name="growthServerUser" enable="true" limitLevel="66" notifyMsgIntervalSec="3600" abnormalityList="1107" />
+    </Package>
+    <Package id="520" order="2" product="true" publisher="OMG">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="" restrictedChannel="" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="dailyQuest" limitAccomplishCountBoost="2.0" />
+      <Property name="tradeBrokerRegisterFee" fee="0" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.05" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8900003, 8900002, 8000080, 8900001" />
+    </Package>
+    <!-- TW 프리미엄 VIP 혜택 + T-cat (신규) -->
+    <Package id="530" order="3" product="true" publisher="OMG">
+      <Property name="chat" order="7" closedChannel="" friendOnlyChannel="" restrictedChannel="" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <!-- 던전입장 2배 -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <!-- 거래소 등록 수수료 -->
+      <Property name="tradeBrokerBuyItNowFee" fee="0.1" />
+      <!-- 구매 수수료 감소 -->
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <!-- 거래소 등록 아이템 개수 -->
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000089, 8000120, 8000121,8000156,8000159" />
+      <!-- 버프3개 +신뢰의 증표 50-->
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="530" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="eliteDiscount" enable="false" />
+    </Package>
+    <!--@{ EME Packages Begin @-->
+    <!-- Elite Status -->
+    <Package id="333" order="3" product="true" publisher="EME">
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <!-- 던전입장 2배 -->
+      <!-- 원정대 포상 -->
+      <Property name="dailyQuest" limitAccomplishCountBoost="2.0" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="333" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="parcelGold" maxForOneParcel="" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="eliteDiscount" enable="true" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000078,8000079,8000080,5020005,5020003,5020017" />
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+    </Package>
+    <!-- Founder -->
+    <Package id="334" order="2" product="true" publisher="EME">
+      <Property name="tradeBrokerMaxRegisterItem" max="30" />
+      <Property name="oldbie" chatIcon="false" />
+      <Property name="parcelGold" maxForOneParcel="" />
+      <Property name="activeSkillWhenEnter" skillIdList="111142" />
+      <Property name="permanentAchievementWhenEnter" achievementIdList="482" />
+      <Property name="expandCharacterSlot" slot="8" />
+      <Property name="expandWarehouseTab" tab="4" />
+    </Package>
+    <!-- Console -->
+    <Package id="335" order="3" product="true" publisher="EME">
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dailyQuest" limitAccomplishCountBoost="2.0" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="335" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="parcelGold" maxForOneParcel="" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerRegisterFee" fee="0" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.1" />
+      <Property name="eliteDiscount" enable="true" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000078,8000079,8000080" />
+    </Package>
+    <!--@} EME Packages End @-->
+    <!--@} EME Extended Account Bits Start @-->
+    <Package id="400" order="1" product="true">
+      <Property name="rightBaseItem" index="65" />
+    </Package>
+    <Package id="401" order="1" product="true">
+      <Property name="rightBaseItem" index="66" />
+    </Package>
+    <Package id="402" order="1" product="true">
+      <Property name="rightBaseItem" index="67" />
+    </Package>
+    <Package id="403" order="1" product="true">
+      <Property name="rightBaseItem" index="68" />
+    </Package>
+    <Package id="404" order="1" product="true">
+      <Property name="rightBaseItem" index="69" />
+    </Package>
+    <Package id="405" order="1" product="true">
+      <Property name="rightBaseItem" index="70" />
+    </Package>
+    <Package id="406" order="1" product="true">
+      <Property name="rightBaseItem" index="71" />
+    </Package>
+    <Package id="407" order="1" product="true">
+      <Property name="rightBaseItem" index="72" />
+    </Package>
+    <Package id="408" order="1" product="true">
+      <Property name="rightBaseItem" index="73" />
+    </Package>
+    <Package id="409" order="1" product="true">
+      <Property name="rightBaseItem" index="74" />
+    </Package>
+    <Package id="410" order="1" product="true">
+      <Property name="rightBaseItem" index="75" />
+    </Package>
+    <Package id="411" order="1" product="true">
+      <Property name="rightBaseItem" index="76" />
+    </Package>
+    <Package id="412" order="1" product="true">
+      <Property name="rightBaseItem" index="77" />
+    </Package>
+    <Package id="413" order="1" product="true">
+      <Property name="rightBaseItem" index="78" />
+    </Package>
+    <Package id="414" order="1" product="true">
+      <Property name="rightBaseItem" index="79" />
+    </Package>
+    <Package id="415" order="1" product="true">
+      <Property name="rightBaseItem" index="80" />
+    </Package>
+    <Package id="416" order="1" product="true">
+      <Property name="rightBaseItem" index="81" />
+    </Package>
+    <Package id="417" order="1" product="true">
+      <Property name="rightBaseItem" index="82" />
+    </Package>
+    <Package id="418" order="1" product="true">
+      <Property name="rightBaseItem" index="83" />
+    </Package>
+    <Package id="419" order="1" product="true">
+      <Property name="rightBaseItem" index="84" />
+    </Package>
+    <Package id="420" order="1" product="true">
+      <Property name="rightBaseItem" index="85" />
+    </Package>
+    <Package id="421" order="1" product="true">
+      <Property name="rightBaseItem" index="86" />
+    </Package>
+    <Package id="422" order="1" product="true">
+      <Property name="rightBaseItem" index="87" />
+    </Package>
+    <Package id="423" order="1" product="true">
+      <Property name="rightBaseItem" index="88" />
+    </Package>
+    <Package id="424" order="1" product="true">
+      <Property name="rightBaseItem" index="89" />
+    </Package>
+    <Package id="425" order="1" product="true">
+      <Property name="rightBaseItem" index="90" />
+    </Package>
+    <!--@} EME Extended Account Bits End @-->
+    <!--@{ GF Packages Begin @-->
+    <!-- Master VIP Package -->
+    <Package id="433" order="3" product="true" publisher="FOG">
+      <Property name="vendingMachine" enable="true" />
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <!-- 던전입장 2배 -->
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="dailyQuest" limitAccomplishCountBoost="2.0" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="433" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="parcelGold" maxForOneParcel="" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="5020003,5020005,8000093,8000079,8000089,5020017,8000156,5020019,81000021" />
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+    </Package>
+    <!-- Founder -->
+    <Package id="434" order="2" product="true" publisher="FOG">
+      <Property name="parcelGold" maxForOneParcel="" />
+      <Property name="tradeBrokerMaxRegisterItem" max="30" />
+      <Property name="permanentAchievementWhenEnter" achievementIdList="482" />
+      <Property name="expandCharacterSlot" slot="8" />
+      <Property name="expandWarehouseTab" tab="4" />
+    </Package>
+    <!-- Velika Recruit Pack -->
+    <Package id="435" order="2" product="true" publisher="FOG">
+      <Property name="expandCharacterSlot" slot="8" />
+      <Property name="expandWarehouseTab" tab="4" />
+    </Package>
+    <!-- Vanguard Warrior Pack -->
+    <Package id="436" order="3" product="true" publisher="FOG">
+      <Property name="expandCharacterSlot" slot="10" />
+      <Property name="expandWarehouseTab" tab="5" />
+    </Package>
+    <!-- Arborean Hero Pack -->
+    <Package id="437" order="4" product="true" publisher="FOG">
+      <Property name="expandCharacterSlot" slot="12" />
+      <Property name="expandWarehouseTab" tab="6" />
+    </Package>
+    <!--@{ RUS Packages Begin @-->
+    <!-- Elite Status -->
+    <Package id="533" order="3" product="true" publisher="RUS">
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="dungeonPartyMatchingClearBonus" bonus="0" />
+      <!-- 원정대 포상 -->
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <!-- 거래소 등록 수수료 -->
+      <Property name="tradeBrokerBuyItNowFee" fee="0.1" />
+      <!-- 구매 수수료 감소 -->
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <!-- 거래소 등록 아이템 개수 -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="dailyQuest" limitAccomplishCountBoost="2.0" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="533" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="parcelGold" maxForOneParcel="" />
+      <Property name="eliteDiscount" enable="true" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="16300017,8000078,8000079,8000080,8900004,5030000,5030001,8000120,8000121,8900003,8000156" />
+    </Package>
+    <!--Founder Status -->
+    <Package id="534" order="2" product="true" publisher="RUS">
+      <Property name="oldbie" chatIcon="true" />
+      <Property name="permanentAchievementWhenEnter" achievementIdList="482" />
+    </Package>
+    <!-- 거래 제한 -->
+    <Package id="600" order="0" product="true">
+      <Property name="HuddleAdding" enable="true" level="1" />
+    </Package>
+    <Package id="601" order="1" product="true">
+      <Property name="HuddleAdding" enable="true" level="2" />
+    </Package>
+    <Package id="602" order="2" product="true">
+      <Property name="HuddleAdding" enable="true" level="3" />
+    </Package>
+    <!-- for program -->
+    <Package id="88888888" order="0" product="true">
+      <Property name="playTimeReward" enable="true" />
+    </Package>
+    <!-- THA VIP -->
+    <Package id="800" order="0" product="true" publisher="THA">
+      <Property name="abnormalityWhenEnter" abnormalityIdList="5060002,5060009" />
+    </Package>
+    <Package id="801" order="1" product="true" publisher="THA">
+      <Property name="abnormalityWhenEnter" abnormalityIdList="5060003,5060010" />
+    </Package>
+    <Package id="802" order="2" product="true" publisher="THA">
+      <Property name="abnormalityWhenEnter" abnormalityIdList="5060004,5060011,5060016" />
+    </Package>
+    <Package id="803" order="3" product="true" publisher="THA">
+      <Property name="abnormalityWhenEnter" abnormalityIdList="5060005,5060012,5060017" />
+    </Package>
+    <Package id="807" order="7" product="true" publisher="THA">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="" restrictedChannel="" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="807" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000089, 8000120, 8000121,8000156" />
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+    </Package>
+    <Package id="808" order="8" product="false" publisher="THA">
+      <Property name="growthServerUser" enable="true" limitLevel="61" notifyMsgIntervalSec="3600" abnormalityList="5060022,5060023,5060024,5060015" />
+      <Property name="abnormalityWhenEnterDungeon" abnormalityIdList="5060025,5060026,5060027,5060030" />
+    </Package>
+    <!--THA 신규VIP ([이벤트]월간패스)-->
+    <Package id="809" order="9" product="true" publisher="THA">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="" restrictedChannel="" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000089, 8000120, 8000121" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="809" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+    </Package>
+    <!--THA 신규VIP (월간패스)-->
+    <Package id="810" order="10" product="true" publisher="THA">
+      <Property name="chat" order="4" closedChannel="" friendOnlyChannel="" restrictedChannel="" restrictedChannelMaxLevel="10" />
+      <Property name="vendingMachine" enable="true" />
+      <Property name="tradeBrokerRegisterFee" fee="0.02" />
+      <Property name="tradeBrokerBuyItNowFee" fee="0.10" />
+      <Property name="tradeBrokerMaxRegisterItem" max="50" />
+      <Property name="tradeBrokerBargain" enable="true" fee="0.05" />
+      <Property name="dungeonEnterLimit" enterLimitType="2" />
+      <Property name="dungeonNewbie" enable="true" />
+      <!-- 인던 초보 공략 파티원중 1명이라도 해당되면 적용됨 -->
+      <Property name="deliveryLimit">
+        <!-- 특정 납품점의 일일 납품 개수를 증가시킬 수 있는 기능 -->
+        <DeliveryLimit targetDeliveryMenuId="1000" limitType="1" />
+        <DeliveryLimit targetDeliveryMenuId="1001" limitType="1" />
+      </Property>
+      <Property name="eliteDiscount" enable="false" />
+      <Property name="abnormalityWhenEnter" abnormalityIdList="8000089, 8000120, 8000121,8000156" />
+      <Property name="canUsePremiumSlot" enable="true">
+        <SlotSet order="1" slotSetId="810" />
+        <!-- 프리미엄 슬롯 -->
+      </Property>
+      <Property name="canUsePremiumDungeon" enable="true" />
+      <!-- 프리미엄 던전(Ex. 길리안의 숲(프리미엄)) -->
+      <Property name="maxActPoint" enable="true" />
+      <!-- 모험의 주화 최대량 -->
+      <Property name="actPointRecoveryRate" enable="true" />
+      <!-- 모험의 주화 충전 속도 -->
+    </Package>
+    <!-- 361 JP 포포리 서버 -->
+    <Package id="361" order="1" product="false" publisher="NHNJ">
+      <Property name="growthServerUser" enable="true" limitLevel="66" notifyMsgIntervalSec="3600" abnormalityList="1106,5010041" />
+    </Package>
+  </PackageList>
+</AccountTrait>

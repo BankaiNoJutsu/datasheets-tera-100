@@ -1,0 +1,737 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9777" name="@dungeon:9777" startPos="-121630,-41458,2398" exitContinentId="7015" exitPos="-12051,87906,-461" matchingRoleId="11">
+  <Condition type="party" value="1" />
+  <Condition type="maxMemberCount" value="3" />
+  <Condition type="levelOver" value="65" />
+  <Retry retryId="1" />
+  <ClearCondition huntingZoneId="777" templateId="77730" amount="1" killCount="1" />
+
+
+  
+  <!-- 인던 생성 시, 치유 테리토리 On -->
+    <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>     
+		<EventTask type="turnAbnormalityTerritory" huntingZoneId="777" territoryId="77700134" turn="on" next="none" />
+		<EventTask type="turnAbnormalityTerritory" huntingZoneId="777" territoryId="77700117" turn="on" next="none" />
+		<EventTask type="turnAbnormalityTerritory" huntingZoneId="777" territoryId="77700149" turn="on" next="none" /> <!-- 테라타임 버프 해제 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <!-- 버프 확인 메세지 걸기 -->
+  <EventGroup type="enterTerritory" uniqueId="777,77700153" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860033" turn="on" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 버프 확인 -->
+  <EventGroup type="none" id="48" name="버프 확인" repeat="true">
+  	<Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860033" turn="off" target="player" next="none" /> <!-- 물약/주문서 가이드 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> <!-- 가이드 삭제용 이상상태 시작 -->
+        <EventTask type="guideOn" nameId="777,911" id="1" pos="-117757,-41448,308" next="none" />
+		<EventTask type="message" string="@dungeon:9860020" style="combat" next="none" />
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700152" next="none"/>
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700153" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+  </EventGroup>
+
+  
+  <!-- 버프 확인 NPC 생성  -->
+  <EventGroup type="enterTerritory" uniqueId="777,77700145" repeat="false">
+    <Event>
+      <EventTaskGroup>
+  		<EventTask type="spawn" huntingZoneId="777" territoryId="77700153" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 재입장했을 때 이상상태 860033 해제해 주기  -->
+  <EventGroup type="enterTerritory" uniqueId="777,77700155" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> <!-- 가이드 삭제용 이상상태 시작 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="enterTerritory" uniqueId="777,77700156" repeat="true"> <!-- 2네임드 입구 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> <!-- 가이드 삭제용 이상상태 시작 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="enterTerritory" uniqueId="777,77700157" repeat="true"> <!-- 3네임드 입구 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> <!-- 가이드 삭제용 이상상태 시작 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <!-- 낙하데미지 면역 이상상태 설정  -->
+  <EventGroup type="enterTerritory" uniqueId="777,77700145" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="99070035" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <!-- 1번방 start -->
+  <!-- 진입시 힐 버프-->
+  <EventGroup type="enterTerritory" uniqueId="777,77700134" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="77700026" turn="on" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <!-- 1번방 진입 시, 아르고스 스폰 -->
+  <EventGroup type="enterTerritory" uniqueId="777,77700117" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <!--<EventTask type="abnormality" abnormalityId="77700018" target="player" next="time" nextValue="0.5" />-->
+		<EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9777008" style="default" next="time" nextValue="6" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8024" playTime="1000" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700011" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+    <EventGroup type="npcState" uniqueId="777,77704" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="TankAggroBuff" value="1" next="none" /><!--탱 어글버프-->
+		<EventTask type="flag" name="HealBuff" value="1" next="none" /><!--미미한 회복 버프-->
+	  	 <!-- 1네임드 길드경쟁 타이머 시작 던전 패턴과 무관--> 		
+		<EventTask type="rankSystem" state="start" startPoint="0" next="none" />		
+		<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+		<!-- 1네임드 길드경쟁 타이머 시작 던전 패턴과 무관--> 	
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700146" next="none" />
+		<EventTask type="turnAbnormalityTerritory" huntingZoneId="777" territoryId="77700117" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+	<EventGroup type="flag" name="TankAggroBuff" repeat="true"> <!--네임드 전투 중 탱 어글버프 제공-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="99009900" target="class" targetUserClass="lancer, fighter" value="1" strictly="true" turn="on" aliveOnly="false" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+
+	<EventGroup type="flag" name="HealBuff" repeat="true"> <!--1,2네임드 전투 중 미미한 회복 버프 제공-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="77700026" target="player" strictly="true" turn="on" aliveOnly="false" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+  <!-- 아르고스 hp 75% 벽 소환 후, 유물의 수호자 환영 스폰 -->
+  <EventGroup type="none" id="101" name="75% 유물의 수호자 스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" targetBossId="777,77704" patternGuide="instanceDeath" patternShowTime="10" next="none" />
+        <EventTask type="message" string="@dungeon:9777034" style="combat" next="none" />
+		<EventTask type="message" string="@dungeon:9777051" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700014" target="npc" targetNpcId="777,77704" next="none" />
+        <EventTask type="message" string="@dungeon:9777031" target="npc" targetNpcId="777,77704" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700140" next="time" nextValue="0.8" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700089" next="time" nextValue="0.8" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700088" next="time" nextValue="0.8" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700069" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700087" next="time" nextValue="0.8" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700086" next="time" nextValue="0.8" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700085" next="time" nextValue="0.8" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700090" next="time" nextValue="0.8" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700091" next="time" nextValue="0.8" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700092" next="time" nextValue="0.8" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700093" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+    
+  <!-- 아르고스 hp 50% 벽 소환 후, 멜디타 환영 스폰 -->
+  <EventGroup type="none" id="102" name="50% 멜디타 환영 스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" targetBossId="777,77704" patternGuide="instanceDeath" patternShowTime="10" next="none" />
+        <EventTask type="message" string="@dungeon:9777034" style="combat" next="none" />		
+		<EventTask type="message" string="@dungeon:9777051" style="combat" next="none" />		
+        <EventTask type="abnormality" abnormalityId="77700014" target="npc" targetNpcId="777,77704" next="none" />
+        <EventTask type="message" string="@dungeon:9777032" target="npc" targetNpcId="777,77704" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700070" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700093" next="time" nextValue="0.7" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700092" next="time" nextValue="0.7" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700091" next="time" nextValue="0.7" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700090" next="time" nextValue="0.7" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700085" next="time" nextValue="0.7" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700086" next="time" nextValue="0.7" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700087" next="time" nextValue="0.7" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700088" next="time" nextValue="0.7" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700089" next="time" nextValue="0.7" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700140" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+    
+  <!-- 아르고스 hp 25% 벽 소환 후, 샨드라 마나이아 환영 스폰 -->
+  <EventGroup type="none" id="103" name="25% 샨드라 마나이아 환영 스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" targetBossId="777,77704" patternGuide="instanceDeath" patternShowTime="10" next="none" />
+        <EventTask type="message" string="@dungeon:9777034" style="combat" next="none" />
+		<EventTask type="message" string="@dungeon:9777051" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700014" target="npc" targetNpcId="777,77704" next="none" />
+        <EventTask type="message" string="@dungeon:9777033" target="npc" targetNpcId="777,77704" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700112" next="time" nextValue="0.6" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700111" next="time" nextValue="0.6" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700110" next="time" nextValue="0.6" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700071" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700109" next="time" nextValue="0.6" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700104" next="time" nextValue="0.6" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700105" next="time" nextValue="0.6" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700106" next="time" nextValue="0.5" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700107" next="time" nextValue="0.4" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700108" next="time" nextValue="0.4" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700141" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+    
+  <!-- 유물의 수호자 디스폰, AI로 동작 -->
+  <EventGroup type="none" id="1" name="유물의 수호자 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" turn="off" abnormalityId="77700014" target="npc" targetNpcId="777,77704" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700069" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700085" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700086" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700087" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700088" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700089" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700090" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700091" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700092" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700093" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700140" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700135" next="none" />
+        <EventTask type="message" string="@dungeon:9777036" style="default" next="time" nextValue="0.5" />
+		<EventTask type="message" string="@dungeon:9777049" style="default" next="none" />
+        <EventTask type="changePatternList" targetNpcId="777,77729" patternListId="2" next="time" nextValue="0.5" />
+        <EventTask type="abnormality" abnormalityId="77700018" target="player" next="time" nextValue="10" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700135" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+    
+  <!-- 멜디타 디스폰, AI로 동작 -->
+  <EventGroup type="none" id="2" name="멜디타 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" turn="off" abnormalityId="77700014" target="npc" targetNpcId="777,77704" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700070" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700085" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700086" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700087" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700088" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700089" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700090" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700091" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700092" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700093" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700140" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700135" next="none" />
+        <EventTask type="message" string="@dungeon:9777036" style="default" next="time" nextValue="0.5" />
+		<EventTask type="message" string="@dungeon:9777049" style="default" next="none" />
+        <EventTask type="changePatternList" targetNpcId="777,77729" patternListId="2" next="time" nextValue="0.5" />
+        <EventTask type="abnormality" abnormalityId="77700018" target="player" next="time" nextValue="10" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700135" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+    
+  <!-- 샨드라 마나이아 디스폰, AI로 동작 -->
+  <EventGroup type="none" id="3" name="샨드라 마나이아 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" turn="off" abnormalityId="77700014" target="npc" targetNpcId="777,77704" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700071" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700104" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700105" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700106" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700107" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700108" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700109" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700110" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700111" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700112" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700141" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700135" next="none" />
+        <EventTask type="message" string="@dungeon:9777036" style="default" next="time" nextValue="0.5" />
+		<EventTask type="message" string="@dungeon:9777049" style="default" next="none" />
+        <EventTask type="changePatternList" targetNpcId="777,77729" patternListId="2" next="time" nextValue="0.5" />
+        <EventTask type="abnormality" abnormalityId="77700018" target="player" next="time" nextValue="10" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700135" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+    
+  <!-- 아르고스 사망 시, 2번 방 통로 문 Open -->
+  <EventGroup type="npcHp" uniqueId="777,77704" value="0" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="TankAggroBuff" value="0" next="none" /><!--탱 어글버프-->
+		<EventTask type="flag" name="HealBuff" value="0" next="none" /><!--미미한 회복 버프-->
+		<EventTask type="guideOn" nameId="777,912" id="1" pos="-114269,-41444,204" next="none" />
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700146" next="none" />
+		<EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+      	<EventTask type="turnAbnormalityTerritory" huntingZoneId="777" territoryId="77700117" turn="off" next="none" />
+        <EventTask type="message" string="@dungeon:9777035" target="npc" targetNpcId="777,77704" next="none" />
+		<EventTask type="dynamicGeo" objectId="977701" next="none" />
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700135" next="none" />
+        <EventTask type="message" string="@dungeon:9777036" style="default" next="time" nextValue="0.5" />
+		<EventTask type="message" string="@dungeon:9777049" style="default" next="none" />
+        <EventTask type="changePatternList" targetNpcId="777,77729" patternListId="2" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" abnormalityId="77700018" target="player" next="time" nextValue="10" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700135" next="none" />
+        <EventTask type="dynamicGeo" objectId="977701" next="none" />
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700032" next="none" />
+		
+		<!--길드경쟁 타이머 종료 1넴-->
+		 <EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+		 <EventTask type="timer" action="stop" value="0" name="timerA" next="none" />
+		<!--길드경쟁 타이머 종료 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+    
+  <!-- 아르고스와의 전투 리셋 시, 치유 테리토리 on -->
+    <EventGroup type="npcReset" uniqueId="777,77704" repeat="true">
+    <Event>
+      <EventTaskGroup>
+	  		<!-- 1네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 		
+		<EventTask type="timer" name="timerA" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+		<!-- 1네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700146" next="none" />
+        <EventTask type="turnAbnormalityTerritory" huntingZoneId="777" territoryId="77700117" turn="on" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1번방 end -->
+  
+  <!-- 2번방 start -->
+  <!-- 알 근처에 PC가 접근 시, 알 자동 파괴 -->
+  <EventGroup type="enterTerritory" uniqueId="777,77700116" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killNpc" targetNpcId="777,77709" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+    <!-- 시작알이 파괴되면 피톤 스폰 -->
+  <EventGroup type="npcHp" uniqueId="777,77709" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <!-- <EventTask type="dynamicGeo" objectId="977701" door="close" next="none" />-->
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700031,77700084" next="time" nextValue="1" />
+	<EventTask type="Soundon" soundType="effectSound" soundId="8024" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9777013" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+    <!-- 피톤과의 전투가 시작되면 1번방 문 닫힘 -->
+  <EventGroup type="npcState" uniqueId="777,77707" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="TankAggroBuff" value="1" next="none" /><!--탱 어글버프-->
+		<EventTask type="flag" name="HealBuff" value="1" next="none" /><!--미미한 회복 버프-->
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700147" next="none" />
+        <EventTask type="dynamicGeo" objectId="977701" door="close" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="777,77707" value="30" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700136" next="none" />
+        <EventTask type="message" string="@dungeon:9777037" style="default" next="time" nextValue="0.5" />
+		<EventTask type="message" string="@dungeon:9777050" style="default" next="none" />
+        <!--<EventTask type="abnormality" abnormalityId="77700025" target="npc" targetNpcId="777,77726" next="time" nextValue="0.5" />-->
+        <EventTask type="changePatternList" targetNpcId="777,77726" patternListId="2" next="time" nextValue="0.5" />
+        <EventTask type="abnormality" abnormalityId="77700019" target="player" next="time" nextValue="30" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700136" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="777,77707" value="0" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="guideOn" nameId="777,913" id="1" pos="-112672,-33918,462" next="none" />
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700147" next="none" />
+		<EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700046" next="none" />
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700143" next="time" nextValue="0.5" />
+        <EventTask type="changePatternList" targetNpcId="777,77732" patternListId="2" next="time" nextValue="1" />
+		<EventTask type="abnormality" abnormalityId="77700005" target="npc" targetNpcId="777,77766" next="none" />
+        <EventTask type="dynamicGeo" objectId="977701" next="none" />
+        <EventTask type="dynamicGeo" objectId="977702" next="none" />
+        <EventTask type="dynamicGeo" objectId="977703" next="none" />
+        <EventTask type="killNpc" targetNpcId="777,77708" next="none" />
+        <EventTask type="killNpc" targetNpcId="777,77710" next="none" />
+        <EventTask type="killNpc" targetNpcId="777,77767" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700084" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700056" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700136" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700015" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="777015" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700019" target="player" turn="off" next="none" />
+		<!--길드경쟁 타이머 종료 2넴-->
+		<EventTask type="timer" action="stop" name="timerB" timerType="rank" next="time" nextValue="5" />
+		<EventTask type="timer" action="stop" value="0" name="timerB" next="none" />
+		<!--길드경쟁 타이머 종료 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" uniqueId="777,77707" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700147" next="none" />
+        <EventTask type="dynamicGeo" objectId="977701" next="none" />
+        <EventTask type="killNpc" targetNpcId="777,77708" next="none" />
+        <EventTask type="killNpc" targetNpcId="777,77710" next="none" />
+        <EventTask type="killNpc" targetNpcId="777,77767" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700136" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700015" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="777015" target="player" turn="off" next="none" />
+				<!-- 2네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 		
+		<EventTask type="timer" name="timerB" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+		<!-- 2네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 
+		
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2번방 end -->
+  <!-- 3번방 start -->
+  <!-- 창기사 스폰 -->
+  <EventGroup type="npcHp" uniqueId="777,77721" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="TankAggroBuff" value="0" next="none" /><!--탱 어글버프-->
+		<EventTask type="flag" name="HealBuff" value="0" next="none" /><!--미미한 회복 버프-->
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700148" next="none" />
+        <EventTask type="dynamicGeo" objectId="977703" door="close" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700057" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700049" next="time" nextValue="0.5" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9777014" style="combat" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9777044" style="combat" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9777024" style="combat" next="none" />
+        <EventTask type="message" string="@dungeon:9777016" target="npc" targetNpcId="777,77723" next="none" />
+        <EventTask type="message" string="@dungeon:9777019" target="npc" targetNpcId="777,77730" next="none" />
+		<EventTask type="abnormality" abnormalityId="77700026" turn="off" target="player" next="none" />
+        <!--<EventTask type="spawn" huntingZoneId="777" territoryId="77700143" next="time" nextValue="0.5" />
+        <EventTask type="changePatternList" targetNpcId="777,77732" patternListId="2" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--전투시작 추석 처리 되어 있던 부분 길드 경쟁으로 인해 추가-->
+    <EventGroup type="npcState" uniqueId="777,77730" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="TankAggroBuff" value="1" next="none" /><!--탱 어글버프-->
+		<!--EventTask type="message" string="@dungeon:9777019" target="npc" targetNpcId="777,77730" next="none" /-->
+		<!--EventTask type="spawn" huntingZoneId="777" territoryId="77700139" next="none" /-->
+		<!-- 3네임드 길드경쟁 타이머 시작 던전 패턴과 무관--> 		
+		<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerC" timerType="rank" timerUiOff="true" next="none" />
+		<!-- 3네임드 길드경쟁 타이머 시작 던전 패턴과 무관--> 	
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+	 
+ <EventGroup type="npcHp" uniqueId="777,77730" value="95" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9777015" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700037" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700041" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 무사 이벤트 -->
+  <EventGroup type="npcHp" uniqueId="777,77724" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="Soundon" soundType="effectSound" soundId="8028" playTime="1000" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700041" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700039" next="none" />
+        <EventTask type="message" string="@dungeon:9777043" style="combat" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9777024" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700058" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9777017" target="npc" targetNpcId="777,77726" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 정령사 이벤트 -->
+  <EventGroup type="npcHp" uniqueId="777,77727" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="Soundon" soundType="effectSound" soundId="8028" playTime="1000" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700037" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700043" next="none" />
+        <EventTask type="message" string="@dungeon:9777025" style="combat" next="none" />
+		<!--<EventTask type="abnormality" abnormalityId="77700002" target="player" next="time" nextValue="0.5" />-->
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700139" next="time" nextValue="1" />
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700039" next="none" />
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700058" next="none" />
+        <EventTask type="message" string="@dungeon:9777018" target="npc" targetNpcId="777,77729" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- HP 85% 이하부터 주기적으로 창기사 석상 스턴 -->
+  <EventGroup type="flag" name="석상플래그" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="timer" action="start" direction="forward" name="석상스턴" value="0" next="time" nextValue="0.5" timerUiOff="true" />
+        <EventTask type="flag" name="석상플래그" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+    <EventGroup type="npcHp" uniqueId="777,77721" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="empty" next="time" nextValue="60" />
+        <EventTask type="flag" name="석상플래그" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="timer" id="4" timerName="석상스턴" value="30" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9777026" target="npc" targetNpcId="777,77723" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700012" target="npc" targetNpcId="777,77723" next="none" />
+        <EventTask type="abnormality" turn="off" abnormalityId="77700017" target="npc" targetNpcId="777,77723" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9777027" style="default" next="time" nextValue="1" />
+        <EventTask type="abnormality" abnormalityId="77700017" target="npc" targetNpcId="777,77723" next="none" />
+		<EventTask type="abnormality" abnormalityId="77700017" target="player" next="none" />
+        <EventTask type="timer" name="석상스턴" action="stop" next="time" nextValue="19" value="0" timerUiOff="true" />
+		<EventTask type="abnormality" abnormalityId="77700017" target="player" turn="off" next="time" nextValue="10" />
+        <EventTask type="flag" name="석상플래그" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 창기사 사망 -->
+  <EventGroup type="npcHp" uniqueId="777,77723" value="0" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none" />
+        <EventTask type="timer" name="석상스턴" action="stop" next="none" value="0" timerUiOff="true" />
+        <EventTask type="flag" name="석상플래그" value="0" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700057" next="none" />
+        <EventTask type="message" string="@dungeon:9777038" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 무사 사망 -->
+  <EventGroup type="npcHp" uniqueId="777,77726" value="0" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700058" next="none" />
+        <EventTask type="message" string="@dungeon:9777039" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 정령사 사망 -->
+  <EventGroup type="npcHp" uniqueId="777,77729" value="0" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700139" next="time" nextValue="1" />
+        <EventTask type="abnormality" abnormalityId="77700002" target="player" turn="off" next="none" />
+        <EventTask type="message" string="@dungeon:9777040" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 싸움꾼 광폭화 -->
+  <EventGroup type="npcHp" uniqueId="777,77730" value="30" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="Soundon" soundType="effectSound" soundId="8027" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9777041" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700020" target="npc" targetNpcId="777,77730" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 싸움꾼 사망 -->
+  <EventGroup type="npcHp" uniqueId="777,77730" value="0" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="TankAggroBuff" value="0" next="none" /><!--탱 어글버프-->
+		<EventTask type="guideOff" id="1" next="none" />
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700148" next="none" />
+		<EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="dynamicGeo" objectId="977703" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8025" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9777030" target="npc" targetNpcId="777,77730" next="none" />
+		<EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none" />
+        <EventTask type="timer" name="석상스턴" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700039" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700043" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700049" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700057" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700058" next="none" />
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700139" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700037" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700041" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700056" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700001" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700002" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700010" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="777001" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="777002" target="player" turn="off" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700143" next="time" nextValue="2" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700065" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="77700005" target="npc" targetNpcId="777,77732" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700012" target="player" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" turn="off" abnormalityId="77700005" target="npc" targetNpcId="777,77732" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="77700005" target="npc" targetNpcId="777,77732" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" turn="off" abnormalityId="77700005" target="npc" targetNpcId="777,77732" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" turn="off" abnormalityId="77700005" target="npc" targetNpcId="777,77732" next="time" nextValue="0.5" />
+        <EventTask type="message" string="@dungeon:9777042" target="npc" targetNpcId="777,77732" next="time" nextValue="5" />
+        <EventTask type="abnormality" turn="off" abnormalityId="77700005" target="npc" targetNpcId="777,77732" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="77700005" target="npc" targetNpcId="777,77732" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700012" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700002" target="player" turn="off" next="none" />
+				<!--길드경쟁 타이머 종료 3넴-->
+		<EventTask type="timer" action="stop" name="timerC" timerType="rank" next="time" nextValue="5" />
+		<EventTask type="rankSystem" state="end" next="none" />
+		<EventTask type="timer" action="stop" value="0" name="timerC" next="none" />
+		<!--길드경쟁 타이머 종료 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="777,77732" value="0" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9777029" target="npc" targetNpcId="777,77732" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700002" target="player" turn="off" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700139" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700137" next="none" />
+	<EventTask type="spawn" huntingZoneId="777" territoryId="77700144" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+   <EventGroup type="npcReset" uniqueId="777,77730" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700148" next="none" />
+		<EventTask type="deSpawn" huntingZoneId="777" territoryId="77700046" next="none" />
+        <EventTask type="dynamicGeo" objectId="977703" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none" />
+        <EventTask type="timer" name="석상스턴" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+        <EventTask type="abnormality" abnormalityId="77700002" target="player" turn="off" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700057" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700058" next="none" />
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700139" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700039" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700043" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700049" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700056" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700139" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700143" next="none" />
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700143" next="none" />
+		<EventTask type="spawn" huntingZoneId="777" territoryId="77700046" next="none" />
+				<!-- 3네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 		
+		<EventTask type="timer" name="timerC" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+		<!-- 3네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="annihilated" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="dynamicGeo" objectId="977703" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none" />
+        <EventTask type="timer" name="석상스턴" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+        <EventTask type="abnormality" abnormalityId="77700002" target="player" turn="off" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700057" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700058" next="none" />
+		<EventTask type="despawn" huntingZoneId="777" territoryId="77700139" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700039" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700043" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700049" next="none" />
+        <EventTask type="spawn" huntingZoneId="777" territoryId="77700056" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700139" next="none" />
+        <EventTask type="despawn" huntingZoneId="777" territoryId="77700143" next="none" />
+	<EventTask type="spawn" huntingZoneId="777" territoryId="77700143" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3번방 end -->
+  
+    <!-- 고대신의 축복 -->
+<!--  <EventGroup type="none" id="901" name="고대신의 축복 30초전 알림" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9777045" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="none" id="902" name="고대신의 축복(1/3)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9777046" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="none" id="903" name="고대신의 축복(2/3)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9777047" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="none" id="904" name="고대신의 축복(3/3)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9777048" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+</Dungeon>

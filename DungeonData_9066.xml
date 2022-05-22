@@ -1,0 +1,1207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9066" name="@dungeon:9066" startPos="-22918,34958,762" startDir="90" exitContinentId="2" exitPos="-18848,17038,2473">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="65" />
+	<ClearCondition huntingZoneId="466" templateId="46613" amount="1" killCount="1" />
+	<Retry retryId="2"/>
+	
+<!--던전 생성 초기화 이벤트 / 1네임드 길 찾기 가이드 / 1네임드 전투 구간 스폰 -->
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600005" next="none" /> <!-- 1네임드 전투 구간 스폰  -->
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600054" next="none"/> <!--1네임드 출구 문 스폰-->
+				<EventTask type="guideOn" nameId="466,911" id="1" pos="-22924.84765625,37032.67578125,644.98828125" next="none" /><!--2네임드 길찾기 가이드-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--전투 시작 시 던전 입장 제한-->
+	<EventGroup type="flag" name="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="enterDungeon" turn="off" next="none" /> <!-- 어뷰징 방지를 위한 던전 입장 제한 설정 -->
+				<EventTask type="flag" name="combat" value="0" next="none"/>
+			</EventTaskGroup>	    
+		</Event>
+	</EventGroup>
+	
+	<!--2네임드 피버타임 중 전멸 시 Reset-->
+	<EventGroup type="flag" id="500" name="FeverReset, Annihilated" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="FeverReset" value="0" next="none" />
+				<EventTask type="flag" name="Annihilated" value="0" next="none" />
+				<EventTask type="enterDungeon" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600018" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600028" target="player" turn="off" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600058" next="none" /> <!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="flag" name="FeverTime" value="0" next="none" />
+				<EventTask type="flag" name="체력40" value="0" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600031" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600032" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600036" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600037" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600038" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600039" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600040" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600041" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600043" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600044" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600045" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600048" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600050" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600033" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600049" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600052" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600031" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600032" next="none" />
+				<EventTask type="eventGage" name="NpcDice" action="change" uiStyle="0" value="0" uiOn="false" string="@dungeon:9066002" next="none"/>
+				<EventTask type="eventGage" name="PcDice" action="change" uiStyle="1" value="0" uiOn="false" string="@dungeon:9066003" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600053" next="none"/> <!--1네임드 입구 문 디스폰-->
+			</EventTaskGroup>	    
+		</Event>
+	</EventGroup>
+	
+	<!--파티원 전멸 시 Flag On-->
+	<EventGroup type="annihilated" id="502" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="Annihilated" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--1네임드 전투상태 돌입-->
+	<EventGroup type="npcHp" uniqueId="466,46601" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600109" target="npc" targetNpcId="466,46601" next="none"/><!-- 1네임드 전투 상태되면 체크 쿨타임Abnormality 부여 -->
+				<EventTask type="message" string="@dungeon:9066004" style="combat" next="time" nextValue="5" /> <!--1네임드 차단 문 생성 메세지-->
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600053" next="none"/> <!--1네임드 입구 문 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcState" uniqueId="466,46601" value="combat" repeat="true"> <!-- 네임드 전투 상태되면 체크 쿨타임 부여 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600109" target="npc" targetNpcId="466,46601" next="none"/><!-- 1네임드 전투 상태되면 체크 쿨타임Abnormality 부여 -->
+				<EventTask type="flag" name="combat" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 1네임드 리셋 / 1네임드 테리토리 디스폰 후 스폰 -->	
+	<EventGroup type="npcReset" uniqueId="466,46601" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="enterDungeon" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600112" target="player" turn="off" next="none" /><!-- PC에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="46600113" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600041" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600042" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600043" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="99000030" target="player" turn="off" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600053" next="none"/> <!--1네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600005" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600005" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 1네임드 처치 / 1네임드, 1네임드 출입구 디스폰 / 2네임드 스폰 -->
+	<EventGroup type="npcHp" uniqueId="466,46601" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="enterDungeon" turn="on" next="none" />
+				<EventTask type="guideOff" id="1" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600112" target="player" turn="off" next="none" /><!-- PC에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="46600113" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600041" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600042" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600043" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="99000030" target="player" turn="off" next="none" />
+				<EventTask type="guideOn" nameId="466,912" id="2" pos="-22917.98046875,42902.88281250,125.80078125" next="none" /><!--2네임드 길찾기 가이드-->
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600031" next="none" /> <!--2네임드 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600053" next="none" /> <!--1네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600054" next="none" /> <!--1네임드 출구 문 디스폰-->
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600058" next="none" /> <!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="empty" next="time" nextValue="3" /> <!--1네임드 디스폰 대기-->
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600005" next="none"/> <!--1네임드 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--2네임드 전투 공간 진입 전 낙하 무적 이상상태 걸기-->
+	<EventGroup type="enterTerritory" uniqueId="466,46600018" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="99070035" target="player" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2넴 전투 시 이벤트 게이지 시작 / 2네임드 초기 세팅(빨원근 or 녹원근)-->
+	<EventGroup type="npcState" uniqueId="466,46602" value="combat" repeat="true"> <!-- 네임드 전투 상태되면 이벤트 게이지 시작 -->
+		<Event>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="46600103" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="eventGage" name="NpcDice" action="start" uiStyle="0" maxValue="100" uiOn="true" string="@dungeon:9066002" next="none"/>
+				<EventTask type="eventGage" name="PcDice" action="start" uiStyle="1" maxValue="100" uiOn="true" string="@dungeon:9066003" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600058" next="none" /> <!--입구에 2넴 앞 마법석 디스폰-->
+				<EventTask type="message" string="@dungeon:9066004" style="combat" next="time" nextValue="5" /> <!--2네임드 차단 문 생성 메세지-->
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600053" next="none"/> <!--1네임드 입구 문 스폰-->
+				<EventTask type="flag" name="combat" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="46600104" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="eventGage" name="NpcDice" action="start" uiStyle="0" maxValue="100" uiOn="true" string="@dungeon:9066002" next="none"/>
+				<EventTask type="eventGage" name="PcDice" action="start" uiStyle="1" maxValue="100" uiOn="true" string="@dungeon:9066003" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600058" next="none" /> <!--입구에 2넴 앞 마법석 디스폰-->
+				<EventTask type="message" string="@dungeon:9066004" style="combat" next="time" nextValue="5" /> <!--1네임드 차단 문 생성 메세지-->
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600053" next="none"/> <!--1네임드 입구 문 스폰-->
+				<EventTask type="flag" name="combat" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 2네임드 리셋 / 2네임드, 룰렛, 말, 보너스 주사위, fever코인 등 디스폰 / 2네임드, 룰렛 스폰 -->
+	<EventGroup type="npcReset" id="501" uniqueId="466,46602" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="enterDungeon" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600018" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600028" target="player" turn="off" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600058" next="none" /> <!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="flag" name="FeverTime" value="0" next="none" />
+				<EventTask type="flag" name="체력40" value="0" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600031" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600032" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600036" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600037" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600038" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600039" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600040" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600041" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600043" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600044" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600045" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600048" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600050" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600033" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600049" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600052" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600031" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600032" next="none" />
+				<EventTask type="eventGage" name="NpcDice" action="change" uiStyle="0" value="0" uiOn="false" string="@dungeon:9066002" next="none"/>
+				<EventTask type="eventGage" name="PcDice" action="change" uiStyle="1" value="0" uiOn="false" string="@dungeon:9066003" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600053" next="none"/> <!--1네임드 입구 문 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2네임드 clear or not -->
+	<!-- 2네임드 클리어 -->
+	<EventGroup type="eventGage" eventName="PcDice" comparison="none" value="100" repeat="false"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="FeverReset" value="0" next="none" />
+				<EventTask type="flag" name="Annihilated" value="0" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="502" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="501" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="500" state="stop" next="none" />
+				<EventTask type="enterDungeon" turn="on" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="100002" playTime="5000" next="none" />
+				<EventTask type="guideOff" id="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600058" next="none" /> <!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600031" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46610" next="none" />
+				<EventTask type="killNpc" targetNpcId="466,46692" next="none" />
+				<EventTask type="message" string="@dungeon:9066011" style="combat" next="time" nextValue="5"/>
+				<EventTask type="abnormality" abnormalityId="46600001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600018" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600028" target="player" turn="off" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600059" next="none" /><!--보상지급npc 스폰-->
+				<EventTask type="flag" name="FeverTime" value="0" next="none" />
+				<EventTask type="flag" name="체력40" value="0" next="none" />
+				<EventTask type="flag" name="combat" value="0" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600032" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600036" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600037" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600038" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600039" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600040" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600041" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600043" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600044" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600045" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600048" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600050" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600033" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600049" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600052" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600505" next="none" />
+				<EventTask type="eventGage" name="NpcDice" action="change" uiStyle="0" value="0" uiOn="false" string="@dungeon:9066002" next="none"/>
+				<EventTask type="eventGage" name="PcDice" action="change" uiStyle="1" value="0" uiOn="false" string="@dungeon:9066003" next="none"/>
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600506" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9066507" target="npc" targetNpcId="466,1083" next="time" nextValue="1"/> 
+				<EventTask type="message" string="@dungeon:9066508" target="npc" targetNpcId="466,1084" next="time" nextValue="1"/> 
+				<EventTask type="message" string="@dungeon:9066509" target="npc" targetNpcId="466,1085" next="time" nextValue="1"/> 
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600053" next="none"/> <!--1네임드 입구 문 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 클리어 실패 -->
+	<EventGroup type="eventGage" eventName="NpcDice" comparison="none" value="100" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9066012" style="combat" next="none"/>
+				<EventTask type="abnormality" abnormalityId="46600100" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="flag" name="FeverTime" value="0" next="none" />
+				<EventTask type="flag" name="체력40" value="0" next="none" />
+				<EventTask type="changePatternList" targetNpcId="466,46602" patternListId="2" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="27" name="NPCHP100" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9066012" style="combat" next="none"/>
+				<EventTask type="abnormality" abnormalityId="46600100" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="changePatternList" targetNpcId="466,46602" patternListId="2" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="1" name="2네임드 전멸기 이후" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="enterDungeon" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600018" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600028" target="player" turn="off" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600058" next="none" /> <!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="flag" name="FeverTime" value="0" next="none" />
+				<EventTask type="flag" name="체력40" value="0" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600031" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600032" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600036" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600037" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600038" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600039" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600040" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600041" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600043" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600044" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600045" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600048" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600050" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600033" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600049" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600052" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600031" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600032" next="none" />
+				<EventTask type="eventGage" name="NpcDice" action="change" uiStyle="0" value="0" uiOn="false" string="@dungeon:9066002" next="none"/>
+				<EventTask type="eventGage" name="PcDice" action="change" uiStyle="1" value="0" uiOn="false" string="@dungeon:9066003" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2네임드 보상 상자 처치 시 / 퇴장 차원의 마법석 스폰 -->
+	<EventGroup type="npcHp" uniqueId="466,46613" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600057" next="time" nextValue="1"/> <!--퇴장 마법석 스폰-->
+				<EventTask type="message" string="@dungeon:9066510" target="npc" targetNpcId="466,1085" next="time" nextValue="1"/> 
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600506" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2네임드 체력 40%에 회복 30% -->
+	<EventGroup type="flag" name="체력40,FeverTime" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="체력40" value="0" next="none" />
+		<EventTask type="message" string="@dungeon:9066015" style="combat" next="none"/>
+		<EventTask type="abnormality" abnormalityId="46600005" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+		<EventTask type="abnormality" abnormalityId="46600099" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+	  </EventTaskGroup>
+    </Event>  
+	</EventGroup>
+	
+	<!-- 2네임드 체력40 flag On-->
+	<EventGroup type="npcHp" uniqueId="466,46602" value="40" repeatAlive="true" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="체력40" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+<!-- 1네임드 패턴 -->
+	<EventGroup type="npcHp" uniqueId="466,46601" value="50" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="466,46601" patternListId="2" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--<EventGroup type="none" id="1" name="홀수 이펙트 부여" repeat="true" > 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600107" turn="on" target="npc" targetNpcId="466,46601" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="2" name="짝수 이펙트 부여" repeat="true" > 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600108" turn="on" target="npc" targetNpcId="466,46601" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+	<EventGroup type="none" id="3" name="정답이 홀수일 때" repeat="true" > 
+		<Event>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="46600114" turn="on" target="npc" targetNpcId="466,46601" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="46600117" turn="on" target="npc" targetNpcId="466,46601" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="4" name="정답이 짝수일 때" repeat="true" > 
+		<Event>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="46600115" turn="on" target="npc" targetNpcId="466,46601" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="46600116" turn="on" target="npc" targetNpcId="466,46601" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	
+<!--2네임드-->
+	<!-- 2네임드 룰렛 스폰 -->
+	<EventGroup type="none" id="19" name="역방향 룰렛 스폰" repeat="true" > 
+		<Event>
+			<EventTaskGroup probability="0.33">
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600037" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600072" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.33">
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600039" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600072" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.33">
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600041" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600072" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="20" name="정방향 룰렛 스폰" repeat="true" > 
+		<Event>
+			<EventTaskGroup probability="0.33">
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600036" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600072" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.33">
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600038" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600072" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.33">
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600040" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600072" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2네임드 보너스 주사위 스폰 -->
+	<EventGroup type="none" id="21" name="보너스 주사위 스폰" repeat="true" > 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600033" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 fever 스폰 -->
+	<EventGroup type="none" id="22" name="fever Time" repeat="true" > 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="Annihilated" value="0" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600019" target="npc" turn="off" targetNpcId="466,46602" next="none" />
+				<!--<EventTask type="spawn" huntingZoneId="466" territoryId="46600034" next="none"/>
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600035" next="none"/>
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600043" next="none"/>-->
+				<EventTask type="flag" name="체력40" value="0" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600045" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600036" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600037" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600038" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600039" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600040" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600041" next="time" nextValue="0.5"/>
+				<EventTask type="flag" name="FeverReset" value="1" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600079" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600061" target="npc" turn="off" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600062" target="npc" turn="off" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600063" target="npc" turn="off" targetNpcId="466,46610" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 체력 30%미만 방어력 1000배 -->
+	<EventGroup type="npcHp" uniqueId="466,46602" value="30" repeatAlive="true" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600099" target="npc" turn="off" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600079" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 fever 디스폰 -->
+	<EventGroup type="eliminate" territoryId="46600034" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9066013" style="combat" next="none"/>
+				<EventTask type="abnormality" abnormalityId="46600020" target="npc" targetNpcId="466,46602" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600034" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600035" next="none"/>
+				<EventTask type="abnormality" abnormalityId="46600099" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600019" target="npc" turn="off" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="23" name="fever 디스폰" repeat="true" > 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600099" target="npc" targetNpcId="466,46602" next="none" targetBossId="466,46602" patternGuide="timeAttack" patternShowTime="0"/>
+				<EventTask type="abnormality" abnormalityId="46600078" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600080" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600079" target="npc" turn="off" targetNpcId="466,46602" next="none" />
+				<EventTask type="flag" name="FeverTime" value="1" next="none" />
+				<EventTask type="killNpc" targetNpcId="466,46611" next="none" />
+				<EventTask type="despawn" huntingZoneId="466" territoryId="46600045" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600034" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600035" next="none"/>
+				<EventTask type="message" string="@dungeon:9066013" style="combat" next="none"/>
+				<EventTask type="abnormality" abnormalityId="46600019" target="npc" turn="off" targetNpcId="466,46602" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="46600027" target="npc" targetNpcId="466,46610" next="none" />
+				<EventTask type="spawn" huntingZoneId="466" territoryId="46600052" next="none"/>
+				<!--<EventTask type="despawn" huntingZoneId="466" territoryId="46600043" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46696" next="none" />
+				<EventTask type="killNpc" targetNpcId="466,46695" next="none" />
+				<EventTask type="despawn" huntingZoneId="466" territoryId="46600048" next="none"/>
+				<EventTask type="despawn" huntingZoneId="466" territoryId="46600044" next="none"/>-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="24" name="Boss 2phase 돌입, 패턴 끊기" repeat="true" > 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600020" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600099" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600078" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="25" name="승패 abnormality 초기화" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600073" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600074" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<!--<EventTask type="abnormality" abnormalityId="46600022" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600023" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600024" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600025" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600026" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600031" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600032" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600033" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600034" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600035" turn="off" target="npc" targetNpcId="466,46611" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600036" turn="off" target="npc" targetNpcId="466,46611" next="none" />-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="26" name="효과없음" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2네임드 말 디스폰 -->
+	<EventGroup type="none" id="28" name="말 디스폰" repeat="true" > 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600075" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600036" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600037" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600038" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600039" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600040" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="466" territoryId="46600041" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="29" name="보너스 주사위 안전지대 디스폰" repeat="true" > 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="466,46612" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="none" id="30" name="분산율 조정" repeat="true" > 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600004" target="player" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--2phase 이상상태 스왑-->
+	<EventGroup type="none" id="33" name="빨원근->녹원근" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600103" target="npc" turn="off" targetNpcId="466,46602" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="46600104" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="34" name="녹원근->빨원근" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600104" target="npc" turn="off" targetNpcId="466,46602" next="none" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="46600103" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+<!-- /@이벤트 게이지 사용-->
+	
+	<!-- PC주사위 이벤트 게이지 증가용 -->
+	<EventGroup type="none" id="201" name="PC 게이지 1 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9066021" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="1" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="202" name="PC 게이지 2 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9066022" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="2" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="203" name="PC 게이지 3 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9066023" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="3" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="204" name="PC 게이지 4 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9066024" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="4" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="205" name="PC 게이지 5 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9066025" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="5" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="206" name="PC 게이지 6 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9066026" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="6" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--보너스주사위pc 게이지 증가용-->
+	<EventGroup type="none" id="211" name="보너스 PC 게이지 1 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="1" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="212" name="보너스 PC 게이지 2 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="2" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="213" name="보너스 PC 게이지 3 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="3" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="214" name="보너스 PC 게이지 4 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="4" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="215" name="보너스 PC 게이지 5 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="5" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="216" name="보너스 PC 게이지 6 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="PcDice" type="eventGage" action="plus" value="6" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- PC주사위 이벤트 게이지 감소용 -->
+	<EventGroup type="none" id="231" name="PC 게이지 1 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9066031" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="minus" value="1" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="232" name="PC 게이지 2 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9066032" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="minus" value="2" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="233" name="PC 게이지 3 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9066033" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="minus" value="3" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="234" name="PC 게이지 4 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9066034" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="minus" value="4" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="235" name="PC 게이지 5 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9066035" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="minus" value="5" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="236" name="PC 게이지 6 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9066036" style="combat" next="none"/>
+				<EventTask name="PcDice" type="eventGage" action="minus" value="6" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 승패 체크용 
+	<EventGroup type="none" id="221" name="PC승" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600038" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="222" name="PC패" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600039" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+	
+	<!-- NPC주사위 이벤트 게이지 증가용 -->	
+	<EventGroup type="none" id="301" name="NPC 게이지 1 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="1" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46692" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="302" name="NPC 게이지 2 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="2" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46692" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="303" name="NPC 게이지 3 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="3" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46692" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="304" name="NPC 게이지 4 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="4" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46692" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="305" name="NPC 게이지 5 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="5" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46692" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="306" name="NPC 게이지 6 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="6" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46692" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--보너스주사위pc 게이지 증가용-->
+	<EventGroup type="none" id="311" name="보너스 NPC 게이지 4 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="4" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46697" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46612" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="312" name="보너스 NPC 게이지 5 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="5" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46698" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46612" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="313" name="보너스 NPC 게이지 6 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="6" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46699" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46612" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="314" name="보너스 NPC 게이지 4_1 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="4" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46677" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46612" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="315" name="보너스 NPC 게이지 5_1 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="5" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46678" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46612" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="316" name="보너스 NPC 게이지 6_1 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="NpcDice" type="eventGage" action="plus" value="6" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46679" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46612" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<!--  PC 주사위 이벤트게이지가 30이상이면 NPC 처치
+	<EventGroup type="eventGage" eventName="PcDice" comparison="gt" value="30" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="466,46602" next="none"/>
+				<EventTask type="despawn" huntingZoneId="466" territoryId="46600004" next="none"/>
+				<EventTask type="despawn" huntingZoneId="466" territoryId="46600006" next="none"/>
+				<EventTask type="despawn" huntingZoneId="466" territoryId="46600007" next="none"/>
+				<EventTask type="eventGage" name="PcDice" action="change" value="30" uiStyle="2" uiOn="on" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="eventGage" name="PcDice" action="plus" value="0" uiStyle="2" uiOn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> -->
+	
+	<!--  NPC 주사위 이벤트게이지가 30이상이면 전멸기 패턴셋 실행
+	<EventGroup type="eventGage" eventName="NpcDice" comparison="gt" value="30" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="466,46602" patternListId="2" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+<!-- 이벤트 게이지 사용 @/ -->
+
+	<!--말 go/stop -->
+	<EventGroup type="none" id="101" name="룰렛 : 파랑" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600063" target="npc" turn="on" targetNpcId="466,46610" next="none"/>
+				<EventTask type="abnormality" abnormalityId="46600077" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600072" target="npc" turn="off" targetNpcId="466,46602" next="time" nextValue="2" />
+				<EventTask type="abnormality" abnormalityId="46600069" target="npc" turn="on" targetNpcId="466,46621" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600071" target="npc" turn="off" targetNpcId="466,46621" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="102" name="룰렛 : 빨강" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600061" target="npc" turn="on" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600077" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600072" target="npc" turn="off" targetNpcId="466,46602" next="time" nextValue="2" />
+				<EventTask type="abnormality" abnormalityId="46600069" target="npc" turn="on" targetNpcId="466,46621" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600071" target="npc" turn="off" targetNpcId="466,46621" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="103" name="룰렛 : 하양" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600062" target="npc" turn="on" targetNpcId="466,46610" next="none"/>
+				<EventTask type="abnormality" abnormalityId="46600077" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600072" target="npc" turn="off" targetNpcId="466,46602" next="time" nextValue="2" />
+				<EventTask type="abnormality" abnormalityId="46600069" target="npc" turn="on" targetNpcId="466,46621" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600071" target="npc" turn="off" targetNpcId="466,46621" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 주사위 territory 스폰 -->
+	<EventGroup type="none" id="901" name="투명npc에 rollcheck 이상상태 부여" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600060" turn="on" target="npc" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600016" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600077" target="npc" turn="off" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="902" name="(빨),노,파" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId="46600066" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600065" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="903" name="빨,(노),파" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600066" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600065" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="904" name="빨,노,(파)" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600066" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600065" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="905" name="(빨),(노),파" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId="46600066" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600066" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600067" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600065" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600065" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="906" name="(빨),노,(파)" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId="46600066" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600067" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600066" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600065" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600065" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="907" name="빨,(노),(파)" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId="46600067" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600066" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600066" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600065" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600065" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="908" name="이상상태 초기화" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600059" turn="off" target="npc" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600060" turn="off" target="npc" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600061" turn="off" target="npc" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600062" turn="off" target="npc" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600063" turn="off" target="npc" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600002" turn="on" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="909" name="투명npc에 reversecheck 이상상태 부여" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600059" turn="on" target="npc" targetNpcId="466,46610" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600016" target="npc" turn="on" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600077" target="npc" turn="off" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="910" name="초기화, 정방향 이상상태 부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600073" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600074" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="46600074" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="911" name="초기화, 역방향 이상상태 부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600073" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600074" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600021" turn="off" target="npc" targetNpcId="466,46602" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="46600073" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="912" name="2phase 다 굴리기" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600064" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600076" turn="on" target="npc" targetNpcId="466,46688" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600076" turn="on" target="npc" targetNpcId="466,46689" next="none" />
+				<EventTask type="abnormality" abnormalityId="46600076" turn="on" target="npc" targetNpcId="466,46690" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!--보스 쿨타임 관리 이상상태-->
+	<EventGroup type="none" id="104" name="주사위 패턴 쿨타임 45초" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600005" turn="on" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--주사위 눈금 비교-->
+	<!--<EventGroup type="eventGage" eventName="NpcDice" comparison="ggt" cName="PcDice" value="15" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600095" turn="on" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eventGage" eventName="PcDice" comparison="ggt" cName="NpcDice" value="12" repeat="true" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="46600096" turn="on" target="npc" targetNpcId="466,46602" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+	
+	<!--주사위 자살-->
+	<EventGroup type="none" id="900" name="PC주사위 자살용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="466,46688" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46689" next="none"/>
+				<EventTask type="killNpc" targetNpcId="466,46690" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="920" name="왕주사위 자살용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="466,46692" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+<!--퀘스트 던전 이벤트-->
+    <EventGroup type="questProgress"> 
+		<Event questId="7281" taskId="11">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="7281_1" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="7281_1">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9066500" targetNpcId="466,46601" next="time" nextValue="3.0"/> 
+			<EventTask type="message" string="@dungeon:9066501" targetNpcId="466,46601" next="time" nextValue="3.0"/> 
+			<EventTask type="message" string="@dungeon:9066502" targetNpcId="466,46601" next="time" nextValue="3.0"/> 
+			<EventTask type="flag" name="7281_1" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <!--EventGroup type="questProgress"> 
+		<Event questId="7281" taskId="16">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="7281_2" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="7281_2">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="doActionScript" targetNpcId="466,1081" actionScriptId="728101" next="none"/> 
+			<EventTask type="message" string="@dungeon:9066503" targetNpcId="466,1080" next="none"/> 
+			<EventTask type="message" string="@dungeon:9066504" targetNpcId="466,1081" next="none"/> 
+			<EventTask type="message" string="@dungeon:9066505" targetNpcId="466,1082" next="time" nextValue="2.0"/> 
+			<EventTask type="message" string="@dungeon:9066506" targetNpcId="466,46602" next="time" nextValue="2.0"/> 
+			<EventTask type="flag" name="7281_2" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+</Dungeon>

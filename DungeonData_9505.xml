@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9505" name="@dungeon:9505" startPos="-37097,8468,2173" exitContinentId="7005" exitPos="986,3929,1777" destroyWaitMin="0">
+  <RestoreTargetQuest id="50502" forceRestore="true" />
+  <Condition type="solo"/>
+  <Condition type="levelOver" value="65"/>  
+  
+  <EventGroup type="initialize" >
+		<Event>
+			<EventTaskGroup>
+				<!--<EventTask type="flag" name="대피" value="1" next="none"/> -->				
+				<EventTask type="flag" name="초기화" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>  
+  
+      <EventGroup type="flag" name="초기화">
+		<Event>
+			<EventTaskGroup>
+				 <!-- 단상 앞 시체들 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500005" next="none" /> 
+				<!-- 그레이엄 헤인즈 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500018" next="none" /> 
+				<!-- 사람들 대피시키는 경비병 -->				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500019" next="none" /> 
+				<!-- 대피  퀘스트(모자) -->				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500020" next="none" />
+				<!-- 대피  퀘스트(모자) -->				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500022" next="none" />
+				<!-- 대피  퀘스트(모자) -->				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500010" next="none" /> 
+				<!-- 대피  퀘스트(모자) -->				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500015" next="none" />  
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500011" next="none" />				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500016" next="none" />				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500022" next="none" />				
+				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500066" next="none" />				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500065" next="none" />				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500064" next="none" />				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500067" next="none" />
+				
+				<!-- 시체 확인 용 테리토리 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500069" next="none" />
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500070" next="none" />
+				
+				<!-- 용 재침공 연출 디스폰 용 테리토리 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500095" next="none" />
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500096" next="none" />
+				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500103" next="none" />
+				<!-- 돌 무더기 소환 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500104" next="time" nextValue="1" />
+				<!-- 돌 무더기 무적 -->
+				<EventTask type="abnormality" abnormalityId ="950500012" target="npc" targetNpcId="505,8000" strictly="true" turn="on" next="none" />					
+			</EventTaskGroup>
+		</Event>
+  </EventGroup> 
+  
+  <!-- 벨리카 침공 영상 재생 -->
+   	<EventGroup type="enterTerritory" uniqueId="505,50500018" triggerUserClass = "lancer;warrior;slayer;berserker;sorcerer;archer;priest;elementalist;engineer;fighter;assassin;soulless;glaiver" repeat="false">	
+		<Event >
+			<EventTaskGroup>				
+				<EventTask type="playMovie" id="3041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+  <!-- 그레이엄 경비병에게 명령 전달. -->
+  <EventGroup type="questProgress">
+		<Event questId="50502" taskId="4" >
+			<EventTaskGroup>				
+				<EventTask type="flag" name="경비" value="1" next="none"/>								
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup> 
+  
+
+    <!-- 연출용 경비병 디스폰 및 퀘스트 전달용 경비병 스폰 -->	
+    <EventGroup type="flag" name="경비">
+		<Event>
+			<EventTaskGroup>			
+				<!-- 그레이엄이 경비병 에게 병령을 하달 -->
+				<EventTask type="doActionScript"  targetNpcId="505,2027" actionScriptId="9506039" next="time" nextValue="1" />					
+				<!-- 경비병 1,2 대답 연출 -->
+				<EventTask type="doActionScript"  targetNpcId="505,1101" actionScriptId="9506042" next="none" />				
+				<EventTask type="doActionScript"  targetNpcId="505,1102" actionScriptId="9506044" next="time" nextValue="2" />				
+				
+				<!-- 경비병 1 생존자를 데리고 오는 연출 -->
+				<EventTask type="doActionScript"  targetNpcId="505,1101" actionScriptId="9505004" next="none" />				
+				<!-- 경비병 2 생존자를 데리고 오는 연출 -->
+				<EventTask type="doActionScript"  targetNpcId="505,1102" actionScriptId="9505013" next="time" nextValue="4" />								
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>   
+
+	<!-- 꼬마 대피 시키기 -->
+    <EventGroup type="questProgress">
+		<Event questId="50502" taskId="5" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="생존자1" value="1" next="none"/>								
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+    <EventGroup type="flag" name="생존자1">
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="doActionScript"  targetNpcId="505,2012" actionScriptId="9505009" next="time" nextValue="4" />
+				<EventTask type="flag" name="생존자1" value="0" next="none"/>			
+			</EventTaskGroup>
+		</Event>
+  </EventGroup> 
+
+  <!-- NPC 1 대피 시키기 -->
+	<EventGroup type="questProgress">
+		<Event questId="50502" taskId="6" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="생존자2" value="1" next="none"/>					
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+      <EventGroup type="flag" name="생존자2">
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="doActionScript"  targetNpcId="505,2028" actionScriptId="9505032" next="time" nextValue="4" />		
+				<EventTask type="flag" name="생존자2" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+  </EventGroup> 
+  
+    <!-- NPC 2 대피 시키기 -->
+	<EventGroup type="questProgress">
+		<Event questId="50502" taskId="7" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="탈출" value="1" next="none"/>									
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	
+     <EventGroup type="flag" name="탈출">
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="doActionScript"  targetNpcId="505,2027" actionScriptId="9506040" next="time" nextValue="3" />
+				<!-- 그레이엄 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500018" next="none" />	
+				<!-- 경비병 1 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500019" next="none" />	
+				<!-- 경비병 2 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500022" next="none" />	
+				<!-- 바라카 생존자 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500067" next="none" />		
+				<!-- 꼬마 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500020" next="none" />		
+				<!-- 남자 휴먼 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500010" next="none" />	
+				<!-- 유저가 구한 생존자 1 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500011" next="none" />		
+				<!-- 유저가 구한 생존자 2 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500015" next="time" nextValue="2" />		
+				<EventTask type="flag" name="탈출" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 	
+
+
+	<!-- 엘린 사망 -->
+	<EventGroup type="questProgress">
+		<Event questId="50502" taskId="10" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="엘린사망" value="1" next="none"/>					
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+      <EventGroup type="flag" name="엘린사망">
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500065" next="none" />	
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500105" next="none" />	
+			</EventTaskGroup>
+		</Event>
+  </EventGroup> 
+	<!-- 재 침공 연출 >
+	<EventGroup type="questProgress">
+		<Event questId="50502" taskId="12" >
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500049" next="time" nextValue="0.3" />
+				<EventTask type="message" string="@dungeon:9505002" style="alert"  next="time" nextValue="5"/>			
+				
+				<EventTask type="doActionScript"  targetNpcId="505,6100" actionScriptId="9505026" next="time" nextValue="0" />
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500091" next="none" />
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500092" next="none" />				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500056" next="time" nextValue="1" />
+				
+				<EventTask type="doActionScript"  targetNpcId="505,9000" actionScriptId="9505025" next="time" nextValue="1" />
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500059" next="time" nextValue="5"/>				
+				<EventTask type="updateQuest" questId="50502" taskId="12" next="none"/>				
+			
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup!-->
+	
+	<!-- 전투 용 알쿠스 소환 -->
+	<EventGroup type="questProgress">
+		<Event questId="50502" taskId="11" >
+			<EventTaskGroup>			
+				<!-- 전투 용 알쿠스 스폰 -->
+				<EventTask type="message" string="@dungeon:9505010" style="alert"  next="time" nextValue="1"/>			
+				<EventTask type="doActionScript"  targetNpcId="505,2001" actionScriptId="9505034" next="time" nextValue="2" />	
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500090" next="time" nextValue="2" />
+				
+				<EventTask type="flag" name="용침공" value="1" next="none"/>
+					
+				
+			</EventTaskGroup>
+		</Event>  		
+	</EventGroup>
+	
+	<EventGroup type="flag" name="용침공">
+		<Event>
+			<EventTaskGroup>				
+				<!-- 용 공중 연출 2 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500074" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9001" actionScriptId="9505025" next="time" nextValue="1" />				
+				<!--EventTask type="spawn" huntingZoneId="505" territoryId="50500076" next="time" nextValue="1"/-->				
+				<EventTask type="empty" next="time" nextValue="1" />
+				
+				<!-- 용 공중 연출 3 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500080" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9002" actionScriptId="9505025" next="time" nextValue="1" />				
+				<!--EventTask type="spawn" huntingZoneId="505" territoryId="50500079" next="time" nextValue="1"/-->
+				<EventTask type="empty" next="time" nextValue="1" />
+				
+				<!-- 용 공중 연출 4 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500077" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9003" actionScriptId="9505025" next="time" nextValue="1" />				
+				<!--EventTask type="spawn" huntingZoneId="505" territoryId="50500082" next="time" nextValue="1"/-->
+				<EventTask type="empty" next="time" nextValue="1" />		
+				
+				<!-- 용 공중 연출 5 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500083" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9004" actionScriptId="9505025" next="none"/>
+				<!--EventTask type="spawn" huntingZoneId="505" territoryId="50500087" next="time" nextValue="1"/-->								
+				<EventTask type="empty" next="time" nextValue="1" />
+				
+				<!-- 용 공중 연출 6 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500099" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9005" actionScriptId="9505025" next="time" nextValue="1" />
+				<!--EventTask type="spawn" huntingZoneId="505" territoryId="50500100" next="time" nextValue="1"/-->	
+				<EventTask type="empty" next="time" nextValue="1" />
+				
+				<!-- 용 공중 연출 7 -->
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500101" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9006" actionScriptId="9505025" next="time" nextValue="1" />
+				<!--EventTask type="spawn" huntingZoneId="505" territoryId="50500102" next="time" nextValue="1"/-->
+				<EventTask type="empty" next="time" nextValue="5" />
+				
+				<EventTask type="flag" name="용침공" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  	<EventGroup type="eliminate" territoryId="50500090">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투용생존" value="0" next="none"/>		
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	<!--
+	<EventGroup type="flag" name="용침공">
+		<Event>
+			<EventTaskGroup>				
+
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500074" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9001" actionScriptId="9505025" next="time" nextValue="1" />				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500076" next="time" nextValue="1"/>				
+				<EventTask type="empty" next="time" nextValue="1" />
+				<EventTask type="flag" name="용침공3" value="1" next="none"/>				
+				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<EventGroup type="flag" name="용침공3,전투용생존">
+		<Event>
+			<EventTaskGroup>				
+
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500080" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9002" actionScriptId="9505025" next="time" nextValue="1" />				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500079" next="time" nextValue="1"/>				
+				<EventTask type="empty" next="time" nextValue="1" />			
+				<EventTask type="flag" name="용침공4" value="1" next="none"/>
+				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<EventGroup type="flag" name="용침공4,전투용생존">
+		<Event>
+			<EventTaskGroup>								
+
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500077" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9003" actionScriptId="9505025" next="time" nextValue="1" />				
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500082" next="time" nextValue="1"/>
+				<EventTask type="empty" next="time" nextValue="1" />						
+				<EventTask type="flag" name="용침공5" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<EventGroup type="flag" name="용침공5,전투용생존">
+		<Event>
+			<EventTaskGroup>								
+
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500083" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9004" actionScriptId="9505025" next="none"/>
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500087" next="time" nextValue="1"/>								
+				<EventTask type="empty" next="time" nextValue="1" />		
+				<EventTask type="flag" name="용침공6" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+		<EventGroup type="flag" name="용침공6,전투용생존">
+		<Event>
+			<EventTaskGroup>												
+
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500099" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9005" actionScriptId="9505025" next="time" nextValue="1" />
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500100" next="time" nextValue="1"/>								
+				<EventTask type="empty" next="time" nextValue="1" />			
+				<EventTask type="flag" name="용침공7" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+		<EventGroup type="flag" name="용침공7,전투용생존">
+		<Event>
+			<EventTaskGroup>												
+
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500101" next="time" nextValue="2"/>
+				<EventTask type="doActionScript"  targetNpcId="505,9006" actionScriptId="9505025" next="time" nextValue="1" />
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500102" next="time" nextValue="1"/>								
+				<EventTask type="empty" next="time" nextValue="5" />				
+
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	-->
+	<!-- 전투용 사망 체크용 -->
+	
+	<!-- 미스텔 출현 -->
+	<EventGroup type="questProgress">
+		<Event questId="50502" taskId="12" >
+			<EventTaskGroup>
+				<!-- 베르다슈를 덮고 있는 바위 무적 해제 >				
+				<EventTask type="abnormality" abnormalityId ="950500012" target="npc" targetNpcId="505,8000" strictly="true" turn="off" next="none" /-->
+				<!--EventTask type="message" string="@dungeon:9505011" targetNpcId="505,3001" next="time" nextValue="2"/-->			
+				<EventTask type="message" string="@dungeon:9505012" style="default"  next="none" />
+				<!--EventTask type="spawn" huntingZoneId="505" territoryId="50500059" next="time" nextValue="5"/-->
+				<EventTask type="flag" name="비행용투명NPC디스폰" value="1" next="none"/>				
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<!-- 비행 연출용 용 및 투명 NPC 전부 디스폰 -->
+	<EventGroup type="flag" name="비행용투명NPC디스폰">
+		<Event>
+			<EventTaskGroup>				
+				<!-- 용 공중 연출 2 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500074" next="none" />
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500076" next="none" />
+				
+				<!-- 용 공중 연출 3 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500080" next="none" />
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500079" next="none" />
+				
+				<!-- 용 공중 연출 4 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500077" next="none" />
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500082" next="none" />
+				
+				<!-- 용 공중 연출 5 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500083" next="none" />
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500087" next="none" />
+				
+				<!-- 용 공중 연출 6 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500099" next="none" />
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500100" next="none" />
+				
+				<!-- 용 공중 연출 7 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500101" next="none" />
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500102" next="none" />
+				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+		
+	<!--EventGroup type="questProgress">
+		<Event questId="50502" taskId="13" >
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9505016" targetNpcId="505," next="time" nextValue="2.0"	/> 	
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500049" next="none" />
+				<EventTask type="message" string="@dungeon:9505002" style="alert"  next="time" nextValue="5"/>	
+			</EventTaskGroup>
+		</Event>  		
+	</EventGroup-->
+	
+	<!--EventGroup type="questProgress">
+		<Event questId="50502" taskId="14" >
+			<EventTaskGroup>
+				<EventTask type="doActionScript"  targetNpcId="505,1001" actionScriptId="9505031" next="time" nextValue="2" />				
+				< 강력한 장판 공격 연출 >
+				<EventTask type="message" string="@dungeon:9505007" style="alert"  next="none" />
+				<EventTask type="spawn" huntingZoneId="505" territoryId="50500046" next="time" nextValue="5" />
+				<EventTask type="message" string="@dungeon:9505009" style="speechbubble"  next="time" nextValue="3">
+				<EventTask type="updateQuest" questId="50502" taskId="14" next="none"/>
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup-->
+	
+	
+	<!--연출 용이 특정 테리토리에 들어왔을 경우 디스폰 -->
+	<!-- 용 1 디스폰 -->
+  	<EventGroup type="enterTerritory" uniqueId="505,50500095" targetNpcId="505,9000" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+				<!-- 용 1 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500056" next="none" />
+				<!-- 용 1 장판 투명 NPC 디스폰 >
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500059" next="none" /-->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!-- 용 2 디스폰 -->
+  	<EventGroup type="enterTerritory" uniqueId="505,50500095" targetNpcId="505,9001" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+				<!-- 용 2 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500074" next="none" />
+				<!-- 용 2 장판 투명 NPC 디스폰 >
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500076" next="none" /-->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 용 3 디스폰 -->
+  	<EventGroup type="enterTerritory" uniqueId="505,50500095" targetNpcId="505,9002" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+				<!-- 용 3 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500080" next="none" />
+				<!-- 용 3 장판 투명 NPC 디스폰 >
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500079" next="none" /-->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 용 4 디스폰 -->
+  	<EventGroup type="enterTerritory" uniqueId="505,50500095" targetNpcId="505,9003" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+				<!-- 용 4 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500077" next="none" />
+				<!-- 용 4 장판 투명 NPC 디스폰 >
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500082" next="none" /-->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 용 5 디스폰 -->
+  	<EventGroup type="enterTerritory" uniqueId="505,50500095" targetNpcId="505,9004" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+				<!-- 용 5 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500083" next="none" />
+				<!-- 용 5 장판 투명 NPC 디스폰 >
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500087" next="none" /-->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+		<!-- 용 6 디스폰 -->
+  	<EventGroup type="enterTerritory" uniqueId="505,50500095" targetNpcId="505,9005" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+				<!-- 용 6 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500099" next="none" />
+				<!-- 용 6 장판 투명 NPC 디스폰 >
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500100" next="none" /-->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+		<!-- 용 7 디스폰 -->
+  	<EventGroup type="enterTerritory" uniqueId="505,50500095" targetNpcId="505,9006" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+				<!-- 용 7 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500101" next="none" />
+				<!-- 용 7 장판 투명 NPC 디스폰 >
+				<EventTask type="despawn" huntingZoneId="505" territoryId="50500102" next="none" /-->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<!-- 영상 재생 후 벨리카로 이동 -->
+	<EventGroup type="questProgress">
+		<Event questId="50502" taskId="14" >
+			<EventTaskGroup>
+			<!-- 	<EventTask type="teleport" continentId="7005" pos="-1225,9049,2173" next="none"/> --> 
+			<EventTask type="teleport" continentId="7005" pos="-82,10008,2173" next="none"/>
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+  
+</Dungeon>

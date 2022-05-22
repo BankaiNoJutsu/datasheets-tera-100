@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9735" name="@dungeon:9735" startPos="-43486,40629,-953" exitContinentId="7031" exitPos="3436,-20408,797" startDir="30" exitDir="340" overlapConsoleEvent="true">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="68" />
+	<ClearCondition huntingZoneId="735" templateId="3000" amount="1" killCount="1" />
+	<Retry retryId="1"/>
+	
+	<!--던전 최초 설정-->
+	<EventGroup type="initialize" name="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73501500" next="none" /> <!--차원의 마법석 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503010" next="none" /> <!--1네임드 랜던 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503012" next="none" /> <!-- 입장 지점 랜던 스폰-->
+				<EventTask type="flag" name="mini1_ob1" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob2" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob3" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob4" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="1N_FallingDmgImmune" value="0" next="none" /> <!--1네임드 전투 공간 내 낙하 피해 면역 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="1N_Dead" value="0" next="none" /> <!--1네임드 사망 조건 플래그 초기화-->
+				<EventTask type="flag" name="mini_Clear" value="0" next="none" /> <!--미니게임 클리어 조건 플래그 초기화-->
+				<EventTask type="flag" name="mini_Silent" value="0" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="2N_Entered" value="0" next="none" /> <!--2네임드 진입 조건 플래그 초기화-->
+				<EventTask type="flag" name="2N_Dead" value="0" next="none" /> <!--2네임드 사망 조건 플래그 초기화-->
+				<EventTask type="flag" name="3N_Entered" value="0" next="none" /> <!--3네임드 진입 조건 플래그 초기화-->
+				<EventTask type="flag" name="1nFallenPCsetPos" value="0" next="none" /> <!--BTS 159598 Flag 초기화-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--공용-->
+	<!--Do Nothing Event-->
+	<EventGroup type="none" id="0" name="DoNothing" repeat="true">
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="empty" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--순차스폰-->
+	<EventGroup type="flag" name="1N_Dead"> <!--미니게임 테리토리 스폰-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="mini_Silent" value="1" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 ON-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503009" next="none" /> <!--미니게임 랜던 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73504000" next="none"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73504001" next="time" nextValue="1"/> <!--미니게임 1번 구간 테리토리 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="mini_Clear,2N_Entered"> <!--2네임드 테리토리 스폰 및 연출-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="735,915" id="1" pos="-32373.86718750,59134.90625000,1.24804688" next="none" /> <!--2네임드 처치 가이드-->
+				<EventTask type="message" string="@dungeon:9735406" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="message" string="@dungeon:9735407" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73502000" next="time" nextValue="1" /> <!--2네임드 스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503011" next="none" /> <!--2네임드 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2N_Dead,3N_Entered"> <!-- 2네임드 사망 조건 및 3네임드 지역 진입 & 확인 영상 재생-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="735,916" id="1" pos="-34841.88671875,40626.43359375,23.25000000" next="none" /> <!--3네임드 처치 가이드-->
+				<EventTask type="playMovie" id="3056" next="time" nextValue="5" /> <!--영상 재생-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503000" next="none" /> <!--3네임드 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503013" next="none" /> <!-- 쓰러진 랜던 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드-->
+	<EventGroup type="flag" name="1N_FallingDmgImmune" repeat="true"> <!--1네임드 지역 낙하 피해 면역 이상상태 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="73500001" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="73501001" huntingZoneId="735" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcState" uniqueId="735,1000" value="combat" repeat="true"> <!--1네임드 전투 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9735001" style="default" next="none" /> <!--포탈 제거 알림-->
+				<EventTask type="flag" name="1nFallenPCsetPos" value="1" next="none" /> <!--BTS 159598 Flag ON-->
+				<EventTask type="consoleEvent" triggerName="Fan01a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan01a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan02a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan02a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan03a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan03a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan04a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan04a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan05a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan05a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan06a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan06a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="empty" next="time" nextValue="2"/> <!--Delay Time-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503010" next="none" /> <!--연출 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="735,1000" repeat="true"> <!--1네임드 리셋-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="735,1011" next="none" /> <!--Kill UltimateAtk TNPC-->
+				<EventTask type="killNpc" targetNpcId="735,1009" next="none" /> <!--Kill TimeBomb MNPC-->
+				<EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none" /> <!---Randomized Fan Working 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="2" state="stop" next="none" /> <!---UltimateAtk Destroy 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="3" state="stop" next="none" /> <!---FloorRotate 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none" /> <!---FloorStop 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="5" state="stop" next="none" /> <!---Order2SpawnTimeBomb 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="6" state="stop" next="none" /> <!---DoNotUseFan 이벤트 즉시 중단-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73500100" next="none" /> <!--입구의 1네임드로 가는 포탈 스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73501000" resetNpcHpDungeonTask="true" next="none" /> <!--1네임드 테리토리 디스폰-->
+				<EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none"/> <!--무작위 환풍기 가동 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="2" state="stop" next="none"/> <!--전멸기 TNPC 제거 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="3" state="stop" next="none"/> <!--전투 지역 회전 시작 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none"/> <!--전투 지역 회전 중지 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="5" state="stop" next="none"/> <!--시한 폭탄 생성 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="6" state="stop" next="time" nextValue="3"/> <!--환풍기 일시 정지 이벤트 즉시 중단-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73501000" next="none" /> <!--1네임드 테리토리 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="735,1000" value="0" repeat="true"> <!--1네임드 사망-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="735,912" id="1" pos="-41854,40625,-951" next="none" /> <!--되돌아 가기 가이드-->
+				<EventTask type="killNpc" targetNpcId="735,1011" next="none" /> <!--Kill UltimateAtk TNPC-->
+				<EventTask type="killNpc" targetNpcId="735,1009" next="none" /> <!--Kill TimeBomb MNPC-->
+				<EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none" /> <!---Randomized Fan Working 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="2" state="stop" next="none" /> <!---UltimateAtk Destroy 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="3" state="stop" next="none" /> <!---FloorRotate 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none" /> <!---FloorStop 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="5" state="stop" next="none" /> <!---Order2SpawnTimeBomb 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="6" state="stop" next="none" /> <!---DoNotUseFan 이벤트 즉시 중단-->
+				<EventTask type="flag" name="1N_FallingDmgImmune" value="0" next="none" /> <!--1네임드 전투 공간 내 낙하 피해 면역 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="1N_Dead" value="1" next="none" /> <!--1네임드 사망 조건 플래그 ON-->
+				<EventTask type="flag" name="1nFallenPCsetPos" value="0" next="none" /> <!--BTS 159598 Flag OFF-->
+				<EventTask type="abnormality" abnormalityId="73500001" target="player" turn="off" next="none"/> <!--1네임드 낙하피해면역 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="73501001" target="player" turn="off" next="none"/> <!--1네임드 지속피해 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="73501004" target="player" turn="off" next="none"/> <!--1네임드 기절 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="73501005" target="player" turn="off" next="none"/> <!--1네임드 이속감소 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="73501008" target="player" turn="off" next="none"/> <!--1네임드 침묵 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="73501012" target="player" turn="off" next="none"/> <!--1네임드 포획 Abn 제거-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73500100" next="none" /> <!--입구의 1네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73500101" next="none" /> <!--입구의 미니게임으로 가는 포탈 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503009" next="none" /> <!--미니게임 랜던 스폰-->
+				<EventTask type="consoleEvent" triggerName="FanStop01" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop01" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop02" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop02" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop03" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop03" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop04" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop04" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop05" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop05" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop06" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop06" turn="off" next="time" nextValue="5" /> <!--console event Initialize-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73501000" next="none" /> <!--1네임드 테리토리 디스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73501002" next="none" /> <!--입구로 가는 포탈 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="735,1000" value="98" repeat="true"> <!--1네임드 포탈 제거-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73500100" next="none" /> <!--입구의 1네임드로 가는 포탈 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="1nFallenPCsetPos" repeat="true"> <!--맵 밖으로 이탈했을 때 1네임드 전투 공간으로 이동-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="false" huntingZoneId="735" territoryId="73501003" next="none">
+					<Pos value="-38364,53760,1" />
+				</EventTask>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--패턴-->
+	<EventGroup type="npcHp" uniqueId="735,1000" value="50" repeat="true"> <!--1네임드 시한 폭탄 난이도 증가-->
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="changePatternList" targetNpcId="735,1002" patternListId="2" next="none" /> <!--TimeBomb Controller Pattern Change 2-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="1" name="Randomized Fan Working" repeat="true"> <!--무작위 환풍기 동작-->
+		<Event>
+			<EventTaskGroup probability="0.16">
+				<EventTask type="abnormality" abnormalityId="73501014" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="73501015" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb-->
+				<EventTask type="abnormality" abnormalityId="73501009" target="npc" targetNpcId="735,1003" turn="on" next="time" nextValue="5" /> <!--1번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan01b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan01b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan01a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan01a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.16">
+				<EventTask type="abnormality" abnormalityId="73501014" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="73501015" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb-->
+				<EventTask type="abnormality" abnormalityId="73501009" target="npc" targetNpcId="735,1004" turn="on" next="time" nextValue="5" /> <!--2번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan02b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan02b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan02a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan02a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="abnormality" abnormalityId="73501014" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="73501015" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb-->
+				<EventTask type="abnormality" abnormalityId="73501009" target="npc" targetNpcId="735,1005" turn="on" next="time" nextValue="5" /> <!--3번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan03b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan03b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan03a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan03a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="abnormality" abnormalityId="73501014" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="73501015" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb-->
+				<EventTask type="abnormality" abnormalityId="73501009" target="npc" targetNpcId="735,1006" turn="on" next="time" nextValue="5" /> <!--4번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan04b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan04b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan04a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan04a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="abnormality" abnormalityId="73501014" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="73501015" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb-->
+				<EventTask type="abnormality" abnormalityId="73501009" target="npc" targetNpcId="735,1007" turn="on" next="time" nextValue="5" /> <!--5번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan05b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan05b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan05a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan05a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="abnormality" abnormalityId="73501014" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="73501015" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb-->
+				<EventTask type="abnormality" abnormalityId="73501009" target="npc" targetNpcId="735,1008" turn="on" next="time" nextValue="5" /> <!--6번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan06b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan06b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan06a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan06a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="2" name="UltimateAtk Destroy" repeat="true"> <!--전멸기 TNPC 제거-->
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="empty" next="time" nextValue="4"/> <!--Delay Time-->
+				<EventTask type="killNpc" targetNpcId="735,1011" next="none" /> <!--Kill TNPC-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	<EventGroup type="none" id="3" name="FloorRotate" repeat="true"> <!--전투 지역 회전 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="consoleEvent" triggerName="FloorRotate" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FloorRotate" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="4" name="FloorStop" repeat="true"> <!--전투 지역 회전 중지-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="consoleEvent" triggerName="FloorStop" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FloorStop" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="5" name="Order2SpawnTimeBomb" repeat="true"> <!--시한 폭탄 생성-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="73501006" target="npc" targetNpcId="735,1002" turn="on" next="none" /> <!--Give Condition 2 TimeBombs-->
+				<EventTask type="abnormality" abnormalityId="73501013" target="npc" targetNpcId="735,1000" turn="on" next="none" /> <!--Give Condition 2 1Named TimeBombUsed-->
+				<EventTask type="abnormality" abnormalityId="73501013" target="npc" targetNpcId="735,1010" turn="on" next="none" /> <!--Give Condition 2 Fan Controller TimeBombUsed-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="6" name="DoNotUseFan" repeat="true"> <!--환풍기 일시 정지-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="73501011" target="npc" targetNpcId="735,1010" turn="on" next="none" /> <!--Give Condition 2 Fan Controller DoNotUseFan-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="8" name="ConditionAbnOFF" repeat="true"> <!--시한 폭탄 사용 조건 Abn 제거-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="73501006" target="npc" targetNpcId="735,1002" turn="off" next="none" /> <!--OFF TimeBomb Condition Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드-->
+	<EventGroup type="npcState" uniqueId="735,2000" value="combat" repeat="true"> <!--2네임드 전투 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9735001" style="default" next="none" /> <!--포탈 제거 알림-->
+				<EventTask type="empty" next="time" nextValue="2"/> <!--Delay Time-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503011" next="none" /> <!--2네임드 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="735,2000" repeat="true"> <!--2네임드 리셋-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73500102" next="none" /> <!--입구의 2네임드로 가는 포탈 스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73502000" resetNpcHpDungeonTask="true" next="none" /> <!--2네임드 테리토리 디스폰-->
+				<EventTask type="eventState" stateType="EventGroup" id="7" state="stop" next="none" /> <!---Order2Explode 이벤트 즉시 중단-->
+				<EventTask type="timer" action="stop" name="UltimateAtk" next="time" nextValue="3" /> <!--타이머 정지-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73502000" next="none" /> <!--2네임드 테리토리 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="735,2000" value="0" repeat="true"> <!--2네임드 사망-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="735,912" id="1" pos="-41854,40625,-951" next="none" /> <!--되돌아 가기 가이드-->
+				<EventTask type="flag" name="2N_Dead" value="1" next="none" /> <!--2네임드 사망 조건 플래그 ON-->
+				<EventTask type="eventState" stateType="EventGroup" id="7" state="stop" next="none" /> <!---Order2Explode 이벤트 즉시 중단-->
+				<EventTask type="abnormality" abnormalityId="73502000" target="player" turn="off" next="none"/> <!--2네임드 지속피해 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="73502004" target="player" turn="off" next="none"/> <!--2네임드 조건 Abn 제거-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73500102" next="none" /> <!--입구의 2네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73500103" next="time" nextValue="5" /> <!--입구의 3네임드로 가는 포탈 스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73502000" next="none" /> <!--2네임드 테리토리 디스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73502001" next="none" /> <!--입구로 가는 포탈 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="735,2000" value="98" repeat="true"> <!--2네임드 포탈 제거-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73500102" next="none" /> <!--입구의 2네임드로 가는 포탈 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--패턴-->
+	<EventGroup type="npcHp" uniqueId="735,2000" value="96" repeat="true"> <!--프레스 작동 메시지 출력-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9735200" style="default" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="735,2000" value="16" repeat="true"> <!--2네임드 Press Tension Change 2-->
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="changePatternList" targetNpcId="735,2001" patternListId="2" next="none" /> <!--Press Change-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="7" name="Order2Explode" repeat="true"> <!--Electricity Bomb-->
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="changePatternList" targetNpcId="735,2007" patternListId="2" next="none" /> <!--Electricity Bomb Tension Change 2-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="735,2000" value="90" repeat="true"> <!--전멸기 패턴 타이머 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" name="UltimateAtk" action="start" direction="reverse" value="80" timerUiOff="true" next="none"/> <!--80초 Timer 시작-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="timer" timerName="UltimateAtk" value="0" repeat="true"> <!--전멸기 패턴 타이머 종료-->
+		<Event>
+			<EventTaskGroup> <!--Without Pulling Order-->
+				<EventTask type="abnormality" abnormalityId="73502003" target="npc" targetNpcId="735,2000" turn="on" next="none" /> <!--Give Conditional Abn-->
+				<EventTask type="timer" name="UltimateAtk" action="start" direction="reverse" value="70" timerUiOff="true" next="none"/> <!--Restart Timer-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드-->
+	<EventGroup type="npcState" uniqueId="735,3000" value="combat" repeat="true"> <!--3네임드 전투 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9735001" style="default" next="none" /> <!--포탈 제거 알림-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="735,3000" id="61" repeat="true"> <!--3네임드 리셋-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73500103" next="none" /> <!--입구에 3네임드로 가는 포탈 스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503004" next="none" /> <!--차단문 디스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503000" resetNpcHpDungeonTask="true" next="none" /> <!--3네임드 테리토리 디스폰-->
+				<EventTask type="eventState" stateType="EventGroup" id="40" state="stop" next="none" /> <!--MiniNuke-Normal Condition 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="52" state="stop" next="none" /> <!--PartBreak-NormalTensionChangeWithStageID_1 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="60" state="stop" next="time" nextValue="3" /> <!--DoNotUseClairDeLune 이벤트 즉시 중단-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503000" next="none" /> <!--3네임드 테리토리 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup  type="npcHp" uniqueId="735,3000" value="0" repeat="true"> <!--3네임드 사망 시-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3057" next="none"/> <!--영상 재생-->
+				<EventTask type="guideOff" id="1" next="none" /> <!--길찾기 메시지 제거-->
+				<EventTask type="abnormality" abnormalityId="73503001" target="player" turn="off" next="none"/> <!--3네임드 기절 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="73503009" target="player" turn="off" next="none"/> <!--3네임드 화상 Abn 제거-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73500103" next="none" /> <!--입구에 3네임드로 가는 포탈 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503001" next="none" /> <!--던전 출구 차원의 마법석 스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503004" next="none" /> <!--차단문 디스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73504003" next="none" /> <!-- 업적용 랜던의 일기장 스폰-->
+				<EventTask type="eventState" stateType="EventGroup" id="40" state="stop" next="none" /> <!--MiniNuke-Normal Condition 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="52" state="stop" next="none" /> <!--PartBreak-NormalTensionChangeWithStageID_1 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="60" state="stop" next="none" /> <!--DoNotUseClairDeLune 이벤트 즉시 중단-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503013" next="time" nextValue="5" /> <!-- 쓰러진 랜던 디스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503000" next="none" /> <!--3네임드 테리토리 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="735,3000" value="98" repeat="true"> <!--3네임드 포탈 제거-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73500103" next="none" /> <!--입구의 3네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503004" next="none" /> <!--차단문 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--패턴-->
+	<EventGroup type="none" id="40" name="MiniNuke-Normal" repeat="true"> <!--원거리 타겟 견제 사용됨 조건 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="73503200" target="npc" targetNpcId="735,3000" turn="on" next="none" /> <!--MiniNuke Normal Target Used Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="52" name="PartBreak-NormalTensionChangeWithStageID_1" repeat="true"> <!--Normal Tension Change-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="73503401" target="npc" targetNpcId="735,3000" turn="off" next="none" /> <!--Shield Abn OFF-->
+				<EventTask type="changePatternList" targetNpcId="735,3000" patternListId="1" next="none" /> <!--Normal Tension Change-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="60" name="DoNotUseClairDeLune" repeat="true"> <!--달빛 베기 5초 간 사용 불가능한 조건 이상상태 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="73503002" target="npc" targetNpcId="735,3000" turn="on" next="none" /> <!--DuNotUseClairDeLune Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1-->
+	<EventGroup type="flag" name="mini1_ob1,mini1_ob2,mini1_ob3,mini1_ob4" repeat="true"> <!-- 모든 오브젝트 해제 시 미니게임1 구간 클리어 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="735,912" id="1" pos="-41854,40625,-951" next="none" /> <!--되돌아 가기 가이드-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73500101" next="none" /> <!--입구에 미니게임으로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73504002" next="none" /> <!--입구로 가는 포탈 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73500102" next="none" /> <!--입구에 2네임드로 가는 포탈 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73503011" next="none" /> <!--2네임드 랜던 스폰-->
+				<EventTask type="flag" name="mini_Silent" value="0" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="mini_Clear" value="1" next="none" /> <!--미니게임 클리어 조건 플래그 ON-->
+				<EventTask type="abnormality" abnormalityId="73504000" target="player" turn="off" next="none"/> <!--모든 플레이어의 침묵 Abn 제거-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73504000" next="none"/> <!--미니게임 1번 구간 테리토리 디스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73504001" next="time" nextValue="2"/> <!--미니게임 1번 구간 테리토리 디스폰-->
+				<EventTask type="message" string="@dungeon:9735314" style="default" next="time" nextValue="0.5" /> <!--미니게임 1번 구간 클리어 메시지-->
+				<EventTask type="message" string="@dungeon:9735315" style="default" next="none" /> <!--미니게임 1번 구간 클리어 메시지-->
+				<EventTask type="flag" name="mini1_ob1" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob2" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob3" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob4" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="735,73501"> <!--미니게임 1번 구간 1번 ONPC-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="mini1_ob1" value="1" next="none" /> <!--플래그 설정-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="735" templateId="73501" next="none" /> <!--ONPC 디스폰-->
+				<EventTask type="message" string="@dungeon:9735313" style="default" next="none" /> <!--ONPC 동작 성공 메시지-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="735,73502"> <!--미니게임 1번 구간 2번 ONPC-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="mini1_ob2" value="1" next="none" /> <!--플래그 설정-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="735" templateId="73502" next="none" /> <!--ONPC 디스폰-->
+				<EventTask type="message" string="@dungeon:9735313" style="default" next="none" /> <!--ONPC 동작 성공 메시지-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="735,73503"> <!--미니게임 1번 구간 3번 ONPC-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="mini1_ob3" value="1" next="none" /> <!--플래그 설정-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="735" templateId="73503" next="none" /> <!--ONPC 디스폰-->
+				<EventTask type="message" string="@dungeon:9735313" style="default" next="none" /> <!--ONPC 동작 성공 메시지-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="735,73504"> <!--미니게임 1번 구간 4번 ONPC-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="mini1_ob4" value="1" next="none" /> <!--플래그 설정-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="735" templateId="73504" next="none" /> <!--ONPC 디스폰-->
+				<EventTask type="message" string="@dungeon:9735313" style="default" next="none" /> <!--ONPC 동작 성공 메시지-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="mini_Silent" repeat="true"> <!--미니게임 공간 내 침묵 이상상태 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="73504000" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="73504444" huntingZoneId="735" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--연출 관련-->
+	<EventGroup type="enterTerritory" uniqueId="735,73500100"> <!-- 영상 재생 및 마석 사라지기 연출-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3055" next="time" nextValue="2" /> <!--영상 재생-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73504005" next="time" nextValue="1" /> <!-- 랜던 탈출용 포탈 스폰-->
+				<EventTask type="consoleEvent" triggerName="LakanStoneOff" turn="on" next="none" /> <!--라칸의 마석 숨기기-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503012" next="time" nextValue="2.5" /> <!-- 입장 지점 랜던 디스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73500100" next="none" /> <!--1네임드 포탈 테리토리 스폰-->
+				<EventTask type="guideOn" nameId="735,911" id="1" pos="-41535,40626,-946" next="none" /> <!--수상한 노인 추적 가이드-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="735,73503008"> <!-- 3네임드 지역 진입 확인 및 영상 재생-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="3N_Entered" value="1" next="none" /> <!--3네임드 진입 조건 플래그 ON-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="735,73501000"> <!--1네임드 지역 연출--> <!--1네임드 지역 입장 시-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="735,913" id="1" pos="-38364,53760,1" next="none" /> <!--1네임드 처치 가이드-->
+				<EventTask type="flag" name="1N_FallingDmgImmune" value="1" next="none" /> <!--1네임드 지역 낙하 피해 면역 이상상태 부여 플래그 ON-->
+				<EventTask type="message" string="@dungeon:9735401" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="message" string="@dungeon:9735402" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73501000" next="none" /> <!--1네임드 스폰-->
+				<EventTask type="spawn" huntingZoneId="735" territoryId="73501000" next="time" nextValue="1" /> <!--1네임드 스폰-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503010" next="none" /> <!--1네임드 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="735,73503009"> <!--미니게임방 연출-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="735,914" id="1" pos="-43953,48746,0" next="none" /> <!--미니게임 수행 가이드-->
+				<EventTask type="empty" next="time" nextValue="2" /> <!--연출 대사 대기-->
+				<EventTask type="message" string="@dungeon:9735403" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="message" string="@dungeon:9735404" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="message" string="@dungeon:9735405" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="despawn" huntingZoneId="735" territoryId="73503009" next="none" /> <!--미니게임 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="735,73502000"> <!--2네임드 지역 진입 확인-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2N_Entered" value="1" next="none" /> <!--2네임드 진입 조건 플래그 ON-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="talkNpc" uniqueId="735,6005" repeat="true">
+		<Event textId="2" >
+			<EventTaskGroup>
+				<EventTask type="empty" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="talkNpc" uniqueId="735,6006" repeat="true">
+		<Event textId="2" >
+			<EventTaskGroup>
+				<EventTask type="empty" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

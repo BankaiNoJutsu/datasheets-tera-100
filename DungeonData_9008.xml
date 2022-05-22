@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9008" name="@dungeon:9008" startPos="69022, -116816, 1" exitContinentId="2" exitPos="-1600, -8307, 6844" destroyWaitMin="0">
+  <RestoreTargetQuest id="3901" forceRestore="true"/>
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="44" />
+  <Condition type="progressQuest" value="3901" taskId="22" />
+  <Condition type="completeQuest" value="3901" />
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="408" territoryId="40800004" next="none" />
+        <EventTask type="spawn" huntingZoneId="408" territoryId="40800005" next="none" />
+        <EventTask type="spawn" huntingZoneId="408" territoryId="40800006" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="talkNpc" uniqueId="408,1007">
+    <Event questId="3901" textId="2" taskId="22">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:90081001" targetNpcId="408,1007" next="time" nextValue="2" />
+        <EventTask type="message" string="@dungeon:90081002" targetNpcId="408,1009" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="408" territoryId="40800004" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="408" territoryId="40800003" startAggro="34000" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="408" territoryId="40800005" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="408" territoryId="40800002" targetNpcId="408,6001" startAggro="34000" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:90081003" style="default" next="time" nextValue="1" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="408,6001" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="playMovie" id="53" next="time" nextValue="0" />
+        <EventTask type="despawn" huntingZoneId="408" territoryId="40800001" startAggro="0" next="time" nextValue="3" />
+        <EventTask type="despawn" huntingZoneId="408" territoryId="40800002" startAggro="0" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="408" territoryId="40800005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

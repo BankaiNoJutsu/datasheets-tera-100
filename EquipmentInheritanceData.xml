@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EquipmentInheritanceData>
+	<!--
+	해당 시스템은 A 장비 아이템에 변경 키 아이템을 사용해 B라는 새로운 장비 아이템으로 변경하는것.
+	A가 B 로 변경되는 과정에서 확인해야 하는 것들을 정의할 필요가 있음
+	
+	중요 - * A 아이템과 B아이템은 '성능레벨'을 제외한 나머지 모든 항목이 동일해야함*
+	
+	
+	따라서 아래의 대분류 항목은 승계 여부를 결정함	
+	1. 명품 masterpiece
+		- +3, +6, +9강의 랜덤 옵션 (enchantId)
+		- 고정 옵션칸에 있는 랜덤 옵션 (passivityCategoryId)
+		- 명품시 고정 옵션
+	2. 각성 awaken
+		- +13, +14, +15강시의 고정 옵션
+	3. 강화단계 enchant
+	4. 마법각인 scroll
+	5. 아티팩트 정보 artifact
+	
+*1번의 랜덤 옵션 항목에 대해서는 추후 개발을 통해 change 파라매터를 추가해 강제 지정할 수 있는 방향으로 구현 되길 요망
+ex. A가 획득 가능한 랜덤옵션이 1,2,3,4,5,6 이고 고객이 1,2,3 옵션을 선택했을때, 해당 작업을 통해 2,4,6 옵션을 획득하게끔 변경가능
+	
+	아래의 분류된 사항들은 무조건적으로 한쪽만을 따라감
+	1. 강화보정치 - 승계
+	2. 누적 강화석 - 승계
+	3. 귀속 해제 - 미승계
+	4. 아이템 봉인 - 미승계
+	5. 획득시 귀속 - 미승계
+	
+* 추가된 기능
+	1. equipExp : 기본값 false 이며 true면 장비 숙련도가 유지됨
+	2. bound : 기본값 false 이며 true면 귀속 상태가 유지되고, 귀속된 아이템을 다른 캐릭터가 승계하려 하면 승계되지 않음
+	
+	-->
+	
+	<!--철기장 매혹에서 고룡 베르고스로-->
+	<Token templateId="98261" masterpiece="true" awaken="true" enchant="true" scroll="true" artifact="true"> <!-- 무기-->
+		<InheritInfo targetTemplateId="88211" resultTemplateId="88242"  />
+		<InheritInfo targetTemplateId="88212" resultTemplateId="88243"  />
+		<InheritInfo targetTemplateId="88213" resultTemplateId="88244"  />
+		<InheritInfo targetTemplateId="88214" resultTemplateId="88245"  />
+		<InheritInfo targetTemplateId="88215" resultTemplateId="88246"  />
+		<InheritInfo targetTemplateId="88216" resultTemplateId="88247"  />
+		<InheritInfo targetTemplateId="88217" resultTemplateId="88248"  />
+		<InheritInfo targetTemplateId="88218" resultTemplateId="88249"  />
+		<InheritInfo targetTemplateId="88219" resultTemplateId="88250"  />
+		<InheritInfo targetTemplateId="88220" resultTemplateId="88251"  />
+		<InheritInfo targetTemplateId="88221" resultTemplateId="88252"  />
+		<InheritInfo targetTemplateId="88222" resultTemplateId="88253"  />
+		<InheritInfo targetTemplateId="59593" resultTemplateId="59595"  />
+	<!--KR PC방 접속시간 이벤트 철기장 매혹 무기 START-->
+		<InheritInfo targetTemplateId="140161" resultTemplateId="88242"  />
+		<InheritInfo targetTemplateId="140162" resultTemplateId="88243"  />
+		<InheritInfo targetTemplateId="140163" resultTemplateId="88244"  />
+		<InheritInfo targetTemplateId="140164" resultTemplateId="88245"  />
+		<InheritInfo targetTemplateId="140165" resultTemplateId="88246"  />
+		<InheritInfo targetTemplateId="140166" resultTemplateId="88247"  />
+		<InheritInfo targetTemplateId="140167" resultTemplateId="88248"  />
+		<InheritInfo targetTemplateId="140168" resultTemplateId="88249"  />
+		<InheritInfo targetTemplateId="140169" resultTemplateId="88250"  />
+		<InheritInfo targetTemplateId="140170" resultTemplateId="88251"  />
+		<InheritInfo targetTemplateId="140171" resultTemplateId="88252"  />
+		<InheritInfo targetTemplateId="140172" resultTemplateId="88253"  />
+	<!--KR PC방 접속시간 이벤트 철기장 매혹 무기 END-->
+		<InheritInfo targetTemplateId="117461" resultTemplateId="59595"  /> <!--jp 빌드 철기장 매혹-->
+	</Token>
+	<Token templateId="98262" masterpiece="true" awaken="true" enchant="true" scroll="true" artifact="true"> <!-- 갑옷-->
+		<InheritInfo targetTemplateId="88223" resultTemplateId="88254"  />
+		<InheritInfo targetTemplateId="88224" resultTemplateId="88255"  />
+		<InheritInfo targetTemplateId="88225" resultTemplateId="88256"  />
+		<InheritInfo targetTemplateId="88226" resultTemplateId="88257"  />
+		<InheritInfo targetTemplateId="88227" resultTemplateId="88258"  />
+		<InheritInfo targetTemplateId="88228" resultTemplateId="88259"  />
+		<InheritInfo targetTemplateId="88229" resultTemplateId="88260"  />
+		<InheritInfo targetTemplateId="88230" resultTemplateId="88261"  />
+		<InheritInfo targetTemplateId="88231" resultTemplateId="88262"  />
+		<InheritInfo targetTemplateId="88232" resultTemplateId="88263"  />
+		<InheritInfo targetTemplateId="88233" resultTemplateId="88264"  />
+		<InheritInfo targetTemplateId="88234" resultTemplateId="88265"  />
+		<InheritInfo targetTemplateId="59594" resultTemplateId="59596"  />
+	<!--KR PC방 접속시간 이벤트 철기장 매혹 갑옷 START-->		
+		<InheritInfo targetTemplateId="140173" resultTemplateId="88254"  />
+		<InheritInfo targetTemplateId="140174" resultTemplateId="88255"  />
+		<InheritInfo targetTemplateId="140175" resultTemplateId="88256"  />
+		<InheritInfo targetTemplateId="140176" resultTemplateId="88257"  />
+		<InheritInfo targetTemplateId="140177" resultTemplateId="88258"  />
+		<InheritInfo targetTemplateId="140178" resultTemplateId="88259"  />
+		<InheritInfo targetTemplateId="140179" resultTemplateId="88260"  />
+		<InheritInfo targetTemplateId="140180" resultTemplateId="88261"  />
+		<InheritInfo targetTemplateId="140181" resultTemplateId="88262"  />
+		<InheritInfo targetTemplateId="140182" resultTemplateId="88263"  />
+		<InheritInfo targetTemplateId="140183" resultTemplateId="88264"  />
+		<InheritInfo targetTemplateId="140184" resultTemplateId="88265"  />
+	<!--KR PC방 접속시간 이벤트 철기장 매혹 갑옷 END-->
+	</Token>
+	<Token templateId="98263" masterpiece="true" awaken="true" enchant="true" scroll="true" artifact="true"> <!-- 장갑-->
+		<InheritInfo targetTemplateId="88235" resultTemplateId="88266"  />
+		<InheritInfo targetTemplateId="88236" resultTemplateId="88267"  />
+		<InheritInfo targetTemplateId="88237" resultTemplateId="88268"  />
+	</Token>
+	<Token templateId="98264" masterpiece="true" awaken="true" enchant="true" scroll="true" artifact="true"> <!-- 신발-->
+		<InheritInfo targetTemplateId="88238" resultTemplateId="88269"  />
+		<InheritInfo targetTemplateId="88239" resultTemplateId="88270"  />
+		<InheritInfo targetTemplateId="88240" resultTemplateId="88271"  />
+	</Token>
+	<!--매혹~베르고스 끝-->
+	
+	<!-- '16상 악세 세공-->
+	<Token templateId="84337" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" > <!-- 목걸-->
+		<InheritInfo targetTemplateId="51012" resultTemplateId="84325"  /> <!--라켈리스 치명-->
+		<InheritInfo targetTemplateId="51017" resultTemplateId="84328"  /> <!--라켈리스 힘-->
+		<InheritInfo targetTemplateId="51022" resultTemplateId="84331"  /> <!--냉정 치명-->
+		<InheritInfo targetTemplateId="51025" resultTemplateId="84334"  /> <!--냉정 힘-->
+	</Token>	
+	<Token templateId="84338" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" > <!-- 귀걸-->
+		<InheritInfo targetTemplateId="51014" resultTemplateId="84326"  /> <!--라켈리스 치명-->
+		<InheritInfo targetTemplateId="51019" resultTemplateId="84329"  /> <!--라켈리스 힘-->
+		<InheritInfo targetTemplateId="51023" resultTemplateId="84332"  /> <!--냉정 치명-->
+		<InheritInfo targetTemplateId="51026" resultTemplateId="84335"  /> <!--냉정 힘-->
+	</Token>	
+	<Token templateId="84339" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" > <!-- 반지-->
+		<InheritInfo targetTemplateId="51016" resultTemplateId="84327"  /> <!--라켈리스 치명-->
+		<InheritInfo targetTemplateId="51021" resultTemplateId="84330"  /> <!--라켈리스 힘-->
+		<InheritInfo targetTemplateId="51024" resultTemplateId="84333"  /> <!--냉정 치명-->
+		<InheritInfo targetTemplateId="51027" resultTemplateId="84336"  /> <!--냉정 힘-->		
+	</Token>
+
+	<!--철기장 냉혈에서 악룡 베르고스로, 철기장 매혹에서 고룡 베르고스로-->
+	<Token templateId="21319" masterpiece="true" awaken="true" enchant="true" scroll="true" artifact="true"> <!-- 무기-->
+		<InheritInfo targetTemplateId="72265" resultTemplateId="72298" />
+		<InheritInfo targetTemplateId="72266" resultTemplateId="72299" />
+		<InheritInfo targetTemplateId="72267" resultTemplateId="72300" />
+		<InheritInfo targetTemplateId="72268" resultTemplateId="72301" />
+		<InheritInfo targetTemplateId="72269" resultTemplateId="72302" />
+		<InheritInfo targetTemplateId="72270" resultTemplateId="72303" />
+		<InheritInfo targetTemplateId="72271" resultTemplateId="72304" />
+		<InheritInfo targetTemplateId="72272" resultTemplateId="72305" />
+		<InheritInfo targetTemplateId="72273" resultTemplateId="72306" />
+		<InheritInfo targetTemplateId="72274" resultTemplateId="72307" />
+		<InheritInfo targetTemplateId="72275" resultTemplateId="72308" />
+		<InheritInfo targetTemplateId="72276" resultTemplateId="72309" />
+		<InheritInfo targetTemplateId="72277" resultTemplateId="72310" />
+	<!--철기장 매혹 무기 -->	
+		<InheritInfo targetTemplateId="88211" resultTemplateId="88242" />
+		<InheritInfo targetTemplateId="88212" resultTemplateId="88243" />
+		<InheritInfo targetTemplateId="88213" resultTemplateId="88244" />
+		<InheritInfo targetTemplateId="88214" resultTemplateId="88245" />
+		<InheritInfo targetTemplateId="88215" resultTemplateId="88246" />
+		<InheritInfo targetTemplateId="88216" resultTemplateId="88247" />
+		<InheritInfo targetTemplateId="88217" resultTemplateId="88248" />
+		<InheritInfo targetTemplateId="88218" resultTemplateId="88249" />
+		<InheritInfo targetTemplateId="88219" resultTemplateId="88250" />
+		<InheritInfo targetTemplateId="88220" resultTemplateId="88251" />
+		<InheritInfo targetTemplateId="88221" resultTemplateId="88252" />
+		<InheritInfo targetTemplateId="88222" resultTemplateId="88253" />
+		<InheritInfo targetTemplateId="59593" resultTemplateId="59595" />
+	<!--KR PC방 접속시간 이벤트 철기장 매혹 무기 START-->
+		<InheritInfo targetTemplateId="140161" resultTemplateId="88242" />
+		<InheritInfo targetTemplateId="140162" resultTemplateId="88243" />
+		<InheritInfo targetTemplateId="140163" resultTemplateId="88244" />
+		<InheritInfo targetTemplateId="140164" resultTemplateId="88245" />
+		<InheritInfo targetTemplateId="140165" resultTemplateId="88246" />
+		<InheritInfo targetTemplateId="140166" resultTemplateId="88247" />
+		<InheritInfo targetTemplateId="140167" resultTemplateId="88248" />
+		<InheritInfo targetTemplateId="140168" resultTemplateId="88249" />
+		<InheritInfo targetTemplateId="140169" resultTemplateId="88250" />
+		<InheritInfo targetTemplateId="140170" resultTemplateId="88251" />
+		<InheritInfo targetTemplateId="140171" resultTemplateId="88252" />
+		<InheritInfo targetTemplateId="140172" resultTemplateId="88253" />
+		<InheritInfo targetTemplateId="117461" resultTemplateId="59595"  /> <!--jp 빌드 철기장 매혹-->
+	<!--철기장 매혹 무기 -->
+	</Token>
+	<Token templateId="21320" masterpiece="true" awaken="true" enchant="true" scroll="true" artifact="true"> <!-- 갑옷-->
+		<InheritInfo targetTemplateId="72278" resultTemplateId="72311" />
+		<InheritInfo targetTemplateId="72279" resultTemplateId="72312" />
+		<InheritInfo targetTemplateId="72280" resultTemplateId="72313" />
+		<InheritInfo targetTemplateId="72281" resultTemplateId="72314" />
+		<InheritInfo targetTemplateId="72282" resultTemplateId="72315" />
+		<InheritInfo targetTemplateId="72283" resultTemplateId="72316" />
+		<InheritInfo targetTemplateId="72284" resultTemplateId="72317" />
+		<InheritInfo targetTemplateId="72285" resultTemplateId="72318" />
+		<InheritInfo targetTemplateId="72286" resultTemplateId="72319" />
+		<InheritInfo targetTemplateId="72287" resultTemplateId="72320" />
+		<InheritInfo targetTemplateId="72288" resultTemplateId="72321" />
+		<InheritInfo targetTemplateId="72289" resultTemplateId="72322" />
+		<InheritInfo targetTemplateId="72290" resultTemplateId="72323" />
+	<!--철기장 매혹 갑옷 -->	
+		<InheritInfo targetTemplateId="88223" resultTemplateId="88254" />
+		<InheritInfo targetTemplateId="88224" resultTemplateId="88255" />
+		<InheritInfo targetTemplateId="88225" resultTemplateId="88256" />
+		<InheritInfo targetTemplateId="88226" resultTemplateId="88257" />
+		<InheritInfo targetTemplateId="88227" resultTemplateId="88258" />
+		<InheritInfo targetTemplateId="88228" resultTemplateId="88259" />
+		<InheritInfo targetTemplateId="88229" resultTemplateId="88260" />
+		<InheritInfo targetTemplateId="88230" resultTemplateId="88261" />
+		<InheritInfo targetTemplateId="88231" resultTemplateId="88262" />
+		<InheritInfo targetTemplateId="88232" resultTemplateId="88263" />
+		<InheritInfo targetTemplateId="88233" resultTemplateId="88264" />
+		<InheritInfo targetTemplateId="88234" resultTemplateId="88265" />
+		<InheritInfo targetTemplateId="59594" resultTemplateId="59596" />
+	<!--KR PC방 접속시간 이벤트 철기장 매혹 갑옷 -->		
+		<InheritInfo targetTemplateId="140173" resultTemplateId="88254" />
+		<InheritInfo targetTemplateId="140174" resultTemplateId="88255" />
+		<InheritInfo targetTemplateId="140175" resultTemplateId="88256" />
+		<InheritInfo targetTemplateId="140176" resultTemplateId="88257" />
+		<InheritInfo targetTemplateId="140177" resultTemplateId="88258" />
+		<InheritInfo targetTemplateId="140178" resultTemplateId="88259" />
+		<InheritInfo targetTemplateId="140179" resultTemplateId="88260" />
+		<InheritInfo targetTemplateId="140180" resultTemplateId="88261" />
+		<InheritInfo targetTemplateId="140181" resultTemplateId="88262" />
+		<InheritInfo targetTemplateId="140182" resultTemplateId="88263" />
+		<InheritInfo targetTemplateId="140183" resultTemplateId="88264" />
+		<InheritInfo targetTemplateId="140184" resultTemplateId="88265" />
+	<!--철기장 매혹 갑옷 -->
+	</Token>
+	<Token templateId="21321" masterpiece="true" awaken="true" enchant="true" scroll="true" artifact="true"> <!-- 장갑-->
+		<InheritInfo targetTemplateId="72291" resultTemplateId="72324" />
+		<InheritInfo targetTemplateId="72292" resultTemplateId="72325" />
+		<InheritInfo targetTemplateId="72293" resultTemplateId="72326" />
+	<!--철기장 매혹 장갑 -->	
+		<InheritInfo targetTemplateId="88235" resultTemplateId="88266" />
+		<InheritInfo targetTemplateId="88236" resultTemplateId="88267" />
+		<InheritInfo targetTemplateId="88237" resultTemplateId="88268" />
+	</Token>
+	<Token templateId="21322" masterpiece="true" awaken="true" enchant="true" scroll="true" artifact="true"> <!-- 신발-->
+		<InheritInfo targetTemplateId="72294" resultTemplateId="72327" />
+		<InheritInfo targetTemplateId="72295" resultTemplateId="72328" />
+		<InheritInfo targetTemplateId="72296" resultTemplateId="72329" />
+	<!--철기장 매혹 신발 -->	
+		<InheritInfo targetTemplateId="88238" resultTemplateId="88269"  />
+		<InheritInfo targetTemplateId="88239" resultTemplateId="88270"  />
+		<InheritInfo targetTemplateId="88240" resultTemplateId="88271"  />
+	</Token>
+	<!--냉혈~베르고스 끝-->
+	
+	<!-- '16하 악세 세공-->
+	<Token templateId="21335" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" > <!-- 목걸-->
+		<InheritInfo targetTemplateId="72331" resultTemplateId="72349" /> <!--라칸 치명-->
+		<InheritInfo targetTemplateId="72336" resultTemplateId="72352" /> <!--라칸 힘-->
+		<InheritInfo targetTemplateId="72341" resultTemplateId="72355" /> <!--압도적인 승리자 치명-->
+		<InheritInfo targetTemplateId="72344" resultTemplateId="72358" /> <!--압도적인 승리자 힘-->
+	</Token>	
+	<Token templateId="21336" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" > <!-- 귀걸-->
+		<InheritInfo targetTemplateId="72333" resultTemplateId="72350" /> <!--라칸 치명-->
+		<InheritInfo targetTemplateId="72338" resultTemplateId="72353" /> <!--라칸 힘-->
+		<InheritInfo targetTemplateId="72342" resultTemplateId="72356" /> <!--압도적인 승리자 치명-->
+		<InheritInfo targetTemplateId="72345" resultTemplateId="72359" /> <!--압도적인 승리자 힘-->
+	</Token>	
+	<Token templateId="21337" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" > <!-- 반지-->
+		<InheritInfo targetTemplateId="72335" resultTemplateId="72351" /> <!--라칸 치명-->
+		<InheritInfo targetTemplateId="72340" resultTemplateId="72354" /> <!--라칸 힘-->
+		<InheritInfo targetTemplateId="72343" resultTemplateId="72357" /> <!--압도적인 승리자 치명-->
+		<InheritInfo targetTemplateId="72346" resultTemplateId="72360" /> <!--압도적인 승리자 힘-->		
+	</Token>
+	<Token templateId="21343" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" > <!-- 목걸-->
+		<InheritInfo targetTemplateId="72331" resultTemplateId="72349" /> <!--라칸 치명-->
+		<InheritInfo targetTemplateId="72336" resultTemplateId="72352" /> <!--라칸 힘-->
+		<InheritInfo targetTemplateId="72341" resultTemplateId="72355" /> <!--압도적인 승리자 치명-->
+		<InheritInfo targetTemplateId="72344" resultTemplateId="72358" /> <!--압도적인 승리자 힘-->
+	</Token>	
+	<Token templateId="21344" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" > <!-- 귀걸-->
+		<InheritInfo targetTemplateId="72333" resultTemplateId="72350" /> <!--라칸 치명-->
+		<InheritInfo targetTemplateId="72338" resultTemplateId="72353" /> <!--라칸 힘-->
+		<InheritInfo targetTemplateId="72342" resultTemplateId="72356" /> <!--압도적인 승리자 치명-->
+		<InheritInfo targetTemplateId="72345" resultTemplateId="72359" /> <!--압도적인 승리자 힘-->
+	</Token>	
+	<Token templateId="21345" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" > <!-- 반지-->
+		<InheritInfo targetTemplateId="72335" resultTemplateId="72351" /> <!--라칸 치명-->
+		<InheritInfo targetTemplateId="72340" resultTemplateId="72354" /> <!--라칸 힘-->
+		<InheritInfo targetTemplateId="72343" resultTemplateId="72357" /> <!--압도적인 승리자 치명-->
+		<InheritInfo targetTemplateId="72346" resultTemplateId="72360" /> <!--압도적인 승리자 힘-->		
+	</Token>
+	
+	<!-- 듀리온의 망치 이벤트-->
+	<Token templateId="99982" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" probability="0.08" equipExp="true" >
+		<InheritInfo targetTemplateId="19703" resultTemplateId="99984" /> <!--세공흉폭-->
+		<InheritInfo targetTemplateId="98404" resultTemplateId="99984" /> <!--세공흉폭-->
+		<InheritInfo targetTemplateId="19706" resultTemplateId="99985" /> <!--세공화려-->
+		<InheritInfo targetTemplateId="98405" resultTemplateId="99985" /> <!--세공화려-->
+	</Token>
+	<Token templateId="99983" masterpiece="false" awaken="false" enchant="true" scroll="false" artifact="true" equipExp="true" >
+		<InheritInfo targetTemplateId="19703" resultTemplateId="99984" /> <!--세공흉폭-->
+		<InheritInfo targetTemplateId="98404" resultTemplateId="99984" /> <!--세공흉폭-->
+		<InheritInfo targetTemplateId="19706" resultTemplateId="99985" /> <!--세공화려-->
+		<InheritInfo targetTemplateId="98405" resultTemplateId="99985" /> <!--세공화려-->
+	</Token>
+	<!-- 라칸의 심장 이벤트-->
+	<Token templateId="98659" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" probability="0.0625" equipExp="true" >
+		<InheritInfo targetTemplateId="51028" resultTemplateId="98661" /> <!--세공고룡-->
+		<InheritInfo targetTemplateId="51011" resultTemplateId="98662" /> <!--세공빛여-->
+		<InheritInfo targetTemplateId="98406" resultTemplateId="98662" /> <!--세공빛여-->		
+	</Token>
+	<Token templateId="98660" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" >
+		<InheritInfo targetTemplateId="51028" resultTemplateId="98661" /> <!--세공고룡-->
+		<InheritInfo targetTemplateId="51011" resultTemplateId="98662" /> <!--세공빛여-->
+		<InheritInfo targetTemplateId="98406" resultTemplateId="98662" /> <!--세공빛여-->		
+	</Token>
+	
+	<!-- 액세서리 변환석 -->
+	<Token templateId="202142" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88405" resultTemplateId="88408" /> <!--수호자악세 획귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88406" resultTemplateId="88409" /> 
+		<InheritInfo targetTemplateId="88407" resultTemplateId="88410" /> 
+		<InheritInfo targetTemplateId="88408" resultTemplateId="88405" /> <!--수호자악세 획귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88409" resultTemplateId="88406" /> 
+		<InheritInfo targetTemplateId="88410" resultTemplateId="88407" /> 
+		<InheritInfo targetTemplateId="88412" resultTemplateId="88415" /> <!--변마악세 획귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88413" resultTemplateId="88416" /> 
+		<InheritInfo targetTemplateId="88414" resultTemplateId="88417" /> 
+		<InheritInfo targetTemplateId="88415" resultTemplateId="88412" /> <!--변마악세 획귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88416" resultTemplateId="88413" /> 
+		<InheritInfo targetTemplateId="88417" resultTemplateId="88414" /> 
+		<InheritInfo targetTemplateId="88419" resultTemplateId="88422" /> <!--차금악세 획귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88420" resultTemplateId="88423" /> 
+		<InheritInfo targetTemplateId="88421" resultTemplateId="88424" /> 
+		<InheritInfo targetTemplateId="88422" resultTemplateId="88419" /> <!--차금악세 획귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88423" resultTemplateId="88420" /> 
+		<InheritInfo targetTemplateId="88424" resultTemplateId="88421" /> 
+		<InheritInfo targetTemplateId="88603" resultTemplateId="88606" /> <!--수호자악세 착귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88604" resultTemplateId="88607" /> 
+		<InheritInfo targetTemplateId="88605" resultTemplateId="88608" /> 
+		<InheritInfo targetTemplateId="88606" resultTemplateId="88603" /> <!--수호자악세 착귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88607" resultTemplateId="88604" /> 
+		<InheritInfo targetTemplateId="88608" resultTemplateId="88605" /> 
+		<InheritInfo targetTemplateId="88610" resultTemplateId="88613" /> <!--변마악세 착귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88611" resultTemplateId="88614" /> 
+		<InheritInfo targetTemplateId="88612" resultTemplateId="88615" /> 
+		<InheritInfo targetTemplateId="88613" resultTemplateId="88610" /> <!--변마악세 착귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88614" resultTemplateId="88611" /> 
+		<InheritInfo targetTemplateId="88615" resultTemplateId="88612" /> 
+		<InheritInfo targetTemplateId="88617" resultTemplateId="88620" /> <!--차금악세 착귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88618" resultTemplateId="88621" /> 
+		<InheritInfo targetTemplateId="88619" resultTemplateId="88622" /> 
+		<InheritInfo targetTemplateId="88620" resultTemplateId="88617" /> <!--차금악세 착귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88621" resultTemplateId="88618" /> 
+		<InheritInfo targetTemplateId="88622" resultTemplateId="88619" />
+	</Token>
+	<Token templateId="202143" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88426" resultTemplateId="88429" /> <!--울분악세 획귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88427" resultTemplateId="88430" /> 
+		<InheritInfo targetTemplateId="88428" resultTemplateId="88431" /> 
+		<InheritInfo targetTemplateId="88429" resultTemplateId="88426" /> <!--울분악세 획귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88430" resultTemplateId="88427" /> 
+		<InheritInfo targetTemplateId="88431" resultTemplateId="88428" /> 
+		<InheritInfo targetTemplateId="88624" resultTemplateId="88627" /> <!--울분악세 착귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88625" resultTemplateId="88628" /> 
+		<InheritInfo targetTemplateId="88626" resultTemplateId="88629" /> 
+		<InheritInfo targetTemplateId="88627" resultTemplateId="88624" /> <!--울분악세 착귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88628" resultTemplateId="88625" /> 
+		<InheritInfo targetTemplateId="88629" resultTemplateId="88626" /> 
+		<InheritInfo targetTemplateId="88766" resultTemplateId="88769" /> <!--초월악세 획귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88767" resultTemplateId="88770" /> 
+		<InheritInfo targetTemplateId="88768" resultTemplateId="88771" /> 
+		<InheritInfo targetTemplateId="88769" resultTemplateId="88766" /> <!--초월악세 획귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88770" resultTemplateId="88767" /> 
+		<InheritInfo targetTemplateId="88771" resultTemplateId="88768" /> 
+		<InheritInfo targetTemplateId="88775" resultTemplateId="88778" /> <!--초월악세 착귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88776" resultTemplateId="88779" /> 
+		<InheritInfo targetTemplateId="88777" resultTemplateId="88780" /> 
+		<InheritInfo targetTemplateId="88778" resultTemplateId="88775" /> <!--초월악세 착귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88779" resultTemplateId="88776" /> 
+		<InheritInfo targetTemplateId="88780" resultTemplateId="88777" /> 
+		<InheritInfo targetTemplateId="88804" resultTemplateId="88807" /> <!--증폭 I 울분악세 치명->힘 -->
+		<InheritInfo targetTemplateId="88805" resultTemplateId="88808" />
+		<InheritInfo targetTemplateId="88806" resultTemplateId="88809" />
+		<InheritInfo targetTemplateId="88807" resultTemplateId="88804" /> <!--증폭 I 울분악세 힘->치명 -->
+		<InheritInfo targetTemplateId="88808" resultTemplateId="88805" />
+		<InheritInfo targetTemplateId="88809" resultTemplateId="88806" />
+		<InheritInfo targetTemplateId="88812" resultTemplateId="88815" /> <!--증폭 I 비맹악세 치명->힘 -->
+		<InheritInfo targetTemplateId="88813" resultTemplateId="88816" />
+		<InheritInfo targetTemplateId="88814" resultTemplateId="88817" />
+		<InheritInfo targetTemplateId="88815" resultTemplateId="88812" /> <!--증폭 I 비맹악세 힘->치명 -->
+		<InheritInfo targetTemplateId="88816" resultTemplateId="88813" />
+		<InheritInfo targetTemplateId="88817" resultTemplateId="88814" />
+		<InheritInfo targetTemplateId="88820" resultTemplateId="88823" /> <!--증폭 II 비맹악세 치명->힘 -->
+		<InheritInfo targetTemplateId="88821" resultTemplateId="88824" />
+		<InheritInfo targetTemplateId="88822" resultTemplateId="88825" />
+		<InheritInfo targetTemplateId="88823" resultTemplateId="88820" /> <!--증폭 II 비맹악세 힘->치명 -->
+		<InheritInfo targetTemplateId="88824" resultTemplateId="88821" />
+		<InheritInfo targetTemplateId="88825" resultTemplateId="88822" />
+		<InheritInfo targetTemplateId="88853" resultTemplateId="88855" /> <!-- 광명악세 획귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88854" resultTemplateId="88856" />
+		<InheritInfo targetTemplateId="88861" resultTemplateId="88862" />
+		<InheritInfo targetTemplateId="88855" resultTemplateId="88853" /> <!-- 광명악세 획귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88856" resultTemplateId="88854" />
+		<InheritInfo targetTemplateId="88862" resultTemplateId="88861" />
+		<InheritInfo targetTemplateId="88857" resultTemplateId="88859" /> <!-- 광명악세 착귀 치명->힘 -->
+		<InheritInfo targetTemplateId="88858" resultTemplateId="88860" />
+		<InheritInfo targetTemplateId="88864" resultTemplateId="88865" />
+		<InheritInfo targetTemplateId="88859" resultTemplateId="88857" /> <!-- 광명악세 착귀 힘->치명 -->
+		<InheritInfo targetTemplateId="88860" resultTemplateId="88858" />
+		<InheritInfo targetTemplateId="88865" resultTemplateId="88864" />		
+	</Token>
+	
+	<!-- '18 하반기 악세 증폭 I -->	
+	<!-- 허리띠 -->
+	<Token templateId="88827" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88404" resultTemplateId="88803" />
+		<InheritInfo targetTemplateId="88602" resultTemplateId="88803" /> 
+		<InheritInfo targetTemplateId="88765" resultTemplateId="88811" />
+		<InheritInfo targetTemplateId="88774" resultTemplateId="88811" />
+	</Token>
+	<!-- 목걸이 -->
+	<Token templateId="88828" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88426" resultTemplateId="88804" />
+		<InheritInfo targetTemplateId="88624" resultTemplateId="88804" /> 
+		<InheritInfo targetTemplateId="88429" resultTemplateId="88807" />
+		<InheritInfo targetTemplateId="88627" resultTemplateId="88807" />
+		<InheritInfo targetTemplateId="88766" resultTemplateId="88812" />
+		<InheritInfo targetTemplateId="88775" resultTemplateId="88812" /> 
+		<InheritInfo targetTemplateId="88769" resultTemplateId="88815" />
+		<InheritInfo targetTemplateId="88778" resultTemplateId="88815" />
+	</Token>
+	<!-- 귀걸이 -->
+	<Token templateId="88829" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88427" resultTemplateId="88805" />
+		<InheritInfo targetTemplateId="88625" resultTemplateId="88805" /> 
+		<InheritInfo targetTemplateId="88430" resultTemplateId="88808" />
+		<InheritInfo targetTemplateId="88628" resultTemplateId="88808" />
+		<InheritInfo targetTemplateId="88767" resultTemplateId="88813" />
+		<InheritInfo targetTemplateId="88776" resultTemplateId="88813" /> 
+		<InheritInfo targetTemplateId="88770" resultTemplateId="88816" />
+		<InheritInfo targetTemplateId="88779" resultTemplateId="88816" />
+	</Token>
+	<!-- 반지 -->
+	<Token templateId="88830" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88428" resultTemplateId="88806" />
+		<InheritInfo targetTemplateId="88626" resultTemplateId="88806" /> 
+		<InheritInfo targetTemplateId="88431" resultTemplateId="88809" />
+		<InheritInfo targetTemplateId="88629" resultTemplateId="88809" />
+		<InheritInfo targetTemplateId="88768" resultTemplateId="88814" />
+		<InheritInfo targetTemplateId="88777" resultTemplateId="88814" /> 
+		<InheritInfo targetTemplateId="88771" resultTemplateId="88817" />
+		<InheritInfo targetTemplateId="88780" resultTemplateId="88817" />
+	</Token>
+	<!-- 서클릿 -->
+	<Token templateId="88831" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88432" resultTemplateId="88810" />
+		<InheritInfo targetTemplateId="88630" resultTemplateId="88810" /> 
+		<InheritInfo targetTemplateId="88772" resultTemplateId="88818" />
+		<InheritInfo targetTemplateId="88781" resultTemplateId="88818" />
+	</Token>
+	
+	<!-- '18 하반기 악세 증폭 II -->	
+	<!-- 허리띠 -->
+	<Token templateId="88832" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88765" resultTemplateId="88819" />
+		<InheritInfo targetTemplateId="88774" resultTemplateId="88819" />
+		<InheritInfo targetTemplateId="88811" resultTemplateId="88819" />
+	</Token>
+	<!-- 목걸이 -->
+	<Token templateId="88833" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88766" resultTemplateId="88820" />
+		<InheritInfo targetTemplateId="88775" resultTemplateId="88820" />
+		<InheritInfo targetTemplateId="88812" resultTemplateId="88820" />
+		<InheritInfo targetTemplateId="88769" resultTemplateId="88823" />
+		<InheritInfo targetTemplateId="88778" resultTemplateId="88823" />
+		<InheritInfo targetTemplateId="88815" resultTemplateId="88823" />
+	</Token>
+	<!-- 귀걸이 -->
+	<Token templateId="88834" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88767" resultTemplateId="88821" />
+		<InheritInfo targetTemplateId="88776" resultTemplateId="88821" /> 
+		<InheritInfo targetTemplateId="88813" resultTemplateId="88821" />
+		<InheritInfo targetTemplateId="88770" resultTemplateId="88824" />
+		<InheritInfo targetTemplateId="88779" resultTemplateId="88824" /> 
+		<InheritInfo targetTemplateId="88816" resultTemplateId="88824" />
+	</Token>
+	<!-- 반지 -->
+	<Token templateId="88835" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88768" resultTemplateId="88822" />
+		<InheritInfo targetTemplateId="88777" resultTemplateId="88822" /> 
+		<InheritInfo targetTemplateId="88814" resultTemplateId="88822" />
+		<InheritInfo targetTemplateId="88771" resultTemplateId="88825" />
+		<InheritInfo targetTemplateId="88780" resultTemplateId="88825" />
+		<InheritInfo targetTemplateId="88817" resultTemplateId="88825" />
+	</Token>
+	<!-- 서클릿 -->
+	<Token templateId="88836" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88772" resultTemplateId="88826" />
+		<InheritInfo targetTemplateId="88781" resultTemplateId="88826" /> 
+		<InheritInfo targetTemplateId="88818" resultTemplateId="88826" />
+	</Token>
+		
+	<!-- '18 하반기 비장한 맹세 증폭 -->	
+	<!-- 장갑 -->
+	<Token templateId="88841" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88665" resultTemplateId="88843" />
+		<InheritInfo targetTemplateId="88666" resultTemplateId="88844" />
+		<InheritInfo targetTemplateId="88667" resultTemplateId="88845" />
+		<InheritInfo targetTemplateId="88697" resultTemplateId="88843" />
+		<InheritInfo targetTemplateId="88698" resultTemplateId="88844" />
+		<InheritInfo targetTemplateId="88699" resultTemplateId="88845" />
+	</Token>	
+	<!-- 신발 -->
+	<Token templateId="88842" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88668" resultTemplateId="88846" />
+		<InheritInfo targetTemplateId="88669" resultTemplateId="88847" />
+		<InheritInfo targetTemplateId="88670" resultTemplateId="88848" />
+		<InheritInfo targetTemplateId="88712" resultTemplateId="88846" />
+		<InheritInfo targetTemplateId="88713" resultTemplateId="88847" />
+		<InheritInfo targetTemplateId="88714" resultTemplateId="88848" />
+	</Token>
+	
+	<!-- 복귀자 혜택 이벤트  KR79 악세 세공 -->
+	<Token templateId="137107" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88413" resultTemplateId="137111" /> <!--의지의 귀걸이 치명->세공된 의지의 귀걸이 치명 -->
+		<InheritInfo targetTemplateId="88416" resultTemplateId="137117" /> <!--의지의 귀걸이 힘->세공된 의지의 귀걸이 힘 -->
+		<InheritInfo targetTemplateId="88611" resultTemplateId="137111" /> <!--의지의 귀걸이 치명(거래가능)->세공된 의지의 귀걸이 치명 -->
+		<InheritInfo targetTemplateId="88614" resultTemplateId="137117" /> <!--의지의 귀걸이 힘(거래가능)->세공된 의지의 귀걸이 힘 -->
+	</Token>
+	<Token templateId="137108" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88414" resultTemplateId="137112" /> <!--결의의 반지 치명->세공된 결의의 반지 치명 -->
+		<InheritInfo targetTemplateId="88417" resultTemplateId="137114" /> <!--결의의 반지 힘->세공된 결의의 반지 힘 -->
+		<InheritInfo targetTemplateId="88612" resultTemplateId="137112" /> <!--결의의 반지 치명(거래가능)->세공된 결의의 반지 치명 -->
+		<InheritInfo targetTemplateId="88615" resultTemplateId="137114" /> <!--결의의 반지 힘(거래가능)->세공된 결의의 반지 힘 -->
+	</Token>
+	<Token templateId="137109" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88420" resultTemplateId="137119" /> <!--여명의 귀걸이 치명->세공된 여명의 귀걸이 치명 -->
+		<InheritInfo targetTemplateId="88423" resultTemplateId="137121" /> <!--여명의 귀걸이 힘->세공된 여명의 귀걸이 힘 -->
+		<InheritInfo targetTemplateId="88618" resultTemplateId="137119" /> <!--여명의 귀걸이 치명(거래가능)->세공된 여명의 귀걸이 치명 -->
+		<InheritInfo targetTemplateId="88621" resultTemplateId="137121" /> <!--여명의 귀걸이 힘(거래가능)->세공된 여명의 귀걸이 힘 -->
+	</Token>
+	<Token templateId="137110" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88421" resultTemplateId="137120" /> <!--어스름의 반지 치명->세공된 어스름의 반지 치명 -->
+		<InheritInfo targetTemplateId="88424" resultTemplateId="137122" /> <!--어스름의 반지 힘->세공된 어스름의 반지 힘 -->
+		<InheritInfo targetTemplateId="88619" resultTemplateId="137120" /> <!--어스름의 반지 치명(거래가능)->세공된 어스름의 반지 치명 -->
+		<InheritInfo targetTemplateId="88622" resultTemplateId="137122" /> <!--어스름의 반지 힘(거래가능)->세공된 어스름의 반지 힘 -->
+	</Token>
+	
+	<!-- 여신<->고룡 변환 아이템 -->
+	<Token templateId="202396" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="51011" resultTemplateId="51028" /> <!-- 빛여브 -> 고룡 -->
+		<InheritInfo targetTemplateId="98406" resultTemplateId="51028" /> <!-- 빛여브 -> 고룡 -->
+		<InheritInfo targetTemplateId="51028" resultTemplateId="98406" /> <!-- 고룡 -> 빛여브 -->
+		<InheritInfo targetTemplateId="51029" resultTemplateId="51030" /> <!-- 찬여브 -> 악룡 -->
+		<InheritInfo targetTemplateId="51030" resultTemplateId="51029" /> <!-- 악룡 -> 찬여브 -->
+	</Token>
+
+	
+	<!-- 길리안의 숲 증폭제 악세 증폭 I -->	
+	<!-- 허리띠 -->
+	<Token templateId="204257" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88404" resultTemplateId="88803" />
+		<InheritInfo targetTemplateId="88602" resultTemplateId="88803" /> 
+		<InheritInfo targetTemplateId="88765" resultTemplateId="88811" />
+		<InheritInfo targetTemplateId="88774" resultTemplateId="88811" />
+	</Token>
+	<!-- 목걸이 -->
+	<Token templateId="204258" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88426" resultTemplateId="88804" />
+		<InheritInfo targetTemplateId="88624" resultTemplateId="88804" /> 
+		<InheritInfo targetTemplateId="88429" resultTemplateId="88807" />
+		<InheritInfo targetTemplateId="88627" resultTemplateId="88807" />
+		<InheritInfo targetTemplateId="88766" resultTemplateId="88812" />
+		<InheritInfo targetTemplateId="88775" resultTemplateId="88812" /> 
+		<InheritInfo targetTemplateId="88769" resultTemplateId="88815" />
+		<InheritInfo targetTemplateId="88778" resultTemplateId="88815" />
+	</Token>
+	<!-- 귀걸이 -->
+	<Token templateId="204259" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88427" resultTemplateId="88805" />
+		<InheritInfo targetTemplateId="88625" resultTemplateId="88805" /> 
+		<InheritInfo targetTemplateId="88430" resultTemplateId="88808" />
+		<InheritInfo targetTemplateId="88628" resultTemplateId="88808" />
+		<InheritInfo targetTemplateId="88767" resultTemplateId="88813" />
+		<InheritInfo targetTemplateId="88776" resultTemplateId="88813" /> 
+		<InheritInfo targetTemplateId="88770" resultTemplateId="88816" />
+		<InheritInfo targetTemplateId="88779" resultTemplateId="88816" />
+	</Token>
+	<!-- 반지 -->
+	<Token templateId="204260" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88428" resultTemplateId="88806" />
+		<InheritInfo targetTemplateId="88626" resultTemplateId="88806" /> 
+		<InheritInfo targetTemplateId="88431" resultTemplateId="88809" />
+		<InheritInfo targetTemplateId="88629" resultTemplateId="88809" />
+		<InheritInfo targetTemplateId="88768" resultTemplateId="88814" />
+		<InheritInfo targetTemplateId="88777" resultTemplateId="88814" /> 
+		<InheritInfo targetTemplateId="88771" resultTemplateId="88817" />
+		<InheritInfo targetTemplateId="88780" resultTemplateId="88817" />
+	</Token>
+	<!-- 서클릿 -->
+	<Token templateId="204261" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88432" resultTemplateId="88810" />
+		<InheritInfo targetTemplateId="88630" resultTemplateId="88810" /> 
+		<InheritInfo targetTemplateId="88772" resultTemplateId="88818" />
+		<InheritInfo targetTemplateId="88781" resultTemplateId="88818" />
+	</Token>
+	
+	<!-- 길리안의 숲 증폭제 악세 증폭 II -->	
+	<!-- 허리띠 -->
+	<Token templateId="204262" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88765" resultTemplateId="88819" />
+		<InheritInfo targetTemplateId="88774" resultTemplateId="88819" />
+		<InheritInfo targetTemplateId="88811" resultTemplateId="88819" />
+	</Token>
+	<!-- 목걸이 -->
+	<Token templateId="204263" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88766" resultTemplateId="88820" />
+		<InheritInfo targetTemplateId="88775" resultTemplateId="88820" />
+		<InheritInfo targetTemplateId="88812" resultTemplateId="88820" />
+		<InheritInfo targetTemplateId="88769" resultTemplateId="88823" />
+		<InheritInfo targetTemplateId="88778" resultTemplateId="88823" />
+		<InheritInfo targetTemplateId="88815" resultTemplateId="88823" />
+	</Token>
+	<!-- 귀걸이 -->
+	<Token templateId="204264" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88767" resultTemplateId="88821" />
+		<InheritInfo targetTemplateId="88776" resultTemplateId="88821" /> 
+		<InheritInfo targetTemplateId="88813" resultTemplateId="88821" />
+		<InheritInfo targetTemplateId="88770" resultTemplateId="88824" />
+		<InheritInfo targetTemplateId="88779" resultTemplateId="88824" /> 
+		<InheritInfo targetTemplateId="88816" resultTemplateId="88824" />
+	</Token>
+	<!-- 반지 -->
+	<Token templateId="204265" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88768" resultTemplateId="88822" />
+		<InheritInfo targetTemplateId="88777" resultTemplateId="88822" /> 
+		<InheritInfo targetTemplateId="88814" resultTemplateId="88822" />
+		<InheritInfo targetTemplateId="88771" resultTemplateId="88825" />
+		<InheritInfo targetTemplateId="88780" resultTemplateId="88825" />
+		<InheritInfo targetTemplateId="88817" resultTemplateId="88825" />
+	</Token>
+	<!-- 서클릿 -->
+	<Token templateId="204266" masterpiece="false" awaken="false" enchant="true" scroll="true" artifact="true" equipExp="true" bound="true" >
+		<InheritInfo targetTemplateId="88772" resultTemplateId="88826" />
+		<InheritInfo targetTemplateId="88781" resultTemplateId="88826" /> 
+		<InheritInfo targetTemplateId="88818" resultTemplateId="88826" />
+	</Token>
+	
+	
+	
+	
+</EquipmentInheritanceData>

@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BuyMenuData>
+	<!--
+	BuyMenu ID 규칙
+	1000~9999 : 전국가 공통 이벤트
+	10000~19999 : 공통
+	20000~29999 : 한국
+	30000~39999 : 일본
+	40000~49999 : 북미
+	50000~59999 : 유럽
+	60000~69999 : 러시아
+	70000~79999 : 대만
+	80000~89999 : 태국(동남아)
+	
+	스트링 ID 규칙
+	상점 스트링 ID = BuyMenu ID끝에 0 붙이기
+	상점 탭 스트링 ID = BuyMenu 끝에 1부터 붙이기(10개 넘기지 말자!)
+	예시) BuyMenu ID="10000", 상점 스트링 ID ="100000", 상점 1번탭 ID ="100001", 상점 2번탭 ID="100002"
+	예외) 매우 자주 쓰는 탭 3종은 아래 아이디로 써서 데이터 양 줄임
+	        교환목록 = "1000", 기타 = "2000", 이벤트 = "3000"
+			
+	resetType
+		none : 초기화되지 않음. 운영툴로만 초기화 가능
+		day : resetTime 노드값 입력 필요. 매일 해당 시간(24시간 기준)에 초기화됨
+		instanceNpc : Npc마다 구매 제한이 별도로 계산되어, Npc가 사라질 때 해당 Npc가 들고 있던 상점만 초기화
+	resetTime
+		매일 해당 시간(24시간 기준)에 초기화됨
+		국가별로 설정해야 하는 값이 다름. 공용 데이터시트에는 resetTime에 어떤 값을 입력하더라도 컨버터를 이용하여 아래 시간으로 변경하고 있음
+		EU : 6
+		NA : 12
+		JP : 9
+		RUS : 6
+		TW : 5
+		THA : 5
+	needMedalItemId : VillagerMenu.xml에서 BuyMenuMedal로 지정한 상점만 입력. 구매에 필요한 토큰의 TID
+	needPointNpcGuildId : VillagerMenu.xml에서 BuyMenuPoint로 지정한 상점만 입력. 구매에 필요한 평판 포인트의 ID, 이 경우 품목마다 구매 시 평판 등급 조건인 grade 노드를 입력해야 함. 또한 아이템 툴팁에 조건을 노출시키려면 ReputationItem.xml에 입력해야 함(가격은 더미로)
+	-->
+
+
+	<BuyMenu id="50000" desc="EU_배틀패스 이벤트" stringId="500001" resetType="none" >
+		<Menu id="1" desc="BP 교환 상점" probability="1" needMedalItemId="170164">
+			<ItemList stringed="500002">
+				<Item itemTemplateId="170175" buyPrice="1000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170176" buyPrice="2000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170177" buyPrice="5000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170178" buyPrice="9000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170179" buyPrice="15000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170180" buyPrice="20000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170181" buyPrice="30000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170182" buyPrice="40000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170183" buyPrice="50000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170184" buyPrice="60000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170270" buyPrice="70000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170271" buyPrice="80000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170272" buyPrice="90000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170273" buyPrice="100000" limitType="account" limitCount="1"/>
+			</ItemList>			
+			<ItemList stringed="500003">
+				<Item itemTemplateId="170186" buyPrice="1000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170187" buyPrice="2000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170188" buyPrice="5000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170189" buyPrice="9000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170190" buyPrice="15000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170191" buyPrice="20000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170192" buyPrice="30000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170193" buyPrice="40000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170194" buyPrice="50000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="170195" buyPrice="60000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170274" buyPrice="70000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170275" buyPrice="80000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170276" buyPrice="90000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="170277" buyPrice="100000" limitType="account" limitCount="1" />
+			</ItemList>			
+			<ItemList stringed="500004">
+				<Item itemTemplateId="170199" buyPrice="100000" />
+				<Item itemTemplateId="170185" buyPrice="1000" />
+				<Item itemTemplateId="170173" buyPrice="1" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="50001" desc="EU97_원소 이벤트(Whakanui)" stringId="500010" resetType="day" resetTime="9" >
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="156349">
+			<ItemList stringed="500011">
+				<Item itemTemplateId="156368" buyPrice="5" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="156370" buyPrice="5" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="69000" buyPrice="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="69001" buyPrice="1" limitType="account" limitCount="4"/>
+				<Item itemTemplateId="98681" buyPrice="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="156351" buyPrice="1" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="209122" buyPrice="2" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="209123" buyPrice="2" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="209124" buyPrice="2" limitType="account" limitCount="3"/>
+			</ItemList>
+			<ItemList stringed="500012">
+				<Item itemTemplateId="156369" buyPrice="3" />
+				<Item itemTemplateId="156371" buyPrice="3" />
+				<Item itemTemplateId="98551" buyPrice="1" />
+				<Item itemTemplateId="98552" buyPrice="1" />
+				<Item itemTemplateId="6335" buyPrice="1" />
+				<Item itemTemplateId="6336" buyPrice="1" />
+				<Item itemTemplateId="5292" buyPrice="1" />
+				<Item itemTemplateId="268639" buyPrice="50" />
+				<Item itemTemplateId="268627" buyPrice="150" />
+				<Item itemTemplateId="268615" buyPrice="300" />
+			</ItemList>
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="50002" desc="EU97_원소 이벤트(Huritau)" stringId="500020" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="156350">
+			<ItemList stringed="500021">
+				<Item itemTemplateId="156372" buyPrice="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207301" buyPrice="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207348" buyPrice="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207349" buyPrice="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207350" buyPrice="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207351" buyPrice="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207332" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207333" buyPrice="2" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207334" buyPrice="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207335" buyPrice="1" limitType="account" limitCount="1"/>
+			</ItemList>
+			<ItemList stringed="500022">
+				<Item itemTemplateId="207345" buyPrice="15" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="207347" buyPrice="15" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="156407" buyPrice="8" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="156408" buyPrice="25" limitType="account" limitCount="10"/>				
+				<Item itemTemplateId="156409" buyPrice="25" limitType="account" limitCount="10"/>				
+				<Item itemTemplateId="207352" buyPrice="20" limitType="account" limitCount="4"/>
+				<Item itemTemplateId="207353" buyPrice="15" limitType="account" limitCount="4"/>
+				<Item itemTemplateId="207354" buyPrice="15" limitType="account" limitCount="4"/>
+				<Item itemTemplateId="207355" buyPrice="15" limitType="account" limitCount="4"/>
+				<Item itemTemplateId="89040" buyPrice="10"  limitType="account" limitCount="25"/>
+				<Item itemTemplateId="89140" buyPrice="10"  limitType="account" limitCount="25"/>
+			</ItemList>
+			<ItemList stringed="500023">
+				<Item itemTemplateId="156373" buyPrice="4" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="156374" buyPrice="4" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="156375" buyPrice="4" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="205018" buyPrice="2" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="205126" buyPrice="7" limitType="account" limitCount="15"/>
+			</ItemList>
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="50003" desc="EU_8주년wolf 이벤트" stringId="500030" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="156380">
+			<ItemList stringed="500031">
+				<Item itemTemplateId="246475" buyPrice="500" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="246474" buyPrice="700" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="1971" buyPrice="500" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="204071" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="96968" buyPrice="1" limitType="account" limitCount="40"/>
+				<Item itemTemplateId="6502" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="88997" buyPrice="100" limitType="account" limitCount="5"/>
+			</ItemList>
+		</Menu>
+	</BuyMenu>	
+<!-- EU95HF 이벤트 -->
+	<BuyMenu id="50004" desc="EU95HF 이벤트(Cetus)" stringId="500040" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="156406">
+			<ItemList stringed="500041">
+				<Item itemTemplateId="99039" buyPrice="350" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="99040" buyPrice="1000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="268938" buyPrice="400" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="268961" buyPrice="1100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89140" buyPrice="50" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="89040" buyPrice="50" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="89142" buyPrice="2000" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="89042" buyPrice="2000" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="204484" buyPrice="1" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="204488" buyPrice="3" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="207212" buyPrice="1200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207215" buyPrice="1200" limitType="account" limitCount="1"/>				
+			</ItemList>
+			<ItemList stringed="500042">
+				<Item itemTemplateId="246495" buyPrice="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="268552" buyPrice="50" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="268576" buyPrice="50" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="246197" buyPrice="60" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="246200" buyPrice="60" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="246356" buyPrice="60" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="246103" buyPrice="60" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="246106" buyPrice="60" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="246109" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="246112" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="179879" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="179882" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="246203" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="246224" buyPrice="50"  limitType="account" limitCount="1"/>
+				<Item itemTemplateId="179730" buyPrice="40"  limitType="account" limitCount="1"/>				
+			</ItemList>
+			<ItemList stringed="500043">
+				<Item itemTemplateId="263655" buyPrice="80" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="154505" buyPrice="60" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="154481" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="154493" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202901" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202902" buyPrice="50" limitType="account" limitCount="1"/>
+			</ItemList>
+			<ItemList stringed="500044">
+				<Item itemTemplateId="156373" buyPrice="5" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="156374" buyPrice="5" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="156375" buyPrice="5" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="179887" buyPrice="30" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="179890" buyPrice="30" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="177647" buyPrice="25" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="177648" buyPrice="25" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="177649" buyPrice="25" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202204" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="99028" buyPrice="90" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202208" buyPrice="5" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="202212" buyPrice="5" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="202216" buyPrice="5" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="202220" buyPrice="5" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="202224" buyPrice="5" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="202228" buyPrice="5" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="202232" buyPrice="5" limitType="account" limitCount="5"/>				
+			</ItemList>
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="50005" desc="EU95HF 이벤트(Scylla)" stringId="500050" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="155011">
+			<ItemList stringed="500051">
+				<Item itemTemplateId="269690" buyPrice="150" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="269697" buyPrice="150" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="269664" buyPrice="150" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="269657" buyPrice="150" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="264444" buyPrice="75" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="264456" buyPrice="75" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="51039" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="264532" buyPrice="90" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="265328" buyPrice="90" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="265340" buyPrice="90" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="263676" buyPrice="75" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="263688" buyPrice="75" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="179846" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="177674" buyPrice="50" limitType="account" limitCount="1"/>	
+				<Item itemTemplateId="177665" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="177668" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="256120" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="256132" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="179861" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="254228" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="254276" buyPrice="50" limitType="account" limitCount="1"/>		
+			</ItemList>
+			<ItemList stringed="500052">
+				<Item itemTemplateId="268660" buyPrice="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="268672" buyPrice="150" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="268564" buyPrice="75" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="268588" buyPrice="75" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="268600" buyPrice="75" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="201587" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202528" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="99515" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="201607" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="201619" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="201631" buyPrice="50"  limitType="account" limitCount="1"/>
+				<Item itemTemplateId="201643" buyPrice="50"  limitType="account" limitCount="1"/>			
+			</ItemList>
+			<ItemList stringed="500053">
+				<Item itemTemplateId="151775" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151787" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151799" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="152228" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="152243" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="152258" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="152576" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="152596" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="152793" buyPrice="200" limitType="account" limitCount="1"/>
+			</ItemList>
+		</Menu>
+	</BuyMenu>
+	<!-- EU98 던전 클리어 이벤트 -->
+	<BuyMenu id="50006" desc="EU98 던전 클리어 이벤트" stringId="500170" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="156413">
+			<ItemList stringed="500055">
+				<Item itemTemplateId="150520" buyPrice="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="150523" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="150526" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="150529" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151802" buyPrice="400" limitType="account" limitCount="1"/>						
+			</ItemList>
+			<ItemList stringed="500056">
+				<Item itemTemplateId="209122" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209123" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209124" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="94413" buyPrice="35" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94414" buyPrice="35" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94415" buyPrice="35" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94416" buyPrice="35" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="205018" buyPrice="20" limitType="account" limitCount="3"/>			
+			</ItemList>
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="50007" desc="EU98 던전 클리어 이벤트" stringId="500170" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="156414">
+			<ItemList stringed="500058">
+				<Item itemTemplateId="150692" buyPrice="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="150695" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="150698" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="150701" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151805" buyPrice="400" limitType="account" limitCount="1"/>						
+			</ItemList>
+			<ItemList stringed="500059">
+				<Item itemTemplateId="209122" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209123" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209124" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="207627" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="207628" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="156375" buyPrice="25" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="207499" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="204484" buyPrice="50" limitType="account" limitCount="20"/>			
+			</ItemList>
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="50008" desc="EU98 던전 클리어 이벤트" stringId="500170" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="156415">
+			<ItemList stringed="500061">
+				<Item itemTemplateId="151408" buyPrice="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151411" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151414" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151417" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151808" buyPrice="400" limitType="account" limitCount="1"/>						
+			</ItemList>
+			<ItemList stringed="500062">
+				<Item itemTemplateId="209122" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209123" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209124" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="94417" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94418" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94419" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94420" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="205126" buyPrice="40" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="155617" buyPrice="10" limitType="account" limitCount="10"/>			
+			</ItemList>
+		</Menu>
+	</BuyMenu>
+<!-- 상점 BuyMenu ID 50009~50015 BuyMenuList.xml 시트와 대역 중복으로 사용X -->
+	<BuyMenu id="50016" desc="EU98 던전 클리어 이벤트" stringId="500170" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="156416">
+			<ItemList stringed="500064">
+				<Item itemTemplateId="151573" buyPrice="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151576" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151579" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151582" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151811" buyPrice="400" limitType="account" limitCount="1"/>						
+			</ItemList>
+			<ItemList stringed="500065">
+				<Item itemTemplateId="209122" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209123" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209124" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="98713" buyPrice="30" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="206854" buyPrice="5" limitType="account" limitCount="30"/>
+				<Item itemTemplateId="207499" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="89905" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="89906" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="156373" buyPrice="25" limitType="account" limitCount="5"/>			
+			</ItemList>
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="50017" desc="EU98 던전 클리어 이벤트" stringId="500170" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="156417">
+			<ItemList stringed="500067">
+				<Item itemTemplateId="151585" buyPrice="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151588" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151591" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151594" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="151814" buyPrice="400" limitType="account" limitCount="1"/>						
+			</ItemList>
+			<ItemList stringed="500068">
+				<Item itemTemplateId="209122" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209123" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209124" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="98714" buyPrice="30" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="206975" buyPrice="100" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="205018" buyPrice="20" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="204488" buyPrice="10" limitType="account" limitCount="30"/>
+				<Item itemTemplateId="156374" buyPrice="25" limitType="account" limitCount="5"/>			
+			</ItemList>
+		</Menu>
+	</BuyMenu>	
+
+	<!-- B100 BattlePAss -->
+	<BuyMenu id="50018" desc="Gate Keeper" stringId="500180" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="170370">
+			<ItemList stringed="500181">
+				<Item itemTemplateId="89929" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89931" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89933" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89935" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89937" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89939" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89941" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89943" buyPrice="4" limitType="account" limitCount="1"/>
+			</ItemList>
+			<ItemList stringed="500182">
+				<Item itemTemplateId="89945" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89947" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89949" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89951" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89953" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89955" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89957" buyPrice="4" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89959" buyPrice="4" limitType="account" limitCount="1"/>		
+				<Item itemTemplateId="89961" buyPrice="4" limitType="account" limitCount="1"/>		
+				<Item itemTemplateId="89963" buyPrice="4" limitType="account" limitCount="1"/>		
+			</ItemList>
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="50019" desc="Valona's Emissary" stringId="500190" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="170371">
+			<ItemList stringed="500191">
+				<Item itemTemplateId="209122" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209123" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="209124" buyPrice="2" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="206854" buyPrice="2" limitType="account" limitCount="50"/>
+			</ItemList>
+			<ItemList stringed="500192">
+				<Item itemTemplateId="94413" buyPrice="35" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94414" buyPrice="35" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94415" buyPrice="35" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94416" buyPrice="35" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="205018" buyPrice="20" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="98713" buyPrice="30" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="207499" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="98714" buyPrice="30" limitType="account" limitCount="5"/>				
+			</ItemList>
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="50020" desc="Valona's Emissary" stringId="500200" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="170372">
+			<ItemList stringed="500201">
+				<Item itemTemplateId="89905" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="89906" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="207627" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="207628" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="204488" buyPrice="10" limitType="account" limitCount="30"/>
+				<Item itemTemplateId="206975" buyPrice="100" limitType="account" limitCount="5"/>
+			</ItemList>
+			<ItemList stringed="500202">
+				<Item itemTemplateId="156374" buyPrice="25" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="156373" buyPrice="25" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="156375" buyPrice="25" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="205018" buyPrice="20" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="205126" buyPrice="40" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="155617" buyPrice="10" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="207499" buyPrice="50" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="204484" buyPrice="20" limitType="account" limitCount="20"/>
+			</ItemList>
+		</Menu>
+	</BuyMenu>	
+	
+</BuyMenuData>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3012" name="@dungeon:3012" startDir="90" startPos="-130619,-117502,-84" exitContinentId="7031" exitPos="21440,4761,6190" newbieBonusOff="false">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="1" />
+	<Condition type="levelOver" value="65" />
+	<DPSDisplay updateFrequency="1.0" cutDigits="1000000" digitStringId="921316" /> <!-- DPS 출력 노드 -->
+
+
+<!-- 네임드 사망 시 모든 마석 제거 -->
+    <EventGroup type="npcHp" uniqueId="3012,18" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="3012" territoryId="301200004" next="none" />  <!-- 정령버프 마석 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3012" territoryId="301200002" next="none" />  <!-- 사제버프 마석 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3012" territoryId="301200007" next="none" />  <!-- 리셋 마석 디스폰 -->
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+<!-- 네임드 리셋 시 테리토리 디스폰 및 리스폰 -->
+    <EventGroup type="npcReset" uniqueId="3012,18" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="3012" territoryId="301200001" next="time" nextValue="3" />
+		  <EventTask type="spawn" huntingZoneId="3012" territoryId="301200001" next="none" />
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+<!-- 리셋용 -->
+  <EventGroup type="none" id="100" name="리셋" repeat="true">
+	<Event>
+	  <EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="3012" territoryId="301200001" next="time" nextValue="3" />
+		  <EventTask type="spawn" huntingZoneId="3012" territoryId="301200001" next="none" />		
+	  </EventTaskGroup>
+	</Event>
+  </EventGroup>
+</Dungeon>

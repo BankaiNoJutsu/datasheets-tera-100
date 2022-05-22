@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9773" name="@dungeon:9773" startPos="66950.8516,81634.9375,5012.2729" exitContinentId="7022" exitPos="9209,40094,8451">
+  <!-- 검은 탑 던전 -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="58" />
+		<ClearCondition huntingZoneId="773" templateId="5103" amount="1" killCount="1" />
+
+
+  <!-- 1층 문 열기 -->
+  <EventGroup type="npcHp" uniqueId="773,2101" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300002" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300003" next="time" nextValue="0.1" />
+        <EventTask type="message" string="@dungeon:9073001" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="977301" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1층 시체 분쇄기(난폭한 아라크네아 설정) -->
+  <EventGroup type="npcHp" uniqueId="773,2101" value="60" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="773" territoryId="77300002" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="773,2101">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300002" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="773,2101" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300002" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="773,2101" value="60" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="773" territoryId="77300003" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="773,2101">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300003" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="773,2101" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300003" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1층 시체 분쇄기 사망 시 마법석 등장 -->
+  <EventGroup type="npcHp" uniqueId="773,2101" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="773" territoryId="77300010" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2층 2인 파티 네임드 제거 후 목책 제거 -->
+  <EventGroup type="enterTerritory" uniqueId="773,47300309">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="773" territoryId="47300191" next="complete" />
+        <EventTask type="despawn" huntingZoneId="773" territoryId="47300306" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3층 언데드 장군 사망 시 봉인의 마법석 소환 -->
+  <EventGroup type="npcHp" uniqueId="773,4101" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300004" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3층 봉인의 마법석 대화 시 다이나믹 지오 동작 
+	<EventGroup type="talkNpc" uniqueId="773,1005">
+		<Event textId="2">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9073001" style="default" next="time" nextValue="1"/>
+				<EventTask type="dynamicGeo" objectId="977302" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+  <!-- 4층 샤말란 사제 네임드 제거 후 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="773,4102" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="47300307" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 5층 불카누스 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="773,5102" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="47300299" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 5층 블러드 골렘 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="773,5101" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300001" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="773" territoryId="47300308" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 5층 블러드 골렘 사망 시 시작 입구에 마법석 등장 -->
+  <EventGroup type="npcHp" uniqueId="773,5101" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="773" territoryId="77300015" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 5층 툴사 사망 시 다이나믹 지오 열림 제거 -->
+  <EventGroup type="npcHp" uniqueId="773,5103" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="dynamicGeo" objectId="977303" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 5층 블러드 골렘 전투설정 -->
+  <EventGroup type="npcHp" uniqueId="773,5101" value="80" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="773" territoryId="77300001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="773,5101">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="773,5101" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 5층 툴사 전투설정 -->
+  <EventGroup type="npcHp" uniqueId="773,5103" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300012" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="773,5103" value="99" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="773" territoryId="77300014" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="773,5103">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300014" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="773,5103" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="773" territoryId="77300014" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

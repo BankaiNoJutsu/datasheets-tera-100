@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Field continentId="7013" >
+	<!--공중섬 이동용 더미 임무-->
+	<FieldEvent id="92" startTerritoryId="41,4100451" startPos="-23799,75468,4187" startDir="-11219" revivePos="-23799,75468,4187" reviveTownNameId="7777" revivalRecoveryRate="1" >
+		<Condition type="maxMemberCount" value="15" />
+		<Condition type="teleportMemberCount" value="10" />
+		<Condition type="minLevel" value="1" />
+		<Condition type="maxLevel" value="65" />
+
+		<!-- 진행도 관련 조건문 -->
+		<ClearCondition progressTime="330" endWhenProgressFull="false" endIntervalTime="30" />
+		<Progress maxValue="100000" dividerPercent="100" isSharedChannel="false" standardPlayerCount="30" />
+
+		<!--
+		<AutoUserBalance>
+			<Balance itemLevelMin="1" itemLevelMax="4" abnormalityId="77770003"/>
+			<Balance itemLevelMin="5" itemLevelMax="10" abnormalityId="77770004"/>
+			<Balance itemLevelMin="11" itemLevelMax="15" abnormalityId="77770005"/>
+			<Balance itemLevelMin="16" itemLevelMax="20" abnormalityId="77770006"/>
+			<Balance itemLevelMin="21" abnormalityId="1"/>
+		</AutoUserBalance>
+		-->
+
+		<!-- 유저 수에 따른 밸런싱 -->
+		<AutoEventBalance>
+			<Balance userMin="0" userMax="1">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770002"/> <!-- 10배 -->
+			</Balance>
+		</AutoEventBalance>
+
+		<!-- 점수 데이터 정의 -->
+		<EventPoint>
+			<Point id="1" type="dealing" value="1.05" />
+			<Point id="2" type="healing" value="1.0" />
+		</EventPoint>
+
+
+		<!-- 전용 UI -->
+		<Guide titleString="@field:701402" eventSize="dragon_island" description="@field:7014020" > <!--월드맵창에서 보이는 내용-->
+			<Task/>
+			<!--Task id="1" target="@creature:621#2003" string="@field:100007" iconId="1" --><!--콘텐츠 진입시 보이는 내용-->
+				<!--Marker markerType="MARKER_FIELD_EVENT_AREA_01" markerPos="-49132,20823,1015" markerScaleX="0.3" markerScaleY="0.3"/-->
+			<!--/Task-->
+		</Guide>
+
+		<!-- 이벤트 초기화 -->
+		<EventGroup type="initialize" >
+			<Event>
+				<EventTaskGroup>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+	</FieldEvent>
+</Field>

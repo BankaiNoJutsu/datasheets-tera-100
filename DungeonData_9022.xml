@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9022" name="@dungeon:9022" startPos="68296,-70995,-1046" exitContinentId="7003" exitPos="-40035, -62883, 2254" destroyWaitMin="0">
+  <RestoreTargetQuest id="2501" forceRestore="true"/>
+  <!-- 잊혀진 거인의 도시 미션 특수공간 -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="35" />
+  <Condition type="progressQuest" value="2501" taskId="17" />
+  <Condition type="completeQuest" value="2501" />
+  <EventGroup type="npcHp" uniqueId="422,3" value="50">
+    <!-- 사제 몬스터 hp 50이면 지원병 몬스터 시간차 스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9022001" targetNpcId="422,3" style="default" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9022002" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="422" territoryId="42200003" next="time" nextValue="30" />
+        <!-- 1차 병력 -->
+        <EventTask type="message" string="@dungeon:9022003" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="422" territoryId="42200005" next="time" nextValue="30" />
+        <!-- 2차 병력 -->
+        <EventTask type="message" string="@dungeon:9022004" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="422" territoryId="42200004" next="time" nextValue="1" />
+        <!-- 사제 재등장 -->
+        <EventTask type="message" string="@dungeon:9022005" style="default" next="time" nextValue="3" />
+        <!-- 고통의 마석 결계 파쇄 -->
+        <EventTask type="despawn" huntingZoneId="422" territoryId="42200007" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="422" territoryId="42200002" next="none" />
+        <!-- 고통의 마석 등장 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="422,1" value="0">
+    <!-- 검투사 재충원 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9022006" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="422" territoryId="42200003" next="none" />
+        <!-- 1차 병력 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="422,2" value="0">
+    <!-- 광전사 재충원 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9022007" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="422" territoryId="42200005" next="none" />
+        <!-- 2차 병력 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="422,2003" value="0">
+    <!-- 고통의 마석 파괴 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9022008" style="default" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="422" territoryId="42200001" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="422" territoryId="42200006" next="none" />
+	<EventTask type="spawn" huntingZoneId="422" territoryId="42200008" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3203" name="@dungeon:3203" startPos="50692,84802,-11881" startDir="90" exitContinentId="7014" exitPos="-86418,24415,3179">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="70" />
+		<ClearCondition huntingZoneId="3203" templateId="1000" amount="1" killCount="1" />
+	
+	<!-- 던전 최초 설정 -->
+	<EventGroup type="initialize" name="Initialize">
+	  <Event>
+	    <EventTaskGroup>
+		  <EventTask type="guideOn" nameId="3203,100" id="1" pos="53554,84788,-11829" next="none" />
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+	
+	<!-- 구원의 손길 불가 테리토리 --> 
+	<EventGroup type="enterTerritory" uniqueId="3203,320300006"> <!-- 불가 (입구) -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3023" territoryId="320300006" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3203,320300007"> <!-- 불가 (사이드) -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3023" territoryId="320300007" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3203,320300008"> <!-- 가능 (전투 구역) -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3023" territoryId="320300008" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 타이머 -->
+	<EventGroup type="npcstate" name="start" uniqueId="3203,1000" value="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="start" next="none" /> <!-- 리더보드 타이머 시작 -->
+				<EventTask type="timer" action="Start" name="시간_제한" direction="reverse" value="600" timerUiOff="false" next="none" /> <!-- 타이머 10분 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 타임 오버 -->
+	<EventGroup type="timer" id="100" timerName="시간_제한" value="0" repeat="true"> <!-- 타임 오버 시 전멸기 이상상태 부여 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32030011" target="npc" targetNpcId="3203,1000" next="none" /> <!-- 전멸기 이상상태 부여 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<EventGroup type="npcState" uniqueId="3203,1000" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="start" next="none" /> <!-- 리더보드 타이머 시작 -->	  
+		<EventTask type="cleanup" next="none" />	
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+	
+	<!-- 철창 on --> 
+	<EventGroup type="npcHp" uniqueId="3203,1000" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!-- 철창 생성 메세지 -->
+				<EventTask type="message" string="@dungeon:32030001" style="combat" next="time" nextValue="5" />
+				<!-- 입구 철창 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3203" territoryId="320300002" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 공간 제한 --> 
+	<EventGroup type="npcHp" uniqueId="3203,1000" value="70" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!-- TNPC 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3203" territoryId="320300009" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- HP 70% 강화 버프 -->
+    <EventGroup type="npcHp" uniqueId="3203,1000" value="70" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32030008" target="npc" targetNpcId="3203,1000" next="none" /> <!-- 보스 강화 버프 --> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- HP 30% 강화 버프 -->
+    <EventGroup type="npcHp" uniqueId="3203,1000" value="30" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32030009" target="npc" targetNpcId="3203,1000" next="none" /> <!-- 보스 강화 버프 --> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 쿨타임 제어 -->
+	<EventGroup type="none" id="1" name="거인의 힘 쿨타임 부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32030100" target="npc" targetNpcId="3203,1000" turn="on" next="none" /> <!-- 거인의 힘 쿨타임 제어 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="2" name="지면 강타 쿨타임 부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32030101" target="npc" targetNpcId="3203,1000" turn="on" next="none" /> <!-- 지면 강타 쿨타임 제어 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="3" name="일격타 쿨타임 부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32030102" target="npc" targetNpcId="3203,1000" turn="on" next="none" /> <!-- 일격타 쿨타임 제어 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 모든 행동 취소 -->
+	<EventGroup type="none" id="999" name="모든 행동 취소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32039999" target="npc" targetNpcId="3203,1000" next="none" /> <!-- 모든 행동 취소 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 전멸기 후 이상상태 부여 -->
+	<EventGroup type="none" id="99" name="죽이는 이상상태" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32030102" target="npc" targetNpcId="3203,1000" next="time" nextValue="4" />
+				<EventTask type="abnormality" abnormalityId="32031018" target="player" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="32031018" target="player" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="32031018" target="player" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 보스 리셋 시 이상상태 모두 해제 -->	
+	<EventGroup type="npcReset" uniqueId="3203,1000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!-- 타이머 Stop -->
+				<EventTask type="ranktimer" timerLog="stop" next="none" /> <!-- 리더보드 타이머 정지 -->
+				<EventTask type="timer" action="stop" name="시간_제한" next="time" nextValue="1" /> <!-- 타이머 정지 -->
+				<EventTask type="timer" action="stop" name="시간_제한" value="0" timerUiOff="true" next="none" /> <!-- 제한 시간 Timer UI OFF -->
+				<!-- 보스에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="32030100" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030101" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030102" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030006" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030007" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030008" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030009" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030010" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030011" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<!-- 테리토리 -->
+				<EventTask type="deSpawn" huntingZoneId="3203" territoryId="320300009" resetNpcHpDungeonTask="true" next="none" /> <!-- 공간 제한 -->
+				<EventTask type="deSpawn" huntingZoneId="3203" territoryId="320300002" resetNpcHpDungeonTask="true" next="none" /> <!-- 입구 철창 -->
+				<EventTask type="deSpawn" huntingZoneId="3203" territoryId="320300001" resetNpcHpDungeonTask="true" next="time" nextValue="5" /> <!-- 보스가 있는 파티(디스폰) -->
+				<EventTask type="Spawn" huntingZoneId="3203" territoryId="320300001" next="none" /> <!-- 보스가 있는 파티(디스폰 후 스폰) -->
+                <!-- PC에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="32031000" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031001" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031002" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031003" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031004" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031005" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031006" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031007" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031008" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031009" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031010" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031011" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031012" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031013" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031014" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031015" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031016" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031017" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031018" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32032000" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32032001" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32032002" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32032003" target="player" turn="off" aliveOnly="false" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 보스 처치 시 이상상태 모두 해제 및 디스폰 -->	
+	<EventGroup type="npcHp" uniqueId="3203,1000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" stageLog="2" logUpdate="true" next="none" /> <!-- 리더보드 타이머 스톱 -->	  
+				<!-- 가이드 Off -->
+     			<EventTask type="guideOff" id="1" next="none" />
+				<!-- 타이머 Stop -->
+				<EventTask type="ranktimer" timerLog="stop" stageLog="2" logUpdate="true" next="none" /> <!-- 리더보드 타이머 정지 -->
+				<EventTask type="timer" action="stop" name="시간_제한" next="time" nextValue="1" /> <!-- 타이머 정지 -->
+				<EventTask type="timer" action="stop" name="시간_제한" value="0" timerUiOff="true" next="none" /> <!-- 제한 시간 Timer UI OFF -->
+				<!-- 보스에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="32030100" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030101" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030102" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030006" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030007" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030008" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030009" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030010" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="32030011" target="npc" targetNpcId="3203,1000" turn="off" next="none" />
+				<!-- 테리토리 -->
+				<EventTask type="deSpawn" huntingZoneId="3203" territoryId="320300009" next="none" /> <!-- 공간 제한 -->
+				<EventTask type="deSpawn" huntingZoneId="3203" territoryId="320300002" next="none" /> <!-- 입구 철창 -->
+				<EventTask type="Spawn" huntingZoneId="3203" territoryId="320300004" next="none" /> <!-- 퇴장 마법석 -->
+				<!-- PC에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="32031000" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031001" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031002" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031003" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031004" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031005" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031006" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031007" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031008" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031009" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031010" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031011" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031012" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031013" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031014" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031015" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031016" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031017" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32031018" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32032000" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32032001" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32032002" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="32032003" target="player" turn="off" aliveOnly="false" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- TNPC 타겟용 안보이는 이상상태 -->
+    <EventGroup type="npcHp" uniqueId="3203,1000" value="85" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32032000" target="class" targetUserClass="priest,elementalist" value="1" strictly="true" turn="on" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="npcHp" uniqueId="3203,1000" value="85" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32032001" target="class" targetUserClass="priest,elementalist" value="1" strictly="true" turn="on" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="npcHp" uniqueId="3203,1000" value="30" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32032002" target="class" targetUserClass="priest,elementalist" value="1" strictly="true" turn="on" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="npcHp" uniqueId="3203,1000" value="30" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32032003" target="class" targetUserClass="priest,elementalist" value="1" strictly="true" turn="on" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9033" name="@dungeon:9033" startPos="-100012,173299,711" exitContinentId="7004" exitPos="90700.2422,74148.3516,2502.1367"> 
+  <Condition type="solo" value="1" />
+  <Condition type="levelOver" value="65" />
+  	<Condition type="maxMemberCount" value="1" />
+  <ClearCondition huntingZoneId="433" templateId="81101" amount="1" killCount="1" />
+  	<Retry retryId="3" />
+	 <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="433,81108" id="1" pos="-97975.5625,175782.8438,470.8390" next="none" /> <!-- 첫 문 (81108 잡아야 열리는 문) -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>  
+<!-- 던전 입장시 사라지는 버프 -->
+   <EventGroup type="enterTerritory" uniqueId="433,43300003">				
+		<Event>
+			<EventTaskGroup>
+		 <EventTask type="abnormality" abnormalityId="43100018" target="player" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>    
+   <!-- 던전 클리어 시 타이머 종료 이벤트 -->  
+  <EventGroup type="npcHp" uniqueId="433,81101" value="0">
+    <Event>
+      <EventTaskGroup>
+	  	  	  	 <EventTask type="guideOff" id="4" next="none" />
+	  <EventTask type="timer" action="stop" direction="forward" name="dwTimer"  timerUiOff="false" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+   <!-- 공속 관련 과제 설정 -->
+    <EventGroup type="flag" name="mobBuff5" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200013" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200013" target="npc" targetNpcId="433,81102" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+    <EventGroup type="flag" name="mobBuff10" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200014" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200014" target="npc" targetNpcId="433,81102" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+    <EventGroup type="flag" name="mobBuff20" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200015" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200015" target="npc" targetNpcId="433,81102" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+    <EventGroup type="flag" name="mobBuff40" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200016" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200016" target="npc" targetNpcId="433,81102" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+    <EventGroup type="flag" name="mobBuff80" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200017" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200017" target="npc" targetNpcId="433,81102" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+  <!-- 타임어택 과제 설정 -->   
+       <EventGroup type="flag" name="dwTimer,입장" repeat="false">
+    <Event>
+      <EventTaskGroup>
+	  <EventTask type="timer" action="start" direction="forward" name="dwTimer" value="0" timerUiOff="false" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+   <!-- 클래스 별 스폰 몬스터  HP 다르게 설정-->
+ <EventGroup triggerUserClass="lancer" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+			<!-- 보스 ID 81101,81102-->
+        <EventTask type="abnormality" abnormalityId="43300007" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300007" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+						  <EventTask type="flag" name="입장" value="1" next="none" />   
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>    
+	<!--검투사 = 비검사와 동일 벨런스 -->
+	<EventGroup triggerUserClass="warrior" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300016" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43300016" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+						  <EventTask type="flag" name="입장" value="1" next="none" />   
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   	
+	<EventGroup triggerUserClass="berserker" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300014" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43300014" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+						  <EventTask type="flag" name="입장" value="1" next="none" />  
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+		<!-- 무사 = 비검사와 동일 벨런스 -->
+  <EventGroup triggerUserClass="slayer" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300011" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43300011" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+						  <EventTask type="flag" name="입장" value="1" next="none" />  
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+			<!-- 무사 = 비검사와 동일 벨런스 -->
+  <EventGroup triggerUserClass="soulless" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300009" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43300009" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+						  <EventTask type="flag" name="입장" value="1" next="none" />   
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="archer" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300008" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43300008" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100009" target="player" next="none" />
+		  				  <EventTask type="flag" name="입장" value="1" next="none" />  
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="sorcerer" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300010" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43300010" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100008" target="player" next="none" />
+		  				  <EventTask type="flag" name="입장" value="1" next="none" />  
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300013" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43300013" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+		 <EventTask type="abnormality" abnormalityId="43100010" target="player" next="none" />
+		 				  <EventTask type="flag" name="입장" value="1" next="none" />   
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300012" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43300012" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100010" target="player" next="none" />
+		  				  <EventTask type="flag" name="입장" value="1" next="none" />    
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="engineer" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="43300005" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300005" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+						  <EventTask type="flag" name="입장" value="1" next="none" />   
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="fighter" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300015" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43300015" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+						  <EventTask type="flag" name="입장" value="1" next="none" />    
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+ <EventGroup triggerUserClass="assassin" type="enterTerritory" uniqueId="433,43300001">				
+		<Event>
+			<EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="43300017" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300017" target="npc" targetNpcId="433,81102" next="none" />
+        <EventTask type="abnormality" abnormalityId="43300006" target="npc" targetNpcId="433,81102" next="none" />
+						  <EventTask type="flag" name="입장" value="1" next="none" />   
+						  <EventTask type="spawn" huntingZoneId="433" territoryId="81100042,81100040,81100041" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+	<!-- 1번 전투 구간 입장 문 열기 -->
+	<!-- <EventGroup type="eliminate" territoryId="81100041" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="433" territoryId="81100086" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	-->
+<!-- 입장 후 쫄 구간 -->
+  <EventGroup type="flag" name="1번 전멸,2번 전멸,3번 전멸" repeat="false">			
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="433" territoryId="81100086" next="none" /> <!-- 문 열기 --> 
+	   <EventTask type="guideOff" id="1" next="none" />
+	   <EventTask type="guideOn" nameId="433,81102" id="2" pos="-98036.7578,179330.2344,247.4531" next="none" /> <!-- 그렉돈 -->
+		</EventTaskGroup>
+    </Event>  
+  </EventGroup>   
+
+   <EventGroup type="eliminate" territoryId="81100042" repeat="false">			
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="1번 전멸" value="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	 
+
+   <EventGroup type="eliminate" territoryId="81100041" repeat="false">			
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="2번 전멸" value="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+   <EventGroup type="eliminate" territoryId="81100040" repeat="false">			
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="3번 전멸" value="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+<!-- 그렉돈 전투 시작 시 문 닫기 -->
+  <EventGroup type="none" id="16" name="인펙션 전투 돌입 후 문 닫기" repeat="true"> <!-- 입장용 연출 -->
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+   	 <EventTask type="message" string="@dungeon:9811024" style="combat" next="time" nextValue="10" />
+	  	<EventTask type="spawn" huntingZoneId="433" territoryId="81100080" next="none" />
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>  
+
+  <!-- HP 70% ~ 60%까지 트윈 어보미 소환 -->
+	<!-- <EventGroup type="none" id="28" name="스턴으로 못 끊으면 hp 회복 부하 소환" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="433,81102" patternListId="4" next="none" />
+		<EventTask type="message" string="@dungeon:9811035" style="combat" next="time" nextValue="3" />
+		<EventTask type="message" string="@dungeon:9811036" style="combat" next="time" nextValue="15" />
+		<EventTask type="changePatternList" targetNpcId="433,81102" patternListId="1" next="none" /> -->
+		<!-- <EventTask type="changePatternList" targetNpcId="433,81116" patternListId="4" next="none" />
+		<EventTask type="changePatternList" targetNpcId="433,81117" patternListId="4" next="time" nextValue="50" />	
+		<EventTask type="changePatternList" targetNpcId="433,81116" patternListId="1" next="time" nextValue="2" />	
+		<EventTask type="changePatternList" targetNpcId="433,81117" patternListId="1" next="none" /> -->
+		<!-- </EventTaskGroup>
+    </Event>
+    </EventGroup> -->
+<!-- 공격력 상승 하는 쫄 데모크론 스폰 시키는 패턴 (그렉돈 -->
+	<EventGroup type="none" id="29" name="전투 공간 가운데에서 썩은 소환을 외치다" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="433,81102" patternListId="5" next="none" />
+	    <EventTask type="spawn" huntingZoneId="433" territoryId="71100017" next="none" /> <!-- 공격력 상승하는 데모크론 스폰 --> 
+		<EventTask type="message" string="@dungeon:9811035" style="combat" next="time" nextValue="3" />
+		<EventTask type="message" string="@dungeon:9811036" style="combat" next="time" nextValue="7" />
+		<!-- <EventTask type="spawn" huntingZoneId="433" territoryId="71100021" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="433" territoryId="71100022" next="time" nextValue="20" />
+		<EventTask type="changePatternList" targetNpcId="433,81102" patternListId="1" next="none" /> -->
+		<!-- <EventTask type="abnormality" abnormalityId="77703443" target="npc" targetNpcId="433,81102" next="none" /> -->
+		<!-- <EventTask type="spawn" huntingZoneId="433" territoryId="71100009" next="none" />
+		<EventTask type="spawn" huntingZoneId="433" territoryId="71100010" next="none" />
+		<EventTask type="spawn" huntingZoneId="433" territoryId="71100011" next="none" />
+		<EventTask type="spawn" huntingZoneId="433" territoryId="71100012" next="none" />
+		<EventTask type="spawn" huntingZoneId="433" territoryId="71100013" next="none" />
+		<EventTask type="spawn" huntingZoneId="433" territoryId="71100014" next="none" />
+		<EventTask type="changePatternList" targetNpcId="433,81116" patternListId="4" next="none" />
+		<EventTask type="changePatternList" targetNpcId="433,81117" patternListId="4" next="time" nextValue="50" />	
+		<EventTask type="changePatternList" targetNpcId="433,81116" patternListId="1" next="time" nextValue="2" />	
+		<EventTask type="changePatternList" targetNpcId="433,81117" patternListId="1" next="none" /> -->
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+	<!-- 썩은 어보미 전멸 시, 그렉톤 패턴 원상복귀 -->
+   <EventGroup type="eliminate" territoryId="71100017" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="433,81102" patternListId="1" next="none" />
+        <!-- <EventTask type="abnormality" abnormalityId="77703443" target="npc" targetNpcId="433,81102" turn="off" next="none" /> -->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+	
+   <!-- HP 10%에 투명 NPC의 텐션을 변경 하여 패턴 시작 -->
+	<EventGroup type="none" id="18" name=" HP 15%맵 가운데로 이동하여 부하들 소환" repeat="true"> <!-- 그렉톤이 '걸어다니는 시체'를 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703428" target="player" next="none" />
+		<EventTask type="spawn" huntingZoneId="433" territoryId="71100007" next="none" />
+		<!-- <EventTask type="changePatternList" targetNpcId="433,81116" patternListId="5" next="none" />
+		<EventTask type="changePatternList" targetNpcId="433,81123" patternListId="3" next="time" nextValue="30" />		
+		<EventTask type="changePatternList" targetNpcId="433,81123" patternListId="4" next="time" nextValue="15" />		
+		<EventTask type="changePatternList" targetNpcId="433,81123" patternListId="5" next="time" nextValue="15" />
+		<EventTask type="changePatternList" targetNpcId="433,81123" patternListId="6" next="none" /> -->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>  	
+  
+   <!-- 1번 전투 구간 어보미네이션인펙션 리셋 or 사망 시 모든 테리토리 디스폰 -->
+  <EventGroup type="npcReset" uniqueId="433,81102" repeat="true"> <!-- 어보미네이션 리셋 시 테리토리 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+	    <EventTask type="despawn" huntingZoneId="433" territoryId="71100017" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100015" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="81100080" next="none" />		
+		<EventTask type="abnormality" abnormalityId="77703428" target="player" turn="off" next="time" nextValue="5" />	
+		<EventTask type="spawn" huntingZoneId="433" territoryId="71100015" next="none" />	
+		<EventTask type="abnormality" abnormalityId="77703444" target="player" turn="off" next="time" nextValue="10" />	
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" uniqueId="433,81102" value="0" repeat="true"> <!-- 인펙션 사망 시 테리토리 디스폰 -->
+    <Event>
+	  <EventTaskGroup>
+	  	 <EventTask type="guideOff" id="2" next="none" />
+	   <EventTask type="guideOn" nameId="433,81118" id="3" pos="-99946.8438,184820.9688,348.5952" next="none" /> <!-- 크라카톡스 -->
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100017" next="none" />
+		<EventTask type="abnormality" abnormalityId="77703444" target="player" turn="off" next="none" />
+	   <EventTask type="abnormality" abnormalityId="77703428" target="player" turn="off" next="none"/>
+		<EventTask type="message" string="@dungeon:9811021" style="combat" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100015" next="none" />	
+        <EventTask type="despawn" huntingZoneId="433" territoryId="81100080" next="none" />
+        <EventTask type="despawn" huntingZoneId="433" territoryId="81100079" next="time" nextValue="5"/>
+		<EventTask type="spawn" huntingZoneId="433" territoryId="81100005" next="none" /> 
+	  	<EventTask type="despawn" huntingZoneId="433" territoryId="81100001" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>  
+ 
+	
+   <!-- 2번 전투 구간 -->
+	<EventGroup type="none" id="45" name="입구 쪽 트윈 어보미 소환" repeat="true">  
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="433,81124" patternListId="2" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 어보미네이션 퓨전 HP 대역대에 따라 썩은 어보미 소환 -->
+   <EventGroup type="npcHp" uniqueId="433,81118" value="50" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="433" territoryId="81100051" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>  
+  <!-- 2번 전투 구간 시작 -->
+	<!-- 2번 전투 구간 WAVE 도중 리셋 시, 퓨전에게 걸려 있는 이상상태 해제 -->
+  <EventGroup type="npcReset" uniqueId="433,81108" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="433,81118" next="none" />
+		<EventTask type="changePatternList" targetNpcId="433,81118" patternListId="2" next="none" />	
+		<EventTask type="despawn" huntingZoneId="433" territoryId="81100051" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" uniqueId="433,81109" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="433,81118" next="none" />
+		<EventTask type="changePatternList" targetNpcId="433,81118" patternListId="2" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="81100051" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcReset" uniqueId="433,81125" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="433,81118" next="none" />
+		<EventTask type="changePatternList" targetNpcId="433,81118" patternListId="2" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" uniqueId="433,81118" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="433,81118" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="81100005" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100019" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100020" next="none" />		
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100021" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="81100004" next="time" nextValue="3" />
+		<EventTask type="spawn" huntingZoneId="433" territoryId="81100005" next="none" />
+		<EventTask type="spawn" huntingZoneId="433" territoryId="81100004" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+   <EventGroup type="npcHp" uniqueId="433,81118" value="0" repeat="true"> <!-- 어보미네이션 퓨전 HP 20%에서 썩은 어보미 소환 -->
+    <Event>
+      <EventTaskGroup>
+	  	  	 <EventTask type="guideOff" id="3" next="none" />
+	   <EventTask type="guideOn" nameId="433,81101" id="4" pos="-101296.9375,186299.6875,352.1680" next="none" /> <!-- 퀴르갈 -->
+		<EventTask type="despawn" huntingZoneId="433" territoryId="81100004" next="none" />
+	    <EventTask type="despawn" huntingZoneId="433" territoryId="81100051" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="81100082" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100019" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100020" next="none" />		
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100021" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+   <!-- 3번 전투 구간 네임드 HP 99%에 문 소환 -->
+  <EventGroup type="npcHp" uniqueId="433,81101" value="99" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+	  <EventTask type="message" string="@dungeon:9811024" style="combat" next="time" nextValue="10"/>
+	  <EventTask type="spawn" huntingZoneId="433" territoryId="81100052" next="none" />
+	  <EventTask type="spawn" huntingZoneId="433" territoryId="81100077" next="none" />
+	  <EventTask type="spawn" huntingZoneId="433" territoryId="81100081" next="none" />
+ </EventTaskGroup>
+    </Event>
+    </EventGroup>  	
+	
+   <!-- 3번 전투 구간 촉수가 사용하는 네임드 HP 회복 --> 
+  <EventGroup type="none" id="1" name="소환되면서 네임드에게 HP 회복" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703429" target="npc" targetNpcId="433,81101" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703430" target="npc" targetNpcId="433,81101" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+   <!-- 3번 전투 구간 떨어지는 돌 스폰되고 5초 후에 공격 -->
+  <EventGroup type="none" id="8" name="촉수 소환 시 시스템 메시지" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9811023" style="combat" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+   <!-- 3번 전투 구간 어보미네이션_촉수 소환할 때 투명 NPC가 네임드에게 HP 회복 이상상태 준 후 자살 -->
+  <EventGroup type="none" id="9" name="본마스터 HP 회복시켜준 후 자살" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9811023" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="777029" target="npc" targetNpcId="433,81130" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+   <!-- 본마스터 사망 시 테리토리 디스폰 -->
+  <EventGroup type="npcHp" uniqueId="433,81101" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="81100052" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="81100005" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="81100044" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="81100077" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="81100081" next="none" />
+      <EventTask type="abnormality" abnormalityId="77703412" target="player" turn="off" next="none"/>
+	  <EventTask type="spawn" huntingZoneId="433" territoryId="81100085" next="none" />
+      </EventTaskGroup> 
+    </Event>
+    </EventGroup>  		
+
+  <EventGroup type="npcReset" uniqueId="433,81101" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="81100052" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="81100077" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="81100081" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="71100006" next="none" />	  
+ 	  <EventTask type="despawn" huntingZoneId="433" territoryId="71100018" next="none" />	  
+      <EventTask type="abnormality" abnormalityId="77703412" target="player" turn="off" next="time" nextValue="3" />
+	  <EventTask type="spawn" huntingZoneId="433" territoryId="81100077" next="none" /> 
+	  <EventTask type="spawn" huntingZoneId="433" territoryId="71100006" next="none" />
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup> 	
+
+  <EventGroup type="none" id="3" name="자신에게 보호막 이상상태 부여" repeat="true">	<!-- 3번 전투 구간 네임드 보호막 버프 부여 -->
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300003" target="npc" targetNpcId="433,81101" next="time" nextValue="3" />
+		<EventTask type="message" string="@dungeon:9811030" style="combat" next="none" />
+		<EventTask type="changePatternList" targetNpcId="433,81101" patternListId="3" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>  	
+
+   <!-- 3번 전투 구간 보호막 사용 & 촉수 소환 -->	  
+  <EventGroup type="none" id="20" name="보호막 사용 시 촉수 소환 1개" repeat="true"> <!-- 랜덤한 위치에 촉수 1개 소환 -->
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="777032" target="npc" targetNpcId="433,81101" turn="off" next="none" />
+	  <EventTask type="spawn" huntingZoneId="433" territoryId="71100001" next="none" />
+		<EventTask type="changePatternList" targetNpcId="433,81101" patternListId="3" next="none" />
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+	<EventGroup type="eliminate" territoryId="71100001" repeat="true"> <!-- 촉수 1개 파괴 시 플레이어에게 이상상태 부여 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703435" target="player" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+	
+  <EventGroup type="none" id="23" name="PC 즉사" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="777029" target="player" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100001" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100002" next="none" />
+		<EventTask type="despawn" huntingZoneId="433" territoryId="71100003" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703433" target="npc" targetNpcId="433,81101" turn="off" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+  <EventGroup type="none" id="24" name="Dot 생성하고 자신에게 이상상태 부여" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703439" target="npc" targetNpcId="433,81101" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+	<!-- 네임드 hp 90% 부터 2초 간격으로 PC에게 해제 패턴 이상상태 부여 -->
+   <EventGroup type="npcHp" uniqueId="433,81101" value="90" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="433,81131" patternListId="2" next="none" />
+		<EventTask type="message" string="@dungeon:9811032" style="combat" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+	<!-- HP 많이 안남았을 때, 퀴르갈 방어력 감소 --> 
+	 <EventGroup type="npcHp" uniqueId="433,81101" value="25" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300004" target="npc" targetNpcId="433,81101" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+  <EventGroup type="none" id="25" name="PC에게 Dot 이상상태 부여" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43300001" target="player" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+	<!-- 네임드 hp 20% 부터 자신에게 10초 간격으로 공격력 증가 이상상태 부여 -->
+   <EventGroup type="npcHp" uniqueId="433,81101" value="50" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="433,81131" patternListId="3" next="none" />
+		<EventTask type="message" string="@dungeon:9811032" style="combat" next="time" nextValue="2" />
+		<EventTask type="message" string="@dungeon:9811032" style="combat" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+  <EventGroup type="none" id="26" name="PC에게 Dot 이상상태 부여" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703437" target="npc" targetNpcId="433,81101" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+	<!-- 네임드 hp 55% 부터 주기적으로 떨어트리는 돌을 소환하는 투명 NPC 소환 -->
+  <EventGroup type="none" id="27" name="돌떨어트리는패턴으로변경형" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="433,81101" patternListId="4" next="none" />
+		<EventTask type="message" string="@dungeon:9811037" style="combat" next="time" nextValue="120" />
+		<!-- <EventTask type="message" string="@dungeon:9811031" style="combat" next="time" nextValue="120" /> -->
+		<!-- <EventTask type="changePatternList" targetNpcId="433,81130" patternListId="2" next="time" nextValue="35" /> -->
+		<EventTask type="changePatternList" targetNpcId="433,81101" patternListId="1" next="none" />
+		<!-- <EventTask type="changePatternList" targetNpcId="433,81130" patternListId="1" next="none" /> -->
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+  <EventGroup type="none" id="34" name="촉수 감옥 소환 후 네임드 패턴 변경" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="433,81101" patternListId="3" next="time" nextValue="20" />
+		<EventTask type="changePatternList" targetNpcId="433,81101" patternListId="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+  <EventGroup type="none" id="35" name="촉수 감옥 파괴 시 네임드 넉백하고 그 이후에 다시 패턴 변경" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="433,81101" patternListId="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+  <EventGroup type="none" id="36" name="보호막 파괴 시 Dot 생성용 투명 npc 처치" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="killNpc" targetNpcId="433,81141" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="71100001" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="71100002" next="none" />
+	  <EventTask type="despawn" huntingZoneId="433" territoryId="71100003" next="none" />
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+  <EventGroup type="none" id="44" name="PC 즉사" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="777029" target="player" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+	</Dungeon>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9023" name="@dungeon:9023" startPos="68128,-54627,-1921" startDir="150" exitContinentId="7004" exitPos="71636, 66494, 354" destroyWaitMin="0">
+  <RestoreTargetQuest id="903" forceRestore="true"/>
+  <!-- 탐욕의 황금 미궁 미션 특수공간 -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="30" />
+  <Condition type="progressQuest" value="903" taskId="11" />
+  <Condition type="completeQuest" value="903" />
+  <Condition type="maxMemberCount" value="5" />
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="423" territoryId="42300001" next="none" />
+		<EventTask type="spawn" huntingZoneId="423" territoryId="42300004" next="none" />
+		<EventTask type="spawn" huntingZoneId="423" territoryId="42300005" next="none" />
+		<EventTask type="spawn" huntingZoneId="423" territoryId="42300006" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="903" taskId="12">
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="423" territoryId="42300001" next="none" />
+		<EventTask type="despawn" huntingZoneId="423" territoryId="42300004" next="none" />
+		<EventTask type="despawn" huntingZoneId="423" territoryId="42300005" next="none" />
+		<EventTask type="despawn" huntingZoneId="423" territoryId="42300006" next="none" />
+		<EventTask type="empty" next="time" nextValue="2" />
+		<EventTask type="message" string="@dungeon:9023001" style="combat" next="none" />
+		<EventTask type="empty" next="time" nextValue="2" />
+		<EventTask type="spawn" huntingZoneId="423" territoryId="42300002" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="903" taskId="13">
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="423" territoryId="42300001" next="none" />
+		<EventTask type="despawn" huntingZoneId="423" territoryId="42300004" next="none" />
+		<EventTask type="despawn" huntingZoneId="423" territoryId="42300005" next="none" />
+		<EventTask type="despawn" huntingZoneId="423" territoryId="42300006" next="none" />
+		<EventTask type="despawn" huntingZoneId="423" territoryId="42300002" next="none" />
+		<EventTask type="spawn" huntingZoneId="423" territoryId="42300008" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+</Dungeon>

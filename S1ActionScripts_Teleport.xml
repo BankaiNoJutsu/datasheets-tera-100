@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- type은 사용하지 않습니다. 그냥 구별용임 -->
+<S1ActionScripts type="Teleport">
+
+  <!-- default teleport 연출: 40000번 -->
+  <Script id="40000" playingTime="4200">
+    <InitState unmount="true"/>
+	<Action time="0" type="actionScript" shapeId="600920" scriptId="40001"/>
+	<Action time="0" type="actionScript" shapeId="600922" scriptId="40001"/>
+	<Action time="300" type="effect" effectId="80015"/>
+	<Action time="4200" type="visible" visibility="false"/>
+  </Script>
+
+  <!-- 차원의 마법석 연출 -->
+  <Script id="40001" playingTime="0" enableInput="true">
+	<Action time="0" type="removeEffect" effectId="80013"/>
+	<Action time="0" type="effect" effectId="80014"/>
+	<Action time="0" type="animation" animName="OnStart" rate="1.0" duration="0" blendInTime="0.2"/>
+	<Action time="2700" type="animation" animName="On" rate="1.0" duration="0" blendInTime="0.2"/>
+	<Action time="4733" type="animation" animName="OffStart" rate="1.0" duration="0" blendInTime="0.0"/>
+	<Action time="2700" type="effect" effectId="80013"/>
+	<Action time="2700" type="effect" effectId="80016"/>
+	<Action time="5200" type="removeEffect" effectId="80013"/>
+  </Script>
+
+  <!-- 포탈 생성, 걸어가면서 포탈 안으로 진입 2-->
+  <Script id="40002" playingTime="6000">
+    <InitState unmount="true"/>
+    <Action time="500" type="defaultAnim" waitAnim="" moveAnim="walk">
+      <Action type="rotate" dir="0" duration="300">
+        <Action type="effect" effectId="50299"/>
+        <Action time="500" type="relativemove" pos="1000,0,0" speed="50"/>
+        <Action time="1100" type="visible" visibility="false">
+          <Action type="defaultAnim" waitAnim="" moveAnim=""/>
+          <Action type="relativemove" pos="0,0,0" speed="0"/>
+        </Action>
+      </Action>
+    </Action>
+  </Script>
+
+  <Script id="40003" playingTime="6000">
+    <Action type="defaultAnim" waitAnim="fall" moveAnim="fall">
+		<Action time="0" type="cameraFocus" huntingZoneId="756" templateId="311" on="true"/>
+		<Action time="0" type="translationZ" from="0.0" to="280.0" duration="5500" power="2.0"/>
+        <Action time="0" type="move" pos="-131675.906250,115342.921875,29998.832031" speed="40"/>
+		<Action time="5400" type="visible" visibility="false">
+          <Action time="0" type="translationZ" from="0.0" to="0.0" duration="100" power="2.0"/>
+		  <Action time="0" type="moveToInitPos" speed="100"/>
+		  <Action time="0" type="removeeffect" effectId="905603"/>
+		  <Action type="defaultAnim" waitAnim="" moveAnim=""/>
+        </Action>
+      </Action>
+  </Script>
+  <Script id="40004" playingTime="6000">
+    <Action type="defaultAnim" waitAnim="fall" moveAnim="fall">
+		<Action time="0" type="cameraFocus" huntingZoneId="456" templateId="311" on="true"/>
+		<Action time="0" type="translationZ" from="0.0" to="280.0" duration="5500" power="2.0"/>
+        <Action time="0" type="move" pos="-131675.906250,115342.921875,29998.832031" speed="40"/>
+		<Action time="5400" type="visible" visibility="false">
+          <Action time="0" type="translationZ" from="0.0" to="0.0" duration="100" power="2.0"/>
+		  <Action time="0" type="moveToInitPos" speed="100"/>
+		  <Action time="0" type="removeeffect" effectId="905603"/>
+		  <Action type="defaultAnim" waitAnim="" moveAnim=""/>
+        </Action>
+      </Action>
+  </Script>
+  <!-- 각성 스토리텔링 용족 포탈 default -->   
+    <Script id="40005" playingTime="5000">
+    <InitState unmount="true"/>
+	<Action type="actionScript" shapeId="652990" scriptId="40006"/>	
+	<Action time="0" type="effect" effectId="80015"/>
+	<Action time="4200" type="visible" visibility="false"/>	
+  </Script>
+  <!-- 각성 스토리텔링 용족 포탈 연출 -->   
+   <Script id="40006" playingTime="0" enableInput="true">		
+	<Action time="100" type="removeEffect" effectId="507006"/> 
+	<Action time="0" type="animation" animName="Open" rate="1.0" duration="0" blendInTime="0.2"/>
+	<Action time="3264" type="effect" effectId="507005"/>	
+	<Action time="4000" type="defaultAnim" waitAnim="OpenWait" moveAnim="OpenWait"/>
+	<Action time="4000" type="animation" animName="OpenWait" rate="0.2" duration="0" blendInTime="0.2"/>
+	<Action time="4000" type="effect" effectId="507004"/>	
+	<Action time="8000" type="removeEffect" effectId="507004"/>
+	<Action time="8033" type="animation" animName="Close" rate="1.0" duration="0" blendInTime="0.0"/>
+	<Action time="8033" type="effect" effectId="507006"/>
+	<Action time="8033" type="defaultAnim" waitAnim="Wait" moveAnim="Wait" />	
+  </Script>
+    <!-- 각성 스토리텔링 용족 포탈 동작 보여주기 연출 -->   
+   <Script id="40007" playingTime="0" enableInput="true">		
+	<Action time="100" type="removeEffect" effectId="507006"/> 
+	<Action time="0" type="animation" animName="Open" rate="1.0" duration="0" blendInTime="0.2"/>
+	<Action time="3264" type="effect" effectId="507005"/>	
+	<Action time="4000" type="defaultAnim" waitAnim="OpenWait" moveAnim="OpenWait"/>
+	<Action time="4000" type="animation" animName="OpenWait" rate="0.2" duration="0" blendInTime="0.2"/>
+	<Action time="4000" type="effect" effectId="507004"/>	
+  </Script>  
+  
+    <!-- 용족 포탈 안으로 진입 2-->
+  <Script id="40008" playingTime="6000">
+    <InitState unmount="true"/>
+    <Action time="500" type="defaultAnim" waitAnim="JumpLoop" moveAnim="JumpLoop">
+      <Action type="rotate" dir="0" duration="300">
+        <Action time="500" type="relativemove" pos="0,0,100" speed="50"/>
+      </Action>
+    </Action>
+  </Script>
+  
+  <!-- 포탈 생성, 걸어가면서 포탈 안으로 진입 2-->
+  <Script id="40009" playingTime="10000" isOnlyPlayerTarget="true">
+    <InitState unmount="true"/>
+        <Action time="500" type="postProcess" postprocessSet="7" on="true" >
+		<Action time="600" type="animation" animName="bReactionStart3" rate="0.06" blendInTime="0.2"/>
+		<Action time="700" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="2.0f" to="3.0f" duration="3500" />
+		<Action time="800" type="systemMessage" message="@dungeon:9681002" style="SMS_CHAT_INFO_QUEST" duration="2000"/>
+		<Action time="7800" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="3.0f" to="0.0f" duration="2000" />
+		<Action time="8900" isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+		</Action>
+  </Script>
+</S1ActionScripts>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- 
+<GuildQuestconfig>
+dailyLimit : 일일 퀘스트 수행 제한 횟수
+dailyResetHour : 수행 횟수 리셋 시간
+sortData : 길드 임무 소팅 기준을 위한 세팅
+-->
+<GuildQuestconfig dailyQuestResetHour="5" concurrent="15" weeklyRewardResetWeekDay="sunday" weeklyRewardResetHour="24" >
+	<SortData>
+		<SortTarget desc="발데리온 증표" targetTemplateId="20000026" name="@GuildQuest:1000000" ascendingOrder="true" />
+		<SortTarget desc="경험치" targetTemplateId="20000001" name="@GuildQuest:1000001" ascendingOrder="true" />
+		<SortTarget desc="획득 자금" targetTemplateId="20000000" name="@GuildQuest:1000002" ascendingOrder="true" />	
+	</SortData>
+	
+	<!--임무 제한 단위를 주간으로 변경 : 노드 이름 WeeklyLimit -->
+	<WeeklyLimit guildSize="0" balderionCoin="900"/> 
+	<WeeklyLimit guildSize="1" balderionCoin="1300"/> 
+	<WeeklyLimit guildSize="2" balderionCoin="1700"/> 
+
+	<ContributionPointconfig weeklyLimit="1000" resetDay="sunday" resetHour="24" />
+	
+	<!--소형 길드임무 첫번째 분기 보상-->
+	<WeeklyGuildQuestReward guildSize="0" rewardStep="0" needBalderionCoin="180">
+		<Item templateId="571" name="소형 길드 보상 상자 I" count="1" />
+	</WeeklyGuildQuestReward>
+	<!--소형 길드임무 두번째 분기 보상-->
+	<WeeklyGuildQuestReward guildSize="0" rewardStep="1" needBalderionCoin="540">
+		<Item templateId="572" name="소형 길드 보상 상자 II" count="1" />
+	</WeeklyGuildQuestReward>
+	<!--소형 길드임무 세번째 분기 보상-->	
+	<WeeklyGuildQuestReward guildSize="0" rewardStep="2" needBalderionCoin="900">
+		<Item templateId="573" name="소형 길드 보상 상자 III" count="1" />
+	</WeeklyGuildQuestReward>
+	
+	<!--중형 길드임무 첫번째 분기 보상-->
+	<WeeklyGuildQuestReward guildSize="1" rewardStep="0" needBalderionCoin="260">
+			<Item templateId="574" name="중형 길드 보상 상자 I" count="1" />
+	</WeeklyGuildQuestReward>
+	<WeeklyGuildQuestReward guildSize="1" rewardStep="1" needBalderionCoin="780">
+			<Item templateId="575" name="중형 길드 보상 상자 II" count="1" />
+	</WeeklyGuildQuestReward>
+	<!--중형 길드임무 세번째 분기 보상-->	
+	<WeeklyGuildQuestReward guildSize="1" rewardStep="2" needBalderionCoin="1300">
+			<Item templateId="576" name="중형 길드 보상 상자 III" count="1" />
+	</WeeklyGuildQuestReward>
+	
+	<!--대형 길드임무 첫번째 분기 보상-->
+	<WeeklyGuildQuestReward guildSize="2" rewardStep="0" needBalderionCoin="340">
+			<Item templateId="577" name="대형 길드 보상 상자 I" count="1" />
+	</WeeklyGuildQuestReward>
+	<!--대형 길드임무 두번째 분기 보상-->
+	<WeeklyGuildQuestReward guildSize="2" rewardStep="1" needBalderionCoin="1020">
+			<Item templateId="578" name="대형 길드 보상 상자 II" count="1" />
+	</WeeklyGuildQuestReward>
+	<!--대형 길드임무 세번째 분기 보상-->	
+	<WeeklyGuildQuestReward guildSize="2" rewardStep="2" needBalderionCoin="1700">
+			<Item templateId="579" name="대형 길드 보상 상자 III" count="1" />
+	</WeeklyGuildQuestReward>
+	<!-- 길드 이벤트 랜덤 퀘스트 목록 -->
+	<!-- day요일에 startHour ~ (startHour + randHour) 사이에 prob의 확률로 이벤트 퀘스트가 하루에 한번 발생한다. -->
+	<ShowList>
+		<!--일반 임무-->	
+		<Quest id="10000" day="all" startHour="0:00" addRandHour="0:00" prob="1.0" /> <!--전장-->
+		<Quest id="10001" day="all" startHour="0:00" addRandHour="0:00" prob="1.0" /> <!--채집-->
+		<Quest id="10004" day="all" startHour="0:00" addRandHour="0:00" prob="1.0" /> <!--낚시-->
+		<Quest id="10002" day="all" startHour="0:00" addRandHour="0:00" prob="1.0" /> <!--필드-->
+		<Quest id="10003" day="all" startHour="0:00" addRandHour="0:00" prob="1.0" /> <!--던전-->
+		
+		<!--긴급 임무-->
+		<Quest id="10005" day="tuesday" startHour="18:00" addRandHour="4:00" prob="1.0" /> <!--아난샤-->
+		<Quest id="10006" day="wednesday" startHour="18:00" addRandHour="4:00" prob="1.0" /> <!--카라고스-->
+		<Quest id="10007" day="monday" startHour="12:00" addRandHour="10:00" prob="1.0" /> <!--사브라니악-->
+		<Quest id="10008" day="friday" startHour="18:00" addRandHour="4:00" prob="1.0" /> <!--오르탄-->
+		<Quest id="10009" day="saturday" startHour="18:00" addRandHour="4:00" prob="1.0" /> <!--하자르-->
+		<Quest id="10010" day="sunday" startHour="18:00" addRandHour="4:00" prob="1.0" /> <!--캘로스-->
+				
+	</ShowList>
+</GuildQuestconfig>

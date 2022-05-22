@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9770" name="@dungeon:9770" startPos="-99659,2470,6470" exitContinentId="7002" exitPos="-7228,37701,4694">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="65" />
+	<ClearCondition huntingZoneId="770" templateId="3000" amount="1" killCount="1"/>
+	<Retry retryId="2" />
+	
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="770,911" id="1" pos="-99648.28906250,5316.64648438,6464.13867188" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--1네임드-->
+	<EventGroup type="npcState" uniqueId="770,1000" id="901" value="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="97000057" target="random" value="2" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="97000058" target="player" exceptTargetAbnormalityKind="7771" next="none" />
+				<EventTask type="message" string="@dungeon:9770013" style="combat" next="time" nextValue="10" />
+				<EventTask type="spawn" huntingZoneId="770" territoryId="97000031" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 	
+		
+	<!--<EventGroup type="npcHp" uniqueId="770,1000" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="97000057" target="aggro" targetNpcId="770,1000" min="1" max="1" next="none" />
+				<EventTask type="abnormality" abnormalityId="97000057" target="aggro" targetNpcId="770,1000" min="3" max="3" next="none" />
+				<EventTask type="abnormality" abnormalityId="97000057" target="aggro" targetNpcId="770,1000" min="5" max="5" next="none" />
+				<EventTask type="abnormality" abnormalityId="97000058" target="aggro" targetNpcId="770,1000" min="2" max="2" next="none" /> 
+				<EventTask type="abnormality" abnormalityId="97000058" target="aggro" targetNpcId="770,1000" min="4" max="4" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+	
+	<EventGroup type="none" id="101" name="1네임드_원근패턴시작" repeat="true"> <!--랜덤 스킬 사용을 위한 메시지 이벤트-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9770011" style="combat" next="none" />
+				<EventTask type="message" string="@dungeon:9770016" style="combat" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="102" name="색깔 스왑" repeat="true"> <!--랜덤 스킬 사용을 위한 더미 이벤트-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="770,1000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="eventState" stateType="EventGroup" id="901" state="stop" next="none" />
+				<!--EventTask type="spawn" huntingZoneId="770" territoryId="97000006" next="none"/-->
+				<EventTask type="abnormality" abnormalityId="97000057" turn="off" target="player" next="none" />
+				<EventTask type="abnormality" abnormalityId="97000058" turn="off" target="player" next="none" />
+				<EventTask type="abnormality" abnormalityId="97000059" turn="off" target="player" next="none" />
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000031" next="none"/>
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="770,1000" value="0" repeat="true"> <!--2네임드 테리토리 소환-->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="eventState" stateType="EventGroup" id="901" state="stop" next="none" />
+		<EventTask type="spawn" huntingZoneId="770" territoryId="97000006" next="none"/>
+		<EventTask type="despawn" huntingZoneId="770" territoryId="97000026" next="none"/>
+		<EventTask type="abnormality" abnormalityId="97000057" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="97000058" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="97000059" turn="off" target="player" next="none" />
+		<EventTask type="despawn" huntingZoneId="770" territoryId="97000031" next="none"/>
+		<EventTask type="guideOff" id="1" next="none" />
+		<EventTask type="guideOn" nameId="770,912" id="2" pos="-99602.64843750,13201.70117188,6537.94970703" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	
+	<!--2네임드-->
+	<EventGroup type="npcState" uniqueId="770,2000" id="902" value="combat" repeat="true"> <!--2네임드 전투 시작 시, 2네임드 이동 마법석 디스폰-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="770" territoryId="97000022" next="none"/>
+		<EventTask type="message" string="@dungeon:9770013" style="combat" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="770" territoryId="97000028" next="none"/>
+		<EventTask type="spawn" huntingZoneId="770" territoryId="97000029" next="none"/>
+      </EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	
+	<EventGroup type="npcState" uniqueId="770,2001" value="combat" repeat="true"> <!--새끼거미 이벤트 게이지 시작-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="eventGage" name="배고픔" action="start" uiStyle="1" uiOn="true" string="@dungeon:9770003" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup> 
+
+	<EventGroup type="npcHp" uniqueId="770,2000" value="95" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killNpc" targetNpcId="770,2003" next="none" />
+		<!--<EventTask type="turnAi" turn="on" huntingZoneId="770" territoryId="97000006" templateId="2004" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="770,2000" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="97000001" turn="off" target="player" next="none" />
+		<EventTask type="eventState" stateType="EventGroup" id="902" state="stop" next="none" />
+		<EventTask type="despawn" huntingZoneId="770" territoryId="97000022" next="none"/>
+		<!--<EventTask type="despawn" huntingZoneId="770" territoryId="97000006" next="none"/>-->
+		<EventTask type="killInTerritory" huntingZoneId="770" territoryId="97000006" target="Npc" next="none" />
+		<EventTask type="killInTerritory" huntingZoneId="770" territoryId="97000006" target="ObjectNpc" next="none" />
+        <EventTask type="spawn" huntingZoneId="770" territoryId="97000024" next="none"/>
+		<EventTask type="spawn" huntingZoneId="770" territoryId="97000007" next="none"/>
+		<EventTask name="배고픔" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" string="@dungeon:9770003" next="none"/>
+		<EventTask type="despawn" huntingZoneId="770" territoryId="97000028" next="none"/>
+		<EventTask type="despawn" huntingZoneId="770" territoryId="97000029" next="none"/>
+		<EventTask type="playMovie" id="3019" next="none" />
+		<EventTask type="guideOff" id="2" next="none" />
+		<EventTask type="guideOn" nameId="770,913" id="3" pos="-99602.94531250,28396.37695313,7987.17626953" next="none" />
+		<EventTask type="guideOn" nameId="770,914" id="4" pos="-99605.03906250,14875.07324219,6760.55371094" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="770,2000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="97000001" turn="off" target="player" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="902" state="stop" next="none" />
+				<EventTask type="spawn" huntingZoneId="770" territoryId="97000022" next="none"/>
+				<EventTask name="배고픔" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" string="@dungeon:9770003" next="none"/>
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000006" next="time" nextValue="1" />
+				<EventTask type="spawn" huntingZoneId="770" territoryId="97000006" next="none"/>
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000028" next="none"/>
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000029" next="none"/>
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+	<EventGroup type="none" id="200" name="2네임드 새끼거미 타겟_대사" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9770001" style="combat" next="none" />
+				<EventTask type="message" string="@dungeon:9770014" style="combat" next="none" />
+				<EventTask type="eventGage" name="배고픔" action="start" uiStyle="1" uiOn="true" string="@dungeon:9770003" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="201" name="2네임드 새끼거미 타겟" repeat="true"> <!-- 2네임드 새끼거미 타겟 설정 -->
+		<Event>
+			<EventTaskGroup probability="0.33">
+				<EventTask type="abnormality" abnormalityId="97000001" target="aggro" targetNpcId="770,2000" min="2" max="2" next="none" />
+				<EventTask type="changePatternList" targetNpcId="770,2004" patternListId="2" next="none"  />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.33">
+				<EventTask type="abnormality" abnormalityId="97000001" target="aggro" targetNpcId="770,2000" min="3" max="3" next="none" />
+				<EventTask type="changePatternList" targetNpcId="770,2004" patternListId="2" next="none"  />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.34">
+				<EventTask type="abnormality" abnormalityId="97000001" target="aggro" targetNpcId="770,2000" min="4" max="4" next="none" />
+				<EventTask type="changePatternList" targetNpcId="770,2004" patternListId="2" next="none"  />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="202" name="2네임드 새끼거미 배고픔" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="배고픔" type="eventGage" action="plus" value="2" uiStyle="1" uiOn="true" string="@dungeon:9770003" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="203" name="2네임드 새끼거미 배고픔_Off" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--<EventTask type="abnormality" turn="off" abnormalityId="98850006" target="npc" targetNpcId="770,2001" next="none" />-->
+				<EventTask type="abnormality" turn="off" abnormalityId="97000007" target="npc" targetNpcId="770,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="97000001" turn="off" target="player" next="none" />
+				<EventTask type="abnormality" abnormalityId="97000048" turn="on" target="player" next="none" /><!--업적 체크용-->
+				<EventTask type="changePatternList" targetNpcId="770,2004" patternListId="1" next="none"  />
+				<EventTask name="배고픔" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" string="@dungeon:9770003" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="204" name="2네임드 베르베로스 리액션 저항 하락" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9770005" style="combat" next="none" />
+				<EventTask type="message" string="@dungeon:9770017" style="combat" next="none" />
+				<EventTask type="empty" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="97000007" target="npc" targetNpcId="770,2000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="eventGage" eventName="배고픔" comparison="none" value="100" repeat="true"> <!-- 배고픔 100 도달 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9770004,9970015" style="combat" next="none" /> 	 <!-- 알림 메세지 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<!--3네임드-->
+	<EventGroup type="npcState"  uniqueId="770,3000" id="903" value="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000023" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="1901" playTime="5000" next="none" />
+				<EventTask type="message" string="@dungeon:9770013" style="combat" next="time" nextValue="10" />
+				<EventTask type="spawn" huntingZoneId="770" territoryId="97000030" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="npcReset" uniqueId="770,3000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="eventState" stateType="EventGroup" id="903" state="stop" next="none" />
+				<EventTask type="spawn" huntingZoneId="770" territoryId="97000023" next="none"/>
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000018" next="none"/>
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000019" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="1904" playTime="5000" next="none"/>
+				<EventTask type="message" string="@dungeon:9770007" style="combat" next="none" />
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000030" next="none"/>
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="770,3000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="eventState" stateType="EventGroup" id="903" state="stop" next="none" />
+				<EventTask type="abnormality" abnormalityId="97000026" turn="off" target="player" next="none" />
+				<EventTask type="abnormality" abnormalityId="97000032" turn="off" target="player" next="none" />
+				<EventTask type="spawn" huntingZoneId="770" territoryId="97000023,97000025" next="none"/>
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000018" next="none"/>
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000019" next="none"/>
+				<EventTask type="despawn" huntingZoneId="770" territoryId="97000030" next="none"/>
+				<EventTask type="guideOff" id="3" next="none" />
+				<EventTask type="guideOff" id="4" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="1906" playTime="5000" next="none"/>
+				<EventTask type="message" string="@dungeon:9770018" style="combat" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+	<EventGroup type="none" id="414" name="가두기 kill(대형)" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="770,3002" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="415" name="패턴보이스_저주" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundon" soundType="effectSound" soundId="1903" playTime="5000" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="416" name="패턴보이스_축해 패턴" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundon" soundType="effectSound" soundId="1902" playTime="5000" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

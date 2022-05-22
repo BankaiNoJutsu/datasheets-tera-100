@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9911" name="@dungeon:9911" startPos="55610.7031,142707.2969,-10238.1338" startRandomPos="100,100,0" exitContinentId="7022" matchingRoleId="7" exitPos="8838.9316,33920.0781,9229.7734" newbieBonusOff="false">
+  <!-- ## 켈사이크의 둥지 던전 ## -->
+  <Condition type="raid" value="7" />
+  <Condition type="maxMemberCount" value="10" />
+  <Condition type="levelOver" value="60" />
+		<ClearCondition huntingZoneId="911" templateId="1000" amount="1" killCount="1" />
+
+
+  <!-- 가이드 -->
+  <EventGroup type="flag" name="켈사이크전투" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <!-- <EventTask type="abnormality" abnormalityId="91101100" target="player" next="none" /> -->
+        <EventTask type="empty" next="time" nextValue="40" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="메시지반복" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="켈사이크전투" value="0" next="none" />
+        <EventTask type="flag" name="메시지반복" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--
+	<EventGroup type="npchp" uniqueId="911,1000" value="70" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="50002" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npchp" uniqueId="911,1000" value="60" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="50003" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	-->
+  <EventGroup type="npchp" uniqueId="911,1000" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="97511" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="911,1000" value="15" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="97512" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--
+	<EventGroup type="npchp" uniqueId="911,1000" value="15" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="50004" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+ -->
+  <EventGroup id="1" type="npchp" uniqueId="911,1000" value="100" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="켈사이크전투" value="1" next="none" />
+        <EventTask type="flag" name="메시지반복" value="0" next="none" />
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100063" startAggro="1" next="time" nextValue="60" />
+        <!-- 업화 오브젝트 -->
+        <EventTask type="eventState" stateType="EventGroup" id="11" state="play" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="911,1000" value="70" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100066" startAggro="1" next="none" />
+        <!-- 살아있는 폭탄 -->
+        <EventTask type="eventState" stateType="EventGroup" id="21" state="play" next="time" nextValue="60" />
+        <EventTask type="eventState" stateType="EventGroup" id="22" state="play" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="911,1000" value="60" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="911,6005" patternListId="2" next="none" />
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100067" startAggro="1" next="none" />
+        <!-- 추적 범위공격 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="911,1000" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="911,6005" patternListId="3" next="none" />
+        <EventTask type="changePatternList" targetNpcId="911,6006" patternListId="2" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="911,1000" value="40" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="30" />
+        <EventTask type="eventState" stateType="EventGroup" id="31" state="play" next="time" nextValue="30" />
+        <EventTask type="eventState" stateType="EventGroup" id="32" state="play" next="time" nextValue="30" />
+        <EventTask type="eventState" stateType="EventGroup" id="33" state="play" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="911,1000" value="30" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100107" startAggro="1000" next="none" />
+        <!-- 소환용 NPC 1 -->
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100108" startAggro="1000" next="none" />
+        <!-- 소환용 NPC 2 -->
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100109" startAggro="1000" next="none" />
+        <!-- 소환용 NPC 3 -->
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100110" startAggro="1000" next="none" />
+        <!-- 소환용 NPC 4 -->
+        <EventTask type="changePatternList" targetNpcId="911,2100" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2101" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2102" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2103" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="911,1000" value="15" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="91104200" target="npc" targetNpcId="911,1000" next="none" />
+        <!-- 10인 전용 켈사이크의 분노 추가.ajh -->
+        <!-- <EventTask type="abnormality" abnormalityId="97504200" target="npc" targetNpcId="911,1000" next="none" />
+				<EventTask type="abnormality" abnormalityId="97504300" target="player" next="none" /> -->
+        <EventTask type="abnormality" abnormalityId="91104300" target="player" next="none" />
+        <!-- 10인 전용 켈사이크의 도발 추가.ajh -->
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100066" startAggro="1000" next="none" />
+        <!-- 살아있는 폭탄 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100067" startAggro="1000" next="none" />
+        <!-- 추적 범위공격 디스폰-->
+        <EventTask type="message" string="@dungeon:9911108" style="combat" next="time" nextValue="20" />
+        <EventTask type="empty" next="time" nextValue="40" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup id="11" type="flag" name="1페이즈,소환오브젝트추가(1-1)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="911,2100" patternListId="2" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2101" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2102" patternListId="2" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2103" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup id="21" type="flag" name="2페이즈,소환오브젝트추가(2-1)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="911,2100" patternListId="2" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2101" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2102" patternListId="2" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2103" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup id="22" type="flag" name="2페이즈,소환오브젝트추가(2-2)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="911,2100" patternListId="3" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2101" patternListId="3" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2102" patternListId="3" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2103" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup id="31" type="flag" name="3페이즈,소환오브젝트추가(3-1)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="911,2100" patternListId="3" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2101" patternListId="3" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2102" patternListId="3" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2103" patternListId="3" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup id="32" type="flag" name="3페이즈,소환오브젝트추가(3-2)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="911,2100" patternListId="4" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2101" patternListId="4" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2102" patternListId="4" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2103" patternListId="1" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup id="33" type="flag" name="3페이즈,소환오브젝트추가(3-3)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="911,2100" patternListId="4" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2101" patternListId="4" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2102" patternListId="4" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+        <EventTask type="changePatternList" targetNpcId="911,2103" patternListId="4" next="none" />
+        <!-- 소환용 NPC AI 변경 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 켈사이크의 HP가 45%가 되면 버프형디버프 오브젝트 스폰
+	<EventGroup type="npchp" uniqueId="911,1000" value="45" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="911" territoryId="91100065" startAggro="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	-->
+  <!-- 켈사이크의 전투상태가 리셋되면 디버프 오브젝트를 모두 디스폰 -->
+  <EventGroup type="npcReset" uniqueId="911,1000" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="97513" next="none" />
+        <EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="97514" next="none" />
+        <EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="97515" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="11" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="21" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="22" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="31" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="32" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="33" state="stop" next="none" />
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100100" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="911" territoryId="91100107" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100063" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100065" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100060" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100061" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100062" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100100" next="none" />
+        <EventTask type="changePatternList" targetNpcId="911,1000" patternListId="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 작동 스위치가 부서지면 화염브레스 방어벽 스폰한다.-->
+  <EventGroup type="npchp" uniqueId="911,6001" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9911014" style="default" next="time" nextValue="0.1" />
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100032" targetNpcId="911,1000" startAggro="1000000" next="time" nextValue="6" />
+        <!-- 브레스 방어벽 디스폰 시간 수정(3.806 -> 6).ajh -->
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100032" next="none" />
+        <EventTask type="changePatternList" targetNpcId="911,1000" patternListId="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 켈사이크 사망안내  :  켈사이크가 사망하면, 사망 메시지를 내보내고, 배경음악을 바꾼다.  -->
+  <!-- 켈사이크의 HP가 0%가 되면 화염/냉기디버프 오브젝트 디스폰 / 이상상태 해제용 오브젝트 스폰 -->
+  <EventGroup type="npchp" uniqueId="911,1000" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="97504300" turn="off" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="91100200" turn="off" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="91101300" turn="off" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="91101100" turn="off" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="91100400" turn="off" target="player" next="none" />
+        <EventTask type="flag" name="켈사이크전투" value="0" next="none" />
+        <EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="97513" next="none" />
+        <EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="97514" next="none" />
+        <EventTask type="doActionScript" targetNpcId="911,1000" actionScriptId="50006" next="none" />
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100059" targetNpcId="" startAggro="" next="time" nextValue="0.1" />
+        <EventTask type="spawn" huntingZoneId="911" territoryId="91100108" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100063" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100065" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100039" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100066" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100067" next="time" nextValue="0.1" />
+        <EventTask type="message" string="@dungeon:9911011" style="default" next="time" nextValue="5" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100001" next="time" nextValue="20" />
+        <EventTask type="despawn" huntingZoneId="911" territoryId="91100001" next="time" nextValue="0.1" />
+        <!-- <EventTask type= "playMusic" musicId="1" playtime="10" next="time" nextValue="10" />
+				<EventTask type= "offMusic" next="none" /> -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+</Dungeon>

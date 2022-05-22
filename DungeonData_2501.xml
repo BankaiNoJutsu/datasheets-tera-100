@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="2501" name="@dungeon:2501" startPos="-22877,13301,1317" startDir="90" exitContinentId="2500" exitPos="-14595,-14188,982" exitDir="90" destroyWaitMin="0">
+	<Condition type="solo"/>
+	<ClearCondition huntingZoneId="2501" templateId="2000" amount="1" killCount="1"/>
+	<RestoreTargetQuest id="250011" forceRestore="true"/>
+
+	<!--던전 최초 설정-->
+	<EventGroup type="initialize" name="Initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100022" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>		
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010020" next="none" nextValue=""/>								
+				<EventTask type="guideOn" nameId="2501,910" id="1" pos="-22847,13793,1354" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--로크와 만남-->
+	<EventGroup type="enterTerritory" uniqueId="2501,250100023" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="로크만남" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" id="21" name="로크만남" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100022" next="none"/>
+				<EventTask type="doActionScript" targetNpcId="2501,30100" actionScriptId="250130100" next="none"/>
+				<EventTask type="flag" name="로크만남" value="0" next="none"/>
+				<EventTask type="flag" name="로크만남완료" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--로크와 대화-->
+	<EventGroup type="talkNpc" uniqueId="2501,30100">
+		<Event textId="2">
+			<EventTaskGroup>
+				<EventTask type="flag" name="로크대화" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" id="22" name="로크만남완료,로크대화" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="2501,30100" actionScriptId="250130101" next="none"/>
+				<EventTask type="empty" next="time" nextValue="6"/>
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100022" next="none"/>
+				<EventTask type="guideOn" nameId="2501,911" id="1" pos="-22877,14337,1389" next="none"/>
+				<EventTask type="updateQuest" questId="250011" taskId="2" next="none"/>
+				<EventTask type="flag" name="로크대화" value="0" next="none"/>
+				<EventTask type="flag" name="로크만남완료" value="0" next="none"/>
+				<EventTask type="flag" name="시작연출진행" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="enterTerritory" uniqueId="2501,250100016" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="시작연출" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="leaveTerritory" uniqueId="2501,250100016" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="시작연출" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--시작 연출-->
+	<EventGroup type="flag" id="11" name="시작연출,시작연출진행" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010001" next="none" nextValue=""/>				
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100014" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="doActionScript" targetNpcId="2501,20000" actionScriptId="250120001" next="time" nextValue="21"/>
+				<EventTask type="guideOn" nameId="2501,911" id="1" pos="-23194,15234,1413" next="none"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010006" next="none" nextValue=""/>								
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100014" next="none"/>
+				<EventTask type="flag" name="시작연출진행" value="0" next="none"/>
+				<EventTask type="flag" name="샨드라연출완료" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--이동 가이드 및 연출-->
+	<EventGroup type="enterTerritory" uniqueId="2501,250100005" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="암흑툴사시작" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="leaveTerritory" uniqueId="2501,250100005" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="암흑툴사시작" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="샨드라연출완료,암흑툴사시작" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010007" next="none" nextValue=""/>
+				<EventTask type="guideOff" id="1" next="none"/>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="flag" name="암흑툴사연출" value="1" next="none"/>
+				<EventTask type="empty" next="time" nextValue="26"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100001" next="none"/>
+				<EventTask type="empty" next="time" nextValue="5"/>				
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010008" next="none" nextValue=""/>
+				<EventTask type="guideOn" nameId="2501,912" id="2" pos="-23434,16194,1539" next="none"/>
+				<EventTask type="flag" name="샨드라연출완료" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--암흑 툴사 연출-->
+	<EventGroup type="flag" id="12" name="암흑툴사연출" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100003" next="time" nextValue="26"/>
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100003" next="none"/>
+				<EventTask type="message" string="@dungeon:25010009" next="none"/>
+				<EventTask type="flag" name="암흑툴사연출" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--암흑 가디언 처치-->
+	<EventGroup type="eliminate" territoryId="250100001" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투1종료" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="enterTerritory" uniqueId="2501,250100006" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투22" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="leaveTerritory" uniqueId="2501,250100006" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투22" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--화염 툴사 스폰-->
+	<EventGroup type="flag" name="전투21,전투22" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010007" next="none" nextValue=""/>
+				<EventTask type="guideOff" id="3" next="none"/>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="flag" name="화염툴사연출" value="1" next="none"/>
+				<EventTask type="empty" next="time" nextValue="11"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100002" next="time" nextValue="1"/>
+				<EventTask type="empty" next="time" nextValue="5"/>				
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010008" next="none" nextValue=""/>
+				<EventTask type="guideOn" nameId="2501,912" id="4" pos="-26916,18247,1902" next="none"/>
+				<EventTask type="flag" name="전투21" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--화염 툴사 연출-->
+	<EventGroup type="flag" id="13" name="화염툴사연출" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="updateQuest" questId="250011" taskId="6" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100004" next="time" nextValue="11"/>
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100004" next="none" />				
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="message" string="@dungeon:25010010" next="none"/>
+				<EventTask type="flag" name="화염툴사연출" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--화염 가디언 처치-->
+	<EventGroup type="eliminate" territoryId="250100002" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투2종료" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="enterTerritory" uniqueId="2501,250100007" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투32" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="leaveTerritory" uniqueId="2501,250100007" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투32" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--혼합 가디언 스폰-->
+	<EventGroup type="flag" name="전투31,전투32" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010007" next="none" nextValue=""/>
+				<EventTask type="guideOff" id="5" next="none"/>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100008" next="time" nextValue="3"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010008" next="none" nextValue=""/>
+				<EventTask type="guideOn" nameId="2501,912" id="6" pos="-21180,20344,1860" next="none"/>
+				<EventTask type="flag" name="전투31" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--혼한 가디언 처치-->
+	<EventGroup type="eliminate" territoryId="250100008" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투3종료" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="enterTerritory" uniqueId="2501,250100009" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투42" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="leaveTerritory" uniqueId="2501,250100009" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투42" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--봉인된 툴사 지역-->
+	<EventGroup type="flag" name="전투41,전투42" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010007" next="none" nextValue=""/>
+				<EventTask type="guideOff" id="7" next="none"/>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="flag" name="봉인된툴사연출" value="1" next="none"/>
+				<EventTask type="flag" name="전투41" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--봉인된 툴사 연출-->
+	<EventGroup type="flag" id="14" name="봉인된툴사연출" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2501" next="none"> <!--PC 카메라 안 보이는 곳으로 이동-->
+					<Pos value="-25190,20551,1907"/>
+				</EventTask>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100018" next="time" nextValue="6.5"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100010" next="time" nextValue="24"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100019" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100020" next="none"/>
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="doActionScript" targetNpcId="2501,20100" actionScriptId="250120101" next="time" nextValue="7"/>
+				<EventTask type="doActionScript" targetNpcId="2501,10200" actionScriptId="250110201" next="none"/>
+				<EventTask type="empty" next="time" nextValue="7"/>
+				<EventTask type="killNpc" targetNpcId="2501,10300" next="none"/>
+				<EventTask type="killNpc" targetNpcId="2501,10400" next="none"/>
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="doActionScript" targetNpcId="2501,10200" actionScriptId="250110202" next="time" nextValue="3"/>
+				
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100010" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100018" next="none"/>
+				
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100012" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100019" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100020" next="none"/>
+				
+				<EventTask type="flag" name="봉인된툴사연출" value="0" next="none"/>
+				<EventTask type="flag" name="해방툴사연출" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" id="15" name="해방툴사연출" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100013" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100017" next="none"/>
+				<EventTask type="empty" next="time" nextValue="0.5"/>
+				<EventTask type="doActionScript" targetNpcId="2501,10500" actionScriptId="250110501" next="none"/>
+				<EventTask type="empty" next="time" nextValue="40"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100015" next="none"/>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2501" dir='0' next="none">  <!--PC 원래 위치로 이동-->
+					<Pos value="-23416,22570,2095"/>
+				</EventTask>
+				<EventTask type="lookAtNpc" huntingZoneId="2501" templateId="2000" turn="on" action="follow" next="none" />
+				<EventTask type="empty" next="time" nextValue="27"/>
+				<EventTask type="guideOn" nameId="2501,913" id="8" pos="-23392,23938,2107" next="none"/>
+				<EventTask type="updateQuest" questId="250011" taskId="10" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100013" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2501" territoryId="250100017" next="none"/>
+				<EventTask type="flag" name="해방툴사연출" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--보스 처치-->
+	<EventGroup type="eliminate" territoryId="250100015" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="8" next="none"/>
+				<EventTask type="updateQuest" questId="250001" taskId="6" next="none"/>
+				<EventTask type="empty" next="time" nextValue="5"/>
+				<EventTask type="spawn" huntingZoneId="2501" territoryId="250100025" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="guideOn" nameId="2501,914" id="9" pos="-23392,24791,2091" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--단계-->
+	<!--1번 전투 종료-->
+	<EventGroup type="flag" id="1" name="전투1종료" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="2" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="guideOn" nameId="2501,911" id="3" pos="-26916,18247,1902" next="none"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010006" next="none" nextValue=""/>				
+				<EventTask type="flag" name="전투21" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--2번 전투 종료-->
+	<EventGroup type="flag" id="2" name="전투2종료" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="4" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="guideOn" nameId="2501,911" id="5" pos="-21112,19086,1835" next="none"/>				
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010006" next="none" nextValue=""/>
+				<EventTask type="flag" name="전투31" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--3번 전투 종료-->
+	<EventGroup type="flag" id="3" name="전투3종료" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="6" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="guideOn" nameId="2501,911" id="7" pos="-23344,22413,2090" next="none"/>				
+				<EventTask type="message" style="speechbubble" string="@dungeon:25010006" next="none" nextValue=""/>
+				<EventTask type="flag" name="전투41" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--시작 연출 스킵-->
+	<EventGroup type="flag" id="10" name="스킵" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="시작연출진행" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

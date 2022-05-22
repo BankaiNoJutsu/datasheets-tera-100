@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9038" name="@dungeon:9038" startPos="66464,-25509,588" exitContinentId="7004" exitPos="35410,96891,658" destroyWaitMin="0" startDir="105">
+  <Condition type="maxMemberCount" value="1" />
+  <RestoreTargetQuest id="901" forceRestore="true"/>
+  <!-- 안개의 섬 릴레이 소환 퀘스트 -->
+  <Condition type="party" value="1" />
+  <!--임시 원안 2인 퀘-->
+  <Condition type="levelOver" value="29" />
+  <!--Condition type="progressQuest" value="901" taskId="16" /-->
+  <!--Condition type="completeQuest" value="901" /-->
+  <!-- 성장 구간 퀘개선 퀘스트단계 설정 -->	
+  <Condition type="progressQuest" value="901" taskId="18" />
+  <Condition type="completeQuest" value="901" />
+  
+
+  <EventGroup type="initialize">
+    <!--인스턴스 공간 생성과 동시에 노예 상인 출현 이벤트 시작 -->
+	<Event>
+		  <EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="438" territoryId="43800001" next="none" />	  
+		  </EventTaskGroup>
+		</Event>
+  </EventGroup>
+  
+  <EventGroup type="eliminate" territoryId="43800001">
+    <!-- 노예 상인 처치 후 매복조 출현 이벤트 시작. -->
+    <Event>
+      <!-- 릴레이 소환 진행 -->
+      <EventTaskGroup>		
+	     <!-- 내부 고객 사마엘의 정체 지루함 -->		 
+	
+        <EventTask type="playMovie" id="19" next="time" nextValue="20" />
+        <EventTask type="message" string="@dungeon:9038002" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="438" territoryId="43800003" startAggro="1" next="none" />        
+        <EventTask type="spawn" huntingZoneId="438" territoryId="43800004" startAggro="1" next="none" />        
+        <EventTask type="spawn" huntingZoneId="438" territoryId="43800002" startAggro="1" next="none" />        
+		<EventTask type="spawn" huntingZoneId="438" territoryId="43800011" startAggro="1" next="none" />        
+
+        <!-- 종족형 정령사 사망 후 벨바 루케 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="eliminate" territoryId="43800002,43800003,43800004,43800011">
+	<Event>
+		<!-- 릴레이 소환 몬스터 전멸 후 벨바 루케 소환 -->
+			
+		<EventTaskGroup>
+			<EventTask type="spawn" huntingZoneId="438" territoryId="43800008" startAggro="1" next="time" nextValue="3" />
+			<EventTask type="message" string="@dungeon:9038005" targetNpcId="438,11" style="default" next="time" />
+		</EventTaskGroup>
+	</Event>
+   </EventGroup>
+   
+   <!-- 벨바 루케 그룹 처치 후 밖으로 이동하는 텔레포트 스폰 이벤트-->
+   <EventGroup type="eliminate" territoryId="43800008">
+	<Event>
+		<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9038006" style="default" next="time" nextValue="3" />
+			<EventTask type="spawn" huntingZoneId="438" territoryId="43800007" next="time" nextValue="3" />			
+		</EventTaskGroup>
+	</Event>
+   </EventGroup>
+   
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

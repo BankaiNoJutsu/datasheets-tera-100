@@ -1,0 +1,896 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3033" name="@dungeon:3033" startPos="34310,-84270,2983" startDir="90" exitContinentId="7031" exitPos="21438,4736,6191" exitDir="135">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="68" />
+	<Retry retryId="9" />
+	<ClearCondition huntingZoneId="3033" templateId="2000" amount="1" killCount="1" />
+	<DPSDisplay updateFrequency="1.0" cutDigits="1000000" digitStringId="921316" /> <!-- DPS 출력 노드 -->
+
+  <EventGroup type="none" id="0" name="빈 이벤트" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="0" />
+		<EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,3051" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		<EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,3053" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" name="1네임드 반복 가이드" uniqueId="3033,1054" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="30330024" target="player" next="none" /> <!-- 1넴 가이드 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" name="2네임드 반복 가이드" uniqueId="3033,2054" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="30330026" target="player" next="none" /> <!-- 2넴 가이드 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+	<!--던전 초기 설정-->	
+	<!--던전 생성 초기화 이벤트 / 입구, 1, 2네임드 스폰 -->
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300100" next="none" /> <!-- 1네임드 전투 구간 스폰  -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300401" next="none" /> <!-- 1네임드 전투 차폐실린더 스폰  -->
+				<!-- 1입구 제외 모든 차폐문 스폰  -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300012" next="none" /> <!-- 1출구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300021" next="none" /> <!-- 2입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300031" next="none" /> <!-- 미니입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300032" next="none" /> <!-- 미니출구 차폐문  -->
+				<!-- 가이드를 위한 NPC 및 석 스폰-->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300609" next="none" /> <!-- 1네임드 가이드 테리토리(창기사) 스폰 -->  
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300611" next="none" /> <!-- 1네임드 가이드 테리토리(사제) 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300619" next="none" /> <!-- 가이드 상점 NPC 스폰 --> 		 
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300615" next="none" /> <!-- 사제 버프 마석 스폰 --> 
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300616" next="none" /> <!-- 정령사 버프 마석 스폰 --> 	
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300617" next="none" /> <!-- 가이드 재확인 마석 스폰 --> 
+				
+				<!--1네임드 길찾기 가이드-->
+				<EventTask type="guideOn" nameId="3033,911" id="1" pos="36225.00000000,-81925.00000000,285.40899658" next="none" />
+				<EventTask type="empty" next="time" nextValue="3" /> 		
+				<EventTask type="message" style="default" string="@dungeon:3033200" next="none" /> <!-- 진입시 설명 1-->
+				<EventTask type="message" style="default" string="@dungeon:3033201" next="none" /> <!-- 진입시 설명 2-->
+	            <EventTask type="abnormality" abnormalityId="30330021" target="class" targetUserClass="lancer,fighter" value="2" strictly="true" turn="on" aliveOnly="false" next="none" /> 
+		        <EventTask type="abnormality" abnormalityId="30330022" target="class" targetUserClass="berserker,slayer,warrior,glaiver,soulless,assassin,engineer,archer,sorcerer" value="5" strictly="true" turn="on" aliveOnly="false" next="none" /> 
+		        <EventTask type="abnormality" abnormalityId="30330023" target="class" targetUserClass="elementalist,priest" value="2" strictly="true" turn="on" aliveOnly="false" next="none" /> 
+				<EventTask type="empty" next="time" nextValue="2" />				
+				<EventTask type="message" style="default" string="@dungeon:3033200" next="none" /> <!-- 진입시 설명 1-->
+				<EventTask type="message" style="default" string="@dungeon:3033201" next="none" /> <!-- 진입시 설명 2-->
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="message" style="default" string="@dungeon:3033200" next="none" /> <!-- 진입시 설명 1-->
+				<EventTask type="message" style="default" string="@dungeon:3033201" next="none" /> <!-- 진입시 설명 2-->
+				<!--미니게임Flag 설정-->
+				<EventTask type="flag" name="미니게임미완" value="1" next="none" />
+				<EventTask type="flag" name="1네임드완" value="0" next="none" />
+				<EventTask type="flag" name="미니게임입구진입" value="0" next="none" />
+				<EventTask type="flag" name="2네임드완" value="0" next="none" />
+				<EventTask type="flag" name="꿀흡수5회이하" value="0" next="none" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--던전 입장시 입구 레이저 스폰 갱신-->
+	<EventGroup type="enterTerritory" uniqueId="3033, 303300404" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300400" next="time" nextValue="0.5" /> <!--레이저디스폰-->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300400" next="time" nextValue="0.5" /> <!--레이저스폰-->
+				<EventTask type="empty" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--낙하무적이상상태-->
+	<EventGroup type="enterTerritory" uniqueId="3033, 303300403" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31010000" target="player" territoryId="303300403" huntingZoneId="3033" next="none" /><!--낙하무적-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 구손 예외 상황(전투 공간 안에서 전투 공간 밖에 있는 유저 구손으로 못 당기도록) -->  
+	<EventGroup type="enterTerritory" uniqueId="3033,303300600">  <!-- 1넴 구손 불가 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3033" territoryId="303300600" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3033,303300601">  <!-- 1넴 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3033" territoryId="303300601" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3033,303300602">  <!-- 2넴 구손 불가 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3033" territoryId="303300602" turn="on" next="none" />
+				<!--보호막어뷰징 수정-->
+				<EventTask type="abnormality" abnormalityId="30330005" target="player" turn="off" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="30330009" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="30330003" target="player" turn="off" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="30330004" target="player" turn="off" next="none" /> <!-- blue 이상상태 -->
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3033,303300603">  <!-- 2넴 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3033" territoryId="303300603" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<EventGroup type="enterTerritory" uniqueId="3033,303300604" repeat="true"> <!--미니게임-2네임드구간 보호막어뷰징 방지-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330005" target="player" turn="off" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="30330009" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="30330003" target="player" turn="off" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="30330004" target="player" turn="off" next="none" /> <!-- blue 이상상태 -->
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="enterTerritory" uniqueId="3033,303300603" repeat="true"> <!--2네임드 전투공간 보호막어뷰징 방지-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330005" target="player" turn="off" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="30330009" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="30330003" target="player" turn="off" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="30330004" target="player" turn="off" next="none" /> <!-- blue 이상상태 -->
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+<!--연출-->
+	<EventGroup type="enterTerritory" uniqueId="3033, 303300402" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3203" next="time" nextValue="5" /><!--1네임드등장영상-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300401" next="none" /> <!-- 1네임드 전투 차폐실린더 스폰  -->
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="message" style="default" string="@dungeon:30336004" next="none" /> <!-- 가이드-몬스터 앞에 소환석을 파괴하여 전투를 도울 보조 대원을 소환하세요. -->
+				<EventTask type="message" style="default" string="@dungeon:30336005" next="none" /> <!-- 가이드-입구 좌우측에는 힐러 버프 마석이 있습니다. 필요할 시 10m내에서 파괴하세요. -->
+				<EventTask type="abnormality" turn="on" abnormalityId="30330024" target="player" next="none" /> <!-- 1네임드 가이드 띄워주는 이상상태 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--1넴리셋-->
+	<EventGroup type="npcReset" uniqueId="3033,1000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			    <!-- 가이드 던전이기 떄문에 리더보드 타이머 스톱 OFF
+				<EventTask type="ranktimer" timerLog="stop" next="none" />
+				-->
+				<!--1네임드 리셋 시 타이밍 이슈를 막기 위한 던전 이벤트 실행 취소-->
+				<EventTask type="eventState" stateType="EventGroup" id="120" state="stop" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300101" next="none" /><!--투명npc 테리토리 디스폰-->
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="30330103" target="player" turn="off" next="none" /><!--꿀흡수Postprocess-->
+				<EventTask type="abnormality" abnormalityId="30330104" target="player" turn="off" next="none" /><!--독방출Postprocess-->
+				<EventTask type="abnormality" abnormalityId="30330105" target="player" turn="off" next="none" /><!--스턴-->
+				<EventTask type="abnormality" abnormalityId="30330106" target="player" turn="off" next="none" /><!--약한 중독-->
+				<EventTask type="abnormality" abnormalityId="30330107" target="player" turn="off" next="none" /><!--중독-->
+				<EventTask type="abnormality" abnormalityId="30330108" target="player" turn="off" next="none" /><!--밀린유저판정용-->
+				<EventTask type="abnormality" abnormalityId="30330109" target="player" turn="off" next="none" /><!--에어본유저판정용-->
+				<EventTask type="abnormality" abnormalityId="30330110" target="player" turn="off" next="none" /><!--에어본-->
+				<EventTask type="abnormality" abnormalityId="30330111" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330125" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330126" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330127" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330128" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330129" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330130" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330131" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<!-- 업적용 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="30330122" target="player" turn="off" aliveOnly="false" next="none" /><!--1네임드 빨리 죽이기 업적-->
+				<EventTask type="abnormality" abnormalityId="30330124" target="player" turn="off" aliveOnly="false" next="none" /><!--1네임드 에어본/밀림 안당하는 업적-->
+				<EventTask type="abnormality" abnormalityId="30330123" target="player" turn="off" aliveOnly="false" next="none" /> <!--에어본/밀림 당한 유저 이상상태 -->
+				<!--1네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300011" next="none" /><!-- 1입구 차폐문  -->
+						<!-- 던전 입구 차폐문  -->
+				<!-- 1네임드 입구로 가는 차원의 마법석 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300010" next="none" />
+				<!--1네임드 테리토리 디스폰 후 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300100" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300100" next="none" />
+				<!-- 가이드 관련 NPC 등 디스폰 후 스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300609" next="none" /> <!-- 1네임드 가이드 테리토리(창기사) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300606" next="none" /> <!-- 1네임드 창기사 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300611" next="none" /> <!-- 1네임드 가이드 테리토리(사제) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300607" next="none" /> <!-- 1네임드 사제 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300615" next="none" /> <!-- 사제 버프 마석 디스폰 --> 
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300616" next="none" /> <!-- 정령사 버프 마석 디스폰 --> 
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300617" next="none" /> <!-- 가이드 재확인 마석 디스폰 --> 
+			    <EventTask type="despawn" huntingZoneId="3033" territoryId="303300619" next="none" /> <!-- 가이드 상점 NPC 디스폰 --> 			  
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300609" next="none" /> <!-- 1네임드 가이드(창기사) 테리토리 스폰 -->	
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300611" next="none" /> <!-- 1네임드 가이드(사제) 테리토리 스폰 -->	
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300615" next="none" /> <!-- 사제 버프 마석 스폰 --> 
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300616" next="none" /> <!-- 정령사 버프 마석 스폰 --> 	
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300617" next="none" /> <!-- 가이드 재확인 마석 스폰 --> 
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300619" next="none" /> <!-- 가이드 상점 NPC 스폰 --> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1네임드 처치 / 1네임드, 1네임드 출입구 디스폰 / 미니게임 스폰 -->
+	<EventGroup type="npcHp" uniqueId="3033,1000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			    <!-- 가이드 던전이기 때문에 리더보드 타이머 스톱 OFF
+				<EventTask type="ranktimer" timerLog="stop" stageLog="1" next="none" />
+				-->
+				<!--1네임드 처치 시 타이밍 이슈를 막기 위한 던전 이벤트 실행 취소-->
+				<EventTask type="eventState" stateType="EventGroup" id="120" state="stop" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300101" next="none" /><!--투명npc 테리토리 디스폰-->
+				<!-- 에어본/밀림 안당하는 업적 달성 부분(1네임드 에어본/밀림 안당하는 업적) OFF (가이드 던전용으로 사용)
+				<EventTask type="abnormality" abnormalityId="30330124" target="player" turn="on" strictly="true" aliveOnly="false" next="none" />
+				-->
+				<!-- PC에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="30330103" target="player" turn="off" next="none" /><!--꿀흡수Postprocess-->
+				<EventTask type="abnormality" abnormalityId="30330104" target="player" turn="off" next="none" /><!--독방출Postprocess-->
+				<EventTask type="abnormality" abnormalityId="30330105" target="player" turn="off" next="none" /><!--스턴-->
+				<EventTask type="abnormality" abnormalityId="30330106" target="player" turn="off" next="none" /><!--약한 중독-->
+				<EventTask type="abnormality" abnormalityId="30330107" target="player" turn="off" next="none" /><!--중독-->
+				<EventTask type="abnormality" abnormalityId="30330108" target="player" turn="off" next="none" /><!--밀린유저판정용-->
+				<EventTask type="abnormality" abnormalityId="30330109" target="player" turn="off" next="none" /><!--에어본유저판정용-->
+				<EventTask type="abnormality" abnormalityId="30330110" target="player" turn="off" next="none" /><!--에어본-->
+				<EventTask type="abnormality" abnormalityId="30330111" target="player" turn="off" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330125" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330126" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330127" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330128" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330129" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330130" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<EventTask type="abnormality" abnormalityId="30330131" target="player" turn="off" aliveOnly="false" next="none" /><!--오염된공기-->
+				<!--미니게임 길찾기 가이드-->
+				<EventTask type="guideOff" id="1" next="none" />
+				<EventTask type="guideOn" nameId="3033,912" id="2" pos="39541,-83876,-207" next="none" />
+				<!--1네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300011" next="none" /><!-- 1입구 차폐문  -->
+				<!-- 던전 입구 차폐문  -->
+				<!--1네임드 출구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300012" next="none" /><!-- 1출구 차폐문  -->
+				<!-- 1네임드 입구로 가는 차원의 마법석 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300010" next="none" />
+				<!--미니게임 스폰-->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300300" next="none" />
+				<!--미니게임 Flag On-->
+				<EventTask type="flag" name="1네임드완" value="1" next="none" />
+				<!--1네임드 에어본/밀림 안당하는 업적 체크 (에어본/밀림 안당한 업적체크용 이상상태) 관련 항목을 끔 (가이드 던전 사용을 위해)
+				<EventTask type="empty" next="time" nextValue="0.5" />
+				<EventTask type="abnormality" abnormalityId="30330124" target="player" turn="on" strictly="true" aliveOnly="false" next="none" /> 
+				-->
+				<!--1네임드 디스폰 대기-->
+				<EventTask type="empty" next="time" nextValue="3" />
+				<!--1네임드 테리토리 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300100" next="time" nextValue="1"/>
+				<!--1네임드 업적 이상상태 해제 대기-->
+				<EventTask type="empty" next="time" nextValue="2" />
+				<!-- 업적용 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="30330122" target="player" turn="off" aliveOnly="false" next="none" /><!--1네임드 빨리 죽이기 업적-->
+				<EventTask type="abnormality" abnormalityId="30330124" target="player" turn="off" aliveOnly="false" next="none" /><!--1네임드 에어본/밀림 안당하는 업적-->
+				<EventTask type="abnormality" abnormalityId="30330123" target="player" turn="off" aliveOnly="false" next="none" /> <!--에어본/밀림 당한 유저 이상상태 -->
+				<!-- 가이드 NPC 관련 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300609" next="none" /> <!-- 1네임드 가이드 테리토리(창기사) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300606" next="none" /> <!-- 1네임드 창기사 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300611" next="none" /> <!-- 1네임드 가이드 테리토리(사제) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300607" next="none" /> <!-- 1네임드 사제 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300615" next="none" /> <!-- 사제 버프 마석 디스폰 --> 
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300616" next="none" /> <!-- 정령사 버프 마석 디스폰 --> 				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1네임드 전투상태 돌입 / 차원의 마법석 제거 -->
+	<EventGroup type="npcState" name="1네임드 전투 상태되면 1네임드 앞으로 이동하는 차원의 마법석 제거" uniqueId="3033,1000" value="combat" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+			    <!-- 리더보드 타이머 시작 OFF (가이드용이기 떄문)
+				<EventTask type="ranktimer" timerLog="start" next="none" />
+				-->
+				<!-- 1네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300010" next="none" />
+				<!--1네임드 빨리 죽이기 업적 시작 OFF(가이드 던전용으로 사용하기 때문)
+				<EventTask type="flag" name="꿀흡수5회이하" value="1" next="none" />
+				-->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1네임드 HP99% / 1네임드 입구 차폐문 스폰 -->
+	<EventGroup type="npcHp" uniqueId="3033,1000" value="99" id="120" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--차단문 생성 메세지-->
+				<EventTask type="message" string="@dungeon:3033100" style="combat" next="time" nextValue="5" />
+				<!-- 1네임드 입구 차폐문 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300011" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2네임드 리셋 / 2네임드 테리토리 디스폰 후 스폰 -->	
+	<EventGroup type="npcReset" uniqueId="3033,2000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+                <!-- 가이드 던전이기 때문에 리더보드 타이머 스톱 OFF			
+				<EventTask type="ranktimer" timerLog="stop" next="none" />
+				-->
+				<EventTask type="timer" action="Stop" name="전멸" value="0" timerUiOff="true" next="none" /><!-- 전멸 타이머 스톱 -->
+				<!--업적용이상상태 해제-->				
+				<EventTask type="abnormality" abnormalityId="30330230" target="player" turn="off" next="none" /><!--침묵안걸리기-->
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="30330202" target="player" turn="off" next="none" /><!--출혈-->
+				<EventTask type="abnormality" abnormalityId="30330220" target="player" turn="off" next="none" /><!--주시-->
+				<EventTask type="abnormality" abnormalityId="30330223" target="player" turn="off" next="none" /><!--주시2중첩-->
+				<EventTask type="abnormality" abnormalityId="30330221" target="player" turn="off" next="none" /><!--공중흡수이펙트-->
+				<EventTask type="abnormality" abnormalityId="30330205" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="30330224" target="player" turn="off" next="none" /><!--주시-->
+				<EventTask type="abnormality" abnormalityId="30330225" target="player" turn="off" next="none" /><!--주시2중첩-->
+				<!--2네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300021" next="none" />
+				<!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300020" next="none" />
+				<!--2네임드 테리토리 디스폰 후 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300200" resetNpcHpDungeonTask="true" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300200" next="none" />
+				<!-- 가이드 관련 NPC 등 디스폰 후 스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300622" next="none" /> <!-- 2네임드 가이드 테리토리(창기사) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300620" next="none" /> <!-- 2네임드 창기사 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300623" next="none" /> <!-- 2네임드 가이드 테리토리(사제) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300621" next="none" /> <!-- 2네임드 사제 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300624" next="none" /> <!-- 사제 버프 마석 디스폰 --> 
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300625" next="none" /> <!-- 정령사 버프 마석 디스폰 --> 
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300626" next="none" /> <!-- 가이드 재확인 마석 디스폰 --> 
+			    <EventTask type="despawn" huntingZoneId="3033" territoryId="303300627" next="none" /> <!-- 가이드 상점 NPC 디스폰 --> 			  
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300622" next="none" /> <!-- 2네임드 가이드(창기사) 테리토리 스폰 -->	
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300623" next="none" /> <!-- 2네임드 가이드(사제) 테리토리 스폰 -->	
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300624" next="none" /> <!-- 사제 버프 마석 스폰 --> 
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300625" next="none" /> <!-- 정령사 버프 마석 스폰 --> 	
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300626" next="none" /> <!-- 가이드 재확인 마석 스폰 --> 
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300627" next="none" /> <!-- 가이드 상점 NPC 스폰 --> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 처치 / 2네임드 디스폰 -->
+	<EventGroup type="npcHp" uniqueId="3033,2000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--2네임드 처치 시 타이밍 이슈를 막기 위한 던전 이벤트 실행 취소-->
+				<EventTask type="eventState" stateType="EventGroup" id="2" state="stop" next="none" />
+				<!-- 가이드 던전이기 때문에 리더보드 타이머 스톱 OFF
+				<EventTask type="ranktimer" timerLog="stop" stageLog="2" logUpdate="true" next="none" />
+				-->
+				<EventTask type="timer" action="Stop" name="전멸" value="0" timerUiOff="true" next="none" /><!-- 전멸 타이머 스톱 -->
+				<!--업적용flag_주시5회미만보고클리어 OFF (가이드 던전 사용을 위해)
+				<EventTask type="flag" name="2네임드완" value="1" next="none" />
+				-->
+				<!--업적용이상상태_침묵안걸리기_Check OFF (가이드 던전 사용을 위해)
+				<EventTask type="abnormality" abnormalityId="30330230" target="player" turn="on" next="none" />
+				-->
+				<!--영상재생-->
+				<EventTask type="playMovie" id="3202" next="time" nextValue="5" /><!--여왕처치영상-->
+				<!--2네임드 처치 시 타이밍 이슈를 막기 위한 던전 이벤트 실행 취소-->
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="30330202" target="player" turn="off" next="none" /><!--출혈-->
+				<EventTask type="abnormality" abnormalityId="30330220" target="player" turn="off" next="none" /><!--주시-->
+				<EventTask type="abnormality" abnormalityId="30330223" target="player" turn="off" next="none" /><!--주시2중첩-->
+				<EventTask type="abnormality" abnormalityId="30330221" target="player" turn="off" next="none" /><!--공중흡수이펙트-->
+				<EventTask type="abnormality" abnormalityId="30330205" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="30330224" target="player" turn="off" next="none" /><!--주시-->
+				<EventTask type="abnormality" abnormalityId="30330225" target="player" turn="off" next="none" /><!--주시2중첩-->
+				<!--2네임드 길찾기 가이드 off-->
+				<EventTask type="guideOff" id="3" next="none" />
+				<!--2네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300021" next="time" nextValue="5" />
+				<!--2네임드 차원의 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300030" next="none" />
+				<!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300020" next="none" />
+				<!--2네임드 테리토리 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300200" next="time" nextValue="1"/>
+				<!-- 가이드 관련 NPC 등 디스폰 후 스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300622" next="none" /> <!-- 2네임드 가이드 테리토리(창기사) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300620" next="none" /> <!-- 2네임드 창기사 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300623" next="none" /> <!-- 2네임드 가이드 테리토리(사제) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300621" next="none" /> <!-- 2네임드 사제 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300624" next="none" /> <!-- 사제 버프 마석 디스폰 --> 
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300625" next="none" /> <!-- 정령사 버프 마석 디스폰 --> 
+				<EventTask type="message" style="default" string="@dungeon:30336006" next="none" /> <!-- 가이드-던전이 종료되었습니다. 던전 리셋 또는 페이퍼돌(P)->인던->인던 초기화 버튼을 눌러 던전을 초기화 해주세요. -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 전투상태 돌입 / 차원의 마법석 제거 -->
+	<EventGroup type="npcState" name="2네임드 전투 상태되면 2네임드 앞으로 이동하는 차원의 마법석 제거" uniqueId="3033,2000" value="combat" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+			    <!-- 가이드 던전이기 때문에 리더보드 타이머 시작 OFF
+				<EventTask type="ranktimer" timerLog="start" next="none" />
+				-->
+				<!-- 2네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300020" next="none" />
+				<!--업적 (침묵안걸리고클리어, 업적용flag_주시5회미만보고클리어 OFF) (가이드 던전 사용을 위해)
+				<EventTask type="abnormality" abnormalityId="30330230" target="player" turn="on" next="none" />
+				<EventTask type="flag" name="주시5회" value="1" next="none" />
+				-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 HP99% / 2네임드 입구 차폐문 스폰 -->
+	<EventGroup type="npcHp" uniqueId="3033,2000" value="99" id="2" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--차단문 생성 메세지-->
+				<EventTask type="message" string="@dungeon:3033100" style="combat" next="time" nextValue="5" />
+				<!-- 2네임드 입구 차폐문 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300021" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 HP75% / 2네임드 전멸 타이머 시작 -->
+	<EventGroup type="npcHp" name="2네임드 HP 75% 되면 전멸 타이머 시작" uniqueId="3033,2000" value="75" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="Start" name="전멸" direction="reverse" value="600" timerUiOff="false" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30330030" target="player" next="none" /> <!-- 2넴 10분 타임어택 가이드용 버프 -->
+				<EventTask type="message" style="default" string="@dungeon:30336007" next="none" /> <!-- 가이드-찬란한 파르퀴나의 HP가 75% 미만이 되면 10분 타이머가 시작되며 0이되면 전멸기가 발동합니다. -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  
+	
+	<!-- 2네임드 알 사망 시 2네임드 스폰 / 영상재생 -->
+	<EventGroup type="eliminate" territoryId="303300201">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3201" next="time" nextValue="10" /><!--여왕등장영상-->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300200" next="none" /><!-- 2네임드 테리토리 스폰  -->
+				<EventTask type="abnormality" turn="on" abnormalityId="30330026" target="player" next="none" /> <!-- 2네임드 가이드 띄워주는 이상상태 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<!--공통 사용 이벤트-->
+	<EventGroup type="none" id="1" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--1네임드 사용 이벤트-->
+	<!--1넴_꿀 흡수-->
+	<EventGroup type="none" id="101" name="1넴 꿀흡수" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="3033,1000" patternListId="2" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="107" name="1넴 분사기작동" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300101" next="time" nextValue="8" />
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300101" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--1넴_독 방출-->
+	<EventGroup type="none" id="102" name="1넴 독방출" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="3033,1000" patternListId="1" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="109" name="1넴_오염된공기" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330111" target="player" turn="on" strictly="true" aliveOnly="false" next="none"/>
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--쿨 제어용-->
+	<EventGroup type="none" id="114" name="1넴_회피요구쿨타임" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330118" target="npc" targetNpcId="3033,1000" turn="on" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="115" name="1넴_측방독쿨타임" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330112" target="npc" targetNpcId="3033,1000" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30330118" target="npc" targetNpcId="3033,1000" turn="on" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="116" name="1넴_측방독딜레이" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330115" target="npc" targetNpcId="3033,1000" turn="on" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="117" name="1넴_근원폭쿨타임" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330119" target="npc" targetNpcId="3033,1000" turn="on" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,1053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="118" name="5중첩됨" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="꿀흡수5회이하" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+    <!-- 네임드 1 가이드 출력을 위한 스크립트 -->
+	<EventGroup type="none" id="10" name="1넴 원폭 공격 + 도트 데미지 공격 가이드용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+		        <EventTask type="abnormality" abnormalityId="30330027" target="player" next="none" /> <!-- 1넴 원폭 공격 + 도트 데미지 공격 가이드용 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<EventGroup type="none" id="11" name="1넴 원폭 공격 + 독 방출 공격 가이드용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+		        <EventTask type="abnormality" abnormalityId="30330028" target="player" next="none" /> <!-- 1넴 원폭 공격 + 독 방출 공격 가이드용 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="12" name="1넴 4방위 초토화 공격 가이드용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+		        <EventTask type="abnormality" abnormalityId="30330029" target="player" next="none" /> <!-- 1넴 4방위 초토화 공격 가이드용 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 1네임드 빨리 죽이기 업적은 가이드 던전에서 사용되지 않을듯 하여 꺼둠
+	<EventGroup type="flag" name="꿀흡수5회이하,1네임드완" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330122" target="player" turn="on" strictly="true" aliveOnly="false" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>  
+	 -->
+
+<!--미니게임시작-->
+	<EventGroup type="flag" name="미니게임미완,1네임드완,미니게임입구진입" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330005" target="player" territoryId="303300302" huntingZoneId="3033" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="30330009" target="player" territoryId="303300302" huntingZoneId="3033" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="30330003" target="random" exceptTargetAbnormalityKind="28806" territoryId="303300302" huntingZoneId="3033" min="0" max="5" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="empty" next="time" nextValue="0.5" />
+				<EventTask type="abnormality" abnormalityId="30330004" target="player" exceptTargetAbnormalityKind="28806" territoryId="303300302" huntingZoneId="3033" next="none" /> <!-- blue 이상상태 -->
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="false" huntingZoneId="3033" territoryId="303300302" targetAbnormalityKind="28806,28807,45501" posType="absolute" next="none">
+					<Pos value="38573,-83875,-207"/>
+				</EventTask>
+				<EventTask type="empty" next="time" nextValue="0.5" />
+				<EventTask type="flag" name="미니게임입구진입" value="0" next="none" />
+				<EventTask type="abnormality" turn="on" abnormalityId="30330025" target="player" next="none" /> <!-- 미니게임 가이드 띄워주는 이상상태 -->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>  
+	<EventGroup type="enterTerritory" uniqueId="3033, 303300302" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="미니게임입구진입" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+<!--미니게임종료-->
+	<EventGroup type="none" id="9999" name="미니게임종료" repeat="true"><!--임시 데이터 group 조건 변경 필요-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="3033,303308" actionScriptId="303301" next="none" />
+				<EventTask type="abnormality" abnormalityId="30330005" target="player" turn="off" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="30330009" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="30330003" target="player" turn="off" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="30330004" target="player" turn="off" next="none" /> <!-- blue 이상상태 -->
+				<!-- 2네임드 길찾기 가이드 -->
+				<EventTask type="guideOff" id="2" next="none" />
+				<EventTask type="guideOn" nameId="3033,913" id="3" pos="37524.41015625,-87748.14062500,-451.52124023" next="none" />
+				<!--미니게임테리토리 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300300" next="none" />
+				<!-- 미니게임 입구 차폐문 디스폰 -->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300031" next="none" />
+				<!-- 미니게임 출구 차폐문 디스폰 -->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300032" next="none" />
+				<!-- 2네임드 시작 테리토리 스폰  -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300201" next="none" />
+				<!-- 2네임드 입구 차폐문 디스폰 -->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300021" next="none" />
+				<!-- 1네임드 입구로 가는 차원의 마법석 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300010" next="none" />
+				<!--미니게임 Flag off-->
+				<EventTask type="flag" name="미니게임미완" value="0" next="none" />
+				<!-- 미니게임 업적 체크 OFF (미니게임 밀려나지 않기 업적체크용 이상상태,미니게임 밀려나지 않기 업적체크용 이상상태,미니게임 밀려난 유저 이상상태) (가이드 던전으로 사용하기 위해)
+				<EventTask type="empty" next="time" nextValue="0.5" />
+				<EventTask type="abnormality" abnormalityId="30330012" target="player" turn="on" strictly="true" aliveOnly="false" next="none" />
+				<EventTask type="empty" next="time" nextValue="5" />
+				<EventTask type="abnormality" abnormalityId="30330012" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30330011" target="player" turn="off" aliveOnly="false" next="none" />
+				-->
+				<!-- 2넴 가이드를 위한 NPC 및 석 스폰-->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300622" next="none" /> <!-- 2네임드 가이드 테리토리(창기사) 스폰 -->  
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300623" next="none" /> <!-- 2네임드 가이드 테리토리(사제) 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300627" next="none" /> <!-- 가이드 상점 NPC 스폰 --> 		 
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300624" next="none" /> <!-- 사제 버프 마석 스폰 --> 
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300625" next="none" /> <!-- 정령사 버프 마석 스폰 --> 	
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300626" next="none" /> <!-- 가이드 재확인 마석 스폰 --> 	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+    <!-- 네임드 2 가이드 출력을 위한 스크립트 -->
+	<EventGroup type="none" id="13" name="2넴 분신 공격 가이드용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+		        <EventTask type="abnormality" abnormalityId="30330031" target="player" next="none" /> <!-- 2넴 분신 공격 가이드용 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<EventGroup type="none" id="14" name="2넴 지속 데미지 + 장판 공격 가이드용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+		        <EventTask type="abnormality" abnormalityId="30330032" target="player" next="none" /> <!-- 2넴 지속 데미지 + 장판 공격 가이드용 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="15" name="2넴 근/원폭 후 추가 공격 패턴 가이드용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+		        <EventTask type="abnormality" abnormalityId="30330033" target="player" next="none" /> <!-- 2넴 근/원폭 후 추가 공격 패턴 가이드용 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<!--2네임드 사용 이벤트-->
+	<EventGroup type="none" id="201" name="원근폭쿨타임이상상태부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330213" target="npc" targetNpcId="3033,2000" turn="on" next="none" /><!--원근폭쿨타임이상상태부여-->
+		        <EventTask type="abnormality" abnormalityId="30330033" target="player" next="none" /> <!-- 2넴 근/원폭 후 추가 공격 패턴 가이드용 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3033,2000" value="80" repeat="true"><!--80퍼 씨앗생성 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="3033,303321" patternListId="2" next="none"/>
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3033,2000" value="50" repeat="true"><!--50퍼 씨앗 랜덤 스폰 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="3033,303325" patternListId="2" next="none"/>
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="202" name="씨앗스폰1실행" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330216" target="npc" targetNpcId="3033,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="30330217" turn="off" target="npc" targetNpcId="3033,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="30330218" turn="off" target="npc" targetNpcId="3033,2000" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="203" name="씨앗스폰2실행" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330217" target="npc" targetNpcId="3033,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="30330216" turn="off" target="npc" targetNpcId="3033,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="30330218" turn="off" target="npc" targetNpcId="3033,2000" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="204" name="씨앗스폰3실행" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330218" target="npc" targetNpcId="3033,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="30330216" turn="off" target="npc" targetNpcId="3033,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="30330217" turn="off" target="npc" targetNpcId="3033,2000" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="205" name="주시7회초과" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="주시5회" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="206" name="강제 리셋" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			    <!-- 가이드 던전이기 때문에 리더보드 타이머 스톱 OFF
+				<EventTask type="ranktimer" timerLog="stop" next="none" />
+				-->
+				<EventTask type="timer" action="Stop" name="전멸" value="0" timerUiOff="true" next="none" /><!-- 전멸 타이머 스톱 -->
+				<!--업적용이상상태 해제-->				
+				<EventTask type="abnormality" abnormalityId="30330230" target="player" turn="off" next="none" /><!--침묵안걸리기-->
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="30330202" target="player" turn="off" next="none" /><!--출혈-->
+				<EventTask type="abnormality" abnormalityId="30330220" target="player" turn="off" next="none" /><!--주시-->
+				<EventTask type="abnormality" abnormalityId="30330221" target="player" turn="off" next="none" /><!--공중흡수이펙트-->
+				<EventTask type="abnormality" abnormalityId="30330205" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="30330224" target="player" turn="off" next="none" /><!--주시-->
+				<EventTask type="abnormality" abnormalityId="30330225" target="player" turn="off" next="none" /><!--주시2중첩-->
+				<!--2네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300021" next="none" />
+				<!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300020" next="time" nextValue="1" />
+				<!--2네임드 테리토리 디스폰 후 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3033" territoryId="303300200" resetNpcHpDungeonTask="true" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300200" next="none" />
+				<!-- 가이드 관련 NPC 등 디스폰 후 스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300622" next="none" /> <!-- 2네임드 가이드 테리토리(창기사) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300620" next="none" /> <!-- 2네임드 창기사 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300623" next="none" /> <!-- 2네임드 가이드 테리토리(사제) 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300621" next="none" /> <!-- 2네임드 사제 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300624" next="none" /> <!-- 사제 버프 마석 디스폰 --> 
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300625" next="none" /> <!-- 정령사 버프 마석 디스폰 --> 
+				<EventTask type="despawn" huntingZoneId="3033" territoryId="303300626" next="none" /> <!-- 가이드 재확인 마석 디스폰 --> 
+			    <EventTask type="despawn" huntingZoneId="3033" territoryId="303300627" next="none" /> <!-- 가이드 상점 NPC 디스폰 --> 			  
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300622" next="none" /> <!-- 2네임드 가이드(창기사) 테리토리 스폰 -->	
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300623" next="none" /> <!-- 2네임드 가이드(사제) 테리토리 스폰 -->	
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300624" next="none" /> <!-- 사제 버프 마석 스폰 --> 
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300625" next="none" /> <!-- 정령사 버프 마석 스폰 --> 	
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300626" next="none" /> <!-- 가이드 재확인 마석 스폰 --> 
+			    <EventTask type="spawn" huntingZoneId="3033" territoryId="303300627" next="none" /> <!-- 가이드 상점 NPC 스폰 --> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="timer" id="207" timerName="전멸" value="0" repeat="true"><!--타임오버 시 전멸기 패턴셋으로 변경-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="3033,2000" actionScriptId="982007" next="none"/> <!-- 카메라 쉐이크 -->
+				<EventTask type="abnormality" abnormalityId="30330203" target="npc" targetNpcId="3033,2000" next="none" /><!--2네임드 하던 행동 멈춤-->
+				<EventTask type="changePatternList" targetNpcId="3033,2000" patternListId="2" next="none" />
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331004" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 무적 버프 -->
+	            <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2051" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+		        <EventTask type="abnormality" abnormalityId="30331001" target="npc" targetNpcId="3033,2053" turn="on" next="none" /> <!-- 창기사 사제 HP 지속 회복 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="2네임드완,주시5회" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30330234" target="player" turn="on" strictly="true" aliveOnly="false" next="none" />
+				<EventTask type="flag" name="주시5회" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>  
+	<!-- 1네임드 마석 뽀개지면 창기사가 나와서 싸워주는거 --> 
+    <EventGroup type="npcHp" name="1네임드 앞 마석 파괴(창기사)" uniqueId="3033,1050" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300606" next="none" /> <!-- 1네임드 창기사 스폰 -->		
+				<EventTask type="message" string="@dungeon:30336000" next="none" /> <!-- 창기사가 전투를 시작하면 창기사를 도와 페르바를 처치하세요. -->
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<!-- 2네임드 마석 뽀개지면 창기사가 나와서 싸워주는거 --> 
+    <EventGroup type="npcHp" name="2네임드 앞 마석 파괴(창기사)" uniqueId="3033,2050" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300620" next="none" /> <!-- 2네임드 창기사 스폰 -->		
+				<EventTask type="message" string="@dungeon:30336001" next="none" /> <!-- 창기사가 전투를 시작하면 창기사를 도와 파르퀴나를 처치하세요. -->
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>	
+	<!-- 1네임드 마석 뽀개지면 사제가 나와서 싸워주는거 --> 
+    <EventGroup type="npcHp" name="1네임드 앞 마석 파괴(사제)" uniqueId="3033,1052" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300607" next="none" /> <!-- 1네임드 사제 스폰 -->		
+				<EventTask type="message" string="@dungeon:30336002" next="none" /> <!-- 사제가 전투를 시작하면 사제의 보조를 받아 페르바를 처치하세요. -->
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<!-- 2네임드 마석 뽀개지면 사제가 나와서 싸워주는거 --> 
+    <EventGroup type="npcHp" name="2네임드 앞 마석 파괴(사제)" uniqueId="3033,2052" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3033" territoryId="303300621" next="none" /> <!-- 2네임드 사제 스폰 -->		
+				<EventTask type="message" string="@dungeon:30336003" next="none" /> <!-- 사제가 전투를 시작하면 사제의 보조를 받아 파르퀴나를 처치하세요. -->
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>	
+</Dungeon>

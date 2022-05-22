@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3031" name="@dungeon:3031" destroyWaitMin="12000" startPos="23258,22866,12623" exitContinentId="2050" exitPos="120659,-96098,12619" exitDir="135"  AllAoiWideBroadCaster="true" >
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="70" />  
+  <Condition type="maxMemberCount" value="200" />
+ 
+  
+	<!-- 시작시 1회 잡몹 구간 스폰 -->
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="eventGage" name="시누스" string="@dungeon:30310001" action="start" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask name="시누스" string="@dungeon:30310001" type="eventGage" action="change" maxValue="1000" value="900" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<!-- 일반 시누스 죽으면 투명 NPC에게 이상상태 걸어줌 -->
+	<EventGroup type="npchp" uniqueId="3031,1000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="none" id="100" name="게이지 1 증가(중형 처치)" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="시누스" string="@dungeon:30310001" type="eventGage" action="plus" maxValue="1000" value="1" uiStyle="2" uiOn="true" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="none" id="101" name="게이지 500 증가 테스트용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="시누스" string="@dungeon:30310001" type="eventGage" action="plus" maxValue="1000" value="500" uiStyle="2" uiOn="true" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	<EventGroup type="none" id="102" name="타이머남은시간강제로1로만듬 테스트용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="Start" name="스폰대기시간" direction="reverse" value="1" timerUiOff="false" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 	
+	<EventGroup type="none" id="200" name="게이지 10 증가(시누스 처치)" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="시누스" string="@dungeon:30310001" type="eventGage" action="plus" maxValue="1000" value="10" uiStyle="2" uiOn="true" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  	
+	
+	<!-- 게이지 100 도달 시 네임드 스폰 -->
+	<EventGroup type="eventGage" eventName="시누스" comparison="none" value="1000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:30310002" next="time" nextValue="1" /> 
+				<EventTask type="spawn" huntingZoneId="3031" territoryId="303100007" next="none"/>
+				<EventTask name="시누스" string="@dungeon:30310001" type="eventGage" action="change" maxValue="1000" value="0" uiStyle="2" uiOn="true" next="none"/>
+				<EventTask type="flag" name="게이지감소" value="1" next="time" nextValue="5" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	 	
+	<!-- 네임드 사망 시 NPC 스폰 대기 시간 -->
+	<EventGroup type="npchp" uniqueId="3031,1001" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:30310003" next="none"/> 
+				<EventTask name="시누스" string="@dungeon:30310001" type="eventGage" action="change" maxValue="1000" value="0" uiStyle="2" uiOn="true" next="none" />
+				<EventTask type="spawn" huntingZoneId="3031" territoryId="303100002" next="none"/>	
+				<EventTask type="timer" action="Start" name="스폰대기시간" direction="reverse" value="21601" timerUiOff="false" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>    
+	<EventGroup type="timer" timerName="스폰대기시간" value="0" repeat="true">
+    <Event>
+		<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="3031" territoryId="303100007" next="none"/>
+				<EventTask type="flag" name="게이지감소" value="0" next="none" />	
+				<EventTask type="flag" name="게이지감소" value="0" next="none" />	
+				<EventTask type="flag" name="게이지감소" value="0" next="none" />	
+				<EventTask type="message" string="@dungeon:30310004" next="none"/> 
+		</EventTaskGroup>
+	</Event>
+  </EventGroup> 
+	<EventGroup type="flag" name="게이지감소" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+				<EventTask name="시누스" string="@dungeon:30310001" type="eventGage" action="minus" maxValue="1000" value="100" uiStyle="2" uiOn="true" next="none" />
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>	
+  
+ 
+</Dungeon>

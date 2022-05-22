@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9007" name="@dungeon:9007" startPos="-23635,55767,1410" exitContinentId="7013" exitPos="-26788,47622,1378" destroyWaitMin="0">
+  <RestoreTargetQuest id="3901" forceRestore="true" />
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="44" />
+  <Condition type="progressQuest" value="3901" taskId="19" />
+  <Condition type="completeQuest" value="3901" />
+  <EventGroup type="enterTerritory" uniqueId="407,40700007">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9007001" style="alert" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="407" territoryId="40700001" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="407" territoryId="40700002" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="407" territoryId="40700003" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="407" territoryId="40700004" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="407,2001" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9007002" targetNpcId="407,2001" style="default" next="time" nextValue="1" />
+        <EventTask type="deSpawn" huntingZoneId="407" territoryId="40700001" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="407" territoryId="40700008" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

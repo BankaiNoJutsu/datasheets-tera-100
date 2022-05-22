@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9070" name="@dungeon:9070" startPos="-131801,-52327,5512" exitContinentId="7002" exitPos="-27445,22494,1743">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="65" />
+	<ClearCondition huntingZoneId="470" templateId="1000" amount="1" killCount="1" />
+	<Retry retryId="2" />
+  	<!-- 길드 경쟁 타이머 온 오프 -->
+	
+		<!-- 1네임드 전투 돌입 시, 타이머 킴 -->
+	<EventGroup type="npcState" uniqueId="470,1000" value="combat" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+		<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+		<EventTask type="timer" action="start" direction="reverse" value="3600" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="470,1000" value="0" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+		<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+		<EventTask type="rankSystem" state="end" next="none" />
+		<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  
+  <!-- 던전 이벤트 -->	
+  <EventGroup type="initialize"> <!-- 던전 생성 되자마자 실행되는 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000015" next="none" />
+		<EventTask type="turnAbnormalityTerritory" huntingZoneId="470" territoryId="47000022" turn="on" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="470,800" value="0" repeat="true"> <!-- 연출용 NPC 사망 시 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcState" uniqueId="470,1000" value="combat" repeat="true"> <!-- 네임드 전투 시작 시 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="470" territoryId="47000003" next="none"/>
+		<EventTask type="abnormality" abnormalityId="470005" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<!--EventTask type="timer" action="start" name="timecheck" timername="timecheck" direction="forward"  next="none" timerUiOff="false"/-->
+		<!-- EventTask type="spawn" huntingZoneId="470" territoryId="47000017" next="none" /-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="470,1000" value="90" repeat="true"> <!-- 네임드 90%되면 거짓말 시작 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="470,600" patternListId="2" next="none" />
+		<EventTask type="eventGage" name="변덕" action="start" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470048" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470048" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="470,1000" value="60" repeat="true"> <!-- 네임드 60%되면 배신자 패턴 시작 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470045" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470045" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="message" string="@dungeon:9070002" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="470,1000" value="15" repeat="true"> <!-- 네임드 15%되면 광폭화 시작 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470051" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="message" string="@dungeon:9070003" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="470,1000" value="0" repeat="true"> <!-- 네임드 사망 시 -->
+    <Event>
+      <EventTaskGroup>
+		<!--EventTask type="timer" action="stop" name="timecheck" value="0" next="none" /-->
+		<EventTask type="message" string="@dungeon:9070004" style="combat" next="none" />
+		<EventTask name="변덕" type="eventGage" action="plus" uiStyle="2" uiOn="false" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000020" next="none" />
+		<EventTask type="abnormality" abnormalityId="470020" target="player" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470022" target="player" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470044" target="player" turn="off" next="none" />
+		<EventTask type="killNpc" targetNpcId="470,601" next="none" />
+		<EventTask type="killNpc" targetNpcId="470,602" next="none" />
+		<EventTask type="killNpc" targetNpcId="470,603" next="none" />
+		<EventTask type="killNpc" targetNpcId="470,604" next="none" />
+		<EventTask type="killNpc" targetNpcId="470,600" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcReset" name="어그로 초기화" uniqueId="470,1000" repeat="true"> <!-- 어글 초기화 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="470" territoryId="47000001" next="none" />
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000015" next="none" />
+		<!--EventTask type="timer" action="stop" name="timecheck" value="0" next="none" /-->
+		<EventTask name="변덕" type="eventGage" action="plus" uiStyle="2" uiOn="false" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  
+  
+  <!--<EventGroup type="none" id="21" name="쫄 거짓말용" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.34" >
+		<EventTask type="changePatternList" targetNpcId="470,410" patternListId="2" next="none"/>
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.34" >
+		<EventTask type="changePatternList" targetNpcId="470,411" patternListId="2" next="none"/>
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.32" >
+		<EventTask type="changePatternList" targetNpcId="470,412" patternListId="2" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+  
+  <EventGroup type="none" id="22" name="쫄 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="470" territoryId="47000002" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="30" name="거짓/진실된 부하 소환" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.1"> <!-- set1 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000005" next="time" nextValue="3" /> <!-- a-->
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.1"> <!-- set2 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000006" next="time" nextValue="3" /> <!-- a-->
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.1"> <!-- set3 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000007" next="time" nextValue="3" /> <!-- a-->
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.1"> <!-- set4 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000008" next="time" nextValue="3" /> <!-- a-->
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.1"> <!-- set5 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000009" next="time" nextValue="3" /> <!-- a-->
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.1"> <!-- set6 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000010" next="time" nextValue="3" /> <!-- a-->
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.1"> <!-- set7 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000011" next="time" nextValue="3" /> <!-- a-->
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.1"> <!-- set8 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000012" next="time" nextValue="3" /> <!-- a-->
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.1"> <!-- set9 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000013" next="time" nextValue="3" /> <!-- a-->
+      </EventTaskGroup>
+	  <EventTaskGroup probability="0.1"> <!-- set10 -->
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+		<EventTask type="spawn" huntingZoneId="470" territoryId="47000014" next="time" nextValue="3" /> <!-- a-->
+		<!--EventTask type="changePatternList" targetNpcId="470,500" patternListId="2" next="none"/>
+		<EventTask type="changePatternList" targetNpcId="470,501" patternListId="2" next="none"/-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="31" name="거짓/진실된 부하 디스폰" repeat="true">
+	<Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470012" target="npc" targetNpcId="470,1000" turn="off" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 거짓말로 패턴 리스트 변경 -->
+  <EventGroup type="none" id="40" name="거짓말 이상 상태 지급" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<!-- 참으로 패턴 리스트 변경-->
+	<EventGroup type="none" id="41" name="참 이상 상태 지급" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<!-- 거짓말로 패턴 리스트 변경 -->
+  <EventGroup type="none" id="42" name="거짓말로 패턴 변경 - 3" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<!-- 참으로 패턴 리스트 변경-->
+	<EventGroup type="none" id="43" name="참으로 패턴 변경 - 3" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<!-- 거짓말로 패턴 리스트 변경 -->
+  <EventGroup type="none" id="44" name="거짓말로 패턴 변경 - 5" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470037" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<!-- 참으로 패턴 리스트 변경-->
+	<EventGroup type="none" id="45" name="참으로 패턴 변경 - 5" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+  <EventGroup type="none" id="50" name="투명 NPC 패턴 변경" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="changePatternList" targetNpcId="470,601" patternListId="2" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="51" name="투명 NPC 돌아오기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="470,601" patternListId="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="60" name="타르스키 변덕 게이지" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask name="변덕" type="eventGage" action="plus" value="1" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="61" name="변덕 게이지 잠시 중단" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+			<EventTask type="abnormality" abnormalityId="470043" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="62" name="변덕 게이지 재개" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+			<EventTask type="abnormality" abnormalityId="470020" target="player" turn="off" next="none" />
+			<EventTask type="abnormality" abnormalityId="470022" target="player" turn="off" next="none" />
+			<EventTask type="abnormality" abnormalityId="470044" target="player" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="70" name="링패턴 - 본래 패턴으로 복귀" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470039" target="npc" targetNpcId="470,600" turn="on" next="none" />
+			<EventTask name="변덕" type="eventGage" action="change" value="0" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+			<EventTask type="abnormality" abnormalityId="470031" target="npc" targetNpcId="470,1000" turn="off" next="none"/>
+			<!--EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="off" next="none" / -->
+			<EventTask type="changePatternList" targetNpcId="470,1000" patternListId="5" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="71" name="전멸기 - 본래 패턴으로 복귀" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470039" target="npc" targetNpcId="470,600" turn="off" next="none" />
+			<!--EventTask name="변덕" type="eventGage" action="change" value="0" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+			<EventTask type="abnormality" abnormalityId="470031" target="npc" targetNpcId="470,1000" turn="off" next="none"/>
+			<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="off" next="none" / -->
+			<EventTask type="changePatternList" targetNpcId="470,1000" patternListId="1" next="none" />
+			<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470048" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470048" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,601" turn="on" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="80" name="369 -> 36" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="470,1000" patternListId="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="470039" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,601" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="81" name="69 -> 9" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="470,1000" patternListId="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="470039" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,601" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="82" name="9 -> 0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="470,1000" patternListId="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="470039" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470048" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470048" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,601" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470056" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="none" id="83" name="369 복귀" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="470,1000" patternListId="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470048" target="npc" targetNpcId="470,600" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470048" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470039" target="npc" targetNpcId="470,600" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,1000" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470049" target="npc" targetNpcId="470,601" turn="on" next="none" />
+		<EventTask type="abnormality" abnormalityId="470056" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="eventGage" eventName="변덕" comparison="none" value="100" repeat="true"> <!-- 변덕 게이지 100 도달 시 준 전멸기 사용 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="killNpc" targetNpcId="470,602" next="none" />
+		<EventTask type="killNpc" targetNpcId="470,603" next="none" />
+		<EventTask type="killNpc" targetNpcId="470,604" next="none" />
+		<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" next="none" />
+		<EventTask type="changePatternList" targetNpcId="470,1000" patternListId="4" next="none" />
+		<EventTask type="abnormality" abnormalityId="470031" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask name="변덕" type="eventGage" action="change" value="0" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+  <EventGroup type="none" id="86" name="2명 이하" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="470,1000" patternListId="3" next="time" nextValue="1" />
+		<EventTask type="abnormality" abnormalityId="470032" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="470038" target="npc" targetNpcId="470,1000" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="100" name="변덕 게이지 - 참 - 5" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470037" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+			<EventTask name="변덕" type="eventGage" action="plus" value="1" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="101" name="이상 상태 부여 + 변덕 게이지" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470031" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+			<EventTask name="변덕" type="eventGage" action="plus" value="1" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="102" name="변덕 게이지 - 참 - 3" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470033" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+			<EventTask name="변덕" type="eventGage" action="plus" value="1" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="103" name="변덕 게이지 - 거짓 - 5" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470047" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+			<EventTask name="변덕" type="eventGage" action="plus" value="1" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="104" name="변덕 게이지 - 거짓 - 4" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470045" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+			<EventTask name="변덕" type="eventGage" action="plus" value="1" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="105" name="변덕 게이지 - 거짓 - 3" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="470046" target="npc" targetNpcId="470,1000" turn="on" next="none"/>
+			<EventTask name="변덕" type="eventGage" action="plus" value="1" uiStyle="2" uiOn="true" string="@dungeon:9070001" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+</Dungeon>

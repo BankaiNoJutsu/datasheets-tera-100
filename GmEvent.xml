@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<GmEvent resetHour="7" adminNoticeSec="3">
+	<!--
+		테리토리 세부 정보
+			stadiumTerritoryId: 안쪽 경기장 영역
+			stadiumTerritoryId 범위 안에 exitPos 가 있으면 안됩니다. (유저가 무한 텔레포트합니다.)
+			텔레포트 했을 때 (이벤트 참여중이 아니고) AND (stadiumTerritoryId 범위 안에 있으면) exitPos 으로 내보내는 기능이 있습니다.
+	-->
+	<Territory huntingZoneId="618" continentId="9618" minChannelId="0" stadiumTerritoryId="61809681" startPos="57406,-207114,432" startDir="10885" standPos="56865,-208058,470" standDir="10901" centerPos="57483,-206997,470" centerDir="10739" distance="2000"
+	 exitContinentId="7005" exitPos="-2496.6724,9380.0674,2765.0933" exitDir="-10087"
+	 ignoreBattleField="true" ignoreDungeon="true" ignoreContinent="152,7087,5,9827,9828,9829"/>
+
+	<!-- 이벤트에 대한 기본 정보 (운영툴로 수정 불가능) -->
+	<GmEventTemplates>
+		<!--
+			hurryUpRatio (20): 20 % 가 남으면 마감임박이라고 나타난다.
+			hurryUpCounts (100,70,50,40,30,20,10,9,8,7,6,5,4,3,2,1): '마감임박 일 경우' 남은 좌석이 hurryUpCounts 에 속해 있으면 월드의 모든 유저에게 broadcast 한다.
+		-->
+		<GmEventTemplate eventType="ox" desc="@gmevent:10000" parcelSender="@gmevent:1" parcelTitle="@gmevent:2" parcelMessage="@gmevent:3" specialParcelMessage="@gmevent:4"
+			 shortCutSetId="6301" shorCutWarningMessage="@gmevent:303" alimUISoundId="3028" teleportDataStringId="@rgn:63027"
+			 hurryUpRatio="10" hurryUpCounts="100,50,40,30,20,10,5">
+			<!--
+				oAreaTerritoryId: O 영역. 정답과 오답 구분용
+				xAreaTerritoryId: X 영역. 정답과 오답 구분용
+				oEffectTerritoryId: O 정답 시 알림 이펙트를 사용하기 위한 테리토리
+				xEffectTerritoryId: X 정답 시 알림 이펙트를 사용하기 위한 테리토리
+
+				oxQuizSeconds: 유저가 문제 풀 시간
+				oxQuizCountdown: 문제 푸는 중 카운트 다운 할 시간
+				oxAnswerSeconds: 문제 정답, 설명 보여줄 시간
+				oxQuizCountdownMessage: 카운트다운 할 때 보여줄 텍스트 (순서대로 입력 10,9,8,7,6,5,4,3,2,1)
+			-->
+			<OxGameProperty oAreaTerritoryId="61809685" xAreaTerritoryId="61809687" oEffectTerritoryId="61809686" xEffectTerritoryId="61809688"
+				 oxQuizSeconds="11" oxAnswerSeconds="8" waitNextQuizSeconds="3"
+				 oxQuizCountdownMessage="@gmevent:110,@gmevent:109,@gmevent:108,@gmevent:107,@gmevent:106,@gmevent:105,@gmevent:104,@gmevent:103,@gmevent:102,@gmevent:101,@gmevent:100">
+			</OxGameProperty>
+			<TaskGroupList>
+				<!-- 대기 시 테스크 -->
+				<TaskGroup type="ready">
+					<Task type="soundOn" soundType="bgm" soundId="100001" playTime="3600" next="time" nextValue="1"/> <!--bgm 등록-->
+					<Task type="spawn" huntingZoneId="618" territoryId="61809681"/> <!--퀘스트-->
+					<Task type="spawn" huntingZoneId="618" territoryId="61809689"/> <!--연출용-->
+					<Task type="spawn" huntingZoneId="618" territoryId="61809682"/> <!--O,X-->
+				</TaskGroup>
+				<!-- 시작 시 테스크 -->
+				<TaskGroup type="start">
+					<Task type="soundOff" soundType="bgm" soundId="100001" playTime="3600" next="none" /> <!--bgm 해제-->
+					<Task type="soundOn" soundType="effectsound" soundId="3029" playTime="0" next="time" nextValue="5" /> <!--시작 효과음-->
+					<Task type="soundOn" soundType="bgm" soundId="100001" playTime="3600" next="none" /> <!--bgm 등록-->
+					<Task type="despawn" huntingZoneId="618" territoryId="61809681"/>
+					<Task type="countdown" message="@gmevent:201,@gmevent:202,@gmevent:203,@gmevent:207,@gmevent:204,@gmevent:205,@gmevent:206" countdownTimes="26,22,18,14,10,6,2" next="time" nextValue="26"/>
+					<Task type="startGame"/>
+				</TaskGroup>
+				<!-- 종료 시 테스크 -->
+				<TaskGroup type="end">
+					<Task type="soundOff" soundType="bgm" soundId="100001" playTime="3600" next="none" /> <!--bgm 해제-->
+					<Task type="soundOn" soundType="effectsound" soundId="3037" playTime="0" next="time" nextValue="5" /> <!--종료 효과음-->
+					<Task type="eventBoard" topString="@gmevent:30" bottomString="@gmevent:31" /> <!--종료 메시지 출력-->
+					<Task type="soundOn" soundType="bgm" soundId="100001" playTime="3600" next="none" /> <!--bgm 등록-->
+					<Task type="despawn" huntingZoneId="618" territoryId="61809681"/>
+					<Task type="despawn" huntingZoneId="618" territoryId="61809682"/>
+					<Task type="spawn" huntingZoneId="618" territoryId="61809684" next="time" nextValue="10"/>
+					<Task type="despawn" huntingZoneId="618" territoryId="61809684"/>
+					<Task type="despawn" huntingZoneId="618" territoryId="61809689" next="time" nextValue="10" /> <!--연출용-->
+					<Task type="soundOff" soundType="bgm" soundId="100001" playTime="3600" next="none"/> <!--bgm 해제-->
+				</TaskGroup>
+			 	<TaskGroup type="mainOxQuiz">
+			 		<!--
+			 			Task type
+			 				sendMessage: OX 전용 메세지 (userTarget 적용)
+							sendQuiz: 문제 보내기
+							oxCountDown: OX 퀴즈 전용 카운트다운
+							spawnOxAnswerEffect: 정답 영역에 대한 이팩트
+							processResult: 정답자 처리
+							kickWrongUser: 오답자 내보내기
+							endQuiz: 퀴즈 마무리 (유저현황 전송)
+							sendRepechageQuiz: 패자부활 문제 보내기
+							processRepechageResult: 패자부활 정답 처리
+							resurrectionCorrectUser: 패자부활 정답자 살리기
+							endRepechageQuiz: 패자부활 마무리 (유저현황 전송)
+
+			 			sendMessage, socialMotion @userTarget
+			 				- stadiumUser: 경기장에 있는 모든 유저
+			 				- gameUser: 게임에 참가한 유저 (틀려서 경기장 밖에 있는 유저 포함)
+			 				- aliveUser: 현재 살아있는 유저
+			 				- deathUser: 틀려서 경기장 밖에 있는 유저
+			 				- newAliveUser: 이번 문제 정답 유저 (패자부활 포함)
+			 				- newDeathUser: 이번 문제 틀린 유저 (패자부활 포함)
+			 			sendMessage@style
+			 				- default
+			 				- alert
+			 				- countdown
+			 				- combat
+			 				- speechbubble
+			 		-->
+					<Task type="soundOn" soundType="effectsound" soundId="3030" playTime="0" next="none"/> <!--문제 시작 효과음-->
+			 		<Task type="sendQuiz" next="time" nextValue="5"/>
+			 		<Task type="oxCountdown" message="@gmevent:110,@gmevent:109,@gmevent:108,@gmevent:107,@gmevent:106,@gmevent:105,@gmevent:104,@gmevent:103,@gmevent:102,@gmevent:101,@gmevent:100" countdownTimes="10,9,8,7,6,5,4,3,2,1,0" effectSoundId="3028, 3028, 3028, 3028, 3028, 3031, 3032, 3033, 3034, 3035, 3036" next="time" nextValue="10"/>
+			 		<Task type="spawnOxAnswerEffect" /> <!-- 정답영역 이펙트 소환 -->
+			 		<Task type="processResult" next="time" nextValue="1"/> <!-- 유저위치판정, 정답유저 점수처리, 결과broadcast, 문제 특별보상지급 -->
+			 		<Task type="socialMotion" userTarget="newAliveUser" socialMotionId="20" next="none" /> <!-- 정답자 소셜 모션 -->
+			 		<Task type="sendMessage" string="@gmevent:303" userTarget="newAliveUser" style="combat" next="time" nextValue="1"/> <!-- 정답입니다! -->
+			 		<Task type="socialMotion" userTarget="newDeathUser" socialMotionId="18" next="none" /> <!-- 오답자 소셜 모션 -->
+			 		<Task type="sendMessage" string="@gmevent:300" userTarget="newDeathUser" style="combat" next="time" nextValue="3"/> <!-- 정답을 맞히지 못했습니다. 관중석에서 기다려주세요.-->
+					<Task type="despawn" huntingZoneId="618" territoryId="61809686"/> <!-- O 영역 이펙트 제거 -->
+					<Task type="despawn" huntingZoneId="618" territoryId="61809688"/> <!-- X 영역 이펙트 제거 -->
+			 		<Task type="kickWrongUser" next="time" nextValue="2" /> <!-- 틀린유저 내보낸다, 유저현황 -->
+			 		<Task type="endQuiz" /> <!-- 유저현황 -->
+			 	</TaskGroup>
+			 	<TaskGroup type="repeQuiz">
+			 		<Task type="sendMessage" string="@gmevent:301" userTarget="stadiumUser" style="combat" next="time" nextValue="4"/> <!-- 이번 문제는 패자부활전 문제입니다! -->
+			 		<Task type="sendMessage" string="@gmevent:302" userTarget="stadiumUser" style="combat" next="time" nextValue="4"/> <!-- 탈락하신 분들은 문제를 보고 10초 내에 O나 X를 선택해 주세요! -->
+			 		<Task type="sendRepechageQuiz" next="time" nextValue="5"/>
+			 		<Task type="oxCountdown" message="@gmevent:110,@gmevent:109,@gmevent:108,@gmevent:107,@gmevent:106,@gmevent:105,@gmevent:104,@gmevent:103,@gmevent:102,@gmevent:101,@gmevent:100" countdownTimes="10,9,8,7,6,5,4,3,2,1,0" effectSoundId="3028, 3028, 3028, 3028, 3028, 3031, 3032, 3033, 3034, 3035, 3036" next="time" nextValue="10"/>
+			 		<Task type="processRepechageResult" next="time" nextValue="1"/> <!-- 정답판정, 정답유저 살리기 -->
+			 		<Task type="socialMotion" userTarget="newAliveUser" socialMotionId="20" next="none" /> <!-- 정답자 소셜 모션 -->
+			 		<Task type="sendMessage" string="@gmevent:304" userTarget="newAliveUser" style="combat" next="none" /> <!-- 정답입니다! 잠시 후 경기장으로 이동됩니다!-->
+			 		<Task type="socialMotion" userTarget="newDeathUser" socialMotionId="18" next="none" /> <!-- 오답자 소셜 모션 -->
+			 		<Task type="sendMessage" string="@gmevent:300" userTarget="newDeathUser" style="combat" next="time" nextValue="3"/> <!-- 정답을 맞히지 못했습니다. 관중석에서 기다려 주세요. -->
+			 		<Task type="resurrectionCorrectUser" next="time" nextValue="5"/> <!-- 정답유저 살리기 -->
+			 		<Task type="endRepechageQuiz" /> <!-- 유저현황 -->
+			 	</TaskGroup>
+			</TaskGroupList>
+		</GmEventTemplate>
+	</GmEventTemplates>
+	
+	<!-- 이벤트(미니게임)에 대한 정보 (운영툴에서 추가/수정 가능하다)-->
+	<GmEvents>
+		<GmEvent id="1" eventType="ox" gameId="1" rewardId="1" eventName="OX이벤트" waitingSeconds="300" minLevel="65" maxLevel="65" openCount="2" maxUser="2" questLimitPerDay="1">
+		</GmEvent>
+		
+		<GmEvent id="412" eventType="ox" gameId="421" rewardId="23" eventName="OX이벤트" waitingSeconds="180" minLevel="30" maxLevel="65" openCount="2" maxUser="1000" questLimitPerDay="2">
+		</GmEvent>
+	</GmEvents>
+	
+	<GmEventMessage>
+		<AlimWindow beforeStart="@gmevent:20" afterStart="@gmevent:21" notyetClose="@gmevent:22" alreadyClose="@gmevent:23" remain="@gmevent:24" notRemain="@gmevent:25"/>
+		<BoardWindow quiz="@gmevent:400" repeQuiz="@gmevent:401"/>
+		<OX normalRewardString="@gmevent:11" pointRewardString="@gmevent:10" />
+		<UserStatus aliveUserString="@gmevent:1001" adminRunningString="@gmevent:2000" adminNotRunningString="@gmevent:2001" />
+		<MainMenu onProgress="@gmevent:40" onEnd="@gmevent:41" onExceed="@gmevent:42"/>
+	</GmEventMessage>
+	
+</GmEvent>

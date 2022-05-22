@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9889" name="@dungeon:9889" startPos="63475.0273,38629.2422,-8876.5625" exitContinentId="7003" exitPos="-76026, -38112, 1746" coolTime="0" coolTimeForPartyMatching="0" enterLimitCount="30" needBattlePoint="12"  coolTimeApplyType="enter" >
+<ClearCondition huntingZoneId="889" templateId="3801" amount="1"/> 
+<ClearCondition huntingZoneId="889" templateId="3802" amount="1"/> 
+  <RandomStart pos="63475.0273,38629.2422,-8876.5625" />
+  <RandomStart pos="69283,35121,-9510" />
+  
+<!--인던 파티 매칭 UI 데이터 -->
+  <!-- rank : 난이도, 1~5까지
+       tooltipStrId : 툴팁 스트링 아이디  -->
+  <Recommend rank="1" tooltipStrId="@dungeon:1">
+     <!-- nameId : ex. "추천 : 고급 문장"에 해당되는 스트링 아이디
+          descId : ex. "스킬을 강화... "에 해당되는 스트링 아이디 -->
+     <Category nameId="@dungeon:60" tooltipStrId="@dungeon:61"/> 	 
+	 <DropItem>
+		<!-- type : 직업
+			 nameId : 세트 아이템 이름 스트링 아이디  
+			 itemIdList : 아이템 아이디 리스트
+			 toolTipStrId : 툴팁 스트링 아이디	 -->
+	    <Class type="warrior" nameId="@dungeon:19089" itemIdList="12345,17659,17660,17661" tooltipStrId="@dungeon:29089"/>
+		<Class type="lancer" nameId="@dungeon:19089" itemIdList="12346,17656,17657,17658" tooltipStrId="@dungeon:29089"/>
+		<Class type="slayer" nameId="@dungeon:19089" itemIdList="12347,17659,17660,17661" tooltipStrId="@dungeon:29089"/>
+		<Class type="berserker" nameId="@dungeon:19089" itemIdList="12348,17656,17657,17658" tooltipStrId="@dungeon:29089"/>
+		<Class type="sorcerer" nameId="@dungeon:19089" itemIdList="12349,17662,17663,17664" tooltipStrId="@dungeon:29089"/>
+		<Class type="archer" nameId="@dungeon:19089" itemIdList="12350,17659,17660,17661" tooltipStrId="@dungeon:29089"/>
+		<Class type="priest" nameId="@dungeon:19089" itemIdList="12351,17662,17663,17664" tooltipStrId="@dungeon:29089"/>
+		<Class type="elementalist" nameId="@dungeon:19089" itemIdList="12352,17662,17663,17664" tooltipStrId="@dungeon:29089"/>
+		<Class type="soulless" nameId="@dungeon:19089" itemIdList="17659,17660,17661" tooltipStrId="@dungeon:29089"/>
+	 </DropItem>
+  </Recommend>
+<!--인던 파티 매칭 UI 데이터 -->
+
+  <!-- 사교도의 신전 스토리 던전 -->
+  <Condition type="maxMemberCount" value="3" />
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="35" />
+  <!-- 1인 인던 입장 버프 마석 소환-->
+  <EventGroup type="enterTerritory" uniqueId="889,88901213">
+    <Event>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88901214" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88901215" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88901216" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.7">
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1인 인던 입장 버프 마석 소환-->
+  <EventGroup type="enterTerritory" uniqueId="889,88901218">
+    <Event>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88901219" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88901220" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88901221" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.7">
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="889,3705" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="889" territoryId="88901224" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 퀘스트 없이도 동작해야 하는 이벤트 -->
+  <!-- 동쪽문 열기 -->
+  <EventGroup type="talkNpc" uniqueId="889,1008">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9889101" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="8105" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 갈란 죽으면 서부 결계석 소환 -->
+  <EventGroup type="npcHp" uniqueId="889,3609" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88901209" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 서쪽문 열기 -->
+  <EventGroup type="talkNpc" uniqueId="889,1011">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9889102" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="8104" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 네임드 문 열기 -->
+  <EventGroup type="talkNpc" uniqueId="889,1017">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9889103" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="8106" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 비밀의 문 열기 (봉인해제 스크롤 제거)-->
+  <!--EventGroup type="npcHp" uniqueId="889,101" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9889106" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="8108" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup-->
+  <EventGroup type="npcHp" uniqueId="889,3609" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="dynamicGeo" objectId="8108" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스방 문 열기 -->
+  <EventGroup type="npcHp" uniqueId="889,3707" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9889107" style="default" next="time" nextValue="3" />
+        <EventTask type="dynamicGeo" objectId="8107" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 일반 마석 보스 소환 -->
+  <EventGroup type="talkNpc" uniqueId="889,1018">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9889104" style="default" next="time" nextValue="5" />
+        <EventTask type="message" string="@dungeon:9889105" style="default" next="time" nextValue="5" />
+        <EventTask type="despawn" huntingZoneId="889" territoryId="88901149" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88900092" next="time" nextValue="7" />
+        <!--<EventTask type="message" string="@dungeon:9889109" style="default" next="time" nextValue="10" />-->
+        <!--<EventTask type="message" string="@dungeon:9889110" style="default" next="none"/>-->
+        <!--엘리온 쿠벨 용병 소환<EventTask type="spawn" huntingZoneId="889" territoryId="88901152" next="none"/>-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 아키아 변신  -->
+  <EventGroup type="talkNpc" uniqueId="889,1007">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9889108" style="default" next="time" nextValue="3" />
+        <EventTask type="deSpawn" huntingZoneId="889" territoryId="88901191" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88900086" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 체력 0일 때 Quest Only 쿠벨 등장 -->
+  <EventGroup type="npcHp" uniqueId="889,3802" value="0">
+    <Event>
+      <EventTaskGroup>
+        <!--엘리온 쿠벨 용병 디스폰<EventTask type="message" string="@dungeon:9889111" targetNpcId="889,3901" style="default" next="time" nextValue="2" />	
+				<EventTask type="despawn" huntingZoneId="889" territoryId="88901152" next="time" nextValue="1" />-->
+        <EventTask type="spawn" huntingZoneId="889" territoryId="88901153" next="time" nextValue="5" />
+        <EventTask type="message" string="@dungeon:9889112" targetNpcId="889,1005" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 사용하지 않는 3차 CBT 이벤트
+	<EventGroup type="enterTerritory" uniqueId="889,88900121">
+		<Event questId="2595">
+			<EventTask type="deSpawn" huntingZoneId="889" territoryId="88900110" next="none"/>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="talkNpc" uniqueId="889,1011">
+		<Event textId="2">
+			<EventTask type="deSpawn" huntingZoneId="889" territoryId="88900111" next="time" value="5"/>
+			<EventTask type="message" string="@dungeon:9889009" style="Alert" next="none"/>	
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="889,3707" value="10">
+		<Event>
+			<EventTask type="message" string="@dungeon:9889010" style="Alert" next="time" nextValue="5"/>	
+			<EventTask type="spawn" huntingZoneId="889" territoryId="88900092" next="time" nextValue="2"/>	 
+			<EventTask type="message" string="@dungeon:9889011" style="Alert" next="none"/>	
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="talkNpc" uniqueId="889,1008">
+		<Event textId="2">
+			<EventTask type="message" string="@dungeon:9889012" style="Alert" next="time" nextValue="5"/>
+			<EventTask type="spawn" huntingZoneId="889" territoryId="88900086" next="none"/>	
+		</Event>
+	</EventGroup> -->
+
+</Dungeon>

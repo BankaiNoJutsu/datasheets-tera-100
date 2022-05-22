@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3030" name="@dungeon:3030" startPos="23275,159400,12618" exitContinentId="2000" exitPos="88851,-101854,16636" AllAoiWideBroadCaster="true" addClusterMargin="1300" ownershipGuaranteeSec="9999" lazyBroadcastPartyMemberInfo="true" coolTimeApplyType="enter">
+	<Condition type="raid" value="4" />
+	<Condition type="maxMemberCount" value="20" />
+	<Condition type="levelOver" value="70" />
+	
+	<ClearCondition huntingZoneId="3030" templateId="1000" amount="1" killCount="1" />
+	<ClearCondition huntingZoneId="3030" templateId="2000" amount="1" killCount="1" />
+	
+	<!-- 던전 초기 세팅 -->
+	<EventGroup type="initialize" name="초기세팅">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000001" next="none"/> <!-- 마흐나크 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000020" next="none"/> <!-- 아비온 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000003" next="none"/> <!-- 퇴장용 차원의 마법석 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000005" next="none"/> <!-- 예외사항 방지용 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000006" next="none"/>
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000007" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="1" name="네임드 랜덤 스폰" repeat="true"> <!--네임드 랜덤 스폰-->
+		<Event>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000004" next="time" nextValue="5"/> <!-- 입장 체크 NPC 디스폰 -->
+				<EventTask type="message" string="@dungeon:30300001" style="default" next="time" nextValue="5" />  
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000001" next="none"/> <!-- 마흐나크 -->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000004" next="time" nextValue="5" /> <!-- 입장 체크 NPC 디스폰 -->
+				<EventTask type="message" string="@dungeon:30300002" style="default" next="time" nextValue="5" />  
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000020" next="none"/> <!-- 아비온 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 마흐나크 리셋용 이벤트 -->
+	<EventGroup type="npcReset" id="1000" uniqueId="3030,1000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000001" next="time" nextValue="5" /> <!-- 마흐나크 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000002" next="none" />  <!-- 차원의 마법석 스폰 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000005" next="none"/> <!-- 예외사항 방지용 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000006" next="none"/>
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000007" next="none"/>
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000001" next="none" /> <!-- 마흐나크 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 아비온 리셋용 이벤트 -->
+	<EventGroup type="npcReset" id="2000" uniqueId="3030,2000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000020" next="time" nextValue="5" /> <!-- 아비온 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000002" next="none" />  <!-- 차원의 마법석 스폰 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000005" next="none"/> <!-- 예외사항 방지용 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000006" next="none"/>
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000007" next="none"/>
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000020" next="none" /> <!-- 아비온 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 마흐나크 전투 시작 -->
+	<EventGroup type="npcHp" uniqueId="3030,1000" value="98" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:30300000" next="none" />
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000002" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!-- 아비온 전투 시작 -->
+	<EventGroup type="npcHp" uniqueId="3030,2000" value="98" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:30300000" next="none" />
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000002" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<!-- 외곽 장판 -->
+	<EventGroup type="none" id="3000" name="장판_1단계" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:30303000" next="none" />
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000005" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="none" id="3001" name="장판_2단계" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000006" next="none"/>
+				<EventTask type="message" string="@dungeon:30303001" next="none" /> 
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000005" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	<EventGroup type="none" id="3002" name="장판_3단계" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000007" next="none"/>
+				<EventTask type="message" string="@dungeon:30303002" next="none" /> 
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000006" next="none" />
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000005" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+
+	<!-- 마흐나크 사망 -->
+	<EventGroup type="npchp" uniqueId="3030,1000" value="0">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000003" next="none" />	<!-- 퇴장용 차원의 마법석 스폰 -->
+				
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000005" next="none"/> <!-- 예외사항 방지용 외곽 장판 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000006" next="none"/>
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000007" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!-- 아비온 사망 -->
+	<EventGroup type="npchp" uniqueId="3030,2000" value="0">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3030" territoryId="303000003" next="none" />	<!-- 퇴장용 차원의 마법석 스폰 -->
+				
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000005" next="none"/> <!-- 예외사항 방지용 외곽 장판 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000006" next="none"/>
+				<EventTask type="despawn" huntingZoneId="3030" territoryId="303000007" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+</Dungeon>

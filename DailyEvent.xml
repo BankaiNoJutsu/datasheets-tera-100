@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+특정 시점에 효과 리셋 (다음 효과로 넘어감)
+월드 전체에 적용됨 (개인 상태와 상관 없음)
+월드 접속 시 이벤트 효과를 메시지로 출력(시스템메시지)
+- SMT_DAILYEVENT_SUNDAY ~ SMT_DAILYEVENT_SATURDAY
+활성화 되어 있는 효과는 이상상태 아이콘으로 표시
+- 빈 이상상태 하나를 적용하는게 좋을 듯
+하루에 1개 이상의 효과가 적용 가능 해야함
+
+이벤트 효과 리스트
+ * 필드 몬스터 경험치 상승 (Abnormality)
+ * 필드 몬스터 드랍 골드 상승 (Abnormality)
+ * 평판 포인트, 평판 경험치 상승 (Abnormality)
+   - abnormalityList = "이상상태Id_1, 이상상태Id_2, 이상상태Id_3"
+
+ * 인던 강화 아이템 드랍 확률 상승 (DungeonEnchantItemDrop)
+   - 드랍 확률 = 기존 확률 + bonusDropProb
+
+ * 인던 명품 아이템 드랍 확률 상승 (DungeonMasterpieceDrop)
+   - 드랍 확률 = 기존 확률 + bonusDropProb
+
+ * 강화 확률 상승 (Enchant)
+   - 강화 성공 확률 = 기존 확률 + bonusSuccessProb
+
+ * 채집 수량 상승 (Gathering)
+   - 채집 갯수 = 기존 갯수 * bonusCountRate
+
+ * 던전 쿨타임 감소 (DungeonCooltime)
+   - 쿨타임 = 기존 쿨타임 * (1 - 헌팅존 이벤트 감소) * (1 - decreaseRate)
+
+ * 일일퀘스트 최대 개수 증가 (DailyQuest)
+   - 최대 개수 = 기존 개수 * bonusLimitAccomplishCountRate
+
+ * 평판 포인트 증가 (Reputation)
+   - 획득 평판 포인트 = 기본 획득 포인트 * (bonusPointRate)
+
+- 레어 몬스터 출현 확률 상승(레어 몬스터 시스템 완성 후) (1)
+- 거래 중개소 수수료 하락 (n)
+
+ -->
+
+ 
+<DailyEvent enable="false">
+  <Time resetHour="6" /> <!-- resetHour 는 local time 기준으로 -->
+
+  <!-- Sunday --><!--카이아의 가호-->
+    <DayOfWeek index="1">
+    <Effect type="Abnormality" abnormalityList="910003" />
+    <Effect type="Gathering" bonusCountRate="2.0" exceptItemTemplateId="1186, 1221, 1222, 562, 7206, 45442, 45443" />
+  </DayOfWeek>
+   
+  <!-- Monday --><!--기드의 가호-->
+    <DayOfWeek index="2">
+    <Effect type="Abnormality" abnormalityList="910002" />
+  </DayOfWeek>
+  
+  <!-- Tuesday --><!--세렌의 가호-->
+<DayOfWeek index="3">
+    <Effect type="Abnormality" abnormalityList="910001" />
+    <Effect type="DailyQuest" bonusLimitAccomplishCountRate="1.5" />
+  </DayOfWeek>
+    
+  <!-- Wednesday --><!--미스텔의 가호-->
+<DayOfWeek index="4">
+    <Effect type="Abnormality" abnormalityList="910004" />
+  </DayOfWeek>
+  
+  <!-- Thursday --><!--발더의 가호-->
+  <DayOfWeek index="5">
+    <Effect type="Abnormality" abnormalityList="910000" />
+    <Effect type="DailyQuest" bonusLimitAccomplishCountRate="1.5" />
+    <Effect type="DungeonEnchantItemDrop" bonusDropProb="0.017" />
+  </DayOfWeek>
+    
+  <!-- Friday --><!--벨릭의 가호-->
+  <DayOfWeek index="6">
+    <Effect type="Abnormality" abnormalityList="910005" />
+    <Effect type="Artisan" produceTimeRate="0.5" />
+    <Effect type="Gathering" bonusCountRate="2.0" exceptItemTemplateId="1186, 1221, 1222, 562, 7206, 45442, 45443" />
+  </DayOfWeek>
+ 
+  <!-- Saturday --><!--엘리누의 가호-->
+  <DayOfWeek index="7">
+    <Effect type="Abnormality" abnormalityList="910006" />
+    <Effect type="DailyQuest" bonusLimitAccomplishCountRate="1.5" />
+    <Effect type="DungeonMasterpieceDrop" bonusDropProb="0.0001" />
+  </DayOfWeek>
+  
+</DailyEvent>

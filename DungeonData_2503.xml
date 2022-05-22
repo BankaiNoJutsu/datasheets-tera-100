@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="2503" name="@dungeon:2503" startPos="-23698,-145259,55" startDir="315" exitContinentId="2500" exitPos="-12538,-16984,982" exitDir="90" destroyWaitMin="0" >
+	<Condition type="solo" value="1"/>
+	<Condition type="maxMemberCount" value="1" />
+	<Condition type="levelOver" value="1" />
+	<ClearCondition huntingZoneId="2503" templateId="2001" amount="1" killCount="1" />
+	<RestoreTargetQuest id="250021" forceRestore="true"/>
+
+	<!--시작 연출-->
+	<EventGroup type="initialize" name="Initialize">
+		<Event>
+			<EventTaskGroup>
+				<!--듀리온 스폰-->
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300024" next="none"/>
+				<EventTask type="flag" name="아군npc" value="1" next="none"/>
+				<EventTask type="flag" name="스킵제외" value="1" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--연합군 병사 스폰-->
+	<EventGroup type="flag" name="아군npc">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300018" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300019" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300020" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300021" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="enterTerritory" uniqueId="2503,250300011" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="아군영웅npc스폰" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="아군영웅npc스폰,스킵제외" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<!--로도스 스폰-->
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300001" next="none"/>
+				<!--포아롱 스폰-->
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300010" next="none"/>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<!--로도스off-->
+				<EventTask type="turnAi" turn="off" huntingZoneId="2503" territoryId="250300001" templateId="1001" next="none"/>
+				<!--포아롱off-->
+				<EventTask type="turnAi" turn="off" huntingZoneId="2503" territoryId="250300010" templateId="1005" next="time" nextValue="1"/>
+				
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="doActionScript" targetNpcId="2503,2000" actionScriptId="25032000" next="time" nextValue="8"/>
+				
+				<EventTask type="turnAi" turn="on" huntingZoneId="2503" territoryId="250300001" templateId="1001" next="none"/> <!--로도스on-->
+				<EventTask type="turnAi" turn="on" huntingZoneId="2503" territoryId="250300010" templateId="1005" next="none"/> <!--포아롱on-->
+				<EventTask type="flag" name="전투" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="전투">
+		<Event>
+			<EventTaskGroup>
+				<!--아크데바 병사 스폰-->
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300012" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300013" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300014" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300015" next="none"/>
+				
+				<EventTask type="empty" next="time" nextValue="1"/>
+				
+				<!--아크데바 마법사, 사제 추가 스폰-->
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300006" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300007" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300016" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300017" next="none"/>
+				
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<!--<EventTask type="doActionScript" targetNpcId="2503,2000" actionScriptId="25032001" next="none"/>-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--아크데바 모두 사망-->
+   <EventGroup type="eliminate" territoryId="250300006,250300007,250300012,250300013,250300014,250300015,250300016,250300017" >
+		<Event>  
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="2503,2000" actionScriptId="25032001" next="none"/>
+				<EventTask type="flag" name="아크데바처치" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="아크데바처치">
+		<Event>  
+			<EventTaskGroup>
+				<EventTask type="updateQuest" questId="250021" taskId="2" next="none"/>
+				<EventTask type="turnAi" turn="off" huntingZoneId="2503" territoryId="250300001" templateId="1001" next="none"/> <!--로도스off-->
+				<EventTask type="turnAi" turn="off" huntingZoneId="2503" territoryId="250300010" templateId="1005" next="none"/> <!--포아롱off-->
+				<EventTask type="turnAi" turn="off" huntingZoneId="2503" territoryId="250300001" templateId="1101" next="none"/> <!--병사off-->
+				<EventTask type="turnAi" turn="off" huntingZoneId="2503" territoryId="250300010" templateId="1102" next="none"/> <!--병사off-->
+				
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300010" next="none"/>
+				
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2503" next="none"><!--시오즈 어디갔어? 할 때 pc 안보이게 하기-->
+					<Pos value="-22745,-145199,49" />
+				</EventTask>
+				
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300035" next="none"/>
+				
+				<!--<EventTask type="doActionScript" targetNpcId="2503,1005" actionScriptId="25031006" next="none"/>-->				
+				<EventTask type="empty" next="time" nextValue="7"/>				
+				<!--<EventTask type="doActionScript" targetNpcId="2503,2000" actionScriptId="25032002" next="time" nextValue="3"/>-->
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2503" next="none"> <!--시작 위치로 이동-->
+					<Pos value="-23698,-145259,55" />
+				</EventTask>
+				
+				<EventTask type="empty" next="time" nextValue="4.5"/>
+				
+				<!--<EventTask type="playMovie" id="2017" next="none"/>-->
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300028" next="none"/>
+				
+				<EventTask type="empty" next="time" nextValue="1"/>
+				
+				<EventTask type="doActionScript" targetNpcId="2503,3000" actionScriptId="25033002" next="time" nextValue="6.5"/>
+				<EventTask type="killNpc" targetNpcId="2503,1101" next="none"/> <!--빌리저 사망-->
+				<EventTask type="killNpc" targetNpcId="2503,1102" next="none"/> <!--빌리저 사망-->
+				<EventTask type="killNpc" targetNpcId="2503,1001" next="none"/>
+				<EventTask type="killNpc" targetNpcId="2503,1006" next="none"/>
+				
+				<EventTask type="empty" next="time" nextValue="2"/>
+				
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300028" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300008" next="none"/>	<!--시오즈 스폰-->
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300009" next="none"/>	<!--투명npc스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 시오즈 빈사 / 플레이어 연민 연출 -->
+	<EventGroup type="npcHp" uniqueId="2503,3001" value="50" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="2503,3001" actionScriptId="821005" next="time" nextValue="3"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	<!-- 시오즈 사망 시 연민 이상상태 해제 -->
+	<EventGroup type="npcHp" uniqueId="2503,3001" value="0" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="시오즈처치" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="시오즈처치" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="updateQuest" questId="250021" taskId="3" next="none"/>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="playMovie" id="2018" next="time" nextValue="47"/>
+				
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300022" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300023" next="none"/>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="doActionScript" targetNpcId="2503,10000" actionScriptId="250310080" next="none"/>				
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2503" next="none"><!--듀리온 등장할 때 pc 보이지 않게 숨기기-->
+					<Pos value="-23776,-145185,440"/>
+				</EventTask>
+				
+				<EventTask type="empty" next="time" nextValue="17"/>
+				
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300030" next="none"/>
+				<EventTask type="empty" next="time" nextValue="0.5"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300031" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300032" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300033" next="none"/>				
+				
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300034" next="none"/>				
+				<EventTask type="empty" next="time" nextValue="74"/>
+				
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300022" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300023" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300030" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300031" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300032" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300033" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300034" next="none"/>				
+
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2503" next="none"> <!--PC 다시 나오게 하기-->
+					<Pos value="-23552,-145422,50"/>
+				</EventTask>
+				<EventTask type="flag" name="듀리온전투" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" id="20" name="구시오즈처치" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="playMovie" id="2018" next="time" nextValue="47"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300022" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300023" next="none"/>
+
+				<EventTask type="empty" next="time" nextValue="1"/>
+				
+				<EventTask type="doActionScript" targetNpcId="2503,10000" actionScriptId="250310000" next="time" nextValue="1"/>
+				
+				<EventTask type="empty" next="time" nextValue="18"/>
+				
+				<EventTask type="empty" next="time" nextValue="6"/>
+				
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300001" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300022" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300023" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300025" next="none"/>				
+				<EventTask type="empty" next="time" nextValue="1"/>
+				
+				<EventTask type="turnAi" turn="off" huntingZoneId="2503" territoryId="250300025" templateId="10100" next="none"/>
+				
+				<EventTask type="doActionScript" targetNpcId="2503,10100" actionScriptId="250310101" next="time" nextValue="2"/>
+				
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="doActionScript" targetNpcId="2503,10100" actionScriptId="250310102" next="time" nextValue="8"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300027" next="none"/>
+				
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300026" next="none"/>
+				
+				<EventTask type="empty" next="time" nextValue="7"/>
+				<EventTask type="doActionScript" targetNpcId="2503,10100" actionScriptId="250310103" next="time" nextValue="1"/>
+				
+				<EventTask type="empty" next="time" nextValue="35"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300026" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300027" next="none"/>
+				<EventTask type="flag" name="듀리온전투" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="듀리온전투" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300024" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300005" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="2503,2001" value="40">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="2503,2001" actionScriptId="25032006" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--보스 처치-->
+	<EventGroup type="eliminate" territoryId="250300005" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300005" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300036" next="none"/>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2503" next="none">
+					<Pos value="-23353,-145606,50"/>
+				</EventTask>
+				<EventTask type="empty" next="time" nextValue="10"/>
+				<EventTask type="flag" name="듀리온사망" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--듀리온 사망 연출-->
+	<EventGroup type="flag" id="4" name="듀리온사망" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300029" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="guideOn" nameId="2503,910" id="1" pos="-22804,-146155,50" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--단계 스킵-->
+	<!--아크데바 처치-->
+	<EventGroup type="flag" id="1" name="아크데바처치스킵" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300001" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300010" next="none"/>
+				<EventTask type="flag" name="스킵제외" value="0" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="flag" name="아크데바처치" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--시오즈 처치-->
+	<EventGroup type="flag" id="2" name="시오즈처치스킵" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="2503,3001" next="none"/>
+				<EventTask type="flag" name="스킵제외" value="0" next="none"/>
+				<EventTask type="flag" name="아군npc디스폰" value="1" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="flag" name="시오즈처치" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--듀리온 전투 시작-->
+	<EventGroup type="flag" id="3" name="듀리온전투시작" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300025" next="none"/>
+				<EventTask type="flag" name="스킵제외" value="0" next="none"/>
+				<EventTask type="flag" name="아군npc디스폰" value="1" next="none"/>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="doActionScript" targetNpcId="2503,10100" actionScriptId="250310105" next="none"/>
+				<EventTask type="flag" name="듀리온전투" value="1" next="none"/>	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--연합군 병사 디스폰-->
+	<EventGroup type="flag" name="아군npc디스폰" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300018" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300019" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300020" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300021" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--다른 진행-->
+	<EventGroup type="flag" id="10" name="부활" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300005" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300024" next="none"/>
+				<EventTask type="flag" name="스킵제외" value="0" next="none"/>
+				<EventTask type="flag" name="아군npc디스폰" value="1" next="none"/>
+				
+				<EventTask type="playMovie" id="2018" next="time" nextValue="47"/>
+				
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300022" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300023" next="none"/>
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="doActionScript" targetNpcId="2503,10000" actionScriptId="250310080" next="none"/>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2503" next="none">
+					<Pos value="-23353,-145606,50"/>
+				</EventTask>
+				
+				<EventTask type="empty" next="time" nextValue="17"/>
+				
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300030" next="none"/>
+				<EventTask type="empty" next="time" nextValue="0.5"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300031" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300032" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300033" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2503" territoryId="250300034" next="none"/>
+				
+				<EventTask type="empty" next="time" nextValue="74"/>
+				
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300022" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300023" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300030" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300031" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300032" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300033" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2503" territoryId="250300034" next="none"/>
+				
+				<EventTask type="flag" name="듀리온전투" value="1" next="none"/>-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

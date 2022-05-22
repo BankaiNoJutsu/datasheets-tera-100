@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9090" name="@dungeon:9090" startPos="108570,-10219,2841" exitContinentId="7001" exitPos="119368, -3288, 3146">
+  <!--서부 벌목지 호위퀘 -->
+  <Condition type="party" value="1" />
+  <!--임시 원안 2인 퀘-->
+  <Condition type="levelOver" value="10" />
+  <Condition type="progressQuest" value="268" taskId="1" />
+  <Condition type="completeQuest" value="268" />
+  <EventGroup type="enterTerritory" uniqueId="490,49000034">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9090001" targetNpcId="490,1004" next="time" nextValue="60" />
+        <EventTask type="message" string="@dungeon:9090002" targetNpcId="490,1004" next="time" nextValue="60" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="490,49000035">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9090003" targetNpcId="490,1004" next="time" nextValue="60" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="490,49000036">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9090004" targetNpc="490,1004" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" value="90" uniqueId="490,1004">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9090005" targetNpcId="490,1004" npcHp="70" next="none" />
+        <EventTask type="message" string="@dungeon:9090006" targetNpcId="490,1004" npcHp="50" next="none" />
+        <EventTask type="message" string="@dungeon:9090007" targetNpcId="490,1004" npcHp="30" next="none" />
+        <EventTask type="message" string="@dungeon:9090008" targetNpcId="490,1004" npcHp="10" next="none" />
+        <EventTask type="message" string="@dungeon:9090009" targetNpcId="490,1004" npcHp="5" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questFail">
+    <!-- 수호 퀘스트 실패 시 처리 -->
+    <Event questId="244" taskId="1">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9090010" style="alert" next="time" nextValue="3" />
+        <EventTask type="teleport" continentId="7001" pos="119368, -3288, 3146" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

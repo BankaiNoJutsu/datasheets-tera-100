@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9053" name="@dungeon:9053" startPos="-42999,86778,1919" exitContinentId="7013" exitPos="-46588,60373,415" startDir="160">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="68" />
+	<ClearCondition huntingZoneId="453" templateId="999" amount="1" killCount="1" />
+	<Retry retryId="1" />
+	
+  <!-- HP99%에 입구 차단벽 생성 -->
+	<EventGroup type="npcHp" uniqueId="453,999" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--차단문 생성 메세지-->
+				<EventTask type="message" string="@dungeon:453001" style="combat" next="time" nextValue="5" />
+				<!--입구 벽 스폰-->
+				<EventTask type="spawn" huntingZoneId="453" territoryId="45300023" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  <!-- 돌거인 리셋 -->
+  <EventGroup type="npcReset" uniqueId="453,999" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="453" territoryId="45300001" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="453" territoryId="45300001" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+  <!-- 보호막 패턴 -->
+  <EventGroup type="none" id="1" name="보호막 전멸기 후 제자리로 가기" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="45300001" target="npc" targetNpcId="453,999" turn="off" next="none" />
+				<EventTask type="changePatternList" targetNpcId="453,999" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  <!-- 돌거인 처치 후 차원의 마법석 생성 -->
+	<EventGroup type="npcHp" uniqueId="453,999" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="453" territoryId="45300033" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 던전 입구 구손 불가 -->
+	<EventGroup type="enterTerritory" uniqueId="453,45300040">  <!-- 던전 입구~차단벽 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="453" territoryId="45300040" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="453,45300041">  <!-- 전투 공간 진입 시 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="453" territoryId="45300041" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+</Dungeon>

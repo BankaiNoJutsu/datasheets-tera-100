@@ -1,0 +1,912 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+ <!-- 
+* UserData.xml 을 참조하면 된다.
+  ** 주의
+  ** race, gender는 있는 그대로 넣는다.
+  ** 다만 class="hero" 고정이다. 
+  ** Template 노드에 @referenceClass Attribute 가 추가되었음.
+  ** @referenceClass 는 스택시스템, 스테미나 게이지에 사용된다.
+  ** 즉, 검투사 스킬을 주력으로 사용하고 검투사의 스테미너 시스템을 사용하는 영웅은 referenceClass="warrior" 
+  ** DefaultSkillList 노드: 영웅의 스킬을 지정한다. (모든 스킬을 배운 상태로 시작)
+  ** @activeSkillIdList: 액티브스킬 ID를 적는다.
+  ** @passiveSkillIdList: 패시브스킬 ID를 적는다.
+  ** DefaultShortcutData 노드 : DefaultShortcutData.xml 을 참조하면 된다.
+
+* HeroData.Template@id : Hero Template ID
+* HeroData.Template@shapeID : Hero가 사용할 shpae ID (HeroShape 노드의 ID / HeroShape.xml)
+* HeroData.Template@basicActionId : Hero가 사용할 basic Action ID (HeroBasicActionData 노드의 ID / HeroBasicAction.xml)
+* HeroData.Template@class : hero 고정
+* HeroData.Template@referenceClass : 해당 영웅이 사용할 스택시스템과 스태미나시스템의 원래 직업 ( 즉, 레퍼런스 직업. 엘리온쿠벨의 경우는 검투사)
+
+* HeroData.Template.DefaultShortcutData.Shortcut : DefaultShortcutData.xml 참조. 다만 관리의 편의성을 위해 HeroData.Template 노드에 속하도록 수정함.
+ 
+* HeroData.Template.DefaultSkillList@activeSkillIdList : 영웅이 가지고 있을 액티브 스킬의 리스트
+* HeroData.Template.DefaultSkillList@passiveSkillIdList : 영웅이 가지고 있을 패시브 스킬의 리스트
+
+* Hero Template ID 발번 규칙 - 20000에서, 100씩 증가하도록 설정합니다.
+
+* CombatPropensity : 0 ~ 100 사이 값.
+ -->
+<HeroData huntingZoneId="0">
+	<Template id="20100" defaultSkinId="20100" heroSkinGroup="20100,20101,20102" basicActionId="20100" desc="브라가" race="baraka" gender="male" class="hero" classType="1" referenceClass="lancer" useStack="False" staminaType="1" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Braga_20100_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="60000" maxMp="0" />
+			<StatByLevel level="2" maxHp="63000" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="66000" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="69000" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="72000" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="75000" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="78000" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="81000" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="84000" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="87000" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020002,1020003,1020100,1020101" />
+		<CombatPropensity attack="30" survival="100" crowdControl="60" move="20" operationDifficulty="40" />
+		<Stamina maxST="1000" tickInterval="1000" recoveryRateNormal="0.05" recoveryRateLow="0" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="10" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="20200" defaultSkinId="20200" heroSkinGroup="20200,20201,20202" basicActionId="20200" desc="길버트 그레이스" race="human" gender="male" class="hero" classType="1" referenceClass="lancer" useStack="False" staminaType="1" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Dougal_20200_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="42000" maxMp="0" />
+			<StatByLevel level="2" maxHp="44100" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="46200" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="48300" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="50400" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="52500" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="54600" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="56700" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="58800" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="60900" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020005,1020003" />
+		<CombatPropensity attack="50" survival="50" crowdControl="50" move="40" operationDifficulty="40" />
+		<Stamina maxST="1500" tickInterval="1000" recoveryRateNormal="0.05" recoveryRateLow="0.1" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="20300" defaultSkinId="20300" heroSkinGroup="20300,20301,20302" basicActionId="20300" desc="로도스" race="human" gender="male" class="hero" classType="2" referenceClass="fighter" useStack="False" staminaType="3" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Rhodos_20300_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="115" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="80" statRes="85" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="16" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="39000" maxMp="0" />
+			<StatByLevel level="2" maxHp="40950" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="42900" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="44850" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="46800" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="48750" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="50700" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="52650" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="54600" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="56550" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003" />
+		<CombatPropensity attack="70" survival="20" crowdControl="50" move="50" operationDifficulty="30" />
+		<Stamina maxST="1500" tickInterval="1000" recoveryRateNormal="0" recoveryRateLow="0" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="20400" defaultSkinId="20400" heroSkinGroup="20400,20401,20402,20403" basicActionId="20400" desc="프레이아 로헨" race="highelf" gender="female" class="hero" classType="2" referenceClass="lancer" useStack="False" staminaType="1" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Fraya_20400_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="80" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="39000" maxMp="0" />
+			<StatByLevel level="2" maxHp="40950" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="42900" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="44850" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="46800" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="48750" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="50700" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="52650" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="54600" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="56550" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020004,1020003,1020400,1020401,1020402" />
+		<CombatPropensity attack="60" survival="50" crowdControl="40" move="30" operationDifficulty="40" />
+		<Stamina maxST="1000" tickInterval="1000" recoveryRateNormal="0.05" recoveryRateLow="0" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="20500" defaultSkinId="20500" heroSkinGroup="20500,20501,20502" basicActionId="20500" desc="엘리온 쿠벨" race="highelf" gender="male" class="hero" classType="3" referenceClass="warrior" useStack="True" staminaType="1" iconResource="Icon_Servants.Pet_Watermelon_Tex" thumbnailPath="Icon_Hero.Icon_Hero_Elleon_20500_face_Tex" deathEffectId="5383" promotionHero="True" >
+		<Stat walkSpeed="50" runSpeed="189" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="80" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="33000" maxMp="0" />
+			<StatByLevel level="2" maxHp="34650" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="36300" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="37950" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="39600" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="41250" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="42900" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="44550" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="46200" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="47850" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1020500" />
+		<CombatPropensity attack="70" survival="30" crowdControl="10" move="40" operationDifficulty="70" />
+		<Stamina maxST="1500" tickInterval="1000" recoveryRateNormal="0.1" recoveryRateLow="0" /> />
+		<StackSystem>
+			<Warrior maxStackPoint="10" minStackPointRequire="3" stackPointPeriod="8000" periodSecondBeforeBlink="5000" />
+		</StackSystem>
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="20600" defaultSkinId="20600" heroSkinGroup="20600,20601,20602" basicActionId="20600" desc="시즈나" race="popori" gender="female" class="hero" classType="3" referenceClass="assassin" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Syzna_20600_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="189" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="33000" maxMp="0" />
+			<StatByLevel level="2" maxHp="34650" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="36300" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="37950" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="39600" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="41250" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="42900" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="44550" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="46200" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="47850" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1020600,1020601,93011" />
+		<CombatPropensity attack="40" survival="40" crowdControl="50" move="70" operationDifficulty="40" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="20700" defaultSkinId="20700" heroSkinGroup="20700,20701,20702" basicActionId="20700" desc="테오룽" race="popori" gender="male" class="hero" classType="4" referenceClass="archer" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Teorung_20700_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="175" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="30000" maxMp="0" />
+			<StatByLevel level="2" maxHp="31500" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="33000" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="34500" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="36000" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="37500" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="39000" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="40500" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="42000" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="43500" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1020700" />
+		<CombatPropensity attack="70" survival="30" crowdControl="40" move="30" operationDifficulty="30" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="20800" defaultSkinId="20800" heroSkinGroup="20800,20801,20802,20803" basicActionId="20800" desc="시벨" race="highelf" gender="female" class="hero" classType="4" referenceClass="archer" useStack="False" staminaType="1" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Ciebel_20800_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="175" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="30000" maxMp="0" />
+			<StatByLevel level="2" maxHp="31500" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="33000" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="34500" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="36000" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="37500" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="39000" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="40500" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="42000" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="43500" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1020800,1020801,1020802" />
+		<CombatPropensity attack="40" survival="30" crowdControl="10" move="70" operationDifficulty="80" />
+		<Stamina maxST="1500" tickInterval="1000" recoveryRateNormal="0.1" recoveryRateLow="0" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="20900" defaultSkinId="20900" heroSkinGroup="20900,20901,20902" basicActionId="20900" desc="에키오르 라펠레이트" race="highelf" gender="male" class="hero" classType="5" referenceClass="sorcerer" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Ryshan_20900_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="168" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="27000" maxMp="4500" />
+			<StatByLevel level="2" maxHp="28350" maxMp="4500" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="29700" maxMp="4500" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="31050" maxMp="4500" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="32400" maxMp="4500" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="33750" maxMp="4500" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="35100" maxMp="4500" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="36450" maxMp="4500" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="37800" maxMp="4500" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="39150" maxMp="4500" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1020900" />
+		<CombatPropensity attack="90" survival="20" crowdControl="40" move="10" operationDifficulty="30" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="21000" defaultSkinId="21000" heroSkinGroup="21000,21001,21002" basicActionId="21000" desc="니나" race="popori" gender="female" class="hero" classType="4" referenceClass="engineer" useStack="False" staminaType="2" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Nina_21000_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="175" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="30000" maxMp="0" />
+			<StatByLevel level="2" maxHp="31500" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="33000" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="34500" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="36000" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="37500" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="39000" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="40500" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="42000" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="43500" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9003,9004,9005" passiveSkillIdList="1020003,1021000" />
+		<CombatPropensity attack="70" survival="30" crowdControl="40" move="30" operationDifficulty="20" />
+		<Stamina maxST="1500" tickInterval="1000" recoveryRateNormal="0" recoveryRateLow="0" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="21100" defaultSkinId="21100" heroSkinGroup="21100,21101,21102,21103" basicActionId="21100" desc="시오즈" race="popori" gender="female" class="hero" classType="3" referenceClass="soulless" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Zolyn_21100_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="189" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="33000" maxMp="3000" />
+			<StatByLevel level="2" maxHp="34650" maxMp="3000" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="36300" maxMp="3000" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="37950" maxMp="3000" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="39600" maxMp="3000" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="41250" maxMp="3000" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="42900" maxMp="3000" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="44550" maxMp="3000" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="46200" maxMp="3000" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="47850" maxMp="3000" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003" />
+		<CombatPropensity attack="70" survival="30" crowdControl="20" move="30" operationDifficulty="60" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="5000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>		
+	</Template>
+	<Template id="21200" defaultSkinId="21200" heroSkinGroup="21200,21201,21202,21203" basicActionId="21200" desc="아스티나" race="castanic" gender="female" class="hero" classType="5" referenceClass="sorcerer" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Astina_21200_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="168" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="27000" maxMp="4000" />
+			<StatByLevel level="2" maxHp="28350" maxMp="4000" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="29700" maxMp="4000" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="31050" maxMp="4000" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="32400" maxMp="4000" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="33750" maxMp="4000" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="35100" maxMp="4000" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="36450" maxMp="4000" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="37800" maxMp="4000" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="39150" maxMp="4000" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1021200" />
+		<CombatPropensity attack="50" survival="20" crowdControl="60" move="20" operationDifficulty="50" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+			<RangeAtkSkill id="1010" lv="" />
+			<RangeAtkSkill id="1020" lv="" />
+			<RangeAtkSkill id="1030" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="21400" defaultSkinId="21400" heroSkinGroup="21400,21401,21402,21403" basicActionId="21400" desc="에르한" race="aman" gender="female" class="hero" classType="6" referenceClass="sorcerer" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Errhan_21400_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="36000" maxMp="3500" />
+			<StatByLevel level="2" maxHp="37800" maxMp="3500" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="39600" maxMp="3500" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="41400" maxMp="3500" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="43200" maxMp="3500" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="45000" maxMp="3500" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="46800" maxMp="3500" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="48600" maxMp="3500" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="50400" maxMp="3500" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="52200" maxMp="3500" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003" />
+		<CombatPropensity attack="50" survival="30" crowdControl="30" move="10" operationDifficulty="70" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="7000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="21500" defaultSkinId="21500" heroSkinGroup="21500,21501,21502" basicActionId="21500" desc="카이아" race="aman" gender="female" class="hero" classType="2" referenceClass="slayer" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Kaia_21500_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="80" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="36000" maxMp="0" />
+			<StatByLevel level="2" maxHp="37800" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="39600" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="41400" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="43200" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="45000" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="46800" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="48600" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="50400" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="52200" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1021500" />
+		<CombatPropensity attack="70" survival="20" crowdControl="20" move="60" operationDifficulty="30" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>		
+	</Template>
+	<Template id="21600" defaultSkinId="21600" heroSkinGroup="21600,21601,21602" basicActionId="21600" desc="딕시핀쳐" race="aman" gender="male" class="hero" classType="1" referenceClass="berserker" useStack="False" staminaType="1" iconResource="Icon_Servants.Pet_Watermelon_Tex" thumbnailPath="Icon_Hero.Icon_Hero_Dixie_21600_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="45000" maxMp="0" />
+			<StatByLevel level="2" maxHp="47250" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="49500" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="51750" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="54000" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="56250" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="58500" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="60750" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="63000" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="65250" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020004,1020003,1021601,1021602,1021603,1021604,1021605" />
+		<CombatPropensity attack="60" survival="30" crowdControl="40" move="30" operationDifficulty="70" />
+		<Stamina maxST="1000" tickInterval="1000" recoveryRateNormal="0.05" recoveryRateLow="0" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>		
+	</Template>
+	<Template id="21900" defaultSkinId="21900" heroSkinGroup="21900,21901,21902" basicActionId="21900" desc="샤오룽" race="popori" gender="male" class="hero" classType="2" referenceClass="archer" useStack="False" staminaType="3" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_shaorung_21900_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="115" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="39000" maxMp="0" />
+			<StatByLevel level="2" maxHp="40950" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="42900" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="44850" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="46800" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="48750" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="50700" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="52650" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="54600" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="56550" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1021900" />
+		<CombatPropensity attack="50" survival="20" crowdControl="50" move="40" operationDifficulty="70" />
+		<Stamina maxST="1500" tickInterval="1000" recoveryRateNormal="0.017" recoveryRateLow="0" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>		
+	</Template>
+	<Template id="22000" defaultSkinId="22000" heroSkinGroup="22000,22001,22002" basicActionId="22000" desc="우푸" race="castanic" gender="female" class="hero" classType="4" referenceClass="engineer" useStack="False" staminaType="2" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Upoo_22000_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="27000" maxMp="0" />
+			<StatByLevel level="2" maxHp="28350" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="29700" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="31050" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="32400" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="33750" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="35100" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="36450" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="37800" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="39150" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003" />
+		<CombatPropensity attack="70" survival="20" crowdControl="30" move="30" operationDifficulty="70" />
+		<Stamina maxST="1500" tickInterval="1000" recoveryRateNormal="0.015" recoveryRateLow="0" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="-5" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="22100" defaultSkinId="22100" heroSkinGroup="22100,22101,22102" basicActionId="22100" desc="트로" race="castanic" gender="male" class="hero" classType="6" referenceClass="sorcerer" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Titus_22100_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="30000" maxMp="4000" />
+			<StatByLevel level="2" maxHp="31500" maxMp="4000" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="33000" maxMp="4000" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="34500" maxMp="4000" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="36000" maxMp="4000" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="37500" maxMp="4000" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="39000" maxMp="4000" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="40500" maxMp="4000" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="42000" maxMp="4000" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="43500" maxMp="4000" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003" />
+		<CombatPropensity attack="60" survival="20" crowdControl="90" move="20" operationDifficulty="50" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="7000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>		
+	</Template>
+	<Template id="22300" defaultSkinId="22300" heroSkinGroup="22300,22301,22302" basicActionId="22300" desc="포아룽" race="popori" gender="male" class="hero" classType="6" referenceClass="warrior" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Paesyn_22300_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="80" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="36000" maxMp="0" />
+			<StatByLevel level="2" maxHp="37800" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="39600" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="41400" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="43200" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="45000" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="46800" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="48600" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="50400" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="52200" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003" />
+		<CombatPropensity attack="60" survival="60" crowdControl="10" move="10" operationDifficulty="70" />
+		<StackSystem>
+			<Warrior maxStackPoint="10" minStackPointRequire="3" stackPointPeriod="8000" periodSecondBeforeBlink="5000" />
+		</StackSystem>
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="7000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>
+	</Template>
+	<Template id="22400" defaultSkinId="22400" heroSkinGroup="22400,22401,22402" basicActionId="22400" desc="무타르" race="baraka" gender="male" class="hero" classType="1" referenceClass="fighter" useStack="False" staminaType="3" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Mootarr_22400_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="45000" maxMp="0" />
+			<StatByLevel level="2" maxHp="47250" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="49500" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="51750" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="54000" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="56250" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="58500" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="60750" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="63000" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="65250" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.62" right="0.83" left="0.83" back="1.0732" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,7100,7400,7800,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1022400,1022401,1022402" />
+		<CombatPropensity attack="60" survival="50" crowdControl="20" move="40" operationDifficulty="50" />
+		<Stamina maxST="1500" tickInterval="1000" recoveryRateNormal="0.013" recoveryRateLow="0" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="1000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="8" deathNameplateHeight="0"/>		
+	</Template>
+	<Template id="22500" defaultSkinId="22500" heroSkinGroup="22500,22501,22502" basicActionId="22500" desc="엘린 월광무사" race="popori" gender="female" class="hero" classType="2" referenceClass="glaiver" useStack="False" staminaType="0" iconResource="0" thumbnailPath="Icon_Hero.Icon_Hero_Riwon_22500_face_Tex" deathEffectId="5383">
+		<Stat walkSpeed="50" runSpeed="182" atk="34" def="151" attackSpeed="145" />
+		<Critical str="50" res="120" powRate="2" physicalPowRate="2" magicalPowRate="2" />
+		<Reaction statStr="40" statRes="60" miniRes="100" basicRes="100" basicIncRes="10" basicGaugeResetTime="10000" maxBasicGauge="300" maxAdditionalGauge="400" />
+		<Abnormality strA="200" resA="10" strB="200" resB="10" strC="200" resC="10" strD="200" resD="10" />
+		<ManaPoint managementType="TypeA" tickCycle="1" effectValue="100" decayStartTime="1000" decayStartTimeMpFull="1000" recoveryStartTime="100" />
+		<StatByLevelTable>
+			<StatByLevel level="1" maxHp="36000" maxMp="0" />
+			<StatByLevel level="2" maxHp="37800" maxMp="0" atk="40" def="160" />
+			<StatByLevel level="3" maxHp="39600" maxMp="0" atk="46" def="169" />
+			<StatByLevel level="4" maxHp="41400" maxMp="0" atk="52" def="178" />
+			<StatByLevel level="5" maxHp="43200" maxMp="0" atk="58" def="187" />
+			<StatByLevel level="6" maxHp="45000" maxMp="0" atk="64" def="196" />
+			<StatByLevel level="7" maxHp="46800" maxMp="0" atk="70" def="205" />
+			<StatByLevel level="8" maxHp="48600" maxMp="0" atk="76" def="214" />
+			<StatByLevel level="9" maxHp="50400" maxMp="0" atk="82" def="223" />
+			<StatByLevel level="10" maxHp="52200" maxMp="0" atk="88" def="232" />
+		</StatByLevelTable>
+		<PveCriticalAdjust front="1" right="1.1" left="1.1" back="1.3" />
+		<PveReactionAdjust front="0.74" right="0.97" left="0.97" back="1.2195" />
+		<PvpReactionAdjust front="1" right="1.2" left="1.2" back="1.4" />
+		<PvpCriticalAdjust front="1" right="1" left="1" back="1" />
+		<DefaultShortcutData>
+			<Shortcut type="Skill" id="8900" line="0" column="0" sequence="8" inputString="950028" />
+			<Shortcut type="Skill" id="9000" line="0" column="1" sequence="9" inputString="950029" />
+			<Shortcut type="Skill" id="1000" line="0" column="24" sequence="6" inputString="950026" />
+			<Shortcut type="Skill" id="2000" line="0" column="25" sequence="7" inputString="950027" />
+			<Shortcut type="Skill" id="3000" line="0" column="21" sequence="4" inputString="950024" />
+			<Shortcut type="Skill" id="8500" line="0" column="22" sequence="5" inputString="950025" />
+			<Shortcut type="Skill" id="4000" line="0" column="6" sequence="0" inputString="950020" />
+			<Shortcut type="Skill" id="5000" line="0" column="7" sequence="1" inputString="950021" />
+			<Shortcut type="Skill" id="6000" line="0" column="8" sequence="2" inputString="950022" />
+			<Shortcut type="Skill" id="7000" line="0" column="9" sequence="3" inputString="950023" />
+		</DefaultShortcutData>
+		<DefaultSkillList activeSkillIdList="1000,2000,3000,4000,5000,6000,7000,8000,8500,8900,9000,9001,9002,9003,9004,9005" passiveSkillIdList="1020003,1022500,1022501" />
+		<CombatPropensity attack="60" survival="10" crowdControl="70" move="20" operationDifficulty="50" />
+		<RangeAtkSkillList>
+			<RangeAtkSkill id="4000" lv="" />
+		</RangeAtkSkillList>
+		<NamePlate nameplateHeight="0" deathNameplateHeight="0"/>		
+	</Template>
+</HeroData>

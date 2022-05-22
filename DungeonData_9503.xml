@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9503" name="@dungeon:9503" startPos="69188,-38873,-90" exitContinentId="3" exitPos="-11499,5930,4105" destroyWaitMin="0">
+	<!-- 벨리카 퀘스트 특수공간 -->
+	<Condition type="solo" />
+	<Condition type="levelOver" value="58" />
+	<RestoreTargetQuest id="17216,17217" forceRestore="true" />
+	<Condition type="progressQuest" value="17216" taskId="6" />
+	<Condition type="completeQuest" value="17216" />
+	<EventGroup type="initialize"> <!-- 던전 생성 되자마자 실행되는 이벤트 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300001" next="none"/><!--그레이엄(연출용) 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300008" next="none"/><!--카미아 스폰-->
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300005" next="none"/><!--그라파인 스폰-->
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300009" next="none"/><!--엘린 외교관 스폰-->
+				<EventTask type="flag" name="리안쿠벨소환" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="503,50300012" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="심각한상황" value="1" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="심각한상황">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="심각한상황" value="0" next="none"/> 
+				<!-- 임무 보고하는 카미아 -->
+				<EventTask type="doActionScript"  targetNpcId="503,1008" actionScriptId="50310081" next="time" nextValue="2" />  
+				<!-- 엘린 무리들 연출 시작 -->
+				<EventTask type="doActionScript"  targetNpcId="503,1006" actionScriptId="50310061" next="time" nextValue="3" />
+				<!-- 그레이엄 헤인즈 대사 -->	
+				<EventTask type="doActionScript"  targetNpcId="503,1002" actionScriptId="50310021" next="time" nextValue="3" />
+				<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300001" next="none"/><!--그레이엄(연출용) 테리토리 디스폰-->
+	  			<EventTask type="spawn" huntingZoneId="503" territoryId="50300018" next="none"/><!--그레이엄(퀘스트용) 테리토리 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="17216" taskId="13">
+			<EventTaskGroup>
+				<EventTask type="flag" name="그라파인심문-회유" value="1" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  <EventGroup type="flag" name="그라파인심문-회유">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="그라파인심문-회유" value="0" next="none"/> 
+				<EventTask type="doActionScript"  targetNpcId="503,1011" actionScriptId="150310111" next="time" nextValue="1" />--><!--그라파인 변신-->
+				<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300005" next="none"/><!--변신전 그라파인 디스폰-->
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300014" next="time" nextValue="1"/><!--아크데바로 변한 그라파인 스폰-->
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300004" next="none"/><!--데모크론 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300013" next="none"/><!--멀쩡한 그라파인 디스폰-->
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="17216" taskId="14">
+      <EventTaskGroup>
+		<EventTask type="flag" name="그라파인심문-협박" value="1" next="none"/> 
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="그라파인심문-협박">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="그라파인심문-협박" value="0" next="none"/> 
+				<EventTask type="doActionScript"  targetNpcId="503,1011" actionScriptId="150310112" next="time" nextValue="1" />--><!--그라파인 균열-->
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300002" next="none"/><!--데모크론 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300013" next="none"/><!--멀쩡한 그라파인 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300005" next="none"/><!--변신전 그라파인 디스폰-->
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="17216" taskId="15">
+      <EventTaskGroup>
+		<EventTask type="flag" name="길버트소환" value="1" next="none"/>
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="길버트소환">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="길버트소환" value="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300016" next="none"/><!--길버트 스폰-->
+				<EventTask type="doActionScript"  targetNpcId="503,1001" actionScriptId="150310011" next="time" nextValue="2" /><!--길버트 스폰연출-->
+				<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300001" next="none"/><!--그레이엄 테리토리 디스폰-->
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300018" next="none"/><!--그레이엄헤인즈(퀘스트용) 스폰-->
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="17217" taskId="1">
+      <EventTaskGroup>
+		<EventTask type="flag" name="심각한상황" value="0" next="none"/> 
+		<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300012" next="time" nextValue="1"/><!--연출 체크 테리토리 디스폰-->
+		<EventTask type="flag" name="리안쿠벨소환" value="1" next="time" nextValue="1"/>
+		<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300005" next="none"/><!--변신전 그라파인 디스폰-->
+		
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>
+    <EventGroup type="flag" name="리안쿠벨소환">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="리안쿠벨소환" value="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300011" next="none"/><!--리안쿠벨(퀘스트용1004) 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300001" next="none"/><!--그레이엄헤인즈(연출용) 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="503" territoryId="50300005" next="none"/><!--변신전 그라파인 디스폰-->
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300018" next="none"/><!--그레이엄(퀘스트용1012) 테리토리 스폰-->
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+
+
+  <EventGroup type="questProgress">
+    <Event questId="17217" taskId="2">
+      <EventTaskGroup>
+		<EventTask type="flag" name="task2" value="1" next="none"/><!--그레이엄과 리안쿠벨 대화-->
+		
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="task2">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="task2" value="0" next="none"/>
+			<EventTask type="message" string="@dungeon:9503001" targetNpcId="503,1004" next="time" nextValue="1.0" />
+			<EventTask type="message" string="@dungeon:9503002" targetNpcId="503,1012" next="time" nextValue="6.0" />
+				<EventTask type="despawn" huntingZoneId="503" territoryId="50300011" next="none"/><!--리안쿠벨(퀘스트용) 디스폰-->
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+    <EventGroup type="questProgress">
+    <Event questId="17217" taskId="3">
+      <EventTaskGroup>
+		<EventTask type="flag" name="17217_3" value="1" next="none"/>
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>
+    <EventGroup type="flag" name="17217_3">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="17217_3" value="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="503" territoryId="50300010" next="none"/><!--차원의마법석(나가는)스폰-->
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+
+</Dungeon>

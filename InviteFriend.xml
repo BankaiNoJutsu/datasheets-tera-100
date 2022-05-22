@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--친구 초대 조건 설정에 대한 설명
+    hostUserMinLevel: 친구를 초대할 수 있는 조건, 해당 레벨부터 친구 초대 코드가 주어짐
+	newUserMaxLevel: 신규/복귀 유저로 판정된 유저가 초대 코드를 입력할 때 선택해야 하는 혜택을 받을 캐릭터의 조건, 해당 레벨 이하의 캐릭터만 혜택 받을 캐릭터로 선택 가능 
+	codeUseCountMax: 초대 코드의 최대 사용 횟수
+	maintainPeriod: 초대 혜택 유지 기간, 해당 기간이 지나면 혜택이 중단됨 (단위: 분)
+	returnUserPeriod: 복귀 유저인지 판단하기 위한 조건, 해당 시간 내에 접속 기록이 없으면 복귀 유저 (단위: 분)
+	enterInviteCodePeriod: 신규/복귀 유저가 초대 코드를 입력할 수 있는 기간 (단위: 분)
+	reuseInviteFriendPeriod: 친구 초대 혜택을 이미 받았던 유저가 초대 코드를 입력할 수 있게 하는 조건, 해당 기간이 지나면 다시 초대 코드를 입력하고 혜택을 받을 수 있음 (단위: 분)
+	resetCodeUseCountPeriod: 초대 코드를 발행한 유저의 초대 코드 사용 횟수 초기화 조건, 해당 기간이 지나면 초기화됨 (단위: 일)
+    resetCodeUseCountTime: resetCodeUseCountPeriod의 기준 시각, 해당 시각부터 resetCodeUseCountPeriod를 계산함 (단위: 시)
+	functionState: True이면 초대 코드 기능이 On, False이면 초대 코드 기능이 Off
+-->
+<!--밸리데이트 체크 조건 
+    1. enterInviteCodePeriod <= reuseInviteFriendPeriod
+	2. maintainPeriod <= reuseInviteFriendPeriod
+	3. 입력한 보상 내용(아이템)이 실제 존재하는 아이템인지 확인
+	4. 입력한 보상 내용(아이템)이 우편으로 보낼 수 있는 최대 개수를 초과하는지 확인
+-->
+   	
+<InviteFriend hostUserMinLevel="40" newUserMaxLevel="9" codeUseCountMax="3" maintainPeriod="43200" returnUserPeriod="43200" enterInviteCodePeriod="20160" reuseInviteFriendPeriod="43200" resetCodeUseCountPeriod="30" resetCodeUseCountTime="10" functionState="True">
+  <CompensationRecipient type="hostUser">
+    <Condition newUserLevel="65" sender="@InviteFriend:300" title="@InviteFriend:508" body="@InviteFriend:310">
+      <Compensation type="item" templateId="81203" amount="1" />
+    </Condition>
+    <Condition newUserLevel="60" sender="@InviteFriend:300" title="@InviteFriend:507" body="@InviteFriend:309">
+      <Compensation type="item" templateId="81202" amount="1" />
+    </Condition>
+    <Condition newUserLevel="50" sender="@InviteFriend:300" title="@InviteFriend:506" body="@InviteFriend:308">
+      <Compensation type="item" templateId="81201" amount="1" />
+    </Condition>
+    <Condition newUserLevel="40" sender="@InviteFriend:300" title="@InviteFriend:505" body="@InviteFriend:307">
+      <Compensation type="item" templateId="81200" amount="1" />
+    </Condition>
+    <Condition newUserLevel="30" sender="@InviteFriend:300" title="@InviteFriend:504" body="@InviteFriend:306">
+      <Compensation type="item" templateId="81199" amount="1" />
+    </Condition>
+    <Condition newUserLevel="20" sender="@InviteFriend:300" title="@InviteFriend:503" body="@InviteFriend:305">
+      <Compensation type="item" templateId="81198" amount="1" />
+    </Condition>
+    <Condition newUserLevel="10" sender="@InviteFriend:300" title="@InviteFriend:502" body="@InviteFriend:304">
+      <Compensation type="item" templateId="81197" amount="1" />
+    </Condition>
+    <Condition newUserLevel="0" sender="@InviteFriend:300" title="@InviteFriend:501" body="@InviteFriend:302">
+      <Compensation type="item" templateId="81196" amount="1" />
+    </Condition>
+  </CompensationRecipient>
+  <CompensationRecipient type="newUser">
+    <Condition newUserLevel="65" sender="@InviteFriend:300" title="@InviteFriend:516" body="@InviteFriend:317">
+      <Compensation type="item" templateId="81178" amount="1" />
+    </Condition>
+    <Condition newUserLevel="60" sender="@InviteFriend:300" title="@InviteFriend:515" body="@InviteFriend:316">
+      <Compensation type="item" templateId="81195" amount="1" />
+    </Condition>
+    <Condition newUserLevel="50" sender="@InviteFriend:300" title="@InviteFriend:514" body="@InviteFriend:315">
+      <Compensation type="item" templateId="81177" amount="1" />
+    </Condition>
+    <Condition newUserLevel="40" sender="@InviteFriend:300" title="@InviteFriend:513" body="@InviteFriend:314">
+      <Compensation type="item" templateId="81194" amount="1" />
+    </Condition>
+    <Condition newUserLevel="30" sender="@InviteFriend:300" title="@InviteFriend:512" body="@InviteFriend:313">
+      <Compensation type="item" templateId="81176" amount="1" />
+    </Condition>
+    <Condition newUserLevel="20" sender="@InviteFriend:300" title="@InviteFriend:511" body="@InviteFriend:312">
+      <Compensation type="item" templateId="81193" amount="1" />
+    </Condition>
+    <Condition newUserLevel="10" sender="@InviteFriend:300" title="@InviteFriend:510" body="@InviteFriend:311">
+      <Compensation type="item" templateId="81175" amount="1" />
+    </Condition>
+    <Condition newUserLevel="0" sender="@InviteFriend:300" title="@InviteFriend:509" body="@InviteFriend:303">
+      <Compensation type="item" templateId="81192" amount="1" />
+    </Condition>
+    <!--
+		<Condition newUserLevel="0" sender="@InviteFriend:300" title="@InviteFriend:301" body="@InviteFriend:303">
+			<Compensation type="item" templateId="81137" amount="1"/>
+	
+			<Compensation type="item" templateId="81174" amount="1"/>
+
+			<Compensation type="item" templateId="137003" amount="1"/> 
+		</Condition>
+		<Condition newUserLevel="10" sender="@InviteFriend:300" title="@InviteFriend:301" body="@InviteFriend:311">
+			<Compensation type="item" templateId="81175" amount="1"/>
+			<Compensation type="item" templateId="81181" amount="1"/>
+		</Condition>
+		<Condition newUserLevel="20" sender="@InviteFriend:300" title="@InviteFriend:301" body="@InviteFriend:312">
+			<Compensation type="item" templateId="81186" amount="1"/>
+			<Compensation type="item" templateId="81182" amount="1"/>
+			<Compensation type="item" templateId="81187" amount="1"/>
+		</Condition>
+		<Condition newUserLevel="30" sender="@InviteFriend:300" title="@InviteFriend:301" body="@InviteFriend:313">
+			<Compensation type="item" templateId="81176" amount="1"/>
+			<Compensation type="item" templateId="81183" amount="1"/>
+			<Compensation type="item" templateId="139103" amount="1"/>
+		</Condition>
+		<Condition newUserLevel="40" sender="@InviteFriend:300" title="@InviteFriend:301" body="@InviteFriend:314">
+			<Compensation type="item" templateId="81184" amount="1"/>
+			<Compensation type="item" templateId="139104" amount="1"/>
+		</Condition>
+		<Condition newUserLevel="50" sender="@InviteFriend:300" title="@InviteFriend:301" body="@InviteFriend:315">
+			<Compensation type="item" templateId="81177" amount="1"/>
+			<Compensation type="item" templateId="81185" amount="1"/>
+			<Compensation type="item" templateId="139106" amount="1"/>
+			<Compensation type="item" templateId="139092" amount="1"/>
+		</Condition>
+		<Condition newUserLevel="60" sender="@InviteFriend:300" title="@InviteFriend:301" body="@InviteFriend:316">
+			<Compensation type="item" templateId="81185" amount="3"/>
+		</Condition>
+		<Condition newUserLevel="65" sender="@InviteFriend:300" title="@InviteFriend:301" body="@InviteFriend:317">
+			<Compensation type="item" templateId="81178" amount="1"/>
+			<Compensation type="item" templateId="71" amount="5"/>
+			<Compensation type="item" templateId="70053" amount="10"/>
+			<Compensation type="item" templateId="400" amount="10"/>
+		</Condition>
+-->		
+	</CompensationRecipient>
+	<AddFriendMail>
+		<FailToNewUser sender="@InviteFriend:300" title="@InviteFriend:20000" body="@InviteFriend:20001"/>
+		<FailToHostUser sender="@InviteFriend:300" title="@InviteFriend:20002" body="@InviteFriend:20003"/>
+		<SuccessToNewUser sender="@InviteFriend:300" title="@InviteFriend:20004" body="@InviteFriend:20005"/>
+		<SuccessToHostUser sender="@InviteFriend:300" title="@InviteFriend:20006" body="@InviteFriend:20007"/>
+	</AddFriendMail>
+	<GuideString id="1">
+		<Title string="@InviteFriend:1000"/>
+		<Text string="@InviteFriend:1001"/>
+	</GuideString>
+	<GuideString id="2">
+		<Title string="@InviteFriend:1003"/>
+		<Text string="@InviteFriend:1004" type="hostUser"/>
+	</GuideString>
+	<GuideString id="3">
+		<Title string="@InviteFriend:1005"/>
+		<Text string="@InviteFriend:1006" type="newUser"/>
+	</GuideString>
+	<GuideString id="4">
+		<Title string="@InviteFriend:1007"/>
+		<Text string="@InviteFriend:1008"/>
+	</GuideString>
+</InviteFriend>

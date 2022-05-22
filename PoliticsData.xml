@@ -1,0 +1,688 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PoliticsData>
+  <LordElectionData>
+	<!-- 관련 데이터 GuardData.xml / StrSheet_Politics.xml / HuntingZoneAreaList.xml !-->
+    <!-- 등록 기간을 설정할 때 주의해야 할 것은 각 단계의 period 이후에 다음 단계로 넘어간다는 사실. 통치 기간을 3주로 하고 싶으면, 값을 21이 아닌 21-(입후보기간)-(경쟁기간)으로 입력해야 한다. !-->
+    <!-- 영주 후보 등록 기간 !-->
+    <ElectionTypeInfo>
+      <Ballot stringId="@politics:301" />
+      <BattleField stringId="@politics:302" />
+      <GuildWar stringId="@politics:303" />
+    </ElectionTypeInfo>
+    <Candidacy period="1" stringId="@politics:20011" description="@politics:20021" tooltip="@politics:20031">
+      <GuideMail sender="@politics:1" title="@politics:2" body="@politics:3" addItemTemplateId="112" addItemAmount="1" />
+      <!-- 입후보 안내 메일-->
+      <CandidacyResultMail sender="@politics:1" title="@politics:31" body="@politics:32" addItemTemplateId="113" addItemAmount="1" />
+      <!-- 입후보 감사 메일-->
+      <Constraint requireUserLevel="50" requireGuildMember="20" requireGuildLevel="3" requireGold="30000000" requireItemTemplateId="14" requireItemCount="100" />
+    </Candidacy>
+    <!-- 투표 UI -->
+    <Vote candidateScoreTooltip="@politics:40001" />
+    <!-- 영주 후보 경쟁 기간 !-->
+    <Competition period="6" stringId="@politics:20012" description="@politics:20022" tooltip="@politics:20032" voterMinLevel="40">
+      <!-- 투표한 사람한테 보내는 감사우편 지속성 회복 물약을 준다. -->
+	  <VoteRewardMail sender="@politics:1" title="@politics:4" body="@politics:5" addItemTemplateId="112" addItemAmount="1" />
+      <!-- 영주 선출 길드전 관련 설정 -->
+	  <!-- 길드장 킬 경쟁 포인트 : guildMasterKillPoint / 길드원 킬 경쟁 포인트 : guildMemberKillPoint / 	길드당 최대 획득 경쟁 포인트 : killPointLimit 
+       초기화 시간 : limitReset / 메시지 출력 간격(점수) : msgKillPoint / 획득 불가능 레벨 지정.(이하) : killPointMinLevel -->
+	  <LordGuildWar  guildMasterBonusPoint="3" guildMasterKillPoint="10" guildMemberKillPoint="1" killPointLimit="100" limitReset="2" msgKillPoint="50" killPointMinLevel="40"  scoreTooltip="@politics:20042" scoreCanGainTooltip="@politics:20043" />
+      <Rival percentage="95.0" minPoint="100"/>
+    </Competition>
+    <!-- 영주 통치 기간 !-->
+    <Reign period="14" stringId="@politics:20013" description="@politics:20023" tooltip="@politics:20033">
+      <!-- initialPolicyPoint: 초기 지급 정책 포인트, policyPointPerGuildRecommendation: 길드 추천 횟수 1당 정책 포인트 !-->
+      <LordData initialPolicyPoint="1000" policyPointPerGuildRecommendation="5" />
+      <CelebrationMail sender="@politics:1" title="@politics:41" body="@politics:42" addItemTemplateId="113" addItemAmount="2" />
+      <!-- 새로 선출된 영주에게 아첨용 선물우편을 보낸다.  -->
+      <TermEndMail sender="@politics:1" title="@politics:101" body="@politics:102" />
+      <!-- SenatorGuardInfo 창 (월드맵 좌상단 길드 로고 클릭했을 때 뜨는 창) 관련 문자열 -->
+      <GuardInfoWindow
+        behaviorRank="@politics:30011"
+        behaviorRankText="@politics:30015"
+        behaviorRankTooltip="@politics:30012"
+        behaviorPoints="@politics:30013"
+        behaviorPointsText="@politics:30016"
+        behaviorPointsTooltip="@politics:30014" />
+    </Reign>
+  </LordElectionData>
+  <LordPolicyData>
+    <!-- 영주 정책 1. PK 여부 선언 !-->
+    <PolicyData id="1" type="pk" stringId="@politics:6" default="1">
+      <PolicyItem id="1" action="on" stringId="@politics:7" fee="0" period="0" tooltip="@politics:10001" />
+      <!-- period단위: day !-->
+      <PolicyItem id="2" action="off" stringId="@politics:8" fee="5000" period="1" tooltip="@politics:10002" />
+    </PolicyData>
+    <!-- 영주 정책 2. 발키온 보호령의 NPC 소환 여부 !-->
+    <PolicyData id="36401" type="spawn" stringId="@politics:10" default="2">
+      <!-- 명품관 !-->
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="364" territoryId="36400002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="364" territoryId="36400001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="36402" type="spawn" stringId="@politics:20" default="2">
+      <!-- 컨디션 회복 !-->
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="364" territoryId="36400005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="364" territoryId="36400006" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 아르카니아 가드 !-->
+    <PolicyData id="36001" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="360" territoryId="36000002" />
+        <SpawnData huntingZoneId="359" territoryId="35900002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="360" territoryId="36000001" />
+        <SpawnData huntingZoneId="359" territoryId="35900001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="36002" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="360" territoryId="36000005" />
+        <SpawnData huntingZoneId="359" territoryId="35900005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="360" territoryId="36000006" />
+        <SpawnData huntingZoneId="359" territoryId="35900006" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 포포리아 가드 !-->
+    <PolicyData id="36801" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="368" territoryId="36800002" />
+        <SpawnData huntingZoneId="367" territoryId="36700002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="368" territoryId="36800001" />
+        <SpawnData huntingZoneId="367" territoryId="36700001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="36802" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="368" territoryId="36800005" />
+        <SpawnData huntingZoneId="367" territoryId="36700005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="368" territoryId="36800006" />
+        <SpawnData huntingZoneId="367" territoryId="36700006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="36803" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="368" territoryId="36800004" />
+        <SpawnData huntingZoneId="367" territoryId="36700004" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="368" territoryId="36800003" />
+        <SpawnData huntingZoneId="367" territoryId="36700003" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 비아 아우레움 가드 !-->
+    <PolicyData id="36501" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="365" territoryId="36500002" />
+        <SpawnData huntingZoneId="366" territoryId="36600002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="365" territoryId="36500001" />
+        <SpawnData huntingZoneId="366" territoryId="36600001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="36502" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="365" territoryId="36500005" />
+        <SpawnData huntingZoneId="366" territoryId="36600006" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="365" territoryId="36500006" />
+        <SpawnData huntingZoneId="366" territoryId="36600007" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="36503" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="365" territoryId="36500004" />
+        <SpawnData huntingZoneId="366" territoryId="36600005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="365" territoryId="36500003" />
+        <SpawnData huntingZoneId="366" territoryId="36600004" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 동부 가드 !-->
+    <PolicyData id="36101" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="361" territoryId="36100002" />
+        <SpawnData huntingZoneId="362" territoryId="36200003" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="361" territoryId="36100001" />
+        <SpawnData huntingZoneId="362" territoryId="36200002" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="36102" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="361" territoryId="36100005" />
+        <SpawnData huntingZoneId="362" territoryId="36200006" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="361" territoryId="36100006" />
+        <SpawnData huntingZoneId="362" territoryId="36200007" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="36103" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="361" territoryId="36100004" />
+        <SpawnData huntingZoneId="362" territoryId="36200005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="361" territoryId="36100003" />
+        <SpawnData huntingZoneId="362" territoryId="36200004" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="36104" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="361" territoryId="36100008" />
+        <SpawnData huntingZoneId="361" territoryId="36100010" />
+        <SpawnData huntingZoneId="361" territoryId="36100012" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="361" territoryId="36100007" />
+        <SpawnData huntingZoneId="361" territoryId="36100009" />
+        <SpawnData huntingZoneId="361" territoryId="36100011" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 발데라 특별지구 !-->
+    <PolicyData id="35801" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="358" territoryId="35800002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="358" territoryId="35800001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="35802" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="358" territoryId="35800005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="358" territoryId="35800006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="35803" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="358" territoryId="35800004" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="358" territoryId="35800003" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!--B대륙 비아 엘레니움 가드 !-->
+    <PolicyData id="37401" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="374" territoryId="37400002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="374" territoryId="37400001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37402" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="374" territoryId="37400005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="374" territoryId="37400006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37403" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="374" territoryId="37400004" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="374" territoryId="37400003" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37404" type="spawn" stringId="@politics:40" default="2"> <!-- 거래 중개인 !-->
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="374" territoryId="37400011" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="374" territoryId="37400010" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 웨스토니아 가드 !-->
+    <PolicyData id="37301" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="373" territoryId="37300002" />
+        <SpawnData huntingZoneId="383" territoryId="38300002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="373" territoryId="37300001" />
+        <SpawnData huntingZoneId="383" territoryId="38300001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37302" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="373" territoryId="37300005" />
+        <SpawnData huntingZoneId="383" territoryId="38300005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="373" territoryId="37300006" />
+        <SpawnData huntingZoneId="383" territoryId="38300006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37303" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="373" territoryId="37300004" />
+        <SpawnData huntingZoneId="383" territoryId="38300004" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="373" territoryId="37300003" />
+        <SpawnData huntingZoneId="383" territoryId="38300003" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37304" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="383" territoryId="38300008" />
+        <SpawnData huntingZoneId="373" territoryId="37300008" />
+        <SpawnData huntingZoneId="373" territoryId="37300010" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="373" territoryId="37300007" />
+        <SpawnData huntingZoneId="373" territoryId="37300009" />
+        <SpawnData huntingZoneId="383" territoryId="38300007" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 에세니아 가드 !-->
+    <PolicyData id="37001" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="370" territoryId="37000002" />
+        <SpawnData huntingZoneId="369" territoryId="36900002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="370" territoryId="37000001" />
+        <SpawnData huntingZoneId="369" territoryId="36900001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37002" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="370" territoryId="37000005" />
+        <SpawnData huntingZoneId="369" territoryId="36900005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="370" territoryId="37000006" />
+        <SpawnData huntingZoneId="369" territoryId="36900006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37003" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="370" territoryId="37000004" />
+        <SpawnData huntingZoneId="369" territoryId="36900004" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="370" territoryId="37000003" />
+        <SpawnData huntingZoneId="369" territoryId="36900003" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37004" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="369" territoryId="36900008" />
+        <SpawnData huntingZoneId="370" territoryId="37000008" />
+        <SpawnData huntingZoneId="370" territoryId="37000010" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="369" territoryId="36900007" />
+        <SpawnData huntingZoneId="370" territoryId="37000007" />
+        <SpawnData huntingZoneId="370" territoryId="37000009" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 판노니아 가드 !-->
+    <PolicyData id="37501" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="375" territoryId="37500002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="375" territoryId="37500001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37502" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="375" territoryId="37500005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="375" territoryId="37500006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37503" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="375" territoryId="37500004" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="375" territoryId="37500003" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37504" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="375" territoryId="37500008" />
+        <SpawnData huntingZoneId="375" territoryId="37500010" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="375" territoryId="37500007" />
+        <SpawnData huntingZoneId="375" territoryId="37500009" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 베리타스 특별지구 !-->
+	<PolicyData id="37101" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="371" territoryId="37100009" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="371" territoryId="37100007" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37102" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="371" territoryId="37100010" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="371" territoryId="37100011" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37103" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="371" territoryId="37100013" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="371" territoryId="37100012" />
+      </PolicyItem>
+    </PolicyData>
+	<PolicyData id="37104" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="371" territoryId="37100015" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="371" territoryId="37100014" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 여기서 부터 C대륙 !-->
+	
+    <!-- 로스 아카디아 가드 !-->
+    <PolicyData id="37901" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="379" territoryId="37900002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="379" territoryId="37900001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37902" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="379" territoryId="37900005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="379" territoryId="37900006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37903" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="379" territoryId="37900004" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="379" territoryId="37900003" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37904" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="379" territoryId="37900008" />
+        <SpawnData huntingZoneId="379" territoryId="37900010" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="379" territoryId="37900007" />
+        <SpawnData huntingZoneId="379" territoryId="37900009" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 실바니아 가드 !-->
+    <PolicyData id="38001" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="380" territoryId="38000002" />
+        <SpawnData huntingZoneId="381" territoryId="38100002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="380" territoryId="38000001" />
+        <SpawnData huntingZoneId="381" territoryId="38100001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="38002" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="380" territoryId="38000005" />
+        <SpawnData huntingZoneId="381" territoryId="38100005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="380" territoryId="38000006" />
+        <SpawnData huntingZoneId="381" territoryId="38100006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="38003" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="380" territoryId="38000004" />
+        <SpawnData huntingZoneId="381" territoryId="38100004" />
+        <SpawnData huntingZoneId="381" territoryId="38100008" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="380" territoryId="38000003" />
+        <SpawnData huntingZoneId="381" territoryId="38100003" />
+        <SpawnData huntingZoneId="381" territoryId="38100007" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="38004" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="380" territoryId="38000008" />
+        <SpawnData huntingZoneId="381" territoryId="38100010" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="380" territoryId="38000007" />
+        <SpawnData huntingZoneId="381" territoryId="38100009" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 로스 티리키아 가드 !-->
+    <PolicyData id="37701" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="377" territoryId="37700002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="377" territoryId="37700001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37702" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="377" territoryId="37700005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="377" territoryId="37700006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37703" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="377" territoryId="37700004" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="377" territoryId="37700003" />
+      </PolicyItem>
+    </PolicyData>
+	<PolicyData id="37704" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="377" territoryId="37700009" />
+		<SpawnData huntingZoneId="377" territoryId="37700011" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="377" territoryId="37700007" />
+		<SpawnData huntingZoneId="377" territoryId="37700010" />
+      </PolicyItem>
+    </PolicyData>		
+	
+	
+	<!-- 로스 카이아나 가드 !-->
+    <PolicyData id="38501" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="385" territoryId="38500002" />
+		<SpawnData huntingZoneId="376" territoryId="37600002" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="385" territoryId="38500001" />
+		<SpawnData huntingZoneId="376" territoryId="37600001" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="38502" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="385" territoryId="38500005" />
+		<SpawnData huntingZoneId="376" territoryId="37600005" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="385" territoryId="38500006" />
+		<SpawnData huntingZoneId="376" territoryId="37600006" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="38503" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="385" territoryId="38500004" />
+		<SpawnData huntingZoneId="376" territoryId="37600004" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="385" territoryId="38500003" />
+		<SpawnData huntingZoneId="376" territoryId="37600003" />
+      </PolicyItem>
+    </PolicyData>
+	<PolicyData id="38504" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="376" territoryId="37600008" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="376" territoryId="37600007" />
+      </PolicyItem>
+    </PolicyData>
+	
+	
+    <!-- 헬칸 특별지구 !-->
+	<PolicyData id="37801" type="spawn" stringId="@politics:10" default="2">
+      <PolicyItem id="1" stringId="@politics:31300005" tooltip="@politics:10003" fee="0" period="0">
+        <SpawnData huntingZoneId="378" territoryId="37800010" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300006" tooltip="@politics:10004" fee="0" period="0">
+        <SpawnData huntingZoneId="378" territoryId="37800008" />
+      </PolicyItem>
+    </PolicyData>
+	 <PolicyData id="37802" type="spawn" stringId="@politics:20" default="2">
+      <PolicyItem id="1" stringId="@politics:31300007" tooltip="@politics:10005" fee="0" period="0">
+        <SpawnData huntingZoneId="378" territoryId="37800011" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300008" tooltip="@politics:10006" fee="0" period="0">
+        <SpawnData huntingZoneId="378" territoryId="37800012" />
+      </PolicyItem>
+    </PolicyData>
+    <PolicyData id="37803" type="spawn" stringId="@politics:30" default="2">
+      <PolicyItem id="1" stringId="@politics:31300009" tooltip="@politics:10007" fee="0" period="0">
+        <SpawnData huntingZoneId="378" territoryId="37800016" />
+		<SpawnData huntingZoneId="378" territoryId="37800018" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300010" tooltip="@politics:10008" fee="0" period="0">
+        <SpawnData huntingZoneId="378" territoryId="37800015" />
+		<SpawnData huntingZoneId="378" territoryId="37800017" />
+      </PolicyItem>
+    </PolicyData>
+	<PolicyData id="37804" type="spawn" stringId="@politics:40" default="2">
+      <PolicyItem id="1" stringId="@politics:31300011" tooltip="@politics:10019" fee="0" period="0">
+        <SpawnData huntingZoneId="378" territoryId="37800014" />
+      </PolicyItem>
+      <PolicyItem id="2" stringId="@politics:31300012" tooltip="@politics:10020" fee="0" period="0">
+        <SpawnData huntingZoneId="378" territoryId="37800013" />
+      </PolicyItem>
+    </PolicyData>
+  </LordPolicyData>
+  <LordGuildBonusData>
+    <MountSkill id="111113" />
+  </LordGuildBonusData>
+  
+  
+  <GuardTaxData>
+    <!-- 상점 세율 -->
+    <TaxGroup stringId="@politics:1001">
+      <TaxData id="1" type="merchant" stringId="@politics:1002" category="1" defaultRate="5" minRate="1" maxRate="15" tooltip="@politics:10009" />
+      <!-- 잡화 상점 !-->
+      <TaxData id="2" type="merchant" stringId="@politics:1003" category="2" defaultRate="5" minRate="1" maxRate="15" tooltip="@politics:10010" />
+      <!-- 크리스탈 상점 !-->
+      <!-- <TaxData id="3" type="merchant" stringId="@politics:1004" category="3" defaultRate="5" minRate="1" maxRate="15" tooltip="@politics:10011"/>  문장 상점 !-->
+      <!-- <TaxData id="4" type="merchant" stringId="@politics:1005" category="4" defaultRate="5" minRate="1" maxRate="15" tooltip="@politics:10012"/>  제작 상점 !-->
+      <TaxData id="3" type="merchant" stringId="@politics:1006" category="3" defaultRate="5" minRate="1" maxRate="15" tooltip="@politics:10021" />
+      <!-- 명품관 !-->
+    </TaxGroup>
+    <!-- 기능 이용 세율 -->
+    <TaxGroup stringId="@politics:2001">
+      <TaxData id="5" type="pegasus" stringId="@politics:2002" defaultRate="5" minRate="1" maxRate="15" tooltip="@politics:10013" />
+      <TaxData id="6" type="skillLearn" stringId="@politics:2003" defaultRate="5" minRate="1" maxRate="15" tooltip="@politics:10014" />
+      <TaxData id="7" type="campTeleport" stringId="@politics:2004" defaultRate="5" minRate="1" maxRate="15" tooltip="@politics:10015" />
+    </TaxGroup>
+  </GuardTaxData>
+  <!--세금 처리 규칙-->
+  <TaxManagementRule calculationPeriod="1" forLord="20.0" forOtherLords="30.0" forConsul="10.0" />
+  <!--이것들을 제외한 나머지가 시스템의 몫이다-->
+  <ToolTipData tooltipBattleField="@politics:20001" tooltipBallot="@politics:20002" tooltipGuildWar="@politics:20003" />
+  <UIStringData lowRankerExpectGuard="@politics:20041" />
+  <UserCareerData>
+    <Career id="1" desc="이력없음" stringId="@politics:30001" />
+    <Career id="2" desc="n대영주" stringId="@politics:30002" />
+  </UserCareerData>
+  <FeudalFlagData maxCount="10" limitDistance="200">
+    <FeudalFlag typeId="1" itemTemplateId="161000" stringId="@politics:1111" huntingZoneId="1023" spawnNpcTemplateId="103" lifeTime="10080" spawnPlace="ownSafeZone"/>
+  </FeudalFlagData>
+  <PoliticsUnitData>
+	<PoliticsUnit politicsUnitId="2" guardNumber="2" />
+	<PoliticsUnit politicsUnitId="3" guardNumber="3" />
+	<PoliticsUnit politicsUnitId="4" guardNumber="4" />
+	<PoliticsUnit politicsUnitId="5" guardNumber="5" />
+	<PoliticsUnit politicsUnitId="6" guardNumber="6" />
+	<PoliticsUnit politicsUnitId="7" guardNumber="7" />
+	<PoliticsUnit politicsUnitId="11" guardNumber="11" />
+	<PoliticsUnit politicsUnitId="12" guardNumber="12" />
+	<PoliticsUnit politicsUnitId="13" guardNumber="13" />
+	<PoliticsUnit politicsUnitId="14" guardNumber="14" />
+	<PoliticsUnit politicsUnitId="15" guardNumber="15" />
+	<PoliticsUnit politicsUnitId="18" guardNumber="18" />
+	<PoliticsUnit politicsUnitId="19" guardNumber="19" />
+	<PoliticsUnit politicsUnitId="20" guardNumber="20" />
+	<PoliticsUnit politicsUnitId="21" guardNumber="21" />
+	<PoliticsUnit politicsUnitId="22" guardNumber="22" />
+	<PoliticsUnit politicsUnitId="23" guardNumber="23" />
+  </PoliticsUnitData>
+
+</PoliticsData>

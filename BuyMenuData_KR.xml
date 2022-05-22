@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BuyMenuData>
+	<!--
+	BuyMenu ID 규칙
+	1000~9999 : 전국가 공통 이벤트
+	10000~19999 : 공통
+	20000~29999 : 한국
+	30000~39999 : 일본
+	40000~49999 : 북미
+	50000~59999 : 유럽
+	60000~69999 : 러시아
+	70000~79999 : 대만
+	80000~89999 : 태국(동남아)
+	
+	스트링 ID 규칙
+	상점 스트링 ID = BuyMenu ID끝에 0 붙이기
+	상점 탭 스트링 ID = BuyMenu 끝에 1부터 붙이기(10개 넘기지 말자!)
+	예시) BuyMenu ID="10000", 상점 스트링 ID ="100000", 상점 1번탭 ID ="100001", 상점 2번탭 ID="100002"
+	예외) 매우 자주 쓰는 탭 3종은 아래 아이디로 써서 데이터 양 줄임
+	        교환목록 = "1000", 기타 = "2000", 이벤트 = "3000"
+			
+	resetType
+		none : 초기화되지 않음. 운영툴로만 초기화 가능
+		day : resetTime 노드값 입력 필요. 매일 해당 시간(24시간 기준)에 초기화됨
+		instanceNpc : Npc마다 구매 제한이 별도로 계산되어, Npc가 사라질 때 해당 Npc가 들고 있던 상점만 초기화
+	resetTime
+		매일 해당 시간(24시간 기준)에 초기화됨
+		국가별로 설정해야 하는 값이 다름. 공용 데이터시트에는 resetTime에 어떤 값을 입력하더라도 컨버터를 이용하여 아래 시간으로 변경하고 있음
+		EU : 6
+		NA : 12
+		JP : 9
+		RUS : 6
+		TW : 5
+		THA : 5
+	needMedalItemId : VillagerMenu.xml에서 BuyMenuMedal로 지정한 상점만 입력. 구매에 필요한 토큰의 TID
+	needPointNpcGuildId : VillagerMenu.xml에서 BuyMenuPoint로 지정한 상점만 입력. 구매에 필요한 평판 포인트의 ID, 이 경우 품목마다 구매 시 평판 등급 조건인 grade 노드를 입력해야 함. 또한 아이템 툴팁에 조건을 노출시키려면 ReputationItem.xml에 입력해야 함(가격은 더미로)
+	-->
+	<BuyMenu id="20000" desc="타르스키 코인 상점" stringId="200000" resetType="day" resetTime="9">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="142768">
+			<ItemList stringed="1000">
+				<Item itemTemplateId="143467" buyPrice="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="148387" buyPrice="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="148372" buyPrice="1"/>
+				<Item itemTemplateId="148391" buyPrice="1"/>
+				<Item itemTemplateId="148381" buyPrice="1"/>
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="20001" desc="KR 강화재료보급 이벤트" stringId="1000" resetType="day" resetTime="9">
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="1000">
+				<Item itemTemplateId="143551" buyPrice="18691589" limitType="account" limitCount="10"/>
+			</ItemList>		
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="20002" desc="KR 지도 이벤트" stringId="1000" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="132724" >
+			<ItemList stringed="1000">
+				<Item itemTemplateId="200922" buyPrice="5"/>
+				<Item itemTemplateId="206854" buyPrice="5"/>
+				<Item itemTemplateId="206869" buyPrice="10" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="206870" buyPrice="15" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="206855" buyPrice="60" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="206856" buyPrice="80" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="206884" buyPrice="100" limitType="account" limitCount="1"/>
+			</ItemList>		
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="20003" desc="KR 복복복 이벤트" stringId="1000" resetType="day" resetTime="9" >
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="147124" >
+			<ItemList stringed="1000">
+				<Item itemTemplateId="147125" buyPrice="1"/>
+				<Item itemTemplateId="148384" buyPrice="1" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="206854" buyPrice="2" />
+				<Item itemTemplateId="92136" buyPrice="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="143442" buyPrice="7" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="267488" buyPrice="5" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="267500" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="147130" buyPrice="5"/>
+			</ItemList>		
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="20004" desc="KR 송편 이벤트" stringId="1000" resetType="day" resetTime="9" >
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="204478" >
+			<ItemList stringed="1000">
+				<Item itemTemplateId="143561" buyPrice="5" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="143562" buyPrice="10" limitType="account" limitCount="10"/>
+			</ItemList>		
+		</Menu>
+	</BuyMenu>
+</BuyMenuData>

@@ -1,0 +1,868 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- type은 사용하지 않습니다. 그냥 구별용임 -->
+<!-- 테스트 방법 -->
+<!-- 게임 콘솔 명령어 창에서 -->
+<!-- "ActionScript [ScriptId]" 입력하면 -->
+<!-- 현재 플레이어에서 가장 가까운 대상NPC가 -->
+<!-- 지정한 스크립트를 실행한다. -->
+<S1ActionScripts type="Common">
+
+  <!-- 예제 스크립트 -->
+	<!-- huntingZoneId=64 templateId=1007 shapeId=203102 basicActionId=200810 전투기술 교관 (66913, -79107, -2965) -->
+	<!-- socialMotionId=12 -> socialId=20081012 Human_M_ANI.Anim.Human_M_Share_Anim.angry -->
+	<Script id="1">
+    <Action time="200" type="move" pos="66836,-79186,-2980" speed="100">
+      <Action type="move" pos="66741,-79099,-2985" speed="100">
+        <Action type="rotateToUser" duration="0">
+          <Action type="social" socialMotionId="12">
+            <Action type="dialog" textId="1"/>
+          </Action>
+        </Action>
+      </Action>
+    </Action>
+
+    <Action time="12000" type="moveToInitPos" speed="100">
+      <Action type="rotateToInitDir" duration="0">
+        <Action type="animation" animName="idle1"/>
+        <Action type="cameraShake" duration="5000" power="5" speed="3000">
+          <Action type="effect" effectId="1109"/>
+        </Action>
+      </Action>
+    </Action>
+
+    <Action time="2000" type="scale" scale="3.0" duration="5000" power="5">
+      <Action type="scaleToInitScale" duration="5000" power="5"/>
+    </Action>
+  </Script>
+
+  <!-- 이건 NPC에게 사용해 보세요. @spawnnpc 13 300930 1-->
+  <Script id="2">
+    <Action time="1000" type="material" postfix="_death">
+      <Action type="materialParam" param="JordonCrossFactor" from="0.0" to="1.0" duration="2000">
+        <Action type="materialParam" param="JordonCrossFactor" from="1.0" to="0.0" duration="2000">
+          <Action type="material" postfix="">
+            <Action type="defaultAnim" waitAnim="Walk" moveAnim="Wait">
+              <Action time="5000"  type="defaultAnim" waitAnim="" moveAnim=""/>
+            </Action>
+          </Action>
+        </Action>
+      </Action>
+    </Action>
+  </Script>
+
+  <Script id="3">
+    <Action time="1000" type="translationZ" from="0.0" to="1000.0" duration="2000" power="4.0">
+      <Action type="translationZ" from="1000.0" to="0.0" duration="2000" power="4.0">
+      </Action>
+    </Action>
+  </Script>
+
+  <Script id="4">
+    <Action time="1000" type="mesh" huntingZoneId="213" templateId="1002"/>
+  </Script>
+
+  <!-- 스폰 시에 머티리얼 변화는 효과 테스트용 -->
+  <!-- 머티리얼 변경 효과가 스폰 다음 틱부터 적용되어 아래와 같이 visible 변경을 사용-->
+  <!-- @spawnnpc 24 9 1 -->
+  <Script id="5">
+    <InitState visible="false"/>
+    <Action type="material" postfix="_spawn">
+      <Action type="materialParam" param="JordonCrossFactor" from="1.0" to="1.0" duration="0">
+        <Action time="1" type="visible" visibility="true">
+          <Action type="materialParam" param="JordonCrossFactor" from="1.0" to="0.0" duration="3000">
+            <Action type="material" postfix=""/>
+          </Action>
+        </Action>
+      </Action>
+    </Action>
+  </Script>
+
+  <!-- 소셜 anim 테스트용 -->
+  <Script id="6" playingTime="100000">
+    <Action time="1000" type="animation" animName="angry" blendInTime="0.2">
+      <Action time="1000" type="animation" animName="applaud" blendInTime="0.2">
+        <Action time="1000" type="animation" animName="attack" blendInTime="0.2">
+          <Action time="1000" type="animation" animName="beg" blendInTime="0.2">
+            <Action time="1000" type="animation" animName="bow" blendInTime="0.2">
+              <Action time="1000" type="animation" animName="dance" blendInTime="0.2">
+                <Action time="1000" type="animation" animName="fund" blendInTime="0.2">
+                  <Action time="1000" type="animation" animName="greet" blendInTime="0.2">
+                    <Action time="1000" type="animation" animName="pointing" blendInTime="0.2">
+                      <Action time="1000" type="animation" animName="propose" blendInTime="0.2">
+                        <Action time="1000" type="animation" animName="request" blendInTime="0.2">
+                          <Action time="1000" type="animation" animName="shy" blendInTime="0.2">
+                            <Action time="1000" type="animation" animName="smile" blendInTime="0.2">
+                              <Action time="1000" type="animation" animName="sob" blendInTime="0.2">
+                                <Action time="1000" type="animation" animName="taunt" blendInTime="0.2">
+                                  <Action time="1000" type="animation" animName="victory" blendInTime="0.2">
+                                    <Action time="1000" type="animation" animName="worry" blendInTime="0.2">
+                                    </Action>
+                                  </Action>
+                                </Action>
+                              </Action>
+                            </Action>
+                          </Action>
+                        </Action>
+                      </Action>
+                    </Action>
+                  </Action>
+                </Action>
+              </Action>
+            </Action>
+          </Action>
+        </Action>
+      </Action>
+    </Action>
+  </Script>
+
+  <Script id="7" playingTime="20000">
+    <Action time="1000" type="aero" aeroSet="ase_aeroset.AERO.ACE_Insanity_Hill_AERO_FINAL" on="true" blendTime="2.0"/>
+    <Action time="4000" type="aero" aeroSet="hec_aeroset.AERO.TRP_Wild_Valley_Aero" on="true" blendTime="2.0"/>
+    <Action time="7000" type="aero" aeroSet="hec_aeroset.AERO.TRP_Wild_Valley_Aero" on="false" blendTime="2.0"/>
+    <Action time="10000" type="aero" aeroSet="ase_aeroset.AERO.ACE_Insanity_Hill_AERO_FINAL" on="false" blendTime="2.0"/>
+  </Script>
+
+  <Script id="8" playingTime="20000">
+    <Action time="1000" type="aero" aeroSet="ase_aeroset.AERO.ACE_Insanity_Hill_AERO_FINAL" on="true" blendTime="2.0"/>
+    <Action time="4000" type="aero" aeroSet="hec_aeroset.AERO.TRP_Wild_Valley_Aero" on="true" blendTime="2.0"/>
+    <Action time="7000" type="aero" aeroSet="" on="false" blendTime="2.0"/>
+  </Script>
+
+    <Script id="47410051" playingTime="1000">
+ 	<Action type="actionScript" huntingZoneId="474" templateId="1005" scriptId="101"/> 
+  </Script>  
+    <Script id="47410052" playingTime="1000">
+ 	<Action type="actionScript" huntingZoneId="474" templateId="1005" scriptId="102"/> 
+  </Script> 
+    <Script id="47410053" playingTime="1000">
+ 	<Action type="actionScript" huntingZoneId="474" templateId="1005" scriptId="103"/> 
+  </Script>
+   <Script id="47410054" playingTime="1000">
+ 	<Action type="actionScript" huntingZoneId="474" templateId="1005" scriptId="104"/> 
+  </Script>
+  <Script id="101" playingTime="2000">
+    <Action type="materialParam" param="process" from="-2.0" to="-0.34" duration="2000"/>
+  </Script>
+
+  <Script id="102" playingTime="2000">
+    <Action type="materialParam" param="process" from="-0.34" to="0.0" duration="2000"/>
+    <Action type="aero" aeroSet="SWC_Quest_Aero.Quest_process_A_Aero" on="true" blendTime="2.0"/>
+	<Action time="200" type="cameraShake" duration="3000" power="2" speed="1000"/>
+  </Script>
+
+  <Script id="103" playingTime="2000">
+    <Action type="materialParam" param="process" from="0.0" to="0.5" duration="2000"/>
+    <Action type="aero" aeroSet="SWC_Quest_Aero.Quest_process_A_Aero" on="false" blendTime="2.0"/>
+    <Action type="aero" aeroSet="SWC_Quest_Aero.Quest_process_B_Aero" on="true" blendTime="2.0"/>
+	<Action time="200" type="cameraShake" duration="3000" power="3" speed="1000"/>
+	</Script>
+
+  <Script id="104" playingTime="2000">
+    <Action type="materialParam" param="process" from="0.5" to="1.0" duration="2000"/>
+    <Action type="aero" aeroSet="SWC_Quest_Aero.Quest_process_B_Aero" on="false" blendTime="2.0"/>
+    <Action type="aero" aeroSet="SWC_Quest_Aero.Quest_process_C_Aero" on="true" blendTime="2.0"/>
+	<Action time="200" type="cameraShake" duration="5000" power="3" speed="1000"/> 
+ </Script>
+
+  <Script id="105" playingTime="2000">
+    <Action type="materialParam" param="process" from="-0.34" to="-2.0" duration="2000"/>
+    <Action type="aero" aeroSet="" on="false" blendTime="2.0"/>
+  </Script>
+
+	<Script id="106" playingTime="5000">
+		<Action time="0" type="effect" effectId="999001"/>
+		<Action time="200" type="effect" effectId="999002"/>
+		<Action time="3500" type="effect" effectId="999003"/>
+	</Script>
+	
+	<Script id="107" playingTime="5000">
+		<Action time="0" type="effect" effectId="999003"/>
+		<Action time="100" type="material" postfix="_death"/>
+        <Action type="materialParam" param="JordonCrossFactor" from="0.0" to="1.0" duration="2000"/>
+		<Action time="0" type="effect" effectId="300004"/>	
+	</Script>
+
+    <Script id="4520001" playingTime="6000">
+		<Action time="0" type="effect" effectId="80038"/>
+	</Script>
+	
+    <Script id="4520003" playingTime="6000">
+		<Action time="500" type="dialog" textId="444"/>
+	</Script>	
+	
+	<Script id="4510002" playingTime="5000">
+        <Action time="0" type="visible" visibility="false"/>
+	</Script>
+	
+	<Script id="4510003" playingTime="6000">
+	    <Action time="0" type="visible" visibility="true"/>
+		<Action time="1" type="animation" animName="Death" rate="1"/>
+	</Script>
+<!--아크데바 무기고 -->
+  <Script id="8080001" playingTime="5000">
+	    <Action type="move" pos="35965.5039,144918.0469,307.1051" speed="200"/>
+	</Script>
+  <!-- 아크데바 인던 종료 -->
+	<Script id="8080002" playingTime="10500">
+	    <Action time="0" type="dialog"  textId="101" rate="1" />
+		<Action time="1000" type="effect" effectId="513110800" rate="1" />
+		<Action time="1000" type="animation" animName="blastBallStart" rate="1" />
+		<Action time="2000" type="animation" animName="blastBallLoop" rate="1" />
+		<Action time="2500" type="cameraShake" duration="2000" power="1" speed="1000" />
+		<Action time="2500" type="effect" effectId="1030" rate="1" />	 
+		<Action time="3000" type="dialog" textId="102" rate="1" />
+		 
+		<Action time="3000" type="animation" animName="bReactionStart2" rate="1" />
+		<Action time="4000" type="effect" effectId="1030" rate="1" />
+		<Action time="4000" type="dialog" textId="102" rate="1" />
+		<Action time="4000" type="instantMove" pos="43855.8398,133768.7969,-1529.7754" dir="1"/>
+		<Action time="4000" type="animation" animName="bReactionDown2" rate="1" />
+		<Action time="5000" type="animation" animName="bReactionDown2" rate="1" />
+		<Action time="6000" type="animation" animName="bReactionDown2" rate="1" />
+		
+		 <Action time="7000" type="animation" animName="bReactionCom2" rate="1" />
+		<Action time="7500" type="dialog" textId="103" rate="1" />
+		<Action time="8000" type="animation" animName="Groggy1" rate="1" />
+		<Action time="9000" type="effect" effectId="1030" rate="1" />
+		<Action time="9000" type="animation" animName="Death" rate="1" />
+	</Script>
+	<!-- 아크데바 무기고 카메라 쉐이크 -->
+	<Script id="8080003" playingTime="2000">
+		<Action time="0" type="cameraShake" duration="2000" power="1" speed="1000" />
+	</Script>
+<!-- 엘카이아호(퀘스트) 카메라 쉐이크 -->
+	<Script id="8230001" playingTime="600000">
+		<Action time="0" type="cameraShake" duration="2000" power="2" speed="1000"/>					
+	</Script>
+	<Script id="8230002" playingTime="600000">
+		<Action time="0" type="cameraShake" duration="2000" power="2" speed="1000"/>			
+	</Script>
+	<!-- 물튀기는 포스트 프로세스 테스트 -->
+	<Script id="4600001" playingTime="8000" enableInput="true">
+		<Action time="0" type="PostProcess" postprocessSet="17" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="17" param="Strength" from="1.0f" to="1.0f" duration="8000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="17" on="false" />
+	</Script>
+	<!-- 카메라 쉐이킹 -->
+	<Script id="4600002" playingTime="600000">
+		<Action time="0" type="cameraShake" duration="2000" power="2" speed="1000"/>			
+	</Script>
+	<Script id="4600003" playingTime="900000">
+		<Action time="0" type="cameraShake" duration="4000" power="4" speed="2000"/>			
+	</Script>
+
+	<!--약화된 켈리반의 돌격선 도핑 아이템 가이드--> 
+	<!--탱커/딜러용-->
+ 	<Script id="986001" playingTime="1000000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="9860010" xPadTextId="9860010" dPadTextId="9860010" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="10000000" type="tutorialMessage" keyTextId="9860010" xPadTextId="9860010" dPadTextId="9860010" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="9860010" xPadTextId="9860010" dPadTextId="9860010" complete="true" on="false"/>
+	</Script>
+	
+	<!--힐러용-->
+ 	<Script id="986002" playingTime="1000000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="9860020" xPadTextId="9860020" dPadTextId="9860020" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="10000000" type="tutorialMessage" keyTextId="9860020" xPadTextId="9860020" dPadTextId="9860020" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="9860020" xPadTextId="9860020" dPadTextId="9860020" complete="true" on="false"/>
+	</Script>
+
+	<!--도핑성공-->
+ 	<Script id="986003" playingTime="10000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="9860030" xPadTextId="9860030" dPadTextId="9860030" complete="true" on="true"/>
+		<Action time="5000" type="tutorialMessage" keyTextId="9860030" xPadTextId="9860030" dPadTextId="9860030" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="9860030" xPadTextId="9860030" dPadTextId="9860030" complete="true" on="false"/>
+	</Script>
+
+	<!-- 듀리온의 안식처 2넴 도망 -->
+	<Script id="4680001" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false"/>
+		<Action time="0" type="PostProcess" postprocessSet="3" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="3" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.f" to="0.9f" duration="500" >
+					<Action time="1000" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.9f" to="0.f" duration="1500">
+						<Action time="0" type="PostProcess" postprocessSet="3" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="3" on="false" />
+	</Script>
+
+	<!--거대몬스터 크리스탈 가이드-->
+ 	<Script id="950101" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="950101" xPadTextId="950101" dPadTextId="950101" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="950101" xPadTextId="950101" dPadTextId="950101" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="950101" xPadTextId="950101" dPadTextId="950101" complete="true" on="false"/>
+	</Script>
+ 	<Script id="950102" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="950102" xPadTextId="950102" dPadTextId="950102" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="950102" xPadTextId="950102" dPadTextId="950102" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="950102" xPadTextId="950102" dPadTextId="950102" complete="true" on="false"/>
+	</Script>
+ 	<Script id="950103" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="950103" xPadTextId="950103" dPadTextId="950103" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="950103" xPadTextId="950103" dPadTextId="950103" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="950103" xPadTextId="950103" dPadTextId="950103" complete="true" on="false"/>
+	</Script>
+
+	
+	<!--GM이벤트 연출용-->
+    <Script id="6311001" playingTime="12000">
+		<Action time="0" type="animation" animName="dance" blendInTime="0.2"/>
+		<Action time="7183" type="animation" animName="victory" blendInTime="0.2"/>
+		<Action time="9608" type="animation" animName="pointing" blendInTime="0.2"/>
+	</Script>	
+    <Script id="6311002" playingTime="5000">	
+		<Action time="0" type="ActionScript" huntingZoneId="63" templateId="5208" scriptId="6311001"/>
+		<Action time="0" type="ActionScript" huntingZoneId="63" templateId="5215" scriptId="6311001"/>
+		<Action time="0" type="ActionScript" huntingZoneId="63" templateId="5216" scriptId="6311001"/>
+		<Action time="0" type="ActionScript" huntingZoneId="63" templateId="5217" scriptId="6311001"/>
+		<Action time="0" type="ActionScript" huntingZoneId="63" templateId="5218" scriptId="6311001"/>
+		<Action time="0" type="ActionScript" huntingZoneId="63" templateId="5219" scriptId="6311001"/>
+	</Script>
+    <Script id="6311003" playingTime="1000">
+		<Action time="0" type="dialog" showChat="false" textId="101"/>
+	</Script>	
+	
+	<!--'18 상반기 최상위 던전 _ 지하사원 던전 연출 -->
+	<Script id="9782001" playingTime="10000">
+		<Action time="0" type="CameraFocus" yaw="0" pitch="-7" distance="550" huntingZoneId="782" templateId="5203" on="true"/>
+		<Action time="2000" type="CameraFocus" huntingZoneId="782" templateId="5203" on="false"/>
+    </Script>
+	<Script id="9782002" playingTime="2000">
+		<Action type="animation" animName="aggrochange" rate="1.0"/>	
+    </Script>
+	<Script id="9782003" playingTime="4000">
+		<Action type="animation" animName="Groggy1" rate="0.5"/>
+		<Action time="2000" type="cameraShake" duration="1000" power="3" speed="6"/>	
+    </Script>
+	<Script id="9782004" playingTime="4000">
+		<Action type="rotate" dir="-17392" duration="500"/>	
+    </Script>	
+	<Script id="9782005" playingTime="2000">
+		<Action type="animation" animName="Atk01End03" rate="1.0"/>	
+    </Script>
+	<Script id="9782006" playingTime="10000">
+		<Action type="animation" animName="death" rate="0.8"/>	
+    </Script>
+
+	<!-- 낚시 미니게임 시작 연출 -->
+	<Script id="6199901" playingTime="3000" enableInput="true">
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2001Cue" volume="1" radius="1.0" pitch="0.5" />
+		<Action time="0" type="cameraShake" duration="500" power="0.2" speed="10"/>			
+    </Script>
+	<Script id="6199902" playingTime="3000" enableInput="true">
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2021Cue" volume="3" radius="1.0" pitch="1" />
+		<Action time="0" type="cameraShake" duration="1000" power="1.5" speed="20"/>	
+		<Action time="800" type="cameraShake" duration="2000" power="0.4" speed="5"/>	
+			<Action time="0" type="PostProcess" postprocessSet="4" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="4" param="Strength" from="0.f" to="1.5f" duration="400" >
+					<Action time="0" type="PostProcessMaterial" postprocessSet="4" param="Strength" from="1.5f" to="0.f" duration="1000">
+						<Action time="0" type="PostProcess" postprocessSet="4" on="false" />
+					</Action>
+				</Action>
+			</Action>
+    </Script>
+	
+	<!-- 벨릭의 꿈 미니게임 나비 경직 및 타격 이펙트 -->
+	<Script id="681001" playingTime="5000">
+		<Action time="0" type="effect" effectId="681003"/>
+		<Action time="0" type="animation" animName="groggy" rate="1" />
+	</Script>
+	<Script id="681002" playingTime="5000">
+		<Action time="0" type="effect" effectId="681004"/>
+		<Action time="0" type="animation" animName="groggy" rate="1" />
+	</Script>
+	
+	<!--아르가프 부화장 던전 이벤트-->
+	<Script id="3024001" playingTime="3000">
+		<Action time="0" type="cameraShake" duration="2000" power="3" speed="6"/>	
+    </Script>
+    	<!-- 공중섬 점프기어 -->
+	<Script id="9999999" playingTime="5000" enableInput="true" isOnlyPlayerTarget="true" isStopActionEnd="false">
+		<Action time="0" type="PostProcess" postprocessSet="18" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="18" param="Strength"  from="0.2f" to="1.0f" duration="1000" />
+			<Action time="1000" type="PostProcessMaterial" postprocessSet="18" param="Strength"  from="1.0f" to="1.0f" duration="3000" />
+			<Action time="4000" type="PostProcessMaterial" postprocessSet="18" param="Strength"  from="1.0f" to="0.2f" duration="1000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="18" on="false" />
+	</Script>
+	<Script id="9999998" playingTime="1500" enableInput="true" isOnlyPlayerTarget="true" isStopActionEnd="false">
+		<Action time="0" type="scale" scale="0.1" duration="10" power="5"/>
+		<Action time="1500" type="scale" scale="1.0" duration="10" power="5"/>
+		<Action isFinal="true" type="scale" scale="1.0" on="false" />
+	</Script>
+	<Script id="9999997" playingTime="200" enableInput="true" isOnlyPlayerTarget="true" isStopActionEnd="false">
+		<Action time="0" type="scale" scale="0.1" duration="10" power="5"/>
+		<Action time="200" type="scale" scale="1.0" duration="10" power="5"/>
+		<Action isFinal="true" type="scale" scale="1.0" on="false" />
+	</Script>
+	<!-- 배가 흔들리는 -->
+	<Script id="30200001" playingTime="45000" enableInput="true">
+		<Action time="0" type="cameraShake" duration="45000" power="0.2" speed="1"/>						
+	</Script>		
+	
+	<Script id="30200002" playingTime="6000">						
+		<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="1.0f" duration="2000"/>
+			<Action time="2000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="1.0f" duration="2000"/>
+			<Action time="4000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.0f" duration="2000"/>
+			<Action time="6000" type="PostProcess" postprocessSet="2"  on="false" />
+		</Action>		
+	</Script>  		
+	
+	<Script id="30200003" playingTime="15000" enableInput="true">
+		<Action time="0" type="cameraShake" duration="15000" power="0.3" speed="1"/>						
+	</Script>
+	
+	<Script id="30200004" playingTime="3000">						
+		<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="1.0f" duration="1000"/>
+			<Action time="1000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="1.0f" duration="1000"/>
+			<Action time="2000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.0f" duration="1000"/>
+			<Action time="3000" type="PostProcess" postprocessSet="2"  on="false" />
+		</Action>		
+	</Script>  		
+	<Script id="30201001" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SeaShip_AERO.AERO.SeaShip_Rainy_AERO" on="true" blendTime="2.85"/>		
+		<Action time="1000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.0f" duration="2000"/>
+	</Script>
+	<Script id="30201002" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SeaShip_AERO.AERO.SeaShip_SunnyDay_AERO" on="true" blendTime="2.85"/>		
+		<Action time="1000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.0f" duration="2000"/>
+	</Script>
+	<Script id="30201003" playingTime="0">
+		<Action time="0" type="aero" aeroSet="ase_aeroset.AERO.ACE_Insanity_Hill_AERO_FINAL" on="true" blendTime="2.85"/>		
+		<Action time="1000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.0f" duration="2000"/>
+	</Script>
+	<Script id="30201011" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SeaShip_AERO.AERO.SeaShip_Rainy_AERO" on="true" blendTime="2.85"/>				
+	</Script>
+	<Script id="30201012" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SeaShip_AERO.AERO.SeaShip_SunnyDay_AERO" on="true" blendTime="2.85"/>				
+	</Script>
+	<Script id="30201013" playingTime="0">
+		<Action time="0" type="aero" aeroSet="ase_aeroset.AERO.ACE_Insanity_Hill_AERO_FINAL" on="true" blendTime="2.85"/>				
+	</Script>
+	
+	<Script id="30201099" playingTime="0">
+		<Action time="0" type="aero" aeroSet="" on="false" blendTime="2.85"/>		
+	</Script>
+
+	
+	
+<!-- 왜곡된 리안의 지하전당 --> 
+	<!--가이드 종료-->
+ 	<Script id="30280000" playingTime="1" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280000" xPadTextId="30280000" dPadTextId="30280000" complete="true" on="true"/>
+		<Action time="1" type="tutorialMessage" keyTextId="30280000" xPadTextId="30280000" dPadTextId="30280000" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280000" xPadTextId="30280000" dPadTextId="30280000" complete="true" on="false"/>
+	</Script>		
+	<!--은은한 초록빛 향기-->
+ 	<Script id="30280001" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280001" xPadTextId="30280001" dPadTextId="30280001" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30280001" xPadTextId="30280001" dPadTextId="30280001" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280001" xPadTextId="30280001" dPadTextId="30280001" complete="true" on="false"/>
+	</Script>	
+	<!--은은한 보랏빛 향기-->
+ 	<Script id="30280002" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280002" xPadTextId="30280002" dPadTextId="30280002" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30280002" xPadTextId="30280002" dPadTextId="30280002" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280002" xPadTextId="30280002" dPadTextId="30280002" complete="true" on="false"/>
+	</Script>		
+	<!-- 1,2네임드 이동 구간 오칸 경비병기-->
+ 	<Script id="30280003" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280003" xPadTextId="30280003" dPadTextId="30280003" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30280003" xPadTextId="30280003" dPadTextId="30280003" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280003" xPadTextId="30280003" dPadTextId="30280003" complete="true" on="false"/>
+	</Script>		
+	<!--2네임드 석상 주시 활성화-->
+ 	<Script id="30280004" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280004" xPadTextId="30280004" dPadTextId="30280004" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="30280004" xPadTextId="30280004" dPadTextId="30280004" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280004" xPadTextId="30280004" dPadTextId="30280004" complete="true" on="false"/>
+	</Script>				
+	<!--2네임드 피의 석상 주시-->
+ 	<Script id="30280005" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280005" xPadTextId="30280005" dPadTextId="30280005" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30280005" xPadTextId="30280005" dPadTextId="30280005" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280005" xPadTextId="30280005" dPadTextId="30280005" complete="true" on="false"/>
+	</Script>			
+	<!--2네임드 찬란한 석상 주시-->
+ 	<Script id="30280006" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280006" xPadTextId="30280006" dPadTextId="30280006" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30280006" xPadTextId="30280006" dPadTextId="30280006" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280006" xPadTextId="30280006" dPadTextId="30280006" complete="true" on="false"/>
+	</Script>			
+	<!--2네임드 저주받은 석상 주시-->
+ 	<Script id="30280007" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280007" xPadTextId="30280007" dPadTextId="30280007" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30280007" xPadTextId="30280007" dPadTextId="30280007" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280007" xPadTextId="30280007" dPadTextId="30280007" complete="true" on="false"/>
+	</Script>		
+	<!--석상 속박 패턴 안내 -->
+ 	<Script id="30280008" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280008" xPadTextId="30280008" dPadTextId="30280008" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="30280008" xPadTextId="30280008" dPadTextId="30280008" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280008" xPadTextId="30280008" dPadTextId="30280008" complete="true" on="false"/>
+	</Script>		
+	<!--카일루스의 각성-->
+ 	<Script id="30280009" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280009" xPadTextId="30280009" dPadTextId="30280009" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="30280009" xPadTextId="30280009" dPadTextId="30280009" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280009" xPadTextId="30280009" dPadTextId="30280009" complete="true" on="false"/>
+	</Script>		
+	<!--비석 소환 패턴 가이드 -->
+ 	<Script id="30280010" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280010" xPadTextId="30280010" dPadTextId="30280010" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="30280010" xPadTextId="30280010" dPadTextId="30280010" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280010" xPadTextId="30280010" dPadTextId="30280010" complete="true" on="false"/>
+	</Script>		
+	<!-- 날아올라 구슬 패턴 가이드 -->
+ 	<Script id="30280011" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280011" xPadTextId="30280011" dPadTextId="30280011" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="30280011" xPadTextId="30280011" dPadTextId="30280011" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280011" xPadTextId="30280011" dPadTextId="30280011" complete="true" on="false"/>
+	</Script>	
+	<!-- 유저 입장 가이드 탱 -->
+ 	<Script id="30280021" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280021" xPadTextId="30280021" dPadTextId="30280021" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30280021" xPadTextId="30280021" dPadTextId="30280021" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280021" xPadTextId="30280021" dPadTextId="30280021" complete="true" on="false"/>
+	</Script>		
+	<!-- 유저 입장 가이드 딜 -->
+ 	<Script id="30280022" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280022" xPadTextId="30280022" dPadTextId="30280022" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30280022" xPadTextId="30280022" dPadTextId="30280022" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280022" xPadTextId="30280022" dPadTextId="30280022" complete="true" on="false"/>
+	</Script>	
+	<!-- 유저 입장 가이드 힐 -->
+ 	<Script id="30280023" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280023" xPadTextId="30280023" dPadTextId="30280023" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30280023" xPadTextId="30280023" dPadTextId="30280023" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280023" xPadTextId="30280023" dPadTextId="30280023" complete="true" on="false"/>
+	</Script>		
+	<!-- 1네임드 패턴 가이드 -->
+ 	<Script id="30281001" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30281001" xPadTextId="30281001" dPadTextId="30281001" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30281001" xPadTextId="30281001" dPadTextId="30281001" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30281001" xPadTextId="30281001" dPadTextId="30281001" complete="true" on="false"/>
+	</Script>		
+	<!-- 1네임드 패턴 가이드 off -->
+ 	<Script id="30281002" playingTime="1" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30280000" xPadTextId="30280000" dPadTextId="30280000" complete="true" on="true"/>
+		<Action time="1" type="tutorialMessage" keyTextId="30280000" xPadTextId="30280000" dPadTextId="30280000" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30280000" xPadTextId="30280000" dPadTextId="30280000" complete="true" on="false"/>
+	</Script>	
+	<!-- 2네임드 패턴 가이드 -->
+ 	<Script id="30282001" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30282001" xPadTextId="30282001" dPadTextId="30282001" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30282001" xPadTextId="30282001" dPadTextId="30282001" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30282001" xPadTextId="30282001" dPadTextId="30282001" complete="true" on="false"/>
+	</Script>		
+	<!-- 3네임드 패턴 가이드 -->
+ 	<Script id="30283001" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30283001" xPadTextId="30283001" dPadTextId="30283001" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30283001" xPadTextId="30283001" dPadTextId="30283001" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30283001" xPadTextId="30283001" dPadTextId="30283001" complete="true" on="false"/>
+	</Script>
+	
+<!-- 공허한 안타로스 심연 1네임드 패턴 가이드 -->
+	<Script id="30291001" playingTime="30000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30291001" xPadTextId="30291001" dPadTextId="30291001" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30291001" xPadTextId="30291001" dPadTextId="30291001" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30291001" xPadTextId="30291001" dPadTextId="30291001" complete="true" on="false"/>	
+	</Script>  	
+	
+<!-- 공허한 안타로스 심연 2네임드 패턴 가이드 -->
+	<Script id="30292001" playingTime="30000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30292001" xPadTextId="30292001" dPadTextId="30292001" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30292001" xPadTextId="30292001" dPadTextId="30292001" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30292001" xPadTextId="30292001" dPadTextId="30292001" complete="true" on="false"/>	
+	</Script> 	
+
+<!-- 공허한 안타로스 심연 네임드 2 저주 디버프 가이드 -->
+	<Script id="30292002" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30292002" xPadTextId="30292002" dPadTextId="30292002" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30292002" xPadTextId="30292002" dPadTextId="30292002" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30292002" xPadTextId="30292002" dPadTextId="30292002" complete="true" on="false"/>	
+	</Script> 	
+
+<!-- 공허한 안타로스 심연 3네임드 패턴 가이드 -->
+	<Script id="30293001" playingTime="30000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30293001" xPadTextId="30293001" dPadTextId="30293001" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30293001" xPadTextId="30293001" dPadTextId="30293001" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30293001" xPadTextId="30293001" dPadTextId="30293001" complete="true" on="false"/>	
+	</Script> 
+	
+<!-- 공허한 안타로스 심연 네임드 3 구슬 소환 디버프 가이드 -->
+	<Script id="30293002" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30293002" xPadTextId="30293002" dPadTextId="30293002" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30293002" xPadTextId="30293002" dPadTextId="30293002" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30293002" xPadTextId="30293002" dPadTextId="30293002" complete="true" on="false"/>	
+	</Script> 
+
+<!-- 공허한 안타로스 심연 네임드 3 감옥 생성 공격 가이드 -->
+	<Script id="30293003" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30293003" xPadTextId="30293003" dPadTextId="30293003" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30293003" xPadTextId="30293003" dPadTextId="30293003" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30293003" xPadTextId="30293003" dPadTextId="30293003" complete="true" on="false"/>	
+	</Script> 	
+
+<!-- 공허한 안타로스 심연 네임드 3 가두기 공격 가이드 -->
+	<Script id="30293004" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30293004" xPadTextId="30293004" dPadTextId="30293004" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30293004" xPadTextId="30293004" dPadTextId="30293004" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30293004" xPadTextId="30293004" dPadTextId="30293004" complete="true" on="false"/>	
+	</Script> 	
+
+<!-- 공허한 안타로스 심연 네임드 3 분신 공격 가이드 -->
+	<Script id="30293005" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30293005" xPadTextId="30293005" dPadTextId="30293005" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30293005" xPadTextId="30293005" dPadTextId="30293005" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30293005" xPadTextId="30293005" dPadTextId="30293005" complete="true" on="false"/>	
+	</Script> 
+	
+<!-- 공허한 안타로스 탱커 가이드 -->
+	<Script id="30290021" playingTime="20000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30290021" xPadTextId="30290021" dPadTextId="30290021" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="30290021" xPadTextId="30290021" dPadTextId="30290021" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30290021" xPadTextId="30290021" dPadTextId="30290021" complete="true" on="false"/>	
+	</Script>  	
+	
+<!-- 공허한 안타로스 딜러 가이드 -->
+	<Script id="30290022" playingTime="20000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30290022" xPadTextId="30290022" dPadTextId="30290022" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="30290022" xPadTextId="30290022" dPadTextId="30290022" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30290022" xPadTextId="30290022" dPadTextId="30290022" complete="true" on="false"/>	
+	</Script> 	
+
+<!-- 공허한 안타로스 힐러 가이드 -->
+	<Script id="30290023" playingTime="20000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30290023" xPadTextId="30290023" dPadTextId="30290023" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="30290023" xPadTextId="30290023" dPadTextId="30290023" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30290023" xPadTextId="30290023" dPadTextId="30290023" complete="true" on="false"/>	
+	</Script> 
+	
+<!-- 베르아크 성채 가이드 던전 가이드 출력 -->
+	<!-- 유저 입장 가이드 탱 -->
+ 	<Script id="30320021" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320021" xPadTextId="30320021" dPadTextId="30320021" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30320021" xPadTextId="30320021" dPadTextId="30320021" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320021" xPadTextId="30320021" dPadTextId="30320021" complete="true" on="false"/>
+	</Script>		
+	<!-- 유저 입장 가이드 딜 -->
+ 	<Script id="30320022" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320022" xPadTextId="30320022" dPadTextId="30320022" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30320022" xPadTextId="30320022" dPadTextId="30320022" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320022" xPadTextId="30320022" dPadTextId="30320022" complete="true" on="false"/>
+	</Script>	
+	<!-- 유저 입장 가이드 힐 -->
+ 	<Script id="30320023" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320023" xPadTextId="30320023" dPadTextId="30320023" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30320023" xPadTextId="30320023" dPadTextId="30320023" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320023" xPadTextId="30320023" dPadTextId="30320023" complete="true" on="false"/>
+	</Script>	
+	<!--1네임드 비석 소환 패턴 가이드 -->
+ 	<Script id="30320001" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320001" xPadTextId="30320001" dPadTextId="30320001" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="30320001" xPadTextId="30320001" dPadTextId="30320001" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320001" xPadTextId="30320001" dPadTextId="30320001" complete="true" on="false"/>
+	</Script>	
+	<!--2네임드 비석 소환 패턴 가이드 -->
+ 	<Script id="30320002" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320002" xPadTextId="30320002" dPadTextId="30320002" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="30320002" xPadTextId="30320002" dPadTextId="30320002" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320002" xPadTextId="30320002" dPadTextId="30320002" complete="true" on="false"/>
+	</Script>
+	<!--1네임드 저주 상태 가이드 -->
+ 	<Script id="30320003" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320003" xPadTextId="30320003" dPadTextId="30320003" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="30320003" xPadTextId="30320003" dPadTextId="30320003" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320003" xPadTextId="30320003" dPadTextId="30320003" complete="true" on="false"/>
+	</Script>	
+ 	<Script id="30320004" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320004" xPadTextId="30320004" dPadTextId="30320004" complete="true" on="true"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="30320004" xPadTextId="30320004" dPadTextId="30320004" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320004" xPadTextId="30320004" dPadTextId="30320004" complete="true" on="false"/>
+	</Script>
+	<!--2네임드 출혈 이상상태 가이드 -->
+ 	<Script id="30320005" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320005" xPadTextId="30320005" dPadTextId="30320005" complete="true" on="true"/>
+		<Action time="5000" type="tutorialMessage" keyTextId="30320005" xPadTextId="30320005" dPadTextId="30320005" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320005" xPadTextId="30320005" dPadTextId="30320005" complete="true" on="false"/>
+	</Script>	
+
+<!-- 찬란한 파르퀴나의 둥지 탱커 가이드 -->
+	<Script id="30330021" playingTime="20000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330021" xPadTextId="30330021" dPadTextId="30330021" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="30330021" xPadTextId="30330021" dPadTextId="30330021" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330021" xPadTextId="30330021" dPadTextId="30330021" complete="true" on="false"/>	
+	</Script>  	
+	
+<!-- 찬란한 파르퀴나의 둥지 딜러 가이드 -->
+	<Script id="30330022" playingTime="20000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330022" xPadTextId="30330022" dPadTextId="30330022" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="30330022" xPadTextId="30330022" dPadTextId="30330022" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330022" xPadTextId="30330022" dPadTextId="30330022" complete="true" on="false"/>	
+	</Script> 	
+
+<!-- 찬란한 파르퀴나의 둥지 힐러 가이드 -->
+	<Script id="30330023" playingTime="20000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330023" xPadTextId="30330023" dPadTextId="30330023" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="30330023" xPadTextId="30330023" dPadTextId="30330023" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330023" xPadTextId="30330023" dPadTextId="30330023" complete="true" on="false"/>	
+	</Script> 
+
+<!-- 찬란한 파르퀴나의 둥지 1네임드 패턴 가이드 -->
+	<Script id="30330024" playingTime="30000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330024" xPadTextId="30330024" dPadTextId="30330024" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30330024" xPadTextId="30330024" dPadTextId="30330024" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330024" xPadTextId="30330024" dPadTextId="30330024" complete="true" on="false"/>	
+	</Script>  	
+	
+<!-- 찬란한 파르퀴나의 둥지 미니게임 가이드 -->
+	<Script id="30330025" playingTime="30000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330025" xPadTextId="30330025" dPadTextId="30330025" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30330025" xPadTextId="30330025" dPadTextId="30330025" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330025" xPadTextId="30330025" dPadTextId="30330025" complete="true" on="false"/>	
+	</Script> 	
+
+<!-- 찬란한 파르퀴나의 둥지 3네임드 패턴 가이드 -->
+	<Script id="30330026" playingTime="30000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330026" xPadTextId="30330026" dPadTextId="30330026" complete="true" on="true"/>
+		<Action time="30000" type="tutorialMessage" keyTextId="30330026" xPadTextId="30330026" dPadTextId="30330026" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330026" xPadTextId="30330026" dPadTextId="30330026" complete="true" on="false"/>	
+	</Script> 
+
+<!-- 찬란한 파르퀴나의 둥지 1네임드 1번 패턴 가이드 -->
+	<Script id="30330027" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330027" xPadTextId="30330027" dPadTextId="30330027" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30330027" xPadTextId="30330027" dPadTextId="30330027" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330027" xPadTextId="30330027" dPadTextId="30330027" complete="true" on="false"/>	
+	</Script> 
+
+<!-- 찬란한 파르퀴나의 둥지 1네임드 2번 패턴 가이드 -->
+	<Script id="30330028" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330028" xPadTextId="30330028" dPadTextId="30330028" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30330028" xPadTextId="30330028" dPadTextId="30330028" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330028" xPadTextId="30330028" dPadTextId="30330028" complete="true" on="false"/>	
+	</Script> 
+
+<!-- 찬란한 파르퀴나의 둥지 1네임드 3번 패턴 가이드 -->
+	<Script id="30330029" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330029" xPadTextId="30330029" dPadTextId="30330029" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30330029" xPadTextId="30330029" dPadTextId="30330029" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330029" xPadTextId="30330029" dPadTextId="30330029" complete="true" on="false"/>	
+	</Script> 	
+
+<!-- 찬란한 파르퀴나의 둥지 2네임드 1번 패턴 가이드 -->
+	<Script id="30330030" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330030" xPadTextId="30330030" dPadTextId="30330030" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30330030" xPadTextId="30330030" dPadTextId="30330030" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330030" xPadTextId="30330030" dPadTextId="30330030" complete="true" on="false"/>	
+	</Script> 		
+
+<!-- 찬란한 파르퀴나의 둥지 2네임드 2번 패턴 가이드 -->
+	<Script id="30330031" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330031" xPadTextId="30330031" dPadTextId="30330031" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30330031" xPadTextId="30330031" dPadTextId="30330031" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330031" xPadTextId="30330031" dPadTextId="30330031" complete="true" on="false"/>	
+	</Script> 
+
+<!-- 찬란한 파르퀴나의 둥지 2네임드 3번 패턴 가이드 -->
+	<Script id="30330032" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330032" xPadTextId="30330032" dPadTextId="30330032" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30330032" xPadTextId="30330032" dPadTextId="30330032" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330032" xPadTextId="30330032" dPadTextId="30330032" complete="true" on="false"/>	
+	</Script> 
+
+<!-- 찬란한 파르퀴나의 둥지 2네임드 4번 패턴 가이드 -->
+	<Script id="30330033" playingTime="10000" enableInput="true">						
+		<Action time="0" type="tutorialMessage" keyTextId="30330033" xPadTextId="30330033" dPadTextId="30330033" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="30330033" xPadTextId="30330033" dPadTextId="30330033" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30330033" xPadTextId="30330033" dPadTextId="30330033" complete="true" on="false"/>	
+	</Script> 	
+	
+<!--도핑 가이드 메시지 on-->
+ 	<Script id="30320006" playingTime="60000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320006" xPadTextId="30320006" dPadTextId="30320006" complete="true" on="true"/>
+		<Action time="60000" type="tutorialMessage" keyTextId="30320006" xPadTextId="30320006" dPadTextId="30320006" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320006" xPadTextId="30320006" dPadTextId="30320006" complete="true" on="false"/>
+	</Script>
+<!--도핑 가이드 메시지 off-->
+ 	<Script id="30320000" playingTime="9000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30320000" xPadTextId="30320000" dPadTextId="30320000" complete="true" on="true"/>
+		<Action time="9000" type="tutorialMessage" keyTextId="30320000" xPadTextId="30320000" dPadTextId="30320000" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30320000" xPadTextId="30320000" dPadTextId="30320000" complete="true" on="false"/>
+	</Script>	
+	
+	<!--바하르 1페이즈 반복 가이드 -->
+ 	<Script id="30371001" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30371001" xPadTextId="30371001" dPadTextId="30371001" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="30371001" xPadTextId="30371001" dPadTextId="30371001" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30371001" xPadTextId="30371001" dPadTextId="30371001" complete="true" on="false"/>
+	</Script>	
+	<!--바하르 2페이즈 반복 가이드 -->
+ 	<Script id="30371002" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30371002" xPadTextId="30371002" dPadTextId="30371002" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="30371002" xPadTextId="30371002" dPadTextId="30371002" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30371002" xPadTextId="30371002" dPadTextId="30371002" complete="true" on="false"/>
+	</Script>
+	<!--바하르 2페이즈 격노의 군대 가이드 -->
+ 	<Script id="30370003" playingTime="10000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="30370003" xPadTextId="30370003" dPadTextId="30370003" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="30370003" xPadTextId="30370003" dPadTextId="30370003" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30370003" xPadTextId="30370003" dPadTextId="30370003" complete="true" on="false"/>
+	</Script>
+	<!-- 신규 모드 전장 -->
+	<Script id="15601001" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15601001"/>		
+		<Action time="5000" type="EventDialog" eventDialogId="15601002"/>		
+		<Action time="10000" type="EventDialog" eventDialogId="15601003"/>		
+		<Action time="15000" type="EventDialog" eventDialogId="15601004"/>		
+		<Action time="20000" type="EventDialog" eventDialogId="15601005"/>		
+	</Script>
+	<Script id="15602001" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15602001"/>				
+	</Script>
+	<Script id="15603001" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15603001"/>				
+	</Script>
+	<Script id="15603002" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15603002"/>				
+	</Script>
+	<Script id="15603003" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15603003"/>				
+	</Script>
+	<Script id="15603004" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15603004"/>				
+	</Script>
+	<Script id="15603005" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15603005"/>				
+	</Script>
+	<Script id="15603006" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15603006"/>				
+	</Script>
+	<Script id="15603007" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15603007"/>				
+	</Script>
+	<Script id="15603008" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15603008"/>				
+	</Script>
+	<Script id="15604001" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15604001"/>				
+	</Script>
+	<Script id="15605001" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15605001"/>				
+	</Script>
+	<Script id="15605002" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15605002"/>				
+	</Script>
+	<Script id="15605003" playingTime="0" enableInput="true">
+		<Action time="0" type="EventDialog" eventDialogId="15605003"/>				
+	</Script>
+</S1ActionScripts>

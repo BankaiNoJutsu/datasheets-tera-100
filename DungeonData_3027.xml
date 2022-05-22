@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3027" name="@dungeon:3027" startPos="50575,69441,-11881" startDir="90" exitContinentId="7014" exitPos="-86418,24415,3179">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="70" />
+		<ClearCondition huntingZoneId="3027" templateId="1000" amount="1" killCount="1" />
+	
+
+	<!--던전 최초 설정-->
+	<EventGroup type="initialize" name="Initialize">
+	  <Event>
+	    <EventTaskGroup>
+		  <EventTask type="guideOn" nameId="3027,100" id="1" pos="53560,69433,-11829" next="none" />
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+
+<!-- 구손 불가능 --> 
+	<EventGroup type="enterTerritory" uniqueId="3027,302700016">  <!-- 1넴 구손 불가 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3023" territoryId="302700016" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3027,302700017">  <!-- 1넴 구손 불가 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3023" territoryId="302700017" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="3027,302700018">  <!-- 1넴 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3023" territoryId="302700018" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+	
+
+<!-- HP 90% 기본 강화 버프 -->
+    <EventGroup type="npcHp" uniqueId="3027,1000" value="90" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270000" target="npc" targetNpcId="3027,1000" next="none"  /> <!-- 보스 강화 버프 --> 
+                <EventTask type="message" string="@dungeon:30270002" style="default" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+<!-- HP 90% 기본 강화 버프 -->
+    <EventGroup type="npcHp" uniqueId="3027,1000" value="55" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270001" target="npc" targetNpcId="3027,1000" next="none"  /> <!-- 보스 강화 버프 --> 
+                <EventTask type="message" string="@dungeon:30270003" style="default" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!-- HP 30% 기본 강화 버프 -->
+    <EventGroup type="npcHp" uniqueId="3027,1000" value="30" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270002" target="npc" targetNpcId="3027,1000" next="none"  /> <!-- 보스 강화 버프 --> 
+                <EventTask type="message" string="@dungeon:30270004" style="default" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+<!-- 보스 리셋 시 이상상태 모두 해제 -->	
+	<EventGroup type="npcReset" uniqueId="3027,1000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="어그로최상위" value="0" next="none" />
+				<EventTask type="flag" name="어그로최상위" value="0" next="none" />
+				<EventTask type="flag" name="어그로최상위" value="0" next="none" />
+				<!-- 보스에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="30270101" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270102" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270103" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270104" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270105" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270106" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270107" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270108" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270109" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<!-- 오브젝트 -->
+				<EventTask type="deSpawn" huntingZoneId="3027" territoryId="302700013" next="none" /><!-- 1입구 차폐문  -->
+				<EventTask type="deSpawn" huntingZoneId="3027" territoryId="302700002" next="time" nextValue="5"  /><!-- 보스가 있는 파티(디스폰)  -->
+				<EventTask type="Spawn" huntingZoneId="3027" territoryId="302700002" next="none" /><!-- 보스가 있는 파티(디스폰 후 스폰)  -->
+
+                <!-- PC에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="30271001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271002" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271003" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271004" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271005" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271006" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271007" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271008" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271009" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271010" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271011" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271012" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271013" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271014" target="player" turn="off" aliveOnly="false" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 보스 죽을 시 이상상태 모두 해제 및 디스폰 -->
+    <EventGroup type="npcHp" uniqueId="3027,1000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+                <!-- 가이드off-->
+     			<EventTask type="guideOff" id="1" next="none" />
+      			<!-- 보스에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="30270000" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270008" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30272001" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30272002" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30272003" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30272004" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270103" target="npc" targetNpcId="3027,1000" turn="off" next="none" />
+				<!-- 투명NPC 디스폰(추가예정) -->
+				<EventTask type="deSpawn" huntingZoneId="3027" territoryId="302700013" next="none" /><!-- 1입구 차폐문  -->
+                <!-- 퇴장 마법석 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="3027" territoryId="302700014" next="none" /><!--퇴장 마법석  -->
+                <!-- PC에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="30271001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271002" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271003" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271004" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271005" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271006" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271007" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271008" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271009" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271010" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271011" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271012" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271013" target="player" turn="off" aliveOnly="false" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271014" target="player" turn="off" aliveOnly="false" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	
+	<EventGroup type="npcState" uniqueId="3027,1000" value="combat" repeat="true">
+    <Event>
+		<EventTaskGroup>
+			<EventTask type="flag" name="어그로최상위" value="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+	
+	<!-- 철창 on --> 
+	<EventGroup type="npcHp" uniqueId="3027,1000" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--차단문 생성 메세지-->
+				<EventTask type="message" string="@dungeon:30270006" style="combat" next="time" nextValue="5" />
+				<!-- 1네임드 입구 차폐문 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3027" territoryId="302700013" next="none" />
+				
+				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+ <!-- 주기적으로 어그로 대상에게 부활 랜타 보호용 이상상태를 뿌림 -->
+	<EventGroup type="flag" name="어그로최상위" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30271010" target="aggro" targetNpcId="3027,1000" min="1" max="1" next="none" />
+				<EventTask type="empty" next="time" nextValue="15" />				
+		</EventTaskGroup>
+      </Event>
+	</EventGroup> 	
+	
+	<!-- TNPC 타겟용 안보이는 이상상태 -->
+    <EventGroup type="npcHp" uniqueId="3027,1000" value="85" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30272001" target="npc" targetNpcId="3027,1000" next="none"  />  
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="npcHp" uniqueId="3027,1000" value="85" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30272002" target="npc" targetNpcId="3027,1000" next="none"  />  
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="npcHp" uniqueId="3027,1000" value="30" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30272003" target="npc" targetNpcId="3027,1000" next="none"  /> 
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="npcHp" uniqueId="3027,1000" value="30" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30272004" target="npc" targetNpcId="3027,1000" next="none"  />  
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!--
+	<EventGroup type="npcHp" uniqueId="3027,1000" value="70" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270007" target="npc" targetNpcId="3027,1000" next="none"  /> 
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3027,1000" value="50" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270008" target="npc" targetNpcId="3027,1000" next="none"  /> 
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+-->	
+    <EventGroup type="none" id="1" name="참격 쿨타임 부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270101" target="npc" targetNpcId="3027,1000" turn="on" next="none" /><!--참격 쿨타임 제어-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="none" id="2" name="일도양단 쿨타임 부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270102" target="npc" targetNpcId="3027,1000" turn="on" next="none" /><!--일도양단 쿨타임 제어-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="none" id="3" name="HeavyAtk 쿨타임 부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270103" target="npc" targetNpcId="3027,1000" turn="on" next="none" /><!--HeavyAtk 쿨타임 제어-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="10" name="부활랜타 대상자 지정(탱커보호)" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30271010" target="aggro" targetNpcId="3027,1000" min="1" max="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="11" name="헤비어택_섬단1타_탱커보호_보스패턴끊김방지" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30271010" target="aggro" targetNpcId="3027,1000" min="1" max="1" next="none" />
+				<EventTask type="abnormality" abnormalityId="30270009" target="npc" targetNpcId="3027,1000" min="1" max="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="12" name="헤비어택_섬단1타_대상자 지정_탱커제외" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30271014" target="aggro" targetNpcId="3027,1000" min="1" max="1" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271013" target="aggro" targetNpcId="3027,1000" min="2" max="2" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271013" target="aggro" targetNpcId="3027,1000" min="3" max="3" next="none" />			
+				<EventTask type="abnormality" abnormalityId="30271013" target="aggro" targetNpcId="3027,1000" min="4" max="4" next="none" />
+				<EventTask type="abnormality" abnormalityId="30271013" target="aggro" targetNpcId="3027,1000" min="5" max="5" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="13" name="보호막 공속제어용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270010" target="npc" targetNpcId="3027,1000" turn="on" next="none" /><!--보호막전용 공속제어-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+<!-- 힘모 패턴 타겟용 --> 
+	<EventGroup type="none" id="14" name="힘모으기 TNPC 스킬제어용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30270105" target="npc" targetNpcId="3027,1000" turn="on" next="none" /><!--모드알림때 TNPC스킬 못쓰도록 함 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="none" id="999" name="모든 행동 취소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30279999" target="npc" targetNpcId="3027,1000" turn="on" next="none" /><!--부활랜타전용 행동취소-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	
+	
+</Dungeon>

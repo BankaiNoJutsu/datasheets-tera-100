@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MiniGameData>
+  <!--물대포 쏘기 미니게임 1 -->
+  <MiniGame id="1" name="@miniGame:7000001" desc="태양의 축제 물대포쏘기">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="5" coolTime="">
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="210, 2001" value="7000"/>
+	  <End	 type="timer" name="timerA" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="210" territoryId="" centerPos="103062,96392,33" distance="800"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="60" name="timerA" timerType="normal" uiOff="true" />	    
+		<EventTask type="countdown" message="@miniGame:7000002,@miniGame:7000003,@miniGame:7000004,@miniGame:7000005,@miniGame:7000000,@miniGame:7000006" countdownTimes="6,5,4,3,2,1" />
+		<EventTask type="abnormality" abnormalityId="" target="player"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerA" timerType="rank" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerA"/>
+		<EventTask type="dettachVehicleEx" targetNpcId="210, 3000"/>
+	  </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="55">
+      <Event>
+        <EventTaskGroup>          
+		  <EventTask type="timer" action="change" direction="reverse" value="60" name="timerA" timerType="normal" uiOff="false" next="none" />	 
+		  <EventTask type="rankSystem" id="1" state="start" startPoint="0" next="time" nextValue="3" />
+		  <!-- next="time" 적용 안됨
+		  <EventTask type="message" string="@minigame:7000007" style="alert" next="time" nextValue="3" />
+		  <EventTask type="message" string="@minigame:7000008" style="alert" next="time" nextValue="3" />
+		  <EventTask type="message" string="@minigame:7000009" style="alert" next="time" nextValue="41" />
+		  <EventTask type="message" string="@minigame:7000010" style="alert" next="time" nextValue="5" />
+		  <EventTask type="message" string="@minigame:7000011" style="alert" next="time" nextValue="2" />
+		  <EventTask type="message" string="@minigame:7000012" style="alert" next="none" /> -->
+		</EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+  
+  <!-- 물대포 쏘기 미니게임 2-->
+  <MiniGame id="2" name="@miniGame:7000001" desc="태양의 축제 물대포쏘기">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="5" >
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="210, 2002" value="7000"/>
+	  <End	 type="timer" name="timerB" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="210" territoryId="" centerPos="98305,99805,20" distance="800"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="60" name="timerB" timerType="normal" uiOff="true" />	    
+		<EventTask type="countdown" message="@miniGame:7000002,@miniGame:7000003,@miniGame:7000004,@miniGame:7000005,@miniGame:7000000,@miniGame:7000006" countdownTimes="6,5,4,3,2,1" />
+		<EventTask type="abnormality" abnormalityId="" target="player"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerB" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerB"/>
+		<EventTask type="dettachVehicleEx" targetNpcId="210, 2999"/>
+	  </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="55">
+      <Event>
+        <EventTaskGroup>          
+		  <EventTask type="timer" action="change" direction="reverse" value="60" name="timerB" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="2" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+  
+  <!-- 수박깨기 미니게임 -->
+    <MiniGame id="3" name="@miniGame:7001001" desc="수박깨기미니게임">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="5" >
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="210, 2005" value="7001"/>
+	  <End	 type="timer" name="timerC" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="210" territoryId="" centerPos="100907,94239,87" distance="800"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="60" name="timerC" timerType="normal" uiOff="true" />	    
+		<EventTask type="countdown" message="@miniGame:7001002,@miniGame:7001003,@miniGame:7001004" countdownTimes="5,3,1" />
+		<EventTask type="abnormality" turn="on" abnormalityId="999001011" target="player"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerC" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerC"/>
+		<EventTask type="doActionScript" actionScriptId="60029"/>
+		<EventTask type="abnormality" turn="off" abnormalityId="999001011" target="player"/>
+	  </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="55">
+      <Event>
+        <EventTaskGroup>          
+		  <EventTask type="timer" action="change" direction="reverse" value="60" name="timerC" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="3" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+  
+  <!-- 뱀 잡기 미니게임 -->
+    <MiniGame id="4" name="@miniGame:7002001" desc="뱀 잡기게임">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="1" >
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="451, 7004" value="7002"/>
+	  <End	 type="timer" name="timerC" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="451" territoryId="" centerPos="-22962.4844,80194.1172,1092.6509" distance="800"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="451" territoryId="45100177" />
+		<EventTask type="spawn" huntingZoneId="451" territoryId="45100180" />
+		<EventTask type="timer" action="start" direction="reverse" value="60" name="timerC" timerType="normal" uiOff="true" />	  	
+		<EventTask type="countdown" message="@miniGame:7002008,@miniGame:7002007,@miniGame:7002002,@miniGame:7002003,@miniGame:7002004,@miniGame:7002005,@miniGame:7000000,@miniGame:7002006" countdownTimes="13,8,6,5,4,3,2,1" />
+		<EventTask type="abnormality" abnormalityId="0" target="player"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerC" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerC"/>
+		<EventTask type="despawn" huntingZoneId="451" territoryId="45100185" despawnCondition="complete"/>
+	 </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="45">
+      <Event>
+        <EventTaskGroup>          
+		  <EventTask type="timer" action="change" direction="reverse" value="60" name="timerC" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="4" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+
+  <MiniGame id="11" name="@miniGame:7000001" desc="비수기 뱀섬 물대포쏘기">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="5" >
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="210, 2501" value="7000"/>
+	  <End	 type="timer" name="timerA" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="210" territoryId="" centerPos="103062,96392,33" distance="800"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="60" name="timerA" timerType="normal" uiOff="true" />	    
+		<EventTask type="countdown" message="@miniGame:7000002,@miniGame:7000003,@miniGame:7000004,@miniGame:7000005,@miniGame:7000000,@miniGame:7000006" countdownTimes="6,5,4,3,2,1" />
+		<EventTask type="abnormality" abnormalityId="" target="player"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerA" timerType="rank" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerA"/>
+		<EventTask type="dettachVehicleEx" targetNpcId="210, 3000"/>
+	 </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="55">
+      <Event>
+        <EventTaskGroup>          
+		  <EventTask type="timer" action="change" direction="reverse" value="60" name="timerA" timerType="normal" uiOff="false" next="none" />	 
+		  <EventTask type="rankSystem" id="11" state="start" startPoint="0" next="time" nextValue="3" />
+		  <!-- next="time" 적용 안됨
+		  <EventTask type="message" string="@minigame:7000007" style="alert" next="time" nextValue="3" />
+		  <EventTask type="message" string="@minigame:7000008" style="alert" next="time" nextValue="3" />
+		  <EventTask type="message" string="@minigame:7000009" style="alert" next="time" nextValue="41" />
+		  <EventTask type="message" string="@minigame:7000010" style="alert" next="time" nextValue="5" />
+		  <EventTask type="message" string="@minigame:7000011" style="alert" next="time" nextValue="2" />
+		  <EventTask type="message" string="@minigame:7000012" style="alert" next="none" /> -->
+		</EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+  
+  <!-- 물대포 쏘기 미니게임 2-->
+  <MiniGame id="12" name="@miniGame:7000001" desc="비수기 뱀섬 물대포쏘기">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="5" >
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="210, 2502" value="7000"/>
+	  <End	 type="timer" name="timerB" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="210" territoryId="" centerPos="98305,99805,20" distance="800"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="60" name="timerB" timerType="normal" uiOff="true" />	    
+		<EventTask type="countdown" message="@miniGame:7000002,@miniGame:7000003,@miniGame:7000004,@miniGame:7000005,@miniGame:7000000,@miniGame:7000006" countdownTimes="6,5,4,3,2,1" />
+		<EventTask type="abnormality" abnormalityId="" target="player"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerB" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerB"/>
+		<EventTask type="dettachVehicleEx" targetNpcId="210, 2999"/>
+	  </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="55">
+      <Event>
+        <EventTaskGroup>          
+		  <EventTask type="timer" action="change" direction="reverse" value="60" name="timerB" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="12" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+  
+  <!-- 수박깨기 미니게임 -->
+    <MiniGame id="13" name="@miniGame:7001001" desc="비수기 뱀섬 수박깨기미니게임">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="5" >
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="210, 2505" value="7001"/>
+	  <End	 type="timer" name="timerC" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="210" territoryId="" centerPos="100907,94239,87" distance="800"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="60" name="timerC" timerType="normal" uiOff="true" />	    
+		<EventTask type="countdown" message="@miniGame:7001002,@miniGame:7001003,@miniGame:7001004" countdownTimes="5,3,1" />
+		<EventTask type="abnormality" turn="on" abnormalityId="999001011" target="player"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerC" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerC"/>
+		<EventTask type="doActionScript" actionScriptId="60029"/>
+		<EventTask type="abnormality" turn="off" abnormalityId="999001011" target="player"/>
+	  </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="55">
+      <Event>
+        <EventTaskGroup>          
+		  <EventTask type="timer" action="change" direction="reverse" value="60" name="timerC" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="13" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+
+<!-- 짚단 치기 게임-->  
+    <MiniGame id="5" name="@miniGame:7005001" desc="짚단 치기 게임">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="1" coolTime="30">
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="219, 1009" value="7005"/>
+	  <End	 type="timer" name="timerD" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="219" territoryId="" centerPos="-21966,-27914,645" distance="1500"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="19" territoryId="1900287" />
+		<EventTask type="timer" action="start" direction="reverse" value="49" name="timerD" timerType="normal" uiOff="true" />	  	
+		<EventTask type="countdown" message="@miniGame:7005007,@miniGame:7005008,@miniGame:7005009,@miniGame:7005004,@miniGame:7005005,@miniGame:7000000,@miniGame:7005006" countdownTimes="9,7,5,4,3,2,1" />
+		<EventTask type="shortcut" shortcutId="777001"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerD" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerD"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900287" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900290" despawnCondition="complete"/>
+	 </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="40">
+      <Event>
+        <EventTaskGroup>          
+			<EventTask type="spawn" huntingZoneId="19" territoryId="1900290" />
+		  <EventTask type="timer" action="change" direction="reverse" value="30" name="timerD" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="5" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+
+ <!-- 꼬리 잡기 게임-->  
+    <MiniGame id="6" name="@miniGame:7006001" desc="꼬리 잡기 게임">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="1" coolTime="30">
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="219, 7005" value="7006"/>
+	  <End	 type="timer" name="timerE" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="219" territoryId="" centerPos="-19637,-9211,1186" distance="600"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="49" name="timerE" timerType="normal" uiOff="true" />	  	
+		<EventTask type="countdown" message="@miniGame:7006007,@miniGame:7006008,@miniGame:7006009,@miniGame:7006004,@miniGame:7006005,@miniGame:7000000,@miniGame:7006006" countdownTimes="9,7,5,4,3,2,1" />
+		<EventTask type="shortcut" shortcutId="777002"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerE" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerE"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900288" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900293" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900294" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900291" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900295" despawnCondition="complete"/>
+	 </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="40">
+      <Event>
+        <EventTaskGroup>          
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900288" />
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900291" />
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900294" />
+		  <EventTask type="timer" action="change" direction="reverse" value="30" name="timerE" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="6" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+
+    <EventGroup type="timer" value="10">
+      <Event>
+        <EventTaskGroup>          
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900293" />
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900295" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+
+  </MiniGame>
+  <!-- 북 치기 게임-->  
+   <MiniGame id="7" name="@miniGame:7007001" desc="북 치기 게임">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="1" coolTime="30">
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="205, 2003" value="7007"/>
+	  <End	 type="timer" name="timerF" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="205" territoryId="" centerPos="53875.8984,-7368.5737,85.5391" distance="450"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="82" name="timerF" timerType="normal" uiOff="true" />	  	
+		<EventTask type="countdown" message="@miniGame:7007011,@miniGame:7007007,@miniGame:7007008,@miniGame:7007009,@miniGame:7007010,@miniGame:7007004,@miniGame:7007005,@miniGame:7000000,@miniGame:7007006" countdownTimes="12,11,9,7,5,4,3,2,1" />
+		<EventTask type="spawn" huntingZoneId="5" territoryId="520334" />
+     	  <EventTask type="spawn" huntingZoneId="5" territoryId="520339" />
+     	  <EventTask type="spawn" huntingZoneId="5" territoryId="520340" />
+     	  <EventTask type="spawn" huntingZoneId="5" territoryId="520341" />
+     	  <EventTask type="spawn" huntingZoneId="5" territoryId="520342" />
+		<EventTask type="shortcut" shortcutId="777003"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerF" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerF"/>
+	 </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="70">
+      <Event>
+        <EventTaskGroup>          
+		  <EventTask type="countdown" message="@miniGame:7007011,@miniGame:7007003,@miniGame:7007002,@miniGame:7007012" countdownTimes="7,5,3,1" />
+     	  <EventTask type="spawn" huntingZoneId="5" territoryId="520335" />
+     	  <EventTask type="spawn" huntingZoneId="5" territoryId="520336" />
+		  <EventTask type="timer" action="change" direction="reverse" value="30" name="timerF" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="7" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<!--종료 50초 전, 추가 개구리1 스폰-->
+	<EventGroup type="timer" value="22">
+      <Event>
+        <EventTaskGroup>          
+     	  <EventTask type="spawn" huntingZoneId="5" territoryId="520337" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<!--종료 20초 전, 추가 개구리 2 스폰	-->
+	<EventGroup type="timer" value="12">
+      <Event>
+        <EventTaskGroup>          
+     	  <EventTask type="spawn" huntingZoneId="5" territoryId="520338" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+
+  </MiniGame>
+<!-- 짚단 치기 게임-->  
+    <MiniGame id="15" name="@miniGame:7005001" desc="비수기 짚단 치기 게임">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="1" coolTime="30">
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="219, 7109" value="7005"/>
+	  <End	 type="timer" name="timerD" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="219" territoryId="" centerPos="-21966,-27914,645" distance="1500"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="19" territoryId="1900287" />
+		<EventTask type="timer" action="start" direction="reverse" value="49" name="timerD" timerType="normal" uiOff="true" />	  	
+		<EventTask type="countdown" message="@miniGame:7005007,@miniGame:7005008,@miniGame:7005009,@miniGame:7005004,@miniGame:7005005,@miniGame:7000000,@miniGame:7005006" countdownTimes="9,7,5,4,3,2,1" />
+		<EventTask type="shortcut" shortcutId="777001"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerD" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerD"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900287" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900290" despawnCondition="complete"/>
+	 </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="40">
+      <Event>
+        <EventTaskGroup>          
+			<EventTask type="spawn" huntingZoneId="19" territoryId="1900290" />
+		  <EventTask type="timer" action="change" direction="reverse" value="60" name="timerD" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="15" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+
+ <!-- 비수기 꼬리 잡기 게임-->  
+   <MiniGame id="16" name="@miniGame:7006001" desc="비수기 꼬리 잡기 게임">
+	<!-- 채널 별로 미니게임이 존재하고 진행하는데 유저 1명이 있으면 된다. --> 
+    <GameRule instanceType="channel" count="1" coolTime="30">
+	  <!-- 미니게임이 시작되고 끝나는 조건, 범위(밖으로 나가는 경우 강제종료) -->
+	  <Start type="npcMenu" uniqueId="219, 7105" value="7006"/>
+	  <End	 type="timer" name="timerE" value="0" giveUp="false"/>
+	  <Constraint Lv="1" item="0" itemCount="0"/>
+	  <Territory huntingZoneId="219" territoryId="" centerPos="-19637,-9211,1186" distance="600"/>
+	</GameRule>  
+	
+	<!-- 미니게임이 시작 될 때 해주어야 하는 일 들 102918,96677,-5 -->
+	<StartTask>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="49" name="timerE" timerType="normal" uiOff="true" />	  	
+		<EventTask type="countdown" message="@miniGame:7006007,@miniGame:7006008,@miniGame:7006009,@miniGame:7006004,@miniGame:7006005,@miniGame:7000000,@miniGame:7006006" countdownTimes="9,7,5,4,3,2,1" />
+		<EventTask type="shortcut" shortcutId="777002"/>
+	  </EventTaskGroup>
+	</StartTask>
+	
+	<!--미니게임이 종료 됐을 때 진행되는 테스크-->
+	<EndTask>
+	  <EventTaskGroup>
+	  <!--타이머 일시정지 스크립트-->
+		<EventTask type="timer" action="stop" name="timerE" timerType="normal" />
+	    <EventTask type="rankSystem" state="end" />
+		<EventTask type="timer" action="stop" value="0" name="timerE"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900288" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900293" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900294" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900291" despawnCondition="complete"/>
+		<EventTask type="despawn" huntingZoneId="19" territoryId="1900295" despawnCondition="complete"/>
+	 </EventTaskGroup>
+	</EndTask>
+	
+    <EventGroup type="timer" value="40">
+      <Event>
+        <EventTaskGroup>          
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900288" />
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900291" />
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900294" />
+		  <EventTask type="timer" action="change" direction="reverse" value="60" name="timerE" timerType="normal" uiOff="false" />	    
+		  <EventTask type="rankSystem" id="16" state="start" startPoint="0" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+
+    <EventGroup type="timer" value="55">
+      <Event>
+        <EventTaskGroup>          
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900293" />
+     	  <EventTask type="spawn" huntingZoneId="19" territoryId="1900295" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+  </MiniGame>
+
+</MiniGameData>
+	

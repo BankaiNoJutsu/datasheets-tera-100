@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon eventDungeon="true" continentId="9126" name="@dungeon:9126" startPos="-130619,-117502,-84" startDir="90" exitContinentId="7031" exitPos="21324,4949,6193" exitDir="135" newbieBonusOff="false" coolTimeApplyType="enter">
+	<Condition type="solo" value="1" />
+	<Condition type="levelOver" value="65" />
+	<Condition type="maxMemberCount" value="1" />
+	<ClearCondition huntingZoneId="126" templateId="5000" amount="1" killCount="1" />
+	<Retry retryId="3"/>
+	
+<!--던전 시작시 처리-->
+	<EventGroup type="initialize" name="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="workObjectSpawn" huntingZoneId="126" templateId="912601" next="none" />		<!--ONPC 디스폰-->
+				<EventTask type="workObjectSpawn" huntingZoneId="126" templateId="912602" next="none" />		<!--ONPC 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="flag" name="spawn_normal" value="0" next="none" /> 							<!--일반몹 소환 플래그 초기화-->
+				<EventTask type="flag" name="spawn_hard" value="0" next="none" /> 								<!--정예몹 소환 플래그 초기화-->
+				<EventTask type="flag" name="lancer_enter" value="0" next="none" /> 							<!--창기 입장 플래그 초기화-->
+				<EventTask type="flag" name="fighter_enter" value="0" next="none" /> 							<!--권술 입장 플래그 초기화-->
+				<EventTask type="flag" name="berserker_enter" value="0" next="none" /> 							<!--광전 입장 플래그 초기화-->
+				<EventTask type="flag" name="slayer_enter" value="0" next="none" /> 							<!--무사 입장 플래그 초기화-->
+				<EventTask type="flag" name="warrior_enter" value="0" next="none" /> 							<!--검투 입장 플래그 초기화-->
+				<EventTask type="flag" name="glaiver_enter" value="0" next="none" /> 							<!--월광 입장 플래그 초기화-->
+				<EventTask type="flag" name="soulless_enter" value="0" next="none" /> 							<!--비검 입장 플래그 초기화-->
+				<EventTask type="flag" name="assassin_enter" value="0" next="none" /> 							<!--인술 입장 플래그 초기화-->
+				<EventTask type="flag" name="engineer_enter" value="0" next="none" /> 							<!--마공 입장 플래그 초기화-->
+				<EventTask type="flag" name="archer_enter" value="0" next="none" /> 							<!--궁수 입장 플래그 초기화-->
+				<EventTask type="flag" name="sorcerer_enter" value="0" next="none" /> 							<!--마법 입장 플래그 초기화-->
+				<EventTask type="flag" name="elementalist_enter" value="0" next="none" /> 						<!--정령 입장 플래그 초기화-->
+				<EventTask type="flag" name="priest_enter" value="0" next="none" /> 							<!--사제 입장 플래그 초기화-->
+				<EventTask type="flag" name="reward" value="0" next="none" /> 									<!--보상 지급 플래그 초기화-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!--몬스터 스폰 단계-->
+	<!--1. 입장 유저 체크-->
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="lancer" >						<!--창기-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="lancer_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="fighter" >						<!--권술-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="fighter_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="berserker" >					<!--광전-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="berserker_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="slayer" >						<!--무사-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="slayer_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="warrior" >						<!--검투-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="warrior_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="glaiver" >						<!--월광-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="glaiver_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="soulless" >						<!--비검-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="soulless_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="assassin" >						<!--인술-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="assassin_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="engineer" >						<!--마공-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="engineer_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="archer" >						<!--궁수-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="archer_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="sorcerer" >						<!--마법-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="sorcerer_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="elementalist" >					<!--정령-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="elementalist_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="126,12600011" triggerUserClass="priest" >						<!--사제-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="priest_enter" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--2.타겟 몬스터 스폰-->
+	<EventGroup type="Workobject" uniqueId="126,912601" repeat="true"> 											<!--일반 페트레 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600025" next="time" nextValue="0.5"/><!-- 보스 몬스터 스폰-->
+				<EventTask type="flag" name="spawn_normal" value="1" next="none" />					 			<!--플래그 설정-->
+				<EventTask type="message" string="@dungeon:9126100" style="default" next="none" /> 				<!--ONPC 동작 성공 메시지-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="126" templateId="912601" next="none" />		<!--ONPC 디스폰-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="126" templateId="912602" next="none" />		<!--ONPC 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="126,912602" repeat="true"> 											<!--랭크 페트레 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600015" next="time" nextValue="1"/><!-- 보스 몬스터 스폰-->
+				<EventTask type="flag" name="spawn_hard" value="1" next="none" /> 								<!--플래그 설정-->
+				<EventTask type="message" string="@dungeon:9126101" style="default" next="none" /> 				<!--ONPC 동작 성공 메시지-->
+				<EventTask type="ranktimer" timerLog="start" next="none"/>				<!-- 랭크 타이머 on-->
+				<EventTask type="timer" name="출력용" action="start" direction="forward" value="0" timerUiOff="false" next="none"/> <!--출력용 타이머 시작-->				
+				<EventTask type="workObjectdeSpawn" huntingZoneId="126" templateId="912601" next="none" />		<!--ONPC 디스폰-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="126" templateId="912602" next="none" />		<!--ONPC 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--3.몬스터 보정치 부여 + 랭크타이머 시작-->
+	<EventGroup type="flag" name="spawn_hard,lancer_enter" repeat="false"> 										<!--창기-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260011" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />			
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,fighter_enter" repeat="false"> 									<!--권술-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260012" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,berserker_enter" repeat="false"> 									<!--광전-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260013" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />							
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,slayer_enter" repeat="false"> 										<!--무사-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260014" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />			
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,warrior_enter" repeat="false"> 									<!--검투-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260015" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />				
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,glaiver_enter" repeat="false"> 									<!--월광-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260016" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />				
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,soulless_enter" repeat="false"> 									<!--비검-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260017" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />								
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,assassin_enter" repeat="false"> 									<!--인술-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260018" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />								
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,engineer_enter" repeat="false"> 									<!--마공-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260019" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />								
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,archer_enter" repeat="false"> 										<!--궁수-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260020" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />								
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,sorcerer_enter" repeat="false"> 									<!--마법-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260021" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />								
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,elementalist_enter" repeat="false"> 								<!--정령-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260022" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />				
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="spawn_hard,priest_enter" repeat="false"> 										<!--사제-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91260023" target="npc" targetNpcId="126,110" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260010" target="npc" targetNpcId="126,110" turn="on" next="none" />				
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+
+<!--몬스터 전투 단계-->
+	<!--1.랭킹 전투-->
+	<EventGroup type="npcState" uniqueId="126,110" value="combat" repeat="true">      							<!--전투 시작 (문닫기)-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="126,110" value="90" repeat="true">										<!--HP 90% 궁수1 생성-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9126001" style="combat" next="none" />
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600020" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="126,110" value="60" repeat="true">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9126004" style="combat" next="none" />              <!--HP 60% -->
+				<!-- 궁수 스폰 제거
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600021" next="none" />
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600028" next="none" />
+				-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="126,110" value="40" repeat="true">										<!--HP 40% 궁수2 생성-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9126005" style="combat" next="none" />
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600021" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="126,110" value="30"  repeat="true">                             			<!--HP 30% 광폭화-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9126006" style="combat" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260007" target="npc" targetNpcId="126,110" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="126,110" value="15" repeat="true">										<!--HP 15% -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9126008" style="combat" next="none" />
+				<!-- 궁수 스폰 제거
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600023" next="none" />
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600030" next="none" />
+				-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="126,110" value="0"  repeat="true">										<!--클리어 (타이머 종료) + 문열기-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" stageLog="1" logUpdate="true" next="none" />		<!--랭크 타이머 종료-->
+				<EventTask type="timer" name="출력용" action="stop" direction="forward" value="0" timerUiOff="false" next="none"/> <!--출력용 타이머 종료-->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600020" next="none"/>				<!-- 궁수 디스폰 -->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600021" next="none"/>
+                <!-- 기존에 출력되던 궁수 제거에 의한 내용 제거		
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600022" next="none"/>				
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600023" next="time" nextValue="1"/>
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600023" next="none"/>	
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600028" next="none"/>				
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600030" next="none"/>
+                -->				
+				<EventTask type="message" string="@dungeon:9126007" style="combat" next="none" />
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600005" next="none" />				<!-- 차원의 마법석 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600003" next="none"/>				<!-- 전투공간 폐쇄 취소 (문 디스폰)-->
+				<EventTask type="flag" name="reward" value="1" next="none" /> 									<!--플래그 설정-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="126,110" repeat="true">                                      			<!--실패 (몬스터 리셋)-->
+		<Event>
+			<EventTaskGroup>
+				<!--EventTask type="ranktimer" timerLog="stop" next="none" />     								타이머는 멈추지 않는다.-->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600003" next="none"/>    			<!-- 전투공간 폐쇄 취소 (문 디스폰)-->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600020,12600021,12600022,12600023" next="none"/>	<!-- 궁수 디스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--2.일반 전투-->	
+	<EventGroup type="npcState" uniqueId="126,1071" value="combat" repeat="true">      							<!--전투 시작 (문닫기)-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="126,1071" value="30"  repeat="true">                             		<!--HP 30% 광폭화-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9126006" style="combat" next="none" />
+				<EventTask type="abnormality" abnormalityId="91260007" target="npc" targetNpcId="126,1071" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="126,1071" value="0"  repeat="true">										<!--클리어 + 문열기-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9126007" style="combat" next="none" />
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600005" next="none" />				<!-- 차원의 마법석 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600003" next="none"/>				<!-- 전투공간 폐쇄 취소 (문 디스폰)-->
+				<EventTask type="flag" name="reward" value="1" next="none" /> 									<!--플래그 설정-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="126,1071" repeat="true">                                      		<!--실패 (몬스터 리셋)-->
+		<Event>
+			<EventTaskGroup>
+				<!--EventTask type="ranktimer" timerLog="stop" next="none" />     								타이머는 멈추지 않는다.-->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600003" next="none"/>    			<!-- 전투공간 폐쇄 취소 (문 디스폰)-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!--보상 지급 단계-->
+	<EventGroup type="flag" name="reward" repeat="false"> 														<!--보상 npc 생성-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="126" territoryId="12600026" next="none" />				<!-- 보상상자 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600020" next="none"/>				<!-- 궁수 디스폰 -->
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600021" next="none"/>				
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600022" next="none"/>				
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600023" next="time" nextValue="1"/>
+				<EventTask type="deSpawn" huntingZoneId="126" territoryId="12600023" next="none"/>				
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+
+	
+</Dungeon>

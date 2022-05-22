@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9011" name="@dungeon:9011" startPos="82440,-5304,471" exitContinentId="7022" exitPos="-5799,68495,6641">
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="56" />
+  <!-- <Condition type="progressQuest" value="41101" taskId="1" />
+  <Condition type="progressQuest" value="5201" taskId="10" />
+  <Condition type="completeQuest" value="5201" /> -->
+  <Condition type="maxMemberCount" value="5" />
+
+	<EventGroup type="questProgress">
+		<Event questId="6002" taskId="6">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="무흐락과트로대화" value="1" next="none" repeat="true"/>		  
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>	  
+     <EventGroup type="flag" name="무흐락과트로대화">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="9011001" target="player" next="none" />												
+				<EventTask type="doActionScript" targetNpcId="411,6000" actionScriptId="6002001" next="time" nextValue="1.0"  /> 
+				<EventTask type="doActionScript" targetNpcId="411,5001" actionScriptId="6002002" next="time" nextValue="1.5"  /> 
+				<EventTask type="doActionScript" targetNpcId="411,6000" actionScriptId="6002002" next="time" nextValue="0.5"  /> 
+				<EventTask type="doActionScript" targetNpcId="411,5001" actionScriptId="6002003"  next="time" nextValue="3.0"  /> 
+				<EventTask type="flag" name="무흐락과트로대화" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+  
+  
+</Dungeon>

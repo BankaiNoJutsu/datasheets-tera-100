@@ -1,0 +1,853 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon isPremiumDungeon="false" continentId="9713" name="@dungeon:9713" startPos="54997,116171,4517" exitContinentId="7005" exitPos="-481, 6301, 1956" coolTimeApplyType="enter">
+  <Condition type="party" value="1" />
+  <Condition type="maxMemberCount" value="1" />
+  <Condition type="levelOver" value="65" />
+  <ClearCondition huntingZoneId="713" templateId="81341" amount="1" killCount="1" />
+  <ClearCondition huntingZoneId="713" templateId="81342" amount="1" killCount="1" />
+  <!-- 인던 생성 시 준비 작업 -->
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300020" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81381" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81382" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81383" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81384" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81308" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81309" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81310" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81311" next="none" />
+        <EventTask type="turnAbnormalityTerritory" huntingZoneId="713" territoryId="71300001" turn="on" next="none" />
+        <!-- 테라타임 버프 해제 -->
+        <EventTask type="abnormality" abnormalityId="81300001" target="npc" targetNpcId="713,81308" next="none" />
+        <!-- <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="2" next="none" /> -->
+        <EventTask type="changePatternList" targetNpcId="713,81312" patternListId="3" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [클래스보정_법사] 법사 인던 진입 시, 충격 증가 
+  <EventGroup type="none" id="8" name="클래스보정_법사" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="81300011" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+  <!-- [클래스보정_힐러] 힐러 인던 진입 시, 공격력 증가  -->
+  <EventGroup type="none" id="7" name="클래스보정_힐러" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <!-- <EventTask type="abnormality" abnormalityId="81300011" target="player" next="none" /> -->
+        <EventTask type="abnormality" abnormalityId="81300017" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1번방 공략 체크(패스 시, 1번방 전부 디스폰) -->
+  <EventGroup type="none" id="23" name="1번방 공략 체크" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300019" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300020" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300021" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300023" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300024" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300025" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300031" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300040" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300044" next="none" />
+        <EventTask type="message" string="@dungeon:9713033" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1번방 공략 체크후 투명NPC 디스폰 -->
+  <EventGroup type="none" id="24" name="1번방 공략 체크 후 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300050" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2번방 공략 체크(패스 시, 2번방 전부 디스폰) -->
+  <EventGroup type="none" id="25" name="2번방 공략 체크" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300017" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300018" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300030" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300038" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300039" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300045" next="none" />
+        <EventTask type="message" string="@dungeon:9713034" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2번방 공략 체크후 투명NPC 디스폰 -->
+  <EventGroup type="none" id="26" name="2번방 공략 체크 후 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300051" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] PC사망 시, 셋팅 리셋 -->
+  <EventGroup type="none" id="11" name="셋팅 리셋_1번방" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killCount" action="stop" value="0" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300019" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300020" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300021" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300023" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300024" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300025" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300031" next="none" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300019" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300020" next="none" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81381" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81382" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81383" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81384" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81312" patternListId="3" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 숲의 거인 사망 시, 셋팅 리셋 -->
+  <EventGroup type="npcHp" uniqueId="713,81312" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killCount" action="stop" value="0" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300019" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300020" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300021" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300023" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300024" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300025" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300031" next="none" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300019" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300020" next="none" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81381" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81382" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81383" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300019" templateId="81384" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81312" patternListId="3" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] PC사망 시, 셋팅 리셋 -->
+  <EventGroup type="none" id="12" name="셋팅 리셋_2번방" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300017" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300018" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300030" next="none" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300017" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300028" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300018" next="none" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81308" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81309" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81310" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81311" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300001" target="npc" targetNpcId="713,81308" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="713,81308" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300017" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300018" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300030" next="none" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300017" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300028" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300018" next="none" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81308" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81309" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81310" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300017" templateId="81311" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300001" target="npc" targetNpcId="713,81308" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3번방 전멸체크 등장(노멀) -->
+  <EventGroup type="none" id="19" name="3번방 전멸체크 등장(노멀)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="message" string="@dungeon:9713032" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300043" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300043" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3번방 전멸체크 등장(하드) -->
+  <EventGroup type="none" id="20" name="3번방 전멸체크 등장(하드)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300042" next="none" />
+        <EventTask type="message" string="@dungeon:9713032" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300043" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300043" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방-노멀] PC사망 시, 셋팅 리셋 -->
+  <EventGroup type="none" id="13" name="셋팅 리셋_3번방_노멀" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="91600036" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300011" templateId="81398" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300046" next="none" />
+        <!--<EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="none" />-->
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300009" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300012" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="2" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300011" templateId="81398" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="2" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="time" nextValue="9" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방-노멀] 어그로 초기화 시, 셋팅 리셋 -->
+  <EventGroup type="npcReset" uniqueId="713,81363" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="91600036" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300011" templateId="81398" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300046" next="none" />
+        <!--<EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="none" />-->
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300009" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300012" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="2" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300011" templateId="81398" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="2" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="time" nextValue="9" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 길리안 어그로 초기화 시, 셋팅 리셋 -->
+  <EventGroup type="npcReset" uniqueId="713,81301" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="91600036" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300046" next="none" />
+        <!--<EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="none" />-->
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300009" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="time" nextValue="9" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방-하드] PC사망 시, 셋팅 리셋 -->
+  <EventGroup type="none" id="14" name="셋팅 리셋_3번방_하드" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="91600036" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300011" templateId="81399" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300047" next="none" />
+        <!--<EventTask type="despawn" huntingZoneId="713" territoryId="81300011" next="none" />-->
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300007" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300008" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300013" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300011" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300001" next="time" nextValue="1" />
+        <!-- <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="1" next="none" /> -->
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300011" templateId="81399" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="time" nextValue="9" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방-하드] 어그로 초기화 시, 셋팅 리셋 -->
+  <EventGroup type="npcReset" uniqueId="713,81364" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="91600036" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="713" territoryId="81300011" templateId="81399" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300047" next="none" />
+        <!--<EventTask type="despawn" huntingZoneId="713" territoryId="81300011" next="none" />-->
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300007" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300008" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300013" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300011" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300001" next="time" nextValue="1" />
+        <!-- <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="1" next="none" /> -->
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300011" templateId="81399" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="time" nextValue="9" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방-하드] 지배석이 2개 소환된 경우 노멀 지배석과 전멸 체크 NPC 디스폰 -->
+  <EventGroup type="none" id="27" name="노멀 지배석와 전멸체크 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300012" next="time" nextValue="2" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1번방 전멸체크 디스폰 -->
+  <EventGroup type="none" id="15" name="1번방 전멸체크 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300044" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2번방 전멸체크 디스폰 -->
+  <EventGroup type="none" id="16" name="2번방 전멸체크 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300045" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3번방 전멸체크 디스폰(노멀) -->
+  <EventGroup type="none" id="17" name="3번방 전멸체크 디스폰(노멀)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3번방 전멸체크 디스폰(노멀) -->
+  <EventGroup type="none" id="18" name="3번방 전멸체크 디스폰(노멀)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300042" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1번방과 2번방을 모두 클리어 했다면, 길리안 노멀모드 작동 -->
+  <EventGroup type="flag" name="노멀모드1,노멀모드2" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <!--<EventTask type="message" string="@dungeon:9713007" style="combat" next="none" />-->
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300048" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300049" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300011" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300012" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="2" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300013" target="npc" targetNpcId="713,81301" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보상 버프 작동(공격력) -->
+  <EventGroup type="npcHp" uniqueId="713,81372" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300049" next="none" />
+        <EventTask type="abnormality" abnormalityId="813002" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보상 버프 작동(회복) -->
+  <EventGroup type="npcHp" uniqueId="713,81373" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300048" next="none" />
+        <EventTask type="abnormality" abnormalityId="813003" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방]연출용 나무 정령이 모두 죽으면 1번방 전투 시작 -->
+  <EventGroup type="eliminateRepeatly" uniqueId="713,81300020" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300044" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300019" templateId="81384" next="time" nextValue="2" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300019" templateId="81382" next="time" nextValue="2" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300019" templateId="81383" next="time" nextValue="2" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300019" templateId="81381" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81312" patternListId="1" next="none" />
+        <EventTask type="message" string="@dungeon:9713042" style="default" next="none" />
+        <EventTask type="message" string="@dungeon:9713021" target="npc" targetNpcId="713,81312" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81381" patternListId="1" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81382" patternListId="1" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81383" patternListId="1" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81384" patternListId="1" next="none" />
+        <!--<EventTask type="abnormality" abnormalityId="2067" target="npc" targetNpcId="713,81312" next="none" />-->
+        <EventTask type="killCount" action="start" value="0" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300031" next="none" />
+        <EventTask type="flag" name="1번방체크1" value="0" next="none" />
+        <EventTask type="flag" name="1번방체크2" value="0" next="none" />
+        <EventTask type="flag" name="1번방체크3" value="0" next="none" />
+        <EventTask type="flag" name="1번방체크4" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 숲의 거인의 체력이 50%가 되면 스턴 발동(어뷰징 방지용)
+  <EventGroup type="npcHp" uniqueId="713,81312" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77700012" target="npc" targetNpcId="713,81312" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+  <!-- [1번방] 정해진 킬카운트가 될때마다 숲의 거인이 지배석 조각을 파괴 -->
+  <EventGroup type="killCount" value="25" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="713,81312" patternListId="2" next="time" nextValue="6" />
+        <EventTask type="changePatternList" targetNpcId="713,81381" patternListId="2" next="time" nextValue="2" />
+        <EventTask type="changePatternList" targetNpcId="713,81382" patternListId="2" next="time" nextValue="2" />
+        <EventTask type="changePatternList" targetNpcId="713,81383" patternListId="2" next="time" nextValue="2" />
+        <EventTask type="changePatternList" targetNpcId="713,81384" patternListId="2" next="none" />
+        <!--<EventTask type="abnormality" abnormalityId="81300009" target="player" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 정해진 킬카운트가 될때마다 숲의 거인이 지배석 조각을 파괴 -->
+  <EventGroup type="killCount" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="713,81312" patternListId="2" next="time" nextValue="6" />
+        <EventTask type="changePatternList" targetNpcId="713,81381" patternListId="3" next="time" nextValue="2" />
+        <EventTask type="changePatternList" targetNpcId="713,81382" patternListId="3" next="time" nextValue="2" />
+        <EventTask type="changePatternList" targetNpcId="713,81383" patternListId="3" next="time" nextValue="2" />
+        <EventTask type="changePatternList" targetNpcId="713,81384" patternListId="3" next="none" />
+        <!--<EventTask type="abnormality" abnormalityId="81300009" target="player" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 정해진 킬카운트가 될때마다 숲의 거인이 지배석 조각을 파괴 -->
+  <EventGroup type="killCount" value="75" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="713,81312" patternListId="2" next="time" nextValue="6" />
+        <EventTask type="changePatternList" targetNpcId="713,81381" patternListId="4" next="time" nextValue="2" />
+        <EventTask type="changePatternList" targetNpcId="713,81382" patternListId="4" next="time" nextValue="2" />
+        <EventTask type="changePatternList" targetNpcId="713,81383" patternListId="4" next="time" nextValue="2" />
+        <EventTask type="changePatternList" targetNpcId="713,81384" patternListId="4" next="none" />
+        <!--<EventTask type="abnormality" abnormalityId="81300009" target="player" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 정해진 킬카운트가 될때마다 숲의 거인이 지배석 조각을 파괴 -->
+  <EventGroup type="killCount" value="100" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="713,81312" patternListId="2" next="none" />
+        <EventTask type="killCount" action="stop" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 지배석 조각을 파괴한 후에 숲의 거인 패턴 정상화 -->
+  <EventGroup type="none" id="10" name="숲의 거인 패턴 정상화" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="713,81312" patternListId="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 1번방의 지배석 조각이 파괴되면 소환용 투명NPC를 죽인 후, 흙정령 소환1 -->
+  <EventGroup type="npcHp" uniqueId="713,81391" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killNpc" targetNpcId="713,81381" next="time" nextValue="3" />
+        <EventTask type="abnormality" abnormalityId="77700018" target="npc" targetNpcId="713,81312" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300021" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713023" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 1번방의 지배석 조각이 파괴되면 소환용 투명NPC를 죽인 후, 흙정령 소환2 -->
+  <EventGroup type="npcHp" uniqueId="713,81392" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killNpc" targetNpcId="713,81382" next="time" nextValue="3" />
+        <EventTask type="abnormality" abnormalityId="77700018" target="npc" targetNpcId="713,81312" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300023" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713023" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 1번방의 지배석 조각이 파괴되면 소환용 투명NPC를 죽인 후, 흙정령 소환3 -->
+  <EventGroup type="npcHp" uniqueId="713,81393" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killNpc" targetNpcId="713,81383" next="time" nextValue="3" />
+        <EventTask type="abnormality" abnormalityId="77700018" target="npc" targetNpcId="713,81312" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300024" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713023" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 1번방의 지배석 조각이 파괴되면 소환용 투명NPC를 죽인 후, 흙정령 소환4 -->
+  <EventGroup type="npcHp" uniqueId="713,81394" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killNpc" targetNpcId="713,81384" next="time" nextValue="3" />
+        <EventTask type="abnormality" abnormalityId="77700018" target="npc" targetNpcId="713,81312" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300025" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713023" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 흙정령 사망 시, 나무정령에게 걸려 있던 버프 삭제(사용안함)
+  <EventGroup type="npcHp" uniqueId="713,81386" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" turn="off" abnormalityId="91104200" target="npc" targetNpcId="713,81390" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+  <!-- [1번방] 1번방의 소환용 투명NPC 4개가 모두 파괴되면 노멀모드1 조건 체크 -->
+  <EventGroup type="flag" name="1번방체크1,1번방체크2,1번방체크3,1번방체크4" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300044" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300050" next="none" />
+        <EventTask type="killNpc" targetNpcId="713,81390" next="none" />
+        <EventTask type="killNpc" targetNpcId="713,81385" next="none" />
+        <EventTask type="killCount" action="stop" value="0" next="none" />
+        <EventTask type="message" string="@dungeon:9713024" style="combat" next="none" />
+        <EventTask type="message" string="@dungeon:9713025" target="npc" targetNpcId="713,81312" next="none" />
+        <EventTask type="flag" name="노멀모드1" value="1" next="time" nextValue="3" />
+        <EventTask type="killNpc" targetNpcId="713,81386" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300021" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300023" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300024" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300025" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 1번방의 소환용 투명NPC 사망 여부 체크1 -->
+  <EventGroup type="npcHp" uniqueId="713,81381" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="1번방체크1" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 1번방의 소환용 투명NPC 사망 여부 체크2 -->
+  <EventGroup type="npcHp" uniqueId="713,81382" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="1번방체크2" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 1번방의 소환용 투명NPC 사망 여부 체크3 -->
+  <EventGroup type="npcHp" uniqueId="713,81383" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="1번방체크3" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [1번방] 1번방의 소환용 투명NPC 사망 여부 체크4 -->
+  <EventGroup type="npcHp" uniqueId="713,81384" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="1번방체크4" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] PC가 포포리에게 접근하면 메시지 연출 -->
+  <EventGroup type="enterTerritory" uniqueId="713,81300039">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9713029" target="npc" targetNpcId="713,81367" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9713030" target="npc" targetNpcId="713,81367" next="time" nextValue="3" />
+        <EventTask type="empty" next="time" nextValue="20" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] PC가 고대 바위에게 접근하면 2번방 전투 시작 -->
+  <EventGroup type="none" id="21" name="2번방 전투 시작" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300030" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300017" templateId="81308" next="none" />
+        <EventTask type="message" string="@dungeon:9713008" target="npc" targetNpcId="713,81308" next="time" nextValue="3" />
+        <EventTask type="abnormality" abnormalityId="81300002" target="npc" targetNpcId="713,81308" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700013" target="npc" targetNpcId="713,81309" next="none" />
+        <EventTask type="abnormality" abnormalityId="77700013" target="npc" targetNpcId="713,81310" next="time" nextValue="3" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300017" templateId="81308" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8028" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713009" style="combat" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300017" templateId="81309" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="713" territoryId="81300017" templateId="81310" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300045" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] 2번방 전투가 시작되면 전투 시작용 투명 NPC 디스폰 -->
+  <EventGroup type="none" id="22" name="2번방 전투 시작용 투명 NPC 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300018" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] 2번방의 지배된 거인이 모두 사망하면 노멀모드2 조건 체크 -->
+  <EventGroup type="flag" name="2번방체크1,2번방체크2" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300045" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300051" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300038" next="none" />
+        <EventTask type="message" string="@dungeon:9713026" target="npc" targetNpcId="713,81308" next="none" />
+        <EventTask type="message" string="@dungeon:9713020" style="combat" next="none" />
+        <EventTask type="flag" name="노멀모드2" value="1" next="none" />
+        <EventTask type="message" string="@dungeon:9713026" target="npc" targetNpcId="713,81308" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] 2번방의 지배된 거인 사망 여부 체크1 -->
+  <EventGroup type="npcHp" uniqueId="713,81309" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="2번방체크1" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] 2번방의 지배된 거인 사망 여부 체크2 -->
+  <EventGroup type="npcHp" uniqueId="713,81310" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="2번방체크2" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] 2번방 고대 바위 체력 체크 후, 메시지 팝업(25%) -->
+  <EventGroup type="none" id="3" name="고대 바위 체력 체크(25%)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713010" style="combat" next="none" />
+        <!--<EventTask type="abnormality" abnormalityId="81300008" target="player" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] 2번방 고대 바위 체력 체크 후, 메시지 팝업(50%) -->
+  <EventGroup type="none" id="4" name="고대 바위 체력 체크(50%)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713011" style="combat" next="none" />
+        <!--<EventTask type="abnormality" abnormalityId="81300008" target="player" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] 2번방 고대 바위 체력 체크 후, 메시지 팝업(75%) -->
+  <EventGroup type="none" id="5" name="고대 바위 체력 체크(75%)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713012" style="combat" next="none" />
+        <!--<EventTask type="abnormality" abnormalityId="81300008" target="player" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] 2번방 고대 바위 체력 체크 후, 메시지 팝업(100%) / 고대 바위 공격태세로 전환 -->
+  <EventGroup type="none" id="6" name="고대 바위 체력 체크(100%)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300027" next="none" />
+        <EventTask type="message" string="@dungeon:9713013" style="combat" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9713014" target="npc" targetNpcId="713,81308" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81308" patternListId="2" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [2번방] 지배석이 파괴되면 지배된 바위 Kill -->
+  <EventGroup type="npcHp" uniqueId="713,81387" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killNpc" targetNpcId="713,81309" next="none" />
+        <EventTask type="killNpc" targetNpcId="713,81310" next="none" />
+        <EventTask type="message" string="@dungeon:9713031" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 길리두 소환(노멀모드) -->
+  <EventGroup type="none" id="1" name="길리두 소환(노멀)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <!--<EventTask type="message" string="@dungeon:9713005" style="combat" next="none" />-->
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300046" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 길리두 소환(하드모드) -->
+  <EventGroup type="none" id="2" name="길리두 소환(하드)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <!--<EventTask type="message" string="@dungeon:9713005" style="combat" next="none" />-->
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300047" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 지배석이 파괴되면 보상 flag ON (노멀모드) -->
+  <EventGroup type="npcHp" uniqueId="713,81398" value="0" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="노멀보상" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 지배석이 파괴되면 전투 종료(노멀모드) -->
+  <EventGroup type="flag" name="노멀보상" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="99000000" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="message" string="@dungeon:9713006" style="combat" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="4" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300008" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300009" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300011" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300017" target="player" turn="off" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300041" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300046" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300060" next="none" />
+        <EventTask type="empty" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300052" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300054" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9713035" target="npc" targetNpcId="713,81343" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9713036" target="npc" targetNpcId="713,81343" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9713037" target="npc" targetNpcId="713,81343" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9713040" target="npc" targetNpcId="713,81343" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300057" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 지배석 HP가 75%가 되면 지배된 숲의 거인 소환(하드모드) -->
+  <EventGroup type="npcHp" uniqueId="713,81399" value="75" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713001" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300007" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 지배석 HP가 50%가 되면 지배된 고대 바위 소환(하드모드) -->
+  <EventGroup type="npcHp" uniqueId="713,81399" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713002" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300008" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 지배석이 파괴되면 숲의 거인과 고대 바위를 흡수한 후, 2페이즈 시작(하드모드) -->
+  <EventGroup type="npcHp" uniqueId="713,81399" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300047" next="none" />
+        <EventTask type="killNpc" targetNpcId="713,81306" next="none" />
+        <EventTask type="killNpc" targetNpcId="713,81303" next="none" />
+        <EventTask type="abnormality" turn="off" abnormalityId="81300022" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300014" target="npc" targetNpcId="713,81301" targetBossId="713,81301" patternGuide="berserk" patternShowTime="5" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="3" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9713003" style="combat" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9713004" target="npc" targetNpcId="713,81301" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 지배석이 파괴되면 보상 flag ON (하드모드) -->
+  <EventGroup type="npcHp" uniqueId="713,81301" value="20" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="하드보상" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- [3번방] 길리안의 HP가 20% 이하가 되면 전투 종료(하드모드) -->
+  <EventGroup type="flag" name="하드보상" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="killNpc" targetNpcId="713,81306" next="none" />
+        <EventTask type="killNpc" targetNpcId="713,81303" next="none" />
+        <EventTask type="abnormality" abnormalityId="99000000" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="abnormality" turn="off" abnormalityId="81300014" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300022" target="npc" targetNpcId="713,81301" next="none" />
+        <EventTask type="message" string="@dungeon:9713022" style="combat" next="none" />
+        <EventTask type="changePatternList" targetNpcId="713,81301" patternListId="4" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300008" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300009" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300011" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="81300017" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="813002" target="player" turn="off" next="none" />
+        <EventTask type="abnormality" abnormalityId="813003" target="player" turn="off" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300042" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300043" next="none" />
+        <EventTask type="despawn" huntingZoneId="713" territoryId="81300001" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300060" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300052" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300056" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9713035" target="npc" targetNpcId="713,81343" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9713038" target="npc" targetNpcId="713,81343" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9713039" target="npc" targetNpcId="713,81343" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9713041" target="npc" targetNpcId="713,81343" next="none" />
+        <EventTask type="spawn" huntingZoneId="713" territoryId="81300057" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보상 깨면 길리안 짭퉁으로 교체 
+  <EventGroup type="npcHp" uniqueId="713,81341" value="0" repeat="true">
+	<Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="713" territoryId="81300001" next="none" />
+		<EventTask type="spawn" huntingZoneId="713" territoryId="81300060" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="713,81342" value="0" repeat="true">
+	<Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="713" territoryId="81300001" next="none" />
+		<EventTask type="spawn" huntingZoneId="713" territoryId="81300060" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  -->
+</Dungeon>

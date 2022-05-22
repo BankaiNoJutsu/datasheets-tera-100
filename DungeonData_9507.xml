@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9507" name="@dungeon:9507" startPos="-27052,-7681,-466" exitContinentId="7004" exitPos="116263,91059,6445" destroyWaitMin="0">
+	<RestoreTargetQuest id="50526,50530" forceRestore="true" />
+	<Condition type="solo"/>
+	<Condition type="levelOver" value="65"/>
+	<Condition type="maxMemberCount" value="1" />
+		
+	<EventGroup type="initialize" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="입구" value="1" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>  
+  <EventGroup type="flag" name="입구">
+		<Event>
+			<EventTaskGroup>	
+				<!-- 길 막기용 NPC -->
+				<!--
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700010" next="none" />
+				-->
+				<!-- 테스트 용 검은 용 소환 -->
+				<!--
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700006" next="none" /> 			
+				-->
+				<!-- 무너지는 바위 -->
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700013" next="none" /> 			
+				<EventTask type="flag" name="입구" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>  
+	
+    <EventGroup type="enterTerritory" uniqueId ="507,50700001" triggerUserClass="lancer;warrior;slayer;berserker;sorcerer;archer;priest;elementalist;engineer;fighter;assassin;soulless;glaiver">
+		<Event>
+			<EventTaskGroup>										
+				<EventTask type="flag" name="용소환연출" value="1" next="none"/>	
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup> 
+  
+   <EventGroup type="flag" name="용소환연출">
+		<Event>
+			<EventTaskGroup>
+				<!-- 용족 수하 -->
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700011" next="none" /> 
+					<!-- 검은 용 소환 용 투명 Npc 소환 -->
+				<!--
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700009" next="time" nextValue="1" />
+				-->
+				<!-- 검은 용 소환 연출 용 용족 포탈 이펙트 실행 -->
+				<!--
+				<EventTask type="doActionScript"  targetNpcId="507,8002" actionScriptId="9505021" next="none"/>
+				-->
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+  
+    <EventGroup type="questProgress">
+		<Event questId="50526" taskId="5" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="초기화" value="1" next="none"/>	
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup> 
+  
+  <!-- 검은용 소환 -->
+    <EventGroup type="flag" name="초기화">
+		<Event>
+			<EventTaskGroup>
+				<!-- 검은 용 소환 연출 용 이펙트 실행 -->
+				<!--
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="doActionScript"  targetNpcId="507,8002" actionScriptId="9505024" next="time" nextValue="4"/>		
+				-->
+				<!-- 검은 용 소환 영상 재생 -->
+				<EventTask type="playMovie" id="3043" next="none"/>								
+				<!-- 용족 수하 디스폰 -->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="507" templateId="50503" next="none" /> 
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700011" next="none" />
+				<!-- 검은 용 소환 -->				
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700002" next="time" nextValue="2" /> 
+				<!-- 길막기용 NPC 디스폰 -->
+				<!--
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700010" next="none" /> 				
+				-->
+			</EventTaskGroup>
+		</Event>		
+	</EventGroup>        
+	
+  <!-- 결계 소환 -->
+    <EventGroup type="questProgress">
+		<Event questId="50526" taskId="6" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="결계" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup> 
+   <EventGroup type="flag" name="결계">
+		<Event>
+			<EventTaskGroup>
+				<!-- 길막용 NPC 생성 -->
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700005" next="none" /> 			
+				<!-- 검은 용 소환 용 용족 포탈 삭제 -->
+				<!--
+				<EventTask type="doActionScript"  targetNpcId="507,8002" actionScriptId="9505023" next="time" nextValue="1"/>		
+				-->
+				<!-- 검은 용 소환 연출 용 투명 NPC 디스폰 -->
+				<!--
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700009" next="none" />		
+				-->
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+  
+    <!--EventGroup type="npcHp" uniqueId="507,1205" value="97">
+     <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9507008" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup-->
+  
+  <!-- 특정 테리토리를 이용한 검은 용 디스폰 -->
+  <!-- 검은 용의 HP가 80%가 될 경우 전멸기 SkillId 1304 사용하고, 해당 스킬 사용 시 투명 NPC를 소환 시킴 -->
+  <!-- 소환된 투명 NPC가 TerritoryId 50700002(용계 전투 지역 전범위 크기)에 들어오면 검은 용 전멸 연출 시작 -->  
+     <EventGroup type="enterTerritory" uniqueId ="507,50700002" targetNpcId ="507,8000" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="5" />
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700002" next="time" nextValue="1" />
+				<EventTask type="message" string="@dungeon:9507007" style="default"  next="none" />	
+				<!--
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700012" next="none" /> 
+				-->
+				<!--<EventTask type="doActionScript"  targetNpcId="507,8000" actionScriptId="9505016" next="none" />-->
+				<!-- 검은 용 전멸 연출용 이상상태 -->
+				<!-- 스턴 효과 및 HP 감소 디버프 -->
+				<EventTask type="abnormality" abnormalityId ="950500007" target="player" strictly="true" turn="on" next="time" nextValue="2"/>
+				<!-- 검은 용 디스폰 -->				
+				<!-- 검은 용 사라질때 연출용 메세지 -->
+				<EventTask type="message" string="@dungeon:9507002" style="speechbubble"  next="time" nextValue="1.5"/>
+				<!-- 포스트프로세스 이상상태 -->
+				<EventTask type="abnormality" abnormalityId ="950500008" target="player" strictly="true" turn="on" next="time" nextValue="2" />			
+				<!-- 포스트프로세스 안내용 메세지 -->
+				<EventTask type="message" string="@dungeon:9507003" style="speechbubble"  next="time" nextValue="0.3" />
+				<!-- 미스텔의 기운 안내 메세지 -->
+				<EventTask type="message" string="@dungeon:9507006" style="speechbubble"  next="time" nextValue="1" />			
+				<EventTask type="message" string="@dungeon:9507004" style="default"  next="time" nextValue="1" />
+				<EventTask type="message" string="@dungeon:9507009" style="default"  next="time" nextValue="2" />
+				<!-- 미스텔의 기운 스폰 -->
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700004" next="none" />
+				<EventTask type="workObjectSpawn" huntingZoneId="507" templateId="50503" next="time" nextValue="2" />
+				<!-- 미스텔의 기운 가이드용 마커 이펙트 부착을 위한 액션 스크립트 실행 -->
+				<EventTask type="doActionScript"  targetNpcId="507,6500" actionScriptId="9507004" next="none"/>
+				<!-- 해당 퀘스트 업데이트 -->
+				<EventTask type="updateQuest" questId="50526" taskId="6" next="none"/>				
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup>
+  
+  <!-- 검은 용 HP 80 퍼 일 때 디스폰 -->  
+  <!--
+     <EventGroup type="npcHp" uniqueId ="507,8000" value="100" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700002" next="none" /> 
+				<EventTask type="message" string="@dungeon:9507002" style="alert"  next="time" nextValue="2" />
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700004" next="none" /> 
+				<EventTask type="updateQuest" questId="50526" taskId="3" next="none"/>
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup>
+  
+  -->
+  
+     <EventGroup type="questProgress">
+		<Event questId="50530" taskId="3" >
+			<EventTaskGroup>
+			    <EventTask type="workObjectdeSpawn" huntingZoneId="507" templateId="50503" next="none" /> 
+				<!-- 내면 세계 포스트 프로세스 삭제 -->
+				<!--
+				<EventTask type="abnormality" abnormalityId ="950500001" target="player" strictly="true" turn="off" next="none" />
+				-->
+				<!-- 당기기 및 내면 세계용 포탈 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700012" next="none" />
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700004" next="none" />
+				<!-- 새로운 검은 용 스폰 -->
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700006" next="none" /> 
+				<EventTask type="message" string="@dungeon:9507001" style="alert"  next="none" />	
+				<!-- 길막기 NPC 스폰 -->
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700005" next="none" /> 
+				<!-- 내면 세계에서 연출용으로 사용한 이펙트 삭제 -->
+				<EventTask type="abnormality" abnormalityId ="950800046" target="player" strictly="true" turn="off" next="none"/>
+				<!-- 클래스 별 각성 스킬 쿨타임 감소 및 마나회복 효과 적용/ 광전사의 경우 HP 회복 -->
+				<!--EventTask type="abnormality" abnormalityId ="950800013" target="class" targetUserClass="lancer" value="1" strictly="true" turn="on" next="none" /-->
+				<EventTask type="abnormality" abnormalityId ="950800003" target="player" strictly="true" turn="on" next="none" />				
+				<!--EventTask type="abnormality" abnormalityId ="950800009" target="class" targetUserClass="slayer" value="1" strictly="true" turn="on" next="none" /-->
+				<!-- 각성 연출용 이펙트 다시 재생 -->
+				<EventTask type="abnormality" abnormalityId ="950800046" target="player" strictly="true" turn="on" next="none"/>
+				<EventTask type="flag" name="사운드" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>  	
+	
+	<EventGroup type="flag" name="사운드">
+		<Event>
+			<EventTaskGroup>
+				<!--EventTask type="Soundon" soundType="bgm" soundId="9508001" playTime="30" next="time" nextValue="30" /-->
+				<!--EventTask type="Soundoff" soundType="bgm" soundId="9508001" next="none" /-->
+				<EventTask type="Soundon" soundId="9508002" soundType ="bgm" playTime="10000" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  <!-- 검은용 소환 -->
+  <!--
+    <EventGroup type="flag" name="초기화2">
+		<Event>
+			<EventTaskGroup>				 
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700006" next="none" /> 
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700005" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+  -->
+  
+  	<EventGroup type="questProgress">
+		<Event questId="50530" taskId="4" >
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3045" next="none"/>				 
+				<!--EventTask type="spawn" huntingZoneId="507" territoryId="50700008" next="none" /--> 
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700018" next="none" /> 
+				<EventTask type="flag" name="중형" value="1" next="none"/>
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700013" next="none" /> 
+				<EventTask type="Soundoff" soundType="bgm" soundId="9508002" next="none" />
+				<EventTask type="Soundon" soundType="bgm" soundId="9508003" playTime="14" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	
+	<EventGroup type="flag" name="중형">
+		<Event>
+			<EventTaskGroup>	
+				<!--클래스 별 각성 스킬 쿨타임 감소 버프 삭제 -->
+				<!--EventTask type="abnormality" abnormalityId ="950800013" target="class" targetUserClass="lancer" value="1" strictly="true" turn="off" next="none" /-->
+				<EventTask type="abnormality" abnormalityId ="950800003" target="player" strictly="true" turn="off" next="none" />				
+				<!--EventTask type="abnormality" abnormalityId ="950800009" target="class" targetUserClass="slayer" value="1" strictly="true" turn="off" next="none" /-->				
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+	
+	<EventGroup type="questProgress">
+		<Event questId="50530" taskId="5" >
+			<EventTaskGroup>		 
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700008" next="none" /> 
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	
+	<EventGroup type="none" id="100" name="도넛 장판 투명 NPC 삭제" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700014" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="101" name="도넛 장판 투명 NPC 스폰" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700014" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="102" name="포탈 자폭" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--
+				<EventTask type="flag" name="자폭" value="1" next="none"/>
+				-->
+				<EventTask type="killNpc" targetNpcId="507,9500" next="time" nextValue="0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--
+	  <EventGroup type="flag" name="자폭">
+		<Event>
+			<EventTaskGroup>				 
+				<EventTask type="killNpc" targetNpcId="507,9500" next="time" nextValue="2" /> 
+				<EventTask type="flag" name="자폭" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+  -->
+	<!--
+	  <EventGroup type="flag" name="자폭">
+		<Event>
+			<EventTaskGroup>				 
+				<EventTask type="abnormality" abnormalityId="950700004" target="npc" targetNpcId="507,9500" strictly="true" next="time" nextValue="2" /> 
+				<EventTask type="flag" name="자폭" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+  </EventGroup> -->
+  
+  	<EventGroup type="none" id="103" name="외곽 + 중앙 장판 투명 NPC 소환" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700015" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	 	<EventGroup type="none" id="104" name="외곽 + 중앙 장판 투명 NPC 삭제" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700015" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--번외 : 중도 사망 시 어그로 리셋되면 Npc 테리토리 재생성 -->
+	<EventGroup type="npcReset" uniqueId="507,1205" repeat="true"> <!--용계 첫 진입시 만나는 용과 전투 중 사망하여 Npc 어그로 초기화되면 검은용 테리티로리 디스폰 후 스폰-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700002" next="none" /> 
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700002" next="time" nextValue="2" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="507,1204" repeat="true"> <!--용계 재진입시 만나는 용과 전투 중 사망하여 Npc 어그로 초기화되면 검은용 테리티로리 디스폰 후 스폰-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="507" territoryId="50700006" next="none" /> 
+				<EventTask type="spawn" huntingZoneId="507" territoryId="50700006" next="time" nextValue="2" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

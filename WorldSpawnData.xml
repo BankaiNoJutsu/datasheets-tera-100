@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorldSpawnData>
+	<!--
+	서버 실행 시 delayStartTimeWhenWorldStart ± delayRandomTime (ms)뒤에 동작 시작
+	randomOrder가 true이면 SpawnTerritoryGroup의 weight에 따라 랜덤한 SpawnTerritoryGroup이 스폰되며, 	false이면 id 1번부터 차례대로 스폰된다. 마지막 id의 다음 순서는 다시 1번이 된다.
+	
+	SpawnTerritoryGroup의 스폰 명령이 내려오면 SpawnTerritoryGroup에 속한 SpawnTerritory들이 spawnDelayTime ± spawnDelayRandomTime (ms) 뒤에 스폰되며 스폰 후 lifeTime (ms) 뒤에 디스폰된다. lifeTime을 지정하지 않으면 이 기능으로 인해서는 디스폰되지 않는다.
+	SpawnTerritoryGroup의 스폰 명령이 내려온 직후 nextTime ± nextRandomTime (ms) 뒤에 SpawnTerritoryGroup에 속한 SpawnTerritory들이 디스폰되며, 다음으로 스폰될 SpawnTerritoryGroup을 지정한다.
+	따라서 SpawnTerritory의 lifeTime을 지정하지 않거나 길게 지정해도 SpawnTerritoryGroup에 의해 디스폰될 수 있다.
+	
+	참고로, NpcData_XX.xml에서 지정하는 lifeTime도 별도로 동작하며, 이로 인한 lifeTime20SecMsg도 동작한다.
+	
+	SpawnTerritory에 notifySpawn에 값이 지정되어 있으면 Npc가 스폰될 때 huntingZoneId에 속한 notifyNpcTemplateId가 해당 지역에 등장했다는 시스템 메시지가 출력된다. SMT_WORLDSPAWN_NOTIFY_SPAWN
+	SpawnTerritory에 notifyDespawn 값이 지정되어 있으면 Npc가 디스폰될 때 huntingZoneId에 속한 notifyNpcTemplateId가 해당 지역에서 떠났다는 시스템 메시지가 출력된다. SMT_WORLDSPAWN_NOTIFY_DESPAWN
+	notifySpawn, notifyDespawn 노드는 누락할 경우에는 시스템 메시지가 출력되지 않는다.
+	
+	이 데이터시트에 등록된 Territory들은 서버 실행 시 스폰되어 있지 않으며, 월드 스폰 기능으로만 스폰된다.
+	-->
+	
+	<!-- 대도시 비밀 상인 -->
+	<WorldSpawn id="10000" delayStartTimeWhenWorldStart="0" delayRandomTime="0"><!--벨리카 비밀 상인-->
+		<SpawnTerritoryGroup id="1" nextTime="53700000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001591"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" nextTime="300000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001592" notifySpawn="world" notifyGuardId="1" notifyNpcTemplateId="1276"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" nextTime="7200000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001590"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" nextTime="25200000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001591"/>
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10001" delayStartTimeWhenWorldStart="0" delayRandomTime="0"><!--알레만시아 비밀 상인-->
+		<SpawnTerritoryGroup id="1" nextTime="10500000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201448"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" nextTime="300000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201449" notifySpawn="world" notifyGuardId="10" notifyNpcTemplateId="1276"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" nextTime="7200000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201447"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" nextTime="68400000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201448"/>
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10002" delayStartTimeWhenWorldStart="0" delayRandomTime="0"><!--카이아도르 비밀 상인-->
+		<SpawnTerritoryGroup id="1" nextTime="75300000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400162"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" nextTime="300000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400163" notifySpawn="world" notifyGuardId="18" notifyNpcTemplateId="1276"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" nextTime="7200000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400161"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" nextTime="3600000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400162"/>
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10003" delayStartTimeWhenWorldStart="0" delayRandomTime="0"><!--이르카 비밀 상인-->
+		<SpawnTerritoryGroup id="1" nextTime="32100000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="183" territoryId="18301294"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" nextTime="300000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="183" territoryId="18301295" notifySpawn="world" notifyGuardId="24" notifyNpcTemplateId="1276"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" nextTime="7200000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="183" territoryId="18301293"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" nextTime="46800000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="183" territoryId="18301294"/>
+		</SpawnTerritoryGroup>
+	</WorldSpawn>	
+	<!-- 가드 유랑 상인 -->	
+	<WorldSpawn id="10010" delayStartTimeWhenWorldStart="7200000" delayRandomTime="1800000"><!--벨리카 직할령 유랑 상인-->
+		<SpawnTerritoryGroup id="1" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001593" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001594" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001595" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001596" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001597" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="6" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001598" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="7" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001599" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="8" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001600" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="9" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001601" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="10" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="63" territoryId="63001602" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="1" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10011" delayStartTimeWhenWorldStart="3000000" delayRandomTime="0" randomOrder="True"><!--아르카니아 가드, 비아 아우레움 가드 유랑 상인-->
+		<SpawnTerritoryGroup id="1" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="2" territoryId="200922" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="3" notifyNpcTemplateId="1271"/><!--아르카니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="3" territoryId="321326" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="3" notifyNpcTemplateId="1271"/><!--아르카니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="5" territoryId="520343" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="3" notifyNpcTemplateId="1271"/><!--아르카니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="6" territoryId="600722" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="3" notifyNpcTemplateId="1271"/><!--아르카니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="7" territoryId="700597" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="3" notifyNpcTemplateId="1271"/><!--아르카니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="6" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="18" territoryId="1801080" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="5" notifyNpcTemplateId="1271"/><!--비아 아우레움 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="7" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="19" territoryId="1900302" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="5" notifyNpcTemplateId="1271"/><!--비아 아우레움 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="8" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="21" territoryId="2100898" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="5" notifyNpcTemplateId="1271"/><!--비아 아우레움 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="9" weight="4" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="24" territoryId="2400617" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="5" notifyNpcTemplateId="1271"/><!--비아 아우레움 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10012" delayStartTimeWhenWorldStart="6000000" delayRandomTime="0" randomOrder="True"><!--동부 가드, 포포리아 가드 유랑 상인-->
+		<SpawnTerritoryGroup id="1" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="4" territoryId="400556" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="6" notifyNpcTemplateId="1271"/><!--동부 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="9" territoryId="900357" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="6" notifyNpcTemplateId="1271"/><!--동부 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="10" territoryId="1000457" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="6" notifyNpcTemplateId="1271"/><!--동부 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="11" territoryId="1100374" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="6" notifyNpcTemplateId="1271"/><!--동부 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="12" territoryId="1200424" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="6" notifyNpcTemplateId="1271"/><!--동부 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="6" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="15" territoryId="1502612" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="4" notifyNpcTemplateId="1271"/><!--포포리아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="7" weight="1" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="16" territoryId="1620695" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="4" notifyNpcTemplateId="1271"/><!--포포리아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="8" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="17" territoryId="1720371" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="4" notifyNpcTemplateId="1271"/><!--포포리아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="9" weight="4" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="23" territoryId="2300414" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="4" notifyNpcTemplateId="1271"/><!--포포리아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10020" delayStartTimeWhenWorldStart="10800000" delayRandomTime="1800000"><!--알레만시아 직할령 유랑 상인-->
+		<SpawnTerritoryGroup id="1" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201450" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="10" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201451" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="10" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201452" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="10" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201453" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="10" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201454" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="10" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="6" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201455" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="10" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="7" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201456" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="10" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="8" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="72" territoryId="7201457" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="10" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10021" delayStartTimeWhenWorldStart="9000000" delayRandomTime="0" randomOrder="True"><!--에세니아 가드, 웨스토니아 가드 유랑 상인-->
+		<SpawnTerritoryGroup id="1" weight="4" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="26" territoryId="2600462" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="13" notifyNpcTemplateId="1271"/><!--에세니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="27" territoryId="2700617" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="13" notifyNpcTemplateId="1271"/><!--에세니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" weight="1" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="28" territoryId="2800314" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="13" notifyNpcTemplateId="1271"/><!--에세니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="29" territoryId="2900366" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="13" notifyNpcTemplateId="1271"/><!--에세니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" weight="4" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="31" territoryId="3100507" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="12" notifyNpcTemplateId="1271"/><!--웨스토니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="6" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="32" territoryId="3200433" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="12" notifyNpcTemplateId="1271"/><!--웨스토니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="7" weight="4" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="34" territoryId="3401086" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="12" notifyNpcTemplateId="1271"/><!--웨스토니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10022" delayStartTimeWhenWorldStart="12000000" delayRandomTime="0" randomOrder="True"><!--판노니아 가드, 비아 엘레니움 가드, 베리타스 특별지구 유랑 상인-->
+		<SpawnTerritoryGroup id="1" weight="4" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="40" territoryId="4000721" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="14" notifyNpcTemplateId="1271"/><!--판노니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" weight="5" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="41" territoryId="4100452" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="14" notifyNpcTemplateId="1271"/><!--판노니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="35" territoryId="3500532" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="11" notifyNpcTemplateId="1271"/><!--비아 엘레니움 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="36" territoryId="3600616" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="11" notifyNpcTemplateId="1271"/><!--비아 엘레니움 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" weight="4" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="38" territoryId="3800657" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="11" notifyNpcTemplateId="1271"/><!--비아 엘레니움 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="6" weight="9" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="30" territoryId="3015369" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="15" notifyNpcTemplateId="1271"/><!--베리타스 특별지구 유랑 상인-->
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10030" delayStartTimeWhenWorldStart="14400000" delayRandomTime="1800000"><!--카이아도르 유랑 상인-->
+		<SpawnTerritoryGroup id="1" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400164" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="18" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400165" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="18" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400166" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="18" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400167" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="18" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400168" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="18" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="6" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400169" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="18" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="7" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400170" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="18" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="8" nextTime="16200000" nextRandomTime="1800000">
+			<SpawnTerritory huntingZoneId="84" territoryId="8400171" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="18" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10031" delayStartTimeWhenWorldStart="15000000" delayRandomTime="0" randomOrder="True"><!--실바니아 가드, 로스 아카디아 가드 유랑 상인-->
+		<SpawnTerritoryGroup id="1" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="54" territoryId="5400408" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="20" notifyNpcTemplateId="1271"/><!--실바니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="55" territoryId="5500802" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="20" notifyNpcTemplateId="1271"/><!--실바니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="56" territoryId="5600582" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="20" notifyNpcTemplateId="1271"/><!--실바니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="57" territoryId="5700377" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="20" notifyNpcTemplateId="1271"/><!--실바니아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="51" territoryId="5100201" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="19" notifyNpcTemplateId="1271"/><!--로스 아카디아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="6" weight="6" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="52" territoryId="5200537" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="19" notifyNpcTemplateId="1271"/><!--로스 아카디아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10032" delayStartTimeWhenWorldStart="18000000" delayRandomTime="0" randomOrder="True"><!--로스 티리키아 가드, 로스 카이아나 가드, 헬칸 특별지구 유랑 상인-->
+		<SpawnTerritoryGroup id="1" weight="5" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="45" territoryId="4500727" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="21" notifyNpcTemplateId="1271"/><!--로스 티리키아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" weight="5" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="47" territoryId="4700761" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="21" notifyNpcTemplateId="1271"/><!--로스 티리키아 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" weight="6" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="49" territoryId="4900446" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="22" notifyNpcTemplateId="1271"/><!--로스 카이아나 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" weight="5" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="50" territoryId="5000310" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="22" notifyNpcTemplateId="1271"/><!--로스 카이아나 가드 유랑 상인-->
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" weight="8" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="48" territoryId="4800779" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="23" notifyNpcTemplateId="1271"/><!--헬칸 특별지구 유랑 상인-->
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10040" delayStartTimeWhenWorldStart="9000000" delayRandomTime="7200000" randomOrder="True"><!--바라카니아 가드 유랑 상인-->
+		<SpawnTerritoryGroup id="1" weight="3" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="172" territoryId="17200908" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="24" notifyNpcTemplateId="1271"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="2" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="181" territoryId="18101643" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="24" notifyNpcTemplateId="1271"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="3" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="182" territoryId="18209841" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="24" notifyNpcTemplateId="1271"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="4" weight="1" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="183" territoryId="18301296" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="24" notifyNpcTemplateId="1278"/>
+		</SpawnTerritoryGroup>
+		<SpawnTerritoryGroup id="5" weight="2" nextTime="18000000" nextRandomTime="0">
+			<SpawnTerritory huntingZoneId="191" territoryId="19102194" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="24" notifyNpcTemplateId="1271"/>
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+	<WorldSpawn id="10050" delayStartTimeWhenWorldStart="7200000" delayRandomTime="6600000" randomOrder="True"><!--발키온 보호령 유랑 상인-->
+		<SpawnTerritoryGroup id="1" weight="10" nextTime="10800000" nextRandomTime="3600000">
+			<SpawnTerritory huntingZoneId="13" territoryId="1300270" lifeTime="1800000" notifySpawn="world" notifyDespawn="world" notifyGuardId="2" notifyNpcTemplateId="1271"/>
+		</SpawnTerritoryGroup>
+	</WorldSpawn>
+</WorldSpawnData>

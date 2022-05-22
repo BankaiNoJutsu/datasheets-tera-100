@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MiniGameRankRecorder>
+  <MiniGameRank id="1" desc="물대포 미니게임">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="1000" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000101" />
+      <Stage grade="2" minPoint="750" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000102" />
+      <Stage grade="3" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000103" />
+	  <Stage grade="4" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerA">
+          <remainTime timePoint="0">
+            <Time min="1" max="3600" timePoint="16" bonusPoint="1000" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData>
+        <KillingPoint huntingZoneId="10" templateId="36" point="50" />
+        <KillingPoint huntingZoneId="10" templateId="37" point="25" />
+        <KillingPoint huntingZoneId="10" templateId="38" point="3" />
+      </KillingPointData>
+	  
+      <!--기타 보너스 점수 계산(미구현)-->  
+	  <BonusPointData>
+        <ActionRecordRoot>       
+		  <Pin id="1042" timeLimit="-1" bonusPoint="0" exclusiveId="1" desc="">
+		    <CompareCondition target="kill" kind="true" />
+            <CompareCondition target="doeeNpcTemplateId" kind="equal" value="4004" />
+          </Pin>
+        </ActionRecordRoot>
+		
+	    <ActionRecord id="28" desc="파티원이 10초내에 20만이상의 데미지 입음 1분 쿨타임">
+          <Pin id="2000" slot="1" timeLimit="-1" bonusPoint="100" desc="">
+		    <CompareCondition target="doeeType" kind="user" />
+            <CompareCondition target="doerNpcTemplateId" kind="equal" value="30001" />
+            <CompareCondition target="hitCountTracking" kind="greaterThanEqual" value="1" />
+          </Pin>
+        </ActionRecord>
+      </BonusPointData>
+	
+	</PointData> 
+  </MiniGameRank>
+  <MiniGameRank id="2" desc="물대포 미니게임2">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="1000" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000101" />
+      <Stage grade="2" minPoint="750" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000102" />
+      <Stage grade="3" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000103" />
+      <Stage grade="4" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000105" />
+   </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerB">
+          <remainTime timePoint="0">
+            <Time min="1" max="6000" timePoint="16" bonusPoint="1000" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData>
+        <KillingPoint huntingZoneId="10" templateId="31" point="50" />
+        <KillingPoint huntingZoneId="10" templateId="32" point="25" />
+        <KillingPoint huntingZoneId="10" templateId="33" point="3" />
+      </KillingPointData>
+	
+	</PointData> 
+  </MiniGameRank>
+  
+  <MiniGameRank id="3" desc="수박 깨기 미니게임2">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="1000" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001101" />
+      <Stage grade="2" minPoint="750" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001102" />
+      <Stage grade="3" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001103" />
+      <Stage grade="4" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerC">
+          <remainTime timePoint="0">
+            <Time min="1" max="6000" timePoint="16" bonusPoint="500" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData>
+        <KillingPoint huntingZoneId="10" templateId="34" point="40" />	  
+      </KillingPointData>
+	
+	</PointData> 
+  </MiniGameRank>
+
+  <MiniGameRank id="4" desc="뱀잡기게임">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="1000" method="inventoryAndMail" mailSender="@miniGame:7002301" mailTitle="@miniGame:7002202" mailContents="@miniGame:7002203" result="@miniGame:7002101" />
+      <Stage grade="2" minPoint="750" method="inventoryAndMail" mailSender="@miniGame:7002301" mailTitle="@miniGame:7002202" mailContents="@miniGame:7002203" result="@miniGame:7002102" />
+      <Stage grade="3" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7002301" mailTitle="@miniGame:7002202" mailContents="@miniGame:7002203" result="@miniGame:7002103" />
+      <Stage grade="4" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7002301" mailTitle="@miniGame:7002202" mailContents="@miniGame:7002203" result="@miniGame:7002104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7002301" mailTitle="@miniGame:7002202" mailContents="@miniGame:7002203" result="@miniGame:7002105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerC">
+          <remainTime timePoint="0">
+            <Time min="1" max="6000" timePoint="16" bonusPoint="500" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData>
+        <KillingPoint huntingZoneId="451" templateId="900" point="40" />	  
+        <KillingPoint huntingZoneId="451" templateId="904" point="-140" />	 
+        <KillingPoint huntingZoneId="451" templateId="905" point="-100" />	
+        <KillingPoint huntingZoneId="451" templateId="906" point="-100" />	
+	  </KillingPointData>
+	</PointData> 
+  </MiniGameRank>
+
+  <MiniGameRank id="11" desc="물대포 미니게임">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="1000" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000101" />
+      <Stage grade="2" minPoint="750" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000102" />
+      <Stage grade="3" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000103" />
+	  <Stage grade="4" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7000201" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerA">
+          <remainTime timePoint="0">
+            <Time min="1" max="3600" timePoint="16" bonusPoint="1000" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData>
+        <KillingPoint huntingZoneId="10" templateId="36" point="50" />
+        <KillingPoint huntingZoneId="10" templateId="37" point="25" />
+        <KillingPoint huntingZoneId="10" templateId="38" point="3" />
+      </KillingPointData>
+	  
+      <!--기타 보너스 점수 계산(미구현)-->  
+	  <BonusPointData>
+        <ActionRecordRoot>       
+		  <Pin id="1042" timeLimit="-1" bonusPoint="0" exclusiveId="1" desc="">
+		    <CompareCondition target="kill" kind="true" />
+            <CompareCondition target="doeeNpcTemplateId" kind="equal" value="4004" />
+          </Pin>
+        </ActionRecordRoot>
+		
+	    <ActionRecord id="28" desc="파티원이 10초내에 20만이상의 데미지 입음 1분 쿨타임">
+          <Pin id="2000" slot="1" timeLimit="-1" bonusPoint="100" desc="">
+		    <CompareCondition target="doeeType" kind="user" />
+            <CompareCondition target="doerNpcTemplateId" kind="equal" value="30001" />
+            <CompareCondition target="hitCountTracking" kind="greaterThanEqual" value="1" />
+          </Pin>
+        </ActionRecord>
+      </BonusPointData>
+	
+	</PointData> 
+  </MiniGameRank>
+  <MiniGameRank id="12" desc="물대포 미니게임2">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="1000" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000101" />
+      <Stage grade="2" minPoint="750" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000102" />
+      <Stage grade="3" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000103" />
+      <Stage grade="4" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7000301" mailTitle="@miniGame:7000202" mailContents="@miniGame:7000203" result="@miniGame:7000105" />
+   </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerB">
+          <remainTime timePoint="0">
+            <Time min="1" max="6000" timePoint="16" bonusPoint="1000" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData>
+        <KillingPoint huntingZoneId="10" templateId="31" point="50" />
+        <KillingPoint huntingZoneId="10" templateId="32" point="25" />
+        <KillingPoint huntingZoneId="10" templateId="33" point="3" />
+      </KillingPointData>
+	
+	</PointData> 
+  </MiniGameRank>
+  
+  <MiniGameRank id="13" desc="수박 깨기 미니게임2">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="1000" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001101" />
+      <Stage grade="2" minPoint="750" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001102" />
+      <Stage grade="3" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001103" />
+      <Stage grade="4" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7001301" mailTitle="@miniGame:7001202" mailContents="@miniGame:7001203" result="@miniGame:7001105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerC">
+          <remainTime timePoint="0">
+            <Time min="1" max="6000" timePoint="16" bonusPoint="500" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData>
+        <KillingPoint huntingZoneId="10" templateId="34" point="40" />	  
+      </KillingPointData>
+	
+	</PointData> 
+  </MiniGameRank>
+
+  <MiniGameRank id="5" desc="짚단치기 미니게임">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005101" />
+      <Stage grade="2" minPoint="375" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005102" />
+      <Stage grade="3" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005103" />
+	  <Stage grade="4" minPoint="125" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerD">
+          <remainTime timePoint="0">
+            <Time min="1" max="3600" timePoint="16" bonusPoint="1000" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData/>
+	  
+      <!--기타 보너스 점수 계산(미구현)-->  
+	  <BonusPointData>
+        <ActionRecordRoot>       
+			<Pin id="51" bonusPoint="50" isPrivate="false" desc="6000번 몬스터 리액션 +100 ">
+			  <CompareCondition target="doerType" kind="user" />
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="6000" value2="19" />
+			  <CompareCondition target="reactionId" kind="equal" value="2" />
+			</Pin>
+			<Pin id="52" bonusPoint="-15" isPrivate="false" desc="6000번 몬스터 이상상태 적용 -70 ">
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="6000" value2="19" />
+			  <CompareCondition target="abnormalityId" kind="equal" value="999001012" />
+			</Pin>
+		</ActionRecordRoot>
+		
+	    <ActionRecord id="28" desc="1회성 체크">
+        </ActionRecord>
+      </BonusPointData>
+	</PointData> 
+  </MiniGameRank>
+
+  <MiniGameRank id="6" desc="꼬리잡기 미니게임">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006101" />
+      <Stage grade="2" minPoint="375" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006102" />
+      <Stage grade="3" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006103" />
+	  <Stage grade="4" minPoint="125" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerD">
+          <remainTime timePoint="0">
+            <Time min="1" max="3600" timePoint="16" bonusPoint="1000" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData/>
+	  
+      <!--기타 보너스 점수 계산(미구현)-->  
+	  <BonusPointData/>
+	  <BonusPointData>
+        <ActionRecordRoot>       
+			<Pin id="61" bonusPoint="80" isPrivate="false" desc="꼬리 획득 시 80점">
+			  <CompareCondition target="doerType" kind="user" />
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="1002" value2="19" />
+			  <CompareCondition target="targetCountInc" kind="equal" />
+			</Pin>
+			<Pin id="25" slot="1" isPrivate="false"  bonusPoint="-70" desc="꼬리를 잃으면 감점">
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="1002" value2="19" />
+              <CompareCondition target="abnormalityId" kind="equal" value="999001013" />
+			</Pin>
+		</ActionRecordRoot>
+
+	    <ActionRecord id="28" desc="1회성 체크">
+        </ActionRecord>
+      </BonusPointData>
+	</PointData> 
+  </MiniGameRank>
+
+  <MiniGameRank id="15" desc="짚단치기 미니게임_비수기">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="1000" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005101" />
+      <Stage grade="2" minPoint="750" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005102" />
+      <Stage grade="3" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005103" />
+	  <Stage grade="4" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7005201" mailTitle="@miniGame:7005202" mailContents="@miniGame:7005203" result="@miniGame:7005105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerD">
+          <remainTime timePoint="0">
+            <Time min="1" max="3600" timePoint="16" bonusPoint="1000" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData/>
+	  
+      <!--기타 보너스 점수 계산(미구현)-->  
+	  <BonusPointData>
+        <ActionRecordRoot>       
+			<Pin id="51" bonusPoint="50" isPrivate="false" desc="6000번 몬스터 리액션 +100 ">
+			  <CompareCondition target="doerType" kind="user" />
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="6000" value2="19" />
+			  <CompareCondition target="reactionId" kind="equal" value="2" />
+			</Pin>
+			<Pin id="52" bonusPoint="-15" isPrivate="false" desc="6000번 몬스터 이상상태 적용 -70 ">
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="6000" value2="19" />
+			  <CompareCondition target="abnormalityId" kind="equal" value="999001012" />
+			</Pin>
+		</ActionRecordRoot>
+		
+	    <ActionRecord id="28" desc="1회성 체크">
+        </ActionRecord>
+      </BonusPointData>
+	</PointData> 
+  </MiniGameRank>
+
+  <MiniGameRank id="16" desc="꼬리잡기 미니게임_비수기">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="1000" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006101" />
+      <Stage grade="2" minPoint="750" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006102" />
+      <Stage grade="3" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006103" />
+	  <Stage grade="4" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7006201" mailTitle="@miniGame:7006202" mailContents="@miniGame:7006203" result="@miniGame:7006105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerD">
+          <remainTime timePoint="0">
+            <Time min="1" max="3600" timePoint="16" bonusPoint="1000" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData/>
+	  
+      <!--기타 보너스 점수 계산(미구현)-->  
+	  <BonusPointData>
+        <ActionRecordRoot>       
+			<Pin id="61" bonusPoint="100" isPrivate="false" desc="꼬리 획득 시 100점">
+			  <CompareCondition target="doerType" kind="user" />
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="1002" value2="19" />
+			  <CompareCondition target="targetCountInc" kind="equal" />
+			</Pin>
+			<Pin id="25" slot="1" isPrivate="false"  bonusPoint="-100" desc="꼬리를 잃으면 감점">
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="1002" value2="19" />
+              <CompareCondition target="abnormalityId" kind="equal" value="999001013" />
+			</Pin>
+		</ActionRecordRoot>
+		
+	    <ActionRecord id="28" desc="1회성 체크">
+      </ActionRecord>
+      </BonusPointData>
+	</PointData> 
+  </MiniGameRank>
+
+  <MiniGameRank id="7" desc="북 치기 미니게임">
+	<Settings dbRecord="true" gameRule="point"/>  
+    <!--미니게임 점수에 따른 등급 설정-->
+	<StageData>
+      <Stage grade="1" minPoint="500" method="inventoryAndMail" mailSender="@miniGame:7007201" mailTitle="@miniGame:7007202" mailContents="@miniGame:7007203" result="@miniGame:7007101" />
+      <Stage grade="2" minPoint="375" method="inventoryAndMail" mailSender="@miniGame:7007201" mailTitle="@miniGame:7007202" mailContents="@miniGame:7007203" result="@miniGame:7007102" />
+      <Stage grade="3" minPoint="250" method="inventoryAndMail" mailSender="@miniGame:7007201" mailTitle="@miniGame:7007202" mailContents="@miniGame:7007203" result="@miniGame:7007103" />
+	  <Stage grade="4" minPoint="125" method="inventoryAndMail" mailSender="@miniGame:7007201" mailTitle="@miniGame:7007202" mailContents="@miniGame:7007203" result="@miniGame:7007104" />
+      <Stage grade="5" minPoint="-99999999" method="inventoryAndMail" mailSender="@miniGame:7007201" mailTitle="@miniGame:7007202" mailContents="@miniGame:7007203" result="@miniGame:7007105" />
+    </StageData>
+	<!--남은 타이머에 의한 점수계산-->
+    <PointData>
+      <TimePointData>
+        <Timer name="timerD">
+          <remainTime timePoint="0">
+            <Time min="1" max="3600" timePoint="16" bonusPoint="1000" />
+          </remainTime>
+        </Timer>
+      </TimePointData>
+	  <!--잡은 몬스터에 대한 점수계산-->
+      <KillingPointData>
+	  </KillingPointData>
+	  
+      <!--기타 보너스 점수 계산(미구현)-->  
+	  <BonusPointData>
+        <ActionRecordRoot>       
+
+			<Pin id="71" bonusPoint="40" isPrivate="false" desc="핑크 북에 의해 개구리 사망 시 40점">
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="7010" value2="5" />
+			  <CompareCondition target="abnormalityId" kind="equal" value="50004" />
+			</Pin>
+			<!-- 녹색 개구리 사용 안함
+			<Pin id="72" bonusPoint="40" isPrivate="false" desc="녹색 북에 의해개구리 사망 시 20점">
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="7011" />
+			  <CompareCondition target="abnormalityId" kind="equal" value="50005" />
+			</Pin>
+			-->
+			<Pin id="73" bonusPoint="40" isPrivate="false" desc="빨간 북에 의해 개구리 사망 시 40점">
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="7012" value2="5" />
+			  <CompareCondition target="abnormalityId" kind="equal" value="50006" />
+			</Pin>
+			<Pin id="74" bonusPoint="40" isPrivate="false" desc="파란 북에 의해 개구리 사망 시 40점">
+			  <CompareCondition target="doeeNpcTemplateId" kind="equal" value="7013" value2="5" />
+			  <CompareCondition target="abnormalityId" kind="equal" value="50007" />
+			</Pin>
+			<Pin id="75" bonusPoint="-21" isPrivate="false" desc="투명 npc에 의해서 사망 시">
+			  <CompareCondition target="doerNpcTemplateId" kind="equal" value="7020" value2="5" />
+			  <CompareCondition target="kill" kind="true" />
+			</Pin>
+
+		</ActionRecordRoot>
+	    <ActionRecord id="28" desc="1회성 체크">
+        </ActionRecord>
+      </BonusPointData>
+	</PointData> 
+  </MiniGameRank>
+</MiniGameRankRecorder>

@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9031" name="@dungeon:9031" startPos="68482, 125779, 776" exitContinentId="7031" exitPos="21306,4861,6196" coolTimeApplyType="enter">
+  <Condition type="solo" value="1" />
+  <Condition type="levelOver" value="65" />
+  <Condition type="maxMemberCount" value="1" />
+  <Condition type="minItemLevel" value="439" />
+	  <ClearCondition huntingZoneId="431" templateId="5005" amount="1" killCount="1" />
+	<Retry retryId="3" />
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="431,6001" id="1" pos="66098.6094,127065.2031,515.3943" next="none" /> <!-- 첫 문지기 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>   
+	<!-- 던전 입장시 사라지는 버프 -->
+   <EventGroup type="enterTerritory" uniqueId="431,43100057">				
+		<Event>
+			<EventTaskGroup>
+		 <EventTask type="abnormality" abnormalityId="43100018" target="player" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>    
+	<!-- 던전 클리어 시 타이머 종료 이벤트 -->  
+  <EventGroup type="npcHp" uniqueId="431,5005" value="0">
+    <Event>
+      <EventTaskGroup>
+	  			<EventTask type="abnormality" abnormalityId="43100007" target="player" turn="off" next="none"/>
+	   <EventTask type="guideOff" id="6" next="none" />
+	  <EventTask type="timer" action="stop" direction="forward" name="dwTimer"  timerUiOff="false" next="none" />
+	  <EventTask type="spawn" huntingZoneId="431" territoryId="43100058" next="none"/>	 <!--던전 클리어 시 차원의 마법석 등장하도록 수정-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+ <!-- 타임어택 과제 설정 -->
+    <EventGroup type="flag" name="dwTimer,입장" repeat="false">
+    <Event>
+      <EventTaskGroup>
+	  <EventTask type="timer" action="start" direction="forward" name="dwTimer" value="0" timerUiOff="false" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+  <!-- 공속 관련 과제 설정 -->
+    <EventGroup type="flag" name="mobBuff5" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200013" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200013" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200013" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200013" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200013" target="npc" targetNpcId="431,5005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+    <EventGroup type="flag" name="mobBuff10" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200014" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200014" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200014" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200014" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200014" target="npc" targetNpcId="431,5005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+    <EventGroup type="flag" name="mobBuff20" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200015" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200015" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200015" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200015" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200015" target="npc" targetNpcId="431,5005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+    <EventGroup type="flag" name="mobBuff40" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200016" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200016" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200016" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200016" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200016" target="npc" targetNpcId="431,5005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+    <EventGroup type="flag" name="mobBuff80" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43200017" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200017" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200017" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200017" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43200017" target="npc" targetNpcId="431,5005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> 
+  <!-- 클래스 별 스폰 몬스터  HP 다르게 설정-->
+ <EventGroup triggerUserClass="lancer" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+			<!-- 보스 ID 5001,5002,5003,5004,5005-->
+        <EventTask type="abnormality" abnormalityId="43100003" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100003" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100003" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100003" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100003" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+		  <EventTask type="flag" name="입장" value="1" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>    
+	<EventGroup triggerUserClass="warrior" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43100017" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43100017" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100017" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100017" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100017" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+				  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   	
+	<EventGroup triggerUserClass="berserker" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43100015" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43100015" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100015" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100015" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100015" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+				  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="slayer" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43100012" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43100012" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100012" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100012" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100012" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+				  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+	  <EventGroup triggerUserClass="soulless" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43100005" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43100005" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100005" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100005" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100005" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+				  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="archer" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43100004" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43100004" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100004" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100004" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100004" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100009" target="player" next="none" />
+		  		  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="sorcerer" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43100006" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43100006" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100006" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100006" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100006" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100008" target="player" next="none" />
+		  		  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43100014" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43100014" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100014" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100014" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100014" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+		 <EventTask type="abnormality" abnormalityId="43100010" target="player" next="none" />
+		 		  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43100013" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43100013" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100013" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100013" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100013" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100010" target="player" next="none" />
+		  		  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="engineer" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="43100001" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100001" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100001" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100001" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100001" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+				  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="fighter" type="enterTerritory" uniqueId="431,43100053">				
+		<Event>
+			<EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="43100016" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />        
+		  <EventTask type="abnormality" abnormalityId="43100016" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100016" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100016" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+		  <EventTask type="abnormality" abnormalityId="43100016" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+				  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  <EventGroup triggerUserClass="assassin" type="enterTerritory" uniqueId="431,43100053">
+		<Event>
+			<EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="43100019" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100019" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100019" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100019" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100019" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+				  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>    
+	  <EventGroup triggerUserClass="Glaiver" type="enterTerritory" uniqueId="431,43100053">
+		<Event>
+			<EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="43100020" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5001" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100020" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5002" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100020" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5003" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100020" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5004" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100020" target="npc" targetNpcId="431,5005" next="none" />
+        <EventTask type="abnormality" abnormalityId="43100002" target="npc" targetNpcId="431,5005" next="none" />
+				  <EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>    
+ <!-- 공통 이벤트 -->
+<!-- 여섯번째 문(아카샤) 열기 -->
+  <EventGroup type="talkNpc" uniqueId="431,1005">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:90311012" style="default" next="time" nextValue="1" />
+		        <EventTask type="dynamicGeo" objectId="903106" next="time" nextValue="1" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+   <!-- 첫번째 문 열기 -->
+  <EventGroup type="npcHp" uniqueId="431,6001" value="0">
+    <Event>
+      <EventTaskGroup>
+	  	 <EventTask type="guideOff" id="1" next="none" />
+	   <EventTask type="guideOn" nameId="431,5001" id="2" pos="66062.6953,128558.3203,521.4209" next="none" /> <!-- 골렘 -->
+        <EventTask type="message" string="@dungeon:90311001" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="903101" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 두번째 문 열기 -->
+    <EventGroup type="npcHp" uniqueId="431,5001" value="0">
+    <Event>
+      <EventTaskGroup>
+	  	  	 <EventTask type="guideOff" id="2" next="none" />
+	   <EventTask type="guideOn" nameId="431,6008" id="3" pos="67721.3906,131691.8281,29.9221" next="none" /> <!-- 문지기 2 -->
+        <EventTask type="message" string="@dungeon:90311002" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="903102" next="none" />
+			<EventTask type="despawn" huntingZoneId="431" territoryId="49300002" next="none"/>	
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+ <!-- 세번째 문 열기 -->
+  <EventGroup type="npcHp" uniqueId="431,6008" value="0">
+    <Event>
+      <EventTaskGroup>
+	  	  	  	 <EventTask type="guideOff" id="3" next="none" />
+	   <EventTask type="guideOn" nameId="431,5002" id="4" pos="69096.1328,131702.3594,4.2874" next="none" /> <!-- 카라스차 -->
+        <EventTask type="message" string="@dungeon:90311003" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="903103" next="time" nextValue="1" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+   <!-- 카라스챠 처치 시 워크 오브젝트 생성 --> 
+   <EventGroup type="npchp" uniqueId="431,5002" value="0">
+    <Event>
+      <EventTaskGroup>
+	  	  <EventTask type="guideOff" id="4" next="none" />
+	   <EventTask type="guideOn" nameId="431,5004" id="5" pos="72388.7109,128524.4531,5.4294" next="none" /> <!-- 샤르티 -->
+        <EventTask type="message" string="@dungeon:90311004" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="903104" next="time" nextValue="1" />
+		 <EventTask type="spawn" huntingZoneId="431" territoryId="43100054" next="none"/>	
+		 <EventTask type="spawn" huntingZoneId="431" territoryId="43100059" next="none"/>	
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+ <!-- 아카샤의방을 여는 오브젝트 소환 -->
+   <EventGroup type="npchp" uniqueId="431,5003" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:90311012" style="default" next="time" nextValue="1" />
+		  <EventTask type="dynamicGeo" objectId="903106" next="time" nextValue="1" /> <!-- 아카샤 방 문 여는 Npc스폰 -->
+		  <EventTask type="spawn" huntingZoneId="431" territoryId="43100056" next="none"/>	
+		  	<EventTask type="despawn" huntingZoneId="431" territoryId="43100055" next="none"/>	
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+   <EventGroup type="npchp" uniqueId="431,5004" value="0">
+    <Event>
+      <EventTaskGroup>
+	  	  	  <EventTask type="guideOff" id="5" next="none" />
+	   <EventTask type="guideOn" nameId="431,5005" id="6" pos="72479.8672,134609.0156,-501.5504" next="none" /> <!-- 아카샤 -->
+        <EventTask type="message" string="@dungeon:90311012" style="default" next="time" nextValue="1" />
+		  <EventTask type="dynamicGeo" objectId="903106" next="time" nextValue="1" /> <!-- 아카샤 방 문 여는 Npc스폰 -->
+		  		  <EventTask type="spawn" huntingZoneId="431" territoryId="43100056" next="none"/>	
+		  	<EventTask type="despawn" huntingZoneId="431" territoryId="43100054" next="none"/>	
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  </Dungeon>

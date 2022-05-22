@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9040" name="@dungeon:9017" startPos="37443.9844,82229.1719,2173.7656" exitContinentId="7005" exitPos="3039, 9603, 1869">
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="1" />
+  <EventGroup type="enterTerritory" uniqueId="440, 44000015" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9040001" style="combat" next="time" nextValue="60" />
+        <EventTask type="message" string="@dungeon:9040002" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="440" territoryId="44000006" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="440" territoryId="44000007" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="440" territoryId="44000008" next="time" nextValue="60" />
+        <EventTask type="message" string="@dungeon:9040002" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="440" territoryId="44000003" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="440" territoryId="44000004" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="440" territoryId="44000005" next="time" nextValue="60" />
+        <EventTask type="message" string="@dungeon:9040002" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="440" territoryId="44000012" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="440" territoryId="44000013" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="440" territoryId="44000014" next="complete" />
+        <EventTask type="message" string="@dungeon:9040007" style="combat" next="time" nextValue="2" />
+        <EventTask type="message" string="@dungeon:9040008" style="combat" next="time" nextValue="10" />
+        <EventTask type="teleport" continentId="7005" pos="3197,9991,1868" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questFail">
+    <!-- 퀘스트 실패 시 처리 -->
+    <Event questId="440" taskId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:90401005" style="alert" next="time" nextValue="3" />
+        <EventTask type="teleport" continentId="63" pos="116931,74040,4771" next="none" />
+        <!-- 강제로 pc를 이동 시킴. -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

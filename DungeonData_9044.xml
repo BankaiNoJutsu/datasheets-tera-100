@@ -1,0 +1,1325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9044" name="@dungeon:9044" startPos="-103510,98460,3547" exitContinentId="7004" exitPos="115313,96662,7201" startDir="74" exitDir="90" AllAoiWideBroadCaster="true" overlapConsoleEvent="true">
+	<Condition type="party" value="1"/>
+	<Condition type="maxMemberCount" value="5"/>
+	<Condition type="levelOver" value="70"/>
+	<ClearCondition huntingZoneId="444" templateId="2000" amount="1" killCount="1"/>
+	<!--Condition type="minItemLevel" value="457"/-->
+	<Retry retryId=""/>
+
+	<!--던전 최초 설정-->
+	<EventGroup type="initialize" name="Initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="CameraSetting" value="1" next="none"/>
+				<EventTask type="flag" name="FallenPCsetPos" value="0" next="none"/>
+				<EventTask type="flag" name="KillArdens" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="flag" name="0Stack" value="1" next="none"/>
+				<EventTask type="flag" name="1Stack" value="0" next="none"/>
+				<EventTask type="flag" name="2Stack" value="0" next="none"/>
+				<EventTask type="flag" name="3Stack" value="0" next="none"/>
+				<EventTask type="flag" name="4Stack" value="0" next="none"/>
+				<EventTask type="flag" name="5Stack" value="0" next="none"/>
+				<EventTask type="flag" name="6Stack" value="0" next="none"/>
+				<EventTask type="flag" name="7Stack" value="0" next="none"/>
+				<EventTask type="flag" name="8Stack" value="0" next="none"/>
+				<EventTask type="flag" name="9Stack" value="0" next="none"/>
+				<EventTask type="flag" name="10Stack" value="0" next="none"/>
+				<EventTask type="flag" name="0Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="1Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="3Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="4Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="5Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="6Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="7Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="8Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="9Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="10Stacked" value="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400000" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400002" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400003" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400004" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400005" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400006" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400007" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400008" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44402200" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401500" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401501" next="none"/>
+				<EventTask type="flag" name="SpeedUpOnEntranceArea" value="1" next="none"/>
+				<EventTask type="guideOn" nameId="444,911" id="1" pos="-98215,99610,4361" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--공용-->
+		<!--Do Nothing Event-->
+	<EventGroup type="none" id="0" name="DoNothing" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Camera ZoomOut-->
+	<EventGroup type="flag" name="CameraSetting" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="Camera_Setting" value="0" next="none"/>
+				<EventTask type="cameraSet" turn="on" territoryId="44400001" next="none"/>
+				<EventTask type="cameraSet" turn="on" territoryId="44401000" next="none"/>
+				<EventTask type="cameraSet" turn="on" territoryId="44402000" next="none"/>
+			</EventTaskGroup>	    
+		</Event>
+	</EventGroup>
+		<!--Speed Up On Entrance Area-->
+	<EventGroup type="flag" name="SpeedUpOnEntranceArea" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90440000" target="player" strictly="true" aliveOnly="true" turn="on" territoryId="44400012" huntingZoneId="444" next="none"/><!--Run Speed / Ride Speed Up Abnormality On Territory-->
+			</EventTaskGroup>	    
+		</Event>
+	</EventGroup>
+		<!--Fall down BTS Check-->
+	<EventGroup type="flag" id="1102" name="FallenPCsetPos" repeat="true"><!--맵 밖으로 이탈했을 때 전투 공간으로 이동-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90440012" target="player" turn="on" aliveOnly="true" next="none"/>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="false" huntingZoneId="444" territoryId="44402500" posType="relative" next="none">
+					<Pos value="0,0,4869"/>
+				</EventTask>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--Entrance Area-->
+		<!--Open Gates-->
+	<EventGroup type="none" id="600" name="SealingGate-OrderToOpen" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90446000" target="npc" strictly="true" targetNpcId="444,6000" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90446001" target="npc" strictly="true" targetNpcId="444,6001" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90446002" target="npc" strictly="true" targetNpcId="444,6002" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90446003" target="npc" strictly="true" targetNpcId="444,6003" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90446004" target="npc" strictly="true" targetNpcId="444,6004" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="601" name="SealingGate-1stGateOpenedSet" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400005" next="none"/><!--Despawn 1st GateCylinder Territory-->
+				<EventTask type="abnormality" abnormalityId="90446001" target="npc" strictly="true" targetNpcId="444,6001" turn="off" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="602" name="SealingGate-2ndGateOpenedSet" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400006" next="none"/><!--Despawn 2nd GateCylinder Territory-->
+				<EventTask type="abnormality" abnormalityId="90446002" target="npc" strictly="true" targetNpcId="444,6002" turn="off" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="603" name="SealingGate-3rdGateOpenedSet" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400007" next="none"/><!--Despawn 3rd GateCylinder Territory-->
+				<EventTask type="abnormality" abnormalityId="90446003" target="npc" strictly="true" targetNpcId="444,6003" turn="off" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="604" name="SealingGate-4thGateOpenedSet" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401001" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400008" next="none"/><!--Despawn 4th GateCylinder Territory-->
+				<EventTask type="abnormality" abnormalityId="90446004" target="npc" strictly="true" targetNpcId="444,6004" turn="off" next="time" nextValue="10"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400009" next="none"/><!--Spawn Sealing_Gate_NonWideBroadCaster_Except4thGate Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400003" next="none"/><!--Despawn Sealing_Gate Territory-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--1Phase-->
+		<!--1Phase Invade-->
+	<EventGroup type="none" id="1000" name="1Phase_Invade_Start">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="7"/>
+				<EventTask type="abnormality" abnormalityId="90441000" target="npc" strictly="true" targetNpcId="444,1001" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="1001" name="1Phase_Territory_Spawn">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44401001" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401000" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--1Phase CombatState-->
+	<EventGroup type="npcState" uniqueId="444,1000" value="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="start" next="none"/><!--리더보드 타이머 시작-->
+				<EventTask type="message" string="@dungeon:9044000" style="default" next="none"/><!--포탈 제거 알림-->
+				<EventTask type="flag" name="SpeedUpOnEntranceArea" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90440000" target="player" turn="off" strictly="true" aliveOnly="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="444,1000" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400008" next="none"/><!--Spawn 4th GateCylinder Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400010" next="none"/><!--Spawn Sealing_Gate_4th_Closed Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400011" next="none"/><!--Despawn Sealing_Gate_4th_AutoOpening Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44401501" next="none"/><!--Despawn Entrance_Goto1Phase Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400004" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--1Phase Reset-->
+	<EventGroup type="npcReset" id="1100" uniqueId="444,1000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" next="none"/><!--리더보드 타이머 스톱-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400008" next="none"/><!--Despawn 4th GateCylinder Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400010" next="none"/><!--Despawn Sealing_Gate_4th_Closed Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400011" next="none"/><!--Spawn Sealing_Gate_4th_AutoOpening Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401501" next="none"/><!--Spawn Entrance_Goto1Phase Territory-->
+				<EventTask type="flag" name="SpeedUpOnEntranceArea" value="1" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44401000" resetNpcHpDungeonTask="true" next="time" nextValue="5"/><!--Despawn 1Phase Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401000" next="none"/><!--Spawn 1Phase Territory-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--1Phase Baharr Death-->
+	<EventGroup type="npcHp" uniqueId="444,1000" value="20" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" stageLog="1" next="none"/><!--리더보드 타이머 스톱-->
+				<EventTask type="abnormality" abnormalityId="90440009" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90440001" target="npc" strictly="true" targetNpcId="444,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="31260029" target="npc" targetNpcId="444,1000" next="none" /> <!-- 행동 취소 --> 
+				<EventTask type="eventState" stateType="EventGroup" id="1100" state="stop" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="444,1000" patternListId="2" next="none"/><!--Baharr Pattern Change Phase2-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="1101" name="1Phase_End">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44401000" next="none"/><!--Despawn 1Phase Territory-->
+				<EventTask type="abnormality" abnormalityId="90440010" target="player" turn="on" aliveOnly="true" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90440011" target="player" turn="on" aliveOnly="true" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90440012" target="player" turn="on" aliveOnly="true" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400008" next="none"/><!--Despawn 4th GateCylinder Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400010" next="none"/><!--Despawn Sealing_Gate_4th_Closed Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44401501" next="none"/><!--Despawn Entrance_Goto1Phase Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400011" next="none"/><!--Spawn Sealing_Gate_4th_AutoOpening Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401502" next="none"/><!--Spawn Entrance_Goto2Phase Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44407000" next="none"/><!--Spawn 1PhaseCompensationBox Territory-->
+				<EventTask type="flag" name="SpeedUpOnEntranceArea" value="1" next="none"/>
+				<EventTask type="flag" name="FallenPCsetPos" value="1" next="none"/>
+				<EventTask type="playMovie" id="3094" next="time" nextValue="13"/>
+				<EventTask type="teleport" continentId="9044" pos="-116363,115070,4022" dir="180" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401504" next="none"/><!--Spawn 1Phase_Exit Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44402001" next="none"/><!--Spawn 2Phase_Scene Territory-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--1Phase Hand Change-->
+	<EventGroup type="none" id="100" name="HandChange-1Phase[RtoL]" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90444000" target="npc" targetNpcId="444,1000" turn="off" next="none"/><!--1Phase Wait_R 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="90444001" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--1Phase Wait_L 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="101" name="HandChange-1Phase[LtoR]" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90444001" target="npc" targetNpcId="444,1000" turn="off" next="none"/><!--1Phase Wait_L 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="90444000" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--1Phase Wait_R 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Baharr-In/Dechant Weapon-->
+	<EventGroup type="none" id="110" name="Inchant_Weapon-70%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.7">
+				<EventTask type="abnormality" abnormalityId="90442000" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--Inchanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.3">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="111" name="Dechant_Weapon-60%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.6">
+				<EventTask type="abnormality" abnormalityId="90442001" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--Dechanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.4">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="112" name="Inchant_Weapon-100%" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442000" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--Inchanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="113" name="Dechant_Weapon-100%" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442001" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--Dechanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--Baharr-Stop Pattern-->
+	<EventGroup type="none" id="120" name="STarget-Stop" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442006" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--단기타겟 사용 정지 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="121" name="Backdrop-Stop" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442004" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--후방 공격 사용 정지 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="130" name="PoundingAtk-CoolTime" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442002" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--분노의 난타 쿨타임 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="131" name="PoundingAtk-Stop[1200ms]" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442003" target="npc" targetNpcId="444,1000" turn="on" next="none"/><!--분노의 난타 12.0초 사용 정지 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--2Phase-->
+		<!--2Phase CombatState-->
+	<EventGroup type="npcState" uniqueId="444,2000" value="combat" repeat="true" logRecord="2PhaseStart">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="start" next="none"/><!--리더보드 타이머 시작-->
+				<EventTask type="abnormality" abnormalityId="90442900" target="player" strictly="true" aliveOnly="false" turn="off" next="none"/>
+				<EventTask type="message" string="@dungeon:9044000" style="default" next="none"/><!--포탈 제거 알림-->
+				<EventTask type="flag" name="SpeedUpOnEntranceArea" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90440000" target="player" turn="off" strictly="true" aliveOnly="true" next="none"/>
+				<EventTask type="flag" name="2PhaseOver30" value="1" next="none"/>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--2Phase Reset-->
+	<EventGroup type="npcReset" id="200" uniqueId="444,2000" repeat="true" logRecord="2PhaseReset">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" next="none"/><!--리더보드 타이머 스톱-->
+				<EventTask type="abnormality" abnormalityId="90440009" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442106" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442110" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442111" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442112" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442113" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442114" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442211" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442400" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442401" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442402" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442403" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442404" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442405" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442406" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442407" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442408" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442502" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442900" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="message" string="@dungeon:9044002" style="default" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400008" next="none"/><!--Despawn 4th GateCylinder Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400010" next="none"/><!--Despawn Sealing_Gate_4th_Closed Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400011" next="none"/><!--Spawn Sealing_Gate_4th_AutoOpening Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401502" next="none"/><!--Spawn Entrance_Goto2Phase Territory-->
+				<EventTask type="flag" name="SpeedUpOnEntranceArea" value="1" next="none"/>
+				<EventTask type="timer" action="stop" name="TheEnd" value="0" timerUiOff="true" next="none"/><!--TheEnd Timer Stop & Hide-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402100" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402101" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402102" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402103" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402104" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402105" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402200" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2500" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90443001" target="npc" targetNpcId="444,3000" turn="off" next="none"/><!--Ardens Abn OFF-->
+				<EventTask type="flag" name="2PhaseReseted" value="1" next="none"/>
+				<EventTask type="flag" name="KillArdens" value="1" next="none"/><!--Kill Ardens-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402000" resetNpcHpDungeonTask="true" next="time" nextValue="5"/><!--Despawn 2Phase Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44402000" next="none"/><!--Spawn 2Phase Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44402200" next="time" nextValue="3"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--2Phase Baharr Death-->
+	<EventGroup type="npcHp" uniqueId="444,2000" value="0" logRecord="2PhaseEnd">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" stageLog="2" logUpdate="true" next="none"/><!--리더보드 타이머 스톱-->
+				<EventTask type="guideOff" nameId="444,914" id="4" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90440009" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442106" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442110" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442111" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442112" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442113" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442114" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442211" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442400" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442401" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442402" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442403" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442404" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442405" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442406" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442407" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442408" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442502" target="player" strictly="true" aliveOnly="true" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442900" target="player" strictly="true" aliveOnly="true" turn="on" next="none"/>
+				<EventTask type="eventState" stateType="EventGroup" id="200" state="stop" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2100" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2101" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2102" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2103" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2104" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2105" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2200" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2201" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,2202" next="none"/>
+				<EventTask type="flag" name="SpeedUpOnEntranceArea" value="1" next="none"/>
+				<EventTask type="timer" action="stop" name="TheEnd" timerUiOff="false" next="none"/><!--TheEnd Timer Stop-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402100" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402101" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402102" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402103" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402104" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402105" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402200" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90443001" target="npc" targetNpcId="444,3000" turn="off" next="none"/><!--Ardens Abn OFF-->
+				<EventTask type="flag" name="KillArdens" value="1" next="time" nextValue="5"/><!--Kill Ardens-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401505" next="none"/><!--Spawn 2Phase_Exit Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400010" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400011" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44401502" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44405002" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402000" next="time" nextValue="10"/><!--Despawn 2Phase Territory-->
+				<EventTask type="timer" action="stop" name="TheEnd" value="0" timerUiOff="true" next="none"/><!--TheEnd Timer Hide-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--2Phase HandChange-->
+	<EventGroup type="none" id="3" name="HandChange-2Phase[RtoL]" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90444000" target="npc" targetNpcId="444,2000" turn="off" next="none"/><!--2Phase Wait_R 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="90444001" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--2Phase Wait_L 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="4" name="HandChange-2Phase[LtoR]" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90444001" target="npc" targetNpcId="444,2000" turn="off" next="none"/><!--2Phase Wait_L 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="90444000" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--2Phase Wait_R 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Baharr-In/Dechant Weapon-->
+	<EventGroup type="none" id="10" name="Inchant_Weapon-70%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.7">
+				<EventTask type="abnormality" abnormalityId="90442000" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Inchanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.3">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="11" name="Dechant_Weapon-60%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.6">
+				<EventTask type="abnormality" abnormalityId="90442001" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Dechanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.4">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="12" name="Inchant_Weapon-65%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.65">
+				<EventTask type="abnormality" abnormalityId="90442000" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Inchanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.35">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="13" name="Dechant_Weapon-20%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="90442001" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Dechanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.8">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="14" name="Inchant_Weapon-85%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.85">
+				<EventTask type="abnormality" abnormalityId="90442000" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Inchanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.15">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="15" name="Dechant_Weapon-35%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.35">
+				<EventTask type="abnormality" abnormalityId="90442001" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Dechanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.65">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="16" name="Inchant_Weapon-80%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.8">
+				<EventTask type="abnormality" abnormalityId="90442000" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Inchanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="17" name="Dechant_Weapon-50%" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="90442001" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Dechanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5">
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="18" name="Inchant_Weapon-100%" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442000" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Inchanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="19" name="Dechant_Weapon-100%" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442001" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Dechanted Weapon 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--2Phase MagmaArea-->
+	<EventGroup type="npcHp" uniqueId="444,2000" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9044001" style="default" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44402100" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442900" target="player" strictly="true" aliveOnly="true" turn="on" next="none"/><!--업적 이상상태 부여-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400008" next="none"/><!--Spawn 4th GateCylinder Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44400010" next="none"/><!--Spawn Sealing_Gate_4th_Closed Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44400011" next="none"/><!--Despawn Sealing_Gate_4th_AutoOpening Territory-->
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44401502" next="none"/><!--Despawn Entrance_Goto2Phase Territory-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="444,2000" value="61" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9044001" style="default" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44402102" next="time" nextValue="2"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402100" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="444,2000" value="31" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9044001" style="default" next="none"/>
+				<EventTask type="timer" name="TheEnd" action="start" direction="reverse" value="300" timerUiOff="false" next="none"/><!--TheEnd Timer Start-->
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseUnder30" value="1" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44402103" next="time" nextValue="2"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402102" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="timer" timerName="TheEnd" value="0" repeat="true"><!--Timer End-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="TheEnd" timerUiOff="false" next="none"/><!--TheEnd Timer Stop-->
+				<EventTask type="abnormality" abnormalityId="90440013" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Baharr-Stop Pattern-->
+	<EventGroup type="none" id="20" name="STarget-Stop" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442006" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--단기타겟 사용 정지 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="21" name="RessurectionSTarget-Stop" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442007" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--부활랜타 글로벌 쿨타임 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="22" name="ChopCombo-GCooltime" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442008" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--ChopCombo 글로벌 쿨타임 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="30" name="PoundingAtk-CoolTime" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442002" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--분노의 난타 쿨타임 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="90442410" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--화산 폭발 사용 금지 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="90442200" target="npc" targetNpcId="444,2200" turn="on" next="none"/><!--격노의 군대 소환 사용 금지 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="31" name="PoundingAtk-Stop[1200ms]" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442003" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--분노의 난타 12.0초 사용 정지 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Baharr-Stop Spawn FlameWorrior-->
+	<EventGroup type="none" id="32" name="FlameWorrior-Stop[30000ms]" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442201" target="npc" targetNpcId="444,2200" turn="on" next="none"/><!--격노의 군대 소환 사용 금지 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Baharr-Cooltime Spawn FlameWorrior-->
+	<EventGroup type="none" id="33" name="FlameWorrior-1Lv Cooltime" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442207" target="npc" targetNpcId="444,2200" turn="on" next="none"/><!--격노의 군대 소환 1Lv 쿨타임 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="34" name="FlameWorrior-2Lv Cooltime" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442208" target="npc" targetNpcId="444,2200" turn="on" next="none"/><!--격노의 군대 소환 2Lv 쿨타임 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="35" name="FlameWorrior-3Lv Cooltime" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442209" target="npc" targetNpcId="444,2200" turn="on" next="none"/><!--격노의 군대 소환 3Lv 쿨타임 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="36" name="FlameWorrior-4Lv Cooltime" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442210" target="npc" targetNpcId="444,2200" turn="on" next="none"/><!--격노의 군대 소환 4Lv 쿨타임 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Ardens-Visual Control-->
+	<EventGroup type="none" id="300" name="Ardens-HideFX" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90443001" target="npc" targetNpcId="444,3000" turn="off" next="time" nextValue="0.5"/><!--Ardens Abn OFF-->
+				<EventTask type="killNpc" targetNpcId="444,3000" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="301" name="Ardens-ShowFX" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90443001" target="npc" targetNpcId="444,3000" turn="on" next="none"/><!--Ardens Abn ON-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="302" name="Kill_Ardens-AngerOFF" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90443001" target="npc" targetNpcId="444,3000" turn="off" next="none"/><!--Ardens Abn OFF-->
+				<EventTask type="killNpc" targetNpcId="444,3000" next="none"/><!--Kill Ardens-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="303" name="Ardens-PhaseChange-1st" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90443003" target="npc" targetNpcId="444,3001" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="304" name="Ardens-PhaseChange-2nd" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90443004" target="npc" targetNpcId="444,3001" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="305" name="Ardens-PhaseChange-3rd" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90443006" target="npc" targetNpcId="444,3001" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="306" name="Ardens-PhaseChange-4th" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90443006" target="npc" targetNpcId="444,3001" turn="off" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="307" name="Ardens-PhaseChange-SpawnRealBaharr" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="FallenPCsetPos" value="0" next="none"/>
+				<EventTask type="killNpc" targetNpcId="444,3001" next="none"/>
+				<EventTask type="despawn" huntingZoneId="444" territoryId="44402001" next="none"/><!--Depawn 2Phase_Scene Territory-->
+				<EventTask type="spawn" huntingZoneId="444" territoryId="44402000" next="none"/><!--Spawn 2Phase Territory-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--VolcanoEruption-->
+	<EventGroup type="none" id="360" name="VolcanoEruption-Start" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442411" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--화산 폭발 쿨타임 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="90442200" target="npc" targetNpcId="444,2200" turn="on" next="none"/><!--격노의 군대 소환 사용 금지 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="90442400" target="player" strictly="true" aliveOnly="true" turn="on" territoryId="90442000" huntingZoneId="444" next="none"/><!--랜덤 고정 방향 표시 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="90442409" target="npc" targetNpcId="444,2400" turn="on" next="none"/><!--화산 폭발 시작 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--Ardens-Strike Abn Initialize-->
+	<EventGroup type="none" id="350" name="ArdensStrike-AbnInitialize" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442110" target="player" strictly="true" aliveOnly="false" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442111" target="player" strictly="true" aliveOnly="false" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442112" target="player" strictly="true" aliveOnly="false" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442113" target="player" strictly="true" aliveOnly="false" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442114" target="player" strictly="true" aliveOnly="false" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442301" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--축복 해제 중첩용 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Ardens-Strike PatternSet Change-->
+	<EventGroup type="none" id="351" name="ArdensStrike-PatternSetChange2Phase" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="444,2000" patternListId="2" next="none"/><!--Baharr Pattern Change ArdensStrike-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="352" name="ArdensStrike-PatternSetRollback2Phase" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442304" target="npc" targetNpcId="444,2000" turn="off" next="none"/><!--리액션 취약 이상상태 해제-->
+				<EventTask type="abnormality" abnormalityId="90442410" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--화산 폭발 사용 금지 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="90442003" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--분노의 난타 12.0초 사용 정지 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="90442009" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Global Cooltime 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="90442300" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--Reaction Stun Immune 이상상태 부여-->
+				<EventTask type="changePatternList" targetNpcId="444,2000" patternListId="1" next="none"/><!--Baharr Pattern Change Battle-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="353" name="ArdensStrike-GiveAbn3Phase" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442100" target="npc" targetNpcId="444,2000" turn="on" next="none"/><!--ArdensStrike 사용 가능 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="354" name="ArdensStrike-StopBaharrEyebeam" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442501" target="npc" targetNpcId="444,2501" turn="on" next="none"/><!--Eyebeam 사용 금지 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="90442201" target="npc" targetNpcId="444,2200" turn="on" next="none"/><!--격노의 군대 소환 사용 금지 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Ardens-Strike Give Start Abn to Ardens-->
+	<EventGroup type="none" id="356" name="ArdensStrike-2PhaseArdensRising" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442105" target="npc" targetNpcId="444,3000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Ardens-3Phase Control-->
+	<EventGroup type="none" id="250" name="3Phase-BaharrEyebeam-GiveAbn" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="90442502" target="aggro" targetNpcId="444,2000" min="2" max="2" turn="on" strictly="true" aliveOnly="true" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442500" target="npc" targetNpcId="444,2500" turn="on" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="90442502" target="aggro" targetNpcId="444,2000" min="3" max="3" turn="on" strictly="true" aliveOnly="true" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442500" target="npc" targetNpcId="444,2500" turn="on" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="90442502" target="aggro" targetNpcId="444,2000" min="4" max="4" turn="on" strictly="true" aliveOnly="true" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442500" target="npc" targetNpcId="444,2500" turn="on" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="90442502" target="aggro" targetNpcId="444,2000" min="5" max="5" turn="on" strictly="true" aliveOnly="true" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442500" target="npc" targetNpcId="444,2500" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="251" name="3Phase-BaharrEyebeam-TargetSetting" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="90442502" target="aggro" targetNpcId="444,2000" min="2" max="2" turn="on" strictly="true" aliveOnly="true" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="90442502" target="aggro" targetNpcId="444,2000" min="3" max="3" turn="on" strictly="true" aliveOnly="true" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="90442502" target="aggro" targetNpcId="444,2000" min="4" max="4" turn="on" strictly="true" aliveOnly="true" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="90442502" target="aggro" targetNpcId="444,2000" min="5" max="5" turn="on" strictly="true" aliveOnly="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="252" name="3Phase-BaharrEyebeam-EraseAbn" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442500" target="npc" targetNpcId="444,2500" turn="off" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442502" target="player" turn="off" aliveOnly="false" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="260" name="Ardens-3Phase-RightWeaponGiveAbn" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442700" target="npc" targetNpcId="444,3000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="261" name="Ardens-3Phase-LeftWeaponGiveAbn" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442701" target="npc" targetNpcId="444,3000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="262" name="Ardens-3Phase-RightWeaponCancelAbn" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442700" target="npc" targetNpcId="444,3000" turn="off" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="263" name="Ardens-3Phase-LeftWeaponCancelAbn" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442701" target="npc" targetNpcId="444,3000" turn="off" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="270" name="Ardens-3Phase-WrathGiveAbn" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442107" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--Revenge Pattern-->
+	<EventGroup type="flag" name="2PhaseUnder30,0Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="0Stack" value="0" next="none"/>
+				<EventTask type="flag" name="1Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,1Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="1Stack" value="0" next="none"/>
+				<EventTask type="flag" name="2Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,2Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="2Stack" value="0" next="none"/>
+				<EventTask type="flag" name="3Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,3Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="3Stack" value="0" next="none"/>
+				<EventTask type="flag" name="4Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,4Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="4Stack" value="0" next="none"/>
+				<EventTask type="flag" name="5Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,5Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="5Stack" value="0" next="none"/>
+				<EventTask type="flag" name="6Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,6Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="6Stack" value="0" next="none"/>
+				<EventTask type="flag" name="7Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,7Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="7Stack" value="0" next="none"/>
+				<EventTask type="flag" name="8Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,8Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="8Stack" value="0" next="none"/>
+				<EventTask type="flag" name="9Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,9Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+				<EventTask type="flag" name="9Stack" value="0" next="none"/>
+				<EventTask type="flag" name="10Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseUnder30,10Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseUnder30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,0Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,1Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,2Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,3Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,4Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,5Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,6Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,7Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,8Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,9Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2PhaseOver30,10Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseOver30" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="0Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="0Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="1Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="1Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="2Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="3Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="3Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="4Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="4Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="5Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="5Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="6Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="6Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="7Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="7Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="8Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="8Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="9Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="9Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="10Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="10Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="0Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="0Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="1Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="1Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="2Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="3Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="3Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="4Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="4Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="5Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="5Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="6Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="6Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="7Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="7Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="8Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="8Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="9Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="9Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="10Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="90442600" target="npc" targetNpcId="444,2000" turn="on" next="none"/>
+				<EventTask type="flag" name="10Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--Dungeon NPC Kill Order-->
+		<!--Kill Ardens-->
+	<EventGroup type="flag" name="KillArdens" id="500" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90443001" target="npc" targetNpcId="444,3000" turn="off" next="time" nextValue="2"/><!--Ardens Abn OFF-->
+				<EventTask type="killNpc" targetNpcId="444,3000" next="none"/>
+				<EventTask type="flag" name="KillArdens" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Kill FlameWorrior-->
+	<EventGroup type="none" name="KillFlameWorrior" id="501" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="444,2201" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!--Kill ArdensStrike-->
+	<EventGroup type="none" name="KillArdensStrike" id="502" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="444,2030" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--GuideOnOFF-->
+	<EventGroup type="enterTerritory" uniqueId="444,44400002">
+      <Event>
+        <EventTaskGroup>
+			<EventTask type="guideOff" nameId="444,911" id="1" next="none"/>
+			<EventTask type="guideOn" nameId="444,912" id="2" pos="-94521,99602,4362" next="none"/>
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="444,44401000">
+      <Event>
+        <EventTaskGroup>
+			<EventTask type="guideOff" nameId="444,912" id="2" next="none"/>
+			<EventTask type="guideOn" nameId="444,913" id="3" pos="-99894,115070,4022" next="none"/>
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="444,44402000">
+      <Event>
+        <EventTaskGroup>
+			<EventTask type="guideOff" nameId="444,913" id="3" next="none"/>
+			<EventTask type="guideOn" nameId="444,914" id="4" pos="-115237,115071,4022" next="none"/>
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>
+</Dungeon>

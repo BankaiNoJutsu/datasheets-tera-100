@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<FieldEvent>
+	<!-- 필드 이벤트 월드맵 UI 표시 레벨, 하단 스트링 정의 -->
+	<FieldEventWMapUI showMinLevel="65" showMaxLevel="70" bottomUITitleStrId="200" />
+
+	<!-- limitTimeSec : 필드 이벤트 남은 시간 빨간 글씨 표시 시점 -->
+	<!-- channelFullGuidePopupTime : 채널 인원 초과 가이드용 인터액션 팝업 유지시간 -->
+	<FieldEventTime limitTimeSec="30" channelFullGuidePopupTime="30" channelFullGuideResetTime="3" />
+
+	<!-- 잠수유저 밴처리 -->
+	<FieldEventBanTime banGuideRemainTime="30,20,10" banTime="120"/>
+	
+	<!-- 필드 이벤트 소규모,중규모,대규모 종류/스트링/아이콘 정의 -->
+	<FieldEventSize>
+		<EventSize type="small" sizeStrId="1" icon="MARKER_FIELD_EVENT_SMALL" />
+		<EventSize type="medium" sizeStrId="2" icon="MARKER_FIELD_EVENT_MEDIUM" />
+		<EventSize type="large" sizeStrId="3" icon="MARKER_FIELD_EVENT_LARGE" />
+		<EventSize type="flying_small" sizeStrId="1" icon="MARKER_FLYING_NB_SMALL" />
+		<EventSize type="flying_medium" sizeStrId="2" icon="MARKER_FLYING_NB_MEDIUM" />
+		<EventSize type="flying_large" sizeStrId="3" icon="MARKER_FLYING_NB_LARGE" />
+		<EventSize type="dragon_island" sizeStrId="4" icon="MARKER_FIELD_EVENT_FDI" />
+	</FieldEventSize>
+
+	<!-- 필드 이벤트 인원수 상태 정의 -->
+	<FieldEventState>
+		<UserNumber rate="0" showString="@field:100" />
+		<UserNumber rate="90" showString="@field:101" />
+		<UserNumber rate="100" showString="@field:102" />
+	</FieldEventState>
+	
+	<FieldEventFontColor>
+		<ColorNode type="rewardLimit" color="#ffbb00" />		
+	</FieldEventFontColor>
+	
+	<!-- 필드 이벤트 발생 로테이션 정의, 이벤트 로테이션은 서버가 올라오는 순간부터 돌기 시작함 -->
+	<FieldEventRotation>
+		<!-- 고급(소규모) 수호자 임무 -->
+		<RotationGroup serverOpenDelay="30" startInterval="990" randomRotation="true">
+			<Event continentId="7003" eventId="1" />
+			<Event continentId="7014" eventId="2" />
+			<Event continentId="7001" eventId="2" />
+			<Event continentId="7012" eventId="1" />
+		</RotationGroup>
+		<!-- 희귀(중규모) 수호자 임무 -->
+		<RotationGroup serverOpenDelay="30" startInterval="660" randomRotation="true">
+			<Event continentId="7011" eventId="1" />
+			<Event continentId="7015" eventId="1" />
+		</RotationGroup>
+		<!-- 비행 희귀(중규모) 수호자 임무 -->
+		<RotationGroup serverOpenDelay="30" startInterval="440" randomRotation="true">
+			<Event continentId="7003" eventId="2" />
+			<Event continentId="7021" eventId="1" />
+		</RotationGroup>
+		<!-- 전설 수호자 임무 -->
+		<RotationGroup serverOpenDelay="1800" startInterval="7200" randomRotation="false">
+			<Event continentId="7005" eventId="1" />			
+		</RotationGroup>
+		<!-- 공중섬 이동용 임무 -->
+		<RotationGroup serverOpenDelay="30" startInterval="330" randomRotation="false">
+			<Event continentId="7022" eventId="90" />			
+			<Event continentId="7011" eventId="91" />			
+			<Event continentId="7013" eventId="92" />			
+			<Event continentId="7003" eventId="93" />			
+			<Event continentId="7001" eventId="94" />			
+			<Event continentId="7031" eventId="95" />			
+		</RotationGroup>
+		<!-- 엑소도르 비행수호자(로열 파르프) off
+		<RotationGroup serverOpenDelay="14400" startInterval="14400" randomRotation="false">
+			<Event continentId="2000" eventId="2" />			
+		</RotationGroup>
+		-->
+	</FieldEventRotation>
+
+	<FieldEventPoint>
+		<!-- 비행 비전투 내부 코드 구조 변경으로, 딜 계수 1/1000로 변경 -->
+		<EventPoint type="dealing" defaultRate="0.001">
+			<EventPointAdjust class="priest" rate="0.00104" />
+			<EventPointAdjust class="lancer" rate="0.00162" />
+			<EventPointAdjust class="fighter" rate="0.00117" />
+			<EventPointAdjust class="engineer" rate="0.00105" />
+			<EventPointAdjust class="elementalist" rate="0.00080" />
+		</EventPoint>
+		<EventPoint type="healing" defaultRate="0.0">
+			<EventPointAdjust class="priest,elementalist" rate="0.0" />
+		</EventPoint>
+		<EventPoint type="checkAbnormality" defaultRate="1.0">
+		</EventPoint>
+		<EventPoint type="checkTerritory" defaultRate="1.0">
+		</EventPoint>
+		<EventPoint type="npcInteraction" defaultRate="1.0">
+		</EventPoint>
+	</FieldEventPoint>
+
+	<!-- 필드 이벤트 보상 받기에 필요한 점수 설정, 작성 순서대로 지급, 아이템 보상은 10종류 이하로 입력할 것!!! -->
+	<FieldEventReward>		
+		<RewardBag requiredPoint="100000" repeat="40">					
+			<Level minLevel="1" maxLevel="64">				
+				<Reward type="item" templateId="98582" amount="1"/>
+			</Level>
+			<Level minLevel="65" maxLevel="70">				
+				<Reward type="item" templateId="98582" amount="1"/>					
+				<Reward type="reputationPoint" npcGuildId="611" amount="250"/>
+			</Level>
+		</RewardBag>
+	</FieldEventReward>
+	
+	<!-- 클리어 시 추가 보상 지급 기능 -->
+	<!-- 
+		*ClearReward : FieldData_*.xml에서 참조하기 위한 보상 데이터 값
+			@id : 고유값
+			@rule : 규칙 정의
+				-rank : 기여도 순위 컷
+				-point : 수호자 임무 점수 컷
+		*ShowRewardList : 월드맵 임무 툴팁에 표시해주기 위한 보상 리스트(주의! 반드시 실제 입력된 보상 ID들과 일치하여야 함)
+		*RewardBag : 실제 보상 입력
+			@ruleValue : 위에서 입력하였던 rule에 따른 value 정의(순위/점수 컷)
+		*ItemBag : 아이템백 정의
+			@prob : 각 아이템백이 지급될 확률(각각 독립적, 백분율)
+			@weightSum : 아이템백 내 아이템들의 weight 총합(아이템들의 weight 총합이 weightSum과 일치하여야 함)
+		*Item : 각 아이템 정의
+			@templateId : 템플릿 아이디
+			@min/max : 최소/최대 아이템 지급 개수
+			@weight : 각 아이템의 비중(weight)		
+	-->
+	<FieldEventClearReward>
+		<ClearReward id="70030201" rule="point">
+			<ShowRewardList itemTemplateIdList="99977,98281" />
+			<RewardBag ruleValue="60000">
+				<ItemBag prob="1" weightSum="1000">
+					<Item templateId="99977" min="1" max="1" weight="1000"/>
+				</ItemBag>
+			</RewardBag>
+			<RewardBag ruleValue="150000">
+				<ItemBag prob="1" weightSum="1000">
+					<Item templateId="99977" min="2" max="2" weight="800"/>
+					<Item templateId="99977" min="3" max="3" weight="195"/>
+					<Item templateId="98281" min="1" max="1" weight="5"/>
+				</ItemBag>
+			</RewardBag>
+		</ClearReward>
+		<ClearReward id="70210101" rule="point">
+			<ShowRewardList itemTemplateIdList="99977,98281" />
+			<RewardBag ruleValue="60000">
+				<ItemBag prob="1" weightSum="1000">
+					<Item templateId="99977" min="1" max="1" weight="1000"/>
+				</ItemBag>
+			</RewardBag>
+			<RewardBag ruleValue="150000">
+				<ItemBag prob="1" weightSum="1000">
+					<Item templateId="99977" min="2" max="2" weight="800"/>
+					<Item templateId="99977" min="3" max="3" weight="195"/>
+					<Item templateId="98281" min="1" max="1" weight="5"/>
+				</ItemBag>
+			</RewardBag>
+		</ClearReward>
+		<ClearReward id="70050101" rule="point">
+			<ShowRewardList itemTemplateIdList="369,98281,96207,200930,366" />
+			<RewardBag ruleValue="175000">
+				<ItemBag prob="1" weightSum="1000">
+					<Item templateId="366" min="6" max="6" weight="700"/>					
+					<Item templateId="200930" min="2" max="2" weight="270"/>					
+					<Item templateId="96207" min="1" max="1" weight="24"/>					
+					<Item templateId="98281" min="1" max="1" weight="5"/>					
+					<Item templateId="369" min="10" max="10" weight="1"/>										
+				</ItemBag>
+			</RewardBag>
+			<RewardBag ruleValue="125000">
+				<ItemBag prob="1" weightSum="1000">
+					<Item templateId="366" min="4" max="4" weight="700"/>					
+					<Item templateId="200930" min="1" max="1" weight="270"/>					
+					<Item templateId="96207" min="1" max="1" weight="25"/>					
+					<Item templateId="98281" min="1" max="1" weight="5"/>									
+				</ItemBag>
+			</RewardBag>
+			<RewardBag ruleValue="62500">
+				<ItemBag prob="1" weightSum="1000">
+					<Item templateId="366" min="2" max="2" weight="800"/>					
+					<Item templateId="200930" min="1" max="1" weight="200"/>										
+				</ItemBag>
+			</RewardBag>
+		</ClearReward>
+		
+		<!--
+		<ClearReward id="1" rule="rank">
+			<ShowRewardList itemTemplateIdList="98582,98583,98584" />			
+			<RewardBag ruleValue="3">
+				<ItemBag prob="1" weightSum="9">
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+				</ItemBag>
+				<ItemBag prob="0.8" weightSum="9">
+					<Item templateId="98583" min="1" max="1" weight="1"/>
+					<Item templateId="98583" min="1" max="1" weight="1"/>
+					<Item templateId="98583" min="1" max="1" weight="1"/>
+					<Item templateId="98583" min="1" max="1" weight="2"/>
+					<Item templateId="98583" min="1" max="1" weight="2"/>
+					<Item templateId="98583" min="1" max="1" weight="2"/>
+				</ItemBag>
+				<ItemBag prob="0.5" weightSum="9">
+					<Item templateId="98584" min="1" max="1" weight="1"/>
+					<Item templateId="98584" min="1" max="1" weight="1"/>
+					<Item templateId="98584" min="1" max="1" weight="1"/>
+					<Item templateId="98584" min="1" max="1" weight="2"/>
+					<Item templateId="98584" min="1" max="1" weight="2"/>
+					<Item templateId="98584" min="1" max="1" weight="2"/>
+				</ItemBag>
+			</RewardBag>
+			<RewardBag ruleValue="10">
+				<ItemBag prob="0.5" weightSum="9">
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+				</ItemBag>
+			</RewardBag>
+		</ClearReward>
+		<ClearReward id="2" rule="point">
+			<ShowRewardList itemTemplateIdList="98582" />
+			<RewardBag ruleValue="5000">
+				<ItemBag prob="0.5" weightSum="9">
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+				</ItemBag>
+			</RewardBag>
+		</ClearReward>
+		<ClearReward id="3" rule="point">
+			<ShowRewardList itemTemplateIdList="98582" />
+			<RewardBag ruleValue="5000">
+				<ItemBag prob="0.5" weightSum="10">
+					<Item templateId="98582" min="1" max="3" weight="3"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="2"/>
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+					<Item templateId="98582" min="1" max="3" weight="1"/>
+				</ItemBag>
+			</RewardBag>
+		</ClearReward>
+		-->
+	</FieldEventClearReward>
+	
+</FieldEvent>

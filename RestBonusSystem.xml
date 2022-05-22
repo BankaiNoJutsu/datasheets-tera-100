@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>		
+
+<!--시스템 설명 및 노드 정보
+
+설명:
+	마을이나 대도시에서 일정 시간 동안 접속 종료를 하면 획득 되는 포인트. 포인트가 남아있다면 몬스터 사냥 시 추가 경험치를 받을 수 있으며 그 만큼 ‘휴식 보너스 포인트’가 차감된다.
+
+공식:
+	휴식 포인트 = 휴식 포인트 + 증가 포인트(증가량을 가속시키기 위함.)
+	restBonusPoint = restBonusPoint + increasePoint
+	
+		increasePoint = maxPoint * accumPointPercent * updateStepNum
+		
+			updateStepNum
+				;최근 휴식 포인트를 적용한 시간이 로그아웃 시간보다 나중인 경우 : 로그아웃 시간과 현재 시간의 차이를 구한 후, updateStepTime으로 나눠준 값
+				;최근 휴식 포인트를 적용한 시간이 로그아웃 시간보다 먼저인 경우 : 휴식 포인트를 적용한 시간과 현재 시간의 차이를 구한 후, updqteStepTime으로 나눠준 값 / 해당 기능은 동작 하지 않는 것 같습니다.
+
+	restBonusPoint가 maxPoint를 넘을 경우, maxPoint까지만 적용합니다. (휴식 포인트는 maxPoint를 넘을 수 없습니다.)
+
+노드 정보:
+	@value: 접속 종료 시, 휴식 보너스 포인트가 추가되기 까지 걸리는 단위 시간
+	@lv: 아래 효과가 적용되는 캐릭터 레벨 정의
+	@MaxPoint: 캐릭터가 보유할 수 있는 최대 휴식 포인트량 정의
+	@ItemDropPercent: 휴식 보너스 적용 상태에서 아이템 드랍 확률 증가량
+		; 0.05 입력 시 몬스터 사냥 시 아이템 획득 확률 5% 증가
+			; 아이템 주머니 내의 획득 확률은 변하지 않음
+	@ExpPercent: 추가 획득 가능 휴식 경험치 비율 / 휴식 보너스 적용 상태에서 몬스터 사냥 시 얻게 되는 추가 경험치 비율
+		; 0.05 입력 시 몬스터 사냥 시 경험치 획득량의 5%를 추가로 얻음
+			; 휴식 보너스를 통해 추가 경험치 획득 시, 획득한 추가 경험치 량 만큼 보유 중인 휴식 포인트에서 차감됨
+	@AccumPointPercent: UpdateStepTime에 정의된 시간 마다 회복될 휴식 보너스 포인트 량을 정의
+		; “AccumPointPercent = 0.005” 일 경우 UpdateStepTime에 정의된 시간 마다 MaxPoint(최대 휴식 보너스)의 0.5%씩 휴식 보너스 포인트가 획득된다.
+
+참고:
+	관련 데이터 시트
+		RestBonusSystem.xml : 휴식 경험치 관련 정보
+		WorldData.xml : 레벨 별 경험치량 정보
+	
+	명령어
+		/@setrestbonus 10000 : 지정된 값 만큼 휴식 보너스 포인트 획득
+ -->
+
+
+
+<RestBonusSystem>		
+	<UpdateStepTime value="1800"/>	 <!--접속 종료 시, 휴식 보너스 포인트가 추가되기까지 걸리는 시간(초) -->
+		
+	<Table id="1" desc="일반">	
+		<Section Lv="1" MaxPoint="419" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.19643"/>
+		<Section Lv="2" MaxPoint="923" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.09821"/>
+		<Section Lv="3" MaxPoint="1523" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.06548"/>
+		<Section Lv="4" MaxPoint="2234" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.04911"/>
+		<Section Lv="5" MaxPoint="3072" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.03929"/>
+		<Section Lv="6" MaxPoint="4056" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.03274"/>
+		<Section Lv="7" MaxPoint="5205" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.02806"/>
+		<Section Lv="8" MaxPoint="6543" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.02455"/>
+		<Section Lv="9" MaxPoint="8098" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.02183"/>
+		<Section Lv="10" MaxPoint="9897" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01964"/>
+		<Section Lv="11" MaxPoint="11976" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01786"/>
+		<Section Lv="12" MaxPoint="14969" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01637"/>
+		<Section Lv="13" MaxPoint="17910" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01511"/>
+		<Section Lv="14" MaxPoint="21874" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01403"/>
+		<Section Lv="15" MaxPoint="26316" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01310"/>
+		<Section Lv="16" MaxPoint="31429" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01228"/>
+		<Section Lv="17" MaxPoint="39287" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01155"/>
+		<Section Lv="18" MaxPoint="49038" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01091"/>
+		<Section Lv="19" MaxPoint="57245" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.01034"/>
+		<Section Lv="20" MaxPoint="71556" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00982"/>
+		<Section Lv="21" MaxPoint="89445" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00935"/>
+		<Section Lv="22" MaxPoint="111807" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00893"/>
+		<Section Lv="23" MaxPoint="137522" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00854"/>
+		<Section Lv="24" MaxPoint="167777" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00818"/>
+		<Section Lv="25" MaxPoint="209722" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00786"/>
+		<Section Lv="26" MaxPoint="257152" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00755"/>
+		<Section Lv="27" MaxPoint="321440" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00728"/>
+		<Section Lv="28" MaxPoint="373792" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00702"/>
+		<Section Lv="29" MaxPoint="419737" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00677"/>
+		<Section Lv="30" MaxPoint="477415" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00655"/>
+		<Section Lv="31" MaxPoint="561321" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00634"/>
+		<Section Lv="32" MaxPoint="627079" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00614"/>
+		<Section Lv="33" MaxPoint="727411" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00595"/>
+		<Section Lv="34" MaxPoint="833027" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="35" MaxPoint="918219" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="36" MaxPoint="1012121" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="37" MaxPoint="1115621" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="38" MaxPoint="1229700" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="39" MaxPoint="1355437" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="40" MaxPoint="1494025" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="41" MaxPoint="1646778" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="42" MaxPoint="1815139" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="43" MaxPoint="2000707" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="44" MaxPoint="2205235" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="45" MaxPoint="2430063" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="46" MaxPoint="2678337" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="47" MaxPoint="2951380" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="48" MaxPoint="3252384" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="49" MaxPoint="3575142" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="50" MaxPoint="3927940" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="51" MaxPoint="4314912" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="52" MaxPoint="4743100" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="53" MaxPoint="5208824" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="54" MaxPoint="5718974" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="55" MaxPoint="6277453" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="56" MaxPoint="6890664" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="57" MaxPoint="7563228" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="58" MaxPoint="8204761" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="59" MaxPoint="8609139" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="60" MaxPoint="8979994" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="61" MaxPoint="9301777" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="62" MaxPoint="9555462" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="63" MaxPoint="9717905" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="64" MaxPoint="9761095" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="65" MaxPoint="292832844" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.0054"/>
+		<Section Lv="66" MaxPoint="322116128" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.0052"/>
+		<Section Lv="67" MaxPoint="341296709" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.0050"/>
+		<Section Lv="68" MaxPoint="375426366" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.0048"/>
+		<Section Lv="69" MaxPoint="409556035" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+		<Section Lv="70" MaxPoint="430033837" ItemDropPercent="0" ExpPercent="1" AccumPointPercent="0.00463"/>
+	</Table>	
+</RestBonusSystem>		

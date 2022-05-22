@@ -1,0 +1,841 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9916" name="@dungeon:9916" startPos="56282,130696,1540"  exitContinentId="7031" exitPos="34404,38241,9376">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="65" />
+	<ClearCondition huntingZoneId="916" templateId="1000" amount="1" killCount="1"/>
+	<Retry retryId="2" />
+
+	<EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="guideOn" nameId="916,911" id="1" pos="57357,133853,1966" next="none" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600052" templateId="1004" next="none" />
+		<EventTask type="flag" name="타이머소환" value="0" next="none" />
+		<EventTask type="flag" name="전멸소환" value="0" next="none" />
+		<EventTask type="flag" name="부유석1" value="0" next="none" />
+		<EventTask type="flag" name="부유석2" value="0" next="none" />
+		<EventTask type="flag" name="부유석3" value="0" next="none" />
+		<EventTask type="flag" name="부유석4" value="0" next="none" />
+		<EventTask type="flag" name="부유석5" value="0" next="none" />
+		<EventTask type="flag" name="부유석6" value="0" next="none" />
+		<EventTask type="flag" name="부유석7" value="0" next="none" />
+		<EventTask type="flag" name="부유석8" value="0" next="none" />
+        <EventTask type="turnAbnormalityTerritory" huntingZoneId="916" territoryId="91600064" turn="on" next="none" /> <!-- 테라타임 버프 해제 -->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<!-- 1번방 전투 시작 -->
+	
+	<EventGroup id="1" type="npcState" uniqueId="916,91660" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="916" territoryId="71600002" next="none" />
+		<EventTask type="message" string="@dungeon:9916055" style="default" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9916049" target="npc" targetNpcId="916,91660" next="time" nextValue="4" />
+		<EventTask type="message" string="@dungeon:9916050" target="npc" targetNpcId="916,91660" next="time" nextValue="5" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600060" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600062" next="none" />
+		<EventTask type="timer" name="소환" action="start" direction="reverse" value="30" timerUiOff="true" next="none"/>
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600059" next="time" nextValue="3" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600059" templateId="91678" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+
+	<EventGroup type="timer" timerName="소환" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="타이머소환" value="1" next="none" />
+		<EventTask type="timer" name="소환" action="start" direction="reverse" value="30" timerUiOff="true" next="none"/>
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="506" name="1네임드_쫄 전멸 체크" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="전멸소환" value="1" next="none" />
+		<EventTask type="timer" name="소환" action="stop" value="30" timerUiOff="true" next="none"/>
+		<EventTask type="timer" name="소환" action="start" direction="reverse" value="30" timerUiOff="true" next="none"/>
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="타이머소환" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="타이머소환" value="0" next="none" />
+		<EventTask type="flag" name="전멸소환" value="0" next="none" />
+		<EventTask type="turnAi" turn="on" huntingZoneId="916" territoryId="91600059" templateId="91678" next="time" nextValue="3" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600059" templateId="91678" next="none" />
+      </EventTaskGroup>
+    </Event>  
+	</EventGroup>
+	
+	<EventGroup type="flag" name="전멸소환" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="타이머소환" value="0" next="none" />
+		<EventTask type="flag" name="전멸소환" value="0" next="none" />
+		<EventTask type="turnAi" turn="on" huntingZoneId="916" territoryId="91600059" templateId="91678" next="time" nextValue="3" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600059" templateId="91678" next="none" />
+      </EventTaskGroup>
+    </Event>  
+	</EventGroup>
+
+	<EventGroup type="none" id="507" name="1네임드_쫄 소환 후 이상상태 걸기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" turn="on" abnormalityId="916005" target="npc" targetNpcId="916,91679" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+
+	<EventGroup type="npcHp" uniqueId="916,91650" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="guideOn" nameId="916,912" id="1" pos="57687,131999,2870" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="71600002" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600059" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600060" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600062" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600005" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600062" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600062" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600062" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="916,91660" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none" />
+  		<EventTask type="timer" name="소환" action="stop" value="30" timerUiOff="true" next="none"/>
+		<EventTask type="flag" name="타이머소환" value="0" next="none" />
+		<EventTask type="flag" name="전멸소환" value="0" next="none" />
+	  	<EventTask type="despawn" huntingZoneId="916" territoryId="71600002" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600059" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600060" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600062" next="none" />-->
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600053" next="none" />
+		<EventTask type="eventState" stateType="EventGroup" id="504" state="stop" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600036" next="none" />	
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="916,91650" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none" />
+  		<EventTask type="timer" name="소환" action="stop" value="30" timerUiOff="true" next="none"/>
+		<EventTask type="flag" name="타이머소환" value="0" next="none" />
+		<EventTask type="flag" name="전멸소환" value="0" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="71600002" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600060" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600036" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600059" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600062" next="none" />-->
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600053" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+    <EventGroup type="none" id="503" name="1네임드_시작" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="turnAi" turn="on" huntingZoneId="916" territoryId="91600053" templateId="91660" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600060" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="504" name="1네임드_마무리" repeat="true">
+    <Event>
+      <EventTaskGroup>
+  		<EventTask type="timer" name="소환" action="stop" value="30" timerUiOff="true" next="none"/>
+		<EventTask type="flag" name="타이머소환" value="0" next="none" />
+		<EventTask type="flag" name="전멸소환" value="0" next="none" />
+	  	<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600059" templateId="91678" next="none" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600059" templateId="91679" next="none" />
+		<EventTask type="empty" next="time" nextValue="20" />
+		<EventTask type="changePatternList" targetNpcId="916,91679" patternListId="2" next="none" />
+		<EventTask type="message" string="@dungeon:9916051" style="combat" next="time" nextValue="10" />
+		<EventTask type="message" string="@dungeon:9916048" target="npc" targetNpcId="916,91660" next="time" nextValue="2" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600053" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600036" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9916052" style="default" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600032" target="npc" targetNpcId="916,91671" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600032" target="npc" targetNpcId="916,91672" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600032" target="npc" targetNpcId="916,91673" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600032" target="npc" targetNpcId="916,91674" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600032" target="npc" targetNpcId="916,91675" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600032" target="npc" targetNpcId="916,91676" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600032" target="npc" targetNpcId="916,91677" next="none" />
+		<EventTask type="turnAi" turn="on" huntingZoneId="916" territoryId="91600059" templateId="91679" next="none" />
+		<EventTask type="changePatternList" targetNpcId="916,91679" patternListId="2" next="none" />
+		<EventTask type="changePatternList" targetNpcId="916,91673" patternListId="2" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="505" name="1번방_업적체크" repeat="true">
+    <Event>
+      <EventTaskGroup>
+	  	<EventTask type="abnormality" abnormalityId="91600035" target="player" next="time" nextValue="3" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600059" templateId="91679" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="501" name="1네임드_노멀" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" turn="off" abnormalityId="91600025" target="npc" targetNpcId="916,91650" next="none" />
+		<!--<EventTask type="abnormality" abnormalityId="91600027" target="npc" targetNpcId="916,91650" next="none" />-->
+		<EventTask type="abnormality" abnormalityId="91600026" target="npc" targetNpcId="916,91650" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600024" target="player" next="none" />
+		<EventTask type="message" string="@dungeon:9916044" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="502" name="1네임드_분노" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<!--<EventTask type="abnormality" turn="off" abnormalityId="91600027" target="npc" targetNpcId="916,91650" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="91600026" target="npc" targetNpcId="916,91650" next="none" />-->
+		<EventTask type="abnormality" abnormalityId="91600025" target="npc" targetNpcId="916,91650" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600023" target="player" next="none" />
+		<EventTask type="message" string="@dungeon:9916045" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	  
+	<!-- 1번방 전투 끝 -->
+	
+	<!-- 일반 몬스터 구간 -->
+	<EventGroup type="enterTerritory" uniqueId="916,71600006" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="916" territoryId="71600005,71600007,71600009,71600010" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="71600005,71600007,71600009,71600010" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="916" territoryId="71600012" next="none" />
+      </EventTaskGroup>
+    </Event>  
+	</EventGroup>
+	
+	<EventGroup type="eliminate" territoryId="71600005,71600007,71600009,71600010" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="guideOn" nameId="916,913" id="1" pos="57702.4023,128408.9688,2374.6611" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600065" next="none" />
+      </EventTaskGroup>
+    </Event>  
+	</EventGroup>
+	
+  <!-- 일반 몬스터 끝 -->
+	<!-- 2번방 전투 시작 -->
+	<EventGroup type="npcReset" uniqueId="916,91606" repeat="true">
+    <Event>
+      <EventTaskGroup>
+   		<EventTask type="spawn" huntingZoneId="916" territoryId="91600065" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="71600003" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600061" next="none" />
+		<EventTask type="flag" name="부유석1" value="0" next="none" />
+		<EventTask type="flag" name="부유석2" value="0" next="none" />
+		<EventTask type="flag" name="부유석3" value="0" next="none" />
+		<EventTask type="flag" name="부유석4" value="0" next="none" />
+		<EventTask type="flag" name="부유석5" value="0" next="none" />
+		<EventTask type="flag" name="부유석6" value="0" next="none" />
+		<EventTask type="flag" name="부유석7" value="0" next="none" />
+		<EventTask type="flag" name="부유석8" value="0" next="none" />
+        <EventTask type="spawn" huntingZoneId="916" territoryId="91600005" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600010" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600038" target="npc" targetNpcId="916,91618" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600038" target="npc" targetNpcId="916,91621" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600038" target="npc" targetNpcId="916,91622" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600038" target="npc" targetNpcId="916,91623" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600038" target="npc" targetNpcId="916,91624" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600038" target="npc" targetNpcId="916,91625" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600038" target="npc" targetNpcId="916,91628" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600038" target="npc" targetNpcId="916,91629" next="none" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600061" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600061" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600061" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600061" next="time" nextValue="9" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600061" next="time" nextValue="1" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600061" next="none" />
+
+		<!-- 2네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 		
+		<EventTask type="timer" name="timerC" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+		<!-- 2네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 	
+		
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+	
+	<EventGroup type="npcState" uniqueId="916,91606" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+	    <EventTask type="despawn" huntingZoneId="916" territoryId="91600065" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="71600003" next="none" />
+		<EventTask type="turnAi" turn="on" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />
+		<EventTask type="message" string="@dungeon:9916055" style="default" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600061" next="none" />
+		
+		<!-- 2네임드 길드경쟁 타이머 시작 던전 패턴과 무관--> 		
+		<EventTask type="rankSystem" state="start" startPoint="0" next="none" />		
+		<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerC" timerType="rank" timerUiOff="true" next="none" />
+		<!-- 2네임드 길드경쟁 타이머 시작 던전 패턴과 무관--> 	
+		
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+		
+	<EventGroup type="npcHp" uniqueId="916,91606" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="guideOn" nameId="916,914" id="1" pos="57702.4023,128408.9688,2374.6611" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="71600003" next="none" />	  
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />
+	    <EventTask type="despawn" huntingZoneId="916" territoryId="91600065" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600049,91600050,91600051" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600061" next="none" />
+		<EventTask type="KillNpc" targetNpcId="916,91619" next="none" />
+		<!-- 2네임드 길드경쟁 타이머 종료 던전 패턴과 무관--> 		
+		<EventTask type="timer" action="stop" name="timerC" timerType="rank" next="time" nextValue="5" />
+		<EventTask type="timer" action="stop" value="0" name="timerC" next="none" />
+		<!-- 2네임드 길드경쟁 타이머 종료 던전 패턴과 무관--> 		
+		
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="916,91618" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>	  
+		<EventTask type="flag" name="부유석1" value="1" next="none" />
+        <EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600011" target="ObjectNpc" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600011" next="none" />
+		<EventTask type="turnAi" turn="on" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="916,91621" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="부유석2" value="1" next="none" />
+        <EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600012" target="ObjectNpc" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600024" turn="off" target="player" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600012" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="916,91622" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="부유석3" value="1" next="none" />
+        <EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600013" target="ObjectNpc" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600024" turn="off" target="player" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600013" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="916,91623" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="부유석4" value="1" next="none" />
+        <EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600014" target="ObjectNpc" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600014" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="916,91624" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="부유석5" value="1" next="none" />
+        <EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600016" target="ObjectNpc" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600016" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="916,91625" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="부유석6" value="1" next="none" />
+        <EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600017" target="ObjectNpc" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600017" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="916,91628" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="부유석7" value="1" next="none" />
+        <EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600028" target="ObjectNpc" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600028" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="916,91629" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="부유석8" value="1" next="none" />
+        <EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600027" target="ObjectNpc" next="none" />
+		<!--<EventTask type="despawn" huntingZoneId="916" territoryId="91600027" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+  
+    <EventGroup type="flag" name="부유석1, 부유석2, 부유석3, 부유석4, 부유석5, 부유석6, 부유석7, 부유석8" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="916" territoryId="71600003" next="none" />
+		<EventTask type="message" string="@dungeon:9916018" style="combat" next="none" />
+		<EventTask type="doActionScript" targetNpcId="916,91619" actionScriptId="91600001" next="none" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="1" />
+		<EventTask type="abnormality" abnormalityId="91600037" turn="on" target="player"  next="time" nextValue="1" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="1" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="1" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="1" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="1" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="none" />
+		<EventTask type="flag" name="부유석1" value="0" next="none" />
+		<EventTask type="flag" name="부유석2" value="0" next="none" />
+		<EventTask type="flag" name="부유석3" value="0" next="none" />
+		<EventTask type="flag" name="부유석4" value="0" next="none" />
+		<EventTask type="flag" name="부유석5" value="0" next="none" />
+		<EventTask type="flag" name="부유석6" value="0" next="none" />
+		<EventTask type="flag" name="부유석7" value="0" next="none" />
+		<EventTask type="flag" name="부유석8" value="0" next="none" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="2" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="2" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="2" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="2" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="2" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="2" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="2" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="time" nextValue="2" />
+		<EventTask type="killInTerritory" huntingZoneId="916" territoryId="91600063" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>  
+	</EventGroup>
+	
+	<EventGroup type="none" id="6" name="잔류 부유석 5개" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916025" style="combat" next="time" nextValue="1" />
+		<!--<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="7" name="잔류 부유석 4개" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916024" style="combat" next="time" nextValue="1" />
+		<!--<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="8" name="잔류 부유석 3개" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916023" style="combat" next="time" nextValue="1" />
+		<!--<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="9" name="잔류 부유석 2개" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916022" style="combat" next="time" nextValue="1" />
+		<!--<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="10" name="잔류 부유석 1개" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916021" style="combat" next="time" nextValue="1" />
+		<!--<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="11" name="잔류 부유석 7개" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916033" style="combat" next="time" nextValue="1" />
+		<!--<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="12" name="잔류 부유석 6개" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916032" style="combat" next="time" nextValue="1" />
+		<!--<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600010" templateId="91619" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	<!-- 2번방 전투 끝 -->
+	
+	<!-- 3번방 전투 시작 -->
+	<EventGroup type="none" id="100" name="(다르칸 연계스킬용) 암흑폭발 시작" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916026" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="101" name="(다르칸 연계스킬용B) 2지선다형 시작" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916027" target="npc" targetNpcId="916,1000" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="108" name="(다르칸 연계스킬용A) 2지선다형 시작" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916031" target="npc" targetNpcId="916,1001" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="111" name="2지선다형 3콤보(1)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916039" target="npc" targetNpcId="916,1000" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="112" name="2지선다형 3콤보(2)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916040" target="npc" targetNpcId="916,1000" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="113" name="2지선다형 3콤보(3)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916041" target="npc" targetNpcId="916,1000" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcState" uniqueId="916,1000" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="916" territoryId="71600004" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600008" turn="off" target="player" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600049,91600050,91600051" next="none" />
+		
+ 		<!-- 3네임드 길드경쟁 타이머 시작 던전 패턴과 무관--> 		
+		<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerE" timerType="rank" timerUiOff="true" next="none" />
+ 		<!-- 3네임드 길드경쟁 타이머 시작 던전 패턴과 무관--> 		
+		
+     </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcState" uniqueId="916,1001" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600049,91600050,91600051" next="none" />
+		<EventTask type="message" string="@dungeon:9916059" target="npc" targetNpcId="916,1001" next="time" nextValue="3" />
+		<EventTask type="message" string="@dungeon:9916060" target="npc" targetNpcId="916,1001" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="916,1001" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600049,91600050,91600051" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+	
+	<EventGroup type="none" id="201" name="암흑장막(75%)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916034" next="time" nextValue="3" />
+		<EventTask type="doActionScript" targetNpcId="916,1000" actionScriptId="50003" next="time" nextValue="2" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600035" next="none" />
+		<!--<EventTask type="abnormality" abnormalityId="91600013" target="player" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="202" name="암흑장막(50%)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916034" next="time" nextValue="3" />
+		<EventTask type="doActionScript" targetNpcId="916,1000" actionScriptId="50003" next="time" nextValue="2" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600032" next="none" />
+		<!--<EventTask type="abnormality" abnormalityId="91600013" target="player" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="203" name="암흑장막(25%)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916034" next="none" />
+		<EventTask type="doActionScript" targetNpcId="916,1000" actionScriptId="50003" next="none" />
+		<!--<EventTask type="abnormality" abnormalityId="91600013" target="player" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="eliminateRepeatly" uniqueId="916,91600035" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="doActionScript" targetNpcId="916,1004" actionScriptId="50006" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600012" target="npc" targetNpcId="916,1000" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9916035" target="npc" targetNpcId="916,1000" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600013" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600014" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600015" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600016" turn="off" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="eliminateRepeatly" uniqueId="916,91600032" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="doActionScript" targetNpcId="916,1004" actionScriptId="50006" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600012" target="npc" targetNpcId="916,1000" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9916035" target="npc" targetNpcId="916,1000" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600013" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600014" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600015" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600016" turn="off" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcReset" uniqueId="916,1000" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="916" territoryId="71600004" next="none" />
+		<EventTask type="message" string="@dungeon:9916061" style="combat" next="none" />
+		<EventTask type="timer" name="3번방불바닥" action="stop" value="0" timerUiOff="true" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600049,91600050,91600051" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600030,91600031,91600032,91600035" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600039,91600040,91600041,91600042,91600043,91600044,91600045,91600046,91600047" next="none" />
+		<EventTask type="doActionScript" targetNpcId="916,1004" actionScriptId="50006" next="none" />	
+		<EventTask type="doActionScript" targetNpcId="916,1004" actionScriptId="50007" next="none" />			
+		<EventTask type="abnormality" abnormalityId="91600013" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600014" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600015" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600016" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600017" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600019" turn="off" target="npc" targetNpcId="916,1000" next="none" />
+		<EventTask type="abnormality" abnormalityId="916004" turn="off" target="npc" targetNpcId="916,1000" next="none" />	
+		
+		<!-- 3네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 		
+		<EventTask type="timer" name="timerE" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+		<!-- 3네임드 길드경쟁 타이머 리셋종료 던전 패턴과 무관--> 		
+		
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="916,1001" value="90" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" turn="on" abnormalityId="91600021" target="npc" targetNpcId="916,1001" next="time" nextValue="1" />		
+		<EventTask type="changePatternList" targetNpcId="916,1001" patternListId="2" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600049,91600050,91600051" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="916,1000" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="guideOff" id="1" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="71600004" next="none" />
+		<EventTask type="message" string="@dungeon:9916062" target="npc" targetNpcId="916,1000" next="none" />
+		<EventTask type="timer" name="3번방불바닥" action="stop" value="0" timerUiOff="true" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600049,91600050,91600051,71600013" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600030,91600031,91600032,91600035" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600039,91600040,91600041,91600042,91600043,91600044,91600045,91600046,91600047" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600004" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600017" turn="off" target="player" next="none" />
+		<EventTask type="doActionScript" targetNpcId="916,1004" actionScriptId="50006" next="none" />	
+		<EventTask type="doActionScript" targetNpcId="916,1004" actionScriptId="50007" next="none" />			
+		<EventTask type="abnormality" abnormalityId="91600013" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600014" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600015" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="91600016" turn="off" target="player" next="time" nextValue="5" />
+		<EventTask type="message" string="@dungeon:9916056" target="npc" targetNpcId="916,99901" next="time" nextValue="3" />
+		<EventTask type="message" string="@dungeon:9916057" target="npc" targetNpcId="916,99901" next="time" nextValue="3" />
+		<EventTask type="message" string="@dungeon:9916058" target="npc" targetNpcId="916,99901" next="none" />
+		
+		<!-- 3네임드 길드경쟁 타이머 종료 던전 패턴과 무관--> 		
+		<EventTask type="timer" action="stop" name="timerE" timerType="rank" next="time" nextValue="5" />
+		<EventTask type="rankSystem" state="end" next="none" />
+		<EventTask type="timer" action="stop" value="0" name="timerE" next="none" />      
+		<!-- 3네임드 길드경쟁 타이머 종료 던전 패턴과 무관--> 	
+		
+	 </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="916,1000" value="95" repeat="true" stopWhenDeath="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916036" style="default" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600039" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="916,1000" value="55" repeat="true" stopWhenDeath="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916038" style="default" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600041" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600042" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="916,1000" value="25" repeat="true" stopWhenDeath="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916042" style="combat" targetBossId="916,1000" patternGuide="timeAttack" patternShowTime="0" next="none" />
+		<!--<EventTask type="abnormality" abnormalityId="91600026" target="npc" targetNpcId="916,1000" next="none" />-->
+		<EventTask type="doActionScript" targetNpcId="916,1004" actionScriptId="50004" next="time" nextValue="5" />
+		<EventTask type="message" string="@dungeon:9916038" style="default" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600043" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600044" next="none" />
+		<EventTask type="timer" name="3번방불바닥" action="start" direction="reverse" value="180" timerUiOff="true" next="none"/>
+		<!--<EventTask type="changePatternList" targetNpcId="916,91632" patternListId="2" next="none" />
+		<EventTask type="changePatternList" targetNpcId="916,91633" patternListId="2" next="none" />
+		<EventTask type="changePatternList" targetNpcId="916,91634" patternListId="2" next="none" />
+		<EventTask type="changePatternList" targetNpcId="916,91635" patternListId="2" next="none" />
+		<EventTask type="changePatternList" targetNpcId="916,91636" patternListId="2" next="none" />-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="timer" timerName="3번방불바닥" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916038" style="default" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600045" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600046" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600047" next="none" />
+		<EventTask type="timer" name="3번방불바닥" action="stop" value="0" timerUiOff="true" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+	
+  <EventGroup type="none" id="303" name="고정형 3번 메시지" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9916038" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+  	<EventGroup type="none" id="304" name="다르칸 바꿔치기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" turn="on" abnormalityId="91600011" target="npc" targetNpcId="916,1001" next="time" nextValue="0.001" />		
+		<EventTask type="playMovie" id="2100" next="none" />	
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600025" next="none" />
+		<EventTask type="spawn" huntingZoneId="916" territoryId="91600052" next="time" nextValue="1" />
+		<EventTask type="turnAi" turn="on" huntingZoneId="916" territoryId="91600052" templateId="1004" next="time" nextValue="1" />
+		<EventTask type="turnAi" turn="off" huntingZoneId="916" territoryId="91600052" templateId="1004" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="annihilated" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" turn="on" abnormalityId="91600036" target="npc" targetNpcId="916,1000" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600036" target="npc" targetNpcId="916,91650" next="none" />
+		<EventTask type="abnormality" turn="on" abnormalityId="91600036" target="npc" targetNpcId="916,91660" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600061" next="none" />
+		<EventTask type="despawn" huntingZoneId="916" territoryId="91600060" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+   <!--3번방 전투 끝 -->
+  <!-- 고대신의 축복 -->
+  <!--EventGroup type="none" id="901" name="고대신의 축복 30초전 알림" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9916053" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="none" id="902" name="고대신의 축복_1차" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9916054" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="none" id="903" name="고대신의 축복_2차" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9916063" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="none" id="904" name="고대신의 축복_3차" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9916064" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup-->
+</Dungeon>

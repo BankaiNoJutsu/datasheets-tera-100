@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9001" name="@dungeon:9001" startPos="69188,-38873,-90" exitContinentId="7004" exitPos="71636,66494,354" destroyWaitMin="0">
+  <RestoreTargetQuest id="904" forceRestore="true"/>
+  <!-- 벨리카 퀘스트 특수공간 -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="30" />
+  <Condition type="progressQuest" value="904" taskId="4" />
+  <Condition type="completeQuest" value="904" />
+  <Condition type="maxMemberCount" value="5" />
+  <EventGroup type="initialize"> <!-- 던전 생성 되자마자 실행되는 이벤트 -->
+    <Event>
+		  <EventTaskGroup>
+			<EventTask type="deSpawn" huntingZoneId="401" territoryId="40100022" next="none" /><!--시벨일행 디스폰-->
+			<EventTask type="spawn" huntingZoneId="401" territoryId="40100017" next="none" /><!--사마엘 스폰-->
+			<EventTask type="spawn" huntingZoneId="401" territoryId="40100019" next="none" /><!--호위병 스폰-->
+			<EventTask type="spawn" huntingZoneId="401" territoryId="40100014" next="none" /><!--길버트 스폰-->
+			<EventTask type="cleanup" next="none" />	
+		  </EventTaskGroup>
+	</Event>	
+  </EventGroup>
+  <EventGroup type="talkNpc" uniqueId="401,1001">
+    <!-- 길버트와 대화 후 호위병 및 사마엘 변신 -->
+    <Event questId="904" taskId="5" textId="2">
+      <EventTaskGroup>
+        <EventTask type="playMovie" id="17" next="time" nextValue="10" />
+        <EventTask type="despawn" huntingZoneId="401" territoryId="40100019" next="none" />
+        <EventTask type="spawn" huntingZoneId="401" territoryId="40100016" targetNpcId="401,1003" startAggro="150" next="none" />
+        <EventTask type="spawn" huntingZoneId="401" territoryId="40100015" targetNpcId="401,1002" startAggro="150" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="401,5002" value="0">
+    <!-- 호위병 A HP감소 시 부하 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9001004" targetNpcId="401,1004" style="default" next="none" />
+        <EventTask type="spawn" huntingZoneId="401" territoryId="40100012" targetNpcId="401,1002" startAggro="150" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="401,5003" value="0">
+    <!-- 호위병 B HP감소 시  부하 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9001005" targetNpcId="401,1004" style="default" next="none" />
+        <EventTask type="spawn" huntingZoneId="401" territoryId="40100013" targetNpcId="401,1003" startAggro="150" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="401,5005" value="0">
+    <!-- 어둠의 약탈자 사망 시 사마엘 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9001006" targetNpcId="401,5001" style="combat" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9001007" targetNpcId="401,5001" style="combat" next="none" />
+		 <EventTask type="doActionScript" targetNpcId="401,1004" actionScriptId="10009034" next="time" nextValue="9"/>
+        <EventTask type="deSpawn" huntingZoneId="401" territoryId="40100017" next="none" />
+        <EventTask type="spawn" huntingZoneId="401" territoryId="40100011" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="401,5001" value="0">
+    <!-- 사마엘(몬스터) 사망 시 npc 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="401" territoryId="40100022" next="time" nextValue="1"/>
+		<EventTask type="deSpawn" huntingZoneId="401" territoryId="40100011" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+ 
+</Dungeon>

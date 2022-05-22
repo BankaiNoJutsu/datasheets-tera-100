@@ -1,0 +1,775 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9757" name="@dungeon:9757" startPos="-89028,100118,4851" exitContinentId="7014" exitPos="-57627,-10401,2261">
+  <Condition type="raid" value="5" />
+	<Condition type="maxMemberCount" value="10" />
+	<Condition type="levelOver" value="65" />
+	<ClearCondition huntingZoneId="757" templateId="1004" amount="1" killCount="1"/>
+
+	<!-- 시작시 길찾기 가이드 추가 -->
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="757,911" id="1" pos="-83714,95039,3728" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>  
+		
+<!-- 2번 일반 구간 함정 엔터 테리토리 -->
+	<EventGroup type="enterTerritory" uniqueId="757,75700001" repeat="false" >    
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,505" patternListId="2" next="time" nextValue="3" /> <!-- 작동 -->
+		<EventTask type="changePatternList" targetNpcId="757,506" patternListId="2" next="none" /> <!-- 작동 -->
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>  
+
+	<EventGroup type="enterTerritory" uniqueId="757,75700002" repeat="false" >    
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,505" patternListId="2" next="time" nextValue="3" /> <!-- 작동 -->
+		<EventTask type="changePatternList" targetNpcId="757,506" patternListId="2" next="none" /> <!-- 작동 -->
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>    
+  
+	
+  <!-- 고대신의 축폭 시리즈 -->
+  <!-- 재도전 장치 1번 -->  
+  <EventGroup type="timer" timerName="벨릭의 은총1" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9055011" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 재도전 장치 2번 -->
+  <EventGroup type="timer" timerName="벨릭의 은총2" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9055012" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 재도전 장치 3번 -->
+  <EventGroup type="timer" timerName="벨릭의 은총3" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9055013" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 1네임드 재도전 장치 --> 
+  <EventGroup type="npcHp" uniqueId="757,1001" value="99.99999999" repeat="true" stopWhenReset="true" stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="150" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />        
+		<EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="30" next="time" nextValue="0" timerUiOff="true" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <!-- 2네임드 재도전 장치 --> 
+  <EventGroup type="npcHp" uniqueId="757,1002" value="99.99999999" repeat="true" stopWhenReset="true" stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="150" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />        
+		<EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="30" next="time" nextValue="0" timerUiOff="true" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 3네임드 재도전 장치 --> 
+  <EventGroup type="npcHp" uniqueId="757,1003" value="99.99999999" repeat="true" stopWhenReset="true" stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="150" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />        
+		<EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="30" next="time" nextValue="0" timerUiOff="true" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 4네임드 재도전 장치 --> 
+  <EventGroup type="npcHp" uniqueId="757,1004" value="99.99999999" repeat="true" stopWhenReset="true" stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="150" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />        
+		<EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="30" next="time" nextValue="0" timerUiOff="true" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+	
+	
+	
+    <EventGroup type="npcHp" uniqueId="757,203" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,201" patternListId="1" next="none" /> <!-- 지진 멈추기 -->	
+		<EventTask type="changePatternList" targetNpcId="757,202" patternListId="2" next="none" /> <!-- 칼 꽂기 -->	
+		<EventTask type="abnormality" abnormalityId="757050" target="npc" targetNpcId="757,202" turn="off" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>	
+
+    <EventGroup type="npcHp" uniqueId="757,202" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="457056" target="player" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700028" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700002" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700020" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700014" next="none" />
+		<EventTask type="changePatternList" targetNpcId="757,207" patternListId="1" next="none" />	
+		<EventTask type="changePatternList" targetNpcId="757,208" patternListId="1" next="time" nextValue="10"/>	
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700002" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700014" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>		
+
+	
+	<!-- 네임드 전투 시작 시 문 스폰 -->
+  <EventGroup type="npcHp" uniqueId="757,1001" value="99" repeat="true"> 	
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9057008" style="combat" next="time" nextValue="10"/>
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700026" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+
+  <EventGroup type="npcHp" uniqueId="757,1002" value="99" repeat="true"> 	
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9057008" style="combat" next="time" nextValue="10"/>
+ 		<EventTask type="spawn" huntingZoneId="757" territoryId="45700028" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+
+  <EventGroup type="npcHp" uniqueId="757,1003" value="99" repeat="true"> 	
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9057008" style="combat" next="time" nextValue="10"/>
+ 		<EventTask type="spawn" huntingZoneId="757" territoryId="45700029" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="413" name="문닫기" repeat="true">  <!-- 돌거인 전투 시작 연출에 넥스트 어택으로 작동 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="777029" target="npc" targetNpcId="757,413" next="time" nextValue="4" /> <!-- 시간 벌기용 쓸데없는 던전 이벤트 -->
+		<EventTask type="message" string="@dungeon:9057008" style="combat" next="time" nextValue="10"/>
+ 		<EventTask type="spawn" huntingZoneId="757" territoryId="45700031" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="75700009" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="75700010" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+
+	
+	<!-- 네임드 hp 0 되었을 때 문 디스폰 -->
+    <EventGroup type="npcHp" uniqueId="757,1001" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="guideOn" nameId="757,912" id="1" pos="-78706,99614,5750" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700026" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700027" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700002" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700014" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="75700008" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>		
+
+    <EventGroup type="npcHp" uniqueId="757,1002" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="guideOn" nameId="757,913" id="1" pos="-83467,104919,4226" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700028" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700020" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700022" next="none" />
+		<EventTask type="killNpc" targetNpcId="757,207" next="none" />
+		<EventTask type="killNpc" targetNpcId="757,208" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700014" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="75700007" next="time" nextValue="5" />		
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700003" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="75700008" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="75700009" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>		
+
+    <EventGroup type="npcHp" uniqueId="757,1003" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="guideOn" nameId="757,914" id="1" pos="-83892,99695,3389" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700029" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700030" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700004" next="none"/>
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>		
+
+    <EventGroup type="npcHp" uniqueId="757,1004" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="guideOff" id="1" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700031" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="75700006" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>		
+
+	<!-- 네임드 리셋 -->
+  <EventGroup type="npcReset" uniqueId="757,1001" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700026" next="time" nextValue="5"/>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700026" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" uniqueId="757,1002" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="eventState" stateType="EventGroup" id="204" state="stop" next="none"  />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700028" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700002" next="time" nextValue="10"/>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700020" next="time" nextValue="2"/>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700020" next="time" nextValue="2"/>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700020" next="time" nextValue="2"/>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700014" next="none" />
+		<EventTask type="changePatternList" targetNpcId="757,207" patternListId="1" next="none" />	
+		<EventTask type="changePatternList" targetNpcId="757,208" patternListId="1" next="time" nextValue="10"/>	
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700002" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700014" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" uniqueId="757,1003" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700029" next="time" nextValue="5"/>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700029" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" uniqueId="757,1004" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700031" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700010" next="none" />		
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700016" next="none" />	
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700017" next="none" />	
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700018" next="none" />	
+		<EventTask type="changePatternList" targetNpcId="757,405" patternListId="1" next="time" nextValue="5"/>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700031" next="none" />
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700004" next="time" nextValue="5"/>
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700004" next="none"/>
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+	
+	<EventGroup type="none" id="1" name="5초에 1번씩 지진 사용" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700001" next="none" />
+		<EventTask type="changePatternList" targetNpcId="757,201" patternListId="2" next="none" />	
+		<EventTask type="abnormality" abnormalityId="757050" target="npc" targetNpcId="757,202" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+	<EventGroup type="none" id="2" name="칼 패턴 변경" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,202" patternListId="1" next="none" />	
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+<!-- 2네임드 쇠먹는괴물 -->  
+    <EventGroup type="npcHp" uniqueId="757,1002" value="80" repeat="true">					<!-- 4네임드 hp 대역에 따라, 칼 hp 회복-->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,207" patternListId="3" next="none" />	
+		<EventTask type="changePatternList" targetNpcId="757,208" patternListId="3" next="none" />	
+		<!-- <EventTask type="message" string="@dungeon:9057002" style="combat" next="none"/> -->
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700020" next="time" nextValue="20"/>
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700020" next="none" />		
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+    <EventGroup type="npcHp" uniqueId="757,1002" value="60" repeat="true">					<!-- 4네임드 hp 대역에 따라, 칼 hp 회복-->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,207" patternListId="4" next="none" />	
+		<EventTask type="changePatternList" targetNpcId="757,208" patternListId="4" next="none" />
+		<!-- <EventTask type="message" string="@dungeon:9057003" style="combat" next="none"/> -->
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700020" next="time" nextValue="20"/>
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700020" next="none" />	
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+    <EventGroup type="npcHp" uniqueId="757,1002" value="40" repeat="true">					<!-- 4네임드 hp 대역에 따라, 칼 hp 회복-->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,207" patternListId="5" next="none" />	
+		<EventTask type="changePatternList" targetNpcId="757,208" patternListId="5" next="none" />
+		<!-- <EventTask type="message" string="@dungeon:9057004" style="combat" next="none"/> -->
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700020" next="time" nextValue="20"/>
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700020" next="none" />	
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+    <EventGroup type="npcHp" uniqueId="757,1002" value="20" repeat="true">					<!-- 4네임드 hp 대역에 따라, 칼 hp 회복-->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,207" patternListId="6" next="none" />	
+		<EventTask type="changePatternList" targetNpcId="757,208" patternListId="6" next="none" />
+		<!-- <EventTask type="message" string="@dungeon:9057005" style="combat" next="none"/> -->
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700020" next="time" nextValue="20"/>
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700020" next="none" />	
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+<!-- 4네임드 hp 대역에 따라, 네임드 방어력 증가 -->	
+    <!-- <EventGroup type="npcHp" uniqueId="757,1002" value="75" repeat="true">					
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757034" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057006" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+    <EventGroup type="npcHp" uniqueId="757,1002" value="55" repeat="true">					
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757035" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057006" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+    <EventGroup type="npcHp" uniqueId="757,1002" value="35" repeat="true">					
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757036" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057006" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+    <EventGroup type="npcHp" uniqueId="757,1002" value="15" repeat="true">					
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757037" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057006" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup> -->
+	
+    <EventGroup type="npcHp" uniqueId="757,202" value="45" repeat="true">					<!-- 칼 hp 대역에 따라, 네임드 공격력 증가 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757042" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057007" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+    <EventGroup type="npcHp" uniqueId="757,202" value="40" repeat="true">					<!-- 칼 hp 대역에 따라, 네임드 공격력 증가 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757042" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057007" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	
+    <EventGroup type="npcHp" uniqueId="757,202" value="35" repeat="true">					<!-- 칼 hp 대역에 따라, 네임드 공격력 증가 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757042" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057007" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+    <EventGroup type="npcHp" uniqueId="757,202" value="30" repeat="true">					<!-- 칼 hp 대역에 따라, 네임드 공격력 증가 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757042" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057007" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+    <EventGroup type="npcHp" uniqueId="757,202" value="25" repeat="true">					<!-- 칼 hp 대역에 따라, 네임드 공격력 증가 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757042" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057007" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+    <EventGroup type="npcHp" uniqueId="757,202" value="20" repeat="true">					<!-- 칼 hp 대역에 따라, 네임드 공격력 증가 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757042" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057007" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+    <EventGroup type="npcHp" uniqueId="757,202" value="15" repeat="true">					<!-- 칼 hp 대역에 따라, 네임드 공격력 증가 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757042" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057007" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+    <EventGroup type="npcHp" uniqueId="757,202" value="10" repeat="true">					<!-- 칼 hp 대역에 따라, 네임드 공격력 증가 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757042" target="npc" targetNpcId="757,1002" next="none" />
+		<EventTask type="message" string="@dungeon:9057007" style="combat" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+
+	
+	<!-- <EventGroup type="eliminate" territoryId="45700014" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="45302" target="npc" targetNpcId="757,1002" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>  -->
+
+	<!-- <EventGroup type="none" id="201" name="이상상태 1중첩씩" repeat="true">					
+		<Event>
+			<EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757011" target="npc" targetNpcId="757,1002" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup> -->
+  
+	<EventGroup type="none" id="201" name="아케론 숨결 작동" repeat="true">						<!-- 현재 사용 안함 -->
+    <Event>
+	  <EventTaskGroup>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>  
+
+	<EventGroup type="none" id="202" name="칼에 걸리는 Dot" repeat="true">						
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757029" target="npc" targetNpcId="757,202" next="none" />
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>  
+	
+	<EventGroup type="none" id="203" name="쇠먹는괴물에게 걸리는 방어력 증가" repeat="true">						
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757030" target="npc" targetNpcId="757,1002" next="none" />
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>  
+
+	<EventGroup type="none" id="204" name="문 소환" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,207" patternListId="2" next="none" />	
+		<EventTask type="changePatternList" targetNpcId="757,208" patternListId="2" next="none" />	
+		<EventTask type="message" string="@dungeon:9057001" style="combat" next="time" nextValue="30"/>
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700020" next="none" />
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+	<EventGroup type="none" id="205" name="메테오npc 자살" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="777029" target="npc" targetNpcId="757,413" next="none" />
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+	<EventGroup type="none" id="206" name="메테오 npc 디스폰" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700025" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>  
+  
+    <EventGroup type="npcHp" uniqueId="757,202" value="55" repeat="true">					<!-- 칼 hp 65%일때 버프 사용 -->
+    <Event>
+	  <EventTaskGroup>
+
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+    <EventGroup type="npcHp" uniqueId="757,202" value="65" repeat="true">					<!-- 칼 hp 65%일때 버프 사용 -->
+    <Event>
+	  <EventTaskGroup>
+
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  
+    <EventGroup type="npcHp" uniqueId="757,202" value="75" repeat="true">					<!-- 칼 hp 65%일때 버프 사용 -->
+    <Event>
+	  <EventTaskGroup>
+
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  
+    <EventGroup type="npcHp" uniqueId="757,202" value="85" repeat="true">					<!-- 칼 hp 65%일때 버프 사용 -->
+    <Event>
+	  <EventTaskGroup>
+
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+    <EventGroup type="npcHp" uniqueId="757,212" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9757010" target="npc" targetNpcId="757,212" next="time" nextValue="5" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>	
+
+    <EventGroup type="npcHp" uniqueId="757,213" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9757012" target="npc" targetNpcId="757,213" next="time" nextValue="5" />
+        <EventTask type="message" string="@dungeon:9757013" style="default" next="none" />
+        <EventTask type="abnormality" abnormalityId="757038" target="player" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>	
+  
+<!-- 4네임드 돌거인 -->  
+	<!-- <EventGroup type="eliminate" territoryId="45700010" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,1004" patternListId="1" next="none" />	
+		<EventTask type="killNpc" targetNpcId="757,405" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>  -->
+  
+	<EventGroup type="none" id="3" name="모드 알람으로 패턴 변경" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,1004" patternListId="2" next="none" />	
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+
+    <EventGroup type="npcHp" uniqueId="757,1004" value="0" repeat="true">					<!-- 4네임드 hp 0이 되면, PC 이상상태 해제 -->
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="757004" target="player" turn="off" next="none"/>
+        <EventTask type="abnormality" abnormalityId="757005" target="player" turn="off" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+	
+
+	<EventGroup type="none" id="402" name="이벤트 게이지 스킬 사용 텐션 변경" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,403" patternListId="1" next="none" />	
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+	<EventGroup type="none" id="403" name="회오리 삭제" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="killNpc" targetNpcId="757,407" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>  
+
+	<EventGroup type="none" id="404" name="돌거인 보호막 부여" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757017" target="npc" targetNpcId="757,1004" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>    
+
+	<EventGroup type="none" id="405" name="돌거인 보호막 부여_투명npc 공격" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="757017" target="npc" targetNpcId="757,1004" next="none" />
+		<!-- <EventTask type="abnormality" abnormalityId="757022" target="npc" targetNpcId="757,1004" next="none" /> -->
+		<EventTask type="changePatternList" targetNpcId="757,405" patternListId="2" next="none" />
+		<EventTask type="changePatternList" targetNpcId="757,1004" patternListId="2" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+	<EventGroup type="none" id="406" name="돌거인 보호막 부여_투명npc 기다리기" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,405" patternListId="1" next="none" />
+		<EventTask type="changePatternList" targetNpcId="757,1004" patternListId="3" next="none" />
+        <EventTask type="abnormality" abnormalityId="757019" target="player" turn="off" next="none"/>
+		<!-- <EventTask type="abnormality" abnormalityId="757022" target="npc" targetNpcId="757,1004" turn="off" next="none" /> -->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+	<EventGroup type="none" id="407" name="돌거인 전멸기 사용" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<!-- <EventTask type="changePatternList" targetNpcId="757,404" patternListId="2" next="none" />
+		<EventTask type="changePatternList" targetNpcId="757,408" patternListId="2" next="none" />
+		<EventTask type="changePatternList" targetNpcId="757,409" patternListId="2" next="none" />
+		<EventTask type="abnormality" abnormalityId="757020" target="npc" targetNpcId="757,404" next="none" />
+		<EventTask type="abnormality" abnormalityId="757020" target="npc" targetNpcId="757,408" next="none" />
+		<EventTask type="abnormality" abnormalityId="757020" target="npc" targetNpcId="757,409" next="none" />
+		<EventTask type="abnormality" abnormalityId="757021" target="npc" targetNpcId="757,404" next="none" />
+		<EventTask type="abnormality" abnormalityId="757021" target="npc" targetNpcId="757,408" next="none" />
+		<EventTask type="abnormality" abnormalityId="757021" target="npc" targetNpcId="757,409" next="none" /> -->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+	<EventGroup type="none" id="408" name="랜덤하게 쫄 소환" repeat="true"> 
+    <Event>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="757" territoryId="45700010" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="757" territoryId="45700016" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="757" territoryId="45700017" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="757" territoryId="45700018" next="none" />
+	</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+	<EventGroup type="none" id="409" name="수증기 공격" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,403" patternListId="2" next="none" />
+		<EventTask type="spawn" huntingZoneId="757" territoryId="45700015" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+  
+	<EventGroup type="none" id="410" name="수증기 방어" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="757" territoryId="45700015" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+	<EventGroup type="none" id="411" name="아케론 숨결 공격" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,412" patternListId="2" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+	<EventGroup type="none" id="412" name="아케론 숨결 방어" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="757,412" patternListId="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+  
+  
+     <!-- HP 50%에 맵 가운데로 이동한 후 투명 NPC의 텐션을 변경 하여 패턴 시작 -->
+    <!-- <EventGroup type="npcHp" uniqueId="711,81102" value="50" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="711,81102" patternListId="2" next="none" />	
+	  </EventTaskGroup>
+    </Event>
+    </EventGroup> -->
+
+	<!-- <EventGroup type="none" id="17" name=" HP 50%패턴 사용을 위한 투명 NPC 패턴 변경" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703428" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="77703416" target="npc" targetNpcId="711,81102" next="none" />
+		<EventTask type="changePatternList" targetNpcId="711,81120" patternListId="2" next="none" />	
+		<EventTask type="changePatternList" targetNpcId="711,81123" patternListId="2" next="time" nextValue="60" />	
+		<EventTask type="changePatternList" targetNpcId="711,81120" patternListId="1" next="none" />
+		<EventTask type="changePatternList" targetNpcId="711,81123" patternListId="1" next="time" nextValue="10" />
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="711,81102" next="time" nextValue="5" /> 
+		<EventTask type="changePatternList" targetNpcId="711,81102" patternListId="1" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703428" target="player" turn="off" next="none"/>
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+	</Dungeon>

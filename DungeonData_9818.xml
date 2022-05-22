@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9818" name="@dungeon:9818" startPos="57805,52367,4911" exitContinentId="7031" exitPos="31396,-1802,3322" destroyWaitMin="0">
+  <Condition type="solo" />
+  <Condition type="maxMemberCount" value="1" />   
+  <RestoreTargetQuest id="18117" forceRestore="true"/>
+  <Condition type="levelOver" value="60" />
+
+  <!-- 방 통과 제어 창살 디스폰 시기 -->
+  <EventGroup type="questProgress">
+    <Event questId="18117" taskId="2"> 
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="818" territoryId="81800096" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>  
+  <EventGroup type="questProgress">
+    <Event questId="18117" taskId="4"> 
+      <EventTaskGroup>
+		<EventTask type="killNpc" targetNpcId="818,1118" next="none" /> <!--빌리저 사망-->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  <EventGroup type="questProgress">
+    <Event questId="18117" taskId="6"> 
+      <EventTaskGroup>
+		<EventTask type="killNpc" targetNpcId="818,1119" next="none" /> <!--빌리저 사망-->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+  <!-- 시오즈와 용병대 스폰 시기 -->
+  <EventGroup type="questProgress">
+    <Event questId="18117" taskId="5"> 
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800085" next="none" />
+ 	  </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  <!-- 시오즈와 용병대 디스폰 시기 -->
+  <EventGroup type="questProgress">
+    <Event questId="18117" taskId="6"> 
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800085" next="none" />
+ 	  </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+ 
+  <!-- 아논족 실험체 디스폰 시기 -->
+  <EventGroup type="questProgress">
+    <Event questId="18117" taskId="7"> 
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800044" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800045" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800047" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800048" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800050" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800051" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800052" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800054" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800055" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800056" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800057" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800058" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+  <EventGroup type="talkNpc" uniqueId="818,1103">
+    <Event textId="2" questId="18117" taskId="10"> <!--포아롱 수호 퀘스트 시작-->
+      <EventTaskGroup>
+		<EventTask type="timer" action="start" direction="reverse" value="180" next="none" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+	<!--웨이브 1-->
+	<EventGroup type="timer" value="175" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800081" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="170" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9818001" targetNpcId="818,1103" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>	
+	<EventGroup type="timer" value="153" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800037" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<!--웨이브 2-->
+	<EventGroup type="timer" value="150" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800073" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="148" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9818010" targetNpcId="818,1103" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<!--웨이브 3-->
+	<EventGroup type="timer" value="125" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800080" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="123" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9818002" targetNpcId="818,1103" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<!--웨이브 4-->
+	<EventGroup type="timer" value="100" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800086" next="none" />
+		<EventTask type="message" string="@dungeon:9818008" targetNpcId="818,1102" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="98" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9818003" targetNpcId="818,1103" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<!--웨이브 5-->
+	<EventGroup type="timer" value="75" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800087" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="73" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9818004" targetNpcId="818,1103" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<!--웨이브 6-->
+	<EventGroup type="timer" value="50" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800088" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<!--웨이브 7-->
+	<EventGroup type="timer" value="25" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800079" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="23" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9818007" targetNpcId="818,1103" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<!--웨이브 종료-->
+	<EventGroup type="timer" value="0" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800073" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800079" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800081" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800080" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800086" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800087" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800088" next="none" />
+		<EventTask type="message" string="@dungeon:9818009" targetNpcId="818,1102" next="none"/>
+		<EventTask type="timer" action="stop" next="none" value="0" timerUiOff="true" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+
+	<!-- 수용소 창살 깨지는 타이밍 -->
+   <EventGroup type="questProgress">
+    <Event questId="18117" taskId="6"> 
+      <EventTaskGroup>
+        <EventTask type="abnormality" turn="off" abnormalityId="776019" target="npc" targetNpcId="818,2101" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+    <!-- 중앙 실험실 시오즈 듀리온 스폰 타이밍 -->
+  <EventGroup type="questProgress">
+    <Event questId="18117" taskId="7"> 
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800091" next="none" />
+        <EventTask type="spawn" huntingZoneId="818" territoryId="81800092" next="none" />
+ 	  </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+<!-- 중앙 실험실 시오즈 듀리온 디스폰 타이밍 -->  
+  <EventGroup type="questProgress">
+    <Event questId="18117" taskId="8"> 
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800091" next="none" />
+        <EventTask type="despawn" huntingZoneId="818" territoryId="81800092" next="none" />
+ 	  </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+ 
+	<!-- 중앙 제어 기계 깨지는 타이밍 -->
+   <EventGroup type="questProgress">
+    <Event questId="18117" taskId="12"> 
+      <EventTaskGroup>
+        <EventTask type="abnormality" turn="off" abnormalityId="776019" target="npc" targetNpcId="818,2104" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  <EventGroup type="questProgress">
+    <Event questId="18117" taskId="13"> 
+      <EventTaskGroup>
+		<EventTask type="killNpc" targetNpcId="818,2104" next="none" /> <!--중앙 제어 기계 사망-->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+	<!--18117,13 Task 시작 시 카메라 연출-->
+	<EventGroup type="questProgress">
+    <Event questId="18117" taskId="13"> 
+      <EventTaskGroup>
+        <EventTask type="doActionScript" targetNpcId="818,1103" actionScriptId="18100007" next="none" />
+     </EventTaskGroup>
+    </Event>
+	</EventGroup>
+
+	<!--18117,9 Task 시작 시 텔레포트-->
+  <EventGroup type="questProgress">
+    <Event questId="18118" taskId="1"> 
+      <EventTaskGroup>
+        <EventTask type="teleport" continentId="7031" pos="24130,4553,6165" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+	
+</Dungeon>

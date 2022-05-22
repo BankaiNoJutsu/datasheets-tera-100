@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NamePlate>
+	<!-- 기본 설정:  폰트 사이즈, 이름 표시 반경, 기본 표시 간격(z값), 사망시 표시 간격(z값) , 채집물 표시 간격(z값)  -->
+	<DefaultValue defaultOffset="12" defaultDistance="5" deathDistance="15" itemDistance="25" nameViewRange="1000" collectionDistance="30" eliteIcon="Icon_System.PartyMonster64" unionEliteIcon="Icon_System.BlackHoleMonster64" freeNamedIcon="Icon_System.FreeHuntingNamedMonster64" battleFieldCommanderIcon="Icon_System.BF_Commander32" hpOffsetPos="0" minPos="0.75" />
+	
+	<Resource>
+		<Name>
+			<Unreal particleSystem="S1UI_Nameplate.namePrint_PS" materialInstanceConstant="S1UI_Nameplate.name_MI"/>
+			<GFX gfxMovie="S1UI_Nameplate.Nameplate" uiFunc="OnGame_NamePlate_SetName" textureSizeX="512" textureSizeY="256"/>
+		</Name>
+		<SignBoard>
+			<Unreal particleSystem="S1UI_BalloonWorld.Balloon_PS" materialInstanceConstant="S1UI_BalloonWorld.Balloon_MI"/>
+			<GFX gfxMovie="S1UI_BalloonWorld.BalloonWorld" uiFunc="OnGame_BalloonWorld_SetMessage" textureSizeX="512" textureSizeY="128"/>
+		</SignBoard>
+		<Notice>
+			<Unreal particleSystem="S1UI_Nameplate.namePrint_PS" materialInstanceConstant="S1UI_Nameplate.name_MI"/>
+			<GFX gfxMovie="S1UI_BoardPlate.BoardPlate" uiFunc="OnGame_BoardPlate_SetData" textureSizeX="256" textureSizeY="128"/>
+		</Notice>
+		<ItemMsg>
+			<Unreal particleSystem="S1UI_Nameplate.namePrint_PS" materialInstanceConstant="S1UI_Nameplate.name_MI"/>
+			<GFX gfxMovie="S1UI_BoardPlate.BoardPlate" uiFunc="OnGame_BoardPlate_SetData" textureSizeX="256" textureSizeY="128"/>
+		</ItemMsg>
+		<Money>
+			<Gold img="Gold_smalltoken" textColor="d7d7d7" numColor="ffb033" />
+			<Silver img="Silver_smalltoken" textColor="d7d7d7" numColor="d7d7d7" />
+			<Copper img="Copper_smalltoken" textColor="d7d7d7" numColor="c87551" />
+			<NoAuthorityMoney textColor="777777" numColor="777777" />
+		</Money>
+		<UserName>
+			<Unreal particleSystem="S1UI_Nameplate.namePrint_PS" materialInstanceConstant="S1UI_Nameplate.name_MI"/>
+			<SpecificEffect>
+				<Effect grade="4" particleSystem="S1UI_Nameplate.namePrint_Glory_PS" materialInstanceConstant="S1UI_Nameplate.name_Glory_MI"/> 
+				<Effect grade="11" particleSystem="S1UI_Nameplate_L.PS.PVP_F" materialInstanceConstant="S1UI_Nameplate_L.MI.MI_PVP_F" additionalParticleSystem="S1UI_Nameplate_L.PS.PVP_F_PS" attachParticle="false" />
+				<Effect grade="12" particleSystem="S1UI_Nameplate_L.PS.PVP_ST" materialInstanceConstant="S1UI_Nameplate_L.MI.MI_PVP_ST"  />
+				<Effect grade="21" particleSystem="S1UI_Nameplate_L.PS.PVE_F" materialInstanceConstant="S1UI_Nameplate_L.MI.MI_PVE_F" additionalParticleSystem="S1UI_Nameplate_L.PS.PVE_F_PS" attachParticle="false" />
+				<Effect grade="22" particleSystem="S1UI_Nameplate_L.PS.PVE_ST" materialInstanceConstant="S1UI_Nameplate_L.MI.MI_PVE_ST"  />
+				<Effect grade="31" particleSystem="S1UI_Nameplate_L.PS.PVE_Tournament_2TH_PS" materialInstanceConstant="S1UI_Nameplate_L.MI.MI_PVE_Tournament_2TH"  />
+				<Effect grade="32" particleSystem="S1UI_Nameplate_L.PS.PVE_Tournament_1TH_PS" materialInstanceConstant="S1UI_Nameplate_L.MI.MI_PVE_Tournament_1TH" additionalParticleSystem="S1UI_Nameplate_L.PS.02BP" attachParticle="false" />
+			</SpecificEffect>
+			<GFX gfxMovie="S1UI_Nameplate.Nameplate" uiFunc="OnGame_NamePlate_SetPcName" textureSizeX="512" textureSizeY="256"/>
+		</UserName>
+		<FloatingCastle>
+			<Unreal particleSystem="GuildHouseName.GuildHouseName01_PS" materialInstanceConstant="GuildHouseName.GuildHouseName00_MI" materialInstanceConstant2="GuildHouseName.NameLine_MI" />
+			<GFX gfxMovie="S1UI_Nameplate.Nameplate" uiFunc="OnGame_NamePlate_SetCastleName" textureSizeX="512" textureSizeY="256"/>
+		</FloatingCastle>
+		<StatueDaisNickName>
+			<Unreal particleSystem="S1UI_Nameplate.namePrint_PS" materialInstanceConstant="S1UI_Nameplate.name_MI"/>
+			<GFX gfxMovie="S1UI_BoardPlate.BoardPlate" uiFunc="OnGame_BoardPlate_SetData" textureSizeX="256" textureSizeY="128"/>
+		</StatueDaisNickName>
+		<HeroName>
+			<GFX gfxMovie="S1UI_TBANamePlate.TBANamePlate" textureSizeX="512" textureSizeY="256" particleSystem="S1UI_TBANamePlate.namePrint_PS" materialInstanceConstant="S1UI_TBANamePlate.name_MI"/>
+		</HeroName>
+	</Resource>
+
+	<FontColor>
+		<Self red="204" green="204" blue="204" />				<!--a 자신-->
+		<Player red="204" green="204" blue="204" />				<!-- 타인일반-->
+		<Party red="1" green="150" blue="255" />				<!-- 파티원-->
+		<Raid red="255" green="204" blue="0" />					<!-- 공격대-->
+		<PkEnemy red="255" green="60" blue="60" />				<!-- PK 중 적-->
+		<PVPEnemy red="255" green="60" blue="60" />				<!-- PVP 중 적 -->		
+		<PkInWar red="255" green="166" blue="60" />				<!-- 쟁 중인 타인-->
+		<DuelEnemy red="255" green="60" blue="60" />			<!-- 결투 중 적-->
+		<Guild red="153" green="153" blue="153" />             	<!-- 길드명(이름색과 동일하게)-->
+		<GuildEnemy red="255" green="60" blue="60" />             	<!-- 길드전 시 적대 길드원 -->
+		<GuildWar red="204" green="204" blue="204" />             	<!-- 길드전 중인 타인 -->
+		<!-- GuildWar red="128" green="0" blue="255" /-->
+		<BattleFieldAlly red="30" green="215" blue="250" />   	<!-- 전장의 아군 -->
+		<BattleFieldEnemy red="255" green="60" blue="60" />   	<!-- 전장의 적 -->
+		<Pet red="53" green="219" blue="255" />					<!-- 호문-->
+		<ObjectNpc red="0" green="255" blue="0" />				<!-- 오브젝트 Npc-->
+		<NpcVillager red="53" green="219" blue="255" />		    <!-- 마을 NPC -->
+		<GameMaster red="255" green="215" blue="0" />		    <!-- GM -->
+		<FloatingCastle red="204" green="204" blue="204" />		<!-- 창공요새-->
+		<GuildTowerEnemy red="255" green="60" blue="60" />			<!-- 도시공방전 전초기지 (적)-->
+		<GuildTowerOur red="1" green="255" blue="150" />			<!-- 도시공방전 전초기지 (아군)-->
+		
+		<LowerLevelMonster red="80" green="80" blue="80" />
+		<LowLevelMonster red="122" green="122" blue="122" />
+		<ProperLevelMonster red="204" green="204" blue="204" />
+		<HighLevelMonster red="229" green="145" blue="100" />
+		<HigherLevelMonster red="166" green="24" blue="24" />
+		<MonsterNotMine red="80" green="80" blue="80" />
+		
+		<MonsterTitle red="204" green="204" blue="204" />     	<!-- 몬스터 호칭 -->
+		<Item0 red="204" green="204" blue="204" />            	<!-- 아이템(일반)-->
+		<Item1 red="152" green="255" blue="152" />            	<!-- 아이템(고급)-->
+		<Item2 red="51" green="190" blue="255" />             	<!-- 아이템(희귀)-->
+		<Item3 red="255" green="106" blue="82" />             	<!-- 아이템(전설)-->
+		<Item4 red="217" green="65" blue="197" />             	<!-- 아이템(신화)-->
+		<VillagerJob red="150" green="215" blue="255" />      	<!-- NPC 직업 -->
+		<SignBoard red="114" green="161" blue="214" />          <!-- 간판  (쓰지 말 것)-->
+		<SignBoardSell red="121" green="173" blue="213" />	    <!-- 간판 광고글 (판매) -->
+		<SignBoardBuy  red="227" green="163" blue="67" />       <!-- 간판 광고글 (구매) -->    
+		<Collection red="204" green="204" blue="204" />       	<!-- Collection-->
+		<ItemBidding red="204" green="204" blue="204" />
+		<MonsterSpecies red="204" green="204" blue="204" />		<!-- 몬스터 종족명 표기 -->
+		<NoAuthority red="127" green="127" blue="127" />
+		<!-- 아이템(경매중)-->
+			
+
+		<Union red="204" green="204" blue="204" />
+		<ServantName red="204" green="204" blue="204" />		
+		<AchievementTitle>
+			<Title grade="0" red="240" green="240" blue="240" />			<!-- 기본 업적 칭호 -->
+			<Title grade="1" red="240" green="240" blue="240" />			<!-- 하급 업적 칭호 -->
+			<Title grade="2" red="251" green="207" blue="4" />				<!-- 상급 업적 칭호 -->
+			<Title grade="3" red="242" green="148" blue="29"/>				<!-- 하드코어 업적 칭호 -->
+			<Title grade="4" red="242" green="148" blue="29" />				<!-- 고유 업적(빛나는) 칭호 -->
+			<Title grade="11" red="255" green="178" blue="102" />			<!-- 전장 대수호자 칭호 -->
+			<Title grade="12" red="255" green="178" blue="102" />			<!-- 전장 수호자 칭호 -->
+			<Title grade="21" red="102" green="178" blue="255" />			<!-- 던전 대수호자 칭호 -->
+			<Title grade="22" red="102" green="178" blue="255" />			<!-- 던전 수호자 칭호 -->	
+			<Title grade="31" red="242" green="148" blue="29"/>				<!-- PVE 대회 결승 진출자 칭호 -->
+			<Title grade="32" red="251" green="207" blue="4" />				<!-- PVE 대회 우승자 칭호 -->
+			<Title grade="41" red="193" green="22" blue="132" />			<!-- RUS PK 이벤트에서 지급한 칭호 -->
+			<Title grade="42" red="73" green="15" blue="99" />				<!-- RUS PK 이벤트에서 지급한 칭호 -->
+			<Title grade="43" red="144" green="0" blue="0" />				<!-- RUS PK 이벤트에서 지급한 칭호 -->
+		</AchievementTitle>
+		<GuildMember red="40" green="251" blue="40" />			<!-- 길드원-->	
+		<DeadPlayer red="80" green="80" blue="80" /> 		<!-- 타인사망 : 칭호, 길드명, 유저명-->
+		<DungeonDeadPlayer red="120" green="0" blue="0" /> 		<!-- 던전 타인사망 : 칭호, 길드명, 유저명-->
+  </FontColor>
+
+  <!-- 몬스터 이름 색상 표시를 위한  PC와 몬스터의 레벨 차이 지정   -->
+  <!--             levelDiff <= lowerMax  : LOWER -->
+  <!--  lowerMax < levelDiff <= lowMax    : LOW -->
+  <!--    lowMax < levelDiff <= properMax : PROPER -->
+  <!-- properMax < levelDiff <= highMax   : HIGH -->
+  <!--   highMax < levelDiff              : HIGHER -->
+  <MonsterColorByLevelDiff lowerMax="-5" lowMax="-3" properMax="1" highMax="3"/>
+
+  <NameSize>
+		<User defaultSize="0.33" slope="0.00168"/>		
+		<Hero defaultSize="0.2" slope="0.00168"/>
+		<Villager defaultSize="0.50" slope="0.00168"/>
+		<Pet defaultSize="0.33" slope="0.00168"/>
+		<LargeNpc defaultSize="0.60" slope="0.00168"/>
+		<MediumNpc defaultSize="0.33" slope="0.00168"/>
+		<SmallNpc defaultSize="0.33" slope="0.00168"/>
+		<Item defaultSize="0.25" slope="0.00168"/>
+		<SignBoard defaultSize="0.33" slope="0.00168"/>
+		<Collection defaultSize="0.25" slope="0.00168" />
+		<Servant defaultSize="0.33" slope="0.00168"/>
+		<WorkObject defaultSize="0.50" slope="0.00168"/>
+		<BuildObject defaultSize="0.80" slope="0.00168"/>
+		<FloatingCastle defaultSize="1.0" slope="0.00168"/>
+		<MonsterSpecies fontSize="0"/>
+  </NameSize>
+
+  <NamePosition>
+    <Data desc="휴먼남" raceId="0" genderId="0" basePos="45.980366" offsetPos="-5" />
+    <Data desc="휴먼여" raceId="0" genderId="1" basePos="43.257679" offsetPos="-5" />
+    <Data desc="하이엘프남" raceId="1" genderId="0" basePos="46.378559" offsetPos="-5" />
+    <Data desc="하이엘프여" raceId="1" genderId="1" basePos="44.709045" offsetPos="-5" />
+    <Data desc="아만남" raceId="2" genderId="0" basePos="55.661354" offsetPos="-3" />
+    <Data desc="아만여" raceId="2" genderId="1" basePos="52.183239" offsetPos="-5" />
+    <Data desc="캐스타닉남" raceId="3" genderId="0" basePos="44.133091" offsetPos="-5" />
+    <Data desc="캐스타닉여" raceId="3" genderId="1" basePos="38.332943" offsetPos="-5" />
+    <Data desc="포포리" raceId="4" genderId="0" basePos="32.148674" offsetPos="-5" />
+    <Data desc="엘린" raceId="4" genderId="1" basePos="32.832714" offsetPos="-5" />
+    <Data desc="바카라" raceId="5" genderId="0" basePos="57.329376" offsetPos="-5" />
+  </NamePosition>
+  
+  <!-- HP게이지가 표시되는 모든 대상에 대해서 -->
+  <HPGauge>
+	<Height desc="높이" value="5"/>
+	<ScaleModifier desc="추가스케일" value="2"/>
+	<BasisModifier desc="위치오프셋" value="-8"/>
+  </HPGauge>
+
+  <HPGaugeCustomList>
+   <HPGaugeCustom huntingZoneId="443" templateId="1005">
+    <Height desc="높이" value="10"/>   
+	<ScaleModifier desc="추가스케일" value="1.95"/>
+	<BasisModifier desc="위치오프셋" value="0"/>
+   </HPGaugeCustom>
+   <HPGaugeCustom huntingZoneId="743" templateId="1005">
+    <Height desc="높이" value="10"/>   
+	<ScaleModifier desc="추가스케일" value="1.95"/>
+	<BasisModifier desc="위치오프셋" value="0"/>
+   </HPGaugeCustom>
+  </HPGaugeCustomList>
+  
+	<HPGaugeCustomList>
+	    <!--
+		<HPGaugeCustom huntingZoneId="121" templateId="9006">
+			<Height desc="높이" value="-10"/>
+			<ScaleModifier desc="추가스케일" value="0"/>
+			<BasisModifier desc="위치오프셋" value="58"/>
+		</HPGaugeCustom>
+		-->
+
+		<HPGaugeCustom huntingZoneId="121" templateId="6001">
+			<Height desc="높이" value="-32"/>
+			<ScaleModifier desc="추가스케일" value="3"/>
+			<BasisModifier desc="위치오프셋" value="-250"/>
+		</HPGaugeCustom>
+
+		<!--
+		<HPGaugeCustom huntingZoneId="121" templateId="9005">
+			<Height desc="높이" value="100"/>
+			<ScaleModifier desc="추가스케일" value="3"/>
+			<BasisModifier desc="위치오프셋" value="-370"/>
+		</HPGaugeCustom>
+		-->
+	</HPGaugeCustomList>
+	
+	<HPGaugeCustomList>
+		<HPGaugeCustom huntingZoneId="122" templateId="6001">
+			<Height desc="높이" value="-32"/>
+			<ScaleModifier desc="추가스케일" value="3"/>
+			<BasisModifier desc="위치오프셋" value="-250"/>
+		</HPGaugeCustom>
+	</HPGaugeCustomList>
+	
+	<HPGaugeCustomList>
+		<HPGaugeCustom huntingZoneId="123" templateId="6001">
+			<Height desc="높이" value="-32"/>
+			<ScaleModifier desc="추가스케일" value="3"/>
+			<BasisModifier desc="위치오프셋" value="-250"/>
+		</HPGaugeCustom>
+	</HPGaugeCustomList>
+
+	<HPGaugeCustomList>
+		<HPGaugeCustom huntingZoneId="711" templateId="81101">
+			<Height desc="높이" value="30"/>
+			<ScaleModifier desc="추가스케일" value="2"/>
+			<BasisModifier desc="위치오프셋" value="1"/>
+		</HPGaugeCustom>
+	</HPGaugeCustomList>
+
+	<HPGaugeCustomList>
+		<HPGaugeCustom huntingZoneId="711" templateId="81102">
+			<Height desc="높이" value="30"/>
+			<ScaleModifier desc="추가스케일" value="2"/>
+			<BasisModifier desc="위치오프셋" value="1"/>
+		</HPGaugeCustom>
+	</HPGaugeCustomList>
+	
+	<HPGaugeCustomList>
+		<HPGaugeCustom huntingZoneId="711" templateId="81118">
+			<Height desc="높이" value="30"/>
+			<ScaleModifier desc="추가스케일" value="2"/>
+			<BasisModifier desc="위치오프셋" value="1"/>
+		</HPGaugeCustom>
+	</HPGaugeCustomList>
+	
+	<HPGaugeCustomList>
+		<HPGaugeCustom huntingZoneId="811" templateId="81101">
+			<Height desc="높이" value="30"/>
+			<ScaleModifier desc="추가스케일" value="2"/>
+			<BasisModifier desc="위치오프셋" value="1"/>
+		</HPGaugeCustom>
+	</HPGaugeCustomList>
+
+	<HPGaugeCustomList>
+		<HPGaugeCustom huntingZoneId="811" templateId="81102">
+			<Height desc="높이" value="30"/>
+			<ScaleModifier desc="추가스케일" value="2"/>
+			<BasisModifier desc="위치오프셋" value="1"/>
+		</HPGaugeCustom>
+	</HPGaugeCustomList>
+	
+	<HPGaugeCustomList>
+		<HPGaugeCustom huntingZoneId="811" templateId="81118">
+			<Height desc="높이" value="30"/>
+			<ScaleModifier desc="추가스케일" value="2"/>
+			<BasisModifier desc="위치오프셋" value="1"/>
+		</HPGaugeCustom>
+	</HPGaugeCustomList>	
+
+  <AchievementTitleReward>
+    <Icons>
+      <Icon grade="0" icon="" />
+      <Icon grade="1" icon="" />
+      <Icon grade="2" icon="" />
+    </Icons>
+    <Template>
+      <![CDATA[
+        {Title}
+      ]]>
+    </Template>
+  </AchievementTitleReward>
+  <AccountTraitIcon>
+	<AccountTrait packageId="1000" address="&lt;img src=&apos;pc&apos;&gt;" traitIconStringId="PCBang"/> <!-- KR PC방 -->
+  </AccountTraitIcon>
+</NamePlate>

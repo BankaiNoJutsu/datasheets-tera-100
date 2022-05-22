@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+	강화 손상/하락 방지 아이템을 정의하고
+	각 장비 별로 손상/하락 방지 아이템 필요 개수를 설정하는 데이터시트이다.
+-->
+
+<!-- 
+	DefineSubItem 
+		itemTemplateId : 아이템 TID
+		type	
+			avoidDrop : 하락 방지
+			avoidDamaged : 손상 방지
+		prob : 아이템 사용 시 손상/하락이 방지될 확률, UI 에 출력되는 값은 정수 단위로만 출력됨
+		
+	DefineEnchantData
+		EnchantData 
+			materialEnchantId : MaterialEnchantData.xml 에 정의된 materialEnchantId 와 동일, 해당 값으로 장비를 구분
+			enchantStep : 손상/하락 방지 아이템을 사용할 수 있는 강화 단계
+			avoidDamagedAmount : 해당 강화 단계의 손상 방지 아이템의 필요 개수
+			avoidDropAmount : 해당 강화 단계의 하락 방지 아이템의 필요 개수
+-->
+<EquipmentEnchantSubItem>
+    <DefineSubItem>  
+        <SubItem itemTemplateId="204483" type="avoidDamaged" prob="1.0" />        <!-- 손상 방지 주문서 100% -->
+        <SubItem itemTemplateId="204484" type="avoidDamaged" prob="0.7" />        <!-- 손상 방지 주문서 70% -->
+        <SubItem itemTemplateId="204485" type="avoidDamaged" prob="0.5" />        <!-- 손상 방지 주문서 50% -->
+		<SubItem itemTemplateId="204486" type="avoidDamaged" prob="0.3" />        <!-- 손상 방지 주문서 30% -->
+		<SubItem itemTemplateId="204487" type="avoidDrop" prob="1.0" />           <!-- 하락 방지 주문서 100% -->
+        <SubItem itemTemplateId="204488" type="avoidDrop" prob="0.7" />           <!-- 하락 방지 주문서 70% -->
+        <SubItem itemTemplateId="204489" type="avoidDrop" prob="0.5" />           <!-- 하락 방지 주문서 50% -->
+		<SubItem itemTemplateId="204490" type="avoidDrop" prob="0.3" />           <!-- 하락 방지 주문서 30% -->
+		<SubItem itemTemplateId="207505" type="avoidDrop" prob="0.5" />           <!-- KR 3월 누적 출석 이벤트 하락 방지 주문서 50% -->
+        <!-- 세그리또 이벤트 -->
+    	<SubItem itemTemplateId="21374" type="avoidDrop" prob="1.0" />           <!-- 하락 방지 주문서 100% -->
+        <SubItem itemTemplateId="21373" type="avoidDrop" prob="0.7" />           <!-- 하락 방지 주문서 70% -->
+        <SubItem itemTemplateId="21372" type="avoidDrop" prob="0.5" />           <!-- 하락 방지 주문서 50% -->
+		<SubItem itemTemplateId="21371" type="avoidDrop" prob="0.3" />           <!-- 하락 방지 주문서 30% -->
+    </DefineSubItem>
+    <DefineEnchantData>
+		<!-- 전설 절멸,검은태양 무기 -->
+        <EnchantData materialEnchantId="1103">       
+            <Enchant enchantStep="10" avoidDamagedAmount="10" avoidDropAmount="5" />
+			<Enchant enchantStep="11" avoidDamagedAmount="11" avoidDropAmount="12" />
+			<Enchant enchantStep="12" avoidDamagedAmount="11" avoidDropAmount="31" />
+			<Enchant enchantStep="13" avoidDamagedAmount="12" avoidDropAmount="74" />
+			<Enchant enchantStep="14" avoidDamagedAmount="12" avoidDropAmount="161" />
+        </EnchantData>
+		<!-- 전설 절멸,검은태양 갑옷 -->
+        <EnchantData materialEnchantId="1106">       
+            <Enchant enchantStep="10" avoidDamagedAmount="5" avoidDropAmount="3" />
+			<Enchant enchantStep="11" avoidDamagedAmount="5" avoidDropAmount="7" />
+			<Enchant enchantStep="12" avoidDamagedAmount="6" avoidDropAmount="16" />
+			<Enchant enchantStep="13" avoidDamagedAmount="6" avoidDropAmount="35" />
+			<Enchant enchantStep="14" avoidDamagedAmount="6" avoidDropAmount="73" />
+        </EnchantData>
+		<!-- 전설 절멸,검은태양 장갑 -->
+        <EnchantData materialEnchantId="1109">       
+            <Enchant enchantStep="10" avoidDamagedAmount="4" avoidDropAmount="3" />
+			<Enchant enchantStep="11" avoidDamagedAmount="4" avoidDropAmount="6" />
+			<Enchant enchantStep="12" avoidDamagedAmount="4" avoidDropAmount="15" />
+			<Enchant enchantStep="13" avoidDamagedAmount="4" avoidDropAmount="32" />
+			<Enchant enchantStep="14" avoidDamagedAmount="5" avoidDropAmount="68" />
+        </EnchantData>
+		<!-- 전설 절멸,검은태양 신발 -->
+        <EnchantData materialEnchantId="1112">       
+            <Enchant enchantStep="10" avoidDamagedAmount="4" avoidDropAmount="3" />
+			<Enchant enchantStep="11" avoidDamagedAmount="4" avoidDropAmount="6" />
+			<Enchant enchantStep="12" avoidDamagedAmount="4" avoidDropAmount="15" />
+			<Enchant enchantStep="13" avoidDamagedAmount="4" avoidDropAmount="32" />
+			<Enchant enchantStep="14" avoidDamagedAmount="5" avoidDropAmount="68" />
+        </EnchantData>
+    </DefineEnchantData>
+</EquipmentEnchantSubItem>

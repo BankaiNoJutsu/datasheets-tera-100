@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3202" name="@dungeon:3023" startPos="-117884,130698,21016" exitContinentId="2000" exitPos="103524,-77714,12901" startDir="" exitDir="90">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="69" />
+	<ClearCondition huntingZoneId="3202" templateId="1000" amount="1" killCount="1"/>
+
+
+	<!--던전 최초 설정-->
+	<EventGroup type="initialize" name="Initialize">
+	  <Event>
+	    <EventTaskGroup>
+			<EventTask type="despawn" huntingZoneId="3202" territoryId="320200002" next="none" />  <!-- 입구 차폐막 디스폰 -->
+			<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+			<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+			<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			<EventTask type="flag" name="EndGame" value="0" next="none"/>
+			<EventTask type="flag" name="Coin" value="1" next="none"/>
+			<EventTask type="flag" name="0Stack" value="1" next="none"/>
+			<EventTask type="flag" name="1Stack" value="0" next="none"/>
+			<EventTask type="flag" name="2Stack" value="0" next="none"/>
+			<EventTask type="flag" name="3Stack" value="0" next="none"/>
+			<EventTask type="flag" name="4Stack" value="0" next="none"/>
+			<EventTask type="flag" name="5Stack" value="0" next="none"/>
+			<EventTask type="flag" name="6Stack" value="0" next="none"/>
+			<EventTask type="flag" name="7Stack" value="0" next="none"/>
+			<EventTask type="flag" name="8Stack" value="0" next="none"/>
+			<EventTask type="flag" name="9Stack" value="0" next="none"/>
+			<EventTask type="flag" name="10Stack" value="0" next="none"/>
+			<EventTask type="flag" name="0Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="1Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="2Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="3Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="4Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="5Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="6Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="7Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="8Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="9Stacked" value="0" next="none"/>
+			<EventTask type="flag" name="10Stacked" value="0" next="none"/>
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+	<!-- 1네임드 전투 시작 시 -->
+	<EventGroup type="npcState" uniqueId="3202,1000" value="combat" repeat="true"> 
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="CombatState" value="1" next="none"/>
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<!-- 1네임드 리셋 시 -->
+    <EventGroup type="npcReset" uniqueId="3202,1000" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+          <EventTask type="flag" name="Continued" value="1" next="none"/>
+		  <EventTask type="flag" name="resetorend" value="1" next="none"/>
+		  <EventTask type="ranktimer" timerLog="stop" next="none" />
+		  <EventTask type="timer" action="stop" name="ATSP" next="time" nextValue="1" /> <!-- 타이머 정지 -->
+		  <EventTask type="timer" action="stop" name="TheEnd" value="0" timerUiOff="true" next="none" /> <!-- 제한 시간 Timer UI OFF -->
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+	<!-- 1네임드 사망 시 -->
+    <EventGroup type="npcHp" uniqueId="3202,1000" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="timer" action="stop" name="TheEnd" timerUiOff="true" next="none" />
+		  <EventTask type="flag" name="Continued" value="0" next="none"/>	
+		  <EventTask type="flag" name="EndGame" value="1" next="none"/>
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<!-- 타이머 종료 시 -->
+	<EventGroup type="timer" timerName="TheEnd" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="Continued" value="1" next="none"/>
+		  <EventTask type="flag" name="resetorend" value="1" next="none"/>	
+	   </EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="Coin,CombatState" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			  <EventTask type="flag" name="Coin" value="0" next="none"/>
+			  <EventTask type="flag" name="CombatState" value="0" next="none"/>
+			  <EventTask type="ranktimer" timerLog="start" next="none" />
+			  <EventTask type="timer" name="TheEnd" action="start" direction="reverse" value="600" timerUiOff="false" next="none"/> <!-- 10분 Timer 시작 -->
+			  <EventTask type="spawn" huntingZoneId="3202" territoryId="320200002" next="none" />  <!-- 입구 차폐막 스폰 -->
+			  <EventTask type="flag" name="PhaseChecker" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="Continued,resetorend" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			  <EventTask type="flag" name="Continued" value="0" next="none"/>
+			  <EventTask type="flag" name="resetorend" value="0" next="none"/>	
+			  <EventTask type="flag" name="2PhaseReseted" value="1" next="none"/>	
+			  <EventTask type="despawn" huntingZoneId="3202" territoryId="320200001" next="time" nextValue="3" />  <!-- 칼리가르 스폰 -->
+			  <EventTask type="spawn" huntingZoneId="3202" territoryId="320200001" next="none" />  <!-- 칼리가르 스폰 -->
+			  <EventTask type="despawn" huntingZoneId="3202" territoryId="320200002" next="time" nextValue="2" />  <!-- 입구 차폐막 디스폰 --> 
+			  <EventTask type="flag" name="2PhaseRespawned" value="1" next="none"/>
+			  <EventTask type="flag" name="Coin" value="1" next="none"/>	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="EndGame" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			  <EventTask type="flag" name="EndGame" value="0" next="none"/>
+			  <EventTask type="timer" action="stop" name="TheEnd" value="600" timerUiOff="true" next="none" /> <!-- 제한 시간 Timer Stop -->
+			  <EventTask type="ranktimer" timerLog="stop" stageLog="2" logUpdate="true" next="none" /> <!-- 리더보드 타이머 스톱 -->	
+			  <EventTask type="timer" action="stop" name="TheEnd" value="0" timerUiOff="true" next="none" /> <!-- 제한 시간 Timer UI OFF -->
+			  <EventTask type="spawn" huntingZoneId="3202" territoryId="320200003" next="time" nextValue="10"/> <!-- 퇴장용 차원의 마법석 스폰 -->
+			  <EventTask type="despawn" huntingZoneId="3202" territoryId="320200001" next="time" nextValue="2" />
+			  <EventTask type="despawn" huntingZoneId="3202" territoryId="320200002" next="none" />  <!-- 입구 차폐막 디스폰 -->
+			  <EventTask type="flag" name="Continued" value="0" next="none"/>
+			  <EventTask type="flag" name="resetorend" value="0" next="none"/>	
+			  
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="PhaseChecker,0Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="0Stack" value="0" next="none"/>
+				<EventTask type="flag" name="1Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,1Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="1Stack" value="0" next="none"/>
+				<EventTask type="flag" name="2Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,2Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="2Stack" value="0" next="none"/>
+				<EventTask type="flag" name="3Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,3Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="3Stack" value="0" next="none"/>
+				<EventTask type="flag" name="4Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,4Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="4Stack" value="0" next="none"/>
+				<EventTask type="flag" name="5Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,5Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="5Stack" value="0" next="none"/>
+				<EventTask type="flag" name="6Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,6Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="6Stack" value="0" next="none"/>
+				<EventTask type="flag" name="7Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,7Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="7Stack" value="0" next="none"/>
+				<EventTask type="flag" name="8Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,8Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="8Stack" value="0" next="none"/>
+				<EventTask type="flag" name="9Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,9Stack">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+				<EventTask type="flag" name="9Stack" value="0" next="none"/>
+				<EventTask type="flag" name="10Stack" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="PhaseChecker,10Stack" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="PhaseChecker" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="0Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="0Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="1Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="1Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="2Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="3Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="3Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="4Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="4Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="5Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="5Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="6Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="6Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="7Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="7Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="8Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="8Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="9Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="9Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="10Stack,2PhaseReseted" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2PhaseReseted" value="0" next="none"/>
+				<EventTask type="flag" name="10Stacked" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="0Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="0Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="1Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="1Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="3Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="3Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="4Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="4Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="5Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="5Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="6Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="6Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="7Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="7Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="8Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="8Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="9Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="9Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="10Stacked,2PhaseRespawned" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="10Stacked" value="0" next="none"/>
+				<EventTask type="flag" name="2PhaseRespawned" value="0" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+				<EventTask type="abnormality" abnormalityId="32021014" target="npc" targetNpcId="3202,1000" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 패턴 관련 데이터 -->
+	<EventGroup type="none" id="100" name="터져라 투명NPC 제거" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="5" />
+		  <EventTask type="killNpc" targetNpcId="3202,1001" next="none" /> <!-- 터져라 npc 제거 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="101" name="액션 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021000" target="npc" targetNpcId="3202,1000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="102" name="패턴 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021001" target="npc" targetNpcId="3202,1000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="103" name="액션 및 패턴 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021000" target="npc" targetNpcId="3202,1000" turn="on" next="none" /> <!-- 액션 5초 -->
+		  <EventTask type="abnormality" abnormalityId="32021001" target="npc" targetNpcId="3202,1000" turn="on" next="none" /> <!-- 패턴 8초 -->
+		  <EventTask type="abnormality" abnormalityId="32021005" target="npc" targetNpcId="3202,1000" turn="on" next="none" /> <!-- 액션 10초 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="104" name="핵심액션 투명NPC 제거" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="5" />
+		  <EventTask type="killNpc" targetNpcId="3202,1002" next="none" /> <!-- 핵심액션 npc 제거 -->
+		  <EventTask type="killNpc" targetNpcId="3202,1003" next="none" /> <!-- 핵심액션 npc 제거 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="105" name="핵심액션 시작용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="106" name="전멸기 시작용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021006" target="npc" targetNpcId="3202,1000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="107" name="업화 이펙트 지우기용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021004" turn="off" target="player" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+</Dungeon>

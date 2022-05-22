@@ -1,0 +1,1109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 
+<EpData>
+beginDate : EP 시스템 서비스 시작 일자. 이 날짜를 기준으로 EpExpBonus.xml의 day를 계산한다.
+resetHour : EP경험치 일일 획득 제한 리셋 시각
+maxEpLevel : EP레벨 최대값
+epExpReserveMax : 플레이 하지 않는 동안 누적되는 EP경험치 양. 예를 들어 3.0(300%)일 경우, 현재 EP레벨 경험치 구간의 3배까지 일일 획득 제한이 증가한다.
+isSystemOn : 시스템 On/Off를 설정
+-->
+<EpData beginDate="2015-10-07" resetHour="4" startEp="300" maxEpLevel="443" maxEp="500" titleText="1" epExpReserveMax="10.0" isSystemOn="true" openLevel="65" >
+	<EpPageData cost="500000000" maxPage="5" />
+	<!-- 부모 스킬이 없는 EP 효과들(공통 EP 효과)의 스킬 정보 -->
+	<CommonPerkSkillInfo iconName="Icon_Status.plusmove_Tex" />
+	
+	<!--
+	<TSRevision>
+	startTsRev : TS보정치가 적용되기 시작하는 시점. 예를 들어 0.5(50%)일 경우 일일 제한값의 50% 충족 시점 부터 TS보정치가 적용되어 획득량이 줄어들기 시작한다.
+	minTsRev : TS보정치가 최대로 적용될 경우의 획득량 보정치. 예를 들어 0.05(5%)일 경우 TS보정치의 최소값은 5%가 되어 EP경험치 보상량의 5%만 획득하게 된다.
+	-->
+	<TSRevision startTsRev="0.9" minTsRev="0.05" />
+
+	<!-- 조건에 맞는 효과들은 전부 재생됨. 동시 재생 가능. 5개 이하를 권장 -->
+	<!-- minEpLevel에서 maxEpLevel 사이(포함)에 해당할 때 해당 파라미터의 텍스쳐가 변경됨
+		 effectId : 재생되는 Effect 번호(EffectData.xml 참조)
+		 parameter : 해당 effect에서 바꿀 텍스쳐의 parameter 이름
+		 textureName : 바꿀 텍스쳐 리소스 이름 -->
+	<LevelUpEffect> 
+		<Effect effectId="7222">
+			<!-- 추가된 마지막 아이콘의 max값은 안전하게 999로 설정한다. //-->
+			<Texture minEpLevel="0" maxEpLevel="9" epGrade="0" parameter="Tex" name="Icon_Ep.EpLv_0000_Tex"/>
+			<Texture minEpLevel="10" maxEpLevel="19" epGrade="1" parameter="Tex" name="Icon_Ep.EpLv_0010_Tex"/>
+			<Texture minEpLevel="20" maxEpLevel="29" epGrade="2" parameter="Tex" name="Icon_Ep.EpLv_0020_Tex"/>
+			<Texture minEpLevel="30" maxEpLevel="39" epGrade="3" parameter="Tex" name="Icon_Ep.EpLv_0030_Tex"/>
+			<Texture minEpLevel="40" maxEpLevel="49" epGrade="4" parameter="Tex" name="Icon_Ep.EpLv_0040_Tex"/>
+			<Texture minEpLevel="50" maxEpLevel="442" epGrade="5" parameter="Tex" name="Icon_Ep.EpLv_0050_Tex"/>
+		</Effect>
+		<Effect effectId="5329">
+			<Texture minEpLevel="443" maxEpLevel="999" epGrade="5"/>
+		</Effect>
+	</LevelUpEffect>
+	
+	<!-- Ep 경험치를 얻을 때 효과(ExpBar의 증가 효과 포함)의 딜레이 시간 
+		 만약 0.5로 설정되어 있으면, 경험치를 얻고 0.5초 내 경험치를 얻지 않았을 경우 효과 발생 -->
+	<ExpUpdateDelay delay="0.5"/> 
+	<!-- 딜레이 동안 얻은 Ep경험치가 현재 레벨에서 비중이 from에서 to 사이일 때 해당하는 이펙트를 출력 -->
+	<ExpEffectList> <!-- 동시 재생 가능. 5개 이하를 권장 -->
+		<ExpEffect from="0" to="5"> <!-- 소 이펙트 --> 
+			<Effect effectId="8200"/>
+		</ExpEffect>
+		<ExpEffect from="5" to="20"> <!-- 중 이펙트 -->
+			<Effect effectId="8201"/>
+		</ExpEffect>
+		<ExpEffect from="20" to="100"> <!-- 대 이펙트 -->
+			<Effect effectId="8202"/>
+			<Effect effectId="8203"/>
+		</ExpEffect>
+	</ExpEffectList>
+
+
+	<!-- 만렙 달성시 받는 보상 경험치의 패널티 
+	비검사와 같은 점핑 캐릭터는 5%만 받도록 한다.-->
+	<ClassPenaltyInfo>
+		<PenaltyData class="Soulless" ratio="0.05"/>
+	</ClassPenaltyInfo>
+
+	<!-- 아이템으로 EP 획득하는 경우 정의. //-->
+	<EpGainFromItemData>
+		<Data itemTemplateId="201101" ep="1" />
+		<Data itemTemplateId="201102" ep="2" />
+		<Data itemTemplateId="209182" ep="2" /> <!-- 기린 시즌2 이벤트 아이템 -->
+		<Data itemTemplateId="201105" ep="5" />
+		<!-- 아래는 테스트 용도로만 사용.  //-->
+		<Data itemTemplateId="96011" ep="1" />
+		<Data itemTemplateId="96012" ep="3" />
+		<Data itemTemplateId="96013" ep="5" />
+		<Data itemTemplateId="96014" ep="100" />
+	</EpGainFromItemData>
+	<!--DefaultGainExpData	type : 획득하는 방법 exp : 획득하는 경험치 tsRevRate : TS보정치 적용률(사양서 참고) -->
+	<DefaultGainExpData>
+		<HuntExpData>
+			<!--
+			일반몹도 약간이나마 경험치를 줘서 닥사로도 미세하게 성장한다는 느낌을 주고 싶었으나, 보물상자와 같은 오브젝트들이 EP경험치를 주는 문제(BTS#128606)가 있음.
+			해당 NPC를 제외할 수 있는 방법이 딱히 없어서 일반몹 킬 보상을 삭제.
+			<ExpData csize="medium" exp="1"/>
+			//-->
+			<ExpData csize="large" exp="10"/>
+		</HuntExpData>
+		<PvPExpData>
+			<ExpData levelDiff="0" exp="10"/>
+			<ExpData levelDiff="1" exp="2"/>
+			<ExpData levelDiff="2" exp="1"/>
+			<ExpData levelDiff="3" exp="1"/>
+			<ExpData levelDiff="4" exp="1"/>
+			<ExpData levelDiff="5" exp="1"/>
+			<ExpData levelDiff="6" exp="0"/>
+		</PvPExpData>
+		<EnchantExpData tsRevRate="0">
+			<!-- 매출과 약간이라도 연결 되는 강화 성공 케이스는 경험치 부여 //-->
+			<!-- 각 단계의 15강은(매우 어렵다는 가정 하에) 최소 10%의 경험치를 부여한다 //-->
+			<ExpData rank="10" step="15" expRatio="0.1"/>
+			<ExpData rank="11" step="12" expRatio="0.05"/>
+			<ExpData rank="11" step="15" expRatio="0.15"/>
+			<ExpData rank="12" step="12" expRatio="0.1"/>
+			<ExpData rank="12" step="15" expRatio="0.3"/>
+			<!--파밍구조 개선후, 상위/최상위 무기의 8강 9강 달성시에 12강 15강에 준하는 경험치 지급-->
+			<ExpData rank="15" step="8" expRatio="0.05"/>
+			<ExpData rank="15" step="9" expRatio="0.15"/>
+			<ExpData rank="16" step="8" expRatio="0.1"/>
+			<ExpData rank="16" step="9" expRatio="0.3"/>
+		</EnchantExpData>
+		<GoldConsumeExpData>
+			<!-- 누적 골드 소모에 따른 계산 -->
+			<!-- gold 이번에 사용한 골드 소모양(해당 값 이상) exp : 계수 -->
+<!--			<AccumulateGoldConsume>
+				<ExpData gold="1000" exp="0"/>
+				<ExpData gold="10000" exp="1"/>
+				<ExpData gold="30000" exp="1.5"/>
+				<ExpData gold="50000" exp="2"/>
+				<ExpData gold="100000" exp="2.5"/>
+			</AccumulateGoldConsume>
+			//-->
+			<!-- 한번에 사용한 골드 사용에 따른 획득 EP양-->
+			<!-- gold : 소모한 골드양(해당 값 이상 사용 했을 경우) exp : 획득하는 경험치 -->
+<!--			<AtOnceGoldConsume>
+				<ExpData gold="100" exp="10"/>
+				<ExpData gold="200" exp="15"/>
+				<ExpData gold="300" exp="20"/>
+				<ExpData gold="500" exp="25"/>
+				<ExpData gold="1000" exp="40"/>
+			</AtOnceGoldConsume>
+			//-->
+		</GoldConsumeExpData>
+		<LevelUpGainExpData tsRevRate="0">
+			<ExpData level="0" exp="1"/>
+			<ExpData level="1" exp="50"/>
+			<ExpData level="10" exp="50"/>
+		</LevelUpGainExpData>
+		<EpItemUseExpData>
+			<!-- 테스트 용도로만 사용. QA 후 삭제 예정  //-->
+			<ExpData itemTemplateId="96010" exp="500" />
+			<!-- //-->
+		</EpItemUseExpData>
+		<EtcExpData>
+			<!-- 사용하지 않음
+			<ExpData type="quest" exp="0"/>
+			<ExpData type="collect" exp="0"/>
+			<ExpData type="production" exp="0"/>
+			<ExpData type="playGuide" exp="0"/>
+			<ExpData type="achievement" exp="0"/>
+			//-->
+		</EtcExpData>
+	</DefaultGainExpData>
+	<!--
+	레벨별 직업별 표준 공격력 값. 특성 데미지를 계산하기 위해서 사용된다.
+	criticalPowRate는 치명타 발생시 특성 데미지에 곱해지는 비율
+	-->
+	<StandardUserAtk criticalPowRate="2.0">
+<Warrior>	
+	<Data level="1" atk="17"/>
+	<Data level="2" atk="19"/>
+	<Data level="3" atk="19"/>
+	<Data level="4" atk="21"/>
+	<Data level="5" atk="23"/>
+	<Data level="6" atk="24"/>
+	<Data level="7" atk="26"/>
+	<Data level="8" atk="29"/>
+	<Data level="9" atk="29"/>
+	<Data level="10" atk="32"/>
+	<Data level="11" atk="36"/>
+	<Data level="12" atk="39"/>
+	<Data level="13" atk="41"/>
+	<Data level="14" atk="43"/>
+	<Data level="15" atk="48"/>
+	<Data level="16" atk="51"/>
+	<Data level="17" atk="53"/>
+	<Data level="18" atk="57"/>
+	<Data level="19" atk="61"/>
+	<Data level="20" atk="67"/>
+	<Data level="21" atk="71"/>
+	<Data level="22" atk="84"/>
+	<Data level="23" atk="90"/>
+	<Data level="24" atk="97"/>
+	<Data level="25" atk="104"/>
+	<Data level="26" atk="111"/>
+	<Data level="27" atk="171"/>
+	<Data level="28" atk="185"/>
+	<Data level="29" atk="198"/>
+	<Data level="30" atk="210"/>
+	<Data level="31" atk="226"/>
+	<Data level="32" atk="242"/>
+	<Data level="33" atk="258"/>
+	<Data level="34" atk="276"/>
+	<Data level="35" atk="295"/>
+	<Data level="36" atk="316"/>
+	<Data level="37" atk="339"/>
+	<Data level="38" atk="374"/>
+	<Data level="39" atk="400"/>
+	<Data level="40" atk="428"/>
+	<Data level="41" atk="457"/>
+	<Data level="42" atk="491"/>
+	<Data level="43" atk="523"/>
+	<Data level="44" atk="600"/>
+	<Data level="45" atk="643"/>
+	<Data level="46" atk="688"/>
+	<Data level="47" atk="736"/>
+	<Data level="48" atk="787"/>
+	<Data level="49" atk="843"/>
+	<Data level="50" atk="1079"/>
+	<Data level="51" atk="1142"/>
+	<Data level="52" atk="1201"/>
+	<Data level="53" atk="1261"/>
+	<Data level="54" atk="1325"/>
+	<Data level="55" atk="1390"/>
+	<Data level="56" atk="1460"/>
+	<Data level="57" atk="1532"/>
+	<Data level="58" atk="1968"/>
+	<Data level="59" atk="2907"/>
+	<Data level="60" atk="4759"/>
+	<Data level="61" atk="4998"/>
+	<Data level="62" atk="5247"/>
+	<Data level="63" atk="5507"/>
+	<Data level="64" atk="5784"/>
+	<Data level="65" atk="9762"/>
+	<Data level="66" atk="9762"/>
+	<Data level="67" atk="9762"/>
+	<Data level="68" atk="9762"/>
+	<Data level="69" atk="9762"/>
+	<Data level="70" atk="9762"/>
+</Warrior>	
+<Lancer>	
+	<Data level="1" atk="16"/>
+	<Data level="2" atk="18"/>
+	<Data level="3" atk="18"/>
+	<Data level="4" atk="20"/>
+	<Data level="5" atk="22"/>
+	<Data level="6" atk="22"/>
+	<Data level="7" atk="25"/>
+	<Data level="8" atk="27"/>
+	<Data level="9" atk="28"/>
+	<Data level="10" atk="31"/>
+	<Data level="11" atk="34"/>
+	<Data level="12" atk="37"/>
+	<Data level="13" atk="39"/>
+	<Data level="14" atk="41"/>
+	<Data level="15" atk="45"/>
+	<Data level="16" atk="48"/>
+	<Data level="17" atk="50"/>
+	<Data level="18" atk="54"/>
+	<Data level="19" atk="58"/>
+	<Data level="20" atk="63"/>
+	<Data level="21" atk="68"/>
+	<Data level="22" atk="79"/>
+	<Data level="23" atk="85"/>
+	<Data level="24" atk="92"/>
+	<Data level="25" atk="98"/>
+	<Data level="26" atk="104"/>
+	<Data level="27" atk="162"/>
+	<Data level="28" atk="175"/>
+	<Data level="29" atk="187"/>
+	<Data level="30" atk="198"/>
+	<Data level="31" atk="213"/>
+	<Data level="32" atk="228"/>
+	<Data level="33" atk="244"/>
+	<Data level="34" atk="260"/>
+	<Data level="35" atk="278"/>
+	<Data level="36" atk="299"/>
+	<Data level="37" atk="320"/>
+	<Data level="38" atk="353"/>
+	<Data level="39" atk="377"/>
+	<Data level="40" atk="404"/>
+	<Data level="41" atk="431"/>
+	<Data level="42" atk="463"/>
+	<Data level="43" atk="493"/>
+	<Data level="44" atk="566"/>
+	<Data level="45" atk="606"/>
+	<Data level="46" atk="648"/>
+	<Data level="47" atk="694"/>
+	<Data level="48" atk="742"/>
+	<Data level="49" atk="795"/>
+	<Data level="50" atk="1016"/>
+	<Data level="51" atk="1076"/>
+	<Data level="52" atk="1131"/>
+	<Data level="53" atk="1188"/>
+	<Data level="54" atk="1247"/>
+	<Data level="55" atk="1310"/>
+	<Data level="56" atk="1376"/>
+	<Data level="57" atk="1444"/>
+	<Data level="58" atk="1849"/>
+	<Data level="59" atk="2733"/>
+	<Data level="60" atk="4449"/>
+	<Data level="61" atk="4671"/>
+	<Data level="62" atk="4905"/>
+	<Data level="63" atk="5147"/>
+	<Data level="64" atk="5408"/>
+	<Data level="65" atk="9076"/>
+	<Data level="66" atk="9076"/>
+	<Data level="67" atk="9076"/>
+	<Data level="68" atk="9076"/>
+	<Data level="69" atk="9076"/>
+	<Data level="70" atk="9076"/>
+</Lancer>	
+<Slayer>	
+	<Data level="1" atk="24"/>
+	<Data level="2" atk="26"/>
+	<Data level="3" atk="27"/>
+	<Data level="4" atk="29"/>
+	<Data level="5" atk="32"/>
+	<Data level="6" atk="34"/>
+	<Data level="7" atk="36"/>
+	<Data level="8" atk="40"/>
+	<Data level="9" atk="41"/>
+	<Data level="10" atk="45"/>
+	<Data level="11" atk="50"/>
+	<Data level="12" atk="55"/>
+	<Data level="13" atk="58"/>
+	<Data level="14" atk="61"/>
+	<Data level="15" atk="66"/>
+	<Data level="16" atk="71"/>
+	<Data level="17" atk="75"/>
+	<Data level="18" atk="80"/>
+	<Data level="19" atk="86"/>
+	<Data level="20" atk="94"/>
+	<Data level="21" atk="100"/>
+	<Data level="22" atk="117"/>
+	<Data level="23" atk="126"/>
+	<Data level="24" atk="135"/>
+	<Data level="25" atk="146"/>
+	<Data level="26" atk="154"/>
+	<Data level="27" atk="240"/>
+	<Data level="28" atk="258"/>
+	<Data level="29" atk="276"/>
+	<Data level="30" atk="293"/>
+	<Data level="31" atk="314"/>
+	<Data level="32" atk="338"/>
+	<Data level="33" atk="360"/>
+	<Data level="34" atk="385"/>
+	<Data level="35" atk="412"/>
+	<Data level="36" atk="442"/>
+	<Data level="37" atk="474"/>
+	<Data level="38" atk="519"/>
+	<Data level="39" atk="556"/>
+	<Data level="40" atk="595"/>
+	<Data level="41" atk="636"/>
+	<Data level="42" atk="682"/>
+	<Data level="43" atk="727"/>
+	<Data level="44" atk="834"/>
+	<Data level="45" atk="893"/>
+	<Data level="46" atk="955"/>
+	<Data level="47" atk="1022"/>
+	<Data level="48" atk="1093"/>
+	<Data level="49" atk="1170"/>
+	<Data level="50" atk="1489"/>
+	<Data level="51" atk="1577"/>
+	<Data level="52" atk="1658"/>
+	<Data level="53" atk="1741"/>
+	<Data level="54" atk="1829"/>
+	<Data level="55" atk="1919"/>
+	<Data level="56" atk="2016"/>
+	<Data level="57" atk="2116"/>
+	<Data level="58" atk="2689"/>
+	<Data level="59" atk="3974"/>
+	<Data level="60" atk="6482"/>
+	<Data level="61" atk="6805"/>
+	<Data level="62" atk="7145"/>
+	<Data level="63" atk="7500"/>
+	<Data level="64" atk="7878"/>
+	<Data level="65" atk="12904"/>
+	<Data level="66" atk="12904"/>
+	<Data level="67" atk="12904"/>
+	<Data level="68" atk="12904"/>
+	<Data level="69" atk="12904"/>
+	<Data level="70" atk="12904"/>
+</Slayer>	
+<Berserker>	
+	<Data level="1" atk="26"/>
+	<Data level="2" atk="29"/>
+	<Data level="3" atk="29"/>
+	<Data level="4" atk="32"/>
+	<Data level="5" atk="35"/>
+	<Data level="6" atk="36"/>
+	<Data level="7" atk="39"/>
+	<Data level="8" atk="43"/>
+	<Data level="9" atk="45"/>
+	<Data level="10" atk="49"/>
+	<Data level="11" atk="54"/>
+	<Data level="12" atk="59"/>
+	<Data level="13" atk="63"/>
+	<Data level="14" atk="66"/>
+	<Data level="15" atk="72"/>
+	<Data level="16" atk="76"/>
+	<Data level="17" atk="81"/>
+	<Data level="18" atk="87"/>
+	<Data level="19" atk="93"/>
+	<Data level="20" atk="101"/>
+	<Data level="21" atk="108"/>
+	<Data level="22" atk="127"/>
+	<Data level="23" atk="137"/>
+	<Data level="24" atk="147"/>
+	<Data level="25" atk="158"/>
+	<Data level="26" atk="167"/>
+	<Data level="27" atk="258"/>
+	<Data level="28" atk="279"/>
+	<Data level="29" atk="298"/>
+	<Data level="30" atk="317"/>
+	<Data level="31" atk="340"/>
+	<Data level="32" atk="365"/>
+	<Data level="33" atk="389"/>
+	<Data level="34" atk="416"/>
+	<Data level="35" atk="445"/>
+	<Data level="36" atk="477"/>
+	<Data level="37" atk="511"/>
+	<Data level="38" atk="561"/>
+	<Data level="39" atk="600"/>
+	<Data level="40" atk="642"/>
+	<Data level="41" atk="686"/>
+	<Data level="42" atk="736"/>
+	<Data level="43" atk="785"/>
+	<Data level="44" atk="900"/>
+	<Data level="45" atk="964"/>
+	<Data level="46" atk="1031"/>
+	<Data level="47" atk="1104"/>
+	<Data level="48" atk="1180"/>
+	<Data level="49" atk="1263"/>
+	<Data level="50" atk="1606"/>
+	<Data level="51" atk="1701"/>
+	<Data level="52" atk="1787"/>
+	<Data level="53" atk="1877"/>
+	<Data level="54" atk="1972"/>
+	<Data level="55" atk="2070"/>
+	<Data level="56" atk="2174"/>
+	<Data level="57" atk="2282"/>
+	<Data level="58" atk="2895"/>
+	<Data level="59" atk="4278"/>
+	<Data level="60" atk="6975"/>
+	<Data level="61" atk="7323"/>
+	<Data level="62" atk="7689"/>
+	<Data level="63" atk="8071"/>
+	<Data level="64" atk="8477"/>
+	<Data level="65" atk="13811"/>
+	<Data level="66" atk="13811"/>
+	<Data level="67" atk="13811"/>
+	<Data level="68" atk="13811"/>
+	<Data level="69" atk="13811"/>
+	<Data level="70" atk="13811"/>
+</Berserker>	
+<Sorcerer>	
+	<Data level="1" atk="22"/>
+	<Data level="2" atk="24"/>
+	<Data level="3" atk="25"/>
+	<Data level="4" atk="27"/>
+	<Data level="5" atk="30"/>
+	<Data level="6" atk="31"/>
+	<Data level="7" atk="34"/>
+	<Data level="8" atk="37"/>
+	<Data level="9" atk="38"/>
+	<Data level="10" atk="42"/>
+	<Data level="11" atk="46"/>
+	<Data level="12" atk="50"/>
+	<Data level="13" atk="53"/>
+	<Data level="14" atk="56"/>
+	<Data level="15" atk="61"/>
+	<Data level="16" atk="65"/>
+	<Data level="17" atk="69"/>
+	<Data level="18" atk="74"/>
+	<Data level="19" atk="79"/>
+	<Data level="20" atk="86"/>
+	<Data level="21" atk="92"/>
+	<Data level="22" atk="108"/>
+	<Data level="23" atk="116"/>
+	<Data level="24" atk="124"/>
+	<Data level="25" atk="134"/>
+	<Data level="26" atk="142"/>
+	<Data level="27" atk="220"/>
+	<Data level="28" atk="238"/>
+	<Data level="29" atk="254"/>
+	<Data level="30" atk="269"/>
+	<Data level="31" atk="289"/>
+	<Data level="32" atk="310"/>
+	<Data level="33" atk="332"/>
+	<Data level="34" atk="354"/>
+	<Data level="35" atk="379"/>
+	<Data level="36" atk="406"/>
+	<Data level="37" atk="436"/>
+	<Data level="38" atk="478"/>
+	<Data level="39" atk="511"/>
+	<Data level="40" atk="548"/>
+	<Data level="41" atk="584"/>
+	<Data level="42" atk="627"/>
+	<Data level="43" atk="669"/>
+	<Data level="44" atk="768"/>
+	<Data level="45" atk="822"/>
+	<Data level="46" atk="879"/>
+	<Data level="47" atk="941"/>
+	<Data level="48" atk="1006"/>
+	<Data level="49" atk="1077"/>
+	<Data level="50" atk="1372"/>
+	<Data level="51" atk="1453"/>
+	<Data level="52" atk="1527"/>
+	<Data level="53" atk="1603"/>
+	<Data level="54" atk="1685"/>
+	<Data level="55" atk="1768"/>
+	<Data level="56" atk="1858"/>
+	<Data level="57" atk="1950"/>
+	<Data level="58" atk="2483"/>
+	<Data level="59" atk="3668"/>
+	<Data level="60" atk="5983"/>
+	<Data level="61" atk="6281"/>
+	<Data level="62" atk="6596"/>
+	<Data level="63" atk="6924"/>
+	<Data level="64" atk="7272"/>
+	<Data level="65" atk="11980"/>
+	<Data level="66" atk="11980"/>
+	<Data level="67" atk="11980"/>
+	<Data level="68" atk="11980"/>
+	<Data level="69" atk="11980"/>
+	<Data level="70" atk="11980"/>
+</Sorcerer>	
+<Archer>	
+	<Data level="1" atk="23"/>
+	<Data level="2" atk="25"/>
+	<Data level="3" atk="26"/>
+	<Data level="4" atk="28"/>
+	<Data level="5" atk="30"/>
+	<Data level="6" atk="32"/>
+	<Data level="7" atk="35"/>
+	<Data level="8" atk="38"/>
+	<Data level="9" atk="40"/>
+	<Data level="10" atk="43"/>
+	<Data level="11" atk="48"/>
+	<Data level="12" atk="52"/>
+	<Data level="13" atk="55"/>
+	<Data level="14" atk="58"/>
+	<Data level="15" atk="63"/>
+	<Data level="16" atk="67"/>
+	<Data level="17" atk="72"/>
+	<Data level="18" atk="76"/>
+	<Data level="19" atk="82"/>
+	<Data level="20" atk="89"/>
+	<Data level="21" atk="95"/>
+	<Data level="22" atk="112"/>
+	<Data level="23" atk="120"/>
+	<Data level="24" atk="129"/>
+	<Data level="25" atk="138"/>
+	<Data level="26" atk="147"/>
+	<Data level="27" atk="228"/>
+	<Data level="28" atk="246"/>
+	<Data level="29" atk="262"/>
+	<Data level="30" atk="279"/>
+	<Data level="31" atk="299"/>
+	<Data level="32" atk="322"/>
+	<Data level="33" atk="343"/>
+	<Data level="34" atk="367"/>
+	<Data level="35" atk="392"/>
+	<Data level="36" atk="420"/>
+	<Data level="37" atk="450"/>
+	<Data level="38" atk="495"/>
+	<Data level="39" atk="529"/>
+	<Data level="40" atk="566"/>
+	<Data level="41" atk="605"/>
+	<Data level="42" atk="649"/>
+	<Data level="43" atk="693"/>
+	<Data level="44" atk="794"/>
+	<Data level="45" atk="850"/>
+	<Data level="46" atk="909"/>
+	<Data level="47" atk="973"/>
+	<Data level="48" atk="1040"/>
+	<Data level="49" atk="1114"/>
+	<Data level="50" atk="1419"/>
+	<Data level="51" atk="1503"/>
+	<Data level="52" atk="1580"/>
+	<Data level="53" atk="1658"/>
+	<Data level="54" atk="1743"/>
+	<Data level="55" atk="1829"/>
+	<Data level="56" atk="1921"/>
+	<Data level="57" atk="2016"/>
+	<Data level="58" atk="2565"/>
+	<Data level="59" atk="3790"/>
+	<Data level="60" atk="6183"/>
+	<Data level="61" atk="6492"/>
+	<Data level="62" atk="6816"/>
+	<Data level="63" atk="7155"/>
+	<Data level="64" atk="7515"/>
+	<Data level="65" atk="12353"/>
+	<Data level="66" atk="12353"/>
+	<Data level="67" atk="12353"/>
+	<Data level="68" atk="12353"/>
+	<Data level="69" atk="12353"/>
+	<Data level="70" atk="12353"/>
+</Archer>	
+<Priest>	
+	<Data level="1" atk="10"/>
+	<Data level="2" atk="11"/>
+	<Data level="3" atk="11"/>
+	<Data level="4" atk="13"/>
+	<Data level="5" atk="14"/>
+	<Data level="6" atk="14"/>
+	<Data level="7" atk="16"/>
+	<Data level="8" atk="17"/>
+	<Data level="9" atk="18"/>
+	<Data level="10" atk="19"/>
+	<Data level="11" atk="21"/>
+	<Data level="12" atk="23"/>
+	<Data level="13" atk="25"/>
+	<Data level="14" atk="26"/>
+	<Data level="15" atk="29"/>
+	<Data level="16" atk="30"/>
+	<Data level="17" atk="32"/>
+	<Data level="18" atk="34"/>
+	<Data level="19" atk="36"/>
+	<Data level="20" atk="40"/>
+	<Data level="21" atk="43"/>
+	<Data level="22" atk="50"/>
+	<Data level="23" atk="54"/>
+	<Data level="24" atk="58"/>
+	<Data level="25" atk="63"/>
+	<Data level="26" atk="66"/>
+	<Data level="27" atk="103"/>
+	<Data level="28" atk="112"/>
+	<Data level="29" atk="119"/>
+	<Data level="30" atk="126"/>
+	<Data level="31" atk="135"/>
+	<Data level="32" atk="146"/>
+	<Data level="33" atk="155"/>
+	<Data level="34" atk="166"/>
+	<Data level="35" atk="177"/>
+	<Data level="36" atk="190"/>
+	<Data level="37" atk="204"/>
+	<Data level="38" atk="225"/>
+	<Data level="39" atk="241"/>
+	<Data level="40" atk="258"/>
+	<Data level="41" atk="275"/>
+	<Data level="42" atk="296"/>
+	<Data level="43" atk="315"/>
+	<Data level="44" atk="362"/>
+	<Data level="45" atk="388"/>
+	<Data level="46" atk="414"/>
+	<Data level="47" atk="444"/>
+	<Data level="48" atk="474"/>
+	<Data level="49" atk="508"/>
+	<Data level="50" atk="652"/>
+	<Data level="51" atk="690"/>
+	<Data level="52" atk="726"/>
+	<Data level="53" atk="763"/>
+	<Data level="54" atk="801"/>
+	<Data level="55" atk="841"/>
+	<Data level="56" atk="883"/>
+	<Data level="57" atk="926"/>
+	<Data level="58" atk="1196"/>
+	<Data level="59" atk="1766"/>
+	<Data level="60" atk="2844"/>
+	<Data level="61" atk="2985"/>
+	<Data level="62" atk="3134"/>
+	<Data level="63" atk="3289"/>
+	<Data level="64" atk="3456"/>
+	<Data level="65" atk="5923"/>
+	<Data level="66" atk="5923"/>
+	<Data level="67" atk="5923"/>
+	<Data level="68" atk="5923"/>
+	<Data level="69" atk="5923"/>
+	<Data level="70" atk="5923"/>
+</Priest>	
+<Elementalist>	
+	<Data level="1" atk="10"/>
+	<Data level="2" atk="11"/>
+	<Data level="3" atk="11"/>
+	<Data level="4" atk="13"/>
+	<Data level="5" atk="14"/>
+	<Data level="6" atk="14"/>
+	<Data level="7" atk="16"/>
+	<Data level="8" atk="17"/>
+	<Data level="9" atk="18"/>
+	<Data level="10" atk="19"/>
+	<Data level="11" atk="21"/>
+	<Data level="12" atk="23"/>
+	<Data level="13" atk="25"/>
+	<Data level="14" atk="26"/>
+	<Data level="15" atk="29"/>
+	<Data level="16" atk="30"/>
+	<Data level="17" atk="32"/>
+	<Data level="18" atk="34"/>
+	<Data level="19" atk="36"/>
+	<Data level="20" atk="40"/>
+	<Data level="21" atk="43"/>
+	<Data level="22" atk="50"/>
+	<Data level="23" atk="54"/>
+	<Data level="24" atk="58"/>
+	<Data level="25" atk="63"/>
+	<Data level="26" atk="66"/>
+	<Data level="27" atk="103"/>
+	<Data level="28" atk="112"/>
+	<Data level="29" atk="119"/>
+	<Data level="30" atk="126"/>
+	<Data level="31" atk="135"/>
+	<Data level="32" atk="146"/>
+	<Data level="33" atk="155"/>
+	<Data level="34" atk="166"/>
+	<Data level="35" atk="177"/>
+	<Data level="36" atk="190"/>
+	<Data level="37" atk="204"/>
+	<Data level="38" atk="225"/>
+	<Data level="39" atk="241"/>
+	<Data level="40" atk="258"/>
+	<Data level="41" atk="275"/>
+	<Data level="42" atk="296"/>
+	<Data level="43" atk="315"/>
+	<Data level="44" atk="362"/>
+	<Data level="45" atk="388"/>
+	<Data level="46" atk="414"/>
+	<Data level="47" atk="444"/>
+	<Data level="48" atk="474"/>
+	<Data level="49" atk="508"/>
+	<Data level="50" atk="652"/>
+	<Data level="51" atk="690"/>
+	<Data level="52" atk="726"/>
+	<Data level="53" atk="763"/>
+	<Data level="54" atk="801"/>
+	<Data level="55" atk="841"/>
+	<Data level="56" atk="883"/>
+	<Data level="57" atk="926"/>
+	<Data level="58" atk="1196"/>
+	<Data level="59" atk="1766"/>
+	<Data level="60" atk="2844"/>
+	<Data level="61" atk="2985"/>
+	<Data level="62" atk="3134"/>
+	<Data level="63" atk="3289"/>
+	<Data level="64" atk="3456"/>
+	<Data level="65" atk="5923"/>
+	<Data level="66" atk="5923"/>
+	<Data level="67" atk="5923"/>
+	<Data level="68" atk="5923"/>
+	<Data level="69" atk="5923"/>
+	<Data level="70" atk="5923"/>
+</Elementalist>	
+<Soulless>	
+	<Data level="1" atk="20"/>
+	<Data level="2" atk="22"/>
+	<Data level="3" atk="22"/>
+	<Data level="4" atk="24"/>
+	<Data level="5" atk="26"/>
+	<Data level="6" atk="27"/>
+	<Data level="7" atk="30"/>
+	<Data level="8" atk="32"/>
+	<Data level="9" atk="34"/>
+	<Data level="10" atk="37"/>
+	<Data level="11" atk="40"/>
+	<Data level="12" atk="45"/>
+	<Data level="13" atk="47"/>
+	<Data level="14" atk="50"/>
+	<Data level="15" atk="54"/>
+	<Data level="16" atk="57"/>
+	<Data level="17" atk="61"/>
+	<Data level="18" atk="65"/>
+	<Data level="19" atk="69"/>
+	<Data level="20" atk="76"/>
+	<Data level="21" atk="81"/>
+	<Data level="22" atk="96"/>
+	<Data level="23" atk="102"/>
+	<Data level="24" atk="110"/>
+	<Data level="25" atk="118"/>
+	<Data level="26" atk="126"/>
+	<Data level="27" atk="195"/>
+	<Data level="28" atk="210"/>
+	<Data level="29" atk="225"/>
+	<Data level="30" atk="238"/>
+	<Data level="31" atk="256"/>
+	<Data level="32" atk="275"/>
+	<Data level="33" atk="294"/>
+	<Data level="34" atk="314"/>
+	<Data level="35" atk="336"/>
+	<Data level="36" atk="359"/>
+	<Data level="37" atk="385"/>
+	<Data level="38" atk="424"/>
+	<Data level="39" atk="453"/>
+	<Data level="40" atk="486"/>
+	<Data level="41" atk="518"/>
+	<Data level="42" atk="557"/>
+	<Data level="43" atk="594"/>
+	<Data level="44" atk="681"/>
+	<Data level="45" atk="729"/>
+	<Data level="46" atk="779"/>
+	<Data level="47" atk="835"/>
+	<Data level="48" atk="892"/>
+	<Data level="49" atk="956"/>
+	<Data level="50" atk="1220"/>
+	<Data level="51" atk="1292"/>
+	<Data level="52" atk="1359"/>
+	<Data level="53" atk="1426"/>
+	<Data level="54" atk="1498"/>
+	<Data level="55" atk="1573"/>
+	<Data level="56" atk="1652"/>
+	<Data level="57" atk="1733"/>
+	<Data level="58" atk="2217"/>
+	<Data level="59" atk="3275"/>
+	<Data level="60" atk="5354"/>
+	<Data level="61" atk="5622"/>
+	<Data level="62" atk="5902"/>
+	<Data level="63" atk="6195"/>
+	<Data level="64" atk="6508"/>
+	<Data level="65" atk="10852"/>
+	<Data level="66" atk="10852"/>
+	<Data level="67" atk="10852"/>
+	<Data level="68" atk="10852"/>
+	<Data level="69" atk="10852"/>
+	<Data level="70" atk="10852"/>
+</Soulless>	
+<Engineer>	
+	<Data level="1" atk="22"/>
+	<Data level="2" atk="24"/>
+	<Data level="3" atk="24"/>
+	<Data level="4" atk="27"/>
+	<Data level="5" atk="29"/>
+	<Data level="6" atk="30"/>
+	<Data level="7" atk="33"/>
+	<Data level="8" atk="36"/>
+	<Data level="9" atk="38"/>
+	<Data level="10" atk="41"/>
+	<Data level="11" atk="45"/>
+	<Data level="12" atk="49"/>
+	<Data level="13" atk="52"/>
+	<Data level="14" atk="55"/>
+	<Data level="15" atk="60"/>
+	<Data level="16" atk="64"/>
+	<Data level="17" atk="68"/>
+	<Data level="18" atk="73"/>
+	<Data level="19" atk="77"/>
+	<Data level="20" atk="85"/>
+	<Data level="21" atk="90"/>
+	<Data level="22" atk="106"/>
+	<Data level="23" atk="114"/>
+	<Data level="24" atk="122"/>
+	<Data level="25" atk="132"/>
+	<Data level="26" atk="140"/>
+	<Data level="27" atk="216"/>
+	<Data level="28" atk="234"/>
+	<Data level="29" atk="250"/>
+	<Data level="30" atk="265"/>
+	<Data level="31" atk="285"/>
+	<Data level="32" atk="305"/>
+	<Data level="33" atk="326"/>
+	<Data level="34" atk="348"/>
+	<Data level="35" atk="372"/>
+	<Data level="36" atk="399"/>
+	<Data level="37" atk="428"/>
+	<Data level="38" atk="470"/>
+	<Data level="39" atk="503"/>
+	<Data level="40" atk="539"/>
+	<Data level="41" atk="575"/>
+	<Data level="42" atk="618"/>
+	<Data level="43" atk="659"/>
+	<Data level="44" atk="755"/>
+	<Data level="45" atk="809"/>
+	<Data level="46" atk="864"/>
+	<Data level="47" atk="926"/>
+	<Data level="48" atk="989"/>
+	<Data level="49" atk="1059"/>
+	<Data level="50" atk="1352"/>
+	<Data level="51" atk="1431"/>
+	<Data level="52" atk="1505"/>
+	<Data level="53" atk="1580"/>
+	<Data level="54" atk="1660"/>
+	<Data level="55" atk="1742"/>
+	<Data level="56" atk="1830"/>
+	<Data level="57" atk="1921"/>
+	<Data level="58" atk="2451"/>
+	<Data level="59" atk="3621"/>
+	<Data level="60" atk="5922"/>
+	<Data level="61" atk="6218"/>
+	<Data level="62" atk="6527"/>
+	<Data level="63" atk="6852"/>
+	<Data level="64" atk="7197"/>
+	<Data level="65" atk="11929"/>
+	<Data level="66" atk="11929"/>
+	<Data level="67" atk="11929"/>
+	<Data level="68" atk="11929"/>
+	<Data level="69" atk="11929"/>
+	<Data level="70" atk="11929"/>
+</Engineer>	
+<Fighter>	
+	<Data level="1" atk="24"/>
+	<Data level="2" atk="26"/>
+	<Data level="3" atk="26"/>
+	<Data level="4" atk="29"/>
+	<Data level="5" atk="31"/>
+	<Data level="6" atk="33"/>
+	<Data level="7" atk="36"/>
+	<Data level="8" atk="39"/>
+	<Data level="9" atk="41"/>
+	<Data level="10" atk="44"/>
+	<Data level="11" atk="49"/>
+	<Data level="12" atk="53"/>
+	<Data level="13" atk="56"/>
+	<Data level="14" atk="59"/>
+	<Data level="15" atk="65"/>
+	<Data level="16" atk="69"/>
+	<Data level="17" atk="73"/>
+	<Data level="18" atk="78"/>
+	<Data level="19" atk="83"/>
+	<Data level="20" atk="91"/>
+	<Data level="21" atk="97"/>
+	<Data level="22" atk="114"/>
+	<Data level="23" atk="123"/>
+	<Data level="24" atk="132"/>
+	<Data level="25" atk="142"/>
+	<Data level="26" atk="150"/>
+	<Data level="27" atk="233"/>
+	<Data level="28" atk="251"/>
+	<Data level="29" atk="269"/>
+	<Data level="30" atk="286"/>
+	<Data level="31" atk="307"/>
+	<Data level="32" atk="329"/>
+	<Data level="33" atk="351"/>
+	<Data level="34" atk="375"/>
+	<Data level="35" atk="402"/>
+	<Data level="36" atk="430"/>
+	<Data level="37" atk="461"/>
+	<Data level="38" atk="507"/>
+	<Data level="39" atk="543"/>
+	<Data level="40" atk="580"/>
+	<Data level="41" atk="620"/>
+	<Data level="42" atk="665"/>
+	<Data level="43" atk="710"/>
+	<Data level="44" atk="814"/>
+	<Data level="45" atk="872"/>
+	<Data level="46" atk="932"/>
+	<Data level="47" atk="998"/>
+	<Data level="48" atk="1067"/>
+	<Data level="49" atk="1142"/>
+	<Data level="50" atk="1457"/>
+	<Data level="51" atk="1543"/>
+	<Data level="52" atk="1622"/>
+	<Data level="53" atk="1703"/>
+	<Data level="54" atk="1789"/>
+	<Data level="55" atk="1878"/>
+	<Data level="56" atk="1973"/>
+	<Data level="57" atk="2070"/>
+	<Data level="58" atk="2641"/>
+	<Data level="59" atk="3902"/>
+	<Data level="60" atk="6705"/>
+	<Data level="61" atk="7038"/>
+	<Data level="62" atk="7390"/>
+	<Data level="63" atk="7759"/>
+	<Data level="64" atk="8149"/>
+	<Data level="65" atk="13505"/>
+	<Data level="66" atk="13505"/>
+	<Data level="67" atk="13505"/>
+	<Data level="68" atk="13505"/>
+	<Data level="69" atk="13505"/>
+	<Data level="70" atk="13505"/>
+</Fighter>	
+<Assassin>	
+	<Data level="1" atk="20"/>
+	<Data level="2" atk="22"/>
+	<Data level="3" atk="22"/>
+	<Data level="4" atk="24"/>
+	<Data level="5" atk="26"/>
+	<Data level="6" atk="27"/>
+	<Data level="7" atk="29"/>
+	<Data level="8" atk="32"/>
+	<Data level="9" atk="33"/>
+	<Data level="10" atk="37"/>
+	<Data level="11" atk="40"/>
+	<Data level="12" atk="44"/>
+	<Data level="13" atk="46"/>
+	<Data level="14" atk="49"/>
+	<Data level="15" atk="54"/>
+	<Data level="16" atk="57"/>
+	<Data level="17" atk="60"/>
+	<Data level="18" atk="64"/>
+	<Data level="19" atk="69"/>
+	<Data level="20" atk="75"/>
+	<Data level="21" atk="80"/>
+	<Data level="22" atk="94"/>
+	<Data level="23" atk="101"/>
+	<Data level="24" atk="109"/>
+	<Data level="25" atk="118"/>
+	<Data level="26" atk="124"/>
+	<Data level="27" atk="193"/>
+	<Data level="28" atk="208"/>
+	<Data level="29" atk="223"/>
+	<Data level="30" atk="236"/>
+	<Data level="31" atk="254"/>
+	<Data level="32" atk="273"/>
+	<Data level="33" atk="291"/>
+	<Data level="34" atk="310"/>
+	<Data level="35" atk="332"/>
+	<Data level="36" atk="356"/>
+	<Data level="37" atk="382"/>
+	<Data level="38" atk="419"/>
+	<Data level="39" atk="449"/>
+	<Data level="40" atk="481"/>
+	<Data level="41" atk="513"/>
+	<Data level="42" atk="551"/>
+	<Data level="43" atk="587"/>
+	<Data level="44" atk="674"/>
+	<Data level="45" atk="722"/>
+	<Data level="46" atk="771"/>
+	<Data level="47" atk="826"/>
+	<Data level="48" atk="883"/>
+	<Data level="49" atk="945"/>
+	<Data level="50" atk="1207"/>
+	<Data level="51" atk="1278"/>
+	<Data level="52" atk="1343"/>
+	<Data level="53" atk="1410"/>
+	<Data level="54" atk="1482"/>
+	<Data level="55" atk="1555"/>
+	<Data level="56" atk="1634"/>
+	<Data level="57" atk="1714"/>
+	<Data level="58" atk="2189"/>
+	<Data level="59" atk="3234"/>
+	<Data level="60" atk="5576"/>
+	<Data level="61" atk="5855"/>
+	<Data level="62" atk="6147"/>
+	<Data level="63" atk="6454"/>
+	<Data level="64" atk="6778"/>
+	<Data level="65" atk="11261"/>
+	<Data level="66" atk="11261"/>
+	<Data level="67" atk="11261"/>
+	<Data level="68" atk="11261"/>
+	<Data level="69" atk="11261"/>
+	<Data level="70" atk="11261"/>
+</Assassin>	
+ <Glaiver>	
+	<Data level="1" atk="25"/>
+	<Data level="2" atk="27"/>
+	<Data level="3" atk="28"/>
+	<Data level="4" atk="31"/>
+	<Data level="5" atk="33"/>
+	<Data level="6" atk="35"/>
+	<Data level="7" atk="38"/>
+	<Data level="8" atk="41"/>
+	<Data level="9" atk="43"/>
+	<Data level="10" atk="47"/>
+	<Data level="11" atk="52"/>
+	<Data level="12" atk="57"/>
+	<Data level="13" atk="59"/>
+	<Data level="14" atk="63"/>
+	<Data level="15" atk="69"/>
+	<Data level="16" atk="73"/>
+	<Data level="17" atk="78"/>
+	<Data level="18" atk="83"/>
+	<Data level="19" atk="88"/>
+	<Data level="20" atk="96"/>
+	<Data level="21" atk="103"/>
+	<Data level="22" atk="121"/>
+	<Data level="23" atk="131"/>
+	<Data level="24" atk="140"/>
+	<Data level="25" atk="151"/>
+	<Data level="26" atk="160"/>
+	<Data level="27" atk="247"/>
+	<Data level="28" atk="267"/>
+	<Data level="29" atk="285"/>
+	<Data level="30" atk="303"/>
+	<Data level="31" atk="325"/>
+	<Data level="32" atk="349"/>
+	<Data level="33" atk="372"/>
+	<Data level="34" atk="398"/>
+	<Data level="35" atk="425"/>
+	<Data level="36" atk="456"/>
+	<Data level="37" atk="488"/>
+	<Data level="38" atk="536"/>
+	<Data level="39" atk="574"/>
+	<Data level="40" atk="614"/>
+	<Data level="41" atk="655"/>
+	<Data level="42" atk="703"/>
+	<Data level="43" atk="750"/>
+	<Data level="44" atk="860"/>
+	<Data level="45" atk="921"/>
+	<Data level="46" atk="985"/>
+	<Data level="47" atk="1055"/>
+	<Data level="48" atk="1128"/>
+	<Data level="49" atk="1207"/>
+	<Data level="50" atk="1536"/>
+	<Data level="51" atk="1627"/>
+	<Data level="52" atk="1710"/>
+	<Data level="53" atk="1795"/>
+	<Data level="54" atk="1886"/>
+	<Data level="55" atk="1980"/>
+	<Data level="56" atk="2080"/>
+	<Data level="57" atk="2182"/>
+	<Data level="58" atk="2772"/>
+	<Data level="59" atk="4096"/>
+	<Data level="60" atk="7000"/>
+	<Data level="61" atk="7350"/>
+	<Data level="62" atk="7717"/>
+	<Data level="63" atk="8102"/>
+	<Data level="64" atk="8509"/>
+	<Data level="65" atk="13908"/>
+	<Data level="66" atk="13908"/>
+	<Data level="67" atk="13908"/>
+	<Data level="68" atk="13908"/>
+	<Data level="69" atk="13908"/>
+	<Data level="70" atk="13908"/>
+</Glaiver>	
+
+	</StandardUserAtk>
+	
+	<EPWindowTabInfo>
+	<!-- 필터의 개수는 UI에서 정한 필터 수와 일치해야한다. -->
+	<!-- 각각의 필터 스트링은 UI에서 정했으므로, 고려하지 않는다. -->
+	<!-- UI에서는 클릭된 인덱스를 보내주며, 초기 값으로는 0을 보내주며, 이후 클라이언트에서 SetTab 이벤트를 이용해서 이 값을 수정할 수 있다. -->
+		<TabInfo index="0" iconAttrList="0,1,2,3,4,5,6" desc="전체"/>
+		<TabInfo index="1" iconAttrList="0" desc="공격강화"/>
+		<TabInfo index="2" iconAttrList="1" desc="특성피해"/>
+		<TabInfo index="3" iconAttrList="2" desc="속도상승"/>
+		<TabInfo index="4" iconAttrList="3" desc="자원회복"/>
+		<TabInfo index="5" iconAttrList="4,5,6" desc="방어/특수"/>
+	</EPWindowTabInfo>
+</EpData>

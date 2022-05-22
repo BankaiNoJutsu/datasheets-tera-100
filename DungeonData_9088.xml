@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9088" name="@dungeon:9088" startPos="73727,15726,2606" exitContinentId="7002" exitPos="-5175, 71910, 4610">
+  <!-- 밤피르 저택 -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="26" />
+  <ClearCondition huntingZoneId="488" templateId="18" amount="1" killCount="1" />
+  <Retry retryId="4" />
+
+   
+<!-- 성장 구간 인던 지원 시스템 테스트용 -->		
+  <!-- <SupportMatchingEffect type="changeLevel" value="26"/>
+  <SupportMatchingEffect type="abnormality" valueList="9999011,9999018,9999019"/> -->
+
+  <!-- 시작시 길찾기 가이드 추가 -->
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="488,911" id="1" pos="74352.1484,29409.0781,4104.2646" next="none" />
+		<EventTask type="empty" next="time" nextValue="3" /> <!--도핑 가이드 메시지 HUD-->	
+		<EventTask type="message" style="default" string="@dungeon:3001200" next="none" />   
+		<EventTask type="message" style="default" string="@dungeon:3001201" next="none" />
+		<EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="message" style="default" string="@dungeon:3001200" next="none" />		  
+		<EventTask type="message" style="default" string="@dungeon:3001201" next="none" />
+		<EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="message" style="default" string="@dungeon:3001200" next="none" />		  
+		<EventTask type="message" style="default" string="@dungeon:3001201" next="none" />
+		<EventTask type="empty" next="time" nextValue="3" />	  			  	  		  		
+		<!-- 최초 시작 시 계단 하강 가이드 디스폰 -->
+		<EventTask type="despawn" huntingZoneId="488" territoryId="48800503" next="none" />
+		<EventTask type="despawn" huntingZoneId="488" territoryId="48800504" next="none" />
+		<EventTask type="despawn" huntingZoneId="488" territoryId="48800505" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>  
+  
+  <EventGroup type="npcHp" uniqueId="488,13" value="0">
+  <!-- 보스 사망 시 동적 지오 작동 후 쟈넬라(호위) 소환 후 동적지오 메시지 표시-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="488" territoryId="48800349" next="none" />
+		<EventTask type="guideOn" nameId="488,912" id="1" pos="65213.6758,22947.5723,3323.8433" next="none" />
+		<EventTask type="dynamicGeo" objectId="90881" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="488" territoryId="48800381" next="time" nextValue="10" />
+        <EventTask type="message" string="@dungeon:9088001" style="alert" next="none" />
+		
+		<!-- 가이드 화살표용 NPC 스폰/디스폰 -->
+		<EventTask type="spawn" huntingZoneId="488" territoryId="48800503" next="none" />
+		<EventTask type="spawn" huntingZoneId="488" territoryId="48800504" next="none" />
+		<EventTask type="spawn" huntingZoneId="488" territoryId="48800505" next="none" />
+		<EventTask type="despawn" huntingZoneId="488" territoryId="48800501" next="none" />
+		<EventTask type="despawn" huntingZoneId="488" territoryId="48800502" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="488,48800383">
+    <!-- 자넬라 호위 중 몬스터 스폰 이벤트(territory) -->
+    <Event questId="1504" taskId="7">
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="488" territoryId="48800291" next="none" />
+        <EventTask type="spawn" huntingZoneId="488" territoryId="48800293" next="none" />
+        <EventTask type="spawn" huntingZoneId="488" territoryId="48800361" next="none" />
+        <EventTask type="spawn" huntingZoneId="488" territoryId="48800277" next="none" />
+        <!--EventTask type="spawn" huntingZoneId="488" territoryId="48800268" next="none" /-->
+        <!--몬스터가 아래층으로 떨어지는 문제로 제거-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,22" value="80">
+    <!-- 호위 중 자넬라의 상태를 표현하는 팝업 대사 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9088002" next="none"  />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,22" value="50">
+    <!-- 호위 중 자넬라의 상태를 표현하는 팝업 대사 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9088003" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,22" value="30">
+    <!-- 호위 중 자넬라의 상태를 표현하는 팝업 대사 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9088004"  next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,22" value="0">
+    <!-- 호위 중 자넬라의 상태를 표현하는 팝업 대사 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9088005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="488,21" value="0">
+    <!-- 보스 몬스터 스폰 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="488,913" id="1" pos="65213.6758,22947.5723,3323.8433" next="none" />
+		<EventTask type="playMovie" id="14" next="time" nextValue="10" />
+        <EventTask type="message" string="@dungeon:9088006" targetNpcId="488,1008" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="488" territoryId="48800343" next="time" nextValue="10" />
+        <EventTask type="message" string="@dungeon:9088007" targetNpcId="488,1008" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="488" territoryId="48800345" startAggro="50" next="complete" />
+        <EventTask type="message" string="@dungeon:9088008" targetNpcId="488,1008" next="time" nextValue="10" />
+        <EventTask type="despawn" huntingZoneId="488" territoryId="48800343" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,18" value="0">
+    <!-- 보스 몬스터 사망 시 아키아 출현 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOff" id="1" next="none" />
+		<EventTask type="despawn" huntingZoneId="488" territoryId="48800353" next="none" />
+        <EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="despawn" huntingZoneId="488" territoryId="48800345" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="3" />
+  
+   <!--오샤르 적용으로 고대신의 축복 삭제-->
+   <!-- 네임드 재도전 장치 
+  <EventGroup type="npcHp" uniqueId="488,18" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9088100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,13" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9088100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,10" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9088100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,23" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9088100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  -->
+  
+  <!-- 보스 사망 시 재도전 장치 스톱
+  <EventGroup type="npcHp" uniqueId="488,18" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,13" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,10" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="488,23" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  -->
+  <!-- 보스 리셋 시 재도전 장치 스톱
+  <EventGroup type="npcReset" uniqueId="488,18" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="488,13" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="488,10" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="488,23" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  
+  <EventGroup type="timer" timerName="벨릭의 은총1" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9088101" style="default" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="timer" timerName="벨릭의 은총2" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9088102" style="default" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="timer" timerName="벨릭의 은총3" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9088103" style="default" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+-->
+  
+  <!--베르베로스 스턴 유발-->
+  <EventGroup type="none" id="100" name="리액션 유발" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="488000001" target="npc" targetNpcId="488,18" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="200" name="리액션 OFF" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="488000001" turn="off" target="npc" targetNpcId="488,18" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+</Dungeon>

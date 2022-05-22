@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9080" name="@dungeon:9080" startPos="-62046.8438,-17307.6797,2331.1958" exitContinentId="7014" exitPos="-47937,20761,1036">
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="58" />
+  <Condition type="completeQuest" value="5204" />
+		<ClearCondition huntingZoneId="480" templateId="121" amount="1" killCount="1" />
+
+
+  <!--철문 앞 이벤트-->
+  <EventGroup type="npcHp" uniqueId="480,117" value="99">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080001" style="default" next="time" nextValue="1" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--철문 앞 이벤트-->
+  <EventGroup type="npcHp" uniqueId="480,117" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000140" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--후카죽으면 툼바소환-->
+  <EventGroup type="npcHp" uniqueId="480,119" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080005" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000143" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000139" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--알쿠스 70%이벤트-->
+  <EventGroup type="npcHp" uniqueId="480,113" value="70" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080003" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000159" startAggro="100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--알쿠스 35%이벤트-->
+  <EventGroup type="npcHp" uniqueId="480,113" value="35" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080003" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000160" startAggro="100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--알쿠스 20%이벤트-->
+  <EventGroup type="npcHp" uniqueId="480,113" value="20" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080003" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000161" startAggro="100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--알쿠스 죽으면 3넴소환-->
+  <EventGroup type="npcHp" uniqueId="480,113" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080004" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000139" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--후카힐 50%-->
+  <EventGroup type="npcHp" uniqueId="480,119" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080002" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000162" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--후카힐 30%-->
+  <EventGroup type="npcHp" uniqueId="480,119" value="30" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080002" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000163" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--후카힐 10%-->
+  <EventGroup type="npcHp" uniqueId="480,119" value="10" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080002" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000164" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--마술사드래곤 80%-->
+  <EventGroup type="npcHp" uniqueId="480,121" value="80" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080010" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000172" startAggro="100" next="none" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000166" startAggro="100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--마술사드래곤 80%디스폰-->
+  <EventGroup type="npcHp" uniqueId="480,400" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000166" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--마술사드래곤 40%-->
+  <EventGroup type="npcHp" uniqueId="480,121" value="35" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080010" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000173" startAggro="100" next="none" />
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000167" startAggro="100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--마술사드래곤 40%디스폰-->
+  <EventGroup type="npcHp" uniqueId="480,400" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000167" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 마술사 드래곤결계 40% 디스폰 -->
+  <EventGroup type="npcHp" uniqueId="480,121" value="40" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="결계40" value="1" next="time" nextValue="10" />
+        <EventTask type="flag" name="결계1" value="1" next="time" nextValue="25" />
+        <EventTask type="flag" name="결계2" value="1" next="time" nextValue="25" />
+        <EventTask type="flag" name="결계3" value="1" next="time" nextValue="20" />
+        <EventTask type="flag" name="결계4" value="1" next="time" nextValue="20" />
+        <EventTask type="flag" name="결계5" value="1" next="time" nextValue="15" />
+        <EventTask type="flag" name="결계6" value="1" next="time" nextValue="15" />
+        <EventTask type="flag" name="결계7" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 마술사 드래곤결계 40% 디스폰 -->
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="결계40" value="0" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계1" value="0" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계2" value="0" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계3" value="0" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계4" value="0" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계5" value="0" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계6" value="0" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계7" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="480,121" value="100" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="드레곤죽었다" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="480,121" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="드레곤죽었다" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="결계40,드레곤죽었다" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080023" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="결계1,드레곤죽었다" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000171" startAggro="100" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계1" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="결계2,드레곤죽었다" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000174" startAggro="100" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계2" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="결계3,드레곤죽었다" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000175" startAggro="100" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계3" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="결계4,드레곤죽었다" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000176" startAggro="100" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계4" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="결계5,드레곤죽었다" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000177" startAggro="100" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계5" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="결계6,드레곤죽었다" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000178" startAggro="100" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계6" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="결계7,드레곤죽었다" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000179" startAggro="100" next="time" nextValue="1" />
+        <EventTask type="flag" name="결계7" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--마술사드래곤 결계45%-->
+  <EventGroup type="npcHp" uniqueId="480,121" value="40" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080014" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--마술사드래곤 결계 디스폰-->
+  <EventGroup type="npcHp" uniqueId="480,121" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="480,121" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000171" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000174" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000175" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000176" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000177" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000178" next="none" />
+        <EventTask type="despawn" huntingZoneId="480" territoryId="48000179" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--1네임드광폭화-->
+  <EventGroup type="npcHp" uniqueId="480,107" value="99" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080020" style="default" next="time" nextValue="900" />
+        <!-- 이상상태 부여-->
+        <EventTask type="abnormality" abnormalityId="47630300" target="npc" targetNpcId="480,107" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--2네임드광폭화-->
+  <EventGroup type="npcHp" uniqueId="480,113" value="99" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080020" style="default" next="time" nextValue="900" />
+        <!-- 이상상태 부여-->
+        <EventTask type="abnormality" abnormalityId="47630300" target="npc" targetNpcId="480,113" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--3네임드광폭화-->
+  <EventGroup type="npcHp" uniqueId="480,119" value="99" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080020" style="default" next="time" nextValue="900" />
+        <!-- 이상상태 부여-->
+        <EventTask type="abnormality" abnormalityId="47630300" target="npc" targetNpcId="480,119" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--4네임드광폭화-->
+  <EventGroup type="npcHp" uniqueId="480,121" value="99" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9080020" style="default" next="time" nextValue="900" />
+        <!-- 이상상태 부여-->
+        <EventTask type="abnormality" abnormalityId="47630300" target="npc" targetNpcId="480,121" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="480,48000184">
+    <Event>
+      <EventTaskGroup probability="1.00">
+        <EventTask type="message" string="@dungeon:9080021" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--막넴으로텔레포트-->
+  <EventGroup type="npcHp" uniqueId="480,121" value="99">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="480" territoryId="48000185" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

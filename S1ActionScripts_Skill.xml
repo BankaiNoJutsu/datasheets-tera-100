@@ -1,0 +1,1622 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- type은 사용하지 않습니다. 그냥 구별용임 -->
+<!-- Skill 관련, 5만번대 사용 -->
+<!-- Abnormality 관련, 6만번대 사용 -->
+<!-- 특정 지역에 제한된 것은 사냥터번호를 가장 앞에 붙임 -->
+<S1ActionScripts type="Skill">
+
+	<!-- 켈사이크 연출: 방어벽이 나온 상태 -->
+	<Script id="50000" playingTime="0">
+		<!-- 브레스 먼지 -->
+		<Action time="7600" type="emitter" tag="DoorOn_FloorEffect00" on="true"/>
+	</Script>
+
+	<!-- 켈사이크 연출: 브레스 사용 -->
+	<Script id="50001" playingTime="0">
+		<!-- 브레스 화염 -->
+		<Action time="0" type="emitter" tag="DoorOn_FloorEffect01" on="true"/>
+		<!-- 브레스 데칼 -->
+		<Action time="2000" type="emitter" tag="DoorOn_FloorEffect02" on="true"/>
+
+		<!-- 뚜껑부분 화염 -->
+		<Action time="0" type="emitter" tag="DoorOff_FloorEffect01" on="true"/>
+		<!-- 뚜껑부분 데칼 -->
+		<Action time="2000" type="emitter" tag="DoorOff_FloorEffect02" on="true"/>
+
+		<!-- 오른쪽 방어벽 불길 이펙트 -->
+		<Action time="1250" type="emitter" tag="R_Door_Effect01" on="true"/>
+		<!-- 왼쪽 방어벽 불길 이펙트 -->
+		<Action time="1250" type="emitter" tag="L_Door_Effect01" on="true"/>
+		<!-- 오른쪽 달아오른 방어벽 이펙트 -->
+		<Action time="1500" type="emitter" tag="R_Door_Effect00" on="true"/>
+		<!-- 왼쪽 달아오른 방어벽 이펙트 -->
+		<Action time="1500" type="emitter" tag="L_Door_Effect00" on="true"/>
+
+		<!-- 켈사이크 연출: 포스트 프로세스 효과-->
+		<Action time="0" type="PostProcess" postprocessSet="1" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="0.f" to="1.2f" duration="900">
+				<Action time="2000" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="1.2f" to="0.3f" duration="2500">
+					<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="0.3f" to="0.0f" duration="1500"/>
+				</Action>
+			</Action>
+		</Action>
+
+		<Action isFinal="true" type="PostProcess" postprocessSet="1" on="false" />
+	</Script>
+
+	<!-- 켈사이크 연출: 보복의 결계 ON -->
+	<Script id="50002" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="10" radius="3.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset1" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset2" on="true" blendTime="2.85"/>
+		<Action time="2850" type="emitter" tag="Acsin_InHp" on="true"/>
+	</Script>
+	<!-- 켈사이크 연출: 응징의 결계 ON -->
+	<Script id="50003" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset1" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset1" on="true" blendTime="2.85"/>
+		<Action time="2850" type="emitter" tag="Acsin_OutHp" on="true"/>
+	</Script>
+	<!-- 켈사이크 연출: 죽음의 결계 ON -->
+	<Script id="50004" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset1" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset3" on="true" blendTime="2.85"/>
+		<Action time="2850" type="emitter" tag="Acsin_Mp" on="true"/>
+	</Script>
+
+	<!-- 켈사이크 연출: 보복의 결계 OFF -->
+	<Script id="50005" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="2850" type="emitter" tag="Acsin_InHp" on="false"/>
+	</Script>
+	<!-- 켈사이크 연출: 응징의 결계 OFF -->
+	<Script id="50006" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset1" on="false" blendTime="2.85"/>
+		<Action time="2850" type="emitter" tag="Acsin_OutHp" on="false"/>
+	</Script>
+	<!-- 켈사이크 연출: 죽음의 결계 OFF -->
+	<Script id="50007" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="2850" type="emitter" tag="Acsin_Mp" on="false"/>
+	</Script>
+
+	<!-- 켈사이크 연출: 죽으면 모두 제거 -->
+	<Script id="50008" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset1" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="2850" type="emitter" tag="Acsin_InHp" on="false"/>
+		<Action time="2850" type="emitter" tag="Acsin_OutHp" on="false"/>
+		<Action time="2850" type="emitter" tag="Acsin_Mp" on="false"/>
+	</Script>
+	<Script id="50009" playingTime="0">
+		<Action type="actionScript" huntingZoneId="475" templateId="1000" scriptId="50008"/>
+		<Action type="actionScript" huntingZoneId="775" templateId="1000" scriptId="50008"/>
+	</Script>
+
+	<!-- 발더의 신전: 좌측 연못 전기 방출 -->
+	<Script id="50010" playingTime="0">
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Balder_CUE.Balder_START_CUE" />
+		<Action time="0" type="emitter" tag="ElectricOn_Effect01" on="true"/>
+		<Action time="0" type="emitter" tag="ElectricOn_Effect02" on="true"/>
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Balder_CUE.Balder_LOOP_CUE" />
+	</Script>
+	<Script id="50011" playingTime="0">
+		<Action time="0" type="removeSound" cueName="Ambient_Emiter.Balder_CUE.Balder_LOOP_CUE" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Balder_CUE.Balder_END_CUE" />
+		<Action time="0" type="emitter" tag="ElectricOn_Effect01" on="false"/>
+		<Action time="0" type="emitter" tag="ElectricOn_Effect02" on="false"/>
+	</Script>
+	<!-- 발더의 신전: 우측 연못 전기 방출 -->
+	<Script id="50020" playingTime="0">
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Balder_CUE.Balder_START_CUE" />
+		<Action time="0" type="emitter" tag="ElectricOn_Effect03" on="true"/>
+		<Action time="0" type="emitter" tag="ElectricOn_Effect04" on="true"/>
+		<Action time="0" type="emitter" tag="ElectricOn_Effect05" on="true"/>
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Balder_CUE.Balder_LOOP_CUE" />
+	</Script>
+	<Script id="50021" playingTime="0">
+		<Action time="0" type="removeSound" cueName="Ambient_Emiter.Balder_CUE.Balder_LOOP_CUE" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Balder_CUE.Balder_END_CUE" />
+		<Action time="0" type="emitter" tag="ElectricOn_Effect03" on="false"/>
+		<Action time="0" type="emitter" tag="ElectricOn_Effect04" on="false"/>
+		<Action time="0" type="emitter" tag="ElectricOn_Effect05" on="false"/>
+	</Script>
+	<!-- 켈사이크 연출: 응징의 결계 ON -->
+	<Script id="97501" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset2" on="true" blendTime="2.85"/>
+	</Script>
+	<!-- 켈사이크 연출: 죽음의 결계 ON -->
+	<Script id="97502" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset3" on="true" blendTime="2.85"/>
+	</Script>
+
+		<Script id="97505" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset" on="true" blendTime="2.85"/>
+	</Script>
+	<!-- 켈사이크 연출: 보복의 결계 OFF -->
+	<Script id="97503" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset2" on="false" blendTime="2.85"/>
+	</Script>
+	<!-- 켈사이크 연출: 응징의 결계 OFF -->
+	<Script id="97504" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20B_Aeroset3" on="false" blendTime="2.85"/>
+	</Script>
+	
+		<!-- 켈사이크 연출: 응징의 결계 ON -->
+	<Script id="97511" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset2" on="true" blendTime="2.85"/>
+	</Script>
+	<!-- 켈사이크 연출: 죽음의 결계 ON -->
+	<Script id="97512" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="true" blendTime="2.85"/>
+	</Script>
+	<!-- 켈사이크 연출: 죽음의 결계 ON -->
+	<Script id="97515" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset" on="true" blendTime="2.85"/>
+	</Script>
+	<!-- 켈사이크 연출: 보복의 결계 OFF -->
+	<Script id="97513" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset2" on="false" blendTime="2.85"/>
+	</Script>
+	<!-- 켈사이크 연출: 응징의 결계 OFF -->
+	<Script id="97514" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.85"/>
+	</Script>
+	<!-- 발더의 신전_상위: 암흑I 이상상태	-->
+	<Script id="60000" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false"/>
+		<Action time="0" type="PostProcess" postprocessSet="3" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="1.0f" duration="20000" >
+					<Action time="40000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.f" duration="5000">
+						<Action time="0" type="PostProcess" postprocessSet="2" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>
+	<!-- 발더의 신전_상위: 섬광 이상상태 -->
+	<Script id="60001" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false"/>
+		<Action time="0" type="PostProcess" postprocessSet="3" on="false">
+			<Action time="2577" type="PostProcess" postprocessSet="3" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.f" to="0.9f" duration="500" >
+					<Action time="1000" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.9f" to="0.f" duration="1500">
+						<Action time="0" type="PostProcess" postprocessSet="3" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="3" on="false" />
+	</Script>
+
+	<!-- 발더의 신전: 암흑II 이상상태	1단계-->
+	<Script id="60002" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="true" >
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="0.5f" duration="30000" />
+		</Action>
+	</Script>
+	<!-- 발더의 신전: 암흑II 이상상태	2단계-->
+	<Script id="60003" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="true" >
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.5f" to="0.8f" duration="30000" />
+		</Action>
+	</Script>
+	<!-- 발더의 신전: 암흑II 이상상태	3단계-->
+	<Script id="60004" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="true" >
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.8f" to="0.9f" duration="30000" />
+		</Action>
+	</Script>
+	<!-- 발더의 신전: 암흑II 이상상태	4단계-->
+	<Script id="60005" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="true" >
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.9f" to="0.95f" duration="30000" />
+		</Action>
+	</Script>
+	<!-- 발더의 신전: 암흑II 이상상태	5단계-->
+	<Script id="60006" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="true" >
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.95f" to="0.995f" duration="30000" />
+		</Action>
+	</Script>
+	<!-- 발더의 신전: 암흑II 이상상태	6단계-->
+	<Script id="60007" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="true" >
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.995f" to="1.0f" duration="30000" />
+		</Action>
+	</Script>
+	<!-- 발더의 신전: 암흑 off -->
+	<Script id="60008" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="3" on="false">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.f" duration="5000">
+				<Action time="0" type="PostProcess" postprocessSet="2" on="false"/>
+			</Action>
+		</Action>
+	</Script>
+	<!-- 발더의 신전: 거울 발동 섬광 -->
+	<Script id="60009" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false"/>
+		<Action time="0" type="PostProcess" postprocessSet="3" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="3" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.f" to="1.0f" duration="1000" >
+					<Action time="5000" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="1.0f" to="0.f" duration="5000">
+						<Action time="0" type="PostProcess" postprocessSet="3" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="3" on="false" />
+	</Script>
+
+	<!-- 발더의 신전_하위: 암흑I 이상상태	-->
+	<Script id="60010" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false"/>
+		<Action time="0" type="PostProcess" postprocessSet="3" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="1.0f" duration="20000" >
+					<Action time="10000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.f" duration="3000">
+						<Action time="0" type="PostProcess" postprocessSet="2" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>
+	<!-- 발더의 신전_하위: 섬광 이상상태 -->
+	<Script id="60011" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false"/>
+		<Action time="0" type="PostProcess" postprocessSet="3" on="false">
+			<Action time="2577" type="PostProcess" postprocessSet="3" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.f" to="1.0f" duration="500" >
+					<Action time="500" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="1.0f" to="0.f" duration="1000">
+						<Action time="0" type="PostProcess" postprocessSet="3" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="3" on="false" />
+	</Script>
+	<!-- 발더의 신전_하위: 거울 발동 섬광 -->
+	<Script id="60012" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false"/>
+		<Action time="0" type="PostProcess" postprocessSet="3" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="3" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.f" to="1.0f" duration="500" >
+					<Action time="1000" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="1.0f" to="0.f" duration="1500">
+						<Action time="0" type="PostProcess" postprocessSet="3" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="3" on="false" />
+	</Script>
+	<!-- 아르곤 에너지 저장고 - 잠입상태 -->
+	<Script id="60013" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="0.5f" duration="500"/>
+		</Action>
+	</Script>
+	
+	<!-- 검은틈 광폭화 -->
+	<Script id="60014" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="1" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="0.f" to="1.0f" duration="500" >
+				<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="1.0f" to="0.f" duration="500">
+					<Action time="0" type="PostProcess" postprocessSet="1" on="false" />
+				</Action>
+			</Action>
+		</Action>
+	</Script>
+	
+	<!-- 세개의탑 하스미나  메세지 -->
+	<Script id="60015" playingTime="0">
+		<Action time="0" type="SystemMessage" message="@dungeon:9012001" style="SMS_CHAT_INFO_QUEST"/>
+		<Action time="800" type="SystemMessage" message="@dungeon:9012002" style="SMS_CHAT_INFO_QUEST"/>
+		<Action time="0" type="PostProcess" postprocessSet="1" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="0.f" to="1.0f" duration="500" >
+				<Action time="500" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="1.0f" to="0.f" duration="500">
+					<Action time="0" type="PostProcess" postprocessSet="1" on="false" />
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="1" on="false" />
+	</Script>
+	
+	<!-- 카이아 전투 연출용 -->
+	<!-- 가드 카운터 -->
+	<Script id="60016" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="4" on="true"/>
+		<Action time="2900" type="PostProcess" postprocessSet="4" on="false"/>
+	</Script>
+	<!-- 화살비 소환 -->
+	<Script id="60017" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="2500" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.5f" to="1.0f" duration="500" >
+				<Action time="5000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.0f" to="0.0f" duration="500" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+
+	<!-- 검은 틈 연합 파티 몬스터 '볼카누스' 시공 붕괴! 이상상태 전용 -->
+	<Script id="60018" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.5f" to="1.0f" duration="500" >
+				<Action time="9500" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.0f" to="0.0f" duration="500" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+	
+	<!-- 레벨 캡 확장 : 시오즈의 방 연출용 효과 -->
+	<Script id="600180" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.5f" to="1.0f" duration="500" >
+				<Action time="60000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.0f" to="0.0f" duration="500" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>	
+
+	<!-- 발더의 신전: 카운트다운 -->
+	<Script id="60019" playingTime="0">
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2077Cue" />
+	</Script>
+	<!-- 샨드라상층이형의괴수 -->
+	<Script id="60020" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="1" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="0.1f" to="0.5f" duration="500" >
+				<Action time="3500" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="1.0f" to="0.0f" duration="500" />
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="1" on="false" />
+	</Script>	
+	<!-- 샨드라마나이아 하층(라마얀) -->
+	<Script id="427001" playingTime="2100000000">
+		<Action time="0" type="visible" visibility="false"/>
+	</Script>
+	<Script id="427002" playingTime="2100000000">
+		<Action time="0" type="visible" visibility="true"/>	
+	</Script>
+
+	<!-- 샨드라마나이아 하층(샨드라마나이아_상급)) -->
+	<Script id="426001" playingTime="2100000000">
+		<Action time="0" type="actionScript" huntingZoneId="427" templateId="2006" scriptId="426002"/>
+		<Action time="0" type="actionScript" huntingZoneId="427" templateId="2002" scriptId="426003"/>
+		<Action time="8500" type="actionScript" huntingZoneId="427" templateId="2005" scriptId="426002"/>		
+		<Action time="0" type="animation" animName="Death">
+			<Action time="0" type="visible" visibility="false"/>	
+			<Action time="0" type="actionScript" huntingZoneId="427" templateId="2003" scriptId="426991"/>
+			<Action time="0" type="actionScript" huntingZoneId="427" templateId="2005" scriptId="426992"/>		 
+			<Action time="6500" type="actionScript" huntingZoneId="427" templateId="2002" scriptId="426994"/>		 
+			<Action time="7533" type="actionScript" huntingZoneId="427" templateId="2005" scriptId="426003"/>		 
+			<Action time="7533" type="actionScript" huntingZoneId="427" templateId="2007" scriptId="426995"/>		 
+			<Action time="7600" type="actionScript" huntingZoneId="427" templateId="2007" scriptId="426993"/>		 
+			<Action time="6000" type="actionScript" huntingZoneId="427" templateId="2006" scriptId="426991"/>
+			<Action time="7700" type="actionScript" huntingZoneId="427" templateId="2003" scriptId="426003"/>
+			<Action time="9033" type="actionScript" huntingZoneId="427" templateId="2006" scriptId="426003"/>
+		</Action>
+	</Script>
+	<Script id="426002" playingTime="2100000000">
+		<Action time="0" type="visible" visibility="true"/>
+	</Script>
+	<Script id="426003" playingTime="2100000000">
+		<Action time="0" type="visible" visibility="false"/>	
+	</Script>
+	<Script id="426991" playingTime="2100000000">
+		<Action time="0" type="animation" animName="Death"/>
+	</Script>
+	<Script id="426992" playingTime="2100000000">
+		<Action time="0" type="animation" animName="Spawn"/>
+	</Script> 
+	<Script id="426993" playingTime="2700">
+		<Action time="0" type="animation" animName="Command"/>
+	</Script> 
+	<Script id="426994" playingTime="0">
+		<Action type="cameraShake" duration="7000" power="2" speed="5"/>
+	</Script>	
+	<Script id="426995" playingTime="0">
+		<Action time="0" type="visible" visibility="true"/>	
+	</Script>
+	<Script id="426996" playingTime="0">
+		<Action time="0" type="visible" visibility="false"/>	
+	</Script>
+	<Script id="426997" playingTime="0">
+		<Action time="0" type="Mesh" huntingZoneId="427" templateId="42732"/>		
+	</Script>
+	<Script id="426998" playingTime="0">
+		<Action time="0" type="Mesh" huntingZoneId="427" templateId="42702"/>		
+	</Script>
+
+	<!-- 샨드라마나이아 하층(샨드라마나이아 연출 전용) -->
+	
+	<Script id="426999" playingTime="6000" enableInput="true">
+		<Action time="0" type="animation" animName="Wait"/>
+		<Action time="1366" type="animation" animName="Wait"/>
+		<Action time="1366" type="CameraFocus" huntingZoneId="427" templateId="2011" on="true"/>
+		<Action time="4366" type="CameraFocus" huntingZoneId="427" templateId="2011" on="false"/>
+		<Action time="2732" type="animation" animName="Wait"/>
+		<Action time="4098" type="animation" animName="command2"/>
+		<Action time="6131" type="animation" animName="Wait"/>
+		<Action time="2366" type="SystemMessage" message="@dungeon:9027016" style="SMS_MSG_DUNGEON_ROLLING_MSG"/>
+		<Action time="5366" type="SystemMessage" message="@dungeon:9027017" style="SMS_MSG_DUNGEON_ROLLING_MSG"/>
+		<Action time="8366" type="SystemMessage" message="@dungeon:9027018" style="SMS_DEFAULT"/>
+		<Action time="6131" type="actionScript" huntingZoneId="427" templateId="2011" scriptId="426700"/>		 
+	</Script>
+	<Script id="426700" playingTime="10000">
+		<Action type="translationZ" from="0.0" to="-200.0" duration="1000" power="4.0"/>
+		<Action time="2000" type="visible" visibility="false"/>
+	</Script>
+	<Script id="426701" playingTime="0">
+		<Action type="cameraShake" duration="10000" power="0.5" speed="10"/>
+	</Script>		
+
+	<!-- 샨드라마나이아 하층(갈란 연출 전용) -->
+
+
+	<Script id="426792" playingTime="0" enableInput="true">
+		<Action time="0" type="Mesh" huntingZoneId="427" templateId="42760"/>		
+	</Script>	
+	<Script id="426703" playingTime="0">
+		<Action time="0" type="Mesh" huntingZoneId="427" templateId="42759"/>		
+	</Script>		
+	<Script id="426704" playingTime="6000" enableInput="true">
+		<Action time="0" type="animation" animName="unarmedwait"/>
+		<Action time="2700" type="animation" animName="Command"/>
+		<Action time="4000" type="actionScript" huntingZoneId="427" templateId="42758" scriptId="426792"/>		 
+	</Script>
+	<Script id="426705" playingTime="6000" enableInput="true">
+		<Action time="0" type="animation" animName="unarmedwait"/>
+		<Action time="2033" type="animation" animName="Idle"/>
+		<Action time="4000" type="actionScript" huntingZoneId="427" templateId="42743" scriptId="426703"/>		 
+	</Script>
+	<!-- 샨드라마나이아 하층(정령이 소환하는 몬스터들 사망시 밑으로 가라 앉기. 웬디고 전사, 아르곤 거인, 경비대장, 자이언트 툴라) -->
+	<Script id="426710" playingTime="1000000" enableInput="true">
+		<Action time="1529" type="actionScript" huntingZoneId="427" templateId="42737" scriptId="426714"/>		 
+	</Script>
+	<Script id="426711" playingTime="1000000" enableInput="true">
+		<Action time="2700" type="actionScript" huntingZoneId="427" templateId="42734" scriptId="426715"/>		 
+	</Script>
+	<Script id="426712" playingTime="1000000" enableInput="true">
+		<Action time="3367" type="actionScript" huntingZoneId="427" templateId="42733" scriptId="426714"/>		 
+	</Script>
+	<Script id="426713" playingTime="1000000" enableInput="true">
+		<Action time="2697" type="actionScript" huntingZoneId="427" templateId="42741" scriptId="426714"/>		 
+	</Script>
+	<Script id="426714" playingTime="10000">
+		<Action type="translationZ" from="0.0" to="-200.0" duration="3000" power="1.0"/>
+		<Action time="1000" type="visible" visibility="false"/>
+	</Script>	
+	<Script id="426715" playingTime="10000">
+		<Action type="translationZ" from="0.0" to="-200.0" duration="3000" power="1.0"/>
+		<Action time="500" type="visible" visibility="false"/>
+	</Script>	
+	<Script id="426716" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="6" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="6" param="Strength" from="0.0f" to="0.5f" duration="1000" >
+				<Action time="0" type="PostProcessMaterial" postprocessSet="6" param="Strength" from="0.5f" to="1.0f" duration="4000">
+					<Action time="0" type="PostProcessMaterial" postprocessSet="6" param="Strength" from="1.0f" to="0.0f" duration="1000">
+						<Action time="0" type="PostProcess" postprocessSet="6" on="false" />
+					</Action>
+				</Action>					
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="6" on="false" />
+	</Script>			
+	<Script id="426717" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="8" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="8" param="Strength" from="0.0f" to="0.5f" duration="6000" >
+				<Action time="0" type="PostProcessMaterial" postprocessSet="8" param="Strength" from="0.5f" to="0.5f" duration="20000">
+					<Action time="0" type="PostProcessMaterial" postprocessSet="8" param="Strength" from="0.5f" to="0.0f" duration="3000">
+						<Action time="0" type="PostProcess" postprocessSet="8" on="false" />
+					</Action>
+				</Action>					
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="8" on="false" />
+	</Script>			
+	<Script id="426718" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="8" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="8" param="Strength" from="1.0f" to="1.0f" duration="0">
+					<Action time="0" type="PostProcessMaterial" postprocessSet="8" param="Strength" from="1.0f" to="0.0f" duration="1500">
+						<Action time="0" type="PostProcess" postprocessSet="8" on="false" />
+					</Action>
+				</Action>					
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="8" on="false" />
+	</Script>			
+	<Script id="426719" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="8" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="8" param="Strength" from="0.5f" to="0.0f" duration="1000">
+					<Action time="0" type="PostProcess" postprocessSet="8" on="false" />
+				</Action>					
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="8" on="false" />
+	</Script>				
+
+	<!-- 여기서부터 샨드라마나이아 하층(샨드라마나이아_난이도 하급)) -->
+	<Script id="727001" playingTime="2100000000">
+		<Action time="0" type="actionScript" huntingZoneId="727" templateId="2006" scriptId="426002"/>
+		<Action time="0" type="actionScript" huntingZoneId="727" templateId="2002" scriptId="426003"/>
+		<Action time="8500" type="actionScript" huntingZoneId="727" templateId="2005" scriptId="426002"/>		
+		<Action time="0" type="animation" animName="Death">
+			<Action time="0" type="visible" visibility="false"/>	
+			<Action time="0" type="actionScript" huntingZoneId="727" templateId="2003" scriptId="426991"/>
+			<Action time="0" type="actionScript" huntingZoneId="727" templateId="2005" scriptId="426992"/>		 
+			<Action time="6500" type="actionScript" huntingZoneId="727" templateId="2002" scriptId="426994"/>		 
+			<Action time="7533" type="actionScript" huntingZoneId="727" templateId="2005" scriptId="426003"/>		 
+			<Action time="7533" type="actionScript" huntingZoneId="727" templateId="2007" scriptId="426995"/>		 
+			<Action time="7600" type="actionScript" huntingZoneId="727" templateId="2007" scriptId="426993"/>		 
+			<Action time="6000" type="actionScript" huntingZoneId="727" templateId="2006" scriptId="426991"/>
+			<Action time="7700" type="actionScript" huntingZoneId="727" templateId="2003" scriptId="426003"/>
+			<Action time="9033" type="actionScript" huntingZoneId="727" templateId="2006" scriptId="426003"/>
+		</Action>
+	</Script>	
+	<Script id="727997" playingTime="0">
+		<Action time="0" type="Mesh" huntingZoneId="727" templateId="42732"/>		
+	</Script>
+	<Script id="727998" playingTime="0">
+		<Action time="0" type="Mesh" huntingZoneId="727" templateId="42702"/>		
+	</Script>
+	<Script id="727999" playingTime="6000" enableInput="true">
+		<Action time="0" type="animation" animName="Wait"/>
+		<Action time="1366" type="animation" animName="Wait"/>
+		<Action time="1366" type="CameraFocus" huntingZoneId="727" templateId="2011" on="true"/>
+		<Action time="4366" type="CameraFocus" huntingZoneId="727" templateId="2011" on="false"/>
+		<Action time="2732" type="animation" animName="Wait"/>
+		<Action time="4098" type="animation" animName="command2"/>
+		<Action time="6131" type="animation" animName="Wait"/>
+		<Action time="2366" type="SystemMessage" message="@dungeon:9027016" style="SMS_MSG_DUNGEON_ROLLING_MSG"/>
+		<Action time="5366" type="SystemMessage" message="@dungeon:9027017" style="SMS_MSG_DUNGEON_ROLLING_MSG"/>
+		<Action time="8366" type="SystemMessage" message="@dungeon:9027018" style="SMS_DEFAULT"/>
+		<Action time="6131" type="actionScript" huntingZoneId="727" templateId="2011" scriptId="426700"/>		 
+	</Script>	
+	<!-- 샨드라마나이아 하층(갈란 연출 전용) -->
+	<Script id="727792" playingTime="0" enableInput="true">
+		<Action time="0" type="Mesh" huntingZoneId="727" templateId="42760"/>		
+	</Script>	
+	<Script id="727703" playingTime="0">
+		<Action time="0" type="Mesh" huntingZoneId="727" templateId="42759"/>		
+	</Script>		
+	<Script id="727704" playingTime="6000" enableInput="true">
+		<Action time="0" type="animation" animName="unarmedwait"/>
+		<Action time="2700" type="animation" animName="Command"/>
+		<Action time="4000" type="actionScript" huntingZoneId="727" templateId="42758" scriptId="727792"/>		 
+	</Script>
+	<Script id="727705" playingTime="6000" enableInput="true">
+		<Action time="0" type="animation" animName="unarmedwait"/>
+		<Action time="2033" type="animation" animName="Idle"/>
+		<Action time="4000" type="actionScript" huntingZoneId="727" templateId="42743" scriptId="727703"/>		 
+	</Script>
+	<!-- 샨드라마나이아 하층(정령이 소환하는 몬스터들 사망시 밑으로 가라 앉기. 웬디고 전사, 아르곤 거인, 경비대장, 자이언트 툴라) -->
+	<Script id="727710" playingTime="1000000" enableInput="true">
+		<Action time="1529" type="actionScript" huntingZoneId="727" templateId="42737" scriptId="426714"/>		 
+	</Script>
+	<Script id="727711" playingTime="1000000" enableInput="true">
+		<Action time="2700" type="actionScript" huntingZoneId="727" templateId="42734" scriptId="426715"/>		 
+	</Script>
+	<Script id="727712" playingTime="1000000" enableInput="true">
+		<Action time="3367" type="actionScript" huntingZoneId="727" templateId="42733" scriptId="426714"/>		 
+	</Script>
+	<Script id="727713" playingTime="1000000" enableInput="true">
+		<Action time="2697" type="actionScript" huntingZoneId="727" templateId="42741" scriptId="426714"/>		 
+	</Script>
+
+	<!-- 연합 섬광탄 -->
+	<Script id="60021" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="3" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.f" to="1.0f" duration="1000" >
+				<Action time="2000" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="1.0f" to="0.f" duration="2000">
+					<Action time="0" type="PostProcess" postprocessSet="3" on="false" />
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="3" on="false" />
+	</Script>
+	<Script id="60022" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="3" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.f" to="0.5f" duration="300" >
+				<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.5f" to="0.f" duration="200">
+					<Action time="0" type="PostProcess" postprocessSet="3" on="false" />
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="3" on="false" />
+	</Script>
+	<!--빙수 "띵!" 연출-->
+	<Script id="60023" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="10" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="10" param="Strength" from="0.0f" to="0.7f" duration="1000" />
+			<Action time="2000" type="PostProcessMaterial" postprocessSet="10" param="Strength" from="7.0f" to="0.0f" duration="7000"/>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="10" on="false" />
+	</Script>	
+	<!--술 "일렁임1단계" 연출-->
+	<Script id="60024" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.0f" to="0.5f" duration="50000" />
+			<Action time="50000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.5f" to="0.4f" duration="2000" />
+			<Action time="52000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.4f" to="0.3f" duration="3000" />
+			<Action time="55000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.3f" to="0.0f" duration="5000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>	
+	<!--술 "일렁임2단계" 연출-->
+	<Script id="60025" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.5f" to="0.8f" duration="50000" />
+			<Action time="50000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.8f" to="0.5f" duration="2000" />
+			<Action time="52000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.5f" to="0.3f" duration="3000" />
+			<Action time="55000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.3f" to="0.0f" duration="5000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>	
+	<!--술 "일렁임3단계" 연출-->
+	<Script id="60026" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.8f" to="1.0f" duration="50000" />
+			<Action time="50000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="1.0f" to="0.8f" duration="2000" />
+			<Action time="52000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.8f" to="0.5f" duration="3000" />
+			<Action time="55000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.5f" to="0.0f" duration="5000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>	
+	<!--술 "일렁임4단계" 연출-->
+	<Script id="60027" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="1.0f" to="2.0f" duration="50000" />
+			<Action time="50000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="2.0f" to="1.0f" duration="2000" />
+			<Action time="52000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="1.0f" to="0.5f" duration="3000" />
+			<Action time="55000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.5f" to="0.0f" duration="5000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>	
+	<!--술 "일렁임5단계" 연출-->
+	<Script id="60028" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="2.0f" to="3.0f" duration="50000" />
+			<Action time="50000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="3.0f" to="2.0f" duration="2000" />
+			<Action time="52000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="2.0f" to="1.0f" duration="3000" />
+			<Action time="55000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="1.0f" to="0.0f" duration="5000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>	
+	<!--술 "일렁임6단계" 연출-->
+	<Script id="60031" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="3.0f" to="0f" duration="1000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>
+	<!--축제 암흑화 해제-->
+	<Script id="60029" playingTime="0" isOnlyPlayerTarget="true">
+		<Action time="0" type="PostProcess" postprocessSet="11" on="false">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="11" param="Strength" from="1.0f" to="0.f" duration="1000">
+				<Action time="0" type="PostProcess" postprocessSet="11" on="false"/>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="11" on="false" />
+	</Script>
+	<!--축제 암흑화-->
+	<Script id="60030" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="11" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="11" param="Strength" from="0.f" to="1.0f" duration="5000"/>
+			<Action time="63000" type="PostProcessMaterial" postprocessSet="11" param="Strength" from="1.0f" to="0.f" duration="1000"/>
+			<Action time="64000" type="PostProcess" postprocessSet="11"  on="false" />
+			<Action isFinal="true" type="PostProcess" postprocessSet="11" on="false" />
+		</Action>
+	</Script>
+
+	<!--가을 축제 술 전용 "일렁임3단계" 10초 -->
+	<Script id="60032" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.0f" to="1.0f" duration="2000" />
+			<Action time="6000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="1.0f" to="0.5f" duration="2000" />
+			<Action time="8000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.5f" to="0.0f" duration="2000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>	
+<!--D대륙 고대 바라카 유적터 퀘스트 전용 -->
+	<Script id="60033" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.0f" to="1.0f" duration="500" />
+			<Action time="2000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="1.0f" to="0.5f" duration="2000" />
+			<Action time="4000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.5f" to="0.0f" duration="1000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>	
+	<Script id="60034" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="2500" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.5f" to="1.0f" duration="500" >
+				<Action time="5000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.0f" to="0.0f" duration="500" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+	
+	<!-- 마법사의 요새 -->
+	
+	<Script id="443001" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="0.85f" duration="7000" >
+					<Action time="6200" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.85f" to="0.f" duration="500">
+						<Action time="0" type="PostProcess" postprocessSet="2" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>
+	<Script id="443711" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="0.85f" duration="7000" >
+					<Action time="3600000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.85f" to="0.f" duration="500">
+						<Action time="0" type="PostProcess" postprocessSet="2" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>
+	<Script id="443712" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="0.85f" duration="0" >
+					<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.85f" to="0.f" duration="500">
+						<Action time="0" type="PostProcess" postprocessSet="2" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>
+	<Script id="443002" playingTime="10000">
+		<Action type="translationZ" from="-200.0" to="0.0" duration="1000" power="4.0"/>
+		<Action time="0" type="Sound" cueName="ObjectSound_03.Expansion_CUE.OpenSteelBarCUE" volume="4.5" radius="1.0" pitch="2.2" />
+	</Script>	
+	<Script id="443003" playingTime="10000">
+		<Action type="translationZ" from="0.0" to="-200.0" duration="1000" power="4.0"/>
+		<Action time="0" type="Sound" cueName="ObjectSound_03.Expansion_CUE.OpenSteelBarCUE" volume="4.5" radius="1.0" pitch="2.2" />
+	</Script>	
+	
+	<Script id="443004" playingTime="2100000000">
+		<Action type="translationZ" from="0.0" to="-300.0" duration="2000" power="3.0"/>
+	</Script>
+
+	<Script id="443005" playingTime="2100000000">
+		<Action time="0" type="animation" animName="Opening"/>
+	</Script>
+	<Script id="443006" playingTime="2100000000">
+		<Action time="0" type="animation" animName="Closing"/>
+	</Script>
+	<Script id="443007" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.f" to="2.f" duration="1000" >
+				<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="2.f" to="3.5f" duration="10000">
+					<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="3.5f" to="0.f" duration="4000">
+						<Action time="0" type="PostProcess" postprocessSet="7" on="false" />
+					</Action>
+				</Action>					
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>			
+	<Script id="443008" playingTime="2100000000">
+		<Action time="0" type="mesh" huntingZoneId="443" templateId="44403">
+			<Action time="0" type="animation" animName="death"/>
+			<Action time="2000" type="effect" effectId="300005" rate="0.5"/>
+			<Action time="4000" type="actionScript" huntingZoneId="443" templateId="44403" scriptId="427001"/>
+		</Action>
+		<Action time="0" type="mesh" huntingZoneId="643" templateId="44403">
+			<Action time="0" type="animation" animName="death"/>
+			<Action time="2000" type="effect" effectId="300005" rate="0.5"/>
+			<Action time="4000" type="actionScript" huntingZoneId="643" templateId="44403" scriptId="427001"/>
+		</Action>	
+	</Script>
+	<Script id="443009" playingTime="12000" enableInput="false">
+		<Action time="0" type="CameraFocus" huntingZoneId="443" templateId="44375" on="true"/>
+		<Action time="0" type="CameraFocus" huntingZoneId="643" templateId="44375" on="true"/>
+		<Action time="7366" type="CameraFocus" huntingZoneId="443" templateId="44375" on="false"/>
+		<Action time="7366" type="CameraFocus" huntingZoneId="643" templateId="44375" on="false"/>
+	</Script>
+	<Script id="443010" playingTime="12000" enableInput="false">
+		<Action time="0" type="CameraFocus" huntingZoneId="743" templateId="44375" on="true"/>
+		<Action time="7366" type="CameraFocus" huntingZoneId="743" templateId="44375" on="false"/>
+	</Script>
+
+	<Script id="443011" playingTime="0">
+		<Action time="0" type="animation" animName="Death"/>
+		<Action time="2000" type="visible" visibility="false"/>
+	</Script>		
+	<Script id="443012" playingTime="0">
+		<Action time="0" type="animation" animName="heavyAtk01"/>
+		<Action time="2150" type="cameraShake" duration="2000" power="1" speed="8"/>
+		<Action time="4150" type="cameraShake" duration="2000" power="1.8" speed="9"/>
+		<Action time="2150" type="actionScript" huntingZoneId="443" templateId="44371" scriptId="443011"/>
+		<Action time="2150" type="actionScript" huntingZoneId="643" templateId="44371" scriptId="443011"/>
+		<Action time="0" type="SystemMessage" message="@dungeon:9043056" style="SMS_CHAT_INFO_QUEST"/>
+		<Action time="4150" type="SystemMessage" message="@dungeon:9043057" style="SMS_CHAT_INFO_QUEST"/>
+		<Action time="2150" type="Sound" cueName="ObjectSound_03.Expansion_CUE.BrokenRoadCUE" volume="4.5" radius="1.0" pitch="2.2" />
+	</Script>		
+	<Script id="443013" playingTime="0">
+		<Action time="0" type="animation" animName="heavyAtk01"/>
+		<Action time="2150" type="cameraShake" duration="2000" power="1" speed="8"/>
+		<Action time="4150" type="cameraShake" duration="2000" power="1.8" speed="9"/>
+		<Action time="2150" type="actionScript" huntingZoneId="743" templateId="44371" scriptId="443011"/>
+		<Action time="0" type="SystemMessage" message="@dungeon:9043056" style="SMS_CHAT_INFO_QUEST"/>
+		<Action time="4150" type="SystemMessage" message="@dungeon:9043057" style="SMS_CHAT_INFO_QUEST"/>
+		<Action time="2150" type="Sound" cueName="ObjectSound_03.Expansion_CUE.BrokenRoadCUE" volume="4.5" radius="1.0" pitch="2.2" />
+	</Script>		
+	
+	<!-- 붉은 해적단의 함정 섬광탄 -->
+	<Script id="766001" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="3" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="0.f" to="1.0f" duration="1000">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="3" param="Strength" from="1.0f" to="0.f" duration="1000">
+					<Action time="0" type="PostProcess" postprocessSet="3" on="false" >
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="3" on="false" />
+	</Script>
+
+	<!-- 붉은 해적단의 함정: 죽음의 결계 ON -->
+	<Script id="766002" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset" on="true" blendTime="2.85"/>
+	</Script>
+	
+	<!-- 붉은 해적단의 함정: 죽음의 결계 OFF -->
+	<Script id="766003" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset" on="false" blendTime="2.85"/>
+	</Script>
+	
+	<!-- 붉은 해적단의 함정: 죽음의 결계 ON (최적화 버전)-->
+	<Script id="766004" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="AncientForest_AEROSet.AERO.AncientForest_Boss_Switch_Aeroset" on="true" blendTime="2.85"/>
+	</Script>
+	
+	<!-- 붉은 해적단의 함정: 죽음의 결계 OFF  (최적화 버전)-->
+	<Script id="766005" playingTime="0">
+		<Action time="0" type="aero" aeroSet="AncientForest_AEROSet.AERO.AncientForest_Boss_Switch_Aeroset" on="false" blendTime="2.85"/>
+	</Script>
+		<!-- 스카라베의 무덤 -->
+	<Script id="450001" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="1" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="0.f" to="0.5f" duration="1000" >
+				<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="0.5f" to="1.f" duration="10000">
+					<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="1.f" to="0.f" duration="4000">
+						<Action time="0" type="PostProcess" postprocessSet="1" on="false" />
+					</Action>
+				</Action>					
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="1" on="false" />
+	</Script>			
+	<Script id="450002" playingTime="0">
+		<Action time="0" type="scale" scale="1.6" duration="5000" power="5"/>
+	</Script>		
+	<Script id="450003" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="1" on="false" />
+		<Action isFinal="true" type="PostProcess" postprocessSet="1" on="false" />
+	</Script>			
+
+	<!-- 스카라베 시누스 -->
+	<Script id="450004" playingTime="2100000000">
+		<Action time="12000" type="visible" visibility="false"/>
+	</Script>
+	<Script id="450005" playingTime="0">
+		<Action time="0" type="scale" scale="1.2" duration="5000" power="5"/>
+	</Script>		
+
+	<!-- 오르카의 신전: 죽음의 결계 ON -->
+	<Script id="905401" playingTime="13000">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="true" blendTime="2.5"/>
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="0.15f" duration="500" >
+					<Action time="12000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.15f" to="0.f" duration="500">
+						<Action time="12000" type="PostProcess" postprocessSet="2" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action time="10200" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.5"/>
+		<Action time="11000" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.5"/>
+		<Action time="12000" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.5"/>
+		<Action time="13000" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.5"/>
+		<Action isFinal="true" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>
+	<Script id="905491" playingTime="5000">
+		<Action time="1000" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.5"/>
+		<Action time="2000" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.5"/>
+		<Action time="3000" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.5"/>
+		<Action time="4000" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.5"/>
+		<Action time="5000" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset3" on="false" blendTime="2.5"/>
+		<Action isFinal="true" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>
+	<Script id="905402" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="4" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="4" param="Strength" from="0.f" to="2.2f" duration="500" >
+				<Action time="0" type="PostProcessMaterial" postprocessSet="4" param="Strength" from="2.2f" to="0.f" duration="500" >
+					<Action time="0" type="PostProcess" postprocessSet="4" on="false" />
+			</Action>					
+		</Action>					
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="4" on="false" />
+	</Script>				
+	<Script id="905403" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="9" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="9" param="Strength" from="0.f" to="0.5f" duration="1000" >
+					<Action time="0" type="PostProcess" postprocessSet="9" on="false" />
+		</Action>					
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="9" on="false" />
+	</Script>			
+	<Script id="905404" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="7" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.0f" to="0.3f" duration="8000" />
+			<Action time="8000" type="PostProcessMaterial" postprocessSet="7" param="Strength" from="0.3f" to="0.0f" duration="2000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="7" on="false" />
+	</Script>		
+	<Script id="905601" playingTime="15000">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.0f" to="0.8f" duration="500" >
+				<Action time="1000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.8f" to="1.2f" duration="500">
+					<Action time="2000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.2f" to="1.4f" duration="500">
+						<Action time="11000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.4f" to="1.2f" duration="500" />
+						<Action time="12000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.2f" to="0.8f" duration="500" />
+						<Action time="13000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.8f" to="0.4f" duration="500" />
+					</Action>
+				</Action>					
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>				
+	<Script id="975601" playingTime="5000">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.0f" to="1.2f" duration="500" >
+				<Action time="1000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.2f" to="1.2f" duration="4000" />
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="true" />
+	</Script>	
+	<Script id="975602" playingTime="5000">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.2f" to="0.0f" duration="5000" >
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+	<Script id="905801" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.0f" to="1.0f" duration="500" >
+						<Action time="1000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.f" duration="1500">
+						<Action time="0" type="PostProcess" postprocessSet="2" on="false" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="false" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>
+	<!-- 번스타인의 악령섬: 죽음의 결계 ON -->
+	<Script id="905901" playingTime="30000">
+		<Action time="0" type="aero" aeroSet="Lilith_DarkTown_OBJ.AERO.LDT_SD_20A_Aereset3" on="true" blendTime="2.5"/>
+		<Action time="1000" type="aero" aeroSet="Lilith_DarkTown_OBJ.AERO.LDT_SD_20A_Aereset3" on="true" blendTime="2.5"/>
+		<Action isFinal="true" type="aero" aeroSet="Lilith_DarkTown_OBJ.AERO.LDT_SD_20A_Aereset3" on="true" blendTime="2.5" />
+	</Script>
+	<Script id="905902" playingTime="1000">
+		<Action time="0" type="aero" aeroSet="Lilith_DarkTown_OBJ.AERO.LDT_SD_20A_Aereset3" on="false" blendTime="2.5"/>
+		<Action time="1000" type="aero" aeroSet="Lilith_DarkTown_OBJ.AERO.LDT_SD_20A_Aereset3" on="false" blendTime="2.5"/>
+		<Action isFinal="true" type="aero" aeroSet="Lilith_DarkTown_OBJ.AERO.LDT_SD_20A_Aereset3" on="false" blendTime="2.5" />
+	</Script>
+	<Script id="905903" playingTime="5000">
+		<Action time="0" type="aero" aeroSet="Lilith_DarkTown_OBJ.AERO.LDT_SD_20A_Aereset3" on="true" blendTime="3.5"/>
+		<Action time="1000" type="aero" aeroSet="Lilith_DarkTown_OBJ.AERO.LDT_SD_20A_Aereset3" on="true" blendTime="3.5"/>
+		<Action isFinal="true" type="aero" aeroSet="Lilith_DarkTown_OBJ.AERO.LDT_SD_20A_Aereset3" on="true" blendTime="3.5" />
+		<Action isFinal="true" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>	
+	
+	<!-- 저주받은 번스타인의 악령섬(2네임드 유령 Shape 변경)-->
+	<Script id="905904" playingTime="10000">
+		<Action time="0" type="mesh" huntingZoneId="759" templateId="330"/>
+	</Script>
+	
+	<!-- 저주받은 번스타인의 악령섬_유령폭발-->
+	<Script id="975901" playingTime="0">
+		<Action time="0" type="PostProcess" postprocessSet="2" on="false"/>
+			<Action time="0" type="PostProcess" postprocessSet="2" on="true">
+				<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.f" to="1.0f" duration="1000">
+					<Action time="3000" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="1.0f" to="0.95f" duration="3000">
+						<Action time="0" type="PostProcessMaterial" postprocessSet="2" param="Strength" from="0.95f" to="0.f" duration="5000">
+							<Action time="0" type="PostProcess" postprocessSet="2" on="false" />
+						</Action>
+					</Action>
+				</Action>
+			</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="2" on="false" />
+	</Script>
+	
+	<!-- 좀비 피 튀기는 효과 적용 -->
+	<Script id="906000" playingTime="1000">
+			   <Action time="0" type="PostProcess" postprocessSet="6" on="true" />
+			   <Action time="0" type="PostProcessMaterial" postprocessSet="6" param="Strength" from="0.0f" to="0.30f" duration="1000" />
+	</Script>
+			   
+	<!-- 좀비 피 튀기는 효과 해제-->
+	<Script id="906001" playingTime="0">
+			   <Action time="0" type="PostProcess" postprocessSet="6" on="false" />
+	</Script>
+
+	<!-- 뒤틀린 라칸의 제단 2네임드 광폭화 메세지 띄우기 효과 -->
+	<Script id="971001" playingTime="0">
+		<Action time="0" type="SystemMessage" message="@dungeon:9710016" style="SMS_CHAT_INFO_QUEST"/>
+	</Script>
+	<Script id="971002" playingTime="0">
+		<Action time="0" type="SystemMessage" message="@dungeon:9710017" style="SMS_CHAT_INFO_QUEST"/>
+	</Script>
+	<Script id="971003" playingTime="0">
+		<Action time="0" type="SystemMessage" message="@dungeon:9710018" style="SMS_CHAT_INFO_QUEST"/>
+	</Script>
+	<Script id="971004" playingTime="0">
+		<Action time="0" type="SystemMessage" message="@dungeon:9710019" style="SMS_CHAT_INFO_QUEST"/>
+	</Script>
+	
+	<!-- 벨릭의 궁전_라칸: 죽음의 결계 ON -->
+	<Script id="781001" playingTime="0">
+		<Action time="760" type="Sound" cueName="Quest_Skill.QuestCUE.Quest_65180Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="Sound" cueName="Ambient_Emiter.Ak_God_CUE.Ak_God_CUE" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset" on="true" blendTime="2.85"/>
+	</Script>
+	<!-- 벨릭의 궁전_라칸: 죽음의 결계 OFF -->
+	<Script id="781002" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset" on="false" blendTime="2.85"/>
+	</Script>
+	
+	<!-- 벨릭의 신전_라칸: 영혼 세계 이동(600180 복사) -->
+	<Script id="781003" playingTime="2100000000">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.5f" to="1.0f" duration="500" >
+				<Action time="6000000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.0f" to="0.0f" duration="500" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+	
+	<Script id="781004" playingTime="0">
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+	<!--RK-9 격납고-->
+	<Script id="935001" playingTime="0">
+		<Action type="cameraShake" duration="2000" power="1.2" speed="7"/>
+	</Script>	
+	
+	<Script id="10238001" playingTime="0">
+		<Action time="5000" type="materialParam" param="SkillClearOn" from="0.0" to="1.0" duration="11000"/> 
+		<Action time="11000" type="visible" visibility="false"/>
+	</Script>
+	<!--혁명단은거지 3네임드 변신-->
+	<Script id="739001">
+		<Action time="100" type="mesh" huntingZoneId="739" templateId="3000"/>
+		<Action time="110" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="5400" />
+	</Script>
+	<Script id="939001">
+		<Action time="100" type="mesh" huntingZoneId="939" templateId="3000"/>
+		<Action time="110" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="5400" />
+	</Script>
+	<!--혁명단은거지 3네임드 대쉬어택 대상자 클라이언트 연출-->
+	<Script id="939002" playingTime="1500">
+		<Action time="0" type="PostProcess" postprocessSet="27" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="27" param="Strength" from="0.0f" to="1.0f" duration="1000" >
+			<Action time="1000" type="PostProcessMaterial" postprocessSet="27" param="Strength" from="1.0f" to="0.0f" duration="500" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="27" on="false" />
+	</Script>	
+	<Script id="939003" playingTime="1500">
+		<Action time="0" type="PostProcess" postprocessSet="27" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="27" param="Strength" from="0.0f" to="1.0f" duration="500" >
+				<Action time="500" type="PostProcessMaterial" postprocessSet="27" param="Strength" from="1.0f" to="0.0f" duration="700" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="27" on="false" />
+	</Script>
+	<!--혁명단은거지 3네임드 3페이즈 변신-->
+	<Script id="939004">
+		<Action time="100" type="mesh" huntingZoneId="939" templateId="3002"/>
+		<Action time="110" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="3850" />
+	</Script>
+	<!--혁명단은거지 입구 에이로셋 체인지-->
+	<Script id="939010" playingTime="0">
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset" on="true" blendTime="2.85"/>
+	</Script>
+	<Script id="939020" playingTime="0">
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset2" on="true" blendTime="2.85"/>
+	</Script>
+	<Script id="939030" playingTime="0">
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset3" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="RevoltVillage_AERO.AERO.RevoltVillage_Aeroset3" on="true" blendTime="2.85"/>
+	</Script>
+	<!--안타로스의 심연 데스 연출 셰이더 변경-->
+	<Script id="9203105">
+		<Action time="100" type="mesh" huntingZoneId="920" templateId="3105"/>
+		<Action time="110" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="110" />
+	</Script>
+	<!--안타로스의 심연 (가이드) 데스 연출 셰이더 변경-->
+	<Script id="30293105">
+		<Action time="100" type="mesh" huntingZoneId="3029" templateId="3105"/>
+		<Action time="110" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="110" />
+	</Script>
+	<!-- 신규 수호자 임무 -->
+	<Script id="628002" playingTime="0" enableInput="true">					
+		<Action time="500" type="SystemMessage" message="@MonsterBehavior:628004" style="SMS_MSG_BIG_CENTER"/>				
+	</Script>	
+	<Script id="628003" playingTime="0" enableInput="true">
+		<Action time="500" type="SystemMessage" message="@MonsterBehavior:628005" style="SMS_MSG_BIG_CENTER"/>
+	</Script>
+	<!-- 비밀요새 2네임드 화속성 -->
+	<Script id="983001" playingTime="900000">
+		<Action time="0" type="PostProcess" postprocessSet="21" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="21" param="Strength" from="0.5f" to="1.0f" duration="90000" >
+			<Action time="90000" type="PostProcessMaterial" postprocessSet="21" param="Strength" from="1.0f" to="1.0f" duration="90000" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="21" on="false" />
+	</Script>
+	<!-- 비밀요새 2네임드 수속성 -->
+	<Script id="983002" playingTime="900000">
+		<Action time="0" type="PostProcess" postprocessSet="20" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="20" param="Strength" from="0.5f" to="1.0f" duration="90000" >
+			<Action time="90000" type="PostProcessMaterial" postprocessSet="20" param="Strength" from="1.0f" to="1.0f" duration="90000" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="20" on="false" />
+	</Script>
+	<!-- 비밀요새 2네임드 지속성 -->
+	<Script id="983003" playingTime="900000">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.0f" to="1.0f" duration="1000" >
+			<Action time="1000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.0f" to="1.0f" duration="90000" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+	<!-- 비밀요새 2네임드 화염골렘 변신(하급) -->
+	<Script id="783011">
+		<Action time="0" type="materialParam" param="Strength" from="1.0" to="0.0" duration="750" />
+		<Action time="750" type="mesh" huntingZoneId="783" templateId="2011"/>
+		<Action time="751" type="materialParam" param="Strength" from="0.0" to="1.0" duration="1149" />
+	</Script>
+	<!-- 비밀요새 2네임드 물골렘 변신(하급) -->
+	<Script id="783012">
+		<Action time="0" type="materialParam" param="Strength" from="1.0" to="0.0" duration="750" />
+		<Action time="750" type="mesh" huntingZoneId="783" templateId="2012"/>
+		<Action time="751" type="materialParam" param="Strength" from="0.0" to="1.0" duration="1149" />	
+	</Script>
+	<!-- 비밀요새 2네임드 풀골렘 변신(하급) -->
+	<Script id="783013">
+		<Action time="0" type="materialParam" param="Strength" from="1.0" to="0.0" duration="750" />
+		<Action time="750" type="mesh" huntingZoneId="783" templateId="2013"/>
+		<Action time="751" type="materialParam" param="Strength" from="0.0" to="1.0" duration="1149" />	
+	</Script>
+	<!-- 비밀요새 2네임드 화염골렘 변신(상급) -->
+	<Script id="983011">
+		<Action time="0" type="materialParam" param="Strength" from="1.0" to="0.0" duration="750" />
+		<Action time="750" type="mesh" huntingZoneId="983" templateId="2011"/>
+		<Action time="751" type="materialParam" param="Strength" from="0.0" to="1.0" duration="1149" />
+	</Script>
+	<!-- 비밀요새 2네임드 물골렘 변신(상급) -->
+	<Script id="983012">
+		<Action time="0" type="materialParam" param="Strength" from="1.0" to="0.0" duration="750" />
+		<Action time="750" type="mesh" huntingZoneId="983" templateId="2012"/>
+		<Action time="751" type="materialParam" param="Strength" from="0.0" to="1.0" duration="1149" />	
+	</Script>
+	<!-- 비밀요새 2네임드 풀골렘 변신(상급) -->
+	<Script id="983013">
+		<Action time="0" type="materialParam" param="Strength" from="1.0" to="0.0" duration="750" />
+		<Action time="750" type="mesh" huntingZoneId="983" templateId="2013"/>
+		<Action time="751" type="materialParam" param="Strength" from="0.0" to="1.0" duration="1149" />	
+	</Script>
+
+	<!-- 리안 쿠벨 지하 사원 -->
+	<Script id="982001" playingTime="6000000">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.0f" to="1.5f" duration="200" >
+				<Action time="6000000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.5f" to="0.0f" duration="200" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+
+	<Script id="982002" playingTime="1000">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.5f" to="0.0f" duration="200" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+
+	<Script id="982003">
+		<Action time="1000" type="materialParam" param="bIsAwakenMode" from="0.0" to="0.7" duration="800" />
+	</Script>
+
+	<Script id="982004">
+		<Action time="1150" type="materialParam" param="bIsAwakenMode" from="1.0" to="0.0" duration="2500" />
+	</Script>
+
+	<Script id="982005" playingTime="6000000">
+		<Action time="10" type="aero" aeroSet="BF_KumasWorld_aeroset.AERO.JungleCoast_AERO" on="true" blendTime="2.85"/>
+	</Script>
+
+	<Script id="982006" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset" on="false" blendTime="2.85"/>
+	</Script>
+
+	<Script id="982007" playingTime="0">
+		<Action type="cameraShake" duration="3000" power="2" speed="3"/>
+	</Script>	
+
+	<Script id="982008">
+		<Action time="0" type="materialParam" param="Progress" from="0.0" to="1.0" duration="12000" />
+		<Action time="12000" type="materialParam" param="Progress" from="1.0" to="0.0" duration="1" />
+	</Script>
+
+	<Script id="982009">
+		<Action time="1000" type="materialParam" param="bIsAwakenMode" from="0.7" to="1.2" duration="800" />
+	</Script>
+	<!-- 리안 쿠벨 지하 사원 _가이드던전-->
+	<Script id="3028001" playingTime="6000000">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.0f" to="1.5f" duration="200" >
+				<Action time="6000000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.5f" to="0.0f" duration="200" />
+			</Action>			
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+
+	<Script id="3028002" playingTime="1000">
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.5f" to="0.0f" duration="200" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>
+
+	<Script id="93028003">
+		<Action time="1000" type="materialParam" param="bIsAwakenMode" from="0.0" to="0.7" duration="800" />
+	</Script>
+
+	<Script id="3028004">
+		<Action time="1150" type="materialParam" param="bIsAwakenMode" from="1.0" to="0.0" duration="2500" />
+	</Script>
+
+	<Script id="3028005" playingTime="6000000">
+		<Action time="10" type="aero" aeroSet="BF_KumasWorld_aeroset.AERO.JungleCoast_AERO" on="true" blendTime="2.85"/>
+	</Script>
+
+	<Script id="3028006" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_20A_Aeroset" on="false" blendTime="2.85"/>
+	</Script>
+
+	<Script id="3028007" playingTime="0">
+		<Action type="cameraShake" duration="3000" power="2" speed="3"/>
+	</Script>	
+
+	<Script id="3028008">
+		<Action time="0" type="materialParam" param="Progress" from="0.0" to="1.0" duration="12000" />
+		<Action time="12000" type="materialParam" param="Progress" from="1.0" to="0.0" duration="1" />
+	</Script>
+
+	<Script id="3028009">
+		<Action time="1000" type="materialParam" param="bIsAwakenMode" from="0.7" to="1.2" duration="800" />
+	</Script>	
+	<!--바하르의신전-->
+	<Script id="444001">
+		<Action time="1000" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="500" />
+		<Action time="3410" type="materialParam" param="BlendWeight" from="1.0" to="0.0" duration="500" />
+	</Script>
+	<Script id="444002">
+		<Action time="0" type="materialParam" param="ChangeOn" from="1.0" to="0.0" duration="0" />
+		<Action time="100" type="mesh" huntingZoneId="444" templateId="2000"/>
+		<Action time="110" type="materialParam" param="ChangeOn" from="0.0" to="1.0" duration="6900" />
+	</Script>
+	<Script id="444003" playingTime="8000" enableInput="false">
+		<Action time="100" type="CameraFocus" yaw="0" pitch="-12" distance="1200" huntingZoneId="444" templateId="1101" on="true"/>
+		<Action time="4100" type="CameraFocus" yaw="0" pitch="-12" distance="3500" huntingZoneId="444" templateId="1101" on="true"/>
+		<Action time="7000" type="CameraFocus" huntingZoneId="444" templateId="1101" on="false"/>
+	</Script>
+	
+	<!-- 샨드라마나이아 (1인) -->
+	<Script id="3011001" playingTime="2100000000">
+		<Action time="0" type="actionScript" huntingZoneId="3011" templateId="2006" scriptId="426002"/>
+		<Action time="0" type="actionScript" huntingZoneId="3011" templateId="2002" scriptId="426003"/>
+		<Action time="8500" type="actionScript" huntingZoneId="3011" templateId="2005" scriptId="426002"/>		
+		<Action time="0" type="animation" animName="Death">
+			<Action time="0" type="visible" visibility="false"/>	
+			<Action time="0" type="actionScript" huntingZoneId="3011" templateId="2003" scriptId="426991"/>
+			<Action time="0" type="actionScript" huntingZoneId="3011" templateId="2005" scriptId="426992"/>		 
+			<Action time="6500" type="actionScript" huntingZoneId="3011" templateId="2002" scriptId="426994"/>		 
+			<Action time="7533" type="actionScript" huntingZoneId="3011" templateId="2005" scriptId="426003"/>		 
+			<Action time="7533" type="actionScript" huntingZoneId="3011" templateId="2007" scriptId="426995"/>		 
+			<Action time="7600" type="actionScript" huntingZoneId="3011" templateId="2007" scriptId="426993"/>		 
+			<Action time="6000" type="actionScript" huntingZoneId="3011" templateId="2006" scriptId="426991"/>
+			<Action time="7700" type="actionScript" huntingZoneId="3011" templateId="2003" scriptId="426003"/>
+			<Action time="9033" type="actionScript" huntingZoneId="3011" templateId="2006" scriptId="426003"/>
+		</Action>
+	</Script>	
+	<Script id="3011997" playingTime="0">
+		<Action time="0" type="Mesh" huntingZoneId="3011" templateId="42732"/>		
+	</Script>
+	<Script id="3011998" playingTime="0">
+		<Action time="0" type="Mesh" huntingZoneId="3011" templateId="42702"/>		
+	</Script>
+	<Script id="3011999" playingTime="6000" enableInput="true">
+		<Action time="0" type="animation" animName="Wait"/>
+		<Action time="1366" type="animation" animName="Wait"/>
+		<Action time="1366" type="CameraFocus" huntingZoneId="3011" templateId="2011" on="true"/>
+		<Action time="4366" type="CameraFocus" huntingZoneId="3011" templateId="2011" on="false"/>
+		<Action time="2732" type="animation" animName="Wait"/>
+		<Action time="4098" type="animation" animName="command2"/>
+		<Action time="6131" type="animation" animName="Wait"/>
+		<Action time="2366" type="SystemMessage" message="@dungeon:9027016" style="SMS_MSG_DUNGEON_ROLLING_MSG"/>
+		<Action time="5366" type="SystemMessage" message="@dungeon:9027017" style="SMS_MSG_DUNGEON_ROLLING_MSG"/>
+		<Action time="8366" type="SystemMessage" message="@dungeon:9027018" style="SMS_DEFAULT"/>
+		<Action time="6131" type="actionScript" huntingZoneId="3011" templateId="2011" scriptId="426700"/>		 
+	</Script>	
+
+	<Script id="3011792" playingTime="0" enableInput="true">
+		<Action time="0" type="Mesh" huntingZoneId="3011" templateId="42760"/>		
+	</Script>	
+	<Script id="3011703" playingTime="0">
+		<Action time="0" type="Mesh" huntingZoneId="3011" templateId="42759"/>		
+	</Script>		
+	<Script id="3011704" playingTime="6000" enableInput="true">
+		<Action time="0" type="animation" animName="unarmedwait"/>
+		<Action time="2700" type="animation" animName="Command"/>
+		<Action time="4000" type="actionScript" huntingZoneId="3011" templateId="42758" scriptId="727792"/>		 
+	</Script>
+	<Script id="3011705" playingTime="6000" enableInput="true">
+		<Action time="0" type="animation" animName="unarmedwait"/>
+		<Action time="2033" type="animation" animName="Idle"/>
+		<Action time="4000" type="actionScript" huntingZoneId="3011" templateId="42743" scriptId="727703"/>		 
+	</Script>
+	<Script id="3011710" playingTime="1000000" enableInput="true">
+		<Action time="1529" type="actionScript" huntingZoneId="3011" templateId="42737" scriptId="426714"/>		 
+	</Script>
+	<Script id="3011711" playingTime="1000000" enableInput="true">
+		<Action time="2700" type="actionScript" huntingZoneId="3011" templateId="42734" scriptId="426715"/>		 
+	</Script>
+	<Script id="3011712" playingTime="1000000" enableInput="true">
+		<Action time="3367" type="actionScript" huntingZoneId="3011" templateId="42733" scriptId="426714"/>		 
+	</Script>
+	<Script id="3011713" playingTime="1000000" enableInput="true">
+		<Action time="2697" type="actionScript" huntingZoneId="3011" templateId="42741" scriptId="426714"/>		 
+	</Script>
+	
+			<!--나비둥지-->
+	<Script id="320101" playingTime="1000000" enableInput="true">
+		<Action time="0" type="animation" animName="Close"/>
+		<Action time="0" type="defaultAnim" waitAnim="unarmedwait" moveAnim="unarmedwait" />
+	</Script>
+	<Script id="320110">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="0.0" to="0.0" duration="1" />
+		<Action time="1300" type="materialParam" param="Progress" from="0.0" to="1.0" duration="4000" />
+		<Action time="5300" type="materialParam" param="Dissolve_Ctrl" from="0.0" to="1.0" duration="800" />
+	</Script>
+	<Script id="320111">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="1.0" to="0.0" duration="380" />
+		<Action time="0" type="materialParam" param="Progress" from="1.0" to="0.0" duration="500" />
+		<Action time="800" type="materialParam" param="Dissolve_Ctrl" from="1.0" to="0.0" duration="0" />
+	</Script>	
+	<Script id="320112">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="0.0" to="0.0" duration="1" />
+		<Action time="1300" type="materialParam" param="Progress" from="9.0" to="1.0" duration="2200" />
+	</Script>	
+	<Script id="320113">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="0.0" to="0.0" duration="1" />
+		<Action time="0" type="materialParam" param="Progress" from="0.0" to="1.0" duration="100" />
+	</Script>	
+
+			<!--찬란한 파르퀴나의 둥지 가이드용-->
+	<Script id="303301" playingTime="1000000" enableInput="true">
+		<Action time="0" type="animation" animName="Close"/>
+		<Action time="0" type="defaultAnim" waitAnim="unarmedwait" moveAnim="unarmedwait" />
+	</Script>
+	<Script id="303310">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="0.0" to="0.0" duration="1" />
+		<Action time="1300" type="materialParam" param="Progress" from="0.0" to="1.0" duration="4000" />
+		<Action time="5300" type="materialParam" param="Dissolve_Ctrl" from="0.0" to="1.0" duration="800" />
+	</Script>
+	<Script id="303311">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="1.0" to="0.0" duration="380" />
+		<Action time="0" type="materialParam" param="Progress" from="1.0" to="0.0" duration="500" />
+		<Action time="800" type="materialParam" param="Dissolve_Ctrl" from="1.0" to="0.0" duration="0" />
+	</Script>	
+	<Script id="303312">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="0.0" to="0.0" duration="1" />
+		<Action time="1300" type="materialParam" param="Progress" from="9.0" to="1.0" duration="2200" />
+	</Script>	
+	<Script id="303313">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="0.0" to="0.0" duration="1" />
+		<Action time="0" type="materialParam" param="Progress" from="0.0" to="1.0" duration="100" />
+	</Script>		
+	
+	<!--18 겨울 최상위 던전 2네임드 날개 연출-->
+	<!--연출 시작-->
+	<Script id="320121">
+		<Action time="0" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="1000" />
+	</Script>
+	<!--연출 종료-->
+	<Script id="320122">
+		<Action time="0" type="materialParam" param="BlendWeight" from="1.0" to="0.0" duration="1000" />
+	</Script>
+	<Script id="320123" playingTime="1500" isOnlyPlayerTarget="true">
+		<Action time="1000" type="PostProcess" postprocessSet="40" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="40" param="Strength" from="0.0f" to="1.0f" duration="500" />
+			<Action time="500" type="cameraShake" duration="300" power="5" speed="10"/>
+		</Action>
+		<Action isFinal="true" type="none">
+			<Action time="0" type="PostProcess" postprocessSet="40" on="false" isOnlyPlayerTarget="true"/>
+		</Action>
+	</Script>   
+	<!--비행X필드컨텐츠-->
+	<Script id="250201" playingTime="1000000" enableInput="true">
+		<Action time="0" type="animation" animName="Close"/>
+		<Action time="0" type="defaultAnim" waitAnim="unarmedwait" moveAnim="unarmedwait" />
+	</Script>
+	<Script id="250210">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="0.0" to="0.0" duration="1" />
+		<Action time="1300" type="materialParam" param="Progress" from="0.0" to="1.0" duration="4000" />
+		<Action time="5300" type="materialParam" param="Dissolve_Ctrl" from="0.0" to="1.0" duration="800" />
+	</Script>
+	<Script id="250211">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="1.0" to="0.0" duration="380" />
+		<Action time="0" type="materialParam" param="Progress" from="1.0" to="0.0" duration="500" />
+		<Action time="800" type="materialParam" param="Dissolve_Ctrl" from="1.0" to="0.0" duration="0" />
+	</Script>	
+	<Script id="250212">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="0.0" to="0.0" duration="1" />
+		<Action time="1300" type="materialParam" param="Progress" from="9.0" to="1.0" duration="2200" />
+	</Script>	
+	<Script id="250213">
+		<Action time="0" type="materialParam" param="ProgressSwitch" from="0.0" to="0.0" duration="1" />
+		<Action time="0" type="materialParam" param="Progress" from="0.0" to="1.0" duration="100" />
+	</Script>	
+	<!--연출 시작-->
+	<Script id="250221">
+		<Action time="0" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="1000" />
+	</Script>
+	<!--연출 종료-->
+	<Script id="250222">
+		<Action time="0" type="materialParam" param="BlendWeight" from="1.0" to="0.0" duration="1000" />
+	</Script>
+	<Script id="250223" playingTime="1500" isOnlyPlayerTarget="true">
+		<Action time="1000" type="PostProcess" postprocessSet="40" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="40" param="Strength" from="0.0f" to="1.0f" duration="500" />
+			<Action time="500" type="cameraShake" duration="300" power="5" speed="10"/>
+		</Action>
+		<Action isFinal="true" type="none">
+			<Action time="0" type="PostProcess" postprocessSet="40" on="false" isOnlyPlayerTarget="true"/>
+		</Action>
+	</Script>
+	<!--아르곤 켈사이크 변신-->
+	<Script id="302601">
+		<Action time="10300" type="mesh" huntingZoneId="3026" playAttachedEffect="true" templateId="1004"/>
+		<Action time="10500" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="10700" />
+		<!-- 켈사이크 연출: 포스트 프로세스 효과-->
+		<Action time="0" type="PostProcess" postprocessSet="1" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="0.f" to="1.2f" duration="500">
+				<Action time="3000" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="1.2f" to="0.3f" duration="500">
+					<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="0.3f" to="0.0f" duration="500"/>
+				</Action>
+			</Action>
+		</Action>	
+		<Action isFinal="true" type="PostProcess" postprocessSet="1" on="false" />		
+	</Script>
+
+	<!-- 켈사이크 연출: 온도 높음 ON -->
+	<Script id="302602" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset2" on="true" blendTime="2.85"/>
+	</Script>
+	<!-- 켈사이크 연출: 온도 연출 OFF -->
+	<Script id="302603" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset3" on="false" blendTime="2.85"/>		
+	</Script>
+	<!-- 켈사이크 연출: 온도 낮음 ON -->
+	<Script id="302604" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset3" on="true" blendTime="2.85"/>
+	</Script>
+
+	<!-- 켈사이크 연출: 죽으면 모두 제거 -->
+	<Script id="302605" playingTime="0">
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset2" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset1" on="false" blendTime="2.85"/>
+		<Action time="0" type="aero" aeroSet="SWC_SD_AERO.AERO.SWC_SD_Aeroset3" on="false" blendTime="2.85"/>
+	</Script>
+	
+	<!-- 권술사 던전 변신 -->
+	<Script id="3103001">
+		<Action time="100" type="mesh" huntingZoneId="3103" templateId="1001"/>
+		<Action time="110" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="1400" />
+	</Script>
+	<Script id="3203001">
+		<Action time="100" type="mesh" huntingZoneId="3203" templateId="1001"/>
+		<Action time="110" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="1400" />
+	</Script>
+	<Script id="3203002">
+		<Action time="1800" type="mesh" huntingZoneId="3203" templateId="1002"/>
+		<Action time="1810" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="2400" />
+	</Script>
+
+	<!--바하르의신전 (가이드)-->
+	<Script id="3037001">
+		<Action time="1000" type="materialParam" param="BlendWeight" from="0.0" to="1.0" duration="500" />
+		<Action time="3410" type="materialParam" param="BlendWeight" from="1.0" to="0.0" duration="500" />
+	</Script>
+	<Script id="3037002">
+		<Action time="0" type="materialParam" param="ChangeOn" from="1.0" to="0.0" duration="0" />
+		<Action time="100" type="mesh" huntingZoneId="3037" templateId="2000"/>
+		<Action time="110" type="materialParam" param="ChangeOn" from="0.0" to="1.0" duration="6900" />
+	</Script>
+	<Script id="3037003" playingTime="8000" enableInput="false">
+		<Action time="100" type="CameraFocus" yaw="0" pitch="-12" distance="1200" huntingZoneId="3037" templateId="1101" on="true"/>
+		<Action time="4100" type="CameraFocus" yaw="0" pitch="-12" distance="3500" huntingZoneId="3037" templateId="1101" on="true"/>
+		<Action time="7000" type="CameraFocus" huntingZoneId="3037" templateId="1101" on="false"/>
+	</Script>
+
+</S1ActionScripts>

@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9804" name="@dungeon:9775" startPos="62621,149164,-9475" exitContinentId="13" exitPos="95722,-86825,-4383">
+  <!-- ## 켈사이크의 둥지 던전 ## - 탈출 좌표는 임시로 카이아도르 귀환 좌표 사용.  -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="58" />
+  <Condition type="maxMemberCount" value="5" />
+  <ClearCondition huntingZoneId="804" templateId="1000" amount="1" killCount="1" />
+
+  <EventGroup type="npchp" uniqueId="804,6005" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9804015" style="default" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="80400001" next="none" />
+		<EventTask type="timer" action="start" name="eventTimer" direction="reverse" value="900" timerType="rank" next="none"/> <!-- value="0" -->
+		<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  
+  <!-- 켈사이크 입장안내  :  던전 입장하면 입장 안내 메시지 출력하고, 분위기 연출용 포효소리를 출력한다. 수호자방 출구문을 스폰한다.  -->
+  <EventGroup type="enterTerritory" uniqueId="804,77500030">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500041" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 수호병 석상 스폰 :   켈사이크 던전에 유저가 들어왔을 때 수호병 석상스폰 시킨다.  확률에 따라 다른 종류의 석상 뭉치를 스폰한다. -->
+  <EventGroup type="enterTerritory" uniqueId="804,77500030">
+    <Event>
+      <EventTaskGroup probability="0.5">
+        <!-- 석상 -->
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500002" targetNpcId="0,0" startAggro="0" next="complete" />
+        <!-- 수호병 모두의 사망으로 관문 열기 : 수호병이 모두 죽으면 메세지 출력 후(테리토리 전멸) 열린다. -->
+        <EventTask type="message" string="@dungeon:9775005" style="default" next="time" nextValue="1" />
+        <!-- 문열기 : 앞뒤 창살문이 열린다 -->
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500041" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <!-- 석상 -->
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500003" targetNpcId="0,0" startAggro="0" next="complete" />
+        <!-- 수호병 모두의 사망으로 관문 열기 : 수호병이 모두 죽으면 메세지 출력 후(테리토리 전멸) 열린다. -->
+        <EventTask type="message" string="@dungeon:9775005" style="default" next="time" nextValue="1" />
+        <!-- 문열기 : 앞뒤 창살문이 열린다 -->
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500041" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <!-- 석상 -->
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500004" targetNpcId="0,0" startAggro="0" next="complete" />
+        <!-- 수호병 모두의 사망으로 관문 열기 : 수호병이 모두 죽으면 메세지 출력 후(테리토리 전멸) 열린다. -->
+        <EventTask type="message" string="@dungeon:9775005" style="default" next="time" nextValue="1" />
+        <!-- 문열기 : 앞뒤 창살문이 열린다 -->
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500041" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.05">
+        <!-- 석상 -->
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500005" targetNpcId="0,0" startAggro="0" next="complete" />
+        <!-- 수호병 모두의 사망으로 관문 열기 : 수호병이 모두 죽으면 메세지 출력 후(테리토리 전멸) 열린다. -->
+        <EventTask type="message" string="@dungeon:9775005" style="default" next="time" nextValue="1" />
+        <!-- 문열기 : 앞뒤 창살문이 열린다 -->
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500041" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.05">
+        <!-- 석상 -->
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500006" targetNpcId="0,0" startAggro="0" next="complete" />
+        <!-- 수호병 모두의 사망으로 관문 열기 : 수호병이 모두 죽으면 메세지 출력 후(테리토리 전멸) 열린다. -->
+        <EventTask type="message" string="@dungeon:9775005" style="default" next="time" nextValue="1" />
+        <!-- 문열기 : 앞뒤 창살문이 열린다 -->
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500041" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 수호병 석상을 하나라도 때리면, 시스템 메시지가 출력되고, 일정시간뒤 입구의 문이 스폰된다 -->
+  <EventGroup type="npchp" uniqueId="804,2000" value="100" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="804,2001" value="100" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="804,2002" value="100" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="804,2003" value="100" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="804,2004" value="100" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500040" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 석상이나, 석상몬스터 중 하나만 전투 리셋되면 입구 철장이 디스폰됨 -->
+  <EventGroup type="npcReset" uniqueId="804,2000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="804,2001">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="804,2002">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="804,2003">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="804,2004">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="804,3000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="804,3001">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="804,3002">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="804,3003">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="804,3004">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 켈사이크가 스폰된다 -->
+  <EventGroup type="enterTerritory" uniqueId="804,77500023">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500001" targetNpcId="0,0" startAggro="0" next="time" nextValue="1" />
+		<EventTask type="dynamicGeo" objectId="980401" door="open" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 전투 관련 부분 -->
+  <EventGroup type="npchp" uniqueId="775,1000" value="100" repeat="true">
+    <Event>
+      <EventTaskGroup>
+
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 켈사이크의 전투상태가 리셋되면 디버프 오브젝트를 모두 디스폰 -->
+  <EventGroup type="npcReset" uniqueId="804,1000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500100" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500063" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500065" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500060" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500061" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500062" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 작동 스위치가 부서지면 화염브레스 방어벽 스폰한다.-->
+  <EventGroup type="npchp" uniqueId="804,6001" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9804014" style="default" next="time" nextValue="0.1" />
+        <EventTask type="spawn" huntingZoneId="804" territoryId="77500032" targetNpcId="775,1000" startAggro="1000000" next="time" nextValue="3.806" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500032" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 켈사이크 사망안내  :  켈사이크가 사망하면, 사망 메시지를 내보내고, 배경음악을 바꾼다.  -->
+  <!-- 켈사이크의 HP가 0%가 되면 화염/냉기디버프 오브젝트 디스폰 / 이상상태 해제용 오브젝트 스폰 -->
+  <EventGroup type="npchp" uniqueId="804,1000" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="timer" action="stop" name="eventTimer" timerType="rank" next="time" nextValue="3" />
+		<EventTask type="timer" action="stop" name="eventTimer" value="0" next="none" />
+		<EventTask type="rankSystem" state="end" next="none" />
+		<EventTask type="spawn" huntingZoneId="804" territoryId="77500059" targetNpcId="" startAggro="" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500063" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500065" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="804" territoryId="77500039" next="time" nextValue="0.1" />
+        <EventTask type="message" string="@dungeon:9775011" style="default" next="time" nextValue="1" />
+        <!-- <EventTask type= "playMusic" musicId="1" playtime="10" next="time" nextValue="10" />
+				<EventTask type= "offMusic" next="none" /> -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+</Dungeon>

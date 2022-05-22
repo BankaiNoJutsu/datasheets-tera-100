@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9793" name="@dungeon:9793" startPos="68482, 125779, 776" exitContinentId="7004" exitPos="109897,78171,6029">
+  <!-- 아카샤의 은신처 인던 -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="48" />
+		<ClearCondition huntingZoneId="793" templateId="5005" amount="1" killCount="1" />
+
+
+  <!-- 첫번째 문 열기 -->
+  <EventGroup type="npcHp" uniqueId="793,6001" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931001" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="979301" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 두번째 문 열기 -->
+  <EventGroup type="npcHp" uniqueId="793,5001" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931002" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="979302" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 세번째 문 열기 -->
+  <EventGroup type="npcHp" uniqueId="793,6008" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931003" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="979303" next="time" nextValue="1" />
+        <EventTask type="playMovie" id="61" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 네번째 문(아카칼라쉬) 열기 -->
+  <EventGroup type="talkNpc" uniqueId="793,1003">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931004" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="979304" next="time" nextValue="1" />
+        <EventTask type="playMovie" id="63" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 다섯번째 문(길가쉬가디언) 열기 -->
+  <EventGroup type="talkNpc" uniqueId="793,1004">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931005" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="979305" next="time" nextValue="1" />
+        <EventTask type="playMovie" id="64" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 아카샤의방을 여는 오브젝트 소환 -->
+  <EventGroup type="npchp" uniqueId="793,5003" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931006" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300039" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="793,5004" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931006" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300039" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 여섯번째 문(아카샤) 열기 -->
+  <EventGroup type="talkNpc" uniqueId="793,1005">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931012" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="979306" next="time" nextValue="1" />
+        <EventTask type="playMovie" id="62" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="793,5003" value="50">
+    <!-- 아카 칼라쉬 전사의 hp가 50% 이하로 떨어지면 아르곤 사역자 졸개 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931008" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300027" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300028" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300029" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300030" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="793,5003" value="25">
+    <!-- 아카 칼라쉬 전사의 hp가 25% 이하로 떨어지면 아르곤 사역자 졸개 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931008" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300027" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300028" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300029" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300030" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="793,5005" value="50">
+    <!-- 아카샤의 hp가 50% 이하로 떨어지면 광포한 시누스 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931009" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300020" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="793,5005" value="15">
+    <!-- 아카샤의 hp가 15% 이하로 떨어지면 광포한 시누스 소환 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:97931009" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="793" territoryId="49300020" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

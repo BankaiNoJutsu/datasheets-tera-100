@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9012" name="@dungeon:9012" startPos="12791.6074,69247.1484,-6309.0581" exitContinentId="7023" exitPos="35363, -23945, -6068" destroyWaitMin="0">
+  <RestoreTargetQuest id="4602" forceRestore="true"/>
+  <Condition type="solo" />
+  <Condition type="levelOver" value="54" />
+  <Condition type="progressQuest" value="4602" taskId="1" />
+  <Condition type="completeQuest" value="4602" />
+  <EventGroup type="questProgress">
+    <Event questId="4602" taskId="11">
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200027" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 하스미나와 대화하여서 특수공간을 나가라는 테스크가 되면 차원의 마법석 스폰 -->
+  <EventGroup type="questProgress">
+    <Event questId="4602" taskId="12">
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200009" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 하스미나 방 오는 길 테리토리에 진입시 하스미나,몬스터 스폰 -->
+  <EventGroup type="enterTerritory" uniqueId="412,41200036">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200003" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200020" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200021" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200022" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200023" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200024" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200025" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="412" territoryId="41200003" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="412" territoryId="41200020" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="412" territoryId="41200021" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="412" territoryId="41200022" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="412" territoryId="41200023" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="412" territoryId="41200024" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="412" territoryId="41200025" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 하스미나 방 입구 테리토리에 진입시 몬스터 전투 시작 -->
+  <EventGroup type="enterTerritory" uniqueId="412,41200037">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="turnAi" turn="on" huntingZoneId="412" territoryId="41200003" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="412" territoryId="41200020" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="412" territoryId="41200021" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="412" territoryId="41200022" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="412" territoryId="41200023" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="412" territoryId="41200024" next="none" />
+        <EventTask type="turnAi" turn="on" huntingZoneId="412" territoryId="41200025" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 하스미나가 보스방에 입장 -->
+  <EventGroup type="enterTerritory" uniqueId="412,41200038" targetNpcId="412,2005">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200003" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200039" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="412,1000" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200027" next="none" />
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200039" next="none" />
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="412,1000" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200039" next="none" />
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcState" uniqueId="412,1000" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200039" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200040" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 딘그레이 디스폰 시 딘그레이 동료 디스폰 후 야스링 앞에 스폰 -->
+  <EventGroup type="questProgress">
+    <Event questId="4602" taskId="4">
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200002" next="none" />
+        <EventTask type="spawn" huntingZoneId="412" territoryId="41200042" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 딘그레이 방문 시 아르곤 벽 디스폰 -->
+  <EventGroup type="questProgress">
+    <Event questId="4602" taskId="3">
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200034" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 야스링 구출 연출 후 빌리저 디스폰 -->
+  <EventGroup type="questProgress">
+    <Event questId="4602" taskId="5">
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="5" />
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200002" next="none" />
+        <EventTask type="despawn" huntingZoneId="412" territoryId="41200041" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 하스미나 전투 구출 후 대화하면 패트롤 시작 -->
+  <EventGroup type="questProgress">
+    <Event questId="4602" taskId="9">
+      <EventTaskGroup>
+        <EventTask type="npcAi" targetNpcId="412,2005" aiid="107" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

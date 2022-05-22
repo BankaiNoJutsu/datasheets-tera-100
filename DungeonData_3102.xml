@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3102" name="@dungeon:3023" startPos="-117884,130698,21016" exitContinentId="2000" exitPos="103524,-77714,12901" startDir="" exitDir="90">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="69" />
+	<Retry retryId="2" />
+	<ClearCondition huntingZoneId="3102" templateId="1000" amount="1" killCount="1"/>
+
+
+	<!--던전 최초 설정-->
+	<EventGroup type="initialize" name="Initialize">
+	  <Event>
+	    <EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="3102" territoryId="320200002" next="none" />  <!-- 입구 차폐막 디스폰 -->
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+	<!-- 1네임드 전투 시작 시 -->
+	<EventGroup type="npcState" uniqueId="3102,1000" value="combat" repeat="true"> 
+      <Event>
+        <EventTaskGroup>
+		  <!-- EventTask type="timer" name="TheEnd" action="start" direction="reverse" value="600" timerUiOff="false" next="none"/--> <!-- 10분 Timer 시작 -->
+		  <EventTask type="spawn" huntingZoneId="3102" territoryId="320200002" next="none" />  <!-- 입구 차폐막 스폰 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<!-- 1네임드 리셋 시 -->
+    <EventGroup type="npcReset" uniqueId="3102,1000" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+		  <!-- EventTask type="timer" action="stop" name="ATSP" next="time" nextValue="1" /--> <!-- 타이머 정지 -->
+		  <!-- EventTask type="timer" action="stop" name="TheEnd" value="0" timerUiOff="true" next="none" /--> <!-- 제한 시간 Timer UI OFF -->
+		  <EventTask type="despawn" huntingZoneId="3102" territoryId="320200001" next="time" nextValue="5" />  <!-- 칼리가르 스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3102" territoryId="320200001" next="none" />  <!-- 칼리가르 스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3102" territoryId="320200002" next="none" />  <!-- 입구 차폐막 디스폰 -->
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+	<!-- 1네임드 사망 시 -->
+    <EventGroup type="npcHp" uniqueId="3102,1000" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <!-- EventTask type="timer" action="stop" name="TheEnd" value="0" timerUiOff="true" next="none" /--> <!-- 제한 시간 Timer Stop -->
+		  <EventTask type="despawn" huntingZoneId="3102" territoryId="320200002" next="none" />  <!-- 입구 차폐막 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3102" territoryId="310200001" next="none" /> <!-- 퇴장용 차원의 마법석 스폰 -->
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<!-- 타이머 종료 시 -->
+	<!-- EventGroup type="timer" timerName="TheEnd" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021013" target="npc" targetNpcId="3202,1000" turn="on" next="none" />
+	   </EventTaskGroup>
+      </Event>
+	</EventGroup-->
+
+	<!-- 패턴 관련 데이터 -->
+	<EventGroup type="none" id="100" name="터져라 투명NPC 제거" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="5" />
+		  <EventTask type="killNpc" targetNpcId="3102,1001" next="none" /> <!-- 터져라 npc 제거 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="101" name="액션 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="31021000" target="npc" targetNpcId="3102,1000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="102" name="패턴 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="31021001" target="npc" targetNpcId="3102,1000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="103" name="액션 및 패턴 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="31021000" target="npc" targetNpcId="3102,1000" turn="on" next="none" /> <!-- 액션 5초 -->
+		  <EventTask type="abnormality" abnormalityId="31021001" target="npc" targetNpcId="3102,1000" turn="on" next="none" /> <!-- 패턴 8초 -->
+		  <EventTask type="abnormality" abnormalityId="31021005" target="npc" targetNpcId="3102,1000" turn="on" next="none" /> <!-- 액션 10초 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="104" name="핵심액션 투명NPC 제거" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="5" />
+		  <EventTask type="killNpc" targetNpcId="3102,1002" next="none" /> <!-- 핵심액션 npc 제거 -->
+		  <EventTask type="killNpc" targetNpcId="3102,1003" next="none" /> <!-- 핵심액션 npc 제거 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="105" name="핵심액션 시작용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="106" name="전멸기 시작용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="31021006" target="npc" targetNpcId="3102,1000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="107" name="업화 이펙트 지우기용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="31021004" turn="off" target="player" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+</Dungeon>

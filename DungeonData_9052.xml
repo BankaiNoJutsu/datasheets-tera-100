@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9052" name="@dungeon:9052" startPos="-23548.2383,97960.9141,2722.9456" exitContinentId="7015" exitPos="-8186.5063,79194.4297,-1299.6886" enterLimitCount="3">
+  <Condition type="solo" />
+  <Condition type="levelOver" value="58" />
+  <Condition type="maxMemberCount" value="1" />
+  <Condition type="progressQuest" value="70111" taskId="2" />
+  <Condition type="completeQuest" value="70111" />
+  
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200071" next="none" /> <!-- 입구 문 1-->
+				<EventTask type="empty" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200008" next="none" /> <!--유령-->
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200006" next="none" /> <!--신사들-->
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200038" next="none" /> <!--숙녀들-->
+				<!-- <EventTask type="spawn" huntingZoneId="452" territoryId="45200039" next="none" /> 투명 오브젝트-->
+				<!--<EventTask type="spawn" huntingZoneId="452" territoryId="45200062" next="none" /> 보스방 문-->
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200009" next="none" /> <!-- 좀포리들-->
+		        <!-- <EventTask type="turnAi" turn="off" huntingZoneId="452" territoryId="45200038" next="none" /> -->
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200072" next="none" /> <!-- 입구 문 2-->
+				<EventTask type="workObjectSpawn" huntingZoneId="452" templateId="45213" next="none" /> <!--관 일반용-->
+		        <EventTask type="workObjectSpawn" huntingZoneId="452" templateId="45212" next="none" /> <!--음식 일반용-->
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200011" next="none" /> <!--문지기-->
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+	
+	<!-- 인질 소환 
+	<EventGroup type="enterTerritory" uniqueId="452,45200045">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200050" targetNpcId="452,12" startAggro="10000000" aggroInterval="10" aggroRange="1000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> -->
+
+	<!-- 인질 죽으면 숙녀들 AI 전환 
+	<EventGroup type="npcHp" uniqueId="452,101" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="452,12" patternListId="2" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+
+	<EventGroup type="questProgress">
+		<Event questId="70111" taskId="4">
+			<EventTaskGroup>
+				<EventTask type="flag" name="가이드4단계" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="questProgress">
+		<Event questId="70111" taskId="5">
+			<EventTaskGroup>
+				<EventTask type="flag" name="가이드5단계" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<EventGroup type="questProgress">
+		<Event questId="70111" taskId="6">
+			<EventTaskGroup>
+				<EventTask type="flag" name="가이드6단계" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	<EventGroup type="questProgress">
+		<Event questId="70111" taskId="7">
+			<EventTaskGroup>
+				<EventTask type="flag" name="가이드7단계" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	<!-- PC가 입장했을 때 -->
+	<EventGroup type="enterTerritory" uniqueId="452,45200069">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="입장" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<!-- 가이드 4단계에서 입장 시 주문으로 문을 파괴해보라는 메시지 출력-->
+	<EventGroup type="flag" name="가이드4단계,입장" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3" />
+				<EventTask type="message" string="@dungeon:9052007" style="combat" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 입구 문이 파괴되면 퀘스트 체크용 투명 NPC 소환, 경비병 소환-->
+	<EventGroup type="npcHp" uniqueId="452,5001" value="0" >
+		<Event>
+			<EventTaskGroup>
+				<!-- 투명npc-->
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200073" next="none" /> 
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200074" next="none" /> 
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200075" next="none" /> 
+				<!-- 경비병 -->
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200024" next="none" /> 
+				<EventTask type="flag" name="입구파괴" value="1" next="none" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<!--가이드 5단계 진행 중 문 파괴 시 퀘스트용 오브젝트 스폰, 일반 오브젝트, 문지기 디스폰 -->
+	<EventGroup type="flag" name="가이드5단계,입구파괴" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="workObjectDespawn" huntingZoneId="452" templateId="45213" next="none" /> <!-- 관 일반용 -->
+				<EventTask type="workObjectSpawn" huntingZoneId="452" templateId="45203" next="none" /> <!--관 퀘스트용 -->
+				<EventTask type="workObjectDespawn" huntingZoneId="452" templateId="45212" next="none" /> <!-- 음식 일반용 -->
+				<EventTask type="workObjectSpawn" huntingZoneId="452" templateId="45202" next="none" /> <!--음식 퀘스트용 -->
+				<EventTask type="despawn" huntingZoneId="452" territoryId="45200011" next="none" /> <!--문지기-->
+				<!-- 2초 뒤 변이 주문을 사용하라는 메시지 출력 -->
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="message" string="@dungeon:9052001" style="combat" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+				<!-- 7초 뒤 관 닫으라는 메시지 출력 -->
+				<EventTask type="empty" next="time" nextValue="7" />
+				<EventTask type="message" string="@dungeon:9052003" style="combat" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+				<EventTask type="flag" name="유령발견" value="0" next="none" />
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+
+	<!-- 가이드 6단계에서 5초 뒤 약 넣으라는 메시지 출력 -->	
+	<EventGroup type="questProgress">
+		<Event questId="70111" taskId="6">
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="5" />
+				<EventTask type="message" string="@dungeon:9052004" style="combat" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+
+	<!-- 음식 퀘스트용을 작동시켰을 때-->
+	<EventGroup type="Workobject" uniqueId="452,45202">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="음식작동" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	<!-- 관 퀘스트용을 작동시키면 유령들이 사망 -->
+	<EventGroup type="Workobject" uniqueId="452,45203">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killInTerritory" huntingZoneId="452" territoryId="45200008" target="npc" targetTemplateId="901" next="time" nextValue="1" />
+				<EventTask type="flag" name="관작동" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!-- 관 일반용을 작동시키면 유령들이 사망 -->
+	<EventGroup type="Workobject" uniqueId="452,45213">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killInTerritory" huntingZoneId="452" territoryId="45200008" target="npc" targetTemplateId="901" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+		
+	<!-- 가이드 오브젝트 2개를 모두 작동시켰을 때 문지기 스폰, 의식의 방으로 가라는 메시지 출력-->
+	<EventGroup type="flag" name="음식작동,관작동" >
+		<Event>
+			<EventTaskGroup>		
+				<EventTask type="empty" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200011" next="none" /> <!--문지기-->
+				<EventTask type="message" string="@dungeon:9052008" style="combat" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	<!-- 문지기를 처치한 후 보스방문 디스폰, 보스,제단 스폰-->
+	<EventGroup type="npcHp" uniqueId="452,2000" value="0" >
+		<Event>
+			<EventTaskGroup>
+				<!-- 보스방문-->
+				<EventTask type="despawn" huntingZoneId="452" territoryId="45200072" next="none" /> 
+				<!--보스-->
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200061" next="none" />
+				<!--제단-->
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200044" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	
+	<!-- 테이블을 작동시키면 좀포리들이 두꺼비로 변신 -->
+	<EventGroup type="Workobject" uniqueId="452,45202" >
+		<Event>
+			<EventTaskGroup>
+		        <EventTask type="workObjectDespawn" huntingZoneId="452" templateId="45202" next="none" />
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200076" next="none" />
+				<!--<EventTask type="flag" name="상한음식" value="1" next="none" />	-->		
+				<EventTask type="doActionScript" targetNpcId="452,711" actionScriptId="4520002" next="none" />						
+				<EventTask type="doActionScript" targetNpcId="452,712" actionScriptId="4520002" next="none" />	
+				<EventTask type="doActionScript" targetNpcId="452,713" actionScriptId="4520002" next="none" />	
+				<EventTask type="doActionScript" targetNpcId="452,714" actionScriptId="4520002" next="time" nextValue="4" />	
+				<EventTask type="despawn" huntingZoneId="452" territoryId="45200009" next="time" nextValue="1" />	
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200060" next="none" />					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 테이블을 작동시키면 좀포리들이 두꺼비로 변신 -->
+	<EventGroup type="Workobject" uniqueId="452,45212" >
+		<Event>
+			<EventTaskGroup>
+		        <EventTask type="workObjectDespawn" huntingZoneId="452" templateId="45212" next="none" />
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200076" next="none" />
+				<!--<EventTask type="flag" name="상한음식" value="1" next="none" />	-->		
+				<EventTask type="doActionScript" targetNpcId="452,711" actionScriptId="4520002" next="none" />						
+				<EventTask type="doActionScript" targetNpcId="452,712" actionScriptId="4520002" next="none" />	
+				<EventTask type="doActionScript" targetNpcId="452,713" actionScriptId="4520002" next="none" />	
+				<EventTask type="doActionScript" targetNpcId="452,714" actionScriptId="4520002" next="time" nextValue="4" />	
+				<EventTask type="despawn" huntingZoneId="452" territoryId="45200009" next="time" nextValue="1" />	
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200060" next="none" />					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 상한 음식이 스폰되었을 때
+	<EventGroup type="flag" name="상한음식" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1" />			
+				<EventTask type="doActionScript" targetNpcId="452,4000" actionScriptId="4520001" next="none" />			
+				<EventTask type="flag" name="상한음식" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> -->
+	
+	<!-- 그림자 사망 시 문 디스폰, 보스, 제단 스폰  
+	<EventGroup type="npcHp" uniqueId="452,2000" value="0">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="452" territoryId="45200062" next="none" />
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200061" next="none" />
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200044" next="none" />
+				</EventTaskGroup>
+		</Event>
+	</EventGroup> -->
+	
+	
+	<!-- 보스방에 들어갔을 때 -->
+	<EventGroup type="enterTerritory" uniqueId="452,45200061">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="보스발견" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<!-- 가이드 7단계에서 보스가 전투 상태가 되면 제단을 파괴하는 방법을 알려주는 메시지 출력-->
+	<EventGroup type="flag" name="가이드7단계,보스발견" >
+		<Event>
+			<EventTaskGroup>		
+				<EventTask type="message" string="@dungeon:9052005" style="combat" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="time" nextValue="5" />
+				<EventTask type="message" string="@dungeon:9052006" style="combat" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+				<EventTask type="flag" name="보스발견" value="0" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	<!-- 보스와 전투 시작하면 부하 소환 -->
+	<EventGroup id="1" type="npcState" uniqueId="452,99" value="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="부하소환1" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup id="2" type="flag" name="부하소환1" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="부하소환1" value="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200063" next="time" nextValue="30"/>
+				<EventTask type="despawn" huntingZoneId="452" territoryId="45200063" next="none"/>
+				<EventTask type="flag" name="부하소환2" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup id="3" type="flag" name="부하소환2" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="부하소환2" value="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="452" territoryId="45200064" next="time" nextValue="30"/>
+				<EventTask type="despawn" huntingZoneId="452" territoryId="45200064" next="none"/>
+				<EventTask type="flag" name="부하소환1" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<!-- 제단 파괴시 보스 디스폰 -->
+	<EventGroup type="npcHp" uniqueId="452,501" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>			
+				<EventTask type="despawn" huntingZoneId="452" territoryId="45200061" next="none" /> <!-- 보스 디스폰 -->
+				<EventTask type="killInTerritory" huntingZoneId="452" territoryId="45200064" target="npc" targetTemplateId="98" next="time" nextValue="1" /> <!-- 인형 죽이기 -->
+				<EventTask type="killInTerritory" huntingZoneId="452" territoryId="45200063" target="npc" targetTemplateId="98" next="time" nextValue="1" /> <!-- 인형 죽이기 -->
+				<EventTask type="flag" name="부하소환1" value="0" next="none"/>
+				<EventTask type="flag" name="부하소환2" value="0" next="none"/>
+				
+				<EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none"/>
+				<EventTask type="eventState" stateType="EventGroup" id="2" state="stop" next="none"/>
+				<EventTask type="eventState" stateType="EventGroup" id="3" state="stop" next="none"/>
+				<!-- 의식 저지를 성공했다는 메시지 출력-->
+				<EventTask type="message" string="@dungeon:9052009" style="combat" next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+
+		
+</Dungeon>

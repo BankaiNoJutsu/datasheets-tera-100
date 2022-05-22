@@ -1,0 +1,586 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BuyMenuData>
+	<!--
+	BuyMenu ID 규칙
+	1000~9999 : 전국가 공통 이벤트
+	10000~19999 : 공통
+	20000~29999 : 한국
+	30000~39999 : 일본
+	40000~49999 : 북미
+	50000~59999 : 유럽
+	60000~69999 : 러시아
+	70000~79999 : 대만
+	80000~89999 : 태국(동남아)
+	
+	스트링 ID 규칙
+	상점 스트링 ID = BuyMenu ID끝에 0 붙이기
+	상점 탭 스트링 ID = BuyMenu 끝에 1부터 붙이기(10개 넘기지 말자!)
+	예시) BuyMenu ID="10000", 상점 스트링 ID ="100000", 상점 1번탭 ID ="100001", 상점 2번탭 ID="100002"
+	예외) 매우 자주 쓰는 탭 3종은 아래 아이디로 써서 데이터 양 줄임
+	        교환목록 = "1000", 기타 = "2000", 이벤트 = "3000"
+			
+	resetType
+		none : 초기화되지 않음. 운영툴로만 초기화 가능
+		day : resetTime 노드값 입력 필요. 매일 해당 시간(24시간 기준)에 초기화됨
+		instanceNpc : Npc마다 구매 제한이 별도로 계산되어, Npc가 사라질 때 해당 Npc가 들고 있던 상점만 초기화
+	resetTime
+		매일 해당 시간(24시간 기준)에 초기화됨
+		국가별로 설정해야 하는 값이 다름. 공용 데이터시트에는 resetTime에 어떤 값을 입력하더라도 컨버터를 이용하여 아래 시간으로 변경하고 있음
+		EU : 6
+		NA : 12
+		JP : 9
+		RUS : 6
+		TW : 5
+		THA : 5
+	needMedalItemId : VillagerMenu.xml에서 BuyMenuMedal로 지정한 상점만 입력. 구매에 필요한 토큰의 TID
+	needPointNpcGuildId : VillagerMenu.xml에서 BuyMenuPoint로 지정한 상점만 입력. 구매에 필요한 평판 포인트의 ID, 이 경우 품목마다 구매 시 평판 등급 조건인 grade 노드를 입력해야 함. 또한 아이템 툴팁에 조건을 노출시키려면 ReputationItem.xml에 입력해야 함(가격은 더미로)
+	-->
+	<BuyMenu id="30000" desc="코이노보리의 천 상점" stringId="300000" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="117300">
+			<ItemList stringed="1000">
+				<Item itemTemplateId="262836" buyPrice="1000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="200932" buyPrice="150"/>
+				<Item itemTemplateId="200930" buyPrice="65"/>
+				<Item itemTemplateId="98579" buyPrice="35"/>
+				<Item itemTemplateId="206417" buyPrice="10"/>
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30001" desc="황금 축제 코인 교환 상점" stringId="300010" resetType="none">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="117301">
+			<ItemList stringed="1000">
+				<Item itemTemplateId="71468" buyPrice="5"/>
+				<Item itemTemplateId="98500" buyPrice="200"/>
+				<Item itemTemplateId="98514" buyPrice="200"/>
+				<Item itemTemplateId="200930" buyPrice="1200"/>
+				<Item itemTemplateId="200931" buyPrice="1500"/>
+				<Item itemTemplateId="117302" buyPrice="10000" limitType="account" limitCount="1"/>
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30002" desc="JP 소환봉 상점" stringId="300020" resetType="day" resetTime="9">
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="255">
+			<ItemList stringed="1000">
+				<Item itemTemplateId="256" buyPrice="5" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="117756" buyPrice="2" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="206854" buyPrice="15" limitType="account" limitCount="1"/>
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+
+	<BuyMenu id="30003" desc="JP_공중섬_보물찾기" stringId="300030" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="1000">
+				<Item itemTemplateId="117898" buyPrice="10000" count="1" />
+				<Item itemTemplateId="117899" buyPrice="10000" limitType="account" limitCount="1"/>
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30004" desc="JP_할로윈 이벤트" stringId="300040" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="560">
+			<ItemList stringed="1000">
+				<Item itemTemplateId="257180" buyPrice="200" limitType="account" limitCount="1" />
+				<Item itemTemplateId="117897" buyPrice="1" limitType="account" limitCount="300"/>
+				<Item itemTemplateId="92141" buyPrice="300" limitType="account" limitCount="1"/>
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30005" desc="JP_배틀패스 이벤트" stringId="300050" resetType="none" >
+		<Menu id="1" desc="BP 교환 상점" probability="1" needMedalItemId="101873">
+			<ItemList stringed="300051">
+				<Item itemTemplateId="101884" buyPrice="500" limitType="account" limitCount="1" />
+				<Item itemTemplateId="101885" buyPrice="1000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101886" buyPrice="4000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101887" buyPrice="7000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="101888" buyPrice="10000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101889" buyPrice="20000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101890" buyPrice="30000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="101891" buyPrice="40000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101892" buyPrice="50000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101893" buyPrice="60000" limitType="account" limitCount="1"/>
+			</ItemList>			
+			<ItemList stringed="300052">
+				<Item itemTemplateId="101895" buyPrice="500" limitType="account" limitCount="1" />
+				<Item itemTemplateId="101896" buyPrice="1000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101897" buyPrice="4000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101898" buyPrice="7000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="101899" buyPrice="10000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101900" buyPrice="20000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101901" buyPrice="30000" limitType="account" limitCount="1" />
+				<Item itemTemplateId="101902" buyPrice="40000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101903" buyPrice="50000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="101904" buyPrice="60000" limitType="account" limitCount="1" />
+			</ItemList>			
+			<ItemList stringed="300053">
+				<Item itemTemplateId="101908" buyPrice="60000" />
+				<Item itemTemplateId="101894" buyPrice="1000" />
+				<Item itemTemplateId="101882" buyPrice="1" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30006" desc="JP_오행의 결정 이벤트" stringId="300060" resetType="day" resetTime="9" >
+		<Menu id="1" desc="귀중한 교환 상점" probability="1" needMedalItemId="118072">
+			<ItemList stringed="1000">
+				<Item itemTemplateId="118088" buyPrice="5" limitType="account" limitCount="1" />
+				<Item itemTemplateId="118090" buyPrice="5" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="69000" buyPrice="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="69001" buyPrice="1" limitType="account" limitCount="4" />
+				<Item itemTemplateId="98681" buyPrice="3" limitType="account" limitCount="1"/>
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30007" desc="JP_히나마츠리 이벤트" stringId="300070" resetType="none" >
+		<Menu id="1" desc="히나마츠리 장비 상점" probability="1" needMedalItemId="118113">
+			<ItemList stringed="300071">
+				<Item itemTemplateId="118112" buyPrice="280" limitType="account" limitCount="1" />
+				<Item itemTemplateId="89737" buyPrice="2" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="118115" buyPrice="120" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="201037" buyPrice="2" limitType="account" limitCount="200" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30008" desc="JP_히나마츠리 이벤트" stringId="300080" resetType="day" resetTime="9" >
+		<Menu id="1" desc="히나마츠리 아이템 상점" probability="1" needMedalItemId="118113">
+			<ItemList stringed="300071">
+				<Item itemTemplateId="118114" buyPrice="1" limitType="account" limitCount="1" />
+				<Item itemTemplateId="69001" buyPrice="3" limitType="account" limitCount="4"/>
+				<Item itemTemplateId="69000" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="98681" buyPrice="4" limitType="account" limitCount="4" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30009" desc="JP97 9주년 배틀패스(3rd) 이벤트" stringId="300090" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="118355">
+			<ItemList stringed="300091">
+				<Item itemTemplateId="118356" buyPrice="1000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118357" buyPrice="4000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118358" buyPrice="7000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118359" buyPrice="10000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118360" buyPrice="20000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118361" buyPrice="30000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118362" buyPrice="40000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118363" buyPrice="50000" limitType="account" limitCount="1"/>	
+				<Item itemTemplateId="118364" buyPrice="60000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118365" buyPrice="70000" limitType="account" limitCount="1"/>
+			</ItemList>	
+			<ItemList stringed="300092">
+				<Item itemTemplateId="118426" buyPrice="70000" />
+			</ItemList>							
+		</Menu>
+	</BuyMenu>		
+	<BuyMenu id="30010" desc="JP_낚시 이벤트" stringId="300100" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="118143">
+			<ItemList stringed="300101">
+				<Item itemTemplateId="115066" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="369" buyPrice="50" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="69001" buyPrice="10" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="98680" buyPrice="3" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="118145" buyPrice="30" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="206053" buyPrice="1" limitType="account" limitCount="300"/>
+				<Item itemTemplateId="202015" buyPrice="2" />
+				<Item itemTemplateId="98666" buyPrice="4" />	
+				<Item itemTemplateId="98668" buyPrice="4" />
+				<Item itemTemplateId="98670" buyPrice="4" />
+				<Item itemTemplateId="207226" buyPrice="5" />
+				<Item itemTemplateId="207227" buyPrice="5" />
+			</ItemList>						
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="30011" desc="진 벚꽃 길리두" stringId="300105" resetType="day" resetTime="9" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="110742">
+			<ItemList stringed="300101">
+				<Item itemTemplateId="110732" buyPrice="1" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="110743" buyPrice="100" />
+				<Item itemTemplateId="69001" buyPrice="3" limitType="account" limitCount="4"/>
+				<Item itemTemplateId="69000" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="114" buyPrice="3" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="207109" buyPrice="100" />
+				<Item itemTemplateId="98675" buyPrice="3" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="98676" buyPrice="3" limitType="account" limitCount="5"/>	
+				<Item itemTemplateId="89737" buyPrice="3" limitType="account" limitCount="1"/>
+			</ItemList>						
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="30012" desc="큐브 상인" stringId="300106" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" >
+			<ItemList stringed="300102">
+				<Item itemTemplateId="110735" buyPrice="10000" />
+				<Item itemTemplateId="110736" buyPrice="10000" />
+				<Item itemTemplateId="110737" buyPrice="10000" />				
+			</ItemList>						
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="30013" desc="대박 당첨 교환소" stringId="300107" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="110738">
+			<ItemList stringed="300109">
+				<Item itemTemplateId="99292" buyPrice="3" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202048" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202049" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202050" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202051" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="202052" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="207212" buyPrice="2" count="3" limitType="account" limitCount="1"/>	
+				<Item itemTemplateId="207215" buyPrice="2" count="3" limitType="account" limitCount="1"/>
+			</ItemList>						
+			<ItemList stringed="300110">
+				<Item itemTemplateId="89512" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89520" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89528" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89536" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89548" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89552" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89564" buyPrice="1" count="1" limitType="account" limitCount="1"/>	
+				<Item itemTemplateId="89572" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89580" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89588" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89592" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89604" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89608" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+			</ItemList>						
+			<ItemList stringed="300111">
+				<Item itemTemplateId="241559" buyPrice="1" count="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="268556" buyPrice="1" limitType="account" limitCount="1"/>				
+				<Item itemTemplateId="118097" buyPrice="1" count="3" limitType="account" limitCount="1"/>
+			</ItemList>							
+			<ItemList stringed="300112">
+				<Item itemTemplateId="101818" buyPrice="1" count="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89042" buyPrice="1" count="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89142" buyPrice="1" count="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="209125" buyPrice="1" count="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="209126" buyPrice="1" count="3" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="110740" buyPrice="1" />
+				<Item itemTemplateId="20859" buyPrice="1" />	
+				<Item itemTemplateId="20869" buyPrice="1" />
+			</ItemList>						
+		</Menu>				
+	</BuyMenu>		
+	<BuyMenu id="30014" desc="당첨 교환소" stringId="300108" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="110739">
+			<ItemList stringed="300104">
+				<Item itemTemplateId="207325" buyPrice="2" limitType="account" limitCount="6"/>
+				<Item itemTemplateId="118108" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118109" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118110" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118111" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="369" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="207261" buyPrice="5" limitType="account" limitCount="10"/>	
+				<Item itemTemplateId="206884" buyPrice="5" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="209904" buyPrice="1" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="89021" buyPrice="2" />
+				<Item itemTemplateId="89031" buyPrice="2" />
+				<Item itemTemplateId="89121" buyPrice="2" />
+				<Item itemTemplateId="89131" buyPrice="2" />
+				<Item itemTemplateId="98681" buyPrice="1" />
+				<Item itemTemplateId="118096" buyPrice="1" />				
+			</ItemList>						
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30015" desc="코이노보이 옷감 상점" stringId="300113" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="118154">
+			<ItemList stringed="300114">
+				<Item itemTemplateId="118155" buyPrice="9000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118156" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="89768" buyPrice="3" />
+				<Item itemTemplateId="89771" buyPrice="3" />
+				<Item itemTemplateId="98675" buyPrice="250" />
+				<Item itemTemplateId="98676" buyPrice="250" />
+				<Item itemTemplateId="98677" buyPrice="2500" limitType="account" limitCount="3"/>	
+				<Item itemTemplateId="98678" buyPrice="2500" limitType="account" limitCount="3"/>
+			</ItemList>						
+			<ItemList stringed="300115">
+				<Item itemTemplateId="118157" buyPrice="300" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118158" buyPrice="600" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118159" buyPrice="1200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118160" buyPrice="2400" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118161" buyPrice="4500" limitType="account" limitCount="1"/>				
+			</ItemList>						
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30016" desc="금빛 조각 상점" stringId="300116" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="118168">
+			<ItemList stringed="300117">
+				<Item itemTemplateId="117302" buyPrice="9000" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="204479" buyPrice="100" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="204480" buyPrice="100" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="204481" buyPrice="100" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="204482" buyPrice="100" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="201239" buyPrice="10" />	
+				<Item itemTemplateId="201222" buyPrice="10" />
+				<Item itemTemplateId="201221" buyPrice="1" />
+			</ItemList>						
+			<ItemList stringed="300118">
+				<Item itemTemplateId="118157" buyPrice="300" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118158" buyPrice="600" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118159" buyPrice="1200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118160" buyPrice="2400" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118161" buyPrice="4500" limitType="account" limitCount="1"/>	
+			</ItemList>					
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30017" desc="2020 보물상자의 내용물" stringId="300119" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300120">
+				<Item itemTemplateId="118163" buyPrice="1" count="1" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118164" buyPrice="1" count="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118165" buyPrice="1" limitType="account" limitCount="1"/>				
+			</ItemList>
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="30018" desc="여름의 양복점" stringId="300121" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" needMedalItemId="110770">
+			<ItemList stringed="300122">
+				<Item itemTemplateId="110758" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="110775" buyPrice="120" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="110771" buyPrice="30" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="110772" buyPrice="30" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="110773" buyPrice="30" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="110774" buyPrice="30" limitType="account" limitCount="2"/>
+			</ItemList>	
+			<ItemList stringed="300123">
+			</ItemList>		
+		</Menu>		
+	</BuyMenu>		
+	<BuyMenu id="30019" desc="JP_던전 장비 지원" stringId="300124" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="118193">
+			<ItemList stringed="300125">
+				<Item itemTemplateId="118108" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118109" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118110" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118111" buyPrice="10" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118194" buyPrice="15" limitType="account" limitCount="2"/>
+			</ItemList>
+			<ItemList stringed="300126">
+				<Item itemTemplateId="98675" buyPrice="2" />
+				<Item itemTemplateId="98676" buyPrice="2" />
+				<Item itemTemplateId="98677" buyPrice="50" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="98678" buyPrice="50" limitType="account" limitCount="3"/>
+			</ItemList>			
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="30020" desc="JP_이벤트 던전 이벤트" stringId="300127" resetType="day" resetTime="9" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="118213">
+			<ItemList stringed="300125">
+				<Item itemTemplateId="118214" buyPrice="20" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118215" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="204488" buyPrice="5" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="110740" buyPrice="20" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118201" buyPrice="1" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="209122" buyPrice="1" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="209124" buyPrice="1" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="202016" buyPrice="600" limitType="account" limitCount="1"/>
+			</ItemList>
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="30021" desc="JP_9주년 보물찾기" stringId="300128" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300131">			
+				<Item itemTemplateId="118190" buyPrice="10000" />
+			</ItemList>						
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="30022" desc="JP_9주년 보물찾기" stringId="300129" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300132">			
+				<Item itemTemplateId="118190" buyPrice="10000" />			
+			</ItemList>						
+		</Menu>
+	</BuyMenu>	
+	<BuyMenu id="30023" desc="JP_9주년 보물찾기" stringId="300130" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300133">			
+				<Item itemTemplateId="118190" buyPrice="10000" />			
+			</ItemList>						
+		</Menu>	
+	</BuyMenu>
+	<BuyMenu id="30025" desc="JP_골드러쉬 세그레토" stringId="300134" resetType="instanceNpc" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="118444" >
+			<ItemList stringed="300135">			
+				<Item itemTemplateId="118440" buyPrice="50" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="98677" buyPrice="300" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="98678" buyPrice="100" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="204488" buyPrice="15" limitType="account" limitCount="10"/>
+			</ItemList>						
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30026" desc="JP_골드러쉬 일방산인" stringId="300136" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="118444" >
+			<ItemList stringed="300137">			
+				<Item itemTemplateId="118442" buyPrice="100" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="118440" buyPrice="200" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="118443" buyPrice="20" limitType="account" limitCount="50"/>
+				<Item itemTemplateId="204489" buyPrice="15" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="201221" buyPrice="1" />
+				<Item itemTemplateId="98677" buyPrice="600" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="98678" buyPrice="200" limitType="account" limitCount="10"/>				
+			</ItemList>						
+		</Menu>
+	</BuyMenu>		
+	<BuyMenu id="30027" desc="단풍잎 모으기" stringId="300138" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="118496" >
+			<ItemList stringed="300139">			
+				<Item itemTemplateId="118495" buyPrice="200" limitType="account" limitCount="1"/>
+				<Item itemTemplateId="204489" buyPrice="5" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="204490" buyPrice="6" limitType="account" limitCount="100"/>
+				<Item itemTemplateId="207613" buyPrice="7" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="207617" buyPrice="8" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="207621" buyPrice="9" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="94413" buyPrice="50" limitType="account" limitCount="2"/>		
+				<Item itemTemplateId="94415" buyPrice="50" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="94414" buyPrice="50" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="94416" buyPrice="50" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="94417" buyPrice="200" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="94419" buyPrice="200" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="94418" buyPrice="200" limitType="account" limitCount="2"/>
+				<Item itemTemplateId="94420" buyPrice="200" limitType="account" limitCount="2"/>		
+				<Item itemTemplateId="94406" buyPrice="20" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94409" buyPrice="20" limitType="account" limitCount="5"/>					
+			</ItemList>		
+			<ItemList stringed="300140">			
+				<Item itemTemplateId="360000" buyPrice="15" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="360001" buyPrice="15" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="360002" buyPrice="15" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="360003" buyPrice="15" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="360004" buyPrice="15" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="360005" buyPrice="15" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="360006" buyPrice="15" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="360007" buyPrice="15" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="361000" buyPrice="30" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="361001" buyPrice="30" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="361002" buyPrice="30" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="361003" buyPrice="30" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="361004" buyPrice="30" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="361005" buyPrice="30" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="361006" buyPrice="30" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="361007" buyPrice="30" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="301021" buyPrice="10" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="301022" buyPrice="5" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="301023" buyPrice="5" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="301024" buyPrice="5" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="301025" buyPrice="5" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="301026" buyPrice="5" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="301019" buyPrice="5" limitType="account" limitCount="20"/>
+				<Item itemTemplateId="301020" buyPrice="5" limitType="account" limitCount="20"/>		
+			</ItemList>									
+		</Menu>
+	</BuyMenu>		
+<!-- JP_스탬프_랠리 이벤트 -->
+	<BuyMenu id="30028" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118447" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30029" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118448" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30030" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118449" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30031" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118450" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30032" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118451" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30033" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118452" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30034" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118453" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30035" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118454" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30036" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118455" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30037" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118456" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30038" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118457" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30039" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118458" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30040" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118459" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<BuyMenu id="30041" desc="JP_스탬프랠리_이벤트" stringId="300270" resetType="none" >
+		<Menu id="1" desc="탭1" probability="1" >
+			<ItemList stringed="300271">
+				<Item itemTemplateId="118460" buyPrice="10000" />
+			</ItemList>			
+		</Menu>
+	</BuyMenu>
+	<!-- JP 연어 낚시 이벤트 -->
+	<BuyMenu id="30042" desc="JP 연어 낚시 이벤트" stringId="300420" resetType="none" >
+		<Menu id="1" desc="노멀" probability="1" needMedalItemId="110811" >
+			<ItemList stringed="300421">			
+				<Item itemTemplateId="110820" buyPrice="99999" limitType="account" limitCount="1"/>		
+				<Item itemTemplateId="118329" buyPrice="10000" limitType="account" limitCount="1"/>		
+				<Item itemTemplateId="98679 " buyPrice="1" limitType="account" limitCount="10000"/>
+				<Item itemTemplateId="94413 " buyPrice="5000" limitType="account" limitCount="5"/>		
+				<Item itemTemplateId="94414 " buyPrice="5000" limitType="account" limitCount="5"/>		
+				<Item itemTemplateId="94415 " buyPrice="5000" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94416 " buyPrice="5000" limitType="account" limitCount="5"/>
+				<Item itemTemplateId="94417 " buyPrice="10000" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="94418 " buyPrice="10000" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="94419 " buyPrice="10000" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="94420 " buyPrice="10000" limitType="account" limitCount="3"/>
+				<Item itemTemplateId="207613" buyPrice="3000" limitType="account" limitCount="10"/>		
+				<Item itemTemplateId="207617" buyPrice="4500" limitType="account" limitCount="10"/>
+				<Item itemTemplateId="207621" buyPrice="6000" limitType="account" limitCount="10"/>					
+			</ItemList>		
+		</Menu>
+	</BuyMenu>		
+</BuyMenuData>

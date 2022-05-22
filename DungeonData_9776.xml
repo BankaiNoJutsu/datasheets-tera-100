@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9776" name="@dungeon:9776" startPos="70993.8281,155509.9531,3478.2278" exitContinentId="7022" exitPos="-21152,61167,3900">
+  <!-- 공포의 미궁 스토리 던전 -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="57" />
+		<ClearCondition huntingZoneId="776" templateId="4000" amount="1" killCount="1" />
+
+
+  <!-- 비밀의 문 열기 (시누스 30% 확률로 소환) -->
+  <EventGroup type="enterTerritory" uniqueId="776, 77600005">
+    <Event>
+      <!-- 시누스 소환 -->
+      <EventTaskGroup probability="0.3">
+        <EventTask type="spawn" huntingZoneId="776" territoryId="77600003" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환 -->
+      <EventTaskGroup probability="0.7"></EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 마리네우 사망 시 마법석 등장 -->
+  <EventGroup type="npcHp" uniqueId="776,3901" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="77600006" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="77600006" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 알레이스터 사망 시 마법석 등장 -->
+  <EventGroup type="npcHp" uniqueId="776,3902" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="77600006" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="77600006" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 비밀의 문 열기 (다이나믹 지오 열기) -->
+  <EventGroup type="npcHp" uniqueId="776,8015" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="dynamicGeo" objectId="977603" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9776002" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1층 가혹한 고문관 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,1902" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="dynamicGeo" objectId="977601" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9776001" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600036" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1층 킬리언의사자 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,1903" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600147" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600036" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1층 포레스트 퀸 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,1901" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="dynamicGeo" objectId="977602" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9776001" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600011" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2층 빙의된 거인 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,2901" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600149" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600089" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3층 쿠마스 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,8000" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600150" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600037" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2층 아르마딜로 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,2902" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600151" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600038" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2층 메지션 드레곤 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,2903" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600152" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600153" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600101" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3층 킬리언 광대 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,3902" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="dynamicGeo" objectId="977606" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9776002" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600119" next="none" />
+        <EventTask type="despawn" huntingZoneId="776" territoryId="77600003,47600100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3층 아르곤 사제 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,3901" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600155" next="none" />
+        <EventTask type="spawn" huntingZoneId="776" territoryId="47600119" next="none" />
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600009,47600011,47600036,47600089,47600037,47600038,47600101" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 킬리언 HP 80%에 루팅데드 소환 -->
+  <EventGroup type="npcHp" uniqueId="776,4000" value="80" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="776" territoryId="77600001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="776,4000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="77600001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="776,4000" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="77600001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 킬리언 사망 시 몬스터 제거 -->
+  <EventGroup type="npcHp" uniqueId="776,4000" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600120" next="time" nextValue="0.1" />
+        <EventTask type="despawn" huntingZoneId="776" territoryId="47600128" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

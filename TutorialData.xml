@@ -1,0 +1,1351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 임시 포맷이므로 언제든지 변경 가능 : 포맷 검증용 -->
+<!-- TutorialEffect의 경우 반복적으로 사용할것 같아서 별도로 빼두었음. 사용할곳에서는 id를 이용해서 원하는 TutorialEffect를 사용. -->
+<!-- 2009.9.8 추가 : HelpPage 표시 기능, TextList대신에 HelpPageList를 사용하면 해당되는 HelpPage를 표시함. -->
+<!-- <HelpPageList> -->
+<!-- 	<HelpPage id="2"> -->
+<!-- </HelpPageList> -->
+<!-- 2012.2.8 추가 : ConditionList > ReputationCondition 노드 추가. 도움말을 평판 관련 조건으로 팝업시키기 위한 것 -->
+<!-- <ConditionList> -->
+<!-- <ReputationCondition event="add" reputationId="604" /> -->
+		<!-- event="add" : 새로운 평판 세력을 알게 되었을 때 -->
+		<!-- event="remove" : 알고 있던 평판 세력을 잊어 버렸을 때 -->
+		<!-- event="level" : 평판 세력의 평판 단계가 변경되었을 때 -->
+		<!-- event="update" : 평판 세력의 평판 수치가 변경되었을 때 -->
+		<!-- reputationId="604" : 평판 세력 ID 입력 (NPCGuild@id) / 0으로 입력하면 모든 평판 세력에 대해서 동작 -->
+<!-- </ConditionList> -->
+<!-- 2014.12.18 추가 : ConditionList > AchievementCondition 노드 추가. 업적 달성 시 도움말을 팝업 시키기 위한 것 -->
+<!-- <ConditionList> -->
+<!-- <AchievementCondition event="complete" achievementId="204" /> -->
+		<!-- event="complete" : 업적 완료했을 때 -->
+		<!-- achievementId="204,7,10" : 업적 ID 입력. 여러 업적 ID 입력 가능. "OR" 조건으로 동작함 -->
+		<!--                            achievementId 항목을 여러 줄로 추가할 경우에는 "AND" 조건으로 동작함 -->
+		<!--                            ex) <AchievementCondition event="complete" achievementId="204" /> -->
+		<!-- 							    <AchievementCondition event="complete" achievementId="7" /> -->
+		<!-- 								위와 같이 작성할 경우 204, 7 두 가지 업적을 모두 달성해야 조건에 만족 -->
+<!-- </ConditionList> -->
+
+
+<TutorialData show="true">
+   <PlayData initLevel="20" initContinentId="9015" dungeonContinentId="9016" initPos="6396, -56126, 37" dir="180"/>
+	<EffectList>
+	<!-- id : Effect간의 구분을 위해 사용 -->
+	<!-- showSound : 나타날때 사용할 사운드 -->
+	<!--Effect id="1" showSound="2001" /-->
+	<Effect id="1"/>
+	</EffectList>
+	<!-- id : Data간의 구분을 위해 사용 -->
+	<!-- repeat : 반복 여부 -->
+	<!-- priority : 우선 순위 1부터 4까지 값이 클수록 우선 순위가 높음. -->
+	<!-- textId : 표시할 문자 정보 -->
+	<!-- tutorialEffectId : 사용할 TutorialEffect정보 -->
+	<!-- showDuration : 표시 시간 s -->
+	<!-- event : 상황 정보, 종류에 따라서 의미있는 것이 다름. new, complete 등-->
+	<!-- questId : 참조하는 퀘스트 -->
+	<!-- skillId : 참조하는 스킬 -->
+	<!-- taskId : 참조하는 task -->
+	<!-- itemId : 참조하는 아이템 -->
+	<!-- territoryId : 참조하는 테리토리 -->
+	<!-- race : 종족 정보 -->
+	<!-- class : 직업 정보 -->
+	<!-- minLevel : 최소 레벨 -->
+	<!-- maxLevel : 최대 레벨 -->
+	<!-- minTotalExp : 최소 경험치 -->
+	<!-- maxTotalExp : 최대 경험치 -->
+	<!-- rate : 0~1 -->
+	<!-- interval : 다음 조건 완료까지 최소 시간 간격, s -->
+  <DataList>
+
+
+	<!-- 이동 -->
+	<Data id="1" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+		<HelpPage id="1"/>
+		<ConditionInfo>
+			<ConditionList>
+				<CharCondition race="common" gender="common" class="common" />
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+
+	<!-- UI 모드	첫퀘스트 수락후 -->
+	<Data id="2" repeat="false" priority="3" tutorialEffectId="1" delayTime="5" showDuration="8" type="game">
+	  <HelpPage id="2"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <!--QuestCondition event="new" questId="1301" /-->
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+    
+    <!-- 간략지도	두번때 퀘스트 수락후 -->
+	<Data id="3" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="3"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="new" questId="1321" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+
+	<!--위치링크	1322 퀘스트 수락후-->
+	<Data id="4" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="4"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="new" questId="1322" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+
+	<!-- 레이더	 1318 퀘스트 수락후 -->
+	<Data id="5" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="5"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="1318" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	
+	<!-- 강화 크리스탈	"1307 퀘스트 완료후"  -->
+	<Data id="7" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="7"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="1307" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 장비의 강화	6099 퀘스트 완료 후  -->
+	<Data id="8" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="8"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="6099" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 스킬 습득  -->
+	<Data id="901" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="9"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="warrior" />
+		  <QuestCondition event="complete" questId="1371" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	<Data id="902" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="9"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="lancer" />
+		  <QuestCondition event="complete" questId="1372" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	<Data id="902" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="9"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="slayer" />
+		  <QuestCondition event="complete" questId="1373" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	<Data id="904" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="9"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="berserker" />
+		  <QuestCondition event="complete" questId="1374" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	<Data id="905" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="9"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="archer" />
+		  <QuestCondition event="complete" questId="1375" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	<Data id="906" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="9"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="sorcerer" />
+		  <QuestCondition event="complete" questId="1376" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	<Data id="907" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="9"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="priest" />
+		  <QuestCondition event="complete" questId="1377" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	<Data id="908" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="9"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="elementalist" />
+		  <QuestCondition event="complete" questId="1378" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+		
+	<!-- 퀘스트 난이도 구분 -->
+	<Data id="10" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="10"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="1313" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+
+	<!-- 퀘스트 난이도 구분 -->
+	<!--Data id="11" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="11"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" minTotalExp="20000" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data-->
+		
+	<!-- 파티 채집 -->
+	<Data id="12" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="12"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="warrior" />
+		  <QuestCondition event="new" questId="1334" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 파티 몬스터 구분 -->
+	<Data id="13" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="13"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="new" questId="1501" taskId="11" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 호문쿨루스의 사용 -->
+	<Data id="14" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="14"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="warrior" />
+		  <QuestCondition event="complete" questId="6303" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 인장의 사용 -->
+	<Data id="15" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="15"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="warrior" />
+		  <QuestCondition event="new" questId="291" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 전투의 기본		베카스 잡는 퀘 수락시 -->
+	<Data id="16" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="16"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="new" questId="1303" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 제작		제작 가이드 퀘 수락시 -->
+	<Data id="18" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="18"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="new" questId="6381" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 추출		제작 가이드 퀘 수락시 -->
+	<Data id="19" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="19"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="new" questId="6381" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 문장 사용법 	문장 보상 주는 퀘스트 완료 후 -->
+	<Data id="20" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="20"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="6358" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 전장		전장 가이드퀘 수락 후 -->
+	<Data id="21" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="21"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="new" questId="7290" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 파티매칭		비밀기지 입장 퀘스트 수락시-->
+	<Data id="22" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="22"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="new" questId="48701" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+		
+	<!-- 거래중개소		밸리카 처음 갔을때 적당히 찌르자.. -->
+	<Data id="23" repeat="false" priority="3" tutorialEffectId="1" delayTime="60" showDuration="8" type="game">
+	  <HelpPage id="23"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="1317" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>
+	
+	<!-- 마을 이동 주문서의 사용		초승달마을 방문 퀘 완료시 -->
+	<Data id="24" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="24"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="325" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+
+	<!-- 캠프로 이동		여명에서 이동 주문서 가이드퀘 수락시 -->
+	<Data id="25" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="25"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="1390" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+	<!-- 부적의 사용		휴식 가이드퀘 완료시 -->
+	<Data id="27" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="27"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="1385" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+	<!-- 인벤토리 확장		밸리카에서 인벤토리 확장 퀘 수락시 -->
+	<Data id="30" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="30"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <QuestCondition event="complete" questId="6359" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+	<!-- 길드 생성  8 레벨-->
+	<Data id="31" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="31"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" minLevel="8" maxLevel="8" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+	<!-- 검은 틈, 59레벨 달성 시 -->
+	<Data id="32" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="32"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" minLevel="59" maxLevel="59" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+	<!-- 평판과 일일 퀘스트, 최초로 평판 세력을 알게 되었을 때 -->
+	<Data id="33" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="33"/>
+	  <ConditionInfo>
+		<ConditionList>
+		  <CharCondition race="common" gender="common" class="common" />
+		  <ReputationCondition event="add" reputationId="0" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+	<!-- 스택시스템, 검투사 14레벨 달성시 -->
+	<Data id="34" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="34"/>
+	  <ConditionInfo>
+		<ConditionList>
+		   <CharCondition race="Warrior" gender="common" class="common" minLevel="14" maxLevel="14" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+		
+			<!-- 장비의 강화 -->
+	<Data id="35" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="35"/>
+	  <ConditionInfo>
+		<ConditionList>
+		   <CharCondition race="common" gender="common" class="common" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+	<!-- 전장 60레벨 달성시 -->
+	<Data id="36" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="36"/>
+	  <ConditionInfo>
+		<ConditionList>
+		   <CharCondition race="common" gender="common" class="common" minLevel="60" maxLevel="60" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+	<!-- 명예의 전장  60레벨 달성시 -->
+	<Data id="37" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="37"/>
+	  <ConditionInfo>
+		<ConditionList>
+		   <CharCondition race="common" gender="common" class="common" minLevel="60" maxLevel="60" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+	<!-- 명예의 전장  60레벨 달성시 -->
+	<Data id="38" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="38"/>
+	  <ConditionInfo>
+		<ConditionList>
+		   <CharCondition race="common" gender="common" class="common" minLevel="60" maxLevel="60" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+	
+		<!-- 공격대-->
+	<Data id="39" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="39"/>
+	  <ConditionInfo>
+		<ConditionList>
+		   <CharCondition race="common" gender="common" class="common" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>	
+
+	<!-- 파티 매칭 업적 달성 시 파티 탈퇴 기능 가이드 -->
+	<Data id="41" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="8" type="game">
+	  <HelpPage id="41"/>
+	  <ConditionInfo>
+		<ConditionList>
+		   <AchievementCondition event="complete" achievementId="204,7,10" />
+		</ConditionList>
+	  </ConditionInfo>
+	</Data>		
+	
+    <!-- 한줄 팁들-->
+    <!--주요 UI 개선업무에서 한줄팁 모두 삭제-->
+	<!--<Data id="136" repeat="true" priority="2" tutorialEffectId="1" delayTime="1" showDuration="8" type="game">
+      <TextList>
+	    <Text id="1" />
+		<Text id="2" />
+		<Text id="3" />
+		<Text id="4" />
+		<Text id="5" />
+		<Text id="6" />
+		<Text id="7" />
+		<Text id="8" />
+		<Text id="9" />
+		<Text id="10" />
+		<Text id="11" />
+		<Text id="12" />
+		<Text id="13" />
+		<Text id="14" />
+		<Text id="15" />
+		<Text id="16" />
+		<Text id="17" />
+		<Text id="18" />
+		<Text id="19" />
+		<Text id="20" />
+		<Text id="21" />
+		<Text id="22" />
+		<Text id="23" />
+		<Text id="24" />
+		<Text id="25" />-->
+		<!-- <Text id="26" /> 추출 기능 삭제로 메시지도 삭제 //-->
+		<!--<Text id="27" />
+		<Text id="28" />
+		<Text id="29" />
+		<Text id="30" />
+		<Text id="31" />
+		<Text id="32" />
+		<Text id="33" />
+		<Text id="34" />
+		<Text id="35" />
+		<Text id="36" />		
+		<Text id="37" />
+		<Text id="38" />
+		<Text id="39" />
+		<Text id="40" />
+		<Text id="41" />
+		<Text id="42" />
+		<Text id="43" />
+		<Text id="44" />
+		<Text id="45" />
+		<Text id="46" />
+		<Text id="47" />
+		<Text id="48" />
+		<Text id="49" />
+		<Text id="50" />
+		<Text id="51" />
+		<Text id="52" />
+		<Text id="53" />
+		<Text id="54" />
+		<Text id="55" />
+		<Text id="56" />
+		<Text id="57" />-->
+		<!-- <Text id="59" /> 추출 기능 삭제로 메시지도 삭제 //-->
+		<!--<Text id="60" />
+		<Text id="61" />
+		<Text id="62" />
+		<Text id="63" />
+		<Text id="64" />
+		<Text id="65" />
+		<Text id="66" />
+		
+		<Text id="67" />
+		<Text id="68" />
+		<Text id="69" />
+		<Text id="70" />
+		<Text id="71" />
+		<Text id="72" />
+		<Text id="73" />
+		<Text id="74" />
+		<Text id="76" />
+		<Text id="76" />
+		<Text id="77" />
+		<Text id="78" />
+		<Text id="79" />
+		<Text id="80" />
+		<Text id="81" />
+		
+		<Text id="82"/>
+		<Text id="83"/>
+		<Text id="84"/>
+		<Text id="86"/>
+		<Text id="86"/>
+		<Text id="87"/>
+		<Text id="88"/>
+		<Text id="89"/>
+		<Text id="90"/>
+		<Text id="91"/>
+		<Text id="92"/>
+		<Text id="93"/>
+		<Text id="94"/>
+		<Text id="96"/>
+		<Text id="96"/>
+		<Text id="97"/>
+		<Text id="98"/>
+		<Text id="99"/>
+		<Text id="100"/>
+		<Text id="101"/>
+		<Text id="102"/>
+		<Text id="103"/>		
+		<Text id="104"/>		
+		<Text id="107"/>
+		<Text id="108"/>	
+		
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+          <CharCondition race="common" gender="common" class="common" maxLevel="30"/>
+          <RandomCondition rate="0.8" interval="80" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>-->	
+	
+	<!-- 로딩 팁들-->
+    <!--주요 UI 개선업무에서 한줄팁 모두 삭제-->
+	<!--<Data id="137" repeat="true" priority="2" tutorialEffectId="1" delayTime="0" showDuration="8" type="loading">
+      <TextList>
+		<Text id="1" />
+		<Text id="2" />
+		<Text id="3" />
+		<Text id="4" />
+		<Text id="5" />
+		<Text id="6" />
+		<Text id="7" />
+		<Text id="8" />
+		<Text id="9" />
+		<Text id="10" />
+		<Text id="11" />
+		<Text id="12" />
+		<Text id="13" />
+		<Text id="14" />
+		<Text id="15" />
+		<Text id="16" />
+		<Text id="17" />
+		<Text id="18" />
+		<Text id="19" />
+		<Text id="20" />
+		<Text id="21" />
+		<Text id="22" />
+		<Text id="23" />
+		<Text id="24" />
+		<Text id="25" />
+		<Text id="26" />
+		<Text id="27" />
+		<Text id="28" />
+		<Text id="29" />
+		<Text id="30" />
+		<Text id="31" />
+		<Text id="32" />
+		<Text id="33" />
+		<Text id="34" />
+		<Text id="35" />
+		<Text id="36" />		
+		<Text id="37" />
+		<Text id="38" />
+		<Text id="39" />
+		<Text id="40" />
+		<Text id="41" />
+		<Text id="42" />
+		<Text id="43" />
+		<Text id="44" />
+		<Text id="45" />
+		<Text id="46" />
+		<Text id="47" />
+		<Text id="48" />
+		<Text id="49" />
+		<Text id="50" />
+		<Text id="51" />
+		<Text id="52" />
+		<Text id="53" />
+		<Text id="54" />
+		<Text id="55" />
+		<Text id="56" />
+		<Text id="57" />
+		<Text id="59" />
+		<Text id="60" />
+		<Text id="61" />
+		<Text id="62" />
+		<Text id="63" />
+		<Text id="64" />
+		<Text id="65" />
+		<Text id="66" />
+		
+		<Text id="67" />
+		<Text id="68" />
+		<Text id="69" />
+		<Text id="70" />
+		<Text id="71" />
+		<Text id="72" />
+		<Text id="73" />
+		<Text id="74" />
+		<Text id="76" />
+		<Text id="76" />
+		<Text id="77" />
+		<Text id="78" />
+		<Text id="79" />
+		<Text id="80" />
+		<Text id="81" />
+
+		<Text id="82"/>
+		<Text id="83"/>
+		<Text id="84"/>
+		<Text id="86"/>
+		<Text id="86"/>
+		<Text id="87"/>
+		<Text id="88"/>
+		<Text id="89"/>
+		<Text id="90"/>
+		<Text id="91"/>
+		<Text id="92"/>
+		<Text id="93"/>
+		<Text id="94"/>
+		<Text id="96"/>
+		<Text id="96"/>
+		<Text id="97"/>
+		<Text id="98"/>
+		<Text id="99"/>
+		<Text id="100"/>
+		<Text id="101"/>
+		<Text id="102"/>
+		<Text id="103"/>
+		<Text id="104"/>
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>-->
+	
+	<!-- 설정  팁들-->
+	<Data id="138" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10041" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage41_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>	
+	<Data id="139" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10042" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage42_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>	
+	<Data id="140" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10043" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage43_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>
+	<Data id="141" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10044" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage44_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="142" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10045" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage45_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="143" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10046" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage46_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="144" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10047" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage47_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="145" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10048" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage48_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="146" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10049" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage49_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="147" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10050" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage50_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="148" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10051" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage51_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="149" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10052" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage52_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="150" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10053" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage53_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="151" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10054" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage54_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="152" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10055" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage55_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="153" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10056" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage56_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="154" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10057" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage57_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="155" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10058" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage58_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="156" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10059" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage59_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="157" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10060" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage60_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="158" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10061" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage61_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="159" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10062" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage62_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="160" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10063" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage63_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="161" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10064" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage64_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="162" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10065" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage65_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="163" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10066" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage66_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="164" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10067" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage67_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>
+	<Data id="165" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10068" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage68_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>
+	<Data id="166" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10069" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage69_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	<Data id="167" repeat="true" priority="4" tutorialEffectId="1" delayTime="0" showDuration="60" type="loading">
+      <TextList>
+        <Text id="10070" />
+      </TextList>
+      <ConditionInfo>
+        <ConditionList>
+		  <LoadingCondition image="LoadingImages.Loading.LoadingImage70_Tex"/>
+          <RandomCondition rate="1" interval="0" />
+        </ConditionList>
+      </ConditionInfo>
+    </Data>		
+	
+		<!-- 포화의 전장 내부 팁 --><!--주요 UI 개선업무에서 전장 내부 한줄팁 모두 삭제-->
+	<!--<Data id="168" repeat="true" priority="2" tutorialEffectId="1" delayTime="0" showDuration="10" type="game">
+		<TextList>
+            <Text id="70000" />
+			<Text id="70001" />
+			<Text id="70002" />
+			<Text id="70003" />
+			<Text id="70004" />
+			<Text id="70005" />
+			<Text id="70006" />
+			<Text id="70007" />
+			<Text id="70008" />
+			<Text id="70009" />
+			<Text id="70010" />
+			<Text id="70011" />
+			<Text id="70012" />
+			<Text id="70013" />
+			<Text id="70014" />
+			<Text id="70015" />
+			<Text id="70016" />
+			<Text id="70017" />
+		</TextList>
+		<ConditionInfo>
+			<ConditionList>
+				<BFCondition id="10" />
+				<RandomCondition rate="0.5" interval="0" />
+			</ConditionList>
+		</ConditionInfo>
+	</Data>-->
+	
+	<!-- 지하의 격전장 (구 대혼전) 내부 팁 --><!--주요 UI 개선업무에서 전장 내부 한줄팁 모두 삭제-->
+	<!--<Data id="175" repeat="true" priority="2" tutorialEffectId="1" delayTime="0" showDuration="10" type="game">
+		<TextList>
+			<Text id="7000" />
+			<Text id="7001" />
+			<Text id="7002" />
+			<Text id="7003" />
+			<Text id="7004" />
+			<Text id="7005" />
+			<Text id="7006" />
+		</TextList>
+		<ConditionInfo>
+			<ConditionList>
+				<BFCondition id="70" />
+				<RandomCondition rate="0.5" interval="10" />
+			</ConditionList>
+		</ConditionInfo>
+	</Data>-->
+	
+	<!-- 쿠마스 월드 내부 팁 --><!--주요 UI 개선업무에서 전장 내부 한줄팁 모두 삭제-->
+	<!--<Data id="169" repeat="true" priority="2" tutorialEffectId="1" delayTime="0" showDuration="10" type="game">
+		<TextList>
+		    <Text id="71000" />
+			<Text id="71003" />
+			<Text id="71004" />
+			<Text id="71005" />
+			<Text id="71006" />
+			<Text id="71007" />
+			<Text id="71008" />
+			<Text id="71009" />
+			<Text id="71010" />
+		</TextList>
+		<ConditionInfo>
+			<ConditionList>
+				<BFCondition id="5" />
+				<RandomCondition rate="0.5" interval="0" />
+			</ConditionList>
+		</ConditionInfo>
+	</Data>	-->
+	
+	<!-- 명예의 전장 내부 팁 --><!--주요 UI 개선업무에서 전장 내부 한줄팁 모두 삭제-->
+	<!--<Data id="170" repeat="true" priority="2" tutorialEffectId="1" delayTime="0" showDuration="10" type="game">
+		<TextList>
+            <Text id="72000" />
+			<Text id="72001" />
+			<Text id="72002" />
+			<Text id="72003" />
+			<Text id="72004" />
+			<Text id="72005" />
+		</TextList>
+		<ConditionInfo>
+			<ConditionList>
+				<BFCondition id="26" />
+				<RandomCondition rate="0.5" interval="0" />
+			</ConditionList>
+		</ConditionInfo>
+	 </Data>-->
+	 
+	<Data id="171" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 비공정 -->
+		<TextList>
+			<Text id="37" />
+		</TextList>
+		<HelpPage id="700"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="172" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 거점 -->
+		<TextList>
+			<Text id="37" />
+		</TextList>
+		<HelpPage id="701"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="173" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 공성포 -->
+		<TextList>
+			<Text id="37" />
+		</TextList>
+		<HelpPage id="702"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="174" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 자폭병 -->
+		<TextList>
+			<Text id="37" />
+		</TextList>
+		<HelpPage id="703"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="188" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 성문 -->
+		<TextList>
+			<Text id="37" />
+		</TextList>
+		<HelpPage id="704"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="176" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 수호탑 -->
+		<TextList>
+			<Text id="37" />
+		</TextList>
+		<HelpPage id="705"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="177" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 보물 상자 -->
+		<TextList>
+			<Text id="37" />
+		</TextList>
+		<HelpPage id="706"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="178" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 운반 지점 -->
+		<TextList>
+			<Text id="37" />
+		</TextList>
+		<HelpPage id="707"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="179" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 보물 상자 마커 -->
+		<TextList>
+			<Text id="37" />
+		</TextList>
+		<HelpPage id="708"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="180" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 포화의 전장 상세 설명 -->
+		<HelpPage id="709"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="181" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 쿠마스 월드 상세 설명 -->
+		<HelpPage id="710"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="182" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 대혼전 상세 설명 -->
+		<HelpPage id="711"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="183" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="10" type="game" showHelpWindow="true" ><!-- 눈싸움 상세 설명 -->
+		<HelpPage id="712"/>
+		<ConditionInfo>
+			<ConditionList>
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<!-- 포화 공성 가이드 이미지-->
+	<!-- <Data id="184" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="0" type="game" showHelpWindow="true" popUpTimes="10" stopBFType="Cannon" stopBFTimes="10">
+		<GuideImage imageId="1" isOpen="TRUE" />
+		<ConditionInfo>
+			<ConditionList>
+				<CharCondition race="common" gender="common" class="common" />
+				<GuideImageCondition huntingZoneId="116" bfCheckSide="2" />
+			</ConditionList>
+		</ConditionInfo>
+	</Data> -->
+	<!-- 포화 수성 가이드 이미지-->
+	<!-- <Data id="185" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="0" type="game" showHelpWindow="true" popUpTimes="10" stopBFType="Cannon" stopBFTimes="10">
+		<GuideImage imageId="2" isOpen="TRUE"/>
+		<ConditionInfo>
+			<ConditionList>
+				<CharCondition race="common" gender="common" class="common" />
+				<GuideImageCondition huntingZoneId="116" bfCheckSide="1" />
+			</ConditionList>
+		</ConditionInfo>
+	</Data> -->
+	<Data id="186" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="0" type="game" showHelpWindow="true" popUpTimes="10" stopBFType="Kumas_World" stopBFTimes="10" ><!-- 쿠마스 인간팀 가이드 이미지-->
+		<GuideImage imageId="3" isOpen="TRUE"/>
+		<ConditionInfo>
+			<ConditionList>
+				<CharCondition race="common" gender="common" class="common" />
+				<GuideImageCondition huntingZoneId="117" bfCheckSide="2" />
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+	<Data id="187" repeat="false" priority="3" tutorialEffectId="1" delayTime="0" showDuration="0" type="game" showHelpWindow="true" popUpTimes="10" stopBFType="Kumas_World" stopBFTimes="10" ><!-- 쿠마스 쿠마스팀 가이드 이미지-->
+		<GuideImage imageId="4" isOpen="TRUE"/>
+		<ConditionInfo>
+			<ConditionList>
+				<CharCondition race="common" gender="common" class="common" />
+				<GuideImageCondition huntingZoneId="117" bfCheckSide="1" />
+			</ConditionList>
+		</ConditionInfo>
+	</Data>
+
+
+		<!-- 포화의 전장 내부 팁 -->
+	<!--주요 UI 개선업무에서 한줄팁 모두 삭제-->
+	<!--<Data id="189" repeat="true" priority="2" tutorialEffectId="1" delayTime="0" showDuration="10" type="game">
+		<TextList>
+			<Text id="73000" />
+			<Text id="73001" />
+			<Text id="73002" />
+			<Text id="73003" />
+			<Text id="73004" />
+			<Text id="73005" />
+			<Text id="73006" />
+			<Text id="73007" />
+			<Text id="73008" />
+			<Text id="73009" />
+			<Text id="73010" />
+			<Text id="73011" />
+			<Text id="73012" />
+			<Text id="73013" />
+			<Text id="73014" />
+			<Text id="73015" />
+			<Text id="73016" />
+			<Text id="73017" />
+			<Text id="73018" />
+			<Text id="73019" />
+			<Text id="73020" />		
+		</TextList>
+		<ConditionInfo>
+			<ConditionList>
+				<BFCondition id="909" />
+				<RandomCondition rate="0.5" interval="0" />
+			</ConditionList>
+		</ConditionInfo>
+	</Data>-->
+
+
+	</DataList>
+</TutorialData>

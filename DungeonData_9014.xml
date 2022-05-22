@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9014" name="@dungeon:9014" startPos="25360.3242,-8417.9863,986.6722" exitContinentId="8001" exitPos="44931, 2415, 1501" destroyWaitMin="0">
+  <RestoreTargetQuest id="4802" forceRestore="true"/>
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="60" />
+  <Condition type="progressQuest" value="4802" taskId="4" />
+  <Condition type="completeQuest" value="4802" />
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400070" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="4802" taskId="6">
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400001" next="none" />
+        <EventTask type="despawn" huntingZoneId="414" territoryId="41400070" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="414,41400003" targetNpcId="414,8000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="414,8000" patternListId="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="414,41400004" targetNpcId="414,8000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="414,8000" patternListId="2" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="414,41400005" targetNpcId="414,8000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="414,8000" patternListId="3" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="414,41400006" targetNpcId="414,8000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="414,8000" patternListId="2" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="414,41400007" targetNpcId="414,8000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="414,8000" patternListId="4" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="414,41400008" targetNpcId="414,8000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="414,8000" patternListId="5" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="414,41400009" targetNpcId="414,8000">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="414,8000" patternListId="6" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 전투 -->
+  <EventGroup type="eliminate" territoryId="41400011,41400014,41400016,41400018,41400019,41400020,41400025,41400033,41400034,41400035,41400036,41400038,41400040,41400041,41400043,41400044,41400046,41400053,41400032,41400072,41400054,41400055,41400056,41400057,41400058,41400061,41400065">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="414,8000" patternListId="7" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="414" territoryId="41400001" templateId="8001" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400066" targetNpcId="414,8000" startAggro="1000000" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 죽으면 디스폰 -->
+  <EventGroup type="npcHp" uniqueId="414,1000" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400073" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400074" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400075" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400076" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400077" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400078" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400079" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400080" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400081" next="none" />
+        <EventTask type="spawn" huntingZoneId="414" territoryId="41400082" next="none" />
+        <EventTask type="despawn" huntingZoneId="414" territoryId="41400001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

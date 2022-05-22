@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9511" name="@dungeon:9811" startPos="-100012,173299,711" exitContinentId="7004" exitPos="102083, 73508, 2641" enterLimitCount="1">
+  <Condition type="raid" value="1" />
+  <Condition type="maxMemberCount" value="7" />
+  <Condition type="levelOver" value="65" />
+		<ClearCondition huntingZoneId="511" templateId="81101" amount="1" killCount="1" />
+		<Retry retryId="1" />
+
+  <!-- 버프 확인 메세지 걸기 -->
+  <EventGroup type="enterTerritory" uniqueId="511,51100002" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860033" turn="on" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 버프 확인 -->
+  <EventGroup type="none" id="48" name="버프 확인" repeat="true">
+  	<Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860033" turn="off" target="player" next="none" /> <!-- 물약/주문서 가이드 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> <!-- 가이드 삭제용 이상상태 시작 -->
+		<EventTask type="guideOn" nameId="511,8111" id="1" pos="-98036.7578,179330.2344,247.4531" next="none" />
+		<EventTask type="message" string="@dungeon:9860020" style="combat" next="none" />
+		<EventTask type="despawn" huntingZoneId="511" territoryId="51100002" next="none"/>
+		<EventTask type="despawn" huntingZoneId="511" territoryId="51100003" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+  </EventGroup>
+
+  
+  <!-- 버프 확인 NPC 생성  -->
+  <EventGroup type="enterTerritory" uniqueId="511,51100004" repeat="false">
+    <Event>
+      <EventTaskGroup>
+  		<EventTask type="spawn" huntingZoneId="511" territoryId="51100002" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <!-- 재입장했을 때 이상상태 860033 해제해 주기  -->
+  <EventGroup type="enterTerritory" uniqueId="511,51100005" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> <!-- 가이드 삭제용 이상상태 시작 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="enterTerritory" uniqueId="511,51100006" repeat="true"> <!-- 2네임드 입구 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> <!-- 가이드 삭제용 이상상태 시작 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 1번 전투 구간 입장 전 카메라 쉐이크 이벤트 -->  
+	<EventGroup type="eliminate" territoryId="81100042" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100050" next="none" />
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100001" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+	<!-- 1번 전투 구간 입장 문 열기 -->
+	<EventGroup type="eliminate" territoryId="81100041" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100086" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  
+	<!-- <EventGroup type="enterTerritory" uniqueId="511,81100049" repeat="false" >    
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100049" next="none" />
+		<EventTask type="message" string="@dungeon:9811001" style="combat" next="none" />
+        <EventTask type="doActionScript" targetNpcId="511,81121" actionScriptId="81100003" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>  -->
+
+	<EventGroup type="enterTerritory" uniqueId="511,81100011" repeat="true" >    
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81102" patternListId="5" next="none" />
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>  
+
+  <EventGroup type="none" id="16" name="인펙션 최초 스폰시 연출" repeat="true"> <!-- 입장용 연출 -->
+    <Event>
+      <EventTaskGroup>
+        <!-- <EventTask type="doActionScript" targetNpcId="511,81121" actionScriptId="81100001" next="none" /> --> <!-- 기어나오는 연출 삭제 -->
+		<!-- <EventTask type="message" string="@dungeon:9811001" style="combat" next="time" nextValue="5" /> --> <!-- 동굴이 흔들립니다. 메시지 삭제 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9811024" style="combat" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100080" next="none" />
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>  
+  
+    <!-- 1번 전투 구간 입장 시 몬스터 스폰 -->  
+  <!-- <EventGroup type="enterTerritory" uniqueId="511,81100011" repeat="false" >    
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100001" next="none" />
+		<EventTask type="message" string="@dungeon:9811002" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703401" target="npc" targetNpcId="511,81102" next="time" nextValue="1" />
+        <EventTask type="doActionScript" targetNpcId="511,81102" actionScriptId="81100001" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+   
+  <!-- 1번 전투 구간 어보미네이션인펙션 HP 90%, 50%, 10%에 WAVE 발동 -->
+   <!-- WAVE된 몬스터 모두 처치 시, 인펙션 텐션 변경 -->
+   <EventGroup type="eliminate" territoryId="81100045" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81102" patternListId="5" next="none" />
+        <EventTask type="despawn" huntingZoneId="511" territoryId="81100045" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="511,81102" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	  
+
+   <EventGroup type="eliminate" territoryId="81100046" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81102" patternListId="5" next="none" />
+        <EventTask type="despawn" huntingZoneId="511" territoryId="81100046" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="511,81102" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	 
+
+  <EventGroup type="flag" name="입구쪽 전멸1, 출구쪽 전멸1" repeat="true">			
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="입구쪽 전멸1" value="0" next="none" />
+		<EventTask type="flag" name="출구쪽 전멸1" value="0" next="none" />
+		<EventTask type="changePatternList" targetNpcId="511,81102" patternListId="5" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="511,81102" next="none" />
+		</EventTaskGroup>
+    </Event>  
+  </EventGroup>   
+
+   <EventGroup type="eliminateRepeatly" uniqueId="511,81100047" repeat="true">			
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="입구쪽 전멸1" value="1" next="none" />
+        <EventTask type="despawn" huntingZoneId="511" territoryId="81100047" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	 
+
+   <EventGroup type="eliminateRepeatly" uniqueId="511,81100048" repeat="true">			
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="출구쪽 전멸1" value="1" next="none" />
+        <EventTask type="despawn" huntingZoneId="511" territoryId="81100048" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+   <!-- WAVE 상황에서 인펙션이 자신에게 무적 버프 사용 -->	  
+  <EventGroup type="none" id="5" name="인펙션이 자신에게 무적 버프 사용" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703416" target="npc" targetNpcId="511,81102" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>  
+  
+   <!-- 인펙션 90% 50% 10%에 텐션 변경 발동 -->	
+   <EventGroup type="npcHp" uniqueId="511,81102" value="90" repeat="true"> <!-- 인펙션 텐션 변경 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81102" patternListId="3" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+  
+   <EventGroup type="npcHp" uniqueId="511,81102" value="50" repeat="true"> <!-- 인펙션 텐션 변경 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81102" patternListId="4" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>   
+
+   <EventGroup type="npcHp" uniqueId="511,81102" value="10" repeat="true"> <!-- 인펙션 텐션 변경 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81102" patternListId="2" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+   <!-- 인펙션 70% 30%에 트윈 어보미네이션 소환용 투명 NPC 텐션 변경 발동 -->	
+   <EventGroup type="npcHp" uniqueId="511,81102" value="70" repeat="true"> <!-- 입구쪽 투명 NPC 텐션 변경 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81116" patternListId="2" next="time" nextValue="10" />
+		<EventTask type="changePatternList" targetNpcId="511,81116" patternListId="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+   <EventGroup type="npcHp" uniqueId="511,81102" value="30" repeat="true"> <!-- 출구쪽 투명 NPC 텐션 변경 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81117" patternListId="2" next="time" nextValue="10" />
+		<EventTask type="changePatternList" targetNpcId="511,81117" patternListId="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+   <!-- 1번 전투 구간 WAVE 상황에서 시스템 메시지 출력 --> 
+  <EventGroup type="none" id="3" name="썩은 어보미네이션 메시지 출력" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9811012" style="combat" next="time" nextValue="2" />
+		<EventTask type="message" string="@dungeon:9811013" style="combat" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>   
+
+  <EventGroup type="none" id="4" name="트윈 어보미네이션 메시지 출력" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9811005" style="combat" next="time" nextValue="2" />
+		<EventTask type="message" string="@dungeon:9811015" style="combat" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>   
+ 
+   <!-- 1번 전투 구간 어보미네이션인펙션 리셋 or 사망 시 모든 테리토리 디스폰 -->
+  <EventGroup type="npcReset" uniqueId="511,81102" repeat="true"> <!-- 어보미네이션 리셋 시 테리토리 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81102" patternListId="5" next="none" />
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100080" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" uniqueId="511,81102" value="0" repeat="true"> <!-- 인펙션 사망 시 테리토리 디스폰 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9811021" style="combat" next="none" />
+        <EventTask type="despawn" huntingZoneId="511" territoryId="81100080" next="none" />
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100045" next="none" />
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100046" next="none" />
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100047" next="none" />
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100048" next="none" />
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100011" next="none" />
+		<EventTask type="killNpc" targetNpcId="511,81104" next="none" />
+		<EventTask type="killNpc" targetNpcId="511,81103" next="none" />
+        <EventTask type="despawn" huntingZoneId="511" territoryId="81100079" next="time" nextValue="5"/>
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100001" next="none" />
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100005" next="none" />
+		<EventTask type="guideOn" nameId="511,8112" id="1" pos="-101287.9844,186295.8281,352.0717" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>  
+
+   <!-- 2번 전투 구간 -->
+  <EventGroup type="enterTerritory" uniqueId="511,81100036" repeat="false" >    
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100036" next="none" />
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100005" next="none" />
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100004" next="time" nextValue="1" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9811016" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703413" target="npc" targetNpcId="511,81118" next="time" nextValue="5" />
+        <EventTask type="killNpc" targetNpcId="511,81124" next="none" />		
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+   <EventGroup type="eliminate" territoryId="81100004" repeat="false">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100051" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  
+   <EventGroup type="eliminate" territoryId="81100051" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81118" patternListId="2" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="511,81118" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>	    
+
+	<!-- 2번 전투 구간 WAVE 도중 리셋 시, 퓨전에게 걸려 있는 이상상태 해제 -->
+  <EventGroup type="npcReset" uniqueId="511,81108" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="511,81118" next="none" />
+		<EventTask type="changePatternList" targetNpcId="511,81118" patternListId="2" next="none" />	
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100051" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" uniqueId="511,81109" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="511,81118" next="none" />
+		<EventTask type="changePatternList" targetNpcId="511,81118" patternListId="2" next="none" />
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100051" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcReset" uniqueId="511,81125" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="511,81118" next="none" />
+		<EventTask type="changePatternList" targetNpcId="511,81118" patternListId="2" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" uniqueId="511,81118" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="77703414" target="npc" targetNpcId="511,81118" next="none" />
+		<EventTask type="changePatternList" targetNpcId="511,81118" patternListId="2" next="none" />	
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+   <EventGroup type="npcHp" uniqueId="511,81118" value="20" repeat="true"> 
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100051" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+   <EventGroup type="npcHp" uniqueId="511,81118" value="0" repeat="true"> <!-- 어보미네이션 퓨전 HP 20%에서 썩은 어보미 소환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100051" next="none" />
+		<EventTask type="despawn" huntingZoneId="511" territoryId="81100082" next="none" />
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100008" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+   <!-- 3번 전투 구간 네임드 HP 99%에 문 소환 -->
+  <EventGroup type="npcHp" uniqueId="511,81101" value="99" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+	  <EventTask type="message" string="@dungeon:9811024" style="combat" next="time" nextValue="10"/>
+	  <EventTask type="spawn" huntingZoneId="511" territoryId="81100052" next="none" />
+	  <EventTask type="spawn" huntingZoneId="511" territoryId="81100077" next="none" />
+	  <EventTask type="spawn" huntingZoneId="511" territoryId="81100081" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>  	
+	
+   <!-- 3번 전투 구간 촉수가 사용하는 네임드 HP 회복 --> 
+  <EventGroup type="none" id="1" name="소환되면서 네임드에게 HP 회복" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9811010" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="77703410" target="npc" targetNpcId="511,81101" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+   <!-- 3번 전투 구간 떨어지는 돌 --> 
+  <EventGroup type="none" id="2" name="떨어지는 돌 디스폰" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="511" territoryId="81100044" next="none" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>  	
+
+   <EventGroup type="npcHp" uniqueId="511,81101" value="40" repeat="true"> <!-- 네임드 hp 40% 되면 주기적으로 떨어트리는 돌을 소환하는 투명 NPC 소환 -->
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9811019" style="combat" next="time" nextValue="2" />
+		<EventTask type="message" string="@dungeon:9811020" style="combat" next="none" />
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100077" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>  
+
+   <!-- 3번 전투 구간 떨어지는 돌 스폰 -->	  
+  <EventGroup type="none" id="6" name="떨어지는 돌 스폰" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="511" territoryId="81100044" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+   <!-- 3번 전투 구간 떨어지는 돌 스폰되고 5초 후에 공격 -->
+  <EventGroup type="none" id="7" name="떨어지는 돌 공격 텐션 2번으로 변경" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81132" patternListId="2" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+   <!-- 3번 전투 구간 떨어지는 돌 스폰되고 5초 후에 공격 -->
+  <EventGroup type="none" id="8" name="촉수 소환 시 시스템 메시지" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9811023" style="combat" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+   <!-- 3번 전투 구간 어보미네이션_촉수 소환할 때 투명 NPC가 네임드에게 HP 회복 이상상태 준 후 자살 -->
+  <EventGroup type="none" id="9" name="본마스터 HP 회복시켜준 후 자살" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9811023" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="777029" target="npc" targetNpcId="511,81130" next="none" />
+		</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+   <!-- 본마스터 사망 시 테리토리 디스폰 -->
+  <EventGroup type="npcHp" uniqueId="511,81101" value="0" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+	  <EventTask type="despawn" huntingZoneId="511" territoryId="81100052" next="none" />
+	  <EventTask type="despawn" huntingZoneId="511" territoryId="81100005" next="none" />
+	  <EventTask type="despawn" huntingZoneId="511" territoryId="81100044" next="none" />
+	  <EventTask type="despawn" huntingZoneId="511" territoryId="81100077" next="none" />
+	  <EventTask type="despawn" huntingZoneId="511" territoryId="81100081" next="none" />
+      <EventTask type="abnormality" abnormalityId="77703412" target="player" turn="off" next="none"/>
+	  <EventTask type="spawn" huntingZoneId="511" territoryId="81100085" next="none" />
+	  <EventTask type="guideOff" id="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>  		
+
+  <EventGroup type="npcReset" uniqueId="511,81101" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+	  <EventTask type="despawn" huntingZoneId="511" territoryId="81100052" next="none" />
+	  <EventTask type="despawn" huntingZoneId="511" territoryId="81100077" next="none" />
+	  <EventTask type="despawn" huntingZoneId="511" territoryId="81100081" next="none" />
+      <EventTask type="abnormality" abnormalityId="77703412" target="player" turn="off" next="none"/>
+      </EventTaskGroup>
+    </Event>
+    </EventGroup> 	
+
+   <!-- 3번 전투 구간 떨어지는 돌 스폰_레이저 쏘기 전에 사용 -->	  
+  <EventGroup type="none" id="10" name="떨어지는 돌 스폰_레이저 쏘기 전에 사용" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100071" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100067" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100059" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100062" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100044" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+   <!-- 3번 전투 구간 떨어지는 돌 스폰_투명 NPC가 사용 -->	  
+  <EventGroup type="npcHp" uniqueId="511,81101" value="40" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81130" patternListId="2" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>  	
+
+  <EventGroup type="npcHp" uniqueId="511,81101" value="30" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81130" patternListId="3" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+  <EventGroup type="npcHp" uniqueId="511,81101" value="20" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81130" patternListId="4" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+  <EventGroup type="npcHp" uniqueId="511,81101" value="10" repeat="true"> 
+    <Event>
+	  <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="511,81130" patternListId="5" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>	
+
+   <!-- 3번 전투 구간 떨어지는 돌 스폰_투명 NPC가 사용 -->	  
+  <EventGroup type="none" id="11" name="떨어지는 돌 스폰_투명 NPC가 사용1" repeat="true">
+    <Event>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100069" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100074" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100053" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100070" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100057" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100063" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100056" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100075" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100065" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100062" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100072" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100057" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>
+ 
+  <EventGroup type="none" id="12" name="떨어지는 돌 스폰_투명 NPC가 사용2" repeat="true">
+    <Event>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100057" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100044" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100074" next="none" />
+	</EventTaskGroup>
+	<EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100056" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100070" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100075" next="none" />
+	</EventTaskGroup>
+	<EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100061" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100053" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100058" next="none" />
+	</EventTaskGroup>
+	<EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100056" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100044" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100061" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>
+  
+  <EventGroup type="none" id="13" name="떨어지는 돌 스폰_투명 NPC가 사용3" repeat="true">
+    <Event>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100070" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100059" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100076" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100066" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100073" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100074" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100067" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100064" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100075" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100062" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100068" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100065" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100072" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100063" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100067" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100065" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>
+	  
+  <EventGroup type="none" id="14" name="떨어지는 돌 스폰_투명 NPC가 사용4" repeat="true">
+    <Event>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100072" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100061" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100067" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100064" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100065" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100072" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100068" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100076" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100063" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100065" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100068" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100066" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100065" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100075" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100076" next="none" />
+	</EventTaskGroup>
+	  <EventTaskGroup probability="0.25">
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100073" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100076" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100063" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100064" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100066" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>
+  
+  <EventGroup type="none" id="15" name="떨어지는 돌 스폰_투명 NPC가 사용5" repeat="true">
+    <Event>
+	  <EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100071" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100067" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100059" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100062" next="none" />
+				<EventTask type="spawn" huntingZoneId="511" territoryId="81100044" next="none" />
+	</EventTaskGroup>
+    </Event>
+    </EventGroup>	
+	
+	</Dungeon>

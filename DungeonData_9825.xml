@@ -1,0 +1,919 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9825" name="@dungeon:9825" startPos="7718.1694,47411.9922,329.6013" exitContinentId="7015" exitPos="-18656,90308,-553" newbieBonusOff="true">
+	<Condition type="maxMemberCount" value="3"/>
+	<Condition type="party" value="1"/>
+	<Condition type="levelOver" value="60"/>
+		<ClearCondition huntingZoneId="825" templateId="6000" amount="1" killCount="1" />
+	<!-- 인던 생성시 -->
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<!-- 문 스폰 -->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500132" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500133" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500134" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500135" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500136" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500137" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500138" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500139" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500140" next="none"/>
+				<!-- 중앙 관제 입구문은 항상 뚫어둔다 -->
+				<!-- <EventTask type="spawn" huntingZoneId="825" territoryId="82500141" next="none" />
+					<EventTask type="spawn" huntingZoneId="825" territoryId="82500142" next="none" /> -->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500143" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500144" next="none"/>
+				<!--<EventTask type="spawn" huntingZoneId="825" territoryId="82500145" next="none" />
+        <EventTask type="spawn" huntingZoneId="825" territoryId="82500146" next="none" />
+        <EventTask type="spawn" huntingZoneId="825" territoryId="82500147" next="none" />
+        <EventTask type="spawn" huntingZoneId="825" territoryId="82500148" next="none" />
+        <EventTask type="spawn" huntingZoneId="825" territoryId="82500149" next="none" />
+        <EventTask type="spawn" huntingZoneId="825" territoryId="82500150" next="none" />-->
+				<!-- 연못 테리토리 이상상태 켜짐 -->
+				<!--<EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82500151" turn="on" next="none" />
+        <EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82500152" turn="on" next="none" />-->
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82500153" turn="on" next="none"/>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82500154" turn="on" next="none"/>
+				<EventTask type="flag" name="정원네임드스폰안됨" value="1" next="none"/>
+				<!--<EventTask type="spawn" huntingZoneId="825" territoryId="82510022" next="none" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="825" territoryId="82510022" next="none" />-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 풀밭 -->
+	<!-- 원숭이 한마리 죽이면 1넴드 스폰 -->
+	<!-- 일단, 거대원숭이는 테리토리 노말로 설정 -->
+	<!-- <EventGroup type="npcHp" uniqueId="825,1011" value="0" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500011" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> -->
+	<!-- 1넴드 죽으면 미로 생성, 문 열림, 연못의 테리토리 이상상태 켜짐 -->
+	<EventGroup type="npcHp" uniqueId="825,1000" value="0">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825001" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7002" playTime="0" next="none"/>
+				<EventTask type="flag" name="미로입장" value="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510024" next="none"/>
+				<!-- 정원 루트 벽 스폰-->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510025" next="none"/>
+				<!-- 정원 루트 벽 스폰-->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510028" next="none"/>
+				<!-- 정원 루트 벽 스폰-->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510029" next="none"/>
+				<!-- 정원 루트 벽 스폰-->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510030" next="none"/>
+				<!-- 정원 루트 벽 스폰-->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510032" next="none"/>
+				<!-- 정원 루트 벽 스폰-->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510034" next="none"/>
+				<!-- 정원 루트 벽 스폰-->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510031" next="none"/>
+				<!-- 정원 루트 벽 스폰-->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500133" next="none"/>
+				<!-- 정원 입구 문 제거-->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500132" next="none"/>
+				<!-- 미로 입구 문 제거-->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500008" next="none"/>
+				<!-- 정원 네임드 스폰 -->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510041" next="none"/>
+				<!-- 정원 몬스터들 스폰 -->
+				<EventTask type="flag" name="정원네임드스폰안됨" value="0" next="none"/>
+				<EventTask type="flag" name="1네임드사망" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500132" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="미로입장" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="1네임드사망,미로입장">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="97" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 미로 -->
+	<!-- 함정구역에 들어오면 몬스터 스폰 -->
+	<EventGroup type="enterTerritory" uniqueId="825,82500022">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500022" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500023">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500023" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500024">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500024" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500025">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500025" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500026">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500026" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500027">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500027" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500028">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500028" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500029">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500029" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500030">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500030" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="825,82500031">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9825020" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500031" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 정원 -->
+	<!-- 정원 스위치길리두 4마리 죽으면 네임드 가는 길 열림 -->
+	<!--<EventGroup type="eliminate" territoryId="82500163,82500164,82500165,82500166">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="825" territoryId="82500161" next="none" />-->
+	<!-- 네임드 가는 길 열림 -->
+	<!--</EventTaskGroup>
+    </Event>
+  </EventGroup>-->
+	<EventGroup type="npcHp" uniqueId="825,3000" value="90" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="정원네임드전투" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="825,3000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="flag" name="정원네임드전투" value="0" next="none"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500176" next="none"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500177" next="none"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500178" next="none"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500179" next="none"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500180" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 정원 넴드 때리면 길리두가 스폰 -->
+	<EventGroup type="npcHp" uniqueId="825,3000" value="90" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="(1)길리두스폰시작1,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="2번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="3번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="4번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="5번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="(1)길리두스폰시작2,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="1번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="3번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="4번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="5번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="(1)길리두스폰시작3,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="1번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="2번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="4번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="5번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="(1)길리두스폰시작4,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="1번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="2번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="3번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="5번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="(1)길리두스폰시작5,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="1번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="2번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="3번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="1" next="none"/>
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none"/>
+				<EventTask type="flag" name="4번길리두스폰" value="1" next="time" nextValue="30"/>
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="1번길리두스폰,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="none"/>
+				<EventTask type="flag" name="1번길리두스폰" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2번길리두스폰,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="none"/>
+				<EventTask type="flag" name="2번길리두스폰" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="3번길리두스폰,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="none"/>
+				<EventTask type="flag" name="3번길리두스폰" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="4번길리두스폰,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="none"/>
+				<EventTask type="flag" name="4번길리두스폰" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="5번길리두스폰,정원네임드전투" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="none"/>
+				<EventTask type="flag" name="5번길리두스폰" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 정원 넴드 HP에 따라 길리두 스폰
+	<EventGroup type="npcHp" uniqueId="825,3000" value="80" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="825,3000" value="60" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="825,3000" value="40" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="825,3000" value="20" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="825,3000" value="10" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="825,3000" value="5" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500179" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="message" string="@dungeon:9825015" style="combat" next="time" nextValue="1"/>
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="2" next="none" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500176" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500177" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500178" targetNpcId="825,3000" startAggro="1" next="time" nextValue="8" />
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500180" targetNpcId="825,3000" startAggro="1" next="time" nextValue="10" />
+				<EventTask type="changePatternList" targetNpcId="825,3000" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+ -->
+	<!-- 정원 넴드 죽으면 정원 문 두개 열림 -->
+	<EventGroup type="npcHp" uniqueId="825,3000" value="0">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="(1)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="flag" name="(1)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="flag" name="(1)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="flag" name="(1)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="flag" name="(1)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="flag" name="(2)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작1" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작2" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작3" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작4" value="0" next="none"/>
+				<EventTask type="flag" name="(3)길리두스폰시작5" value="0" next="none"/>
+				<EventTask type="flag" name="정원네임드전투" value="0" next="none"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500176" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500177" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500178" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500179" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500180" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+				<EventTask type="Soundon" soundType="effectSound" soundId="7002" playTime="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825023" style="combat" next="time" nextValue="1"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500135" next="none"/>
+				<!-- 정원 출구 문 제거-->
+				<!--<EventTask type="despawn" huntingZoneId="825" territoryId="82500139" next="time" nextValue="10" />-->
+				<!-- 지하수로 문 제거-->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500136" next="none"/>
+				<!-- 정원 뒤쪽 출구 문 제거-->
+				<EventTask type="flag" name="정원클리어" value="1" next="none"/>
+				<EventTask type="flag" name="정원 또는 연못클리어" value="1" next="none"/>
+				<!--<EventTask type="spawn" huntingZoneId="825" territoryId="82500167" next="none" />-->
+				<!-- 차원의마법석 스폰 -->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500176" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500177" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500178" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500179" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500180" next="none"/>
+				<!-- 소환된 길리두 디스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 중앙관제 -->
+	<!-- 정원, 연못 네임드가 죽으면 딱 한번만 중앙관제 네임드를 스폰한다 -->
+	<EventGroup type="flag" name="정원 또는 연못클리어">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500013" next="time" nextValue="5"/>
+				<EventTask type="turnAi" turn="off" huntingZoneId="825" territoryId="82500013" templateId="9073" next="none"/>
+				<!-- 중앙관제 명령오브젝트 AI 끔 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 네임드와 전투 시작하면 입구 문닫기-->
+	<EventGroup type="npcState" uniqueId="825,6000" value="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="마그누스전투중" value="1" next="none"/>
+				<EventTask type="turnAi" turn="on" huntingZoneId="825" territoryId="82500013" templateId="9073" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500142" next="none"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82500141" next="none"/>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82510061" turn="on" next="none"/>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82510062" turn="on" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 네임드가 죽으면 중앙관제 앞 뒤 문 열림, 쿠마스 석상 디스폰 -->
+	<EventGroup type="npcHp" uniqueId="825,6000" value="0">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500013" next="none"/>
+				<!-- 쿠마스 석상 -->
+				<!--<EventTask type="despawn" huntingZoneId="825" territoryId="82500141" next="none" />-->
+				<!-- 중앙관제 입구 문 제거-->
+				<!--<EventTask type="despawn" huntingZoneId="825" territoryId="82500143" next="none" />-->
+				<!-- 중앙관제 입구 문 제거-->
+				<!--<EventTask type="despawn" huntingZoneId="825" territoryId="82500142" next="time" nextValue="2" />-->
+				<!-- 중앙관제 출구 문 제거-->
+				<!--<EventTask type="despawn" huntingZoneId="825" territoryId="82500144" next="none" />-->
+				<!-- 중앙관제 출구 문 제거-->
+				<EventTask type="Soundon" soundType="effectSound" soundId="7002" playTime="0" next="none"/>
+				<EventTask type="message" string="@dungeon:9825026" style="combat" next="time" nextValue="1"/>
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510056" next="none"/>
+				<!-- 보상용 보물상자 추가 -->
+				<EventTask type="spawn" huntingZoneId="825" territoryId="82510047" next="none"/>
+				<!-- 텔레포트 마법석 추가 -->
+				<!--<EventTask type="spawn" huntingZoneId="825" territoryId="82500113" next="none" />-->
+				<!-- 기본 항아리 스폰 -->
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82510061" turn="off" next="none"/>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82510062" turn="off" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 네임드가 전투 리셋되면 문 열어주기 -->
+	<EventGroup type="npcReset" uniqueId="825,6000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAi" turn="off" huntingZoneId="825" territoryId="82500013" templateId="9073" next="none"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500142" next="none"/>
+				<EventTask type="despawn" huntingZoneId="825" territoryId="82500141" next="none"/>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82510061" turn="off" next="none"/>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="825" territoryId="82510062" turn="off" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

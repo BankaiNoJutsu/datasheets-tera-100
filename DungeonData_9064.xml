@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9064" name="@dungeon:9064" startPos="67164,-178572,5636" exitContinentId="7022" exitPos="-24391,42376,3660" destroyWaitMin="0">
+  <!-- 용암의 홀 -->
+  <RestoreTargetQuest id="5201" forceRestore="true"/>
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="56" />
+  <Condition type="progressQuest" value="5201" taskId="8" />
+  <Condition type="completeQuest" value="5201" />
+  <!-- 수호 퀘스트 시작 -->
+	<EventGroup type="talkNpc" uniqueId="464,5013">
+    <Event textId="2" questId="5201" taskId="10">
+      <EventTaskGroup>
+        <!-- 용광로 제어장치 스폰 -->
+		<EventTask type="timer" action="start" direction="reverse" value="180" next="none" timerUiOff="false" /> <!--타이머시작-->
+        <EventTask type="message" string="@dungeon:9064003" style="alert" next="time" nextValue="3" />
+        <EventTask type="despawn" huntingZoneId="464" territoryId="46400042" next="none" />
+        <EventTask type="despawn" huntingZoneId="464" territoryId="46400046" next="none" />
+        <EventTask type="despawn" huntingZoneId="464" territoryId="46400047" next="none" />
+        <!-- 빌리저 용광로 제어장치 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="464" territoryId="46400037" next="none" />
+        <EventTask type="spawn" huntingZoneId="464" territoryId="46400043" next="none" />
+        <EventTask type="spawn" huntingZoneId="464" territoryId="46400044" next="none" />
+      </EventTaskGroup>
+    </Event>
+	</EventGroup>
+
+   <!--웨이브 시작-->
+	<EventGroup type="timer" value="175" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400004" startAggro="50" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="165" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400012" startAggro="50" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="135" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400009" startAggro="50" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="120" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400030" startAggro="50" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="115" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400033" startAggro="50" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="110" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400010" startAggro="50" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="105" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400031" startAggro="50" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="95" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400034" startAggro="50" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="85" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400004" startAggro="50" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="65" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+	   <EventTask type="spawn" huntingZoneId="464" territoryId="46400012" startAggro="50" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="60" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9064002" style="alert" next="none" />
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	<EventGroup type="timer" value="55" repeat="false">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="464" territoryId="46400001" startAggro="50" next="none" /> <!--중형몹 스폰-->
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup> 
+	<EventGroup type="timer" value="0" repeat="false"> <!--웨이브 종료-->
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="timer" action="stop" next="none" value="0" timerUiOff="true" />
+		<EventTask type="message" string="@dungeon:9064004" targetNpcId="464,5009" next="none"/>
+		<EventTask type="killNpc" targetNpcId="464,5009" next="none" /> <!--중형몹 사망-->
+		<EventTask type="killNpc" targetNpcId="464,5010" next="none" /> <!--중형몹 힐러 사망-->
+		<EventTask type="killNpc" targetNpcId="464,5014" next="none" /> <!--오브젝트 사망-->
+	  </EventTaskGroup>
+	</Event>
+	</EventGroup>
+	
+  <EventGroup type="questFail">
+    <!-- 수호 퀘스트 실패 시 처리 -->
+    <Event questId="5201" taskId="10">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9064001" style="alert" next="time" nextValue="3" />
+        <EventTask type="teleport" continentId="7022" pos="-24391,42376,3660" next="none" />
+        <!-- 일단 임시 좌표(캠프로 보냄)-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

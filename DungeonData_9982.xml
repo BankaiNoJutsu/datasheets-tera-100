@@ -1,0 +1,1411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9982" name="@dungeon:9982" startPos="-106795,145816,6193" exitContinentId="7021" exitPos="-66247,15177,2716" startDir="10">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="70" />
+	<ClearCondition huntingZoneId="982" templateId="3000" amount="1" killCount="1" />
+	<Retry retryId="2" />
+
+
+	
+  <EventGroup type="none" id="0" name="빈 이벤트" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="0" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="10" name="빈 이벤트" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="0" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="initialize">
+	<Event>
+      <EventTaskGroup>
+				<!--1넴 전투공간 연출 테리토리 스폰-->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98202107" next="none" />	  
+		<EventTask type="guideOn" nameId="982,911" id="1" pos="-103923.84375000,144482.20312500,7024.07519531" next="none" />
+		<!--모든 차폐문 스폰-->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98209201" next="none" /> <!-- 2넴 입구문 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98209202" next="none" /> <!-- 2넴 출구문 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98209301" next="none" /> <!-- 3넴 입구문 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98209401" next="none" /> <!-- 쫄구간 출구문 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98209402" next="none" /> <!-- 2-3넴 이동구간 문 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+<!-- 구손 예외 상황(전투 공간 안에서 전투 공간 밖에 있는 유저 구손으로 못 당기도록) -->  
+
+	<EventGroup type="enterTerritory" uniqueId="982,98203001">  <!-- 1넴 구손 불가 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="982" territoryId="98203001" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="982,98203002">  <!-- 1넴 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="982" territoryId="98203002" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="982,98203003">  <!-- 2넴 구손 불가 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="982" territoryId="98203003" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="982,98203004">  <!-- 2넴 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="982" territoryId="98203004" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="982,98203005">  <!-- 2넴 구손 불가 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="982" territoryId="98203005" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="982,98203006">  <!-- 3넴 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="982" territoryId="98203006" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  
+<!-- 1네임드 -->
+
+  <EventGroup type="npcHp" name="1네임드 HP 98% 되면 입구 닫기" uniqueId="982,1000" value="98" repeat="true">
+    <Event>
+      <EventTaskGroup>
+  		<EventTask type="message" style="default" string="@dungeon:9982100" next="none" />
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98209101" next="none" /> <!-- 1넴 입구문 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcState" id="150" uniqueId="982,1000" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+        <EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="abnormality" abnormalityId="98200152" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 꽃 심음 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcState" uniqueId="982,1000" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="start" next="none" /> <!-- 리더보드 타이머 시작 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="101" name="1네임드 이동하는 줄기 스킬 사용하기 전에 유저들에게 줄기가 쫓을 이상상태 걸어 주기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200111" target="aggro" targetNpcId="982,1000" min="1" max="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200112" target="aggro" targetNpcId="982,1000" min="2" max="2" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200113" target="aggro" targetNpcId="982,1000" min="3" max="3" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200114" target="aggro" targetNpcId="982,1000" min="4" max="4" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200114" target="aggro" targetNpcId="982,1000" min="5" max="5" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="102" name="1네임드 유저들에게 꽃씨 이상상태(꽃씨 3개씩) 부여하기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" turn="off" abnormalityId="98200118" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 유저들에게 꽃씨 부여하는 이상상태 발동 -->
+		<EventTask type="abnormality" turn="off" abnormalityId="98200105" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200106" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200107" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200108" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200109" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200110" target="player" next="none" />
+        <EventTask type="empty" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" abnormalityId="98200107" target="player" next="none" />
+        <EventTask type="empty" next="time" nextValue="40" />
+		<EventTask type="abnormality" abnormalityId="98200119" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 꽃 심기 스킬 사용함 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="103" name="1네임드 악취 투명npc 소환, 30초 후 꽃/악취 제거" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200003" next="none" /> <!-- 악취 투명npc, 1네임드에게 행동 끊는 이상상태 부여하는 투명npc 스폰 -->
+		<EventTask type="abnormality" abnormalityId="98200139" target="npc" targetNpcId="982,1001" next="none" /> <!-- 꽃을 악취나는 꽃으로 만들기 -->
+        <EventTask type="empty" next="time" nextValue="30" />
+	    <EventTask type="killNpc" targetNpcId="982,1001" next="none" /> <!-- 꽃 제거 -->
+	    <EventTask type="killNpc" targetNpcId="982,1003" next="none" /> <!-- 악취 투명npc 제거 -->
+	    <EventTask type="killNpc" targetNpcId="982,1004" next="none" /> <!-- 1네임드에게 행동 끊는 이상상태 부여하는 투명npc 제거 -->
+        <EventTask type="empty" next="time" nextValue="5" />
+		<EventTask type="abnormality" abnormalityId="98200118" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 유저들에게 꽃씨 이상상태 발동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="106" name="1네임드 기본 패턴으로 전환" repeat="true">
+    <Event>
+      <EventTaskGroup>
+	    <EventTask type="changePatternList" targetNpcId="982,1000" patternListId="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200126" turn="off" target="player" next="none" /> <!-- 1네임드 쓸기 브레스 패턴에서 대상자가 갖는 이상상태 제거 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="107" name="1네임드에게 행동 끊는 이상상태 부여하기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 걸리면 본인이 하던 행동 중단함 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="108" name="1네임드가 툴라 소환하기 전에 랜덤으로 향기/악취 이상상태 부여" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.3">
+		<EventTask type="abnormality" abnormalityId="98200133" target="aggro" targetNpcId="982,1000" min="1" max="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200134" target="aggro" targetNpcId="982,1000" min="2" max="2" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200135" target="aggro" targetNpcId="982,1000" min="3" max="3" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200136" target="aggro" targetNpcId="982,1000" min="4" max="4" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200137" target="aggro" targetNpcId="982,1000" min="5" max="5" next="none" />
+        <EventTask type="empty" next="time" nextValue="20" />
+		<EventTask type="abnormality" abnormalityId="98200132" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 공간을 악취로 덮음 -->
+	  </EventTaskGroup>
+      <EventTaskGroup probability="0.3">
+		<EventTask type="abnormality" abnormalityId="98200133" target="aggro" targetNpcId="982,1000" min="4" max="4" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200134" target="aggro" targetNpcId="982,1000" min="2" max="2" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200135" target="aggro" targetNpcId="982,1000" min="3" max="3" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200136" target="aggro" targetNpcId="982,1000" min="1" max="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200137" target="aggro" targetNpcId="982,1000" min="5" max="5" next="none" />
+        <EventTask type="empty" next="time" nextValue="20" />
+		<EventTask type="abnormality" abnormalityId="98200132" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 공간을 악취로 덮음 -->
+	  </EventTaskGroup>
+      <EventTaskGroup probability="0.4">
+		<EventTask type="abnormality" abnormalityId="98200133" target="aggro" targetNpcId="982,1000" min="4" max="4" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200134" target="aggro" targetNpcId="982,1000" min="5" max="5" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200135" target="aggro" targetNpcId="982,1000" min="3" max="3" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200136" target="aggro" targetNpcId="982,1000" min="1" max="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200137" target="aggro" targetNpcId="982,1000" min="2" max="2" next="none" />
+        <EventTask type="empty" next="time" nextValue="20" />
+		<EventTask type="abnormality" abnormalityId="98200132" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 공간을 악취로 덮음 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="109" name="향기 툴라1 투명화 후 제거" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200246" target="npc" targetNpcId="982,1021" next="none" /> <!-- 투명화 이상상태 부여 -->
+	    <EventTask type="killNpc" targetNpcId="982,1021" next="none" /> <!-- 향기 툴라1 제거 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="110" name="향기 툴라2 투명화 후 제거" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200246" target="npc" targetNpcId="982,1022" next="none" /> <!-- 투명화 이상상태 부여 -->
+	    <EventTask type="killNpc" targetNpcId="982,1022" next="none" /> <!-- 향기 툴라2 제거 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="111" name="향기 툴라3 투명화 후 제거" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200246" target="npc" targetNpcId="982,1023" next="none" /> <!-- 투명화 이상상태 부여 -->
+	    <EventTask type="killNpc" targetNpcId="982,1023" next="none" /> <!-- 향기 툴라3 제거 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="112" name="악취 툴라1 투명화 후 제거" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200246" target="npc" targetNpcId="982,1024" next="none" /> <!-- 투명화 이상상태 부여 -->
+	    <EventTask type="killNpc" targetNpcId="982,1024" next="none" /> <!-- 악취 툴라1 제거 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="113" name="악취 툴라2 투명화 후 제거" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200246" target="npc" targetNpcId="982,1025" next="none" /> <!-- 투명화 이상상태 부여 -->
+	    <EventTask type="killNpc" targetNpcId="982,1025" next="none" /> <!-- 악취 툴라1 제거 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="114" name="1네임드 40초 뒤에 본인에게 꽃 심기 이상상태 부여하기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="40" />
+		<EventTask type="abnormality" abnormalityId="98200119" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 꽃 심기 스킬 사용함 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="115" name="1네임드가 물기둥 소환하기 전에 랜덤으로 이상상태 부여" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" turn="off" abnormalityId="98200121" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 꽃 피우기 발동 -->
+		<EventTask type="abnormality" abnormalityId="98200144" target="aggro" targetNpcId="982,1000" min="1" max="1" next="none" /> <!-- 향기, 향기, 악취 -->
+		<EventTask type="abnormality" abnormalityId="98200144" target="aggro" targetNpcId="982,1000" min="2" max="2" next="none" /> <!-- 향기, 향기, 악취 -->
+		<EventTask type="abnormality" abnormalityId="98200145" target="aggro" targetNpcId="982,1000" min="3" max="3" next="none" /> <!-- 향기, 악취, 향기 -->
+		<EventTask type="abnormality" abnormalityId="98200146" target="aggro" targetNpcId="982,1000" min="4" max="4" next="none" /> <!-- 악취, 향기, 향기 -->
+		<EventTask type="abnormality" abnormalityId="98200146" target="aggro" targetNpcId="982,1000" min="5" max="5" next="none" /> <!-- 악취, 향기, 향기 -->
+        <EventTask type="empty" next="time" nextValue="20" />
+		<EventTask type="abnormality" abnormalityId="98200132" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 공간을 악취로 덮음 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="116" name="유저들에게 전멸기 방지 이상상태 걸기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+	    <EventTask type="changePatternList" targetNpcId="982,1001" patternListId="2" next="none" />
+	    <EventTask type="changePatternList" targetNpcId="982,1002" patternListId="2" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="117" name="1네임드에게 꽃 심기 위한 이상상태 부여" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200153" target="npc" turn="off" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 향기 전환 폭탄 발사 시전 -->
+		<EventTask type="abnormality" abnormalityId="98200161" turn="off" target="npc" targetNpcId="982,1003" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200162" turn="off" target="npc" targetNpcId="982,1003" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200150" target="player" turn="off" next="none" /> <!-- 향기A 꽃이 주는 전멸기 방지 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200151" target="player" turn="off" next="none" /> <!-- 향기A 꽃이 주는 전멸기 방지 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200148" target="player" turn="off" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200149" target="player" turn="off" next="none" /> <!-- 향기B 이상상태 -->
+        <EventTask type="empty" next="time" nextValue="35" />
+		<EventTask type="abnormality" abnormalityId="98200152" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 꽃 심음 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="118" name="꽃 심고 나서 1네임드에게 악취 전멸기 시전을 위한 이상상태 걸기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="20" /> <!-- 최소 20초는 지나야 함 -->
+		<EventTask type="abnormality" abnormalityId="98200153" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 악취 전멸기 시전 -->
+  		<EventTask type="message" style="default" string="@dungeon:9982011" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="119" name="꽃(향기A) or 꽃(향기B) 소환 + 유저들에게 랜덤하게 향기A, 향기B 이상상태 걸기, 본인에게 향기 전환 폭탄 발사 가능한 이상상태 걸기" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.5">
+		<EventTask type="abnormality" abnormalityId="98200161" turn="off" target="npc" targetNpcId="982,1003" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200162" turn="off" target="npc" targetNpcId="982,1003" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200150" target="player" turn="off" next="none" /> <!-- 향기A 꽃이 주는 전멸기 방지 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200151" target="player" turn="off" next="none" /> <!-- 향기A 꽃이 주는 전멸기 방지 이상상태 -->
+        <EventTask type="empty" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" abnormalityId="98200161" target="npc" targetNpcId="982,1003" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200150" target="player" next="none" /> <!-- 향기A 꽃이 주는 전멸기 방지 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200148" target="player" turn="off" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200149" target="player" turn="off" next="none" /> <!-- 향기B 이상상태 -->
+        <EventTask type="empty" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" abnormalityId="98200148" target="random" min="2" max="3" next="none" /> <!-- 향기A 이상상태 -->
+        <EventTask type="empty" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" abnormalityId="98200149" target="player" exceptTargetAbnormalityKind="48167" next="none" /> <!-- 향기B 이상상태 -->
+        <EventTask type="empty" next="time" nextValue="15" /> <!-- 최소 15초는 지나야 함 -->
+		<EventTask type="abnormality" abnormalityId="98200153" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 향기 전환 폭탄 발사 시전 -->
+	  </EventTaskGroup>
+      <EventTaskGroup probability="0.5">
+		<EventTask type="abnormality" abnormalityId="98200161" turn="off" target="npc" targetNpcId="982,1003" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200162" turn="off" target="npc" targetNpcId="982,1003" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200150" target="player" turn="off" next="none" /> <!-- 향기A 꽃이 주는 전멸기 방지 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200151" target="player" turn="off" next="none" /> <!-- 향기A 꽃이 주는 전멸기 방지 이상상태 -->
+        <EventTask type="empty" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" abnormalityId="98200162" target="npc" targetNpcId="982,1003" next="none" /> <!-- 향기B 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200151" target="player" next="none" /> <!-- 향기B 꽃이 주는 전멸기 방지 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200148" target="player" turn="off" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200149" target="player" turn="off" next="none" /> <!-- 향기B 이상상태 -->
+        <EventTask type="empty" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" abnormalityId="98200148" target="random" min="2" max="3" next="none" /> <!-- 향기A 이상상태 -->
+        <EventTask type="empty" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" abnormalityId="98200149" target="player" exceptTargetAbnormalityKind="48167" next="none" /> <!-- 향기B 이상상태 -->
+        <EventTask type="empty" next="time" nextValue="15" /> <!-- 최소 15초는 지나야 함 -->
+		<EventTask type="abnormality" abnormalityId="98200153" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 향기 전환 폭탄 발사 시전 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="120" name="유저 중 랜덤하게 1명에게 향기 전환 폭탄 대상자 이상상태 걸어 주기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200157" target="random" min="1" max="1" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="121" name="낙하하는 폭탄 1 테리토리 스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200031" next="none" /> <!-- 낙하하는 폭탄 1 테리토리 -->
+		<EventTask type="abnormality" abnormalityId="98200153" turn="off" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 향기 전환 폭탄 발사 시전 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="122" name="낙하하는 폭탄 2 테리토리 스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200032" next="none" /> <!-- 낙하하는 폭탄 2 테리토리 -->
+		<EventTask type="abnormality" abnormalityId="98200153" turn="off" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 향기 전환 폭탄 발사 시전 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="123" name="낙하하는 폭탄 3 테리토리 스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200033" next="none" /> <!-- 낙하하는 폭탄 3 테리토리 -->
+		<EventTask type="abnormality" abnormalityId="98200153" turn="off" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 향기 전환 폭탄 발사 시전 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="124" name="낙하하는 폭탄(시한 폭탄 소환) 테리토리 스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200034" next="none" /> <!-- 낙하하는 폭탄 3 테리토리 -->
+		<EventTask type="abnormality" abnormalityId="98200153" turn="off" target="npc" targetNpcId="982,1000" next="none" /> <!-- 1네임드가 이 이상상태 갖고 있어야 향기 전환 폭탄 발사 시전 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="140" name="연속 회피기 요구 방지용 이상상태 걸기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200166" target="npc" targetNpcId="982,1000" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcReset" name="1네임드 어그로 초기화" uniqueId="982,1000" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="stop" next="none" /> <!-- 리더보드 타이머 스톱 -->
+        <EventTask type="eventState" stateType="EventGroup" id="150" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="114" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="117" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="119" state="stop" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200148" turn="off" target="player" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200149" turn="off" target="player" next="none" /> <!-- 향기B 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200123" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200130" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200131" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200150" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200151" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200154" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200155" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200156" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200160" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200165" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200167" turn="off" target="player" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98209101" next="none" /> <!--1넴 입구문 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200010" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200031" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200032" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200033" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200034" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200001" next="none" /> <!-- 1네임드 -->
+        <EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200001" next="none" /> <!-- 1네임드 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200010" next="none" /> <!-- 1네임드 꽃 향기 투명npc 테리토리 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" name="1네임드 사망" uniqueId="982,1000" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="stop" stageLog="1" next="none" /> <!-- 리더보드 타이머 스톱 -->
+		<EventTask type="guideOn" nameId="982,912" id="1" pos="-101493.18750000,149662.98437500,6822.54199219" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="150" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="114" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="117" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="119" state="stop" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200148" turn="off" target="player" next="none" /> <!-- 향기A 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200149" turn="off" target="player" next="none" /> <!-- 향기B 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200123" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200130" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200131" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200150" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200151" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200154" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200155" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200156" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200160" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200165" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200167" turn="off" target="player" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98209101" next="none" /> <!--1넴 입구문 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98202108" next="none"/><!--2네임드 연출 테리토리 스폰-->		
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98209102" next="none" /> <!--1넴 출구문 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200010" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200031" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200032" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200033" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200034" next="none" />
+        <EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200001" next="none" /> <!-- 1네임드 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98202004" next="none" /> <!-- 쫄몹 테리토리 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+
+<!-- 쫄몹 테리토리 -->
+
+	<EventGroup type="eliminate" name="오칸 쫄 모두 처치시 쫄구간 / 출구 디스폰" territoryId="98202004">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98202004" next="none" /> <!-- 쫄구간 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98209401" next="none" /> <!-- 쫄구간 출구 문 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98209201" next="none" /> <!-- 2넴 입구문 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcState" name="오칸 쫄 전투 상태되면 쫄 메시지 띄우기" uniqueId="982,5002" value="combat" repeat="false">
+ 		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9982500" targetNpcId="982,5002" next="none"/> <!-- 오칸 전원 : 침입자다!! 쫓아라!! -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!-- 2네임드 -->
+
+  <EventGroup type="npcState" uniqueId="982,2000" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="start" next="none" /> <!-- 리더보드 타이머 시작 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" name="2네임드 HP 98% 되면 입구 닫기" uniqueId="982,2000" value="98" repeat="true">
+    <Event>
+      <EventTaskGroup>
+  		<EventTask type="message" style="default" string="@dungeon:9982100" next="none" />
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98209201" next="none" /> <!-- 2넴 입구문 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" id="250" name="2네임드 hp가 95%가 되면 10초 뒤 석상1 가동 이상상태 걸기" uniqueId="982,2000" value="95" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="10" />
+		<EventTask type="abnormality" abnormalityId="98200227" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상1 가동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="201" name="2네임드 모든 석상을 포획 패턴셋으로 전환" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200225" turn="off" target="npc" targetNpcId="982,2000" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200226" turn="off" target="npc" targetNpcId="982,2000" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2021" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2022" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2023" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2021" patternListId="2" next="none" />
+	    <EventTask type="changePatternList" targetNpcId="982,2022" patternListId="2" next="none" />
+	    <EventTask type="changePatternList" targetNpcId="982,2023" patternListId="2" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="202" type="none" name="석상1근" repeat="true"> <!-- 2네임드 석상1을 가장 가까운 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200227" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상1 가동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2021" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2021" patternListId="3" next="none" />
+        <EventTask type="empty" next="time" nextValue="30" />
+		<EventTask type="abnormality" abnormalityId="98200228" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상2 가동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="203" type="none" name="석상1원" repeat="true"> <!-- 2네임드 석상1을 가장 먼 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200227" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상1 가동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2021" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2021" patternListId="4" next="none" />
+        <EventTask type="empty" next="time" nextValue="30" />
+		<EventTask type="abnormality" abnormalityId="98200228" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상2 가동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="205" type="none" name="석상2근" repeat="true"> <!-- 2네임드 석상2를 가장 가까운 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200228" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상2 가동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2022" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2022" patternListId="3" next="none" />
+        <EventTask type="empty" next="time" nextValue="30" />
+		<EventTask type="abnormality" abnormalityId="98200229" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상3 가동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="206" type="none" name="석상2원" repeat="true"> <!-- 2네임드 석상2를 가장 먼 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200228" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상2 가동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2022" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2022" patternListId="4" next="none" />
+        <EventTask type="empty" next="time" nextValue="30" />
+		<EventTask type="abnormality" abnormalityId="98200229" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상3 가동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="208" type="none" name="석상3근" repeat="true"> <!-- 2네임드 석상3을 가장 가까운 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200229" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상3 가동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2023" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2023" patternListId="3" next="none" />
+        <EventTask type="empty" next="time" nextValue="15" />
+		<EventTask type="abnormality" abnormalityId="98200225" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 전멸기 발동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="209" type="none" name="석상3원" repeat="true"> <!-- 2네임드 석상3을 가장 먼 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200229" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상3 가동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2023" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2023" patternListId="4" next="none" />
+        <EventTask type="empty" next="time" nextValue="15" />
+		<EventTask type="abnormality" abnormalityId="98200225" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 전멸기 발동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="211" name="2네임드 모든 석상을 기본 대기 패턴셋으로 전환" repeat="true">
+    <Event>
+      <EventTaskGroup>
+	    <EventTask type="changePatternList" targetNpcId="982,2021" patternListId="1" next="none" />
+	    <EventTask type="changePatternList" targetNpcId="982,2022" patternListId="1" next="none" />
+	    <EventTask type="changePatternList" targetNpcId="982,2023" patternListId="1" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="212" name="2네임드 전멸기(석상 발동) 끝나고 2네임드 및 유저에게 걸린 석상 주시 이상상태 전부 제거" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" turn="off" abnormalityId="98200203" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200204" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200205" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200258" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200259" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200260" target="player" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200203" target="npc" targetNpcId="982,2000" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200204" target="npc" targetNpcId="982,2000" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200205" target="npc" targetNpcId="982,2000" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200258" target="npc" targetNpcId="982,2000" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200259" target="npc" targetNpcId="982,2000" next="none" />
+		<EventTask type="abnormality" turn="off" abnormalityId="98200260" target="npc" targetNpcId="982,2000" next="none" />
+        <EventTask type="empty" next="time" nextValue="10" />
+		<EventTask type="abnormality" abnormalityId="98200227" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상1 OR 석상 2개 가동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="251" name="2네임드 선형 소용돌이(시작) 테리토리 스폰" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.5">
+        <EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200005" next="none" /> <!-- 선형 소용돌이(시작) 테리토리 1 -->
+	  </EventTaskGroup>
+      <EventTaskGroup probability="0.5">
+        <EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200006" next="none" /> <!-- 선형 소용돌이(시작) 테리토리 2 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="252" name="2네임드 선형 소용돌이(시작) 테리토리 디스폰" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200005" next="none" /> <!-- 선형 소용돌이(시작) 테리토리 1 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200006" next="none" /> <!-- 선형 소용돌이(시작) 테리토리 2 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="213" type="none" name="석상1근석상2근" repeat="true"> <!-- 2네임드 석상1을 가장 가까운 생명체 주시하는 패턴셋으로, 석상2를 가장 가까운 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200227" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상 2개 가동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2021" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2022" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2021" patternListId="6" next="none" />
+	    <EventTask type="changePatternList" targetNpcId="982,2022" patternListId="6" next="none" />
+        <EventTask type="empty" next="time" nextValue="30" />
+		<EventTask type="abnormality" abnormalityId="98200232" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상3 가동(난이도 업) -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="214" type="none" name="석상1원석상3원" repeat="true"> <!-- 2네임드 석상1을 가장 먼 생명체 주시하는 패턴셋으로, 석상3을 가장 먼 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200227" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상 2개 가동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2021" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2023" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2021" patternListId="7" next="none" />
+	    <EventTask type="changePatternList" targetNpcId="982,2023" patternListId="7" next="none" />
+        <EventTask type="empty" next="time" nextValue="30" />
+		<EventTask type="abnormality" abnormalityId="98200231" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상2 가동(난이도 업) -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="215" type="none" name="석상2근석상3근" repeat="true"> <!-- 2네임드 석상2를 가장 가까운 생명체 주시하는 패턴셋으로, 석상3을 가장 가까운 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200227" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상 2개 가동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2022" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2023" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2022" patternListId="6" next="none" />
+	    <EventTask type="changePatternList" targetNpcId="982,2023" patternListId="6" next="none" />
+        <EventTask type="empty" next="time" nextValue="30" />
+		<EventTask type="abnormality" abnormalityId="98200230" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상1 가동(난이도 업) -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="216" type="none" name="석상1근(난이도 업)" repeat="true"> <!-- 2네임드 석상1을 가장 가까운 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200230" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상1 가동(난이도 업) -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2021" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2021" patternListId="3" next="none" />
+        <EventTask type="empty" next="time" nextValue="15" />
+		<EventTask type="abnormality" abnormalityId="98200226" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 전멸기 발동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="217" type="none" name="석상1원(난이도 업)" repeat="true"> <!-- 2네임드 석상1을 가장 먼 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200230" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상1 가동(난이도 업) -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2021" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2021" patternListId="4" next="none" />
+        <EventTask type="empty" next="time" nextValue="15" />
+		<EventTask type="abnormality" abnormalityId="98200226" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 전멸기 발동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="218" type="none" name="석상2근(난이도 업)" repeat="true"> <!-- 2네임드 석상2를 가장 가까운 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200231" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상2 가동(난이도 업) -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2022" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2022" patternListId="3" next="none" />
+        <EventTask type="empty" next="time" nextValue="15" />
+		<EventTask type="abnormality" abnormalityId="98200226" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 전멸기 발동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="219" type="none" name="석상2원(난이도 업)" repeat="true"> <!-- 2네임드 석상2를 가장 먼 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200231" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상2 가동(난이도 업) -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2022" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2022" patternListId="4" next="none" />
+        <EventTask type="empty" next="time" nextValue="15" />
+		<EventTask type="abnormality" abnormalityId="98200226" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 전멸기 발동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="220" type="none" name="석상3근(난이도 업)" repeat="true"> <!-- 2네임드 석상3을 가장 가까운 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200232" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상3 가동(난이도 업) -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2023" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2023" patternListId="3" next="none" />
+        <EventTask type="empty" next="time" nextValue="15" />
+		<EventTask type="abnormality" abnormalityId="98200226" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 전멸기 발동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="221" type="none" name="석상3원(난이도 업)" repeat="true"> <!-- 2네임드 석상3을 가장 먼 생명체 주시하는 패턴셋으로 전환 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200232" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 있어야 석상3 가동(난이도 업) -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,2023" next="none" /> <!-- 이 이상상태 걸리면 일단 본인이 기존에 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,2023" patternListId="4" next="none" />
+        <EventTask type="empty" next="time" nextValue="15" />
+		<EventTask type="abnormality" abnormalityId="98200226" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드가 이 이상상태 갖고 전멸기 발동 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="231" name="2네임드 무브 어택 전에 anim change" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changeNpcAnim" huntingZoneId="982" templateId="2000" customWaitAnim="Wait" customRunAnim="moveatkLoop" next="none" /> 
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="232" name="2네임드 무브 어택 후에 anim change" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changeNpcAnim" huntingZoneId="982" templateId="2000" customWaitAnim="Wait" customRunAnim="ActiveMoveLoop" next="none" /> 
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="261" type="npcHp" name="석상1이 부서지면 석상1 주시 이상상태 제거, 8초 뒤 석상1 재스폰" uniqueId="982,2021" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200203" turn="off" target="player" next="none" /> <!-- 석상1 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200203" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 석상1 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200258" turn="off" target="player" next="none" /> <!-- 석상1 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200258" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 석상1 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200257" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드 석상 가동되지 않게 하는 이상상태(석상이 재스폰되기 전에 가동되는 것 방지) -->
+        <EventTask type="empty" next="time" nextValue="8" />
+  		<EventTask type="message" style="default" string="@dungeon:9982008" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200007" next="none" /> <!-- 석상1 테리토리 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200007" next="none" /> <!-- 석상1 테리토리 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="262" type="npcHp" name="석상2가 부서지면 석상2 주시 이상상태 제거, 8초 뒤 석상2 재스폰" uniqueId="982,2022" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200204" turn="off" target="player" next="none" /> <!-- 석상2 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200204" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 석상2 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200259" turn="off" target="player" next="none" /> <!-- 석상1 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200259" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 석상1 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200257" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드 석상 가동되지 않게 하는 이상상태(석상이 재스폰되기 전에 가동되는 것 방지) -->
+        <EventTask type="empty" next="time" nextValue="8" />
+  		<EventTask type="message" style="default" string="@dungeon:9982009" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200008" next="none" /> <!-- 석상2 테리토리 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200008" next="none" /> <!-- 석상2 테리토리 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="263" type="npcHp" name="석상3이 부서지면 석상3 주시 이상상태 제거, 8초 뒤 석상3 재스폰" uniqueId="982,2023" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200205" turn="off" target="player" next="none" /> <!-- 석상3 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200205" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 석상3 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200260" turn="off" target="player" next="none" /> <!-- 석상1 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200260" turn="off" target="npc" targetNpcId="982,2000" next="none" /> <!-- 석상1 주시 이상상태 제거 -->
+		<EventTask type="abnormality" abnormalityId="98200257" target="npc" targetNpcId="982,2000" next="none" /> <!-- 2네임드 석상 가동되지 않게 하는 이상상태(석상이 재스폰되기 전에 가동되는 것 방지) -->
+        <EventTask type="empty" next="time" nextValue="8" />
+  		<EventTask type="message" style="default" string="@dungeon:9982010" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200009" next="none" /> <!-- 석상3 테리토리 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200009" next="none" /> <!-- 석상3 테리토리 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup id="241" type="none" name="2네임드에게 석상 부수기 스킬 사용하지 않게 하는 이상상태 걸기" repeat="true"> <!-- 유저가 주시 걸리자마자 석상 부수기 스킬 사용하는 것을 방지 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200256" target="npc" targetNpcId="982,2000" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" name="2네임드 어그로 초기화" uniqueId="982,2000" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="stop" next="none" /> <!-- 리더보드 타이머 스톱 -->
+        <EventTask type="eventState" stateType="EventGroup" id="250" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="201" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="202" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="203" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="205" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="206" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="208" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="209" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="212" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="213" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="214" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="215" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="216" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="217" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="218" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="219" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="220" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="221" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="261" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="262" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="263" state="stop" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200203" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200204" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200205" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200233" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200234" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200235" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200236" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200238" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200241" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200243" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200248" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200249" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200250" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200251" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200252" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200253" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200254" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200255" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200261" turn="off" target="player" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98209201" next="none" /> <!-- 2넴 입구문 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200010" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200031" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200032" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200033" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200034" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200002" next="none" /> <!-- 2네임드 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200007" next="none" /> <!-- 석상1 테리토리 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200008" next="none" /> <!-- 석상2 테리토리 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200009" next="none" /> <!-- 석상3 테리토리 -->
+        <EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200002" next="none" /> <!-- 2네임드 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200007" next="none" /> <!-- 석상1 테리토리 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200008" next="none" /> <!-- 석상2 테리토리 -->
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200009" next="none" /> <!-- 석상3 테리토리 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" name="2네임드 사망" uniqueId="982,2000" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="stop" stageLog="2" next="none" /> <!-- 리더보드 타이머 스톱 -->
+		<EventTask type="guideOn" nameId="982,913" id="1" pos="-95695.85937500,144994.70312500,5548.92529297" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="250" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="201" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="202" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="203" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="205" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="206" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="208" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="209" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="212" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="213" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="214" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="215" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="216" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="217" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="218" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="219" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="220" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="221" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="261" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="262" state="stop" next="none" />
+        <EventTask type="eventState" stateType="EventGroup" id="263" state="stop" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200203" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200204" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200205" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200233" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200234" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200235" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200236" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200238" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200241" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200243" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200248" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200249" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200250" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200251" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200252" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200253" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200254" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200255" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200258" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200259" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200260" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200261" turn="off" target="player" next="none" />
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98202109" next="none"/><!--3네임드 연출 테리토리 스폰-->		
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98209201" next="none" /> <!-- 2넴 입구문 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98209202" next="none" /> <!-- 2넴 출구문 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98209301" next="none" /> <!-- 3넴 입구문 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200010" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200031" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200032" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200033" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200034" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200007" next="none" /> <!-- 석상1 테리토리 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200008" next="none" /> <!-- 석상2 테리토리 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200009" next="none" /> <!-- 석상3 테리토리 -->
+        <EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200002" next="none" /> <!-- 2네임드 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+ 
+<!--2-3넴구간 이동 테리토리 진입하여 setpos-->
+
+	<!--<EventGroup type="enterTerritory" name="2-3넴구간 이동용 테리토리" uniqueId="982,98202106" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="982" territoryId="98202106" next="none">
+					<Pos value="-96372,150069,6500" />
+				</EventTask>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+
+<!-- 3네임드 -->
+
+  <EventGroup type="npcState" uniqueId="982,3000" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="start" next="none" /> <!-- 리더보드 타이머 시작 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" name="3네임드 HP 98% 되면 입구 닫기" uniqueId="982,3000" value="98" repeat="true">
+    <Event>
+      <EventTaskGroup>
+  		<EventTask type="message" style="default" string="@dungeon:9982100" next="none" />
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98209301" next="none" /> <!-- 3넴 입구문 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" name="3네임드 HP 80% 되면 전멸 타이머 시작" uniqueId="982,3000" value="80" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="Start" name="전멸" direction="reverse" value="1800" timerUiOff="false" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="321" name="각성화 전환" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200320" target="npc" targetNpcId="982,3000" next="none" /> <!-- 각성화 이상상태 -->
+	    <EventTask type="changePatternList" targetNpcId="982,3000" patternListId="2" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="322" name="비각성화 전환" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200320" turn="off" target="npc" targetNpcId="982,3000" next="none" /> <!-- 각성화 연출용 이상상태 -->
+	    <EventTask type="changePatternList" targetNpcId="982,3000" patternListId="1" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="323" name="진각성화 전환" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200387" target="npc" targetNpcId="982,3000" next="none" /> <!-- 진각성화 이상상태 -->
+		<EventTask type="abnormality" abnormalityId="98200382" target="npc" targetNpcId="982,3000" next="none" /> <!-- 3네임드가 이 이상상태 갖고 있으면 구슬 2개 날리기 시작, 5인 누킹 이상상태 중첩도 2중첩씩 쌓임 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="360" name="연속 회피기 요구 방지용 이상상태 걸기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200346" target="npc" targetNpcId="982,3000" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="361" name="구슬 깨는 도중 대응 불가능한 스킬 나오는 것 방지용 이상상태 걸기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200381" target="npc" targetNpcId="982,3000" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="370" name="강력한 연쇄 전기 사슬 패턴 시작(유저들에게 강력한 연쇄 전기 사슬이 걸릴 수 있는 이상상태 부여)" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200370" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200389" target="player" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="371" name="강력한 연쇄 전기 사슬 이펙트 전부 제거" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200356" turn="off" target="npc" targetNpcId="982,3000" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200356" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200357" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200358" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200359" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200360" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200361" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200370" turn="off" target="player" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="372" name="강력한 연쇄 전기 사슬 패턴 때 축해 실패해서 유저들에게 패널티 부여" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200389" turn="off" target="player" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="373" name="강력한 연쇄 전기 사슬 패턴 때 허름한 비석 떨구기 위해 유저들에게 거는 이상상태" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="98200391" target="aggro" targetNpcId="982,3000" min="1" max="1" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200392" target="aggro" targetNpcId="982,3000" min="2" max="2" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200393" target="aggro" targetNpcId="982,3000" min="3" max="3" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200392" target="aggro" targetNpcId="982,3000" min="4" max="4" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200391" target="aggro" targetNpcId="982,3000" min="5" max="5" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="382" name="마력이 깃든 비석 소환하는 투명npc 기본 패턴셋으로 전환" repeat="true">
+    <Event>
+      <EventTaskGroup>
+	    <EventTask type="changePatternList" targetNpcId="982,3031" patternListId="1" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="383" name="마력이 깃든 비석 소환하는 투명npc 마석 1개 소환하는 패턴셋으로 전환" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.5">
+		<EventTask type="abnormality" abnormalityId="98200394" target="npc" targetNpcId="982,3000" next="none" /> <!-- 3네임드가 이 이상상태 안 갖고 있어야 강력한 연쇄 전기 패턴 발동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,3031" next="none" /> <!-- 이 이상상태 걸리면 본인이 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,3031" patternListId="2" next="none" />
+		<EventTask type="doActionScript" targetNpcId="982,3000" actionScriptId="982007" next="none"/> <!-- 카메라 쉐이크 -->
+	  </EventTaskGroup>
+      <EventTaskGroup probability="0.5">
+		<EventTask type="abnormality" abnormalityId="98200394" target="npc" targetNpcId="982,3000" next="none" /> <!-- 3네임드가 이 이상상태 안 갖고 있어야 강력한 연쇄 전기 패턴 발동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,3031" next="none" /> <!-- 이 이상상태 걸리면 본인이 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,3031" patternListId="3" next="none" />
+		<EventTask type="doActionScript" targetNpcId="982,3000" actionScriptId="982007" next="none"/> <!-- 카메라 쉐이크 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="384" name="마력이 깃든 비석 소환하는 투명npc 마석 2개 소환하는 패턴셋으로 전환" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.5">
+		<EventTask type="abnormality" abnormalityId="98200394" target="npc" targetNpcId="982,3000" next="none" /> <!-- 3네임드가 이 이상상태 안 갖고 있어야 강력한 연쇄 전기 패턴 발동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,3031" next="none" /> <!-- 이 이상상태 걸리면 본인이 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,3031" patternListId="4" next="none" />
+		<EventTask type="doActionScript" targetNpcId="982,3000" actionScriptId="982007" next="none"/> <!-- 카메라 쉐이크 -->
+	  </EventTaskGroup>
+      <EventTaskGroup probability="0.5">
+		<EventTask type="abnormality" abnormalityId="98200394" target="npc" targetNpcId="982,3000" next="none" /> <!-- 3네임드가 이 이상상태 안 갖고 있어야 강력한 연쇄 전기 패턴 발동 -->
+		<EventTask type="abnormality" abnormalityId="98200124" target="npc" targetNpcId="982,3031" next="none" /> <!-- 이 이상상태 걸리면 본인이 하던 행동 중단함 -->
+	    <EventTask type="changePatternList" targetNpcId="982,3031" patternListId="5" next="none" />
+		<EventTask type="doActionScript" targetNpcId="982,3000" actionScriptId="982007" next="none"/> <!-- 카메라 쉐이크 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="timer" timerName="전멸" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="doActionScript" targetNpcId="982,3000" actionScriptId="982007" next="none"/> <!-- 카메라 쉐이크 -->
+		<EventTask type="abnormality" abnormalityId="98200305" target="aggro" targetNpcId="982,3000" min="1" max="2" next="none" />
+        <EventTask type="empty" next="time" nextValue="0.5" />
+		<EventTask type="abnormality" abnormalityId="98200306" target="player" exceptTargetAbnormalityKind="48181" next="none" />
+  		<EventTask type="message" style="default" string="@dungeon:9982013" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200301" target="npc" targetNpcId="982,3099" next="none" /> <!-- 전멸 투명npc에게 걸어 주는 이상상태 -->
+	  </EventTaskGroup>
+	</Event>
+  </EventGroup>
+
+  <EventGroup type="npcReset" name="3네임드 어그로 초기화" uniqueId="982,3000" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="stop" next="none" /> <!-- 리더보드 타이머 스톱 -->
+		<EventTask type="timer" action="Stop" name="전멸" value="0" timerUiOff="true" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200305" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200306" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200319" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200321" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200350" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200351" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200352" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200353" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200354" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200355" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200356" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200357" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200358" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200359" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200360" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200361" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200362" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200370" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200372" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200376" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200379" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200380" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200383" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200386" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200389" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200390" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200391" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200392" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200393" turn="off" target="player" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98209301" next="none" /> <!-- 3넴 입구문 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200017" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200018" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200019" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200016" next="none" /> <!-- 3네임드 -->
+        <EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="spawn" huntingZoneId="982" territoryId="98200016" next="none" /> <!-- 3네임드 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" name="3네임드 사망" uniqueId="982,3000" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="stop" stageLog="3" logUpdate="true" next="none" /> <!-- 리더보드 타이머 스톱 -->
+		<EventTask type="guideOff" id="1" next="none" />
+		<EventTask type="timer" action="Stop" name="전멸" value="0" timerUiOff="true" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200305" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200306" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200319" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200321" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200350" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200351" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200352" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200353" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200354" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200355" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200356" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200357" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200358" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200359" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200360" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200361" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200362" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200370" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200372" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200376" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200379" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200380" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200383" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200386" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200389" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200390" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200391" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200392" turn="off" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="98200393" turn="off" target="player" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98209301" next="none" /> <!-- 3넴 입구문 -->
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200017" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200018" next="none" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200019" next="none" />
+        <EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="despawn" huntingZoneId="982" territoryId="98200016" next="none" /> <!-- 3네임드 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+<!-- 차원의 마법석 관련 -->
+	<EventGroup type="eliminate" name="오칸 쫄 모두 처치시 2네임드 앞으로 이동하는 차원의 마법석 생성" territoryId="98202004">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98201502" next="none" /> <!-- 2네임드 입구로 가는 차원의 마법석 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" name="2네임드 리셋되면 2네임드 앞으로 이동하는 차원의 마법석 생성" uniqueId="982,2000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98201502" next="none" /> <!-- 2네임드 입구로 가는 차원의 마법석 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcState" name="2네임드 전투 상태되면 2네임드 앞으로 이동하는 차원의 마법석 제거" uniqueId="982,2000" value="combat" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98201502" next="none" /> <!-- 2네임드 입구로 가는 차원의 마법석 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" name="2네임드 죽으면 3네임드로 이동하는 차원의 마법석 생성" uniqueId="982,2000" value="0" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98201503" next="none" /> <!-- 3네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98201505" next="none" /> <!-- 3네임드 입구로 가는 검은 구슬 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcReset" name="3네임드 리셋되면 3네임드 앞으로 이동하는 차원의 마법석 생성" uniqueId="982,3000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98201503" next="none" /> <!-- 3네임드 입구로 가는 차원의 마법석 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcState" name="3네임드 전투 상태되면 3네임드 앞으로 이동하는 차원의 마법석 제거" uniqueId="982,3000" value="combat" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98201503" next="none" /> <!-- 3네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98201505" next="none" /> <!-- 3네임드 입구로 가는 검은 구슬 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" name="3네임드 죽으면 3네임드 앞으로 이동하는 차원의 마법석, 던전 입구로 이동하는 차원의 마법석 생성" uniqueId="982,3000" value="0" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98201503" next="none" /> <!-- 3네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98201504" next="none" /> <!-- 던전 출구로 가는 차원의 마법석 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+<!--인게임 연출 + 네임드 스폰-->
+	<!--1넴 연출-->
+	<EventGroup type="enterTerritory" name="1네임드 입구 테리토리 진입 시 1네임드 영상 시작, 1넴 스폰" uniqueId="982,98202101">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3084" next="time" nextValue="1" /><!--1네임드 영상 재생(악마의 속삭임 B-1)-->
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98202107" next="none" /><!--1넴 연출용 테리토리 디스폰-->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98200001" next="none" /> <!-- 1네임드 테리토리 스폰 -->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98200010" next="none" /> <!-- 1네임드 꽃 향기 투명npc 테리토리 스폰 -->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98209102" next="none" /> <!-- 1넴 출구문 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--2넴 연출-->
+	<EventGroup type="enterTerritory" name="2네임드 입구 테리토리 진입 시 2네임드 연출 시작, 2넴 스폰" uniqueId="982,98202102">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="982,5203" actionScriptId="9782001" next="none"/> <!--아만 발키온 병사 줌인 -->
+				<EventTask type="message" string="@dungeon:9782501" targetNpcId="982,5203" next="time" nextValue="2.0"/> <!-- 병사 : 동료들에게 무슨 짓을 한거냐!! -->
+				
+				<EventTask type="doActionScript" targetNpcId="982,5202" actionScriptId="9782002" next="none"/> <!-- 오칸_병사를 손가락질 하며 -->
+				<EventTask type="message" string="@dungeon:9782502" targetNpcId="982,5202" next="time" nextValue="2.0"/> <!-- 오칸 : 이제 우리의 기분을 좀 알겠나? 더러운 연합의 개들아.... -->
+				<EventTask type="abnormality" abnormalityId="78200250" target="npc" targetNpcId="982,5203" next="none" /> <!-- 연합 병사에게 석상 포박 -->
+				<EventTask type="abnormality" abnormalityId="78200251" target="npc" targetNpcId="982,5203" next="none" /> <!-- 연합 병사에게 석상 포박 -->
+				<EventTask type="abnormality" abnormalityId="78200252" target="npc" targetNpcId="982,5203" next="none" /> <!-- 연합 병사에게 석상 포박 -->
+				<EventTask type="doActionScript" targetNpcId="982,5203" actionScriptId="9782003" next="time" nextValue="1.0"/> <!-- 병사_그로기 모션 -->
+				<EventTask type="message" string="@dungeon:9782505" targetNpcId="982,5201" next="none"/> <!-- 2네임드 : 크르르.. 죽어라..!! -->
+				<EventTask type="doActionScript" targetNpcId="982,5201" actionScriptId="9782005" next="time" nextValue="0.5"/> <!-- 2네임드가 병사 죽이는 모션 -->
+				<EventTask type="doActionScript" targetNpcId="982,5203" actionScriptId="9782006" next="none"/> <!-- 병사_사망 모션 -->
+				<EventTask type="message" string="@dungeon:9782503" targetNpcId="982,5203" next="time" nextValue="1.0"/> <!-- 병사 : 끄으으아아아아아아악 -->
+				
+				<EventTask type="doActionScript" targetNpcId="982,5202" actionScriptId="9782004" next="none"/> <!-- 오칸_수호자 바라봄 -->
+				<EventTask type="message" string="@dungeon:9782504" targetNpcId="982,5202" next="time" nextValue="3"/> <!-- 오칸 : 이런, 손님이 오셨군 -->
+				
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98202108" next="time" nextValue="1" /><!-- 2넴 연출용 테리토리 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98200002" next="none" /> <!-- 2네임드 테리토리 스폰 -->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98200007" next="none" /> <!-- 석상1 테리토리 -->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98200008" next="none" /> <!-- 석상2 테리토리 -->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98200009" next="none" /> <!-- 석상3 테리토리 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--2-3넴 구간 이동구간 문 연출-->
+	<EventGroup type="enterTerritory" name="2-3넴 이동구간 입장체크 2넴 문장치 워크 오브젝트 스폰" uniqueId="982,98202106">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="workObjectSpawn" huntingZoneId="982" templateId="78201" next="none" /> <!-- 2-3넴 이동구간 워크 오브젝트 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--3넴 연출-->
+	<EventGroup type="npcHp" name="3넴 마석 깨지면 연출 테리토리 디스폰 / 영상 재생 / set_pos / 3넴 스폰" uniqueId="982,5001" value="0" repeat="true">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="78200401" turn="off" target="npc" targetNpcId="982,5001" next="none" /> <!-- 소환석 포탈 연결 이펙트 제거하기 -->
+				<EventTask type="abnormality" abnormalityId="78200400" turn="off" target="npc" targetNpcId="982,5309" next="none" /> <!-- 포탈 이펙트 제거하기 -->
+				<EventTask type="playMovie" id="3085" next="time" nextValue="1" /><!--3네임드 영상 재생(에드윈의 본모습B-1)-->
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="982" territoryId="98202109" next="none"><!--3넴 입구로  setpos-->
+					<Pos value="-95411,145934,5527" />
+				</EventTask>
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98202109" next="time" nextValue="1" /><!-- 3넴 연출용 테리토리 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="982" territoryId="98200016" next="none" /> <!-- 3네임드 테리토리 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" name="3넴 사망 시 영상 재생" uniqueId="982,3000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3086" next="time" nextValue="1" /><!--3네임드 사망 영상 재생(에드윈의 최후B-1)-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+<!-- 문 오브젝트 -->
+	<EventGroup type="workObject" name="2넴 문장치 오브젝트 작동 시 2-3넴 이동구간 문 디스폰" uniqueId="982,78201" value="0" repeat="false">
+ 		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1" />
+				<EventTask type="despawn" huntingZoneId="982" territoryId="98209402" next="none" /> <!-- 2-3넴 이동구간 문 디스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+</Dungeon>

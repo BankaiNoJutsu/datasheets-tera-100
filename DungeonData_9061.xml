@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9061" name="@dungeon:9061" startPos="67978, -132208, -1044" exitContinentId="7014" exitPos="-83058, 24479, 3173">
+  <!-- 38_고대 전쟁의 폐허 특수공간 : 461_거인의 유적지 -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="53" />
+  <Condition type="progressQuest" value="3839" taskId="2" />
+  <Condition type="completeQuest" value="3839" />
+  <!--던전 입장 시 프리온 죽는 연출에 사용될 죽을 프리온 소환-->
+  <!--입구에서 코너를 돌면 소환됨-->
+  <EventGroup type="enterTerritory" uniqueId="461,46100010">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="461" territoryId="46100003" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="461" territoryId="46100011" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 거인 HP 90%일 때 부하 소환 -->
+  <EventGroup type="npcHp" uniqueId="461,5001" value="90">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9061001" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="461" territoryId="46100006" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 거인 HP 60%일 때 부하 소환 -->
+  <EventGroup type="npcHp" uniqueId="461,5001" value="60">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9061001" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="461" territoryId="46100007" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 거인 HP 30%일 때 부하 소환 -->
+  <EventGroup type="npcHp" uniqueId="461,5001" value="30">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9061001" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="461" territoryId="46100008" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 거인 사망하면 차원의 마법석 소환 -->
+  <EventGroup type="npcHp" uniqueId="461,5001" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="461" territoryId="46100015" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

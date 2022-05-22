@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3101" name="@dungeon:3101" startPos="34310,-84270,2983" startDir="90" exitContinentId="7011" exitPos="72428,21135,872">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="66" />
+	<Retry retryId="2" />
+	<ClearCondition huntingZoneId="3101" templateId="2000" amount="1" killCount="1" />
+	
+	<!--던전 초기 설정-->	
+	<!--던전 생성 초기화 이벤트 / 입구, 1, 2네임드 스폰 -->
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100100" next="none" /> <!-- 1네임드 전투 구간 스폰  -->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100401" next="none" /> <!-- 1네임드 전투 차폐실린더 스폰  -->
+				<!-- 1입구 제외 모든 차폐문 스폰  -->                             
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100012" next="none" /> <!-- 1출구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100021" next="none" /> <!-- 2입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100031" next="none" /> <!-- 미니입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100032" next="none" /> <!-- 미니출구 차폐문  -->
+				<!--1네임드 길찾기 가이드-->
+				<EventTask type="guideOn" nameId="3101,911" id="1" pos="36225.00000000,-81925.00000000,285.40899658" next="none" />
+				<!--미니게임Flag 설정-->
+				<EventTask type="flag" name="미니게임미완" value="1" next="none" />
+				<EventTask type="flag" name="1네임드완" value="0" next="none" />
+				<EventTask type="flag" name="미니게임입구진입" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--던전 입장시 입구 레이저 스폰 갱신-->
+	<EventGroup type="enterTerritory" uniqueId="3101, 310100404" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100400" next="none" /> <!--레이저디스폰-->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100400" next="time" nextValue="0.5" /> <!--레이저스폰-->
+				<EventTask type="empty" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--낙하무적이상상태-->
+	<EventGroup type="enterTerritory" uniqueId="3101, 310100403" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31010000" target="player" territoryId="310100403" huntingZoneId="3101" next="none" /><!--낙하무적-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 구손 예외 상황(전투 공간 안에서 전투 공간 밖에 있는 유저 구손으로 못 당기도록) -->  
+	<EventGroup type="enterTerritory" uniqueId="3101,310100600">  <!-- 1넴 구손 불가 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3101" territoryId="310100600" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3101,310100601">  <!-- 1넴 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3101" territoryId="310100601" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3101,310100602">  <!-- 2넴 구손 불가 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3101" territoryId="310100602" turn="on" next="none" />
+				<!--보호막어뷰징 수정-->
+				<EventTask type="abnormality" abnormalityId="32010005" target="player" turn="off" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="32010009" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="32010003" target="player" turn="off" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="32010004" target="player" turn="off" next="none" /> <!-- blue 이상상태 -->
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3101,310100603">  <!-- 2넴 구손 불가 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAbnormalityTerritory" huntingZoneId="3101" territoryId="310100603" turn="on" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<EventGroup type="enterTerritory" uniqueId="3101,310100604" repeat="true"> <!--미니게임-2네임드구간 보호막어뷰징 방지-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32010005" target="player" turn="off" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="32010009" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="32010003" target="player" turn="off" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="32010004" target="player" turn="off" next="none" /> <!-- blue 이상상태 -->
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="enterTerritory" uniqueId="3101,310100603" repeat="true"> <!--2네임드 전투공간 보호막어뷰징 방지-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32010005" target="player" turn="off" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="32010009" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="32010003" target="player" turn="off" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="32010004" target="player" turn="off" next="none" /> <!-- blue 이상상태 -->
+		</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+<!--연출-->
+	<EventGroup type="enterTerritory" uniqueId="3101, 310100402" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3203" next="time" nextValue="5" /><!--1네임드등장영상-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100401" next="none" /> <!-- 1네임드 전투 차폐실린더 스폰  -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--1넴리셋-->
+	<EventGroup type="npcReset" uniqueId="3101,1000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--1네임드 리셋 시 타이밍 이슈를 막기 위한 던전 이벤트 실행 취소-->
+				<EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" />
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="32010105" target="player" turn="off" next="none" /><!--스턴-->
+				<EventTask type="abnormality" abnormalityId="32010106" target="player" turn="off" next="none" /><!--중독-->
+				<EventTask type="abnormality" abnormalityId="32010108" target="player" turn="off" next="none" /><!--밀린유저판정용-->
+				<EventTask type="abnormality" abnormalityId="32010109" target="player" turn="off" next="none" /><!--에어본유저판정용-->
+				<EventTask type="abnormality" abnormalityId="32010110" target="player" turn="off" next="none" /><!--에어본-->
+				<!--1네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100011" next="none" /><!-- 1입구 차폐문  -->
+						<!-- 던전 입구 차폐문  -->
+				<!-- 1네임드 입구로 가는 차원의 마법석 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100010" next="none" />
+				<!--1네임드 테리토리 디스폰 후 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100100" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100100" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1네임드 처치 / 1네임드, 1네임드 출입구 디스폰 / 미니게임 스폰 -->
+	<EventGroup type="npcHp" uniqueId="3101,1000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--1네임드 처치 시 타이밍 이슈를 막기 위한 던전 이벤트 실행 취소-->
+				<EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" />
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="32010105" target="player" turn="off" next="none" /><!--스턴-->
+				<EventTask type="abnormality" abnormalityId="32010106" target="player" turn="off" next="none" /><!--중독-->
+				<EventTask type="abnormality" abnormalityId="32010108" target="player" turn="off" next="none" /><!--밀린유저판정용-->
+				<EventTask type="abnormality" abnormalityId="32010109" target="player" turn="off" next="none" /><!--에어본유저판정용-->
+				<EventTask type="abnormality" abnormalityId="32010110" target="player" turn="off" next="none" /><!--에어본-->
+				<!--미니게임 길찾기 가이드-->
+				<EventTask type="guideOff" id="1" next="none" />
+				<EventTask type="guideOn" nameId="3101,912" id="2" pos="39541,-83876,-207" next="none" />
+				<!--1네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100011" next="none" /><!-- 1입구 차폐문  -->
+				<!-- 던전 입구 차폐문  -->
+				<!--1네임드 출구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100012" next="none" /><!-- 1출구 차폐문  -->
+				<!-- 1네임드 입구로 가는 차원의 마법석 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100010" next="none" />
+				<!--미니게임 스폰-->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100300" next="none" />
+				<!--1네임드 디스폰 대기-->
+				<EventTask type="empty" next="time" nextValue="3" />
+				<!--1네임드 테리토리 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100100" next="time" nextValue="1"/>
+				<!--미니게임 Flag On-->
+				<EventTask type="flag" name="1네임드완" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1네임드 전투상태 돌입 / 차원의 마법석 제거 -->
+	<EventGroup type="npcState" name="1네임드 전투 상태되면 1네임드 앞으로 이동하는 차원의 마법석 제거" uniqueId="3101,1000" value="combat" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+				<!-- 1네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100010" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1네임드 HP99% / 1네임드 입구 차폐문 스폰 -->
+	<EventGroup type="npcHp" uniqueId="3101,1000" value="99" id="101" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--차단문 생성 메세지-->
+				<EventTask type="message" string="@dungeon:3101100" style="combat" next="time" nextValue="5" />
+				<!-- 1네임드 입구 차폐문 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100011" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 2네임드 리셋 / 2네임드 테리토리 디스폰 후 스폰 -->	
+	<EventGroup type="npcReset" uniqueId="3101,2000" repeat="true">
+		<Event>
+			<EventTaskGroup>			
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="31010220" target="player" turn="off" next="none" /><!--주시-->
+				<EventTask type="abnormality" abnormalityId="31010223" target="player" turn="off" next="none" /><!--주시2중첩-->
+				<EventTask type="abnormality" abnormalityId="32010221" target="player" turn="off" next="none" /><!--공중흡수이펙트-->
+				<EventTask type="abnormality" abnormalityId="31010205" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="31010202" target="player" turn="off" next="none" /><!--출혈-->
+				<!--2네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100021" next="none" />
+				<!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100020" next="none" />
+				<!--2네임드 테리토리 디스폰 후 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100200" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100200" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 처치 / 2네임드 디스폰 -->
+	<EventGroup type="npcHp" uniqueId="3101,2000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--2네임드 처치 시 타이밍 이슈를 막기 위한 던전 이벤트 실행 취소-->
+				<EventTask type="eventState" stateType="EventGroup" id="2" state="stop" next="none" />
+				<EventTask type="playMovie" id="3202" next="time" nextValue="5" /><!--여왕처치영상-->
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="31010220" target="player" turn="off" next="none" /><!--주시-->
+				<EventTask type="abnormality" abnormalityId="31010223" target="player" turn="off" next="none" /><!--주시2중첩-->
+				<EventTask type="abnormality" abnormalityId="32010221" target="player" turn="off" next="none" /><!--공중흡수이펙트-->
+				<EventTask type="abnormality" abnormalityId="31010205" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="31010202" target="player" turn="off" next="none" /><!--출혈-->
+				<!--2네임드 길찾기 가이드 off-->
+				<EventTask type="guideOff" id="3" next="none" />
+				<!--2네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100021" next="time" nextValue="5" />
+				<!--2네임드 차원의 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100030" next="none" />
+				<!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100020" next="none" />
+				<!--2네임드 테리토리 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100200" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 전투상태 돌입 / 차원의 마법석 제거 -->
+	<EventGroup type="npcState" name="2네임드 전투 상태되면 2네임드 앞으로 이동하는 차원의 마법석 제거" uniqueId="3101,2000" value="combat" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+				<!-- 2네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100020" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 HP99% / 2네임드 입구 차폐문 스폰 -->
+	<EventGroup type="npcHp" uniqueId="3101,2000" value="99" id="2" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--차단문 생성 메세지-->
+				<EventTask type="message" string="@dungeon:3101100" style="combat" next="time" nextValue="5" />
+				<!-- 2네임드 입구 차폐문 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100021" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 2네임드 알 사망 시 2네임드 스폰 -->
+	<EventGroup type="eliminate" territoryId="310100201">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3201" next="time" nextValue="10" /><!--여왕등장영상-->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100200" next="none" /><!-- 2네임드 테리토리 스폰  -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--공통 사용 이벤트-->
+	<EventGroup type="none" id="1" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--1네임드 사용 이벤트-->
+	<!--쿨 제어용-->
+	<EventGroup type="none" id="114" name="1넴_회피요구쿨타임" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32010118" target="npc" targetNpcId="3101,1000" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="116" name="1넴_측방독딜레이" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32010115" target="npc" targetNpcId="3101,1000" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+
+	<!--미니게임시작-->
+	<EventGroup type="flag" name="미니게임미완,1네임드완,미니게임입구진입" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32010005" target="player" territoryId="310100302" huntingZoneId="3101" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="32010009" target="player" territoryId="310100302" huntingZoneId="3101" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="32010003" target="random" exceptTargetAbnormalityKind="28806" territoryId="310100302" huntingZoneId="3101" min="0" max="5" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="empty" next="time" nextValue="0.5" />
+				<EventTask type="abnormality" abnormalityId="32010004" target="player" exceptTargetAbnormalityKind="28806" territoryId="310100302" huntingZoneId="3101" next="none" /> <!-- blue 이상상태 -->
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="false" huntingZoneId="3101" territoryId="310100302" targetAbnormalityKind="28806,28807,45501" posType="absolute" next="none">
+					<Pos value="38573,-83875,-207"/>
+				</EventTask>
+				<EventTask type="empty" next="time" nextValue="0.5" />
+				<EventTask type="flag" name="미니게임입구진입" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	<EventGroup type="enterTerritory" uniqueId="3101, 310100302" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="미니게임입구진입" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--미니게임종료-->
+	<EventGroup type="none" id="9999" name="미니게임종료" repeat="true"><!--임시 데이터 group 조건 변경 필요-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="3101,310108" actionScriptId="320101" next="none" />
+				<EventTask type="abnormality" abnormalityId="32010005" target="player" turn="off" next="none" /><!--이속감소-->
+				<EventTask type="abnormality" abnormalityId="32010009" target="player" turn="off" next="none" /><!--침묵-->
+				<EventTask type="abnormality" abnormalityId="32010003" target="player" turn="off" next="none" /> <!-- red 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="32010004" target="player" turn="off" next="none" /> <!-- blue 이상상태 -->
+				<!-- 2네임드 길찾기 가이드 -->
+				<EventTask type="guideOff" id="2" next="none" />
+				<EventTask type="guideOn" nameId="3101,913" id="3" pos="37524.41015625,-87748.14062500,-451.52124023" next="none" />
+				<!--미니게임테리토리 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100300" next="none" />
+				<!-- 미니게임 입구 차폐문 디스폰 -->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100031" next="none" />
+				<!-- 미니게임 출구 차폐문 디스폰 -->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100032" next="none" />
+				<!-- 2네임드 시작 테리토리 스폰  -->
+				<EventTask type="spawn" huntingZoneId="3101" territoryId="310100201" next="none" />
+				<!-- 2네임드 입구 차폐문 디스폰 -->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100021" next="none" />
+				<!-- 1네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="deSpawn" huntingZoneId="3101" territoryId="310100010" next="none" />
+				<!--미니게임Flag off-->
+				<EventTask type="flag" name="미니게임미완" value="0" next="none" />
+				<!-- 미니게임 업적 체크 -->
+				<EventTask type="empty" next="time" nextValue="0.5" />
+				<EventTask type="abnormality" abnormalityId="31010012" target="player" turn="on" next="none" /> <!-- 미니게임 밀려나지 않기 업적체크용 이상상태 -->
+				<EventTask type="empty" next="time" nextValue="5" />
+				<EventTask type="abnormality" abnormalityId="31010012" target="player" turn="off" aliveOnly="false" next="none" /> <!-- 미니게임 밀려나지 않기 업적체크용 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="31010011" target="player" turn="off" aliveOnly="false" next="none" /> <!-- 미니게임 밀려난 유저 이상상태 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--2네임드 사용 이벤트-->
+	<EventGroup type="none" id="201" name="원근폭쿨타임이상상태부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32010213" target="npc" targetNpcId="3101,2000" turn="on" next="none" /><!--원근폭쿨타임이상상태부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="202" name="씨앗스폰1실행" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32010216" target="npc" targetNpcId="3101,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="32010217" turn="off" target="npc" targetNpcId="3101,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="32010218" turn="off" target="npc" targetNpcId="3101,2000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="203" name="씨앗스폰2실행" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32010217" target="npc" targetNpcId="3101,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="32010216" turn="off" target="npc" targetNpcId="3101,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="32010218" turn="off" target="npc" targetNpcId="3101,2000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="204" name="씨앗스폰3실행" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="32010218" target="npc" targetNpcId="3101,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="32010216" turn="off" target="npc" targetNpcId="3101,2000" next="none" />
+				<EventTask type="abnormality" abnormalityId="32010217" turn="off" target="npc" targetNpcId="3101,2000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

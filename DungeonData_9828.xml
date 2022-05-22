@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9828" name="@dungeon:9828" startPos="19551,8799,-3265" exitContinentId="5" exitPos="21078,5996,-3114" destroyWaitMin="0">
+  <Condition type="solo" />
+  <Condition type="maxMemberCount" value="1" />   
+  <RestoreTargetQuest id="59906" forceRestore="true"/>
+  <Condition type="levelOver" value="1" />
+
+<!-- 아샤와 대화 후: 아샤가 PC를 따라오는 AI로 변경, 피글링 스폰 -->
+<!--    <EventGroup type="questProgress">
+		<Event questId="59906" taskId="1">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="미션1" value="1" next="none"  repeat="true" />		  
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+     <EventGroup type="flag" name="미션1">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="npcAi" targetNpcId="828,108" aiid="100" next="none" />
+			<EventTask type="empty" next="time" nextValue="1" /> 
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800085" next="none" />
+			<EventTask type="empty" next="time" nextValue="0.5" /> 
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800086" next="none" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800087" next="none" />
+			<EventTask type="empty" next="time" nextValue="0.5" /> 
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800088" next="none" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800089" next="none" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800090" next="none" />
+ 			<EventTask type="empty" next="time" nextValue="0.5" /> 
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800091" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup> -->
+<!-- 피글링 처치 후 아샤 대사-->
+<!--
+    <EventGroup type="questProgress">
+		<Event questId="59906" taskId="2">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="아샤대사1" value="1" next="none"  repeat="true" />		  
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+     <EventGroup type="flag" name="아샤대사1">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="empty" next="time" nextValue="1" /> 
+			<EventTask type="message" string="@dungeon:9828001" targetNpcId="828,108" next="none"/>
+			<EventTask type="empty" next="time" nextValue="0.5" /> 
+			<EventTask type="message" string="@dungeon:9828004" targetNpcId="828,108" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup> -->
+
+<!--아르곤 보병 등장 -->
+<!--
+    <EventGroup type="questProgress">
+		<Event questId="59906" taskId="3">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="미션2" value="1" next="none"  repeat="true" />		  
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+
+	<EventGroup type="flag" name="미션2">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800020" next="none" />
+			<EventTask type="empty" next="time" nextValue="0.5" /> 
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800023" next="none" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800022" next="none" />
+			<EventTask type="empty" next="time" nextValue="0.5" /> 
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800025" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup> -->
+	
+<!--아르곤 보병 처치 후 아샤 대사-->	
+<!--
+    <EventGroup type="questProgress">
+		<Event questId="59906" taskId="4">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="아샤대사2" value="1" next="none"  repeat="true" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="아샤대사2">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="empty" next="time" nextValue="1" /> 
+			<EventTask type="message" string="@dungeon:9828002" targetNpcId="828,108" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup> -->
+
+<!-- 아르곤 파수병, 아르곤 강습병, 수호자들 모두 스폰 -->
+    <EventGroup type="questProgress">
+		<Event questId="59906" taskId="3">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="미션4" value="1" next="none" repeat="true" />		  
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+
+	<EventGroup type="flag" name="미션4">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800093" next="none" /> <!--여기서부터 수호자 스폰-->
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800094" next="none" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800097" next="none" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800099" next="none" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800100" next="none" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800102" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!-- 아르곤 파수병, 아르곤 강습병 모두 죽어 -->	
+    <EventGroup type="questProgress">
+		<Event questId="59906" taskId="4"> <!--잡몹 죽인 후 에드문드와 대화하는 TASK -->
+		  <EventTaskGroup>
+			<EventTask type="empty" next="time" nextValue="1" /> <!--잠시 대기-->
+			<EventTask type="killNpc" targetNpcId="828,5006" next="none" repeat="true" /> <!--아르곤 파수병 죽어-->
+			<EventTask type="empty" next="time" nextValue="1" /> <!--잠시 대기-->
+			<EventTask type="killNpc" targetNpcId="828,5011" next="none" repeat="true" /> <!--아르곤 강습병 죽어-->
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+<!-- 중형 등장 -->
+    <EventGroup type="questProgress">
+		<Event questId="59906" taskId="5">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="미션5" value="1" next="none" repeat="true" />		  
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+
+	<EventGroup type="flag" name="미션5">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800111" next="none" /> <!--액션스크립트용 투명 NPC 스폰-->
+		    <EventTask type="message" string="@dungeon:9828011" targetNpcId="828,102" next="none"/> <!--대장님 팝업 대사-->
+			<EventTask type="empty" next="time" nextValue="1" /> <!--잠시 대기-->
+		    <EventTask type="despawn" huntingZoneId="828" territoryId="82800093" next="none" /> <!--대장님 디스폰-->
+			<EventTask type="despawn" huntingZoneId="828" territoryId="82800094" next="none" /> <!--여기서부터 수호자 디스폰-->
+			<EventTask type="despawn" huntingZoneId="828" territoryId="82800097" next="none" />
+			<EventTask type="despawn" huntingZoneId="828" territoryId="82800099" next="none" />
+			<EventTask type="despawn" huntingZoneId="828" territoryId="82800100" next="none" />
+			<EventTask type="despawn" huntingZoneId="828" territoryId="82800102" next="none" />
+			<EventTask type="doActionScript" targetNpcId="828,110" actionScriptId="5990034" next="none" /> <!--아르곤 포식자 등장 전 분위기 조성-->
+			<EventTask type="Soundon" soundType="effectSound" soundId="8031" playTime="1000" next="none" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800001" next="none" /> <!--아르곤 포식자 스폰-->			
+			<EventTask type="lookAtNpc" huntingZoneId="828" templateId="5000" turn="on" action="followOnce" next="none" /> <!--포식자 쳐다보기-->			
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+<!-- 중형 몬스터 사망 
+	<EventGroup type="none" id="11" name="중형 몬스터 사망" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="828,5000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	-->
+  
+  <!-- 아르곤 장치 스폰을 위해 이동할 때 메시지 -->
+	<EventGroup type="none" id="9" name="아르곤 장치 스폰 이동" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9828008" style="combat" next="none" />
+			<EventTask type="abnormality" abnormalityId="99000085" target="npc" targetNpcId="828,5000" next="none"/>     		<!-- 몬스터에게 무적 -->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+  
+  <!-- 아르곤 장치 스폰 -->
+	<EventGroup type="none" id="10" name="아르곤 장치 스폰" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9828005" style="combat" next="time" nextValue="1" />
+			<EventTask type="spawn" huntingZoneId="828" territoryId="82800109" next="none"/>
+			<EventTask type="message" string="@dungeon:9828006" style="combat" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="828,6000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3" /> <!--잠시 대기-->
+				<EventTask type="killNpc" targetNpcId="828,5000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+</Dungeon>

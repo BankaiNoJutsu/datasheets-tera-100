@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3035" name="@dungeon:3035" startPos="-10647.6260,-7753.9082,-9854.0459" startDir="90" exitContinentId="7005" exitPos="-1928,12851,2179">
+	<Condition type="solo" value="1" />
+	<Condition type="maxMemberCount" value="1" />
+	<Condition type="levelOver" value="1" />	
+  	<EventGroup type="questProgress">
+		<Event questId="303502" taskId="9" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="일반몬스터 전투 시작" value="1" next="none"/>					
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	<EventGroup type="flag" name="일반몬스터 전투 시작">
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="despawn" huntingZoneId="3035" territoryId="303500001" next="none" />	
+				<EventTask type="spawn" huntingZoneId="3035" territoryId="303500002" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+  	<EventGroup type="questProgress">
+		<Event questId="303502" taskId="10" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="중형몬스터 전투 시작" value="1" next="none"/>					
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+    <EventGroup type="flag" name="중형몬스터 전투 시작">
+		<Event>
+			<EventTaskGroup>					
+				<EventTask type="spawn" huntingZoneId="3035" territoryId="303500003" next="none" />	
+			</EventTaskGroup>
+		</Event>
+     </EventGroup> 
+  	<EventGroup type="questProgress">
+		<Event questId="303502" taskId="11" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="중형몬스터 전투 종료" value="1" next="none"/>					
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+    <EventGroup type="flag" name="중형몬스터 전투 종료">
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="spawn" huntingZoneId="3035" territoryId="303500001" next="none" />	
+	
+			</EventTaskGroup>
+		</Event>
+     </EventGroup> 	 
+</Dungeon>

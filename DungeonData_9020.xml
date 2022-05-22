@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9020" name="@dungeon:9020" startPos="68460,11323,-39" exitContinentId="7001" exitPos="107378,16617,2717" destroyWaitMin="0">
+  <RestoreTargetQuest id="604" forceRestore="true"/>
+  <!-- 포효의 침략지 미션 특수공간 -->
+  <!--Condition type="party" value="1" />
+  <Condition type="levelOver" value="15" />
+  <Condition type="progressQuest" value="604" taskId="4" />
+  <Condition type="completeQuest" value="604" />
+  <Condition type="maxMemberCount" value="5" /-->
+
+  <Condition type="solo" />
+  <Condition type="levelOver" value="16" />
+  <Condition type="progressQuest" value="604" taskId="1" />
+  <Condition type="completeQuest" value="604" />
+  <RestoreTargetQuest id="604" />
+  <Condition type="maxMemberCount" value="1" /> 
+  
+	<!--퀘스트 7단계-->
+	<EventGroup type="questProgress">
+		<Event questId="604" taskId="3">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="미션" value="1" next="none" />		  
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+	<EventGroup type="flag" name="미션">
+		<Event>
+		    <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="70454" target="player" next="time" nextValue="1"/> <!--입장 시 pc 투명화-->
+
+				<EventTask type="spawn" huntingZoneId="420" territoryId="42000004" next="time" nextValue="1" /> <!-- 로크 교도 스폰--> 
+				<EventTask type="spawn" huntingZoneId="420" territoryId="42000005" next="time" nextValue="1" /> <!-- 카미아 스폰--> 
+
+				<EventTask type="message" string="@dungeon:9020001" targetNpcId="420,2001" next="time" nextValue="4"/> <!--경비병 1 대사-->		
+				<EventTask type="message" string="@dungeon:9020002" targetNpcId="420,2002" next="time" nextValue="4"/> <!--경비병 2 대사-->		
+				<EventTask type="message" string="@dungeon:9020003" targetNpcId="420,2003" next="time" nextValue="5"/> <!--경비병 3 대사-->		
+
+				<EventTask type="message" string="@dungeon:9020004" targetNpcId="420,2002" next="time" nextValue="5"/> <!--경비병 2 대사-->		
+				<EventTask type="message" string="@dungeon:9020005" targetNpcId="420,2001" next="time" nextValue="5"/> <!--경비병 1 대사-->		
+				<EventTask type="message" string="@dungeon:9020006" targetNpcId="420,2003" next="time" nextValue="5"/> <!--경비병 3 대사-->		
+
+				<EventTask type="message" string="@dungeon:9020007" targetNpcId="420,2004" next="time" nextValue="3"/> <!--경비병 3 대사-->		
+				<EventTask type="message" string="@dungeon:9020008" targetNpcId="420,2003" next="time" nextValue="3"/> <!--경비병 3 대사-->		
+
+				<EventTask type="despawn" huntingZoneId="420" territoryId="42000004" next="none" /> <!-- 로크 교도 디스폰--> 				
+				<EventTask type="spawn" huntingZoneId="420" territoryId="42000007" next="none" /> <!-- 투명 npc 스폰--> 
+
+				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+	<!--퀘스트 9단계-->
+	<EventGroup type="questProgress">
+		<Event questId="604" taskId="5">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="미션완료" value="1" next="none" />		  
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<EventGroup type="flag" name="미션완료">
+		<Event>
+		    <EventTaskGroup>		
+				<EventTask type="spawn" huntingZoneId="420" territoryId="42000003" next="none" /> <!-- 차원의 마법석 스폰--> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+</Dungeon>

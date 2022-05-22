@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- type은 사용하지 않습니다. 그냥 구별용임 -->
+<!-- 테스트 방법 -->
+<!-- 게임 콘솔 명령어 창에서 -->
+<!-- "ActionScript [ScriptId]" 입력하면 -->
+<!-- 현재 플레이어에서 가장 가까운 대상NPC가 -->
+<!-- 지정한 스크립트를 실행한다. -->
+<S1ActionScripts type="Field">
+
+	<!-- 만필컨 보스 카메라 쉐이크 -->
+	<Script id="620001" playingTime="3000" >
+		<Action time="0" type="cameraShake" duration="3000" power="1" speed="100"/>
+	</Script>
+	<Script id="622001" playingTime="3000">
+		<Action time="0" type="cameraShake" duration="3000" power="1" speed="100"/>
+	</Script>
+	<!-- 갑각류의 사정 양식용 먹이통 & 카메라 쉐이크 연출 -->
+	<Script id="621001" playingTime="12000">
+		<Action time="0" type="animation" animName="onstart" blendInTime="1.0"/>
+		<Action time="4000" type="animation" animName="On"/>
+		<Action time="7000" type="animation" animName="On"/>
+	</Script>
+	<Script id="621002" playingTime="12000">
+		<Action time="0" type="animation" animName="craft_energy" blendInTime="0.2"/>
+		<Action time="3500" type="cameraShake" duration="8000" power="0.5" speed="100"/>
+	</Script>
+	<Script id="621003" playingTime="15000">
+		<Action time="0" type="ActionScript" huntingZoneId="621" templateId="2003" scriptId="621002"/>
+		<Action time="0" type="ActionScript" huntingZoneId="621" templateId="2002" scriptId="621001"/>
+		<Action time="0" type="ActionScript" huntingZoneId="621" templateId="2004" scriptId="621001"/>
+	</Script>
+
+	<!-- 비행 비전투 연출 -->
+	<Script id="630000" playingTime="3000" >
+		<Action time="0" type="cameraShake" duration="2000" power="0.5" speed="100"/>
+		<Action time="0" type="Sound" cueName="Monster_Skill01._Common_CUE.BigMonster_Common_Impact_Stereo_02CUE" volume="3.5" radius="1.0" pitch="1.0" />
+	</Script>
+	<Script id="630001" playingTime="3000" >
+		<Action time="0" type="animation" animName="Roar" rate="0.5"/>
+		<Action time="0" type="Sound" cueName="ObjectSound_03.FlyingNB_Cue.FlyingNB_Whale_Roar_CUE" volume="3.5" radius="1.0" pitch="1.0" />
+	</Script>
+	<Script id="630002" playingTime="1000">		
+		<Action time="0" type="postProcess" postprocessSet="30" on="true" />
+		<Action time="0" type="PostProcessMaterial" postprocessSet="30" param="Strength" from="0.0f" to="1.0f" duration="1000"  />
+	</Script>	
+	<Script id="630003" playingTime="1000">		
+		<Action time="0" type="postProcess" postprocessSet="31" on="true" />
+		<Action time="0" type="PostProcessMaterial" postprocessSet="31" param="Strength" from="0.0f" to="1.0f" duration="1000"  />
+	</Script>
+	<Script id="630004" playingTime="1000">		
+		<Action time="0" type="postProcess" postprocessSet="30" on="false" />
+	</Script>	
+	<Script id="630005" playingTime="1000">		
+		<Action time="0" type="postProcess" postprocessSet="31" on="false" />
+	</Script>
+	<Script id="630006" playingTime="2000">		
+		<Action time="1000" type="animation" animName="DownEnd" rate="2.0" />
+	</Script>
+	<Script id="630007" playingTime="1000" isOnlyPlayerTarget="true">
+		<Action time="0" type="postProcess" postprocessSet="40" on="true" />
+		<Action time="0" type="PostProcessMaterial" postprocessSet="40" param="Strength" from="0.0f" to="0.2f" duration="1000" />		
+    </Script>		
+	<Script id="630008" playingTime="1000">
+		<Action time="0" type="postProcess" postprocessSet="40" on="false" />				
+    </Script>	
+	<Script id="631001" playingTime="2000">
+		<Action time="0" type="animation" animName="Opening" rate="1.0"/>
+		<Action time="3000" type="animation" animName="Closing" rate="1.0"/>
+	</Script>
+	<Script id="631002" playingTime="1000">		
+		<Action time="0" type="postProcess" postprocessSet="32" on="true" />
+		<Action time="0" type="PostProcessMaterial" postprocessSet="32" param="Strength" from="0.0f" to="1.0f" duration="1000"  />
+	</Script>	
+	<Script id="631003" playingTime="1000">		
+		<Action time="0" type="postProcess" postprocessSet="32" on="false" />
+	</Script>	
+</S1ActionScripts>

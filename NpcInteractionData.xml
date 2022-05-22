@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<NpcInteractionData>
+	<!-- 
+		InteractionRule : 인터랙션 규칙 정의
+			@id : 고유값, npc templatId와 유사
+			@type : 수집물의 인터랙션 종류를 정의
+				- all : 여러명 동시 인터랙션 (모든 유저의 클라이언트에 동일한 내용 표시)
+				- individual : 개인 별 인터랙션 (유저 각각의 클라이언트에 서로 다른 내용 표시)
+			@maxInteractionCount : 오브젝트가 전체 인터랙션 가능한 횟수
+			@interval : 
+				- type="all"일 시, 인터랙션 발생 시간 간격(sec)을 정의
+				- type="individual"일 시, 인터랙션 후 재등장 시간(sec)을 정의
+			@distance : 인터랙션하기 위한 거리 조건(uu)
+			@point : 인터랙션 1회당 획득되는 점수(수호자 임무 점수)
+			@abnormality : 인터랙션 성공 시 유저에게 부여되는 이상상태
+			@checkAbnormality : 인터랙션을 하기 위해 유저가 가지고 있어야 하는 이상상태 조건
+			@flightGageAdd : 인터랙션 성공 시 게이지 회복량(+,- 가능)
+			@targetHpReduce : 인터랙션 성공 시 대상 NPC의 HP 감소량(양수 입력 시 감소됨)
+			@comboRuleId : 인터랙션에 적용되는 콤보 룰 규칙(ComboSystem.xml를 참조함)
+			@despawnDelay : 인터랙션이 완료되어 NPC가 디스폰되기까지의 지연시간(연출이 발생하지 않는 오류 방지용)
+			@inFieldEvent : 수호자 임무에서만 인터랙션이 가능한지 여부			
+			@isVoidInteraction : 투명 인터랙션 여부(UI표시안됨/점수획득없음/콤보영향없음/업적획득불가/지령서클리어불가)
+			@interactOnFly : 비행 중일 때만 인터랙션 가능하도록 설정
+				- none : 비행 중이 아니어도 인터랙션 가능(default)
+				- onFly : 비행 중일 때만 인터랙션 가능
+				- onFlyMove : 비행 중이면서 이동 중인 상태여야만 인터랙션 가능
+			
+		EffectList : 인터랙션 시 발생하는 이펙트 정의
+			@EffectList
+				@type : 이펙트 발생 타입 정의
+					- 0 : normal effect on player
+					- 1 : normal effect on npc
+					- 2 : magnetic effect from npc to player
+					- 3 : magnetic effect from player to npc
+				@effectId : 발생할 이펙트의 ID 입력
+				
+		Hotkey : 특정 버튼을 눌러야 인터랙션함
+			@type : 버튼 동작 방식 정의
+				- 0 : 클릭 방식
+				- 1 : 프레스 방식
+			@inputKey : 눌러야하는 버튼 정의
+			@icon : 핫키 UI에 표시될 아이콘 정의
+			@msg : 핫키 UI에 표시될 스트링 정의
+	-->
+
+	<!-- 비행 아이템 : 초 (테스트) -->
+	<InteractionRule id="1" type="individual" interval="1000" distance="5000" point="250" abnormality="630400" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="100" comboRuleId="1"> 
+		<EffectList>				
+		</EffectList>
+	</InteractionRule>	
+	<!-- 비행 아이템 : 빨 (테스트) -->
+	<InteractionRule id="2" type="individual" interval="1000" distance="5000" point="250" abnormality="630500" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="100" comboRuleId="1"> 
+		<EffectList>			
+		</EffectList>
+	</InteractionRule>
+	
+	<!-- 비행 아이템 : 초 (1페이즈) -->
+	<InteractionRule id="100" type="individual" interval="10000" distance="100" point="1250" abnormality="630400" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="100" despawnDelay="50" comboRuleId="1"> 
+		<EffectList>				
+		</EffectList>
+	</InteractionRule>	
+	<!-- 비행 아이템 : 빨 (1페이즈) -->
+	<InteractionRule id="101" type="individual" interval="10000" distance="100" point="1250" abnormality="630500" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="100" despawnDelay="50" comboRuleId="1"> 
+		<EffectList>			
+		</EffectList>
+	</InteractionRule>
+	<!-- 비행 아이템 : 초 (2~3페이즈) -->
+	<InteractionRule id="102" type="individual" interval="30000" distance="100" point="1250" abnormality="630400" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="100" despawnDelay="50" comboRuleId="1"> 
+		<EffectList>					
+		</EffectList>
+	</InteractionRule>	
+	<!-- 비행 아이템 : 빨 (2~3페이즈) -->
+	<InteractionRule id="103" type="individual" interval="30000" distance="100" point="1250" abnormality="630500" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="100" despawnDelay="50" comboRuleId="1"> 
+		<EffectList>
+		</EffectList>
+	</InteractionRule>
+	<!-- 비행 아이템 : 초 (1페이즈_다이내믹구슬) -->
+	<InteractionRule id="104" type="individual" interval="1000000" distance="100" point="1250" abnormality="630400" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="100" despawnDelay="50" comboRuleId="1"> 
+		<EffectList>
+		</EffectList>
+	</InteractionRule>	
+	<!-- 비행 아이템 : 빨 (1페이즈_다이내믹구슬) -->
+	<InteractionRule id="105" type="individual" interval="1000000" distance="100" point="1250" abnormality="630500" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="100" despawnDelay="50" comboRuleId="1"> 
+		<EffectList>
+		</EffectList>
+	</InteractionRule>
+	<!-- 비행 아이템 : 느려짐 -->
+	<InteractionRule id="106" type="individual" interval="10000" distance="100" point="0" abnormality="25020001" inFieldEvent="false" interactOnFly="none" flightGageAdd="-300" despawnDelay="50" comboRuleId="1"> 
+		<EffectList>				
+		</EffectList>
+	</InteractionRule>	
+	<!-- 비행 아이템 : 대형 미사일 -->
+	<InteractionRule id="107" type="individual" interval="10000" distance="100" point="0" abnormality="25020004" inFieldEvent="false" interactOnFly="none" flightGageAdd="800" despawnDelay="50" comboRuleId="1"> 
+		<EffectList>				
+		</EffectList>
+	</InteractionRule>
+	
+	<!-- 초록 유령한테 쏘기 -->
+	<InteractionRule id="200" type="all" interval="1000" maxInteractionCount="1" gageType="0" distance="500" point="10000" checkAbnormality="630510" abnormality="630515" inFieldEvent="true" interactOnFly="onFly" flightGageAdd="500" despawnDelay="100" comboRuleId="2" >
+		<HotKey type="0" inputKey="LeftMouseButton" icon="Icon_Status.BattleFieldBuff02_Tex" msg="@field:700302801"/>
+		<EffectList>
+			<!-- <Effect type="3" effectId="631002"/> -->
+			<Effect type="0" effectId="631008"/>
+			<Effect type="1" effectId="631008"/>
+		</EffectList>
+	</InteractionRule>
+	<!-- 빨강 유령한테 쏘기 -->
+	<InteractionRule id="201" type="all" interval="1000" maxInteractionCount="1" gageType="0" distance="500" point="10000" checkAbnormality="630410" abnormality="630515" inFieldEvent="true" interactOnFly="onFly" flightGageAdd="500" despawnDelay="100" comboRuleId="2" >
+		<HotKey type="0" inputKey="LeftMouseButton" icon="Icon_Status.BattleFieldBuff01_Tex" msg="@field:700302802"/>
+		<EffectList>
+			<!-- <Effect type="3" effectId="631001"/> -->
+			<Effect type="0" effectId="631006"/>
+			<Effect type="1" effectId="631006"/>
+		</EffectList>
+	</InteractionRule>
+	<!-- 거대 유령한테 쏘기 (초록구슬에 대한 판정, 유저는 빨간구슬을 쏨) -->
+	<InteractionRule id="202" type="all" interval="3000" maxInteractionCount="10000" distance="3000" point="10000" checkAbnormality="630510" abnormality="630515" inFieldEvent="true" interactOnFly="onFly" flightGageAdd="500" comboRuleId="2" >
+		<HotKey type="0" inputKey="LeftMouseButton" icon="Icon_Status.BattleFieldBuff02_Tex" msg="@field:700302804"/>
+		<EffectList>
+			<Effect type="3" effectId="631002"/>
+		</EffectList>
+	</InteractionRule>
+	<!-- 거대 유령한테 쏘기 (빨강구슬에 대한 판정, 유저는 초록구슬을 쏨) -->
+	<InteractionRule id="203" type="all" interval="3000" maxInteractionCount="10000" distance="3000" point="10000" checkAbnormality="630410" abnormality="630515" inFieldEvent="true" interactOnFly="onFly" flightGageAdd="500" comboRuleId="2" >
+		<HotKey inputKey="LeftMouseButton" icon="Icon_Status.BattleFieldBuff01_Tex" msg="@field:700302803"/>
+		<EffectList>
+			<Effect type="3" effectId="631001"/>
+		</EffectList>
+	</InteractionRule>
+	<!-- 거대 유령한테 데이지 입히기 (판정 후 HP 깎기) -->
+	<!-- <InteractionRule id="204" type="all" interval="3000" maxInteractionCount="10000" distance="3000" point="0" checkAbnormality="630515" abnormality="" targetHpReduce="" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="1000" comboRuleId="2">
+		<EffectList>
+		</EffectList>
+	</InteractionRule> -->
+	
+	<!-- 스파크 인터랙션 -->
+	<InteractionRule id="300" type="individual" interval="30000" distance="120" point="500" inFieldEvent="true" interactOnFly="onFlyMove" flightGageAdd="150" abnormality="631001" despawnDelay="50" comboRuleId="3">
+		<EffectList>
+			<Effect type="0" effectId="631012"/>
+		</EffectList>
+	</InteractionRule>
+	<!-- 정찰기 인터랙션 -->
+	<InteractionRule id="301" type="all" interval="200" maxInteractionCount="3" gageType="0" distance="600" point="2500" inFieldEvent="true" interactOnFly="onFly" flightGageAdd="-25" comboRuleId="3" despawnDelay="500" targetHpReduce="" >
+		<HotKey type="1" inputKey="LeftMouseButton" icon="Icon_Status.GodSpell_Tex" msg="@field:702101801"/>
+		<EffectList>
+			<Effect type="3" effectId="631003"/>
+		</EffectList>
+	</InteractionRule>
+	<!-- 거대 정찰기 인터랙션 -->
+	<InteractionRule id="302" type="all" interval="200" maxInteractionCount="1000000" distance="1500" point="2500" inFieldEvent="true" interactOnFly="onFly" flightGageAdd="-75" targetHpReduce="0" despawnDelay="100" comboRuleId="3" >
+		<HotKey type="1" inputKey="LeftMouseButton" icon="Icon_Status.GodSpell_Tex" msg="@field:702101802"/>
+		<EffectList>
+			<Effect type="3" effectId="631003"/>
+		</EffectList>
+	</InteractionRule>
+	<!-- 용계 코어 인터랙션 -->
+	<InteractionRule id="303" type="all" interval="250" maxInteractionCount="1000000" distance="650" point="0" inFieldEvent="true" interactOnFly="onFly" flightGageAdd="100" comboRuleId="4" despawnDelay="100" targetHpReduce="" isVoidInteraction="true" >
+		<HotKey type="1" inputKey="LeftMouseButton" icon="Icon_Status.minusfocus_Tex" msg="@field:702101803"/>
+		<EffectList>
+			<Effect type="2" effectId="631004"/>
+		</EffectList>
+	</InteractionRule>
+	<InteractionRule id="304" type="all" interval="300" maxInteractionCount="30" gageType="0" distance="1200" point="0" checkAbnormality="25020003" inFieldEvent="false" interactOnFly="none" flightGageAdd="175" comboRuleId="3" despawnDelay="500" targetHpReduce="150000" >
+		<HotKey type="1" inputKey="LeftMouseButton" icon="Icon_Status.GodSpell_Tex" msg="@field:702101801"/>
+		<EffectList>
+			<Effect type="3" effectId="250101"/>
+		</EffectList>
+	</InteractionRule>
+	<InteractionRule id="305" type="all" interval="300" maxInteractionCount="200" gageType="0" distance="1500" point="0" checkAbnormality="25020004" inFieldEvent="false" interactOnFly="none" flightGageAdd="175" comboRuleId="3" despawnDelay="500" targetHpReduce="5000" >
+		<HotKey type="1" inputKey="LeftMouseButton" icon="Icon_Status.GodSpell_Tex" msg="@field:702101801"/>
+		<EffectList>
+			<Effect type="3" effectId="250102"/>
+		</EffectList>
+	</InteractionRule>
+</NpcInteractionData>

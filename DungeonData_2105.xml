@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="2105" name="@dungeon:2105" startPos="-117790,130697,21016" startDir="0" exitContinentId="2000" exitPos="103524,-77714,12901" exitDir="90" destroyWaitMin="0">
+	<Condition type="solo" />
+	<Condition type="maxMemberCount" value="1" />
+	<Condition type="levelOver" value="69" />
+	<ClearCondition huntingZoneId="2105" templateId="1000" amount="1" killCount="1"/>
+	<RestoreTargetQuest id="210502" forceRestore="true"/>
+	<Condition type="progressQuest" value="210502" taskId="1" />
+
+
+	<!--던전 최초 설정-->
+	<EventGroup type="initialize" name="Initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2105" territoryId="210500002" next="none" />  <!-- 입구 차폐막 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500010" next="none" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500011" next="none" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500012" next="none" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500013" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" triggerUserClass = "lancer;priest;elementalist" uniqueId="2105,210500018">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="21050001" target="player" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	  
+
+	<!-- 1네임드 전투 시작 시 -->
+	<EventGroup type="npcState" uniqueId="2105,1000" value="combat" repeat="true"> 
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="spawn" huntingZoneId="2105" territoryId="210500009" next="none" />
+		  <EventTask type="message" string="@dungeon:2105001" style="speechbubble" targetNpcId="2105,30000" next="time" nextValue="1"/>
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	
+	<!-- 1네임드 사망 시 -->
+    <EventGroup type="npcHp" uniqueId="2105,1000" value="0" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3303" next="none" />
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="despawn" huntingZoneId="2105" territoryId="210500001" next="none" />  <!-- 칼리가르 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="2105" territoryId="210500009" next="none" />
+				<EventTask type="despawn" huntingZoneId="2105" territoryId="210500010" next="none" />
+				<EventTask type="despawn" huntingZoneId="2105" territoryId="210500011" next="none" />
+				<EventTask type="despawn" huntingZoneId="2105" territoryId="210500012" next="none" />
+				<EventTask type="despawn" huntingZoneId="2105" territoryId="210500013" next="none" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500006" next="none" />				
+				<EventTask type="updateQuest" questId="210502" taskId="5" next="none"/>
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<!-- 타이머 종료 시 : 임시.. 전멸 등 연출용 필요 
+	<EventGroup type="timer" timerName="TheEnd" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021002" turn="off" target="player" next="none" /> 
+	   </EventTaskGroup>
+      </Event>
+	</EventGroup>-->
+
+	<!-- 패턴 관련 데이터 -->
+	<EventGroup type="none" id="100" name="터져라 투명NPC 제거" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="5" />
+		  <EventTask type="killNpc" targetNpcId="2105,1001" next="none" /> <!-- 터져라 npc 제거 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="101" name="액션 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021000" target="npc" targetNpcId="2105,1000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="102" name="패턴 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021001" target="npc" targetNpcId="2105,1000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="103" name="액션 및 패턴 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021000" target="npc" targetNpcId="2105,1000" turn="on" next="none" /> <!-- 액션 5초 -->
+		  <EventTask type="abnormality" abnormalityId="32021001" target="npc" targetNpcId="2105,1000" turn="on" next="none" /> <!-- 패턴 8초 -->
+		  <EventTask type="abnormality" abnormalityId="32021005" target="npc" targetNpcId="2105,1000" turn="on" next="none" /> <!-- 액션 10초 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="104" name="핵심액션 투명NPC 제거" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="5" />
+		  <EventTask type="killNpc" targetNpcId="2105,1002" next="none" /> <!-- 핵심액션 npc 제거 -->
+		  <EventTask type="killNpc" targetNpcId="2105,1003" next="none" /> <!-- 핵심액션 npc 제거 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="105" name="핵심액션 시작용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="106" name="전멸기 시작용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="32021006" target="npc" targetNpcId="2105,1000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	
+	<!--칼리가르 시작 영상-->
+	<EventGroup type="enterTerritory" uniqueId="2105, 210500008" id="3301" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3301" next="none" />
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500003" next="none" />  <!-- 칼리가르 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--칼리가르 변신전 처치-->
+	<EventGroup type="npcHp" uniqueId="2105,2000" value="0" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3302" next="time" nextValue="2" />
+				<EventTask type="despawn" huntingZoneId="2105" territoryId="210500003" next="none" />  <!-- 변신전 칼리가르 디스폰 -->
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500001" next="none" />  <!-- 칼리가르 스폰 -->
+				<EventTask type="updateQuest" questId="210502" taskId="4" next="none"/>
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+	<!-- npc 부활 -->
+	<EventGroup type="npcHp" uniqueId="2105,30000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="10" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500009" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+	<!--
+	<EventGroup type="npcHp" uniqueId="2105,30100" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="10" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500010" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="2105,30200" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="10" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500011" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+		
+	<EventGroup type="npcHp" uniqueId="2105,30300" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="10" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500012" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="2105,30400" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="10" />
+				<EventTask type="spawn" huntingZoneId="2105" territoryId="210500013" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup> -->
+</Dungeon>

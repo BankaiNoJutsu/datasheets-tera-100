@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9029" name="@dungeon:9029" startPos="-7179,8189,-1652" exitContinentId="7004" exitPos="26595,82876,1855">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="65" />
+	<Condition type="partyMatchingOnly" /> <!--파티 매칭 전용-->
+	<ClearCondition huntingZoneId="429" templateId="3000" amount="1" killCount="1" />
+	<Retry retryId="1" />
+	
+	<!-- 시작시 길찾기 가이드 추가 -->
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="429,911" id="1" pos="-7081.23291016,10256.57421875,-1660.22265625" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>  
+	
+	<!-- 일반구간 관련 던전 이벤트 -->
+		
+	<EventGroup type="npcReset" uniqueId="429,4001" repeat="true"> <!-- 로그란 리셋 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900038" next="time" nextValue="1"/> <!-- 로그란 테리토리 디스폰 후 다시 스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900038" next="none" />
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="429,4005" value="0" repeat="true"> <!-- 아크데바 정찰병 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="429,912" id="1" pos="-7333,11198,-1212" next="none" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900027" next="none"/> <!-- 꽃게방 입구 철창 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900001" next="none" />  <!-- 꽃게 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="429,4002" value="0" repeat="true"> <!-- 1차 중형(타일런트) 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="429,914" id="1" pos="-9962.11718750,17253.86132813,-1068.51635742" next="none" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900031" next="none"/> <!-- 타일런트 출구 철창 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900032" next="none"/>
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900038" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="429,2001" value="0" repeat="true"> <!-- 시에그레아 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="429,915" id="1" pos="-9962.11718750,17253.86132813,-1068.51635742" next="none" />
+				<EventTask type="abnormality" abnormalityId="429016" target="npc" targetNpcId="429,4001" turn="off" next="none" /> <!-- 무적 이상상태 off -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+  <EventGroup type="eliminate" territoryId="42900032" repeat="false"> <!-- 순찰 파티 전멸 체크 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="party1" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+  <EventGroup type="eliminate" territoryId="42900038" repeat="false"> <!-- 로그란 전멸 체크 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="party2" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  
+  <EventGroup type="flag" name="party1,party2" repeat="false"> <!-- 순찰 파티, 로그란 파티 전멸 시 문 열기 -->
+    <Event>
+      <EventTaskGroup>
+				<EventTask type="guideOn" nameId="429,916" id="1" pos="-10000,17376,-350" next="none" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900035" next="time" nextValue="1"/> <!-- 2번 중형방 출구 철창 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900042" next="none"/> <!-- 2차중형(로그란)위쪽 파견감독 Territory 스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900043" next="none"/>
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900044" next="none"/>
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900039" next="none"/>
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900055" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="eliminate" territoryId="42900043" repeat="false"> <!-- 2번째 순찰 파티 전멸 체크 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="party3" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+
+  <EventGroup type="eliminate" territoryId="42900044" repeat="false"> <!-- 궁수 파티 전멸 체크 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="party4" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  
+  <EventGroup type="eliminate" territoryId="42900042" repeat="false"> <!-- 복구 담당자 파티 전멸 체크 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="party5" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	
+  
+  <EventGroup type="flag" name="party3,party4,party5" repeat="false"> <!-- 2번째 순찰 파티, 궁수 파티, 복구 담당자 파티 전멸 시 문 열기 -->
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="guideOn" nameId="429,917" id="1" pos="-8752,18909,-352" next="none" />
+			<EventTask type="despawn" huntingZoneId="429" territoryId="42900037" next="none"/> <!-- 복구담당자 뒤쪽 철창 디스폰 -->
+			<EventTask type="spawn" huntingZoneId="429" territoryId="42900047" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+    
+	<EventGroup type="npcHp" uniqueId="429,2003" value="0" repeat="true"> <!-- 사제 소환 마석 파괴 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="429,918" id="1" pos="-7964,20079,-352" next="none" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900049" next="none"/> <!-- 2네임드 입구 철창 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900002" next="none" />  <!-- 창기사 스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900057" next="none" />  <!-- 2넴 이동 마석 소환 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900056" next="none" />  <!-- 1넴 이동 마석 삭제 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="none" id="19" name="1네임드 시작전 몬스터 소환" repeat="true"> <!--  1넴 방 밖에 아크데바 검투사 도착 시 Territory 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900046" next="none"/> <!-- 경비병 Territory Spawn -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 1네임드(보스전) 관련 던전 이벤트 -->
+	<EventGroup type="npcState" id="20" uniqueId="429,1000" value="combat" repeat="true"> <!-- 꽃게(부활한 아가르타) 전투 시작시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900011" next="none"/> <!-- 가시 함정 스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900021" next="none"/>		
+				<EventTask type="message" string="@dungeon:9029014" style="combat" next="time" nextValue="10" /> <!-- 입구 철창 스폰 알림 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900027" next="none"/> <!-- 꽃게방 입구 철창 스폰 -->			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcHp" uniqueId="429,1000" value="0" repeat="true"> <!-- 꽃게(부활한 아가르타) 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="429,913" id="1" pos="-7183,14277,-1050" next="none" />
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900030" next="none"/>
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900011" next="none"/> <!-- 가시 함정 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900013" next="none"/> <!-- 드릴 A(백색) 제거 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900017" next="none"/> <!-- 드릴 B(흑색) 제거 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900018" next="none"/>
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900019" next="none"/>
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900020" next="none"/>
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900021" next="none"/> <!-- 투명NPC들 제거 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900029" next="none"/> <!-- 꽃게방 출구 철창 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900027" next="none"/> <!-- 꽃게방 입구 철창 디스폰 -->				
+				<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" /> <!-- 고대신의 축복 제거 -->
+				<EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+				<EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900056" next="none" />  <!-- 1넴 이동 마석 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="429,1000" value="95" repeat="true"> <!-- 꽃게(부활한 아가르타) 95%시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900013" next="none"/> <!-- 드릴 A(백색) 스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900017" next="none"/> <!-- 드릴 B(흑색) 스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900018" next="none"/>
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900019" next="none"/>
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900020" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="npcHp" uniqueId="429,1000" value="90" repeat="true"> <!-- 꽃게(부활한 아가르타) 90%시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1" patternListId="2" next="none" /> <!-- 꽃게 드릴 패턴 작동 투명NPC 시전 패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="429,1000" value="70" repeat="true"> <!-- 꽃게(부활한 아가르타) 70%시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1" patternListId="1" next="none" /> <!-- 꽃게 드릴 패턴 작동 투명NPC 정지 패턴으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="429,3" patternListId="2" next="none" /> <!-- 드릴 A(백색) 조정NPC 공격 패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="none" id="9" name="백색드릴 공격 패턴 시작" repeat="true"> <!-- 백색드릴 공격 패턴 시작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1000" patternListId="3" next="none" /> <!-- 꽃게 점프패턴 안쓰는 패턴으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="429,1003" patternListId="2" next="none" /> <!-- 드릴 A(백색) 공격 패턴 시작 -->
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->	
+				<EventTask type="message" string="@dungeon:9029015" style="combat" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="10" name="백색드릴 정지 패턴 시작" repeat="true"> <!-- 백색드릴 정지 패턴 시작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1000" patternListId="1" next="none" /> <!-- 꽃게 원래 패턴으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="429,1003" patternListId="1" next="none" /> <!-- 드릴 A(백색) 정지 패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="1" name="드릴 시전 후 텐션변경" repeat="true"> <!-- 검정드릴 공격 후 정지패턴 시전 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1002" patternListId="1" next="none" /> <!-- 드릴 B-a(검정) 정지 패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="3" name="드릴 시전 후 텐션변경" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1004" patternListId="1" next="none" /> <!-- 드릴 B-b(검정) 정지 패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="4" name="드릴 시전 후 텐션변경" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1005" patternListId="1" next="none" /> <!-- 드릴 B-c(검정) 정지 패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="5" name="드릴 시전 후 텐션변경" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1006" patternListId="1" next="none" /> <!-- 드릴 B-d(검정) 정지 패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="7" name="꽃게 드릴 텐션 시작" repeat="true"> <!-- 투명NPC가 꽃게에게 드릴패턴 시작하게 만듬 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1000" patternListId="2" next="none" /> <!-- 꽃게 드릴패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="2" name="랜덤 드릴 시전" repeat="true"> <!-- 드릴 2 ~ 3개 시전의 랜덤선택 -->
+		<Event>
+			<EventTaskGroup probability="0.08"> <!-- 드릴B의 a(1002), b(1004), c(1005), d(1006) 중 2~3개 선택 확률(사실은 패턴) -->
+				<EventTask type="changePatternList" targetNpcId="429,1002" patternListId="2" next="none" /> <!-- ab 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1004" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.13"> 
+				<EventTask type="changePatternList" targetNpcId="429,1002" patternListId="2" next="none" /> <!-- acd 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1005" patternListId="2" next="none" /> 
+				<EventTask type="changePatternList" targetNpcId="429,1006" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.08"> 
+				<EventTask type="changePatternList" targetNpcId="429,1002" patternListId="2" next="none" /> <!-- ac 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1005" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>			
+			<EventTaskGroup probability="0.13"> 
+				<EventTask type="changePatternList" targetNpcId="429,1004" patternListId="2" next="none" /> <!-- bcd 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1005" patternListId="2" next="none" /> 
+				<EventTask type="changePatternList" targetNpcId="429,1006" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.13"> 
+				<EventTask type="changePatternList" targetNpcId="429,1002" patternListId="2" next="none" /> <!-- abc 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1004" patternListId="2" next="none" /> 
+				<EventTask type="changePatternList" targetNpcId="429,1005" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.08"> 
+				<EventTask type="changePatternList" targetNpcId="429,1004" patternListId="2" next="none" /> <!-- bc 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1005" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>	
+			<EventTaskGroup probability="0.08"> 
+				<EventTask type="changePatternList" targetNpcId="429,1005" patternListId="2" next="none" /> <!-- cd 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1006" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.13"> 
+				<EventTask type="changePatternList" targetNpcId="429,1002" patternListId="2" next="none" /> <!-- abd 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1004" patternListId="2" next="none" /> 
+				<EventTask type="changePatternList" targetNpcId="429,1006" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.08"> 
+				<EventTask type="changePatternList" targetNpcId="429,1004" patternListId="2" next="none" /> <!-- bd 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1006" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.08"> 
+				<EventTask type="changePatternList" targetNpcId="429,1002" patternListId="2" next="none" /> <!-- ad 선택 -->
+				<EventTask type="changePatternList" targetNpcId="429,1006" patternListId="2" next="none" /> 
+				<EventTask type="message" string="@dungeon:9029001" style="combat" next="time" nextValue="1"/> <!-- 드릴 패턴 시작 알림 -->
+				<EventTask type="message" string="@dungeon:9029016" style="combat" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="6" name="꽃게 점프 후 텐션 변경" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1000" patternListId="1" next="none" /> <!-- 꽃게 공격 패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="429,1000" value="50" repeat="true"> <!-- 꽃게(부활한 아가르타) 50%시 -->
+		<Event>
+			<EventTaskGroup>
+			<EventTask type="changePatternList" targetNpcId="429,1000" patternListId="1" next="none" /> <!-- 꽃게 공격 패턴 시작 -->
+			<EventTask type="changePatternList" targetNpcId="429,1" patternListId="1" next="none" /> <!-- 꽃게 조작 투명NPC 대기 패턴 시작 -->
+			<EventTask type="changePatternList" targetNpcId="429,3" patternListId="1" next="none" /> <!-- 드릴A(백색) 조작 투명NPC 대기 패턴 시작 -->
+			<EventTask type="changePatternList" targetNpcId="429,2" patternListId="2" next="none" /> <!-- 패턴3 조작 투명NPC 패턴 시작 -->
+			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="8" name="드릴A 드릴B 랜덤 시전" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="none" id="11" name="드릴A 관련 모두 스탑" repeat="true"> <!-- 드릴A관련 텐션 모두 정지텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,3" patternListId="1" next="none" /> <!-- 드릴A(백색) 조작 투명NPC 대기 패턴 시작 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="12" name="드릴B관련 모두 스탑" repeat="true"> <!-- 드릴B 관련 텐션 모두 정지텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,1" patternListId="1" next="none" /> <!-- 꽃게 조작 투명NPC 대기 패턴 시작 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+		
+	<EventGroup type="npcReset" uniqueId="429,1000" repeat="true"> <!-- 꽃게(부활한 아가르타) 리셋 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="eventState" stateType="EventGroup" id="20" state="stop" next="none" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900011" next="none" /> <!-- 가시 함정 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900001" next="time" nextValue="1"/> <!-- 1 네임드 디스폰 후 다시 스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900001" next="none" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900013" next="none"/> <!-- 드릴 A(백색) 제거 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900017" next="none"/> <!-- 드릴 B(흑색) 제거 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900018" next="none"/>
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900019" next="none"/>
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900020" next="none"/>
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900021" next="none"/> <!-- 투명NPC들 제거 -->
+				<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" /> <!-- 고대신의 축복 제거 -->
+				<EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+				<EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900027" next="none"/> <!-- 꽃게방 입구 철창 디스폰 -->				
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2네임드(보스전) 관련 던전 이벤트 -->
+
+	<EventGroup type="npcState" id="21" uniqueId="429,2000" value="combat" repeat="true"> <!-- 창기사(부활한 코르누스) 전투 시작시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9029014" style="combat" next="time" nextValue="10" /> <!-- 입구 철창 스폰 알림 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900049" next="none"/> <!-- 2네임드 입구 철창 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="429,2000" repeat="true"> <!-- 창기사(부활한 코르누스) 리셋 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="eventState" stateType="EventGroup" id="21" state="stop" next="none" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900049" next="none"/> <!-- 2네임드 입구 철창 디스폰 -->
+				<EventTask type="abnormality" abnormalityId="90290002" target="npc" targetNpcId="429,2000" turn="off" next="none" /> <!-- 완전방어 이상상태 해제 -->	
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900002" next="time" nextValue="1"/> <!-- 2 네임드 디스폰 후 다시 스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900002" next="none" />
+				<EventTask type="killNpc" targetNpcId="429,12" next="none" /> <!-- 석상들 제거 -->			
+				<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" /> <!-- 고대신의 축복 제거 -->
+				<EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+				<EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="npcHp" uniqueId="429,2000" value="0" repeat="true"> <!-- 창기사(부활한 코르누스) 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="429,919" id="1" pos="-7572,26474,-875" next="none" />
+				<EventTask type="killNpc" targetNpcId="429,12" next="none" /> <!-- 석상들 제거 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900004" next="none" />  <!-- 바포메트 스폰 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900045" next="none"/> <!-- 2네임드 출구 철창 디스폰 -->	
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900049" next="none"/> <!-- 2네임드 입구 철창 디스폰 -->
+				<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" /> <!-- 고대신의 축복 제거 -->
+				<EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+				<EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900058" next="none" />  <!-- 3넴 이동 마석 소환 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900057" next="none" />  <!-- 2넴 이동 마석 삭제 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+		
+	<EventGroup type="none" id="14" name="완전방어 시작" repeat="true"> <!-- 완전방어 이상상태 걸어주는 던전이벤트 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="90290002" target="npc" targetNpcId="429,2000" turn="on" next="none" /> <!-- 완전방어 이상상태 -->
+				<EventTask type="abnormality" abnormalityId="90290001" target="npc" targetNpcId="429,2000" turn="on" next="none" />
+				<EventTask type="message" string="@dungeon:9029011" style="combat" next="time" nextValue="2" /> <!-- 완전방어 시작 알림 -->					
+				<EventTask type="message" string="@dungeon:9029013" style="combat" next="none" /> <!-- 완전방어 해제 알림 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!-- 3네임드(보스전) 관련 던전 이벤트 -->
+		
+	<EventGroup type="npcState" id="22" uniqueId="429,3000" value="combat" repeat="true"> <!-- 바포메트(완성된 카프리콘) 전투 시작시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9029014" style="combat" next="time" nextValue="10" /> <!-- 입구 철창 스폰 알림 -->		
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900053" next="none" /> <!-- 바포메트(완성된 카프리콘) 입구 철창 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="429,3000" repeat="true"> <!-- 바포메트(완성된 카프리콘) 리셋 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="eventState" stateType="EventGroup" id="22" state="stop" next="none" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900053" next="none" /> <!-- 바포메트(완성된 카프리콘) 입구 철창 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900004" next="time" nextValue="1"/> <!-- 1 네임드 디스폰 후 다시 스폰 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900004" next="none" />
+				<EventTask type="abnormality" abnormalityId="429006" target="player" turn="off" next="none"/> <!-- 뱀머리 깨질 때 PC 무적 효과 제거 -->
+				<EventTask type="killNpc" targetNpcId="429,3001" next="none"/> <!-- 뱀머리 제거 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="npcHp" uniqueId="429,3000" value="0" repeat="true"> <!-- 바포메트(완성된 카프리콘) 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="1" next="none" />
+				<EventTask type="abnormality" abnormalityId="429006" target="player" turn="off" next="none"/> <!-- 뱀머리 깨질 때 PC 무적 효과 제거 -->
+				<EventTask type="killNpc" targetNpcId="429,3001" next="none" /> <!-- 뱀머리 제거 -->
+				<EventTask type="spawn" huntingZoneId="429" territoryId="42900051" next="none" />
+				<EventTask type="despawn" huntingZoneId="429" territoryId="42900053" next="none" /> <!-- 바포메트(완성된 카프리콘) 입구 철창 디스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	<EventGroup type="none" id="15" name="패턴 대화창 생성(패턴A)" repeat="true"> <!-- 전멸패턴 대화창 생성(패턴A) -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="0" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="none" id="16" name="패턴 대화창 생성(패턴B)" repeat="true"> <!-- 전멸패턴 대화창 생성(패턴B) -->
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="message" string="@dungeon:9029006" style="combat" next="none" /> <!-- 전멸패턴 시작 알림 -->		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!-- 바포메트(완성된 카프리콘) HP 30%이하일때 패턴 랜덤 시전
+	<EventGroup type="none" id="17" name="패턴A or 패턴B" repeat="true">   
+		<Event>
+			<EventTaskGroup probability="0.4"> 
+				<EventTask type="changePatternList" targetNpcId="429,3000" patternListId="3" next="none" /> 
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.6"> 
+				<EventTask type="changePatternList" targetNpcId="429,3000" patternListId="2" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	 -->
+	 
+	<EventGroup type="none" id="18" name="카프리콘 기본패턴 다시시작" repeat="true"> <!--  바포메트(완성된 카프리콘) 일반 패턴으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="429,3000" patternListId="1" next="none" /> <!--  바포메트(완성된 카프리콘) 일반 패턴으로 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="npcHp" uniqueId="429,3001" value="0" repeat="true"> <!-- 패턴A 뱀머리 깨질 때 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="429006" target="player" turn="off" next="none"/> <!-- 뱀머리 깨질 때 PC 무적 효과 제거 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="429,3002" value="0" repeat="true"> <!-- 패턴B 뱀머리 깨질 때 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="429006" target="player" turn="off" next="none"/> <!-- 뱀머리 깨질 때 PC 무적 효과 제거 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+  <!-- 고대신의 축폭 시리즈 -->
+  <!-- 재도전 장치 1번 -->  
+  <EventGroup type="timer" timerName="벨릭의 은총1" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9029008" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 재도전 장치 2번 -->
+  <EventGroup type="timer" timerName="벨릭의 은총2" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9029009" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 재도전 장치 3번 -->
+  <EventGroup type="timer" timerName="벨릭의 은총3" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9029010" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 1네임드 재도전 장치 --> 
+  <!-- <EventGroup type="npcHp" uniqueId="429,1000" value="99.99999999" repeat="true" stopWhenReset="true" stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="150" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />        
+		<EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="30" next="time" nextValue="0" timerUiOff="true" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+  
+  <!-- 2네임드 재도전 장치 --> 
+  <!-- <EventGroup type="npcHp" uniqueId="429,2000" value="99.99999999" repeat="true" stopWhenReset="true" stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="150" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />        
+		<EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="30" next="time" nextValue="0" timerUiOff="true" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+
+  <!-- 3네임드 재도전 장치 --> 
+  <!-- <EventGroup type="npcHp" uniqueId="429,3000" value="99.99999999" repeat="true" stopWhenReset="true" stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="150" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="30" next="time" nextValue="180" timerUiOff="true" />
+        <EventTask type="message" string="@dungeon:9029007" style="default" next="time" nextValue="0" />        
+		<EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="30" next="time" nextValue="0" timerUiOff="true" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+
+</Dungeon>

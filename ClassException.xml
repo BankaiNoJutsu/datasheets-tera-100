@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassExceptionData>
+
+	<!-- 
+	Condition : 조건입력 노드(값이 입력된 Attribute 만큼 AND 조건)
+	Condition@class : 종족 제한
+	Condition@underLevel : 레벨 제한(초과)
+	Condition@upperLevel : 레벨 제한(미만)
+	-->
+	
+	<!-- 조건 범위가 중복되면 안된다(우선순위가 없기 때문) 전 레벨에 걸쳐 적용하고 싶다면, 비검사의 경우 1~57, 58~65 두개 구간 모두에 적용해야 한다 -->
+	<Condition class="soulless" minLevel="1" maxLevel="57">
+		<ForbidQuest>
+			<!-- 수주할 수 없는 퀘스트 -->
+			<StoryGroupList idList="7011,7012,7013,7021,7022"/>
+			<Quest idList="6388,49491,8403"/>
+		</ForbidQuest>
+		<DisableItem idList="301,331,96417,96418,139709,149321,168011,170020,179887,179888,179889,179953,181963,181964,181965,210729,210730,212448,212449,212450,212451,212452,212453,210729,213302,153453,182434,185735,214017,101547,98415,98416,98417,98418,98419,98420,98421,98422"/>
+		<Restriction partyMatch="false" battleField="false" dungeon="false" partySummon="false"/>
+		<Reputation forbidNpcGuildIdList="605,901,902"/>
+		<TeleportRestriction continentId="7087" questId="8708" taskId="3"/> <!--퀘스트와 태스크를 완료하지 못하면 설정된 대륙이 아닌 곳으로 이동이 불가 -->
+	</Condition>
+
+	<Condition class="soulless" minLevel="58" maxLevel="70">
+		<DisableItem idList="301,331,96417,96418,139709,149321,168011,170020,181963,181964,181965,179887,179888,179889,179953,210729,210730,212448,212449,212450,212451,212452,212453,210729,153453,98415,98416,98417,98418,98419,98420,98421,98422"/>		
+		<TeleportRestriction continentId="7087" questId="8708" taskId="3"/>		
+	</Condition>
+	
+	<DeathPostProcess class="soulless" postprocessId="12" abnormalityId="10151090">
+		<Action time="0" materialName="S1_ShadowOfNight_PPMI" param="Strength" from="0.0f" to="0.9f" duration="500" />
+		<Action time="500" materialName="S1_ShadowOfNight_PPMI" param="Strength" from="0.9f" to="0.9f" duration="2000" />
+		<Action time="2500" materialName="S1_ShadowOfNight_PPMI" param="Strength" from="0.9f" to="0.0f" duration="4500" />	
+	</DeathPostProcess>
+	
+	<Condition class="engineer" minLevel="1" maxLevel="70">
+		<DisableItem idList="302,332,96419,96420,139688,168012,170019,179890,179891,179892,179952,181966,181967,181968,210730,212451,212452,212453,153454"/>		
+	</Condition>
+	
+	<Condition class="fighter" minLevel="1" maxLevel="70">
+		<DisableItem idList="101080,101202,139688"/>
+	</Condition>
+	
+	<Condition class="assassin" minLevel="1" maxLevel="70">
+		<DisableItem idList="301,302,331,332,96417,96418,96419,96420,101080,101202,139688,139709,149321,168011,168012,170019,170020,179887,179888,179889,179890,179891,179892,179952,179953,181963,181964,181965,181966,181967,181968"/>		
+	</Condition>
+	
+	<Condition class="glaiver" minLevel="1" maxLevel="70"> <!-- 캐릭터 종족 변경권 아이템 사용 불가 -->
+		<DisableItem idList="302,332,96419,96420,101080,101202,139688,168012,170019,179890,179891,179892,179952,181966,181967,181968,210730,212451,212452,212453,153454"/>		
+	</Condition>	
+	
+</ClassExceptionData>

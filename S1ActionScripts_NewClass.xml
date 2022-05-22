@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<S1ActionScripts type="NewClass">
+	
+	<!--어둠의 장막 발동 시 출력되는 PostProcess-->	
+	<Script id="101500" playingTime="8000" enableInput="true">
+		<Action time="0" type="PostProcess" postprocessSet="12" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="12" param="Strength" from="0.0f" to="0.9f" duration="500" />
+			<Action time="500" type="PostProcessMaterial" postprocessSet="12" param="Strength" from="0.9f" to="0.9f" duration="2000" />
+			<Action time="2500" type="PostProcessMaterial" postprocessSet="12" param="Strength" from="0.9f" to="0.0f" duration="4500" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="12" on="false" />
+	</Script>
+
+	<!-- 마공사 필살기 스킬 사용 시 출력되는 PostProcess-->
+	<!-- 발사 직후 -->
+	<Script id="101503" playingTime="6000" enableInput="true" isOnlyPlayerTarget="true" isStopActionEnd="true" applySkillTimeRate="true">
+		<Action time="0" type="PostProcess" postprocessSet="14" on="true">
+			<Action time="200" type="PostProcessMaterial" postprocessSet="14" param="Phase"  from="0.05f" to="0.15f" duration="700" />
+			<Action time="700" type="PostProcessMaterial" postprocessSet="14" param="Phase"  from="0.15f" to="0.5f" duration="1500" />
+			<Action time="2200" type="PostProcessMaterial" postprocessSet="14" param="Phase"  from="0.5f" to="1.0f" duration="3400" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="14" on="false">
+			<Action time="0" type="PostProcess" postprocessSet="14" on="false" isOnlyPlayerTarget="true" />
+		</Action>
+	</Script>
+	<!-- 테스트용 -->
+	<Script id="101504" playingTime="1500" enableInput="true">
+		<Action time="0" type="PostProcess" postprocessSet="14" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="14" param="Phase"  from="0.05f" to="0.15f" duration="500" />
+			<Action time="500" type="PostProcessMaterial" postprocessSet="14" param="Phase"  from="0.15f" to="0.5f" duration="1000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="14" on="false" />
+	</Script>
+	<!-- 테스트용 -->
+	<Script id="101505" playingTime="200" enableInput="true">
+		<Action time="0" type="PostProcess" postprocessSet="14" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="14" param="Phase"  from="0.15f" to="0.5f" duration="200" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="14" on="false" />
+	</Script>
+	
+	<Script id="101510" playingTime="5000" enableInput="true">
+		<Action time="0" type="shortcut_blink" blink="true" skillId="20100"/>
+		<Action time="0" type="shortcut_blink" blink="true" skillId="50100"/>
+		<Action time="0" type="shortcut_blink" blink="true" skillId="130100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="20100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="50100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="130100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="20100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="50100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="130100"/>
+	</Script>
+	<Script id="101511" playingTime="8000" enableInput="true">
+		<Action time="0" type="shortcut_blink" blink="true" skillId="400100"/>
+		<Action time="8000" type="shortcut_blink" blink="false" skillId="400100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="400100"/>
+		<Action time="0" type="tutorialMessage" keyTextId="101510" xPadTextId="101510" dPadTextId="101510" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="8000" type="tutorialMessage" keyTextId="101510" xPadTextId="101510" dPadTextId="101510" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="101510" xPadTextId="101510" dPadTextId="101510" complete="true" on="false"/>
+	</Script>
+	<!-- 구르기 후 산탄 숏컷 가이드 -->
+	<Script id="101512" playingTime="5000" enableInput="true">
+		<Action time="0" type="shortcut_blink" blink="true" skillId="30100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="30100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="30100"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+	</Script>
+	<!-- 숏컷 가이드 삭제 -->
+	<Script id="101513" playingTime="0" enableInput="true">
+		<Action time="0" type="shortcut_blink" blink="true" skillId="30100"/>
+		<Action time="0" type="shortcut_blink" blink="false" skillId="30100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="30100"/>
+		<Action time="0" type="shortcut_blink" blink="true" skillId="400100"/>
+		<Action time="0" type="shortcut_blink" blink="false" skillId="400100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="400100"/>
+	</Script>
+	<!-- 미션 퀘스트 1379 TASK 3 수행 중 15초간 뜨는 산탄 구르기 산탄 초기화 가이드 -->
+	<Script id="101515" playingTime="15000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="101511" xPadTextId="101511" dPadTextId="101511" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="15000" type="tutorialMessage" keyTextId="101511" xPadTextId="101511" dPadTextId="101511" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="101511" xPadTextId="101511" dPadTextId="101511" complete="true" on="false"/>
+	</Script>
+	<!-- 산탄 후 구르기 숏컷 가이드 -->
+	<Script id="101516" playingTime="5000" enableInput="true">
+		<Action time="0" type="shortcut_blink" blink="true" skillId="400100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="400100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="400100"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+	</Script>
+	
+	<!--마공사 각성 스킬 융단 폭격 섬광 효과-->
+	<Script id="101520" playingTime="3000" enableInput="true" applySkillTimeRate="true">
+		<Action time="0" type="PostProcess" postprocessSet="34" on="true" isOnlyPlayerTarget="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="34" param="Strength"  from="0.00f" to="0.0f" duration="3400" />
+			<Action time="3400" type="PostProcessMaterial" postprocessSet="34" param="Strength"  from="0.0f" to="1.0f" duration="50" />
+			<Action time="3450" type="PostProcessMaterial" postprocessSet="34" param="Strength"  from="1.0f" to="0.0f" duration="500" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="34" on="false" isOnlyPlayerTarget="true"/>
+	</Script>
+	
+	
+	
+	
+	<!-- 권술사 -->
+	<!-- 강타 방어 효과 가이드 -->
+	<Script id="1015200" playingTime="30000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="1015200" xPadTextId="1015200" dPadTextId="1015200" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="15000" type="tutorialMessage" keyTextId="1015200" xPadTextId="1015200" dPadTextId="1015200" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015200" xPadTextId="1015200" dPadTextId="1015200" complete="true" on="false"/>
+		<Action time="15000" type="tutorialMessage" keyTextId="1015201" xPadTextId="1015201" dPadTextId="1015201" complete="true" on="true"/>
+		<Action time="15000" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="30000" type="tutorialMessage" keyTextId="1015201" xPadTextId="1015201" dPadTextId="1015201" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015201" xPadTextId="1015201" dPadTextId="1015201" complete="true" on="false"/>
+	</Script>
+	<!-- 난폭한 돌진 사용 가이드 -->
+	<Script id="1015210" playingTime="10000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="1015210" xPadTextId="1015210" dPadTextId="1015210" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="10000" type="tutorialMessage" keyTextId="1015210" xPadTextId="1015210" dPadTextId="1015210" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015210" xPadTextId="1015210" dPadTextId="1015210" complete="true" on="false"/>
+	</Script>
+	<!-- 분노의 난타 방어 효과 가이드 -->
+	<Script id="1015220" playingTime="10000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="1015220" xPadTextId="1015220" dPadTextId="1015220" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="10000" type="tutorialMessage" keyTextId="1015220" xPadTextId="1015220" dPadTextId="1015220" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015220" xPadTextId="1015220" dPadTextId="1015220" complete="true" on="false"/>
+	</Script>
+	<!-- 지면 강타 방어 효과 가이드 -->
+	<Script id="1015230" playingTime="10000" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="1015230" xPadTextId="1015230" dPadTextId="1015230" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="10000" type="tutorialMessage" keyTextId="1015230" xPadTextId="1015230" dPadTextId="1015230" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015230" xPadTextId="1015230" dPadTextId="1015230" complete="true" on="false"/>
+	</Script>
+	
+		<!--권술사 각성 스킬 '원 인치 펀치' 포스트 프로세스: 사전 연계 없이 이 스킬만 쓸 때-->		
+		<Script id="1015240" playingTime="3000" enableInput="true" isOnlyPlayerTarget="true" isStopActionEnd="true">
+		<Action time="0" type="PostProcess" postprocessSet="26" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="26" param="Strength"  from="0.0f" to="0.0f" duration="450" />
+			<Action time="450" type="PostProcessMaterial" postprocessSet="26" param="Strength"  from="0.0f" to="1.0f" duration="300" />
+			<Action time="750" type="PostProcessMaterial" postprocessSet="26" param="Strength"  from="1.0f" to="1.0f" duration="800" />
+			<Action time="1450" type="PostProcessMaterial" postprocessSet="26" param="Strength"  from="1.0f" to="0.0f" duration="120" />
+			<Action time="1600" type="PostProcessMaterial" postprocessSet="26" param="Strength"  from="0.0f" to="0.0f" duration="1700" />
+			</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="26" on="false" />
+	</Script>
+	
+	
+	<!--권술사 각성 스킬 '원 인치 펀치' 포스트 프로세스: 연계기 사용 후, 거힘 발동 후 바로 쓸 때-->	
+	<Script id="1015241" playingTime="3000" enableInput="true" isOnlyPlayerTarget="true" isStopActionEnd="true">
+		<Action time="0" type="PostProcess" postprocessSet="26" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="26" param="Strength"  from="0.0f" to="0.0f" duration="150" />		
+			<Action time="0" type="PostProcessMaterial" postprocessSet="26" param="Strength"  from="0.0f" to="1.0f" duration="150" />
+			<Action time="300" type="PostProcessMaterial" postprocessSet="26" param="Strength"  from="1.0f" to="1.0f" duration="300" />
+			<Action time="600" type="PostProcessMaterial" postprocessSet="26" param="Strength"  from="1.0f" to="0.0f" duration="120" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="26" on="false" />
+	</Script>	
+	
+	<!-- 월광무사 -->
+	<!-- 월광무사 적월 스킬 사용 시 출력되는 PostProcess-->
+	<Script id="1015300" playingTime="35000" enableInput="true" isOnlyPlayerTarget="true" isStopActionEnd="false">
+		<Action time="0" type="PostProcess" postprocessSet="21" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="21" param="Strength"  from="0.2f" to="1.0f" duration="35000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="21" on="false" />
+	</Script>
+	<Script id="1015301" playingTime="1000" enableInput="true" isOnlyPlayerTarget="true" isStopActionEnd="true">
+		<Action time="0" type="PostProcess" postprocessSet="21" on="false" />
+		<Action isFinal="true" type="PostProcess" postprocessSet="21" on="false" />
+	</Script>
+	<!-- 월광흔 가이드 -->
+	<Script id="1015310" playingTime="20000" enableInput="true">
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="tutorialMessage" keyTextId="1015310" xPadTextId="1015310" dPadTextId="1015310" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="1015310" xPadTextId="1015310" dPadTextId="1015310" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015310" xPadTextId="1015310" dPadTextId="1015310" complete="true" on="false"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="1015311" xPadTextId="1015311" dPadTextId="1015311" complete="true" on="true"/>
+		<Action time="10000" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="20000" type="tutorialMessage" keyTextId="1015311" xPadTextId="1015311" dPadTextId="1015311" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015311" xPadTextId="1015311" dPadTextId="1015311" complete="true" on="false"/>
+	</Script>
+	<Script id="1015320" playingTime="20000" enableInput="true">
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="tutorialMessage" keyTextId="1015320" xPadTextId="1015320" dPadTextId="1015320" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="1015320" xPadTextId="1015320" dPadTextId="1015320" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015320" xPadTextId="1015320" dPadTextId="1015320" complete="true" on="false"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="1015321" xPadTextId="1015321" dPadTextId="1015321" complete="true" on="true"/>
+		<Action time="10000" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="20000" type="tutorialMessage" keyTextId="1015321" xPadTextId="1015321" dPadTextId="1015321" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015321" xPadTextId="1015321" dPadTextId="1015321" complete="true" on="false"/>
+	</Script>
+	<Script id="1015330" playingTime="10000" enableInput="true">
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="tutorialMessage" keyTextId="1015330" xPadTextId="1015330" dPadTextId="1015330" complete="true" on="true"/>
+		<Action time="10000" type="tutorialMessage" keyTextId="1015330" xPadTextId="1015330" dPadTextId="1015330" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015330" xPadTextId="1015330" dPadTextId="1015330" complete="true" on="false"/>
+	</Script>
+	<Script id="1015340" playingTime="20000" enableInput="true">
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="0" type="tutorialMessage" keyTextId="1015340" xPadTextId="1015340" dPadTextId="1015340" complete="true" on="true"/>
+		<Action time="20000" type="tutorialMessage" keyTextId="1015340" xPadTextId="1015340" dPadTextId="1015340" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="1015340" xPadTextId="1015340" dPadTextId="1015340" complete="true" on="false"/>
+	</Script>
+	<!--개전2타 효과-->
+	<Script id="101550" playingTime="5000" enableInput="true" applySkillTimeRate="true" isStopActionEnd="false">
+		<Action time="0" type="PostProcess" postprocessSet="37" on="true" isOnlyPlayerTarget="true" >
+			<Action time="50" type="PostProcessMaterial" postprocessSet="37" param="Progress"  from="0.0f" to="0.1125f" duration="850" />
+			<Action time="900" type="PostProcessMaterial" postprocessSet="37" param="Progress"  from="0.1125f" to="0.5f" duration="1100" />
+			<Action time="2000" type="PostProcessMaterial" postprocessSet="37" param="Progress"  from="0.5f" to="0.75f" duration="323" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="37" on="false" isOnlyPlayerTarget="true" />
+	</Script>
+	
+	<!--전투 전 지급받은 소모품을 사용하라는 가이드-->	
+	<Script id="870001" playingTime="7000" enableInput="false">
+		<Action time="0" type="showUI" name="Inventory" on="true"/>
+		<Action time="0" type="tutorialMessage" keyTextId="40000" xPadTextId="40001" dPadTextId="40002" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="7000" type="tutorialMessage" keyTextId="40000" xPadTextId="40001" dPadTextId="40002" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="40000" xPadTextId="40001" dPadTextId="40002" complete="true" on="false"/>
+	</Script>
+
+	<!-- 지급받은 장비를 장착하라는 연출 -->
+	<Script id="870002" playingTime="0" enableInput="true">
+		<Action time="0" type="showUI" name="Inventory" on="true"/>
+		<Action time="0" type="tutorialMessage" keyTextId="30040" xPadTextId="30041" dPadTextId="30042" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="7000" type="tutorialMessage" keyTextId="30040" xPadTextId="30041" dPadTextId="30042" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="30040" xPadTextId="30041" dPadTextId="30042" complete="true" on="false"/>
+	</Script>
+
+	<!-- 신규 습득 스킬 가이드 메시지 연출 -->
+	<Script id="870003" playingTime="0" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="40100" xPadTextId="40100" dPadTextId="40100" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40100" xPadTextId="40100" dPadTextId="40100" complete="true" on="false"/>
+		<Action time="2000" type="shortcut_blink" blink="true" skillId="50100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="50100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="50100"/>
+	</Script>
+	<Script id="870004" playingTime="0" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="40101" xPadTextId="40101" dPadTextId="40101" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40101" xPadTextId="40101" dPadTextId="40101" complete="true" on="false"/>
+		<Action time="2000" type="shortcut_blink" blink="true" skillId="100100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="100100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="100100"/>
+	</Script>
+	<Script id="870005" playingTime="0" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="40102" xPadTextId="40102" dPadTextId="40102" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40102" xPadTextId="40102" dPadTextId="40102" complete="true" on="false"/>
+		<Action time="2000" type="shortcut_blink" blink="true" skillId="80100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="80100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="80100"/>
+	</Script>
+	<Script id="870006" playingTime="0" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="40103" xPadTextId="40103" dPadTextId="40103" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40103" xPadTextId="40103" dPadTextId="40103" complete="true" on="false"/>
+		<Action time="2000" type="shortcut_blink" blink="true" skillId="40100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="40100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="40100"/>
+	</Script>
+	<Script id="870007" playingTime="0" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="40104" xPadTextId="40104" dPadTextId="40104" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40104" xPadTextId="40104" dPadTextId="40104" complete="true" on="false"/>
+		<Action time="2000" type="shortcut_blink" blink="true" skillId="200100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="200100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="200100"/>
+	</Script>
+	<Script id="870008" playingTime="0" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="40105" xPadTextId="40105" dPadTextId="40105" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40105" xPadTextId="40105" dPadTextId="40105" complete="true" on="false"/>
+		<Action time="2000" type="shortcut_blink" blink="true" skillId="60100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="60100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="60100"/>
+	</Script>
+	<Script id="870009" playingTime="0" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="40106" xPadTextId="40106" dPadTextId="40106" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40106" xPadTextId="40106" dPadTextId="40106" complete="true" on="false"/>
+		<Action time="2000" type="shortcut_blink" blink="true" skillId="120100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="120100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="120100"/>
+	</Script>
+	<Script id="870010" playingTime="0" enableInput="true">
+		<Action time="0" type="tutorialMessage" keyTextId="40107" xPadTextId="40107" dPadTextId="40107" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40107" xPadTextId="40107" dPadTextId="40107" complete="true" on="false"/>
+		<Action time="2000" type="shortcut_blink" blink="true" skillId="90100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="90100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="90100"/>
+	</Script>
+	
+	<!-- 반격 가이드 -->
+	<Script id="870011" playingTime="10000" enableInput="true">
+		<Action time="1200" type="shortcut_blink" blink="true" skillId="150100"/>
+		<Action time="3200" type="shortcut_blink" blink="false" skillId="150100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="150100"/>
+		<Action time="1200" type="tutorialMessage" keyTextId="40200" xPadTextId="40200" dPadTextId="40200" complete="true" on="true"/>
+		<Action time="1200" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="3200" type="tutorialMessage" keyTextId="40200" xPadTextId="40200" dPadTextId="40200" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="40200" xPadTextId="40200" dPadTextId="40200" complete="true" on="false"/>
+	</Script>
+	<!-- 암흑 칼날I 가이드 -->
+	<Script id="870012" playingTime="10000" enableInput="true">
+		<Action time="0" type="shortcut_blink" blink="true" skillId="80100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="80100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="80100"/>
+		<Action time="0" type="tutorialMessage" keyTextId="40300" xPadTextId="40300" dPadTextId="40300" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40300" xPadTextId="40300" dPadTextId="40300" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="40300" xPadTextId="40300" dPadTextId="40300" complete="true" on="false"/>
+	</Script>
+	<!-- 역포획을 사용하라는 가이드 -->
+	<Script id="870013" playingTime="10000" enableInput="true">
+		<Action time="0" type="shortcut_blink" blink="true" skillId="200100"/>
+		<Action time="5000" type="shortcut_blink" blink="false" skillId="200100"/>
+		<Action isFinal="true" type="shortcut_blink" blink="false" skillId="200100"/>
+		<Action time="0" type="tutorialMessage" keyTextId="40400" xPadTextId="40400" dPadTextId="40400" complete="true" on="true"/>
+		<Action time="0" type="Sound" cueName="InterfaceSound.SYSMSGCUE.SYSMSG_2088Cue" volume="4.5" radius="1.0" pitch="2.2" />
+		<Action time="5000" type="tutorialMessage" keyTextId="40400" xPadTextId="40400" dPadTextId="40400" complete="true" on="false"/>
+		<Action isFinal="true" type="tutorialMessage" keyTextId="40400" xPadTextId="40400" dPadTextId="40400" complete="true" on="false"/>
+	</Script>
+	
+	
+	<!-- 궁수 -->
+	
+	<!-- 각성 태풍의 눈 포스트 프로세스 효과-->
+	<Script id="870021" playingTime="15000" enableInput="true" applySkillTimeRate="true" isStopActionEnd="true">
+		<Action time="0" type="PostProcess" postprocessSet="38" on="true" isOnlyPlayerTarget="true" >
+			<Action time="0" type="PostProcessMaterial" postprocessSet="38" param="AimProgress"  from="0.0f" to="0.561f" duration="3350" />
+			<Action time="3425" type="PostProcessMaterial" postprocessSet="38" param="AimProgress"  from="0.565f" to="0.75f" duration="650" />
+			<Action time="5617" type="PostProcessMaterial" postprocessSet="38" param="AimProgress"  from="0.75f" to="0.875f" duration="168" />
+			<Action time="5785" type="PostProcessMaterial" postprocessSet="38" param="AimProgress"  from="0.875f" to="1.0f" duration="250" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="38" on="false" isOnlyPlayerTarget="true" />
+	</Script>
+	
+			
+	<!--마법사 각성 원소붕괴 포스트 프로세스-->
+	<Script id="390100" playingTime="6600" enableInput="true" applySkillTimeRate="true" isStopActionEnd="true" >
+		<Action time="0" type="SpecialMaterial" name="ElementCollapse" on="true" duration="6550"/>
+		<Action time="0" type="PostProcess" postprocessSet="33" on="true" isOnlyPlayerTarget="true" >
+			<Action time="926" type="PostProcessMaterial" postprocessSet="33" param="Strength"  from="0.0f" to="0.225f" duration="475" />
+			<Action time="1401" type="PostProcessMaterial" postprocessSet="33" param="Strength"  from="0.225f" to="0.25f" duration="45" />
+			<Action time="1715" type="PostProcessMaterial" postprocessSet="33" param="Strength"  from="0.25f" to="0.5f" duration="2785" />
+			<Action time="4505" type="PostProcessMaterial" postprocessSet="33" param="Strength"  from="0.5f" to="0.75f" duration="1295" />
+			<Action time="5800" type="PostProcessMaterial" postprocessSet="33" param="Strength"  from="0.75f" to="1.0f" duration="750" />	
+		</Action>
+		<Action isFinal="true" type="none">
+			<Action time="0" type="PostProcess" postprocessSet="33" on="false" isOnlyPlayerTarget="true" />
+			<Action time="0" type="SpecialMaterial" name="ElementCollapse" on="false" />
+		</Action>
+	</Script>
+	<!-- 마법사 각성 원소붕괴 투명화 효과-->
+	<Script id="390101" playingTime="800" enableInput="true">
+		<Action time="5300" type="visible" visibility="true"/>
+	</Script>
+	
+</S1ActionScripts>

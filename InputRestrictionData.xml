@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<InputRestrictionData>
+  <Enabled client="true" server="false"/>
+
+  <!--
+  
+  === READ ME ===
+  
+    "svn\Design\사회\ETC\입력제한 기획서겸 사양서.doc"
+    
+    
+===입력 규칙 목록===
+  
+MaxLength
+최대 길이 제한. 
+
+MinLength
+최소 길이 제한. 
+
+LengthNarrowWordOnly
+최대 길이 제한. 영어/숫자가 최대 몇 글자 포함될 수 있는지 제한
+
+StringTable
+금칙어 목록에서 완전(exact) 혹은 부분 일치를 확인하여 제한
+replace=true일때는 금칙어를 임의로 변경한 후 통과시킴(입력 에러 나지 않음)
+
+RangedNumericOnly
+min~max 범위의 숫자만 허용. 그 외는 금지
+
+CharacterSet
+incldue 나 exclude 를 만족하는지 검사하여 제한
+(Binary 는 BitTable 로 rangeOnly 가 true 일 때는 해당 영역(from ~ to) 에 포함되지 않아도 true 를 반환한다)
+
+ConvertUrlEncodeStr
+'<', '>', '"(큰따옴표)' 를 HTML용 특수기호로 자동 변환함.
+(입력 오류가 나지는 않음)
+(CHAT 는 <font> 까지 변환되므로 쓰면 안된다)
+
+  -->
+  
+    <!-- RuleCategory에는 어떤 형식의 필터링 규칙이 있는지 목록을 나열한 것이다. 프로그램에서 사용하진 않음 --> 
+  <RuleCategory>
+    <!--  -->
+    <Rule type="MinLength" awareNarrowWord="true" min="2" onFail="RE_MINLENGTH_RESTRICTION"/>
+    <Rule type="MaxLength" awareNarrowWord="true" max="16" onFail="RE_LENGTH_RESTRICTION"/>
+    <Rule type="LengthNarrowWordOnly" max="16" onFail="RE_LENGTHASCIIONLY_RESTRICTION"/>
+    <Rule type="StringTable" table="AbuseWord" replace="false" exact="true" onFail="RE_FORBIDDEN_NAME_RESTRICTION"/>
+    <Rule type="RangedNumericOnly" min="1000" max="9999" onFail="RE_RANGEDNUMERICONLY_RESTRICTION"/>
+    <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    <Rule type="CharacterSet" exclude="Blank" onFail="RE_BLANK_RESTRICTION"/>
+    <Rule type="CharacterSet" include="Alphabet|Numeric|Hiragana|Katakana|Kanji|Kanji-Rare" onFail="RE_SPECIAL_CHARACTER_RESTRICTION"/>
+  </RuleCategory>
+
+  <!--
+  1234         0031
+  abcd         0061
+  ありがとう 3040
+  カタカナ   30A0
+  㐂         3402
+  日本       65E5
+  １２３４   FF11
+  ｶﾀｶﾅ       FF76
+  ａｂｃｄ   FF41
+
+  0x0000 ~ 0x00FF : 반각 영어, 반각 숫자, 반각 특수문자
+  0x3040 ~ 0x309F : 전각 히라가나
+  0x30A0 ~ 0x30FF : 전각 카타카나
+  0x3400 ~ 0x4DBF : 전각 레어 한자
+  0x4E00 ~ 0x9FAF : 전각 한자
+  0xFF00 ~ 0xFFFF : 전각 영어, 전각 특수문자, 전각 숫자, 반각 카타카나
+  -->
+
+  <!--
+    MinLength, MaxLength 계산 시 규칙은 다음과 같다. 
+      1. awareNarrowWord="true"  인 경우 -> NarrowWord에 포함되는 것들은 길이를 1로 계산. 그렇지 않은 것들은 길이를 2로 계산. 
+      2. awareNarrowWord="false" 인 경우 -> 모든 글자의 길이를 1로 계산
+  --> 
+  <CharacterSetRestriction>
+    <CharacterSet name="NarrowWord">
+      <Range from="0x0000" to="0x007F"/>
+    </CharacterSet>
+    <CharacterSet name="Alphabet">
+      <Range from="0x0041" to="0x005A"/>
+      <Range from="0x0061" to="0x007A"/>
+    </CharacterSet>
+    <CharacterSet name="Numeric">
+      <Range from="0x0030" to="0x0039"/>
+    </CharacterSet>
+    <CharacterSet name="Special">
+      <Range from="0xFF01" to="0xFFE6"/>
+      <Range from="0x0021" to="0x002F"/>
+      <Range from="0x003A" to="0x0040"/>
+      <Range from="0x005B" to="0x0060"/>
+      <Range from="0x007B" to="0x0491"/>
+      <Range from="0x1113" to="0x1160"/>
+      <Range from="0x1176" to="0x11A2"/>
+      <Range from="0x11C3" to="0x30F6"/>
+      <Range from="0x3164" to="0x33DD"/>
+      <Range from="0xFB01" to="0xFB02"/>
+    </CharacterSet>
+    <CharacterSet name="Blank">
+      <Range from="0x0020" to="0x0020"/>
+      <Range from="0x0009" to="0x0009"/>
+      <Range from="0x2000" to="0x200A"/>
+      <Range from="0x00A0" to="0x00A0"/>
+      <Range from="0x200B" to="0x200B"/>
+      <Range from="0x2060" to="0x2060"/>
+      <Range from="0x3000" to="0x3000"/>
+      <Range from="0xFEFF" to="0xFEFF"/>
+    </CharacterSet>
+    <CharacterSet name="LineFeed">
+      <Range from="0x000A" to="0x000A"/>
+      <Range from="0x000D" to="0x000D"/>
+    </CharacterSet>
+	<CharacterSet name="OmgChineseExclude">
+	  <Range from="0x0021" to="0x002F"/>
+	  <Range from="0x003A" to="0x0040"/>
+	  <Range from="0x005B" to="0x0060"/>
+	  <Range from="0x02CB" to="0x02D9"/>
+	  <Range from="0x03C9" to="0x3104"/>
+	  <Range from="0x312A" to="0x4DFF"/>
+	  <Range from="0x88CF" to="0x88CF"/>
+	  <Range from="0x9F99" to="0xFF0C"/>
+	  <Range from="0x5E79" to="0x5E79"/>
+	</CharacterSet>
+	<CharacterSet name="OmgChineseInclude">
+	  <Range from="0x0030" to="0x0039"/>
+	  <Range from="0x0041" to="0x005A"/>
+	  <Range from="0x0061" to="0x007A"/>
+	  <Range from="0x3105" to="0x3129"/>
+	  <Range from="0x4E00" to="0x88CE"/>
+	  <Range from="0x88D0" to="0x9F98"/>
+	</CharacterSet>
+  </CharacterSetRestriction>
+
+  <UrlEncode>
+	<Char from="&lt;" to="&amp;lt;" />
+	<Char from="&gt;" to="&amp;gt;" />
+	<Char from="&quot;" to="&amp;quot;" />
+  </UrlEncode>
+  
+  <RegularExpressions/>
+  
+  <RestrictionContents>
+
+    <Content readableId="RESTRICTION_NONE" name="None"/>
+
+    <!--캐릭터명-->
+    <Content readableId="RESTRICTION_CHARACTER_NAME" name="@inputrestriction:1">
+      <Rule type="MinLength" awareNarrowWord="true" min="2" onFail="RE_MINLENGTH_RESTRICTION"/>
+      <Rule type="MaxLength" awareNarrowWord="true" max="16" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="Blank" onFail="RE_BLANK_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="OmgChineseExclude" onFail="RE_UNKNOWN"/>
+      <Rule type="CharacterSet" include="OmgChineseInclude" onFail="RE_UNKNOWN"/>
+      <Rule type="StringMatch" table="ForbiddenName" exact="true" onFail="RE_FORBIDDEN_NAME_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" exact="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="StringMatch" table="ReservedWord" exact="true" onFail="RE_CONFIG_LETTER_RESTRICTION"/>
+    </Content>
+
+    <!--길드명-->
+    <Content readableId="RESTRICTION_GUILD_NAME" name="@inputrestriction:21">
+      <Rule type="MinLength" awareNarrowWord="true" min="6" onFail="RE_MINLENGTH_RESTRICTION"/>
+      <Rule type="MaxLength" awareNarrowWord="true" max="30" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="Blank" onFail="RE_BLANK_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="OmgChineseExclude" onFail="RE_UNKNOWN"/>
+      <Rule type="CharacterSet" include="OmgChineseInclude" onFail="RE_UNKNOWN"/>
+      <Rule type="StringMatch" table="ForbiddenName" exact="true" onFail="RE_FORBIDDEN_NAME_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" exact="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="StringMatch" table="ReservedWord" exact="true" onFail="RE_CONFIG_LETTER_RESTRICTION"/>
+    </Content>
+
+    <!--채팅창-->
+    <Content readableId="RESTRICTION_CHAT" name="@inputrestriction:2">
+      <Rule type="MaxLength" awareNarrowWord="true" max="600" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+    </Content>
+
+    <!--자판기광고-->
+    <Content readableId="RESTRICTION_VENDINGMACHINE_ADVERTISE" name="@inputrestriction:3">
+      <Rule type="MinLength" awareNarrowWord="true" min="1" onFail="RE_MINLENGTH_RESTRICTION"/>
+      <Rule type="MaxLength" awareNarrowWord="true" max="300" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--우편 제목-->
+    <Content readableId="RESTRICTION_PARCEL_TITLE" name="@inputrestriction:5">
+      <Rule type="MaxLength" awareNarrowWord="true" max="40" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--우편 메시지-->
+    <Content readableId="RESTRICTION_PARCEL_MESSAGE" name="@inputrestriction:6">
+      <Rule type="MaxLength" awareNarrowWord="true" max="300" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--파티 모집 홍보글-->
+    <Content readableId="RESTRICTION_PARTY_BOARD_DESC" name="@inputrestriction:8">
+      <Rule type="MaxLength" awareNarrowWord="true" max="60" onFail="RE_LENGTH_RESTRICTION"/>
+	  <Rule type="LengthNarrowWordOnly" max="120" onFail="RE_LENGTHASCIIONLY_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--북마크 이름-->
+    <Content readableId="RESTRICTION_ADMINTOOL_BOOKMARK_NAME" name="@inputrestriction:9">
+      <Rule type="MaxLength" awareNarrowWord="true" max="20" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="OmgChineseExclude" onFail="RE_UNKNOWN"/>
+      <Rule type="CharacterSet" include="OmgChineseInclude" onFail="RE_UNKNOWN"/>
+      <Rule type="CharacterSet" exclude="Special" onFail="RE_SPECIAL_CHARACTER_RESTRICTION"/>
+    </Content>
+
+    <!--PaperDoll의 오늘의 한마디-->
+    <Content readableId="RESTRICTION_GREETING_MESSAGE" name="@inputrestriction:10">
+      <Rule type="MaxLength" awareNarrowWord="true" max="40" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--길드 공지사항-->
+    <Content readableId="RESTRICTION_GUILD_NOTICE" name="@inputrestriction:11">
+      <Rule type="MaxLength" awareNarrowWord="true" max="200" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--길드 호칭-->
+    <Content readableId="RESTRICTION_GUILD_TITLE" name="@inputrestriction:12">
+      <Rule type="MaxLength" awareNarrowWord="true" max="14" onFail="RE_LENGTH_RESTRICTION"/>
+	  <Rule type="LengthNarrowWordOnly" max="15" onFail="RE_LENGTHASCIIONLY_RESTRICTION"/>
+      <Rule type="StringMatch" table="ForbiddenName" replace="true" onFail="RE_FORBIDDEN_NAME_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--길드창의 자기소개-->
+    <Content readableId="RESTRICTION_GUILD_MYPR" name="@inputrestriction:13">
+      <Rule type="MaxLength" awareNarrowWord="true" max="60" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--길드창의 길드홍보-->
+    <Content readableId="RESTRICTION_GUILD_GUILDPR" name="@inputrestriction:14">
+      <Rule type="MaxLength" awareNarrowWord="true" max="60" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--길드신청-->
+    <Content readableId="RESTRICTION_GUILD_APPLY" name="@inputrestriction:15">
+      <Rule type="MaxLength" awareNarrowWord="true" max="150" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--길드 계급-->
+    <Content readableId="RESTRICTION_GUILD_GROUP" name="@inputrestriction:16">
+      <Rule type="MaxLength" awareNarrowWord="true" max="14" onFail="RE_LENGTH_RESTRICTION"/>
+	  <Rule type="LengthNarrowWordOnly" max="15" onFail="RE_LENGTHASCIIONLY_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="Special" onFail="RE_SPECIAL_CHARACTER_RESTRICTION"/>
+    </Content>
+
+    <!--채팅 채널 이름-->
+    <Content readableId="RESTRICTION_PERSONAL_CHAT_NAME" name="@inputrestriction:17">
+      <Rule type="MinLength" awareNarrowWord="true" min="2" onFail="RE_MINLENGTH_RESTRICTION"/>
+      <Rule type="MaxLength" awareNarrowWord="true" max="8" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="Special" onFail="RE_SPECIAL_CHARACTER_RESTRICTION"/>
+    </Content>
+
+    <!--채팅 채널 비번-->
+    <Content readableId="RESTRICTION_PERSONAL_CHAT_PASSWORD" name="@inputrestriction:22">
+      <Rule type="RangedNumericOnly" min="1000" max="9999" onFail="RE_RANGEDNUMERICONLY_RESTRICTION"/>
+      <Rule type="MaxLength" awareNarrowWord="true" max="4" onFail="RE_LENGTH_RESTRICTION"/> <!-- 최대 길이값 나타내려고 일부러 넣은 필드. -->
+    </Content>    
+
+    <!--영주 인사말-->
+    <Content readableId="RESTRICTION_LORD_GREETINGS" name="@inputrestriction:19">
+      <Rule type="MaxLength" awareNarrowWord="true" max="200" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--영주 후보자 공약-->
+    <Content readableId="RESTRICTION_LORD_CANDIDATE_PLEDGE" name="@inputrestriction:20">
+      <Rule type="MaxLength" awareNarrowWord="true" max="300" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+
+    <!--길드전 선포 메시지-->
+    <Content readableId="RESTRICTION_GUILD_WAR_DECLARE_MESSAGE" name="@inputrestriction:23">
+      <Rule type="MaxLength" awareNarrowWord="true" max="40" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+    
+    <!--그룹결투 홍보 메시지-->
+    <Content readableId="RESTRICTION_GROUPDUEL_PR_MESSAGE" name="@inputrestriction:24">
+	  <Rule type="MaxLength" awareNarrowWord="true" max="100" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+    
+	    <!--펫 이름-->
+    <Content readableId="RESTRICTION_SERVANT_NAME" name="@inputrestriction:25">
+      <Rule type="MinLength" awareNarrowWord="true" min="2" onFail="RE_MINLENGTH_RESTRICTION"/>
+      <Rule type="MaxLength" awareNarrowWord="true" max="16" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="Blank" onFail="RE_BLANK_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="OmgChineseExclude" onFail="RE_UNKNOWN"/>
+      <Rule type="CharacterSet" include="OmgChineseInclude" onFail="RE_UNKNOWN"/>
+      <Rule type="StringMatch" table="ForbiddenName" exact="true" onFail="RE_FORBIDDEN_NAME_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" exact="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="StringMatch" table="ReservedWord" exact="true" onFail="RE_CONFIG_LETTER_RESTRICTION"/>
+    </Content>
+    
+    <!--연맹 공지사항-->
+    <Content readableId="RESTRICTION_UNION_CONSUL_NOTICE" name="@inputrestriction:26">
+      <Rule type="MaxLength" awareNarrowWord="true" max="256" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+    
+    <!--연맹 정책 내용-->
+    <Content readableId="RESTRICTION_UNION_POLICY" name="@inputrestriction:27">
+      <Rule type="MaxLength" awareNarrowWord="true" max="256" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+	
+	<!--업데이트 공지
+    <Content readableId="RESTRICTION_UPDATE_NOTIFICATION" name="@inputrestriction:28">
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+	-->
+
+    <!--가족명
+    <Content readableId="RESTRICTION_FAMILY_NAME" name="@inputrestriction:29">
+      <Rule type="MinLength" awareNarrowWord="true" min="6" onFail="RE_MINLENGTH_RESTRICTION"/>
+      <Rule type="MaxLength" awareNarrowWord="true" max="20" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="Blank" onFail="RE_BLANK_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="OmgChineseExclude" onFail="RE_UNKNOWN"/>
+      <Rule type="CharacterSet" include="OmgChineseInclude" onFail="RE_UNKNOWN"/>
+      <Rule type="StringMatch" table="ForbiddenName" exact="true" onFail="RE_FORBIDDEN_NAME_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" exact="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="StringMatch" table="ReservedWord" exact="true" onFail="RE_CONFIG_LETTER_RESTRICTION"/>
+    </Content>
+	-->
+	
+	<!--가족 호칭
+    <Content readableId="RESTRICTION_FAMILY_TITLE" name="@inputrestriction:30">
+      <Rule type="MaxLength" awareNarrowWord="true" max="14" onFail="RE_LENGTH_RESTRICTION"/>
+	  <Rule type="LengthNarrowWordOnly" max="15" onFail="RE_LENGTHASCIIONLY_RESTRICTION"/>
+      <Rule type="StringMatch" table="ForbiddenName" replace="true" onFail="RE_FORBIDDEN_NAME_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" replace="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="ConvertUrlEncodeStr" onFail="RE_UNKNOWN"/>
+    </Content>
+	-->
+	
+		<!--아이템 메시지-->
+    <Content readableId="RESTRICTION_ITEM_MESSAGE" name="@inputrestriction:31">
+      <Rule type="MinLength" awareNarrowWord="true" min="1" onFail="RE_MINLENGTH_RESTRICTION"/>
+      <Rule type="MaxLength" awareNarrowWord="true" max="8" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="LengthNarrowWordOnly" max="8" onFail="RE_LENGTHASCIIONLY_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="Blank" onFail="RE_BLANK_RESTRICTION"/>
+      <Rule type="CharacterSet" exclude="OmgChineseExclude" onFail="RE_UNKNOWN"/>
+      <Rule type="CharacterSet" include="OmgChineseInclude" onFail="RE_UNKNOWN"/>
+      <Rule type="StringMatch" table="ForbiddenName" exact="true" onFail="RE_FORBIDDEN_NAME_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" exact="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="StringMatch" table="ReservedWord" exact="true" onFail="RE_CONFIG_LETTER_RESTRICTION"/>
+    </Content>
+	
+	<!--주머니 이름-->
+    <Content readableId="RESTRICTION_POCKET_NAME" name="@inputrestriction:31">
+      <Rule type="MinLength" awareNarrowWord="false" min="1" onFail="RE_MINLENGTH_RESTRICTION"/>
+      <Rule type="MaxLength" awareNarrowWord="false" max="12" onFail="RE_LENGTH_RESTRICTION"/>
+      <Rule type="StringMatch" table="ForbiddenName" exact="true" onFail="RE_FORBIDDEN_NAME_RESTRICTION"/>
+      <Rule type="StringMatch" table="AbuseWord" exact="true" onFail="RE_ABUSE_LETTER_RESTRICTION"/>
+      <Rule type="StringMatch" table="ReservedWord" exact="true" onFail="RE_CONFIG_LETTER_RESTRICTION"/>
+    </Content>	
+  </RestrictionContents>
+</InputRestrictionData>

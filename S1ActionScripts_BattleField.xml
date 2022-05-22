@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- type은 사용하지 않습니다. 그냥 구별용임 -->
+<!-- Skill 관련, 5만번대 사용 -->
+<!-- Abnormality 관련, 6만번대 사용 -->
+<!-- 특정 지역에 제한된 것은 사냥터번호를 가장 앞에 붙임 -->
+
+<!-- 포화의 전장 자폭 -->
+<S1ActionScripts type="Skill">
+	<Script id="51160" playingTime="0" enableInput="false" >
+		<Action time="0" type="PostProcess" postprocessSet="5" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="0.f" to="1.0f" duration="500" >
+				<Action time="500" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="1.0f" to="2.0f" duration="2000" >
+					<Action time="2000" type="PostProcess" postprocessSet="5" on="true">
+						<Action time="2000" type="PostProcessMaterial" postprocessSet="5" param="Strength" from="2.0f" to="0.0f" duration="2000" />
+					</Action>
+				</Action>
+			</Action>
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="5" on="false" />
+	</Script>			
+	
+<!--쿠마스 월드 디스폰 연출-->
+	<!-- 대장 쿠마스 사망 시 카메라 줌인 & 사망 모션 재생-->
+	<Script id="1185000">
+		<Action time="0" type="CameraFocus" huntingZoneId="118" templateId="5000" on="true"/>
+		<Action time="0" type="animation" animName="Death" rate="1.5"/>
+		<Action time="3000" type="CameraFocus" huntingZoneId="118" templateId="5000" on="false"/>
+ 	</Script>
+	<Script id="1185001">
+		<Action time="0" type="CameraFocus" huntingZoneId="118" templateId="5001" on="true"/>
+		<Action time="0" type="animation" animName="Death" rate="1.5"/>
+		<Action time="3000" type="CameraFocus" huntingZoneId="118" templateId="5001" on="false"/>
+ 	</Script>
+	<Script id="1188000">
+		<Action time="0" type="CameraFocus" huntingZoneId="118" templateId="8000" on="true"/>
+		<Action time="0" type="animation" animName="Death" rate="1.5"/>
+		<Action time="3000" type="CameraFocus" huntingZoneId="118" templateId="8000" on="false"/>
+ 	</Script>
+	<Script id="1188001">
+		<Action time="0" type="CameraFocus" huntingZoneId="118" templateId="8001" on="true"/>
+		<Action time="0" type="animation" animName="Death" rate="1.5"/>
+		<Action time="3000" type="CameraFocus" huntingZoneId="118" templateId="8001" on="false"/>
+ 	</Script>
+
+	<!-- 아기 쿠마스 사망 시 사망 모션 재생-->
+	<Script id="1186000">
+		<Action time="0" type="animation" animName="Death" rate="1.5"/>
+ 	</Script>
+	<Script id="1189000">
+		<Action time="0" type="animation" animName="Death" rate="1.5"/>
+ 	</Script>
+</S1ActionScripts>

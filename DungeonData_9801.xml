@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9801" name="@dungeon:9801" startPos="11948,-145967,-9326" exitContinentId="8001" exitPos="33545,-3256,1273" summonPc="true">
+  <Condition type="raid" value="7" />
+  <Condition type="levelOver" value="59" />
+  <Condition type="maxMemberCount" value="20" />
+  <Condition type="abnormality" value="47681600" count="1" />
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <!-- 문 스폰 -->
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100021" next="none" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100022" next="none" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100023" next="none" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100024" next="none" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="80100011" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--  재입장 불가 이상상태 걸어주기	
+	<EventGroup type="enterTerritory" uniqueId="801,60100020" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="47681700" target="player" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	-->
+  <!--  입장한 유저 인원 수 체크 후 문 열기	-->
+  <EventGroup type="userCountInTerritory" uniqueId="801,80100012" value="7">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="801" territoryId="80100011" next="none" />
+        <EventTask type="Spawn" huntingZoneId="801" territoryId="60100001,60100002,60100003,60100004,60100005" next="none" />
+        <EventTask type="message" string="@dungeon:9801006" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="47681700" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1번방  전투 시작하면 입구 문닫기
+	<EventGroup type="npcState" uniqueId="801,404" value="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="801" territoryId="60100025" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	-->
+  <!-- 1번방의 모든 몬스터가 죽었을 경우 2번문 디스폰 및 2번방 몬스터 스폰 -->
+  <EventGroup type="eliminate" territoryId="60100001,60100002,60100003,60100004,60100005">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="801" territoryId="60100021" next="none" />
+        <EventTask type="deSpawn" huntingZoneId="801" territoryId="60100022" next="none" />
+        <EventTask type="Spawn" huntingZoneId="801" territoryId="60100010" next="none" />
+        <EventTask type="abnormality" abnormalityId="47681700" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2번방  전투 시작하면 입구 문닫기
+	<EventGroup type="npcState" uniqueId="801,201" value="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="801" territoryId="60100022" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	-->
+  <!-- 2번방의 모든 몬스터가 죽었을 경우 3번문 디스폰 -->
+  <EventGroup type="eliminate" territoryId="60100010">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="801" territoryId="60100023" next="none" />
+        <EventTask type="deSpawn" huntingZoneId="801" territoryId="60100024" next="none" />
+        <EventTask type="Spawn" huntingZoneId="801" territoryId="60100012" next="none" />
+        <EventTask type="abnormality" abnormalityId="47681700" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3번방  전투 시작하면 입구 문닫기
+	<EventGroup type="npcState" uniqueId="801,101" value="combat" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="801" territoryId="60100024" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	-->
+  <!-- 3번방의 모든 몬스터가 죽었을 경우 차원의 마법석 스폰 -->
+  <EventGroup type="npcHp" uniqueId="801,101" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="801" territoryId="60100016" next="none" />
+		<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100017" next="none" />
+		<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100018" next="none" />
+		<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100019" next="none" />
+		<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100013" next="none" />
+		<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100014" next="none" />
+		<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100015" next="none" />
+		<EventTask type="Spawn" huntingZoneId="801" territoryId="80100001" next="none" />
+		<EventTask type="Spawn" huntingZoneId="801" territoryId="80100016" next="none" />
+        <EventTask type="abnormality" abnormalityId="47681700" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 몬스터 디스폰 시키는 오브젝트 작동 설정 1	
+	<EventGroup type="enterTerritory" uniqueId="801,80100006" targetNpcId="801,201">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9801001" style="combat" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100013" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+  <!-- 몬스터 디스폰 시키는 오브젝트 작동 설정 2	
+	<EventGroup type="enterTerritory" uniqueId="801,80100006" targetNpcId="801,202">
+		<Event>
+			<EventTaskGroup>nnn
+				<EventTask type="message" string="@dungeon:9801001" style="combat" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100014" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+  <!-- 몬스터 디스폰 시키는 오브젝트 작동 설정 3	
+	<EventGroup type="enterTerritory" uniqueId="801,80100006" targetNpcId="801,203">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9801001" style="combat" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100015" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+  <!-- 몬스터 디스폰 시키는 오브젝트 작동 설정 4	
+	<EventGroup type="enterTerritory" uniqueId="801,80100009" targetNpcId="801,201">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9801001" style="combat" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100013" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+  <!-- 몬스터 디스폰 시키는 오브젝트 작동 설정 5	
+	<EventGroup type="enterTerritory" uniqueId="801,80100009" targetNpcId="801,202">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9801001" style="combat" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100014" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+  <!-- 몬스터 디스폰 시키는 오브젝트 작동 설정6	
+	<EventGroup type="enterTerritory" uniqueId="801,80100009" targetNpcId="801,203">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9801001" style="combat" next="none"/>
+				<EventTask type="deSpawn" huntingZoneId="801" territoryId="60100015" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+  <!-- 공격대 몬스터 HP가 80%되면 기본몬스터 소환 -->
+  <EventGroup type="npcHp" uniqueId="801,101" value="80" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9801002" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100016" next="none" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100017" next="none" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100018" next="none" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100019" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 공격대 몬스터 HP가 60%되면 중형몬스터 소환 -->
+  <EventGroup type="npcHp" uniqueId="801,101" value="60" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9801002" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100013" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 공격대 몬스터 HP가 50%되면 경고 -->
+  <EventGroup type="npcHp" uniqueId="801,101" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9801003" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 공격대 몬스터 HP가 40%되면 중형몬스터 소환 -->
+  <EventGroup type="npcHp" uniqueId="801,101" value="40" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9801002" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100014" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 공격대 몬스터 HP가 20%되면 중형몬스터 소환 -->
+  <EventGroup type="npcHp" uniqueId="801,101" value="20" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9801002" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="801" territoryId="60100015" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3네임드 10분뒤 광폭화  -->
+  <EventGroup type="npcHp" uniqueId="801,101" value="100" repeat="true" stopWhenReset="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9801005" style="default" next="time" nextValue="600" />
+        <!-- 이상상태 부여-->
+        <EventTask type="abnormality" abnormalityId="47630300" target="npc" targetNpcId="801,101" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+</Dungeon>

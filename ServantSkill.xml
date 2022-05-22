@@ -1,0 +1,728 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServantSkill>
+	<AbilityInfo>
+		<AbilityCategory>
+			<!--
+			id : 카테고리 구분 id
+			name : 주석용 문구
+			type
+				- active : 사용 시 발동되는 능력
+				- passive : 보유 시 발동되는 능력
+				- switch : 사용 시 on, 재 사용 시 off되는 능력
+				어빌리티의 type마다 지정해야하는 카테고리의 type이 정해져있음.
+			kind : type이 switch일 경우 동일한 kind의 능력을 여러 개 보유하고 있다면 이 중 하나만 on 할 수 있게 하는 기능.
+			stringId : 숏컷에 등록했지만 소환된 서번트가 없거나, 소환된 서번트가 해당 카테고리의 능력을 보유하지 않을 경우 숏컷에 등록된 스킬 아이콘에 마우스 오버 시 보일 툴팁. 규칙 : 카테고리id + 0
+			iconName : 서번트 목록 및 숏컷에서 보일 스킬 아이콘
+			-->
+			<Category id="1" name="소셜 모션" type="passive" kind="0" stringId="10" iconName="Icon_Skills.PetSkill_Social_Tex"/>
+			<Category id="2" name="보관함" type="active" kind="0" stringId="20" iconName="Icon_Skills.PetSkill_Inventory_Tex"/>
+			<Category id="3" name="아이템 루팅" type="switch" kind="1" stringId="30" iconName="Icon_Skills.PetSkill_Loot_Tex"/>
+			<Category id="4" name="골드 루팅" type="switch" kind="1" stringId="40" iconName="Icon_Items.goldcoin_Tex"/>
+			<Category id="5" name="자동 채집" type="switch" kind="1" stringId="50" iconName="Icon_Skills.PetSkill_Collect_Tex"/>
+			<Category id="6" name="하급 HP 물약 먹기" type="switch" kind="2" stringId="60" iconName="Icon_Items.HP_Potion_Level_9_Tex"/>
+			<Category id="7" name="중급 HP 물약 먹기" type="switch" kind="2" stringId="70" iconName="Icon_Items.HP_Potion_Level_33_Tex"/>
+			<Category id="8" name="상급 HP 물약 먹기" type="switch" kind="2" stringId="80" iconName="Icon_Items.HP_Potion_Level_60_Tex"/>
+			<Category id="9" name="급속 회복 물약 먹기" type="switch" kind="2" stringId="90" iconName="Icon_Items.potion5_Tex"/>
+			<Category id="10" name="하급 MP 물약 먹기" type="switch" kind="3" stringId="100" iconName="Icon_Items.MP_Potion_Level_9_Tex"/>
+			<Category id="11" name="중급 MP 물약 먹기" type="switch" kind="3" stringId="110" iconName="Icon_Items.MP_Potion_Level_33_Tex"/>
+			<Category id="12" name="상급 MP 물약 먹기" type="switch" kind="3" stringId="120" iconName="Icon_Items.MP_Potion_Level_60_Tex"/>
+			<Category id="13" name="MP 회복 물약 먹기" type="switch" kind="3" stringId="130" iconName="Icon_Items.potion19_Tex"/>
+			<Category id="14" name="자동 물약 사용" type="switch" kind="4" stringId="140" iconName="Icon_Items.HP_Potion_Level_65_Tex"/>
+			<Category id="15" name="자동 먹이 선물" type="switch" kind="5" stringId="150" iconName="Icon_Skills.ServantSkill_AutoFeedPresent_Tex"/>
+			<Category id="16" name="대물 자동 낚시" type="passive" kind="0" stringId="160" iconName="Icon_Skills.PartnerSkill_Fishing_Tex"/>
+		</AbilityCategory>
+		<AbilityData>
+			<!--
+			id : 능력의 고유 id. 규칙 = 카테고리id + 구분 번호(1~9)
+			name : 주석용 문구
+			categoryId : 해당 능력이 속한 AbilityCategory의 id 입력. 서번트는 categoryId마다 하나의 능력만 보유할 수 있음. 즉 동일한 categoryId를 가진 능력이 있다면 이 중 하나만 보유 가능.
+			type
+			1 : 소셜
+			2 : 캐릭터 창고 열기 + 캐릭터 창고 1탭 확장
+			3 : 아이템 루팅(골드도 루팅함)
+			4 : 골드 루팅
+			5 : 자동 채집
+			6 : HP가 일정 % 밑으로 내려가면 자동으로 물약 먹기
+			7 : MP가 일정 % 밑으로 내려가면 자동으로 물약 먹기
+			8 : 원하는 물약 원하는 %에 자동으로 먹기
+			9 : 캐릭터 창고 열기만 하기
+			10 : 원하는 먹이, 선물 원하는 %에 자동으로 먹기
+			11 : 서번트 소환 시 이상상태 걸어주기 + 서번트의 최대 기력/피로도 변경
+			deletable : 제거 가능 여부
+			transferable : 전수 가능 여부
+			transferPrice : 전수 비용. 단위 동(10000 = 1금)
+			transferId : 전수할 경우 변경될 Ability의 id
+			stringId : 서번트 목록 및 숏컷에서 보일 툴팁. StrSheet_ServantSkill.xml에서 참조
+			일반적으로 펫에게는 제거 불가, 전수 가능 능력을 부여하여 파트너에게 전수시키도록 함
+			일반적으로 전수된 능력은 제거 가능, 전수 가능으로 실수로 전수했을 때 다시 전수하거나 제거할 수 있도록 함
+			-->
+			<Ability id="11" name="소셜 모션" categoryId="1" type="1" value1="5" value2="10" value3="15" deletable="False" transferable="False" stringId="11"/>
+			<Ability id="12" name="소셜 모션" categoryId="1" type="1" value1="11,12,13,14,20,21" value2="10" value3="15" deletable="False" transferable="False" stringId="12"/>
+			<Ability id="13" name="소셜 모션" categoryId="1" type="1" value1="5,6,7" value2="10" value3="15" deletable="False" transferable="False" stringId="13"/>
+			<Ability id="21" name="보관함" categoryId="2" type="2" deletable="False" transferable="True" transferPrice="10000000" transferId="22" stringId="21"/>
+			<Ability id="22" name="보관함" categoryId="2" type="2" deletable="True" transferable="True" transferPrice="100000000" transferId="22" stringId="21"/>
+			<Ability id="23" name="보관함" categoryId="2" type="2" deletable="False" transferable="True" transferPrice="100000000" transferId="22" stringId="21"/>
+			<Ability id="24" name="보관함(기간제 펫 전용)" categoryId="2" type="9" deletable="False" transferable="True" transferPrice="10000000" transferId="22" stringId="21"/>
+			<Ability id="31" name="아이템 루팅" categoryId="3" type="3" deletable="False" transferable="True" transferPrice="10000000" transferId="32" stringId="31"/>
+			<Ability id="32" name="아이템 루팅" categoryId="3" type="3" deletable="True" transferable="True" transferPrice="100000000" transferId="32" stringId="31"/>
+			<Ability id="41" name="골드 루팅" categoryId="4" type="4" deletable="False" transferable="True" transferPrice="10000000" transferId="42" stringId="41"/>
+			<Ability id="42" name="골드 루팅" categoryId="4" type="4" deletable="True" transferable="True" transferPrice="100000000" transferId="42" stringId="41"/>
+			<Ability id="51" name="자동 채집" categoryId="5" type="5" value1="0.8" value2="0.33" value3="0" addProficiency="true" addExp="false" deletable="False" transferable="True" transferPrice="10000000" transferId="52" stringId="51"/>
+			<Ability id="52" name="자동 채집" categoryId="5" type="5" value1="0.8" value2="0.33" value3="0" addProficiency="true" addExp="false" deletable="True" transferable="True" transferPrice="100000000" transferId="52" stringId="51"/>
+			<Ability id="61" name="하급 hp 물약 먹기" categoryId="6" type="6" value1="6550" value2="0.3" deletable="False" transferable="True" transferPrice="1000000" transferId="62" stringId="61"/>
+			<Ability id="62" name="하급 hp 물약 먹기" categoryId="6" type="6" value1="6550" value2="0.3" deletable="True" transferable="True" transferPrice="10000000" transferId="62" stringId="61"/>
+			<Ability id="71" name="중급 hp 물약 먹기" categoryId="7" type="6" value1="6551" value2="0.3" deletable="False" transferable="True" transferPrice="3000000" transferId="72" stringId="71"/>
+			<Ability id="72" name="중급 hp 물약 먹기" categoryId="7" type="6" value1="6551" value2="0.3" deletable="True" transferable="True" transferPrice="30000000" transferId="72" stringId="71"/>
+			<Ability id="81" name="상급 hp 물약 먹기" categoryId="8" type="6" value1="6552" value2="0.3" deletable="False" transferable="True" transferPrice="5000000" transferId="142" stringId="81"/>
+			<Ability id="82" name="상급 hp 물약 먹기" categoryId="8" type="6" value1="6552" value2="0.5" deletable="False" transferable="True" transferPrice="5000000" transferId="142" stringId="82"/>
+			<Ability id="91" name="급속 회복 물약 먹기" categoryId="9" type="6" value1="213821,201222,114,116,212789" value2="0.3" deletable="False" transferable="True" transferPrice="10000000" transferId="142" stringId="91"/>
+			<Ability id="92" name="급속 회복 물약 먹기" categoryId="9" type="6" value1="213821,201222,114,116,212789" value2="0.5" deletable="False" transferable="True" transferPrice="10000000" transferId="142" stringId="92"/>
+			<Ability id="101" name="하급 mp 물약 먹기" categoryId="10" type="7" value1="6560" value2="0.7" deletable="False" transferable="True" transferPrice="1000000" transferId="102" stringId="101"/>
+			<Ability id="102" name="하급 mp 물약 먹기" categoryId="10" type="7" value1="6560" value2="0.7" deletable="True" transferable="True" transferPrice="10000000" transferId="102" stringId="101"/>
+			<Ability id="111" name="중급 mp 물약 먹기" categoryId="11" type="7" value1="6561" value2="0.7" deletable="False" transferable="True" transferPrice="3000000" transferId="112" stringId="111"/>
+			<Ability id="112" name="중급 mp 물약 먹기" categoryId="11" type="7" value1="6561" value2="0.7" deletable="True" transferable="True" transferPrice="30000000" transferId="112" stringId="111"/>
+			<Ability id="121" name="상급 mp 물약 먹기" categoryId="12" type="7" value1="6562" value2="0.7" deletable="False" transferable="True" transferPrice="5000000" transferId="142" stringId="121"/>
+			<Ability id="122" name="상급 mp 물약 먹기" categoryId="12" type="7" value1="6562" value2="0.5" deletable="False" transferable="True" transferPrice="5000000" transferId="142" stringId="122"/>
+			<Ability id="131" name="MP 회복 물약 먹기" categoryId="13" type="7" value1="856061,213826,149645,100527,130" value2="0.5" deletable="False" transferable="True" transferPrice="10000000" transferId="142" stringId="131"/>
+			<Ability id="132" name="MP 회복 물약 먹기" categoryId="13" type="7" value1="856061,213826,149645,100527,130" value2="0.3" deletable="False" transferable="True" transferPrice="10000000" transferId="142" stringId="132"/>
+			<Ability id="141" name="자동 물약 사용" categoryId="14" type="8" deletable="False" transferable="True" transferPrice="10000000" transferId="142" stringId="141"/>
+			<Ability id="142" name="자동 물약 사용" categoryId="14" type="8" deletable="True" transferable="True" transferPrice="100000000" transferId="142" stringId="141"/>
+			<Ability id="151" name="자동 먹이 선물" categoryId="15" type="10" deletable="False" transferable="True" transferPrice="15000000" transferId="152" stringId="151"/>
+			<Ability id="152" name="자동 먹이 선물" categoryId="15" type="10" deletable="True" transferable="True" transferPrice="150000000" transferId="152" stringId="151"/>
+			<Ability id="161" name="대물 자동 낚시" categoryId="16" type="11" value1="14030" value2="1.2" deletable="False" transferable="True" transferPrice="15000000" transferId="162" stringId="161"/>
+			<Ability id="162" name="대물 자동 낚시" categoryId="16" type="11" value1="14030" value2="1.2" deletable="True" transferable="True" transferPrice="150000000" transferId="162" stringId="161"/>
+		</AbilityData>
+	</AbilityInfo>
+	<ActiveSkillData coolTime="180000" stringId="1000" iconName="Icon_Skills.PartnerSkill_Buff_Tex">
+		<!-- 마리, 루미, 쿤쿤, 코코밍밍 -->
+		<ActiveSkill id="1"><!-- 힘 고급 -->
+			<SkillData grade="1" skillId="1101" stringId="1101"/>
+			<SkillData grade="2" skillId="1101" stringId="1101"/>
+			<SkillData grade="3" skillId="1101" stringId="1101"/>
+			<SkillData grade="4" skillId="1102" stringId="1102"/>
+			<SkillData grade="5" skillId="1102" stringId="1102"/>
+			<SkillData grade="6" skillId="1102" stringId="1102"/>
+			<SkillData grade="7" skillId="1103" stringId="1103"/>
+			<SkillData grade="8" skillId="1103" stringId="1103"/>
+			<SkillData grade="9" skillId="1103" stringId="1103"/>
+			<SkillData grade="10" skillId="1104" stringId="1104"/>
+			<SkillData grade="11" skillId="1104" stringId="1104"/>
+			<SkillData grade="12" skillId="1104" stringId="1104"/>
+			<SkillData grade="13" skillId="1105" stringId="1105"/>
+			<SkillData grade="14" skillId="1105" stringId="1105"/>
+			<SkillData grade="15" skillId="1105" stringId="1105"/>
+			<SkillData grade="16" skillId="1106" stringId="1106"/>
+			<SkillData grade="17" skillId="1106" stringId="1106"/>
+			<SkillData grade="18" skillId="1106" stringId="1106"/>
+			<SkillData grade="19" skillId="1107" stringId="1107"/>
+			<SkillData grade="20" skillId="1107" stringId="1107"/>
+			<SkillData grade="21" skillId="1107" stringId="1107"/>
+			<SkillData grade="22" skillId="1108" stringId="1108"/>
+			<SkillData grade="23" skillId="1108" stringId="1108"/>
+			<SkillData grade="24" skillId="1108" stringId="1108"/>
+			<SkillData grade="25" skillId="1109" stringId="1109"/>
+			<SkillData grade="26" skillId="1109" stringId="1109"/>
+			<SkillData grade="27" skillId="1110" stringId="1110"/>
+			<SkillData grade="28" skillId="1110" stringId="1110"/>
+			<SkillData grade="29" skillId="1111" stringId="1111"/>
+			<SkillData grade="30" skillId="1111" stringId="1111"/>
+			<SkillData grade="31" skillId="1112" stringId="1112"/>
+			<SkillData grade="32" skillId="1112" stringId="1112"/>
+			<SkillData grade="33" skillId="1113" stringId="1113"/>
+			<SkillData grade="34" skillId="1113" stringId="1113"/>
+			<SkillData grade="35" skillId="1114" stringId="1114"/>
+			<SkillData grade="36" skillId="1114" stringId="1114"/>
+			<SkillData grade="37" skillId="1115" stringId="1115"/>
+			<SkillData grade="38" skillId="1115" stringId="1115"/>
+			<SkillData grade="39" skillId="1116" stringId="1116"/>
+			<SkillData grade="40" skillId="1116" stringId="1116"/>
+			<SkillData grade="41" skillId="1117" stringId="1117"/>
+			<SkillData grade="42" skillId="1117" stringId="1117"/>
+			<SkillData grade="43" skillId="1118" stringId="1118"/>
+			<SkillData grade="44" skillId="1118" stringId="1118"/>
+			<SkillData grade="45" skillId="1121" stringId="1121"/>
+			<SkillData grade="46" skillId="1124" stringId="1124"/>
+			<SkillData grade="47" skillId="1127" stringId="1127"/>
+			<SkillData grade="48" skillId="1130" stringId="1130"/>
+			<SkillData grade="49" skillId="1133" stringId="1133"/>
+			<SkillData grade="50" skillId="1136" stringId="1136"/>
+		</ActiveSkill>
+		<ActiveSkill id="2"><!-- 힘 희귀 -->
+			<SkillData grade="1" skillId="1102" stringId="1102"/>
+			<SkillData grade="2" skillId="1102" stringId="1102"/>
+			<SkillData grade="3" skillId="1102" stringId="1102"/>
+			<SkillData grade="4" skillId="1103" stringId="1103"/>
+			<SkillData grade="5" skillId="1103" stringId="1103"/>
+			<SkillData grade="6" skillId="1103" stringId="1103"/>
+			<SkillData grade="7" skillId="1104" stringId="1104"/>
+			<SkillData grade="8" skillId="1104" stringId="1104"/>
+			<SkillData grade="9" skillId="1104" stringId="1104"/>
+			<SkillData grade="10" skillId="1105" stringId="1105"/>
+			<SkillData grade="11" skillId="1105" stringId="1105"/>
+			<SkillData grade="12" skillId="1105" stringId="1105"/>
+			<SkillData grade="13" skillId="1106" stringId="1106"/>
+			<SkillData grade="14" skillId="1106" stringId="1106"/>
+			<SkillData grade="15" skillId="1106" stringId="1106"/>
+			<SkillData grade="16" skillId="1107" stringId="1107"/>
+			<SkillData grade="17" skillId="1107" stringId="1107"/>
+			<SkillData grade="18" skillId="1107" stringId="1107"/>
+			<SkillData grade="19" skillId="1108" stringId="1108"/>
+			<SkillData grade="20" skillId="1108" stringId="1108"/>
+			<SkillData grade="21" skillId="1108" stringId="1108"/>
+			<SkillData grade="22" skillId="1109" stringId="1109"/>
+			<SkillData grade="23" skillId="1109" stringId="1109"/>
+			<SkillData grade="24" skillId="1109" stringId="1109"/>
+			<SkillData grade="25" skillId="1110" stringId="1110"/>
+			<SkillData grade="26" skillId="1110" stringId="1110"/>
+			<SkillData grade="27" skillId="1111" stringId="1111"/>
+			<SkillData grade="28" skillId="1111" stringId="1111"/>
+			<SkillData grade="29" skillId="1112" stringId="1112"/>
+			<SkillData grade="30" skillId="1112" stringId="1112"/>
+			<SkillData grade="31" skillId="1113" stringId="1113"/>
+			<SkillData grade="32" skillId="1113" stringId="1113"/>
+			<SkillData grade="33" skillId="1114" stringId="1114"/>
+			<SkillData grade="34" skillId="1114" stringId="1114"/>
+			<SkillData grade="35" skillId="1115" stringId="1115"/>
+			<SkillData grade="36" skillId="1115" stringId="1115"/>
+			<SkillData grade="37" skillId="1116" stringId="1116"/>
+			<SkillData grade="38" skillId="1116" stringId="1116"/>
+			<SkillData grade="39" skillId="1117" stringId="1117"/>
+			<SkillData grade="40" skillId="1117" stringId="1117"/>
+			<SkillData grade="41" skillId="1118" stringId="1118"/>
+			<SkillData grade="42" skillId="1118" stringId="1118"/>
+			<SkillData grade="43" skillId="1119" stringId="1119"/>
+			<SkillData grade="44" skillId="1119" stringId="1119"/>
+			<SkillData grade="45" skillId="1122" stringId="1122"/>
+			<SkillData grade="46" skillId="1125" stringId="1125"/>
+			<SkillData grade="47" skillId="1128" stringId="1128"/>
+			<SkillData grade="48" skillId="1131" stringId="1131"/>
+			<SkillData grade="49" skillId="1134" stringId="1134"/>
+			<SkillData grade="50" skillId="1137" stringId="1137"/>
+		</ActiveSkill>
+		<ActiveSkill id="3"><!-- 힘 전설 -->
+			<SkillData grade="1" skillId="1103" stringId="1103"/>
+			<SkillData grade="2" skillId="1103" stringId="1103"/>
+			<SkillData grade="3" skillId="1103" stringId="1103"/>
+			<SkillData grade="4" skillId="1104" stringId="1104"/>
+			<SkillData grade="5" skillId="1104" stringId="1104"/>
+			<SkillData grade="6" skillId="1104" stringId="1104"/>
+			<SkillData grade="7" skillId="1105" stringId="1105"/>
+			<SkillData grade="8" skillId="1105" stringId="1105"/>
+			<SkillData grade="9" skillId="1105" stringId="1105"/>
+			<SkillData grade="10" skillId="1106" stringId="1106"/>
+			<SkillData grade="11" skillId="1106" stringId="1106"/>
+			<SkillData grade="12" skillId="1106" stringId="1106"/>
+			<SkillData grade="13" skillId="1107" stringId="1107"/>
+			<SkillData grade="14" skillId="1107" stringId="1107"/>
+			<SkillData grade="15" skillId="1107" stringId="1107"/>
+			<SkillData grade="16" skillId="1108" stringId="1108"/>
+			<SkillData grade="17" skillId="1108" stringId="1108"/>
+			<SkillData grade="18" skillId="1108" stringId="1108"/>
+			<SkillData grade="19" skillId="1109" stringId="1109"/>
+			<SkillData grade="20" skillId="1109" stringId="1109"/>
+			<SkillData grade="21" skillId="1109" stringId="1109"/>
+			<SkillData grade="22" skillId="1110" stringId="1110"/>
+			<SkillData grade="23" skillId="1110" stringId="1110"/>
+			<SkillData grade="24" skillId="1110" stringId="1110"/>
+			<SkillData grade="25" skillId="1111" stringId="1111"/>
+			<SkillData grade="26" skillId="1111" stringId="1111"/>
+			<SkillData grade="27" skillId="1112" stringId="1112"/>
+			<SkillData grade="28" skillId="1112" stringId="1112"/>
+			<SkillData grade="29" skillId="1113" stringId="1113"/>
+			<SkillData grade="30" skillId="1113" stringId="1113"/>
+			<SkillData grade="31" skillId="1114" stringId="1114"/>
+			<SkillData grade="32" skillId="1114" stringId="1114"/>
+			<SkillData grade="33" skillId="1115" stringId="1115"/>
+			<SkillData grade="34" skillId="1115" stringId="1115"/>
+			<SkillData grade="35" skillId="1116" stringId="1116"/>
+			<SkillData grade="36" skillId="1116" stringId="1116"/>
+			<SkillData grade="37" skillId="1117" stringId="1117"/>
+			<SkillData grade="38" skillId="1117" stringId="1117"/>
+			<SkillData grade="39" skillId="1118" stringId="1118"/>
+			<SkillData grade="40" skillId="1118" stringId="1118"/>
+			<SkillData grade="41" skillId="1119" stringId="1119"/>
+			<SkillData grade="42" skillId="1119" stringId="1119"/>
+			<SkillData grade="43" skillId="1120" stringId="1120"/>
+			<SkillData grade="44" skillId="1120" stringId="1120"/>
+			<SkillData grade="45" skillId="1123" stringId="1123"/>
+			<SkillData grade="46" skillId="1126" stringId="1126"/>
+			<SkillData grade="47" skillId="1129" stringId="1129"/>
+			<SkillData grade="48" skillId="1132" stringId="1132"/>
+			<SkillData grade="49" skillId="1135" stringId="1135"/>
+			<SkillData grade="50" skillId="1138" stringId="1138"/>
+		</ActiveSkill>
+		<ActiveSkill id="4"><!-- 힘 미션퀘 지급용 -->
+			<SkillData grade="1" skillId="1110" stringId="1110"/>
+			<SkillData grade="2" skillId="1110" stringId="1110"/>
+			<SkillData grade="3" skillId="1110" stringId="1110"/>
+			<SkillData grade="4" skillId="1110" stringId="1110"/>
+			<SkillData grade="5" skillId="1110" stringId="1110"/>
+			<SkillData grade="6" skillId="1110" stringId="1110"/>
+			<SkillData grade="7" skillId="1110" stringId="1110"/>
+			<SkillData grade="8" skillId="1110" stringId="1110"/>
+			<SkillData grade="9" skillId="1110" stringId="1110"/>
+			<SkillData grade="10" skillId="1110" stringId="1110"/>
+			<SkillData grade="11" skillId="1110" stringId="1110"/>
+			<SkillData grade="12" skillId="1110" stringId="1110"/>
+			<SkillData grade="13" skillId="1110" stringId="1110"/>
+			<SkillData grade="14" skillId="1110" stringId="1110"/>
+			<SkillData grade="15" skillId="1110" stringId="1110"/>
+			<SkillData grade="16" skillId="1110" stringId="1110"/>
+			<SkillData grade="17" skillId="1110" stringId="1110"/>
+			<SkillData grade="18" skillId="1110" stringId="1110"/>
+			<SkillData grade="19" skillId="1110" stringId="1110"/>
+			<SkillData grade="20" skillId="1110" stringId="1110"/>
+			<SkillData grade="21" skillId="1110" stringId="1110"/>
+			<SkillData grade="22" skillId="1110" stringId="1110"/>
+			<SkillData grade="23" skillId="1110" stringId="1110"/>
+			<SkillData grade="24" skillId="1110" stringId="1110"/>
+			<SkillData grade="25" skillId="1110" stringId="1110"/>
+			<SkillData grade="26" skillId="1110" stringId="1110"/>
+			<SkillData grade="27" skillId="1110" stringId="1110"/>
+			<SkillData grade="28" skillId="1110" stringId="1110"/>
+			<SkillData grade="29" skillId="1110" stringId="1110"/>
+			<SkillData grade="30" skillId="1110" stringId="1110"/>
+			<SkillData grade="31" skillId="1110" stringId="1110"/>
+			<SkillData grade="32" skillId="1110" stringId="1110"/>
+			<SkillData grade="33" skillId="1110" stringId="1110"/>
+			<SkillData grade="34" skillId="1110" stringId="1110"/>
+			<SkillData grade="35" skillId="1110" stringId="1110"/>
+			<SkillData grade="36" skillId="1110" stringId="1110"/>
+			<SkillData grade="37" skillId="1110" stringId="1110"/>
+			<SkillData grade="38" skillId="1110" stringId="1110"/>
+			<SkillData grade="39" skillId="1110" stringId="1110"/>
+			<SkillData grade="40" skillId="1110" stringId="1110"/>
+			<SkillData grade="41" skillId="1110" stringId="1110"/>
+			<SkillData grade="42" skillId="1110" stringId="1110"/>
+			<SkillData grade="43" skillId="1110" stringId="1110"/>
+			<SkillData grade="44" skillId="1110" stringId="1110"/>
+			<SkillData grade="45" skillId="1110" stringId="1110"/>
+			<SkillData grade="46" skillId="1110" stringId="1110"/>
+			<SkillData grade="47" skillId="1110" stringId="1110"/>
+			<SkillData grade="48" skillId="1110" stringId="1110"/>
+			<SkillData grade="49" skillId="1110" stringId="1110"/>
+			<SkillData grade="50" skillId="1110" stringId="1110"/>
+		</ActiveSkill>
+		<ActiveSkill id="5"><!-- 힘 전설 보스 파트너용 -->
+			<SkillData grade="1" skillId="1103" stringId="1142"/>
+			<SkillData grade="2" skillId="1103" stringId="1142"/>
+			<SkillData grade="3" skillId="1103" stringId="1142"/>
+			<SkillData grade="4" skillId="1104" stringId="1143"/>
+			<SkillData grade="5" skillId="1104" stringId="1143"/>
+			<SkillData grade="6" skillId="1104" stringId="1143"/>
+			<SkillData grade="7" skillId="1105" stringId="1144"/>
+			<SkillData grade="8" skillId="1105" stringId="1144"/>
+			<SkillData grade="9" skillId="1105" stringId="1144"/>
+			<SkillData grade="10" skillId="1106" stringId="1145"/>
+			<SkillData grade="11" skillId="1106" stringId="1145"/>
+			<SkillData grade="12" skillId="1106" stringId="1145"/>
+			<SkillData grade="13" skillId="1107" stringId="1146"/>
+			<SkillData grade="14" skillId="1107" stringId="1146"/>
+			<SkillData grade="15" skillId="1107" stringId="1146"/>
+			<SkillData grade="16" skillId="1108" stringId="1147"/>
+			<SkillData grade="17" skillId="1108" stringId="1147"/>
+			<SkillData grade="18" skillId="1108" stringId="1147"/>
+			<SkillData grade="19" skillId="1109" stringId="1148"/>
+			<SkillData grade="20" skillId="1109" stringId="1148"/>
+			<SkillData grade="21" skillId="1109" stringId="1148"/>
+			<SkillData grade="22" skillId="1110" stringId="1149"/>
+			<SkillData grade="23" skillId="1110" stringId="1149"/>
+			<SkillData grade="24" skillId="1110" stringId="1149"/>
+			<SkillData grade="25" skillId="1111" stringId="1150"/>
+			<SkillData grade="26" skillId="1111" stringId="1150"/>
+			<SkillData grade="27" skillId="1112" stringId="1151"/>
+			<SkillData grade="28" skillId="1112" stringId="1151"/>
+			<SkillData grade="29" skillId="1113" stringId="1152"/>
+			<SkillData grade="30" skillId="1113" stringId="1152"/>
+			<SkillData grade="31" skillId="1114" stringId="1153"/>
+			<SkillData grade="32" skillId="1114" stringId="1153"/>
+			<SkillData grade="33" skillId="1115" stringId="1154"/>
+			<SkillData grade="34" skillId="1115" stringId="1154"/>
+			<SkillData grade="35" skillId="1116" stringId="1155"/>
+			<SkillData grade="36" skillId="1116" stringId="1155"/>
+			<SkillData grade="37" skillId="1117" stringId="1156"/>
+			<SkillData grade="38" skillId="1117" stringId="1156"/>
+			<SkillData grade="39" skillId="1118" stringId="1157"/>
+			<SkillData grade="40" skillId="1118" stringId="1157"/>
+			<SkillData grade="41" skillId="1119" stringId="1158"/>
+			<SkillData grade="42" skillId="1119" stringId="1158"/>
+			<SkillData grade="43" skillId="1120" stringId="1159"/>
+			<SkillData grade="44" skillId="1120" stringId="1159"/>
+			<SkillData grade="45" skillId="1123" stringId="1162"/>
+			<SkillData grade="46" skillId="1126" stringId="1165"/>
+			<SkillData grade="47" skillId="1129" stringId="1168"/>
+			<SkillData grade="48" skillId="1132" stringId="1171"/>
+			<SkillData grade="49" skillId="1135" stringId="1174"/>
+			<SkillData grade="50" skillId="1138" stringId="1177"/>
+		</ActiveSkill>
+		<!-- 엘로 -->
+		<ActiveSkill id="11"><!-- 마법 증폭 고급 -->
+			<SkillData grade="1" skillId="1101" stringId="1201"/>
+			<SkillData grade="2" skillId="1101" stringId="1201"/>
+			<SkillData grade="3" skillId="1101" stringId="1201"/>
+			<SkillData grade="4" skillId="1102" stringId="1202"/>
+			<SkillData grade="5" skillId="1102" stringId="1202"/>
+			<SkillData grade="6" skillId="1102" stringId="1202"/>
+			<SkillData grade="7" skillId="1103" stringId="1203"/>
+			<SkillData grade="8" skillId="1103" stringId="1203"/>
+			<SkillData grade="9" skillId="1103" stringId="1203"/>
+			<SkillData grade="10" skillId="1104" stringId="1204"/>
+			<SkillData grade="11" skillId="1104" stringId="1204"/>
+			<SkillData grade="12" skillId="1104" stringId="1204"/>
+			<SkillData grade="13" skillId="1105" stringId="1205"/>
+			<SkillData grade="14" skillId="1105" stringId="1205"/>
+			<SkillData grade="15" skillId="1105" stringId="1205"/>
+			<SkillData grade="16" skillId="1106" stringId="1206"/>
+			<SkillData grade="17" skillId="1106" stringId="1206"/>
+			<SkillData grade="18" skillId="1106" stringId="1206"/>
+			<SkillData grade="19" skillId="1107" stringId="1207"/>
+			<SkillData grade="20" skillId="1107" stringId="1207"/>
+			<SkillData grade="21" skillId="1107" stringId="1207"/>
+			<SkillData grade="22" skillId="1108" stringId="1208"/>
+			<SkillData grade="23" skillId="1108" stringId="1208"/>
+			<SkillData grade="24" skillId="1108" stringId="1208"/>
+			<SkillData grade="25" skillId="1109" stringId="1209"/>
+			<SkillData grade="26" skillId="1109" stringId="1209"/>
+			<SkillData grade="27" skillId="1110" stringId="1210"/>
+			<SkillData grade="28" skillId="1110" stringId="1210"/>
+			<SkillData grade="29" skillId="1111" stringId="1211"/>
+			<SkillData grade="30" skillId="1111" stringId="1211"/>
+			<SkillData grade="31" skillId="1112" stringId="1212"/>
+			<SkillData grade="32" skillId="1112" stringId="1212"/>
+			<SkillData grade="33" skillId="1113" stringId="1213"/>
+			<SkillData grade="34" skillId="1113" stringId="1213"/>
+			<SkillData grade="35" skillId="1114" stringId="1214"/>
+			<SkillData grade="36" skillId="1114" stringId="1214"/>
+			<SkillData grade="37" skillId="1115" stringId="1215"/>
+			<SkillData grade="38" skillId="1115" stringId="1215"/>
+			<SkillData grade="39" skillId="1116" stringId="1216"/>
+			<SkillData grade="40" skillId="1116" stringId="1216"/>
+			<SkillData grade="41" skillId="1117" stringId="1217"/>
+			<SkillData grade="42" skillId="1117" stringId="1217"/>
+			<SkillData grade="43" skillId="1118" stringId="1218"/>
+			<SkillData grade="44" skillId="1118" stringId="1218"/>
+			<SkillData grade="45" skillId="1121" stringId="1221"/>
+			<SkillData grade="46" skillId="1124" stringId="1224"/>
+			<SkillData grade="47" skillId="1127" stringId="1227"/>
+			<SkillData grade="48" skillId="1130" stringId="1230"/>
+			<SkillData grade="49" skillId="1133" stringId="1233"/>
+			<SkillData grade="50" skillId="1136" stringId="1236"/>
+		</ActiveSkill>
+		<ActiveSkill id="12"><!-- 마법 증폭 희귀 -->
+			<SkillData grade="1" skillId="1102" stringId="1202"/>
+			<SkillData grade="2" skillId="1102" stringId="1202"/>
+			<SkillData grade="3" skillId="1102" stringId="1202"/>
+			<SkillData grade="4" skillId="1103" stringId="1203"/>
+			<SkillData grade="5" skillId="1103" stringId="1203"/>
+			<SkillData grade="6" skillId="1103" stringId="1203"/>
+			<SkillData grade="7" skillId="1104" stringId="1204"/>
+			<SkillData grade="8" skillId="1104" stringId="1204"/>
+			<SkillData grade="9" skillId="1104" stringId="1204"/>
+			<SkillData grade="10" skillId="1105" stringId="1205"/>
+			<SkillData grade="11" skillId="1105" stringId="1205"/>
+			<SkillData grade="12" skillId="1105" stringId="1205"/>
+			<SkillData grade="13" skillId="1106" stringId="1206"/>
+			<SkillData grade="14" skillId="1106" stringId="1206"/>
+			<SkillData grade="15" skillId="1106" stringId="1206"/>
+			<SkillData grade="16" skillId="1107" stringId="1207"/>
+			<SkillData grade="17" skillId="1107" stringId="1207"/>
+			<SkillData grade="18" skillId="1107" stringId="1207"/>
+			<SkillData grade="19" skillId="1108" stringId="1208"/>
+			<SkillData grade="20" skillId="1108" stringId="1208"/>
+			<SkillData grade="21" skillId="1108" stringId="1208"/>
+			<SkillData grade="22" skillId="1109" stringId="1209"/>
+			<SkillData grade="23" skillId="1109" stringId="1209"/>
+			<SkillData grade="24" skillId="1109" stringId="1209"/>
+			<SkillData grade="25" skillId="1110" stringId="1210"/>
+			<SkillData grade="26" skillId="1110" stringId="1210"/>
+			<SkillData grade="27" skillId="1111" stringId="1211"/>
+			<SkillData grade="28" skillId="1111" stringId="1211"/>
+			<SkillData grade="29" skillId="1112" stringId="1212"/>
+			<SkillData grade="30" skillId="1112" stringId="1212"/>
+			<SkillData grade="31" skillId="1113" stringId="1213"/>
+			<SkillData grade="32" skillId="1113" stringId="1213"/>
+			<SkillData grade="33" skillId="1114" stringId="1214"/>
+			<SkillData grade="34" skillId="1114" stringId="1214"/>
+			<SkillData grade="35" skillId="1115" stringId="1215"/>
+			<SkillData grade="36" skillId="1115" stringId="1215"/>
+			<SkillData grade="37" skillId="1116" stringId="1216"/>
+			<SkillData grade="38" skillId="1116" stringId="1216"/>
+			<SkillData grade="39" skillId="1117" stringId="1217"/>
+			<SkillData grade="40" skillId="1117" stringId="1217"/>
+			<SkillData grade="41" skillId="1118" stringId="1218"/>
+			<SkillData grade="42" skillId="1118" stringId="1218"/>
+			<SkillData grade="43" skillId="1119" stringId="1219"/>
+			<SkillData grade="44" skillId="1119" stringId="1219"/>
+			<SkillData grade="45" skillId="1122" stringId="1222"/>
+			<SkillData grade="46" skillId="1125" stringId="1225"/>
+			<SkillData grade="47" skillId="1128" stringId="1228"/>
+			<SkillData grade="48" skillId="1131" stringId="1231"/>
+			<SkillData grade="49" skillId="1134" stringId="1234"/>
+			<SkillData grade="50" skillId="1137" stringId="1237"/>
+		</ActiveSkill>
+		<ActiveSkill id="13"><!-- 마법 증폭 전설 -->
+			<SkillData grade="1" skillId="1103" stringId="1203"/>
+			<SkillData grade="2" skillId="1103" stringId="1203"/>
+			<SkillData grade="3" skillId="1103" stringId="1203"/>
+			<SkillData grade="4" skillId="1104" stringId="1204"/>
+			<SkillData grade="5" skillId="1104" stringId="1204"/>
+			<SkillData grade="6" skillId="1104" stringId="1204"/>
+			<SkillData grade="7" skillId="1105" stringId="1205"/>
+			<SkillData grade="8" skillId="1105" stringId="1205"/>
+			<SkillData grade="9" skillId="1105" stringId="1205"/>
+			<SkillData grade="10" skillId="1106" stringId="1206"/>
+			<SkillData grade="11" skillId="1106" stringId="1206"/>
+			<SkillData grade="12" skillId="1106" stringId="1206"/>
+			<SkillData grade="13" skillId="1107" stringId="1207"/>
+			<SkillData grade="14" skillId="1107" stringId="1207"/>
+			<SkillData grade="15" skillId="1107" stringId="1207"/>
+			<SkillData grade="16" skillId="1108" stringId="1208"/>
+			<SkillData grade="17" skillId="1108" stringId="1208"/>
+			<SkillData grade="18" skillId="1108" stringId="1208"/>
+			<SkillData grade="19" skillId="1109" stringId="1209"/>
+			<SkillData grade="20" skillId="1109" stringId="1209"/>
+			<SkillData grade="21" skillId="1109" stringId="1209"/>
+			<SkillData grade="22" skillId="1110" stringId="1210"/>
+			<SkillData grade="23" skillId="1110" stringId="1210"/>
+			<SkillData grade="24" skillId="1110" stringId="1210"/>
+			<SkillData grade="25" skillId="1111" stringId="1211"/>
+			<SkillData grade="26" skillId="1111" stringId="1211"/>
+			<SkillData grade="27" skillId="1112" stringId="1212"/>
+			<SkillData grade="28" skillId="1112" stringId="1212"/>
+			<SkillData grade="29" skillId="1113" stringId="1213"/>
+			<SkillData grade="30" skillId="1113" stringId="1213"/>
+			<SkillData grade="31" skillId="1114" stringId="1214"/>
+			<SkillData grade="32" skillId="1114" stringId="1214"/>
+			<SkillData grade="33" skillId="1115" stringId="1215"/>
+			<SkillData grade="34" skillId="1115" stringId="1215"/>
+			<SkillData grade="35" skillId="1116" stringId="1216"/>
+			<SkillData grade="36" skillId="1116" stringId="1216"/>
+			<SkillData grade="37" skillId="1117" stringId="1217"/>
+			<SkillData grade="38" skillId="1117" stringId="1217"/>
+			<SkillData grade="39" skillId="1118" stringId="1218"/>
+			<SkillData grade="40" skillId="1118" stringId="1218"/>
+			<SkillData grade="41" skillId="1119" stringId="1219"/>
+			<SkillData grade="42" skillId="1119" stringId="1219"/>
+			<SkillData grade="43" skillId="1120" stringId="1220"/>
+			<SkillData grade="44" skillId="1120" stringId="1220"/>
+			<SkillData grade="45" skillId="1123" stringId="1223"/>
+			<SkillData grade="46" skillId="1126" stringId="1226"/>
+			<SkillData grade="47" skillId="1129" stringId="1229"/>
+			<SkillData grade="48" skillId="1132" stringId="1232"/>
+			<SkillData grade="49" skillId="1135" stringId="1235"/>
+			<SkillData grade="50" skillId="1138" stringId="1238"/>
+		</ActiveSkill>
+		<!-- 리코 -->
+		<ActiveSkill id="21"><!-- 물리 증폭 고급 -->
+			<SkillData grade="1" skillId="1101" stringId="1301"/>
+			<SkillData grade="2" skillId="1101" stringId="1301"/>
+			<SkillData grade="3" skillId="1101" stringId="1301"/>
+			<SkillData grade="4" skillId="1102" stringId="1302"/>
+			<SkillData grade="5" skillId="1102" stringId="1302"/>
+			<SkillData grade="6" skillId="1102" stringId="1302"/>
+			<SkillData grade="7" skillId="1103" stringId="1303"/>
+			<SkillData grade="8" skillId="1103" stringId="1303"/>
+			<SkillData grade="9" skillId="1103" stringId="1303"/>
+			<SkillData grade="10" skillId="1104" stringId="1304"/>
+			<SkillData grade="11" skillId="1104" stringId="1304"/>
+			<SkillData grade="12" skillId="1104" stringId="1304"/>
+			<SkillData grade="13" skillId="1105" stringId="1305"/>
+			<SkillData grade="14" skillId="1105" stringId="1305"/>
+			<SkillData grade="15" skillId="1105" stringId="1305"/>
+			<SkillData grade="16" skillId="1106" stringId="1306"/>
+			<SkillData grade="17" skillId="1106" stringId="1306"/>
+			<SkillData grade="18" skillId="1106" stringId="1306"/>
+			<SkillData grade="19" skillId="1107" stringId="1307"/>
+			<SkillData grade="20" skillId="1107" stringId="1307"/>
+			<SkillData grade="21" skillId="1107" stringId="1307"/>
+			<SkillData grade="22" skillId="1108" stringId="1308"/>
+			<SkillData grade="23" skillId="1108" stringId="1308"/>
+			<SkillData grade="24" skillId="1108" stringId="1308"/>			
+			<SkillData grade="25" skillId="1109" stringId="1309"/>
+			<SkillData grade="26" skillId="1109" stringId="1309"/>
+			<SkillData grade="27" skillId="1110" stringId="1310"/>
+			<SkillData grade="28" skillId="1110" stringId="1310"/>
+			<SkillData grade="29" skillId="1111" stringId="1311"/>
+			<SkillData grade="30" skillId="1111" stringId="1311"/>
+			<SkillData grade="31" skillId="1112" stringId="1312"/>
+			<SkillData grade="32" skillId="1112" stringId="1312"/>
+			<SkillData grade="33" skillId="1113" stringId="1313"/>
+			<SkillData grade="34" skillId="1113" stringId="1313"/>
+			<SkillData grade="35" skillId="1114" stringId="1314"/>
+			<SkillData grade="36" skillId="1114" stringId="1314"/>
+			<SkillData grade="37" skillId="1115" stringId="1315"/>
+			<SkillData grade="38" skillId="1115" stringId="1315"/>
+			<SkillData grade="39" skillId="1116" stringId="1316"/>
+			<SkillData grade="40" skillId="1116" stringId="1316"/>
+			<SkillData grade="41" skillId="1117" stringId="1317"/>
+			<SkillData grade="42" skillId="1117" stringId="1317"/>
+			<SkillData grade="43" skillId="1118" stringId="1318"/>
+			<SkillData grade="44" skillId="1118" stringId="1318"/>
+			<SkillData grade="45" skillId="1121" stringId="1321"/>
+			<SkillData grade="46" skillId="1124" stringId="1324"/>
+			<SkillData grade="47" skillId="1127" stringId="1327"/>
+			<SkillData grade="48" skillId="1130" stringId="1330"/>
+			<SkillData grade="49" skillId="1133" stringId="1333"/>
+			<SkillData grade="50" skillId="1136" stringId="1336"/>
+		</ActiveSkill>
+		<ActiveSkill id="22"><!-- 물리 증폭 희귀 -->
+			<SkillData grade="1" skillId="1102" stringId="1302"/>
+			<SkillData grade="2" skillId="1102" stringId="1302"/>
+			<SkillData grade="3" skillId="1102" stringId="1302"/>
+			<SkillData grade="4" skillId="1103" stringId="1303"/>
+			<SkillData grade="5" skillId="1103" stringId="1303"/>
+			<SkillData grade="6" skillId="1103" stringId="1303"/>
+			<SkillData grade="7" skillId="1104" stringId="1304"/>
+			<SkillData grade="8" skillId="1104" stringId="1304"/>
+			<SkillData grade="9" skillId="1104" stringId="1304"/>
+			<SkillData grade="10" skillId="1105" stringId="1305"/>
+			<SkillData grade="11" skillId="1105" stringId="1305"/>
+			<SkillData grade="12" skillId="1105" stringId="1305"/>
+			<SkillData grade="13" skillId="1106" stringId="1306"/>
+			<SkillData grade="14" skillId="1106" stringId="1306"/>
+			<SkillData grade="15" skillId="1106" stringId="1306"/>
+			<SkillData grade="16" skillId="1107" stringId="1307"/>
+			<SkillData grade="17" skillId="1107" stringId="1307"/>
+			<SkillData grade="18" skillId="1107" stringId="1307"/>
+			<SkillData grade="19" skillId="1108" stringId="1308"/>
+			<SkillData grade="20" skillId="1108" stringId="1308"/>
+			<SkillData grade="21" skillId="1108" stringId="1308"/>
+			<SkillData grade="22" skillId="1109" stringId="1309"/>
+			<SkillData grade="23" skillId="1109" stringId="1309"/>
+			<SkillData grade="24" skillId="1109" stringId="1309"/>
+			<SkillData grade="25" skillId="1110" stringId="1310"/>
+			<SkillData grade="26" skillId="1110" stringId="1310"/>
+			<SkillData grade="27" skillId="1111" stringId="1311"/>
+			<SkillData grade="28" skillId="1111" stringId="1311"/>
+			<SkillData grade="29" skillId="1112" stringId="1312"/>
+			<SkillData grade="30" skillId="1112" stringId="1312"/>
+			<SkillData grade="31" skillId="1113" stringId="1313"/>
+			<SkillData grade="32" skillId="1113" stringId="1313"/>
+			<SkillData grade="33" skillId="1114" stringId="1314"/>
+			<SkillData grade="34" skillId="1114" stringId="1314"/>
+			<SkillData grade="35" skillId="1115" stringId="1315"/>
+			<SkillData grade="36" skillId="1115" stringId="1315"/>
+			<SkillData grade="37" skillId="1116" stringId="1316"/>
+			<SkillData grade="38" skillId="1116" stringId="1316"/>
+			<SkillData grade="39" skillId="1117" stringId="1317"/>
+			<SkillData grade="40" skillId="1117" stringId="1317"/>
+			<SkillData grade="41" skillId="1118" stringId="1318"/>
+			<SkillData grade="42" skillId="1118" stringId="1318"/>
+			<SkillData grade="43" skillId="1119" stringId="1319"/>
+			<SkillData grade="44" skillId="1119" stringId="1319"/>
+			<SkillData grade="45" skillId="1122" stringId="1322"/>
+			<SkillData grade="46" skillId="1125" stringId="1325"/>
+			<SkillData grade="47" skillId="1128" stringId="1328"/>
+			<SkillData grade="48" skillId="1131" stringId="1331"/>
+			<SkillData grade="49" skillId="1134" stringId="1334"/>
+			<SkillData grade="50" skillId="1137" stringId="1337"/>
+		</ActiveSkill>
+		<ActiveSkill id="23"><!-- 물리 증폭 전설 -->
+			<SkillData grade="1" skillId="1103" stringId="1303"/>
+			<SkillData grade="2" skillId="1103" stringId="1303"/>
+			<SkillData grade="3" skillId="1103" stringId="1303"/>
+			<SkillData grade="4" skillId="1104" stringId="1304"/>
+			<SkillData grade="5" skillId="1104" stringId="1304"/>
+			<SkillData grade="6" skillId="1104" stringId="1304"/>
+			<SkillData grade="7" skillId="1105" stringId="1305"/>
+			<SkillData grade="8" skillId="1105" stringId="1305"/>
+			<SkillData grade="9" skillId="1105" stringId="1305"/>
+			<SkillData grade="10" skillId="1106" stringId="1306"/>
+			<SkillData grade="11" skillId="1106" stringId="1306"/>
+			<SkillData grade="12" skillId="1106" stringId="1306"/>
+			<SkillData grade="13" skillId="1107" stringId="1307"/>
+			<SkillData grade="14" skillId="1107" stringId="1307"/>
+			<SkillData grade="15" skillId="1107" stringId="1307"/>
+			<SkillData grade="16" skillId="1108" stringId="1308"/>
+			<SkillData grade="17" skillId="1108" stringId="1308"/>
+			<SkillData grade="18" skillId="1108" stringId="1308"/>
+			<SkillData grade="19" skillId="1109" stringId="1309"/>
+			<SkillData grade="20" skillId="1109" stringId="1309"/>
+			<SkillData grade="21" skillId="1109" stringId="1309"/>
+			<SkillData grade="22" skillId="1110" stringId="1310"/>
+			<SkillData grade="23" skillId="1110" stringId="1310"/>
+			<SkillData grade="24" skillId="1110" stringId="1310"/>
+			<SkillData grade="25" skillId="1111" stringId="1311"/>
+			<SkillData grade="26" skillId="1111" stringId="1311"/>
+			<SkillData grade="27" skillId="1112" stringId="1312"/>
+			<SkillData grade="28" skillId="1112" stringId="1312"/>
+			<SkillData grade="29" skillId="1113" stringId="1313"/>
+			<SkillData grade="30" skillId="1113" stringId="1313"/>
+			<SkillData grade="31" skillId="1114" stringId="1314"/>
+			<SkillData grade="32" skillId="1114" stringId="1314"/>
+			<SkillData grade="33" skillId="1115" stringId="1315"/>
+			<SkillData grade="34" skillId="1115" stringId="1315"/>
+			<SkillData grade="35" skillId="1116" stringId="1316"/>
+			<SkillData grade="36" skillId="1116" stringId="1316"/>
+			<SkillData grade="37" skillId="1117" stringId="1317"/>
+			<SkillData grade="38" skillId="1117" stringId="1317"/>
+			<SkillData grade="39" skillId="1118" stringId="1318"/>
+			<SkillData grade="40" skillId="1118" stringId="1318"/>
+			<SkillData grade="41" skillId="1119" stringId="1319"/>
+			<SkillData grade="42" skillId="1119" stringId="1319"/>
+			<SkillData grade="43" skillId="1120" stringId="1320"/>
+			<SkillData grade="44" skillId="1120" stringId="1320"/>
+			<SkillData grade="45" skillId="1123" stringId="1323"/>
+			<SkillData grade="46" skillId="1126" stringId="1326"/>
+			<SkillData grade="47" skillId="1129" stringId="1329"/>
+			<SkillData grade="48" skillId="1132" stringId="1332"/>
+			<SkillData grade="49" skillId="1135" stringId="1335"/>
+			<SkillData grade="50" skillId="1138" stringId="1338"/>
+		</ActiveSkill>
+	</ActiveSkillData>
+	<ConditionalSkillData>
+		<!--
+		type
+		1 : Pc의 Hp가 감소하는 로직이 동작했을 때 몇 % 미만이 된 경우. value는 0~1 사이
+		2 : Pc의 Mp가 감소하는 로직이 동작했을 때 몇 % 미만이 된 경우. value는 0~1 사이
+		3 : Pc의 St가 감소하는 로직이 동작했을 때 몇 % 미만이 된 경우. value는 0~1 사이
+		4 : Pc가 특정 이상상태에 걸린 경우. value는 이상상태 id 리스트
+		5 : Pc가 스킬을 적중 시킨 경우. value는 스킬 카테고리id, 0이면 모든 스킬
+		6 : Pc 사망 시
+		7 : Pc 부활 시
+		8 : Pc가 전투 상태 진입 시
+		9 : 아이템 사용 시. value는 아이템 id 리스트
+		10 : 채집으로 아이템 획득 시. value는 아이템 id 리스트
+		11 : 제작으로 아이템 획득 시. value는 아이템 id 리스트
+		12 : 낚시로 아이템 획득 시. value는 아이템 id 리스트
+		
+		target
+		MyOwner : 자신의 주인을 타겟으로 설정
+		MyOwnerTarget : 주인을 공격한 대상을 타겟으로 설정
+		MyOwnerAttackingTarget : 주인이 공격하고 있는 대상을 타겟으로 설정
+		-->		
+		<ConditionalSkill id="2" type="1" value="1" probability="0.01" target="MyOwner" skillId="5001" coolTime="3000" stringId="5001" iconName="Icon_Skills.guildskill2_HPup_1_Tex"/><!-- 긴급 회복 I -->
+		<ConditionalSkill id="3" type="1" value="1" probability="0.01" target="MyOwner" skillId="5002" coolTime="3000" stringId="5002" iconName="Icon_Skills.guildskill2_HPup_1_Tex"/><!-- 긴급 회복 II -->
+		<ConditionalSkill id="4" type="1" value="1" probability="0.01" target="MyOwner" skillId="5003" coolTime="3000" stringId="5003" iconName="Icon_Skills.guildskill2_HPup_1_Tex"/><!-- 긴급 회복 III -->
+		<ConditionalSkill id="5" type="2" value="1" probability="0.01" target="MyOwner" skillId="5004" coolTime="3000" stringId="5004" iconName="Icon_Skills.guildskill2_MPup_1_Tex"/><!-- 긴급 지원 I -->
+		<ConditionalSkill id="6" type="2" value="1" probability="0.01" target="MyOwner" skillId="5005" coolTime="3000" stringId="5005" iconName="Icon_Skills.guildskill2_MPup_1_Tex"/><!-- 긴급 지원 II -->
+		<ConditionalSkill id="7" type="2" value="1" probability="0.01" target="MyOwner" skillId="5006" coolTime="3000" stringId="5006" iconName="Icon_Skills.guildskill2_MPup_1_Tex"/><!-- 긴급 지원 III -->
+		<ConditionalSkill id="8" type="1" value="1" probability="0.01" target="MyOwner" skillId="5007" coolTime="3000" stringId="5007" iconName="Icon_Skills.EmergencyShield_Tex"/><!-- 보호막 I -->
+		<ConditionalSkill id="9" type="1" value="1" probability="0.01" target="MyOwner" skillId="5008" coolTime="3000" stringId="5008" iconName="Icon_Skills.EmergencyShield_Tex"/><!-- 보호막 II -->
+		<ConditionalSkill id="10" type="1" value="1" probability="0.01" target="MyOwner" skillId="5009" coolTime="3000" stringId="5009" iconName="Icon_Skills.EmergencyShield_Tex"/><!-- 보호막 III -->
+		<ConditionalSkill id="11" type="8" value="0" probability="0.1" target="MyOwner" skillId="5010" coolTime="3000" stringId="5010" iconName="Icon_Skills.Heart_buff_Tex"/><!-- 교감 강화 I -->
+		<ConditionalSkill id="12" type="8" value="0" probability="0.1" target="MyOwner" skillId="5011" coolTime="3000" stringId="5011" iconName="Icon_Skills.Heart_buff_Tex"/><!-- 교감 강화 II -->
+		<ConditionalSkill id="13" type="8" value="0" probability="0.1" target="MyOwner" skillId="5012" coolTime="3000" stringId="5012" iconName="Icon_Skills.Heart_buff_Tex"/><!-- 교감 강화 III -->
+		<ConditionalSkill id="14" type="4" value="13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067,13068,13069,13070,13071,13072,13073,13074,13075,13076,13077,13080,13081,13082,13083,13084,13085,13086,13087,13088,13089,13090,13091,13092,13093,13094,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13115,13116,13117,13120,13121,13122,13123,13124,13125,13126,13127,13128,13129,13130,13131,13132,13133,13134,13135,13136,13137,13138,13139,13140,13141,13142,13143,13144,13145,13146,13147,13148,13149,13150,13151,13152,13153,13154,13155,13156,13157" probability="0.05" target="MyOwner" skillId="5013" coolTime="3000" stringId="5013" iconName="Icon_Items.F2P_XPBooster_Tex"/><!-- 성장 가속 I -->
+		<ConditionalSkill id="15" type="4" value="13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067,13068,13069,13070,13071,13072,13073,13074,13075,13076,13077,13080,13081,13082,13083,13084,13085,13086,13087,13088,13089,13090,13091,13092,13093,13094,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13115,13116,13117,13120,13121,13122,13123,13124,13125,13126,13127,13128,13129,13130,13131,13132,13133,13134,13135,13136,13137,13138,13139,13140,13141,13142,13143,13144,13145,13146,13147,13148,13149,13150,13151,13152,13153,13154,13155,13156,13157" probability="0.05" target="MyOwner" skillId="5014" coolTime="3000" stringId="5014" iconName="Icon_Items.F2P_XPBooster_Tex"/><!-- 성장 가속 II -->
+		<ConditionalSkill id="16" type="4" value="13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067,13068,13069,13070,13071,13072,13073,13074,13075,13076,13077,13080,13081,13082,13083,13084,13085,13086,13087,13088,13089,13090,13091,13092,13093,13094,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13115,13116,13117,13120,13121,13122,13123,13124,13125,13126,13127,13128,13129,13130,13131,13132,13133,13134,13135,13136,13137,13138,13139,13140,13141,13142,13143,13144,13145,13146,13147,13148,13149,13150,13151,13152,13153,13154,13155,13156,13157" probability="0.05" target="MyOwner" skillId="5015" coolTime="3000" stringId="5015" iconName="Icon_Items.F2P_XPBooster_Tex"/><!-- 성장 가속 III -->
+		<ConditionalSkill id="17" type="4" value="13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067,13068,13069,13070,13071,13072,13073,13074,13075,13076,13077,13080,13081,13082,13083,13084,13085,13086,13087,13088,13089,13090,13091,13092,13093,13094,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13115,13116,13117,13120,13121,13122,13123,13124,13125,13126,13127,13128,13129,13130,13131,13132,13133,13134,13135,13136,13137,13138,13139,13140,13141,13142,13143,13144,13145,13146,13147,13148,13149,13150,13151,13152,13153,13154,13155,13156,13157" probability="0.05" target="MyOwner" skillId="5016" coolTime="3000" stringId="5016" iconName="Icon_Items.Icon_spexp_Tex"/><!-- 연마 가속 I -->
+		<ConditionalSkill id="18" type="4" value="13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067,13068,13069,13070,13071,13072,13073,13074,13075,13076,13077,13080,13081,13082,13083,13084,13085,13086,13087,13088,13089,13090,13091,13092,13093,13094,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13115,13116,13117,13120,13121,13122,13123,13124,13125,13126,13127,13128,13129,13130,13131,13132,13133,13134,13135,13136,13137,13138,13139,13140,13141,13142,13143,13144,13145,13146,13147,13148,13149,13150,13151,13152,13153,13154,13155,13156,13157" probability="0.05" target="MyOwner" skillId="5017" coolTime="3000" stringId="5017" iconName="Icon_Items.Icon_spexp_Tex"/><!-- 연마 가속 II -->
+		<ConditionalSkill id="19" type="4" value="13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067,13068,13069,13070,13071,13072,13073,13074,13075,13076,13077,13080,13081,13082,13083,13084,13085,13086,13087,13088,13089,13090,13091,13092,13093,13094,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13115,13116,13117,13120,13121,13122,13123,13124,13125,13126,13127,13128,13129,13130,13131,13132,13133,13134,13135,13136,13137,13138,13139,13140,13141,13142,13143,13144,13145,13146,13147,13148,13149,13150,13151,13152,13153,13154,13155,13156,13157" probability="0.05" target="MyOwner" skillId="5018" coolTime="3000" stringId="5018" iconName="Icon_Items.Icon_spexp_Tex"/><!-- 연마 가속 III -->
+		<ConditionalSkill id="20" type="4" value="13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067,13068,13069,13070,13071,13072,13073,13074,13075,13076,13077,13080,13081,13082,13083,13084,13085,13086,13087,13088,13089,13090,13091,13092,13093,13094,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13115,13116,13117,13120,13121,13122,13123,13124,13125,13126,13127,13128,13129,13130,13131,13132,13133,13134,13135,13136,13137,13138,13139,13140,13141,13142,13143,13144,13145,13146,13147,13148,13149,13150,13151,13152,13153,13154,13155,13156,13157" probability="0.05" target="MyOwner" skillId="5019" coolTime="3000" stringId="5019" iconName="Icon_Items.Icon_exp_Tex"/><!-- 복합 가속 I -->
+		<ConditionalSkill id="21" type="4" value="13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067,13068,13069,13070,13071,13072,13073,13074,13075,13076,13077,13080,13081,13082,13083,13084,13085,13086,13087,13088,13089,13090,13091,13092,13093,13094,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13115,13116,13117,13120,13121,13122,13123,13124,13125,13126,13127,13128,13129,13130,13131,13132,13133,13134,13135,13136,13137,13138,13139,13140,13141,13142,13143,13144,13145,13146,13147,13148,13149,13150,13151,13152,13153,13154,13155,13156,13157" probability="0.05" target="MyOwner" skillId="5020" coolTime="3000" stringId="5020" iconName="Icon_Items.Icon_exp_Tex"/><!-- 복합 가속 II -->
+		<ConditionalSkill id="22" type="4" value="13000,13001,13002,13003,13004,13005,13006,13007,13008,13009,13010,13011,13012,13013,13014,13015,13016,13017,13018,13019,13020,13021,13022,13023,13024,13025,13026,13027,13028,13029,13030,13031,13032,13033,13034,13035,13036,13037,13040,13041,13042,13043,13044,13045,13046,13047,13048,13049,13050,13051,13052,13053,13054,13055,13056,13057,13058,13059,13060,13061,13062,13063,13064,13065,13066,13067,13068,13069,13070,13071,13072,13073,13074,13075,13076,13077,13080,13081,13082,13083,13084,13085,13086,13087,13088,13089,13090,13091,13092,13093,13094,13095,13096,13097,13098,13099,13100,13101,13102,13103,13104,13105,13106,13107,13108,13109,13110,13111,13112,13113,13114,13115,13116,13117,13120,13121,13122,13123,13124,13125,13126,13127,13128,13129,13130,13131,13132,13133,13134,13135,13136,13137,13138,13139,13140,13141,13142,13143,13144,13145,13146,13147,13148,13149,13150,13151,13152,13153,13154,13155,13156,13157" probability="0.05" target="MyOwner" skillId="5021" coolTime="3000" stringId="5021" iconName="Icon_Items.Icon_exp_Tex"/><!-- 복합 가속 III -->
+		<ConditionalSkill id="23" type="11" value="0" probability="0.05" target="MyOwner" skillId="5022" coolTime="3000" stringId="5022" iconName="Icon_Skills.produce_icon_01_Tex"/><!-- 제작 지원 I -->
+		<ConditionalSkill id="24" type="11" value="0" probability="0.05" target="MyOwner" skillId="5023" coolTime="3000" stringId="5023" iconName="Icon_Skills.produce_icon_01_Tex"/><!-- 제작 지원 II -->
+		<ConditionalSkill id="25" type="11" value="0" probability="0.05" target="MyOwner" skillId="5024" coolTime="3000" stringId="5024" iconName="Icon_Skills.produce_icon_01_Tex"/><!-- 제작 지원 III -->
+		<ConditionalSkill id="26" type="12" value="0" probability="0.01" target="MyOwner" skillId="5025" coolTime="3000" stringId="5025" iconName="Icon_Skills.PartnerSkill_Fishing_Tex"/><!-- 낚시 지원 I -->
+		<ConditionalSkill id="27" type="12" value="0" probability="0.01" target="MyOwner" skillId="5026" coolTime="3000" stringId="5026" iconName="Icon_Skills.PartnerSkill_Fishing_Tex"/><!-- 낚시 지원 II -->
+		<ConditionalSkill id="28" type="12" value="0" probability="0.01" target="MyOwner" skillId="5027" coolTime="3000" stringId="5027" iconName="Icon_Skills.PartnerSkill_Fishing_Tex"/><!-- 낚시 지원 III -->
+		<ConditionalSkill id="29" type="10" value="0" probability="0.05" target="MyOwner" skillId="5028" coolTime="3000" stringId="5028" iconName="Icon_Status.aura_of_collect_Tex"/><!-- 채집 지원 I -->
+		<ConditionalSkill id="30" type="10" value="0" probability="0.05" target="MyOwner" skillId="5029" coolTime="3000" stringId="5029" iconName="Icon_Status.aura_of_collect_Tex"/><!-- 채집 지원 II -->
+		<ConditionalSkill id="31" type="10" value="0" probability="0.05" target="MyOwner" skillId="5030" coolTime="3000" stringId="5030" iconName="Icon_Status.aura_of_collect_Tex"/><!-- 채집 지원 III -->
+		<ConditionalSkill id="32" type="13" value="1.3" probability="1.0" target="MyOwner" skillId="5031" coolTime="0" stringId="5031" iconName="Icon_Skills.PartnerSkill_AutoCollection_Tex"/><!-- 모험 강화 I -->
+		<ConditionalSkill id="33" type="13" value="1.5" probability="1.0" target="MyOwner" skillId="5032" coolTime="0" stringId="5032" iconName="Icon_Skills.PartnerSkill_AutoCollection_Tex"/><!-- 모험 강화 II -->
+		<ConditionalSkill id="34" type="13" value="2.0" probability="1.0" target="MyOwner" skillId="5033" coolTime="0" stringId="5033" iconName="Icon_Skills.PartnerSkill_AutoCollection_Tex"/><!-- 모험 강화 III -->
+	</ConditionalSkillData>
+</ServantSkill>

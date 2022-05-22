@@ -1,0 +1,1821 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="3126" name="@dungeon:3126" startDir="80" startPos="57484.3594,99089.4375,15648.3359" startRandomPos="100,100,0" exitContinentId="2000" matchingRoleId="6" exitPos="88478,-74869,22376" newbieBonusOff="false">
+  <!-- ## 켈사이크의 둥지 던전 ## -->
+  <Condition type="party" value="1" />
+  <Condition type="maxMemberCount" value="5" />
+  <Condition type="levelOver" value="70" />
+		<ClearCondition huntingZoneId="3126" templateId="1000" amount="1" killCount="1" />
+
+
+	<EventGroup type="none" id="0" name="더미" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 테스트용 -->
+	<EventGroup type="none" id="2005" name="투명NPC소환" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312611304" next="none"/>			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<!-- 테스트용 보석화 OFF -->
+	<EventGroup type="none" id="4449" name="보석화 모두 OFF" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600012" next="none"/>			
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600013" next="none"/>			
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600014" next="none"/>			
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600015" next="none"/>
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600016" next="none"/>
+				<EventTask type="killNpc" targetNpcId="3126,3001" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--테스트용 온도 OFF -->
+	<EventGroup type="none" id="4450" name="온도 OFF" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="change" value="50" uiStyle="0" uiOn="false" next="none"/>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="change" value="50" uiStyle="1" uiOn="false" next="none"/>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="change" value="50" uiStyle="2" uiOn="false" next="none"/>
+				<EventTask type="killNpc" targetNpcId="3126,1003" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--테스트용 던초 -->
+	<EventGroup type="none" id="4451" name="처음부터" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="31260001" next="none"/>			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 쿨타임 걸기 -->
+	<EventGroup type="none" id="101" name="근원쿨타임" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31260053" target="npc" targetNpcId="3126,1000" next="none"  /> <!--  --> 		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="none" id="102" name="장판쿨타임" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31260054" target="npc" targetNpcId="3126,1000" next="none"  /> <!--  --> 		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="none" id="103" name="광역쿨타임" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31260055" target="npc" targetNpcId="3126,1000" next="none"  /> <!--  --> 		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<!-- 보석화 이벤트 -->
+   	<EventGroup type="none" id="4444" name="보석화1" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3126300" next="none"/>
+				<EventTask type="message" string="@dungeon:3126301" next="none"/>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600012" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="4445" name="보석화2" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3126302" next="none"/>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600013" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="4446" name="보석화3" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3126303" next="none"/>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600014" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="4447" name="보석화4" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3126304" next="none"/>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600015" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="4448" name="보석화5" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3126305" next="none"/> 
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600016" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 붕괴 패턴 -->
+	<EventGroup type="none" id="9000" name="폭주 패턴용" repeat="true">
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="flag" name="CameraSetting" value="1" next="none"/>
+					<EventTask type="message" string="@dungeon:3126407" next="none"/>
+					<EventTask type="abnormality" abnormalityId="31260001" turn="off" target="player" next="none" /> 
+					<EventTask type="abnormality" abnormalityId="31260003" turn="off" target="player" next="none" /> 
+					<EventTask type="abnormality" abnormalityId="31260002" turn="off" target="player" next="none" /> 
+					<EventTask type="abnormality" abnormalityId="31260018" turn="off" target="player" next="none" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600131" next="none" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600139" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600152" next="none" />	
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600132" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600140" next="none" />	
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600154" next="none" />		
+					<EventTask type="abnormality" abnormalityId="31264004" target="npc" targetNpcId="3126,4000" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600133" next="none" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600141" next="none" />	 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600145" next="none" />	
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600134" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600142" next="none" />		
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600135" next="none" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600143" next="none" />	
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600136" next="none" />	
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600144" next="none" />	
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600137" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600157" next="none" />		  
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600153" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600138" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600156" next="none" />		  
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600155" next="none" /> 		
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600146" next="none" />
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="9001" name="폭주 패턴용2" repeat="true">
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="message" string="@dungeon:3126409" next="time" nextValue="1" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600147" next="none" />	 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600159" next="none" />   
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600148" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600160" next="none" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600166" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600149" next="none" />	 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600161" next="none" />	  
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600158" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600150" next="none" />	
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600162" next="none" />	
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600151" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600163" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600165" next="none" />	 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="9002" name="폭주 패턴용3" repeat="true">
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="message" string="@dungeon:3126410" next="time" nextValue="1" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600164" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600171" next="none" />
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600174" next="none" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600172" next="none" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600175" next="none" />  
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600173" next="none" /> 
+					<EventTask type="spawn" huntingZoneId="3126" territoryId="312600176" next="none" />			
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	
+  <EventGroup type="annihilated" id="9995" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31260027" turn="off" target="npc" targetNpcId="3126,1000" next="none" /><!-- 켈사이크 무적 OFF TRQA-6740 대응-->
+				<EventTask type="abnormality" abnormalityId="31260050" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 무적 온 --> 
+				<EventTask type="empty" next="time" nextValue="1" /> <!-- 켈사이크 리셋 시간 1초 지연 TRQA-6740 대응 -->
+				<EventTask type="abnormality" abnormalityId="31260029" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 행동 취소 --> 
+				<EventTask type="abnormality" abnormalityId="31264005" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 리셋 명령 --> 	
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>  	
+
+
+	<!-- 리셋/켈사이크 사망 후 예외사항 제거용 -->
+	<EventGroup type="none" id="9998" name="리셋 도우미" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" next="none" /> <!-- 리더보드 타이머 스톱 -->			
+				<EventTask type="eventState" stateType="EventGroup" id="500" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="501" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="502" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="503" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="504" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="505" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="510" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="520" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="530" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="540" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="550" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="551" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="552" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4444" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4445" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4446" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4447" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4448" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="201" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="202" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3001" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3002" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3003" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="102" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="103" state="stop" next="none" />
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600167" next="none"/> <!--입구 열기-->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="31260002" next="none" /> <!-- 공간제한 관련 NPC 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600177" next="none" /> <!-- 공간제한 1단계 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600178" next="none" /> <!-- 공간제한 2단계 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600179" next="none" /> <!-- 공간제한 3단계 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312611302" next="none" /> <!-- 마석 테리토리 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600011" next="none" /> <!-- 보석화 관련 NPC 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600012" next="none" /> <!-- 보석화 기본 페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600013" next="none" /> <!-- 보석화 1페이즈 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600014" next="none" /> <!-- 보석화 2페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600015" next="none" /> <!-- 보석화 3페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600016" next="none" /> <!-- 보석화 전멸 페이즈 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600131" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600132" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600133" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600134" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600135" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600136" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600137" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600138" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600139" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600140" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600141" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600142" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600143" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600144" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600145" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600146" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600147" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600148" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600149" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600150" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600151" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600152" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600153" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600154" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600155" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600156" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600157" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600158" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600159" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600160" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600161" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600162" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600163" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600164" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600165" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600166" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600169" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600170" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600171" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600172" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600173" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600174" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600175" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600176" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600119" resetNpcHpDungeonTask="true" next="none" /> <!-- 분신 켈사이크(화염) -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600120" resetNpcHpDungeonTask="true" next="none" /> <!-- 분신 켈사이크(냉기) -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600121" resetNpcHpDungeonTask="true" next="none" /> <!-- 냉기패턴 -->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600122" resetNpcHpDungeonTask="true" next="none" /> <!-- 화염패턴 -->				
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none" /> <!-- 점프기어1 -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600130" next="none" /> <!-- 점프기어2 -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="31260001" resetNpcHpDungeonTask="true" next="none" /> <!-- 켈사이크 디스폰 -->				
+				<EventTask type="timer" action="stop" name="타임어택_냉기" timerUiOff="false" next="none"/> <!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_냉기" value="0" timerUiOff="true" next="none"/>
+				<EventTask type="timer" action="stop" name="타임어택_화염" timerUiOff="false" next="none"/> <!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_화염" value="0" timerUiOff="true" next="none"/>	
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask type="abnormality" abnormalityId="31260018" turn="off" target="player" next="none" /> <!--플레이어 켈사이크의 저주 해제-->
+				<EventTask type="abnormality" abnormalityId="31260251" turn="off" target="player" next="none" /> <!--플레이어 아르곤 기생충 해제-->	
+				<EventTask type="flag" name="업화_전파" value="0" next="none" /> <!-- 업화 전파 flag OFF -->
+				<EventTask type="flag" name="온도감소" value="0" next="none" />	
+				<EventTask type="flag" name="온도증가" value="0" next="none" />	
+				<EventTask type="abnormality" abnormalityId="31260026" turn="off" target="player" next="none" /> <!--붕괴디버프해제-->	
+				<EventTask type="abnormality" abnormalityId="31260254" turn="off" target="player" next="none" /> <!--붕괴디버프해제-->	
+				<EventTask type="abnormality" abnormalityId="31260001" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260002" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260003" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312611306" next="none"/> 				
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600131" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600132" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600133" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600134" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600135" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600136" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600137" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600138" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600139" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600140" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600141" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600142" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600143" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600144" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600145" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600146" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600147" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600148" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600149" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600150" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600151" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600152" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600153" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600154" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600155" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600156" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600157" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600158" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600159" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600160" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600161" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600162" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600163" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600164" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600165" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600166" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600169" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600170" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600171" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600172" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600173" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600174" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600175" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600176" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+  
+	<!-- 전멸기 쓴 뒤 쓰는 이벤트 -->
+	<EventGroup type="none" id="9999" name="온도조절 실패" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" next="none" /> <!-- 리더보드 타이머 스톱 -->			
+				<EventTask type="cleanup" next="none" />	
+				<EventTask type="empty" next="time" nextValue="3" />
+				<EventTask type="flag" name="게이지끔" value="1" next="none" />
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312611306" next="none"/> 		
+				<EventTask type="eventState" stateType="EventGroup" id="10" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="11" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="12" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="13" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="14" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="15" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="16" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="17" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="18" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="19" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="9000" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="9001" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="9002" state="stop" next="none" />				
+				<EventTask type="eventState" stateType="EventGroup" id="500" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="501" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="502" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="503" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="504" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="505" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="510" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="520" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="530" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="540" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="550" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="551" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="552" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4444" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4445" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4446" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4447" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4448" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="201" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="202" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3001" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3002" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3003" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="102" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="103" state="stop" next="none" />
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600167" next="none"/> <!--입구 열기-->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="31260002" next="none" /> <!-- 공간제한 관련 NPC 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600177" next="none" /> <!-- 공간제한 1단계 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600178" next="none" /> <!-- 공간제한 2단계 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600179" next="none" /> <!-- 공간제한 3단계 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312611302" next="none" /> <!-- 마석 테리토리 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600011" next="none" /> <!-- 보석화 관련 NPC 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600012" next="none" /> <!-- 보석화 기본 페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600013" next="none" /> <!-- 보석화 1페이즈 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600014" next="none" /> <!-- 보석화 2페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600015" next="none" /> <!-- 보석화 3페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600016" next="none" /> <!-- 보석화 전멸 페이즈 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600131" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600132" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600133" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600134" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600135" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600136" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600137" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600138" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600139" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600140" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600141" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600142" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600143" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600144" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600145" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600146" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600147" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600148" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600149" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600150" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600151" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600152" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600153" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600154" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600155" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600156" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600157" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600158" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600159" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600160" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600161" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600162" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600163" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600164" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600165" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600166" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600169" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600170" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600171" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600172" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600173" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600174" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600175" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600176" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600119" resetNpcHpDungeonTask="true" next="none" /> <!-- 분신 켈사이크(화염) -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600120" resetNpcHpDungeonTask="true" next="none" /> <!-- 분신 켈사이크(냉기) -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600121" resetNpcHpDungeonTask="true" next="none" /> <!-- 냉기패턴 -->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600122" resetNpcHpDungeonTask="true" next="none" /> <!-- 화염패턴 -->				
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none" /> <!-- 점프기어1 -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600130" next="none" /> <!-- 점프기어2 -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="31260001" resetNpcHpDungeonTask="true" next="time" nextValue="2" /> <!-- 켈사이크 디스폰 -->				
+				<EventTask type="timer" action="stop" name="타임어택_냉기" timerUiOff="false" next="none"/> <!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_냉기" value="0" timerUiOff="true" next="none"/>
+				<EventTask type="timer" action="stop" name="타임어택_화염" timerUiOff="false" next="none"/> <!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_화염" value="0" timerUiOff="true" next="none"/>	
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask type="abnormality" abnormalityId="31260018" turn="off" target="player" next="none" /> <!--플레이어 켈사이크의 저주 해제-->
+				<EventTask type="abnormality" abnormalityId="31260251" turn="off" target="player" next="none" /> <!--플레이어 아르곤 기생충 해제-->	
+				<EventTask type="flag" name="업화_전파" value="0" next="none" /> <!-- 업화 전파 flag OFF -->
+				<EventTask type="flag" name="온도감소" value="0" next="none" />	
+				<EventTask type="flag" name="온도증가" value="0" next="none" />	
+				<EventTask type="abnormality" abnormalityId="31260026" turn="off" target="player" next="none" /> <!--붕괴디버프해제-->	
+				<EventTask type="abnormality" abnormalityId="31260254" turn="off" target="player" next="none" /> <!--붕괴디버프해제-->	
+				<EventTask type="abnormality" abnormalityId="31260001" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260002" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260003" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312611306" next="none"/> 				
+				<EventTask type="flag" name="게이지끔" value="0" next="none" />
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600131" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600132" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600133" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600134" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600135" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600136" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600137" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600138" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600139" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600140" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600141" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600142" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600143" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600144" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600145" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600146" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600147" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600148" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600149" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600150" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600151" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600152" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600153" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600154" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600155" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600156" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600157" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600158" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600159" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600160" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600161" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600162" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600163" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600164" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600165" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600166" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600169" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600170" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600171" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600172" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600173" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600174" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600175" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600176" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="31260001" next="time" nextValue="3"/> <!--켈사이크 스폰-->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	
+	<!-- 시작시 1회 잡몹 구간 스폰 -->
+	<EventGroup type="initialize">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600168" next="none"/>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600167" next="time" nextValue="3"/> 
+				<EventTask type="guideOn" nameId="3126,100" id="1" pos="56686,100117,15652" next="none" />
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>  
+	<!-- 입구 지키는 몬스터와 전투 시작  --> 
+  	<EventGroup type="enterTerritory" uniqueId="3126,312600168">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:31260002" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	  
+	<!-- 잡몹 모두 죽으면 차폐 테리토리 디스폰/켈사이크 스폰 -->
+    <EventGroup type="eliminate" territoryId="312600168" >
+      <Event>
+        <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="31260259" target="player" next="none" /> <!-- TMI 업적용 이상상태 -->
+			<EventTask type="guideOff" id="1" next="none" />
+			<EventTask type="guideOn" nameId="3126,101" id="2" pos="53752.39843750,100199.25781250,14829.81445313" next="none" />
+			<EventTask type="despawn" huntingZoneId="3126" territoryId="312600167" next="none"/>
+			<EventTask type="despawn" huntingZoneId="3126" territoryId="312600168" next="none"/>
+			<EventTask type="message" string="@dungeon:31260003" next="time" nextValue="3"/> 
+			<EventTask type="spawn" huntingZoneId="3126" territoryId="312611303" next="none"/>
+			<EventTask type="message" string="@dungeon:31260004" next="time" nextValue="3"/> 
+			<EventTask type="message" string="@dungeon:31260011" next="time" nextValue="3"/> 
+			<EventTask type="despawn" huntingZoneId="3126" territoryId="312600169" next="none"/>
+			<EventTask type="despawn" huntingZoneId="3126" territoryId="312611303" next="none"/>
+			<EventTask type="cameraSet" turn="on" territoryId="312611300" next="none"/>
+			<EventTask type="spawn" huntingZoneId="3126" territoryId="31260001" next="none"/>
+			</EventTaskGroup>
+      </Event>
+	</EventGroup>
+	
+	<EventGroup type="npcState" uniqueId="3126,1000" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="31260030" turn="off" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 예외사항, 전투시작하자마자 전멸기 나오는 버그 --> 		
+		<EventTask type="abnormality" abnormalityId="31260031" turn="off" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 예외사항, 전투시작하자마자 전멸기 나오는 버그 --> 		
+		<EventTask type="timer" action="stop" name="타임어택_냉기" timerUiOff="false" next="none"/> <!--Timer Stop-->
+		<EventTask type="timer" action="stop" name="타임어택_냉기" value="0" timerUiOff="true" next="none"/>
+		<EventTask type="timer" action="stop" name="타임어택_화염" timerUiOff="false" next="none"/> <!--Timer Stop-->
+		<EventTask type="timer" action="stop" name="타임어택_화염" value="0" timerUiOff="true" next="none"/>	
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+ 		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+ 		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask type="ranktimer" timerLog="start" next="none" /> <!-- 리더보드 타이머 시작 -->	  
+		<EventTask type="cleanup" next="none" />	
+		<EventTask type="abnormality" abnormalityId="31260259" turn="off" target="player" next="none" /> <!-- TMI 업적용 이상상태 해제 -->
+		<EventTask type="abnormality" abnormalityId="31260261" target="player" next="none" /> <!-- 인사 업적용 이상상태 -->
+		<EventTask type="guideOff" id="2" next="none" />
+		<EventTask type="flag" name="이벤트_종료" value="0" next="none" />		
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312600020" next="none"/>
+		<EventTask type="eventGage" name="내부_온도" string="@dungeon:31260001" action="start" uiStyle="2" uiOn="true" next="none"/>
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="change" value="50" uiStyle="2" uiOn="true" next="none"/>
+		<EventTask type="abnormality" abnormalityId="31261605" target="player" next="none" />  <!-- 약화 보호 이상상태 --> 
+		<EventTask type="abnormality" abnormalityId="31261606" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="31260003" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="31261651" target="npc" targetNpcId="3126,1003" next="none"  /> <!--  --> 
+		<EventTask type="flag" name="업화_전파" value="1" next="none" />
+		<EventTask type="flag" name="어뷰징방지" value="1" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+ <!--바닥에 아이템 남기고 먹는 어뷰징 행위 못하도록 함 -->
+	<EventGroup type="flag" name="어뷰징방지" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31261701" turn="off" target="player" next="none" /> <!-- 아르곤 사제의 정수 -->	
+				<EventTask type="abnormality" abnormalityId="31260028" turn="off" target="player" next="none" /> <!-- 켈사이크의 정수 -->		
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<!-- 캐릭터가 죽었더라도 업화를 계속 걸어줌 -->
+	<EventGroup type="flag" name="업화_전파" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31260003" turn="on" strictly="false" target="player" next="none" />
+		  </EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<!-- 냉기 패턴 1씩 감소 -->
+	<EventGroup type="flag" name="온도감소" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="1" uiStyle="1" uiOn="true" next="time" nextValue="2"/>
+				<EventTask type="empty" next="time" nextValue="1" />	
+		  </EventTaskGroup>
+      </Event>
+	</EventGroup>	
+	<!-- 화염 패턴 1씩 증가 -->
+	<EventGroup type="flag" name="온도증가" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="1" uiStyle="0" uiOn="true" next="time" nextValue="2"/>
+				<EventTask type="empty" next="time" nextValue="1" />	
+		  </EventTaskGroup>
+      </Event>
+	</EventGroup>	
+
+
+		<!-- 모든 게이지  OFF  -->
+	<EventGroup type="flag" name="게이지끔" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->				
+				<EventTask type="flag" name="게이지끔" value="0" next="none" />	
+				<EventTask type="flag" name="게이지끔" value="0" next="none" />	
+				<EventTask type="flag" name="게이지끔" value="0" next="none" />	
+			</EventTaskGroup>
+      </Event>
+	</EventGroup>	
+
+	
+		<!-- 화염 켈사이크 게이지  OFF  -->
+	<EventGroup type="flag" name="불끄기" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->	
+				<EventTask type="flag" name="불끄기" value="0" next="none" />	
+				<EventTask type="flag" name="불끄기" value="0" next="none" />	
+				<EventTask type="flag" name="불끄기" value="0" next="none" />	
+			</EventTaskGroup>
+      </Event>
+	</EventGroup>		
+	
+		<!-- 얼음 켈사이크 게이지  OFF  -->
+	<EventGroup type="flag" name="물끄기" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask type="flag" name="물끄기" value="0" next="none" />	
+				<EventTask type="flag" name="물끄기" value="0" next="none" />	
+				<EventTask type="flag" name="물끄기" value="0" next="none" />	
+			</EventTaskGroup>
+      </Event>
+	</EventGroup>	
+	
+	
+  <!-- 98퍼센트 입구차단  -->	
+	<EventGroup type="npcHp" uniqueId="3126,1000" value="98" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:31260005" next="none" />
+			<EventTask type="spawn" huntingZoneId="3126" territoryId="312600167" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!-- 보석화 낙하 관련 이벤트  -->
+    <EventGroup type="npchp" uniqueId="3126,1000" value="95" repeat="true">
+    <Event>
+		<EventTaskGroup>
+			<EventTask type="spawn" huntingZoneId="3126" territoryId="312600011" next="none"/>
+			<EventTask type="eventState" stateType="EventGroup" id="10" state="stop" next="none" />
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 	
+ 	<!-- 85퍼센트 화염/냉기갑옷을 부여한뒤 캘사이크 무적 -->
+    <EventGroup type="npchp" id="10" uniqueId="3126,1000" value="85" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="flag" name="어뷰징방지" value="0" next="none" /> <!--어뷰징 방지 Flag OFF -->
+			<EventTask type="abnormality" abnormalityId="31260064" target="npc" targetNpcId="3126,1003" next="none" /> <!-- 온도느리게함 --> 
+			<EventTask type="abnormality" abnormalityId="31260029" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 행동 취소 --> 
+			<EventTask type="abnormality" abnormalityId="31260050" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 무적 온 --> 
+			<EventTask type="message" string="@dungeon:3126404" next="time" nextValue="1" /> 
+			<EventTask type="message" string="@dungeon:3126405" next="none"/>
+			<EventTask type="abnormality" abnormalityId="31261605" turn="off" target="player" next="none" />  <!-- 켈사이크 약화보호 제거 --> 
+			<EventTask type="abnormality" abnormalityId="31261606" turn="off" target="player" next="none" />  <!-- 켈사이크 약화보호 제거 --> 		
+			<EventTask type="abnormality" abnormalityId="31261603" target="npc" targetNpcId="3126,1000" next="none" /> <!--화염갑옷-->	
+			<EventTask type="abnormality" abnormalityId="31261604" target="npc" targetNpcId="3126,1000" next="time" nextValue="7" /> <!--냉기갑옷-->	
+			<EventTask type="abnormality" abnormalityId="31260050" turn="off" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 무적 오프 --> 
+			<EventTask type="abnormality" abnormalityId="31261501" target="npc" targetNpcId="3126,1000" next="none"/>
+			<EventTask type="spawn" huntingZoneId="3126" territoryId="312611302" next="none"/>
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+	<!-- 공간 제한 테리토리를 70%에 소환함 -->
+    <EventGroup type="npchp" uniqueId="3126,1000" value="70" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="spawn" huntingZoneId="3126" territoryId="31260002" next="none"/>
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+	<!-- 50퍼센트 켈사이크의 분노 부여  -->	
+	<EventGroup type="npcHp" uniqueId="3126,1000" value="50" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:31260014" next="none" /> 
+				<EventTask type="message" string="@dungeon:31260021" next="none" /> 
+				<EventTask type="abnormality" abnormalityId="31261502" target="npc" targetNpcId="3126,1000"  next="none"  /> 
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312611302" next="none"/>
+				<EventTask type="abnormality" abnormalityId="31260063" target="npc" targetNpcId="3126,1003" next="none"  /> <!-- 온도 1.5 배속 --> 	
+				<EventTask type="flag" name="온도감소" value="0" next="none" />	
+				<EventTask type="flag" name="온도증가" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+   <!-- 15퍼센트 -->
+	<EventGroup type="npchp" id="11" uniqueId="3126,1000" value="15" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="ranktimer" timerLog="stop" stageLog="1" next="none" /> <!-- 리더보드 타이머 스톱 -->	  
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312611306" next="none"/> 	  
+		<EventTask type="flag" name="게이지끔" value="1" next="none" />	
+		<EventTask type="abnormality" abnormalityId="31260029" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 행동 취소 --> 
+		<EventTask type="abnormality" abnormalityId="31260026" target="player" next="none" /> 		
+		<EventTask type="abnormality" abnormalityId="31260254" target="player" next="none" /> 
+		<EventTask type="flag" name="업화_전파" value="0" next="none" /> <!--업화 전파 종료-->
+		<EventTask type="flag" name="업화_전파" value="0" next="none" /> <!--업화 전파 종료-->
+		<EventTask type="flag" name="업화_전파" value="0" next="none" /> <!--업화 전파 종료-->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+ 		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+ 		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+		<EventTask type="abnormality" abnormalityId="31260001" turn="off" target="player" next="none" /> 
+		<EventTask type="abnormality" abnormalityId="31260003" turn="off" target="player" next="none" /> 
+		<EventTask type="abnormality" abnormalityId="31260002" turn="off" target="player" next="none" /> 
+		<EventTask type="abnormality" abnormalityId="31260018" turn="off" target="player" next="none" /> 
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600012" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600013" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600014" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600015" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600016" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600119" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600120" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600121" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600122" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600130" next="none" />
+		<EventTask type="eventState" stateType="EventGroup" id="4444" state="stop" next="none" />
+		<EventTask type="eventState" stateType="EventGroup" id="4445" state="stop" next="none" />
+		<EventTask type="eventState" stateType="EventGroup" id="4446" state="stop" next="none" />
+		<EventTask type="eventState" stateType="EventGroup" id="4447" state="stop" next="none" />
+		<EventTask type="eventState" stateType="EventGroup" id="4448" state="stop" next="none" />
+		<EventTask type="killNpc" targetNpcId="3126,3001" next="none" />
+		<EventTask type="abnormality" abnormalityId="31260251" turn="off" target="player" next="none" /> 	
+		<EventTask type="abnormality" abnormalityId="31260252" turn="off" target="player" next="none" /> 	
+		<EventTask type="abnormality" abnormalityId="31260253" turn="off" target="player" next="none" /> 	
+		<EventTask type="abnormality" abnormalityId="31260026" target="player" next="none" /> 		
+		<EventTask type="abnormality" abnormalityId="31260254" target="player" next="none" /> 
+		<EventTask type="abnormality" abnormalityId="31261607" target="npc" targetNpcId="3126,1000" next="none" />
+		<EventTask type="abnormality" abnormalityId="31260027" target="npc" targetNpcId="3126,1000" next="none" />
+		<EventTask type="message" string="@dungeon:31260009" next="time" nextValue="1" /> 
+		<EventTask type="message" string="@dungeon:31260010" next="time" nextValue="1" /> 
+		<EventTask type="message" string="@dungeon:3126407" next="time" nextValue="1" /> 
+		<EventTask type="message" string="@dungeon:3126408" next="none" /> 	
+		<EventTask type="abnormality" abnormalityId="31264004" target="npc" targetNpcId="3126,4001" next="none" /> 
+		<EventTask type="abnormality" abnormalityId="31264004" target="npc" targetNpcId="3126,4004" next="none" /> 
+		<EventTask type="abnormality" abnormalityId="31260027" target="npc" targetNpcId="3126,1000" next="none" /> 	
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+		<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->		
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312611306" next="none"/> 		
+		<EventTask type="flag" name="게이지끔" value="0" next="none" />
+		<EventTask type="ranktimer" timerLog="start" next="none" /> <!-- 리더보드 타이머 시작 -->		
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+	<EventGroup type="npcHp" uniqueId="3126,1000" value="13" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31261704" target="npc" targetNpcId="3126,4004" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcHp" uniqueId="3126,1000" value="8" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31261705" target="npc" targetNpcId="3126,4004" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	<!-- 내부 온도 게이지 관리 -->
+	<EventGroup type="none" id="505" name="내부 온도 5 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="5" uiStyle="0" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="504" name="내부 온도 4 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="4" uiStyle="0" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="503" name="내부 온도 3 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="3" uiStyle="0" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="502" name="내부 온도 2 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="2" uiStyle="0" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="501" name="내부 온도 1 증가" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="1" uiStyle="0" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="500" name="내부 온도 그대로" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="510" name="내부 온도 1 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="1" uiStyle="1" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="520" name="내부 온도 2 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="2" uiStyle="1" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="530" name="내부 온도 3 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="3" uiStyle="1" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="540" name="내부 온도 4 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="4" uiStyle="1" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="550" name="내부 온도 5 감소" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<!-- 공간 제한 -->
+	<EventGroup type="none" id="3001" name="공간제한1단계" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:31260015" next="none" />
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600177" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="none" id="3002" name="공간제한2단계" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600178" next="none"/>
+				<EventTask type="message" string="@dungeon:31260016" next="none" /> 
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600177" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	<EventGroup type="none" id="3003" name="공간제한3단계" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600179" next="none"/>
+				<EventTask type="message" string="@dungeon:31260017" next="none" /> 
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600178" next="none" />
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="31260002" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	<!-- 냉기 소환패턴 시작-->
+	<EventGroup type="none" id="201" name="냉기_소환" repeat="true">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>				
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600130" next="none"/>	<!-- 퇴장 마법석 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none"/>	<!-- 입장 마법석 디스폰 -->				
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600121" next="none"/> <!--아르곤 사제(냉기) 테리토리 스폰-->
+				<EventTask type="abnormality" abnormalityId="31260062" target="npc" targetNpcId="3126,1003" next="none"  /> <!-- 온도 2배속 --> 	
+				<EventTask type="message" string="@dungeon:3126002" next="time" nextValue="0.5" /> 
+				<EventTask type="message" string="@dungeon:3126003" next="time" nextValue="0.5" /> 
+				<EventTask type="abnormality" abnormalityId="31261702" target="npc" targetNpcId="3126,1000" next="none" />  <!-- 켈사이크의 광기 부여 --> 
+				<EventTask type="message" string="@dungeon:3126007" next="none" /> 
+				<EventTask type="eventGage" name="냉기의_켈사이크" string="@dungeon:31260019" action="start" uiStyle="1" uiOn="true" next="none"/>
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="100" uiStyle="1" uiOn="true" next="none"/>
+				<EventTask type="flag" name="온도감소" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+    <!-- 냉기의 사제사망 감지  -->    
+	<EventGroup type="npchp" id="12" uniqueId="3126,1006" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="31261702" turn="off" target="npc" targetNpcId="3126,1000" next="none" /> 
+		<EventTask type="message" string="@dungeon:3126004" next="time" nextValue="0.5" /> 
+		<EventTask type="message" string="@dungeon:3126005" next="time" nextValue="0.5" /> 
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312600127" next="none"/>	<!-- 입장 마법석 소환-->
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312600120" next="none"/> <!--냉기 켈사이크 스폰-->
+		<EventTask type="timer" action="Start" name="타임어택_냉기" direction="reverse" value="90" timerUiOff="false" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600121" resetNpcHpDungeonTask="true" next="none"/> <!--아르곤 사제(냉기) 테리토리 스폰-->
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+    <!-- 냉기 패턴 잘못된 사제 사망 감지  -->    
+	<EventGroup type="npchp" id="13" uniqueId="3126,1009" value="0" repeat="true">
+    <Event>
+		<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:3126018" next="time" nextValue="0.5" /> 
+			<EventTask type="message" string="@dungeon:3126020" next="time" nextValue="0.5" /> 
+			<EventTask type="abnormality" abnormalityId="31261611" target="player" next="none" />
+			<EventTask type="abnormality" abnormalityId="31261609" target="npc" targetNpcId="3126,1000" next="none"  /> <!--  --> 	
+			<EventTask type="message" string="@dungeon:3126022" next="time" nextValue="1" /> 
+			<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="10" uiStyle="1" uiOn="true" next="time" nextValue="3" />
+			<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="10" uiStyle="1" uiOn="true" next="time" nextValue="3" />
+			<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="10" uiStyle="1" uiOn="true" next="time" nextValue="3" />
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 	
+	<EventGroup type="timer" id="14" timerName="타임어택_냉기" value="0" repeat="true">
+    <Event>
+		<EventTaskGroup>
+				<EventTask type="flag" name="물끄기" value="1" next="none" />	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none"/>	<!-- 입장 마법석 디스폰 -->		
+				<EventTask type="abnormality" abnormalityId="31260062" turn="off" target="npc" targetNpcId="3126,1003" next="none"  /> <!-- 2배속 정지 --> 
+				<EventTask type="message" string="@dungeon:3126015" next="time" nextValue="0.5" /> 
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="100" uiStyle="0" uiOn="true" next="time" nextValue="1"/>
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600121" resetNpcHpDungeonTask="true" next="none"/>  <!-- 냉기사제 테리토리 디스폰함 -->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600120" resetNpcHpDungeonTask="true" next="time" nextValue="5" />  <!-- 냉기켈사이크 테리토리 디스폰함 -->
+				<EventTask type="timer" action="stop" name="타임어택_냉기" timerUiOff="false" next="none"/><!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_냉기" value="0" timerUiOff="true" next="none"/>
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+				<EventTask type="flag" name="온도감소" value="0" next="none" />	
+				<EventTask type="flag" name="온도감소" value="0" next="none" />
+				<EventTask type="flag" name="온도감소" value="0" next="none" />		
+		</EventTaskGroup>
+	</Event>
+  </EventGroup>
+    <!-- 냉기 켈사이크 죽음 감지  -->    
+	<EventGroup type="npchp" id="15" uniqueId="3126,1002" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="물끄기" value="1" next="none" />	
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>		
+		<EventTask type="abnormality" abnormalityId="31260062" turn="off" target="npc" targetNpcId="3126,1003" next="none"  /> <!-- 2배속 정지 --> 
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none"/>	<!-- 입장 마법석 디스폰 -->
+		<EventTask type="timer" action="stop" name="타임어택_냉기" timerUiOff="false" next="none"/><!--Timer Stop-->
+		<EventTask type="timer" action="stop" name="타임어택_냉기" value="0" timerUiOff="true" next="none"/>
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312600124" next="none"/>  <!-- 화살표 테리토리 스폰함 -->
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312600130" next="none"/>	<!-- 퇴장 마법석 소환-->
+		<EventTask type="abnormality" abnormalityId="31261701" turn="off" target="player" next="none" /> <!-- 사제축복 off -->
+		<EventTask type="message" string="@dungeon:3126006" next="time" nextValue="0.5" /> 
+		<EventTask type="abnormality" abnormalityId="31261606" target="player" next="none" /> 
+		<EventTask type="abnormality" abnormalityId="31261604" turn="off" target="npc" targetNpcId="3126,1000" next="none" /> 
+		<EventTask type="message" string="@dungeon:3126008" next="time" nextValue="0.5" /> 
+		<EventTask type="message" string="@dungeon:3126010" next="time" nextValue="0.5" /> 
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600121" resetNpcHpDungeonTask="true" next="none"/>  <!-- 냉기사제 테리토리 디스폰함 -->
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600120" resetNpcHpDungeonTask="true" next="none"/>  <!-- 냉기켈사이크 테리토리 디스폰함 -->
+		<EventTask type="flag" name="온도감소" value="0" next="none" />	
+		<EventTask type="flag" name="온도감소" value="0" next="none" />
+		<EventTask type="flag" name="온도감소" value="0" next="none" />		
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 	
+	<!-- 화염 소환패턴 시작-->
+	<EventGroup type="none" id="202" name="화염_소환" repeat="true">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>				
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600130" next="none"/>	<!-- 퇴장 마법석 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none"/>	<!-- 입장 마법석 디스폰 -->	
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312600122" next="none"/><!--아르곤 사제(화염) 테리토리 스폰-->
+				<EventTask type="abnormality" abnormalityId="31260062" target="npc" targetNpcId="3126,1003" next="none"  /> <!-- 온도 2배속 --> 	
+				<EventTask type="message" string="@dungeon:3126002" next="time" nextValue="0.5" /> 
+				<EventTask type="message" string="@dungeon:3126003" next="time" nextValue="0.5" /> 
+				<EventTask type="abnormality" abnormalityId="31261702" target="npc" targetNpcId="3126,1000" next="none" />  <!-- 켈사이크의 광기 부여 --> 
+				<EventTask type="message" string="@dungeon:3126007" next="none"  /> 
+				<EventTask type="eventGage" name="화염의_켈사이크" string="@dungeon:31260020" action="start" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask name="화염의_켈사이크" string="@dungeon:31260020" type="eventGage" action="change" value="100" uiStyle="0" uiOn="true" next="none"/>
+				<EventTask type="flag" name="온도증가" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>			
+     <!-- 화염의 사제죽음 감지 -->    
+	<EventGroup type="npchp" id="16" uniqueId="3126,1007" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="31261702" turn="off" target="npc" targetNpcId="3126,1000" next="none" /> 
+		<EventTask type="message" string="@dungeon:3126004" next="time" nextValue="0.5" /> 
+		<EventTask type="message" string="@dungeon:3126005" next="time" nextValue="0.5" /> 
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312600127" next="none"/>	<!-- 입장 마법석 소환-->	
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312600119" next="none"/><!--화염 켈사이크 스폰-->
+		<EventTask type="timer" action="Start" name="타임어택_화염" direction="reverse" value="90" timerUiOff="false" next="none" />
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600122" resetNpcHpDungeonTask="true" next="none"/><!--아르곤 사제(화염) 테리토리 스폰-->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>   
+    <!-- 화염 패턴 잘못된 사제 사망 감지  -->    
+	<EventGroup type="npchp" id="17" uniqueId="3126,1008" value="0" repeat="true">
+    <Event>
+		<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:3126019" next="time" nextValue="0.5" /> 
+			<EventTask type="message" string="@dungeon:3126021" next="time" nextValue="0.5" /> 
+			<EventTask type="abnormality" abnormalityId="31261612" target="player" next="none" />
+			<EventTask type="abnormality" abnormalityId="31261610" target="npc" targetNpcId="3126,1000" next="none"  /> <!--  --> 			
+			<EventTask type="message" string="@dungeon:3126023" next="time" nextValue="1" /> 
+			<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="10" uiStyle="1" uiOn="true" next="time" nextValue="3" />
+			<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="10" uiStyle="1" uiOn="true" next="time" nextValue="3" />
+			<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="minus" value="10" uiStyle="1" uiOn="true" next="time" nextValue="3" />
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 	
+	<EventGroup type="timer" id="18" timerName="타임어택_화염" value="0" repeat="true">
+    <Event>
+		<EventTaskGroup>
+				<EventTask type="flag" name="불끄기" value="1" next="none" />	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none"/>	<!-- 입장 마법석 디스폰 -->	
+				<EventTask type="abnormality" abnormalityId="31260062" turn="off" target="npc" targetNpcId="3126,1003" next="none"  /> <!-- 2배속 정지 --> 		
+				<EventTask type="message" string="@dungeon:3126017" next="time" nextValue="0.5" /> 
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="100" uiStyle="0" uiOn="true" next="time" nextValue="0.5"/>
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600122" resetNpcHpDungeonTask="true" next="none"/>  <!-- 화염사제 테리토리 디스폰함 -->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600119" resetNpcHpDungeonTask="true" next="time" nextValue="5" />  <!-- 화염켈사이크 테리토리 디스폰함 -->
+				<EventTask type="timer" action="stop" name="타임어택_화염" timerUiOff="false" next="none"/><!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_화염" value="0" timerUiOff="true" next="none"/>
+				<EventTask name="화염의_켈사이크" string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+				<EventTask name="화염의_켈사이크" string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+				<EventTask name="화염의_켈사이크" string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+				<EventTask type="flag" name="온도증가" value="0" next="none" />
+				<EventTask type="flag" name="온도증가" value="0" next="none" />
+				<EventTask type="flag" name="온도증가" value="0" next="none" />				
+			</EventTaskGroup>
+	</Event>
+  </EventGroup>  
+	<!-- 화염 켈사이크죽음 감지  -->    
+	<EventGroup type="npchp" id="19" uniqueId="3126,1001" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="flag" name="불끄기" value="1" next="none" />	
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="0" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="1" uiOn="false" next="none"/>
+		<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>		
+		<EventTask type="abnormality" abnormalityId="31260062" turn="off" target="npc" targetNpcId="3126,1003" next="none"  /> <!-- 2배속 정지 --> 
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none"/>	<!-- 입장 마법석 디스폰 -->
+		<EventTask type="timer" action="stop" name="타임어택_화염" timerUiOff="false" next="none"/><!--Timer Stop-->
+		<EventTask type="timer" action="stop" name="타임어택_화염" value="0" timerUiOff="true" next="none"/>
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312600124" next="none"/>  <!-- 화살표 테리토리 스폰함 -->
+		<EventTask type="spawn" huntingZoneId="3126" territoryId="312600130" next="none"/>	<!-- 퇴장 마법석 소환-->
+		<EventTask type="abnormality" abnormalityId="31261701" turn="off" target="player" next="none" /> 
+		<EventTask type="message" string="@dungeon:3126006" next="time" nextValue="0.5" /> 
+		<EventTask type="abnormality" abnormalityId="31261605" target="player" next="none" />
+		<EventTask type="abnormality" abnormalityId="31261603" turn="off" target="npc" targetNpcId="3126,1000" next="none" /> 
+		<EventTask type="message" string="@dungeon:3126009" next="time" nextValue="0.5" /> 
+		<EventTask type="message" string="@dungeon:3126010" next="time" nextValue="0.5" /> 
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600122" resetNpcHpDungeonTask="true" next="none"/>  <!-- 화염사제 테리토리 디스폰함 -->
+		<EventTask type="despawn" huntingZoneId="3126" territoryId="312600119" resetNpcHpDungeonTask="true" next="none"/>  <!-- 화염켈사이크 테리토리 디스폰함 -->
+		<EventTask type="flag" name="온도증가" value="0" next="none" />	
+		<EventTask type="flag" name="온도증가" value="0" next="none" />	
+		<EventTask type="flag" name="온도증가" value="0" next="none" />	
+		</EventTaskGroup>
+    </Event>
+  </EventGroup> 
+
+
+	<!-- 냉기 켈사이크HP 감지  -->    
+	<EventGroup type="npchp" uniqueId="3126,1002" value="95" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="90" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="85" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="80" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="75" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="70" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="65" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="60" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="55" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="45" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="40" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="35" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="30" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="25" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="20" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="15" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="10" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1002" value="5" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="minus" value="5" uiStyle="1" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<!-- 화염 켈사이크HP 감지  -->    
+	<EventGroup type="npchp" uniqueId="3126,1001" value="95" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="90" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="85" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="80" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="75" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="70" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="65" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="60" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="55" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="45" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="40" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="35" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="30" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="25" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="20" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="15" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="10" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	<EventGroup type="npchp" uniqueId="3126,1001" value="5" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="minus" value="5" uiStyle="0" uiOn="true" next="none"/>
+		</EventTaskGroup>
+    </Event>
+	</EventGroup> 
+	
+
+	
+	
+	<!-- 게이지에 따른 켈사이크 이상상태 변경 -->
+	<EventGroup type="eventGage" eventName="내부_온도" comparison="gt" value="51" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31260060" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 행동 취소 --> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	<EventGroup type="eventGage" eventName="내부_온도" comparison="lt" value="49" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="31260061" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 행동 취소 --> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	
+	
+	<!-- 게이지 100 도달 시 전멸 -->
+	<EventGroup type="eventGage" eventName="내부_온도" comparison="none" value="100" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:31260012" next="time" nextValue="1" /> 
+				<EventTask type="message" string="@dungeon:31260013" next="time" nextValue="1" /> 
+				<EventTask type="abnormality" abnormalityId="31260029" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 행동 취소 --> 
+				<EventTask type="abnormality" abnormalityId="31260030" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 온도100도 알려줌 --> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	<!-- 게이지 0 도달 시 전멸 -->
+	<EventGroup type="eventGage" eventName="내부_온도" comparison="none" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:31260012" next="time" nextValue="1" /> 
+				<EventTask type="message" string="@dungeon:31260013" next="time" nextValue="1" /> 
+				<EventTask type="abnormality" abnormalityId="31260029" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 행동 취소 --> 
+				<EventTask type="abnormality" abnormalityId="31260031" target="npc" targetNpcId="3126,1000" next="none" /> <!-- 켈사이크 온도0도 알려줌 --> 
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+  
+  <!-- 켈사이크의 전투상태가 리셋되면 디버프 오브젝트를 모두 디스폰 -->
+  <EventGroup type="npcReset" uniqueId="3126,1000" repeat="true">
+    <Event>
+      <EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" next="none" /> <!-- 리더보드 타이머 스톱 -->	  
+				<EventTask type="cleanup" next="none" />	
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312611306" next="none"/> 	  	  
+				<EventTask type="flag" name="게이지끔" value="1" next="none" />	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="31260001" resetNpcHpDungeonTask="true" next="time" nextValue="5" /> <!-- 켈사이크 디스폰 -->
+				<EventTask type="eventState" stateType="EventGroup" id="10" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="11" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="12" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="13" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="14" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="15" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="16" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="17" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="18" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="19" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="9000" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="9001" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="9002" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="500" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="501" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="502" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="503" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="504" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="505" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="510" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="520" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="530" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="540" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="550" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="551" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="552" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4444" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4445" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4446" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4447" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4448" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="201" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="202" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3001" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3002" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3003" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="102" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="103" state="stop" next="none" />
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600167" next="none"/> <!--입구 열기-->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="31260002" next="none" /> <!-- 공간제한 관련 NPC 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600177" next="none" /> <!-- 공간제한 1단계 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600178" next="none" /> <!-- 공간제한 2단계 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600179" next="none" /> <!-- 공간제한 3단계 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312611302" next="none" /> <!-- 마석 테리토리 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600011" next="none" /> <!-- 보석화 관련 NPC 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600012" next="none" /> <!-- 보석화 기본 페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600013" next="none" /> <!-- 보석화 1페이즈 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600014" next="none" /> <!-- 보석화 2페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600015" next="none" /> <!-- 보석화 3페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600016" next="none" /> <!-- 보석화 전멸 페이즈 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600131" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600132" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600133" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600134" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600135" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600136" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600137" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600138" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600139" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600140" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600141" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600142" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600143" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600144" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600145" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600146" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600147" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600148" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600149" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600150" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600151" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600152" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600153" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600154" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600155" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600156" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600157" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600158" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600159" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600160" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600161" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600162" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600163" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600164" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600165" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600166" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600169" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600170" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600171" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600172" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600173" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600174" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600175" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600176" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600119" resetNpcHpDungeonTask="true" next="none" /> <!-- 분신 켈사이크(화염) -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600120" resetNpcHpDungeonTask="true" next="none" /> <!-- 분신 켈사이크(냉기) -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600121" resetNpcHpDungeonTask="true" next="none" /> <!-- 냉기패턴 -->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600122" resetNpcHpDungeonTask="true" next="none" /> <!-- 화염패턴 -->				
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none" /> <!-- 점프기어1 -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600130" next="none" /> <!-- 점프기어2 -->				
+				<EventTask type="timer" action="stop" name="타임어택_냉기" timerUiOff="false" next="none"/> <!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_냉기" value="0" timerUiOff="true" next="none"/>
+				<EventTask type="timer" action="stop" name="타임어택_화염" timerUiOff="false" next="none"/> <!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_화염" value="0" timerUiOff="true" next="none"/>	
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask type="abnormality" abnormalityId="31260018" turn="off" target="player" next="none" /> <!--플레이어 켈사이크의 저주 해제-->
+				<EventTask type="abnormality" abnormalityId="31260251" turn="off" target="player" next="none" /> <!--플레이어 아르곤 기생충 해제-->	
+				<EventTask type="flag" name="업화_전파" value="0" next="none" /> <!-- 업화 전파 flag OFF -->
+				<EventTask type="flag" name="온도감소" value="0" next="none" />	
+				<EventTask type="flag" name="온도증가" value="0" next="none" />	
+				<EventTask type="abnormality" abnormalityId="31260026" turn="off" target="player" next="none" /> <!--붕괴디버프해제-->	
+				<EventTask type="abnormality" abnormalityId="31260254" turn="off" target="player" next="none" /> <!--붕괴디버프해제-->					
+				<EventTask type="abnormality" abnormalityId="31260001" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260002" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260003" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="empty" next="time" nextValue="5" />
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312611306" next="none"/> 	  				
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="31260001" next="none"/> <!--켈사이크 스폰-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 켈사이크 사망안내  :  켈사이크가 사망하면, 사망 메시지를 내보내고, 배경음악을 바꾼다.  -->
+  
+  <!-- 켈사이크의 HP가 0%가 되면 화염/냉기디버프 오브젝트 디스폰 / 이상상태 해제용 오브젝트 스폰 일단 다넣고 나중에 수정함-->
+  <EventGroup type="npchp" uniqueId="3126,1000" value="0">
+    <Event>
+      <EventTaskGroup>
+				<EventTask type="ranktimer" timerLog="stop" stageLog="2" logUpdate="true" next="none" /> <!-- 리더보드 타이머 스톱 -->	  
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="312611306" next="none"/> 	  	
+				<EventTask type="empty" next="time" nextValue="1" />		
+				<EventTask type="message" string="@dungeon:31260018" style="default" next="none" />	
+				<EventTask type="empty" next="time" nextValue="1" />						
+				<EventTask type="eventState" stateType="EventGroup" id="500" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="501" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="502" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="503" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="504" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="505" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="510" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="520" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="530" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="540" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="550" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="551" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="552" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4444" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4445" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4446" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4447" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="4448" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="201" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="202" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3001" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3002" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="3003" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="102" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="103" state="stop" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="9995" state="stop" next="none" /> <!-- 켈사이크  사망시 리셋 로직 멈춤  TRQA-6740 대응 -->
+				<EventTask type="eventState" stateType="EventGroup" id="9998" state="stop" next="none" /> <!-- 켈사이크  사망시 리셋 로직 멈춤  TRQA-6740 대응 -->
+				<EventTask type="eventState" stateType="EventGroup" id="9999" state="stop" next="none" /> <!-- 켈사이크  사망시 리셋 로직 멈춤  TRQA-6740 대응 -->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600167" next="none"/> <!--입구 열기-->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="31260002" next="none" /> <!-- 공간제한 관련 NPC 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600177" next="none" /> <!-- 공간제한 1단계 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600178" next="none" /> <!-- 공간제한 2단계 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600179" next="none" /> <!-- 공간제한 3단계 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312611302" next="none" /> <!-- 마석 테리토리 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600011" next="none" /> <!-- 보석화 관련 NPC 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600012" next="none" /> <!-- 보석화 기본 페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600013" next="none" /> <!-- 보석화 1페이즈 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600014" next="none" /> <!-- 보석화 2페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600015" next="none" /> <!-- 보석화 3페이즈 디스폰 -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600016" next="none" /> <!-- 보석화 전멸 페이즈 디스폰 -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600131" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600132" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->						
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600133" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600134" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->		
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600135" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600136" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600137" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600138" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600139" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600140" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600141" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600142" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600143" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600144" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600145" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600146" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600147" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600148" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600149" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600150" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600151" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600152" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600153" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600154" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600155" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600156" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600157" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600158" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600159" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600160" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600161" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600162" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600163" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600164" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600165" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600166" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600169" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600170" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600171" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600172" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600173" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600174" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600175" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600176" next="none" /> <!-- 붕괴 패턴 테리토리 OFF -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600119" resetNpcHpDungeonTask="true" next="none" /> <!-- 분신 켈사이크(화염) -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600120" resetNpcHpDungeonTask="true" next="none" /> <!-- 분신 켈사이크(냉기) -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600121" resetNpcHpDungeonTask="true" next="none" /> <!-- 냉기패턴 -->
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600122" resetNpcHpDungeonTask="true" next="none" /> <!-- 화염패턴 -->				
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600127" next="none" /> <!-- 점프기어1 -->	
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312600130" next="none" /> <!-- 점프기어2 -->	
+				<EventTask type="timer" action="stop" name="타임어택_냉기" timerUiOff="false" next="none"/> <!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_냉기" value="0" timerUiOff="true" next="none"/>
+				<EventTask type="timer" action="stop" name="타임어택_화염" timerUiOff="false" next="none"/> <!--Timer Stop-->
+				<EventTask type="timer" action="stop" name="타임어택_화염" value="0" timerUiOff="true" next="none"/>	
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+				<EventTask name="내부_온도" string="@dungeon:31260001" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none" /> <!-- 내부온도 OFF -->
+ 				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="화염의_켈사이크"  string="@dungeon:31260020" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="0" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="1" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask name="냉기의_켈사이크" string="@dungeon:31260019" type="eventGage" action="plus" value="0" uiStyle="2" uiOn="false" next="none"/>  <!-- HP표시 OFF -->
+				<EventTask type="abnormality" abnormalityId="31260018" turn="off" target="player" next="none" /> <!--플레이어 켈사이크의 저주 해제-->
+				<EventTask type="abnormality" abnormalityId="31260251" turn="off" target="player" next="none" /> <!--플레이어 아르곤 기생충 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260252" turn="off" target="player" next="none" /> <!--플레이어 아르곤 기생충 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260253" turn="off" target="player" next="none" /> <!--플레이어 아르곤 기생충 해제-->	
+				<EventTask type="flag" name="업화_전파" value="0" next="none" /> <!-- 업화 전파 flag OFF -->
+				<EventTask type="flag" name="온도감소" value="0" next="none" />	
+				<EventTask type="flag" name="온도증가" value="0" next="none" />
+				<EventTask type="abnormality" abnormalityId="31260001" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260002" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260003" turn="off" target="player" next="none" /> <!--업화 해제-->	
+				<EventTask type="abnormality" abnormalityId="31260026" turn="off" target="player" next="none" /> <!--붕괴디버프해제-->	
+				<EventTask type="abnormality" abnormalityId="31260254" turn="off" target="player" next="none" /> <!--붕괴디버프해제-->					
+				<EventTask type="spawn" huntingZoneId="3126" territoryId="31260108" next="none" /> <!-- 탈출 마법석 스폰 -->
+				<EventTask type="killNpc" targetNpcId="3126,1003" next="none" /> 
+				<EventTask type="killNpc" targetNpcId="3126,4005" next="none" /> 
+				<EventTask type="killNpc" targetNpcId="3126,4007" next="none" /> 
+				<EventTask type="killNpc" targetNpcId="3126,1017" next="none" /> 
+				<EventTask type="killNpc" targetNpcId="3126,1013" next="none" /> 
+				<EventTask type="killNpc" targetNpcId="3126,1014" next="none" /> 
+				<EventTask type="killNpc" targetNpcId="3126,1015" next="none" /> 
+				<EventTask type="killNpc" targetNpcId="3126,3001" next="none" />
+				<EventTask type="killNpc" targetNpcId="3126,4007" next="none" />
+				<EventTask type="killNpc" targetNpcId="3126,4005" next="none" />
+				<EventTask type="killNpc" targetNpcId="3126,1010" next="none" />
+				<EventTask type="killNpc" targetNpcId="3126,4001" next="none" />
+				<EventTask type="killNpc" targetNpcId="3126,4004" next="none" />
+				<EventTask type="despawn" huntingZoneId="3126" territoryId="312611306" next="none"/> 	  
+				<EventTask type="abnormality" abnormalityId="31260069" target="player" next="none" /> <!--붕괴디버프해제-->		
+			</EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+</Dungeon>

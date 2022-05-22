@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="2102" name="@dungeon:2102" startPos="38040,39273,1015" exitContinentId="2000" exitPos="126565,-51230,13055" destroyWaitMin="0">
+  	<Condition type="solo" />
+	<Condition type="levelOver" value="65" />
+	<RestoreTargetQuest id="200202" forceRestore="true"/>
+	<Condition type="progressQuest" value="200202" taskId="11"/>
+	<Condition type="completeQuest" value="200201" />
+
+	
+	<!--나가 대장 소환-->
+	<EventGroup type="initialize" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200032" next="none" />
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200034" next="none" />
+				<EventTask type="message" string="@dungeon:2102100" targetNpcId="2102,100" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:2102200" targetNpcId="2102,2000" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:2102201" targetNpcId="2102,2000" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:2102202" targetNpcId="2102,2000" next="time" nextValue="0.5" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  
+	<!--나가 및 엘리온 대사 및 연출-->
+	<EventGroup type="questProgress" >
+		<Event questId="200202" taskId="12">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:2102400" targetNpcId="2102,111" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2102101" targetNpcId="2102,100" next="time" nextValue="1.0" />
+				<EventTask type="doActionScript" targetNpcId="2102,100" actionScriptId="210200" next="time" nextValue="1.0" /> 
+				<EventTask type="message" string="@dungeon:2102203" targetNpcId="2102,2000" next="time" nextValue="0.5" />
+				<EventTask type="killInTerritory" huntingZoneId="2102" territoryId="210200032" target="npc" targetTemplateId="2000" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--나가 소환-->
+	<EventGroup type="eliminate" territoryId="210200032" repeat="false" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200032" next="none" />
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200004" next="none" />
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200008" next="none" />
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200026" next="none" />
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200028" next="none" />
+				<EventTask type="message" string="@dungeon:2102300" targetNpcId="2102,1100" next="none" />
+				<EventTask type="message" string="@dungeon:2102301" targetNpcId="2102,1100" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:2102401" targetNpcId="2102,111" next="none" />
+				<EventTask type="message" string="@dungeon:2102000" style="speechbubble" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--용족 소환-->
+	<EventGroup type="questProgress" >
+		<Event questId="200202" taskId="14">
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200015" next="none" />
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200017" next="none" />
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200018" next="none" />	
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200024" next="none" />
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200029" next="none" />
+				<EventTask type="spawn" huntingZoneId="2102" territoryId="210200031" next="none" />	
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200004" next="none" />
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200008" next="none" />
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200026" next="none" />
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200028" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 낙뎀 제거 -->
+	<EventGroup type="questProgress" >
+		<Event questId="200202" taskId="16">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:2102402" targetNpcId="2102,110" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:2102403" targetNpcId="2102,110" next="none" />
+				<EventTask type="abnormality" abnormalityId="99070036" target="player" strictly="true" turn="on" next="none" />
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200015" next="none" />
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200017" next="none" />
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200018" next="none" />	
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200024" next="none" />
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200029" next="none" />
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200031" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 투명npc 제거 -->
+	<EventGroup type="questProgress" >
+		<Event questId="200202" taskId="17">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2102" territoryId="210200034" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 낙뎀 제거용 이상상태 제거 -->
+	<EventGroup type="Workobject" uniqueId="2102,210201" repeat="false" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="99070036" target="player" strictly="true" turn="off" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?><!--비밀 기지-->
+<Dungeon continentId="9887" name="@dungeon:9887" startPos="76339,583,310" exitContinentId="7001" exitPos="119824, 25332, 2801" coolTime="0" coolTimeForPartyMatching="0" enterLimitCount="30" needBattlePoint="10"  coolTimeApplyType="enter" >
+<ClearCondition huntingZoneId="887" templateId="1006" amount="1"/> 
+<ClearCondition huntingZoneId="887" templateId="3006" amount="1"/>   
+  <RandomStart pos="76339,583,310" />
+  <RandomStart pos="72312,9909,-175" />
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="20" />
+  <EventGroup type="npcHp" uniqueId="887,1005" value="0">
+    <!-- 1넴전 세미보스 -->
+    <!-- 중간 보스 스폰 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9887007" style="default" next="time" nextValue="3" />
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700101" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="887,1006" value="0">
+    <!-- 1넴-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9887006" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700191" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="887,3006" value="10">
+    <!-- 2넴-->
+    <!-- 불카누스 전투 시 사제형 보스(드라크 무르단) 소환 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9887005" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700165" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="887,3006" value="0">
+    <!-- 2넴-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700160" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="887,88700195" repeat="false">
+    <Event>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700195" next="none" />
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700197" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700195" next="none" />
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700198" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700195" next="none" />
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700199" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.4">
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="887,88700196" repeat="false">
+    <Event>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700196" next="none" />
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700200" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700196" next="none" />
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700201" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.2">
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700196" next="none" />
+        <EventTask type="spawn" huntingZoneId="887" territoryId="88700202" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.4">
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="3" />
+</Dungeon>

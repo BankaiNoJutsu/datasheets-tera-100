@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9810" name="@dungeon:9810" startPos="-84921.9766,170370.3906,13781.1768" exitContinentId="7001" exitPos="109225,3181,3003">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="60" />
+	<ClearCondition huntingZoneId="810" templateId="3003" amount="1" killCount="1" />
+
+<!-- 진입방 테오론 보스 패턴 -->
+
+  <EventGroup type="npcHp" uniqueId="810,2020" value="80" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="810,2020" patternListId="2" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcHp" uniqueId="810,2020" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="810,2020" patternListId="3" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+	
+  <EventGroup type="npcHp" uniqueId="810,2020" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+	  <EventTask type="timer" action="stop" name="Boss1" value="0" next="none" /> <!-- 출현 패턴 정지 -->
+	  <EventTask type="despawn" huntingZoneId="810" territoryId="81000074" next="none" /> <!-- 출현 패턴 정지 -->
+      <EventTask type="spawn" huntingZoneId="810" territoryId="81000008" next="none" /> <!-- 2 네임드 보스 스폰 -->
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000014" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000020" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000015" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000016" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000017" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000018" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000001" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000002" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000003" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000005" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000006" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000007" next="time" nextValue="3"/>	  
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,173" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,174" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,153" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,154" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,133" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,134" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,123" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,124" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,143" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,144" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,163" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,164" turn="on" next="none" />
+	  <EventTask type="message" string="@dungeon:9810005" style="combat" next="none" />
+	  <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+      <EventTask type="dynamicGeo" objectId="981001" door="open" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  
+  <EventGroup type="flag" name="AI" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        
+		<EventTask type="changePatternList" targetNpcId="810,3001" patternListId="1" next="none"/>
+        <EventTask type="flag" name="AI" value="0" next="time" nextValue="3"/>
+		<EventTask type="abnormality" abnormalityId="9810015" target="npc" targetNpcId="810,3001" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="timer" timerName="Boss1" value="30" repeat="true">
+    <Event>
+      <EventTaskGroup> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000074" next="none" /> 
+		<EventTask type="timer" action="stop" name="Boss1" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+    <EventGroup type="none" id="101" name="스폰 메세지" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9810015" style="combat" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	  
+
+<!-- 라칸의 불 회수와 동시에 터트리기 -->	
+  <EventGroup type="npcHp" uniqueId="810,3003" value="50" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9810018" style="combat" next="time" nextValue="1"/>
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000075" next="none" /> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000076" next="none" /> 
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000070" next="none" /> <!-- 라칸의 불 원점 회수 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+<!-- 라칸의 뱀머리 공격 패턴 시작 -->	
+  <EventGroup type="npcHp" uniqueId="810,3003" value="40" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9810020" style="combat" next="time" nextValue="1"/>
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000077" next="none" /> <!-- 라칸의 뱀머리 시전자 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="npcHp" uniqueId="810,3003" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000077" next="none" /> <!-- 라칸의 뱀머리 시전자 스폰 -->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000078" next="none" /> <!-- 차원 마법석 등장 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000077" next="time" nextValue="1"/> <!-- 라칸의 뱀머리 시전자 스폰 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000077" next="time" nextValue="1"/> <!-- 라칸의 뱀머리 시전자 스폰 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000077" next="time" nextValue="1"/> <!-- 라칸의 뱀머리 시전자 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  
+<!-- 플레이어 전투 시작 시 공격 지시 -->	
+  <EventGroup type="npcState" uniqueId="810,3001" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9810012" target="npc" targetNpcId="810,3001" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9810019" style="combat" next="time" nextValue="10"/>
+		<EventTask type="dynamicGeo" objectId="981001" door="close" next="none" />  <!-- 보스방 문 닫기 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcState" uniqueId="810,3003" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="dynamicGeo" objectId="981001" door="close" next="none" />  <!-- 보스방 문 닫기 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000008" next="none" /> <!-- 강제 디스폰 -->		
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>  
+
+<!-- 2네임드 보스(루드킨) HP 90% 남았을 경우  -->	
+  <EventGroup type="npcHp" uniqueId="810,3001" value="90" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="9810015" target="npc" targetNpcId="810,3001" turn="on" next="none" />
+		<EventTask type="changePatternList" targetNpcId="810,3001" patternListId="2" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="90" name="HP 90% 행동" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9810001" style="default" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8011" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9810013" target="npc" targetNpcId="810,3001" next="none" />
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000014" next="none" /> <!-- 흡수 이펙트 투명NPC 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="810" territoryId="81000020" next="none" /> <!-- 흡수 이펙트 투명NPC 디스폰 -->
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,173" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,174" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,163" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,164" turn="off" next="none" />		
+		<EventTask type="npcAi" targetNpcId="810,173" aiid="23" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,174" aiid="24" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,163" aiid="23" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,164" aiid="24" next="time" nextValue="9"/>		
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000009" next="none" /> <!-- 뱀머리 등장 -->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000010" next="time" nextValue="1"/> <!-- 뱀머리 등장 -->
+		<EventTask type="flag" name="AI" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	  
+ 
+<!-- 2네임드 보스(루드킨) 보스 HP 75% 남았을 경우  -->	
+  <EventGroup type="npcHp" uniqueId="810,3001" value="75" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="9810015" target="npc" targetNpcId="810,3001" turn="on" next="none" />
+		<EventTask type="changePatternList" targetNpcId="810,3001" patternListId="3" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="70" name="HP 75% 행동" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9810001" style="default" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8011" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9810013" target="npc" targetNpcId="810,3001" next="none" />
+        <EventTask type="despawn" huntingZoneId="810" territoryId="81000015" next="none" /> <!-- 흡수 이펙트 투명NPC 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="810" territoryId="81000018" next="none" /> <!-- 흡수 이펙트 투명NPC 디스폰 -->
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,153" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,154" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,143" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,144" turn="off" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,143" aiid="23" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,144" aiid="24" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,153" aiid="23" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,154" aiid="24" next="time" nextValue="9"/>
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000026" next="none" /> <!-- 뱀머리 등장 -->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000029" next="time" nextValue="1"/> <!-- 뱀머리 등장 -->
+		<EventTask type="flag" name="AI" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	  
+  
+<!-- 2네임드 보스(루드킨) 보스 HP 60% 남았을 경우  -->	
+  <EventGroup type="npcHp" uniqueId="810,3001" value="60" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="9810015" target="npc" targetNpcId="810,3001" turn="on" next="none" />
+		<EventTask type="changePatternList" targetNpcId="810,3001" patternListId="4" next="none"/>
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="50" name="HP 60% 행동" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9810001" style="default" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8011" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9810013" target="npc" targetNpcId="810,3001" next="none" />
+        <EventTask type="despawn" huntingZoneId="810" territoryId="81000016" next="none" /> <!-- 흡수 이펙트 투명NPC 디스폰 -->
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,133" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,134" turn="off" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,133" aiid="23" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,134" aiid="24" next="none" />
+        <EventTask type="despawn" huntingZoneId="810" territoryId="81000017" next="none" /> <!-- 흡수 이펙트 투명NPC 디스폰 -->
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,123" turn="off" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,124" turn="off" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,123" aiid="23" next="none" />
+		<EventTask type="npcAi" targetNpcId="810,124" aiid="24" next="time" nextValue="9"/>
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000027" next="none" /> <!-- 뱀머리 등장 -->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000028" next="time" nextValue="1"/> <!-- 뱀머리 등장 -->
+		<EventTask type="flag" name="AI" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>	  
+  
+
+<!-- 2네임드 보스(루드킨)이 각성한 루드킨으로 변신 -->
+  <EventGroup type="npcHp" uniqueId="810,3001" value="45" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="9810019" target="npc" targetNpcId="810,3001" turn="on" next="none" />
+		<EventTask type="message" string="@dungeon:9810014" target="npc" targetNpcId="810,3001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="1" name="라스트어택_재물로 받쳐지기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9810002" target="npc" targetNpcId="810,3001" next="time" nextValue="2" />
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000004" next="time" nextValue="1" /> <!-- 뱀머리 등장 -->		
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9810003" style="combat" next="time" nextValue="6" />
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000031" next="time" nextValue="2"/>
+		<EventTask type="message" string="@dungeon:9810004" target="npc" targetNpcId="810,3003" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  
+<!-- 진보스 패턴 라칸의 불 패턴 시작-->
+  <EventGroup type="npcHp" uniqueId="810,3003" value="90" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="810,3003" patternListId="3" next="none"/> <!-- 라칸의 불 설치 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="6" name="라칸의 불 설치" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="810" territoryId="81000070" next="none"/> 
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="2" name="라칸의 불 설치 후 돌아오기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="message" string="@dungeon:9810006" style="combat" next="none" />
+		<EventTask type="changePatternList" targetNpcId="810,3003" patternListId="1" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="3" name="패턴1 돌리기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="810,3003" patternListId="1" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="4" name="패턴2 돌리기" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="810,3003" patternListId="2" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="5" name="라칸의 불 전부 회수" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="810" territoryId="81000033" next="none" /> <!-- 라칸의 불 NPC 전부 디스폰 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000034" next="none" /> <!-- 라칸의 불 NPC 전부 디스폰 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000035" next="none" /> <!-- 라칸의 불 NPC 전부 디스폰 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000036" next="none" /> <!-- 라칸의 불 NPC 전부 디스폰 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000037" next="none" /> <!-- 라칸의 불 NPC 전부 디스폰 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000038" next="none" /> <!-- 라칸의 불 NPC 전부 디스폰 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000071" next="none" /> <!-- 라칸의 불 NPC 전부 디스폰 -->
+		<EventTask type="abnormality" abnormalityId="9810015" target="npc" targetNpcId="810,3003" turn="off" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+<!-- 라칸의 불 1차 패턴 시작 -->
+  <EventGroup type="npcHp" uniqueId="810,3003" value="80" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9810016" style="combat" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000035" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000038" next="time" nextValue="3"/> 
+		<EventTask type="changePatternList" targetNpcId="810,3003" patternListId="4" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810015" target="npc" targetNpcId="810,3003" turn="on" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="none" id="11" name="라칸의 불 1차 패턴 시작" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="810,503" patternListId="2" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+<!-- 라칸의 불 2차 패턴 시작 -->
+  <EventGroup type="npcHp" uniqueId="810,3003" value="70" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9810016" style="combat" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000035" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000036" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000034" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000038" next="time" nextValue="3"/> 
+		<EventTask type="changePatternList" targetNpcId="810,3003" patternListId="4" next="none" />
+		<EventTask type="abnormality" abnormalityId="9810015" target="npc" targetNpcId="810,3003" turn="on" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="none" id="12" name="라칸의 불 2차 패턴 시작" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="810,503" patternListId="3" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+<!-- 라칸의 불 3차 패턴 시작 -->
+  <EventGroup type="npcHp" uniqueId="810,3003" value="60" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9810017" style="combat" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="8026" playTime="1000" next="none" />
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000033" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000037" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000035" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000036" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000034" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000071" next="none"/> 
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000038" next="time" nextValue="3"/> 
+		<EventTask type="changePatternList" targetNpcId="810,3003" patternListId="5" next="none"/>
+		<EventTask type="abnormality" abnormalityId="9810015" target="npc" targetNpcId="810,3003" turn="on" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  
+  <EventGroup type="none" id="13" name="라칸의 불 3차 패턴 시작" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="810,503" patternListId="2" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+<!-- 각성한 루드킨 마지막 패턴 -->
+  <EventGroup type="npcHp" uniqueId="810,3003" value="30" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="810,3003" patternListId="2" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  
+<!-- 진입방 1번홀 대사 출력 -->
+  <EventGroup type="npcState" uniqueId="810,1001" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9810010" target="npc" targetNpcId="810,1001" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+<!-- 진입방 첫번째 보스 대사 출력 -->
+  <EventGroup type="npcState" uniqueId="810,2020" value="combat" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="message" string="@dungeon:9810011" target="npc" targetNpcId="810,2020" next="none" />
+		<EventTask type="timer" action="start" name="Boss1" direction="forward" value="0" next="none" timerUiOff="true"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  
+   <!-- 리셋 정보 -->
+  <EventGroup type="npcReset" uniqueId="810,2020" repeat="true"> <!-- 테오론 리셋 시 작동  -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="810,2020" patternListId="1" next="none" />
+		<EventTask type="timer" action="stop" name="Boss1" value="0" next="none" /> <!-- 출현 패턴 정지 -->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000074" next="none" /> <!-- 출현 패턴 정지 -->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="npcReset" uniqueId="810,3001" repeat="true"> <!-- 루드킨 리셋 시 작동  -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="810,3001" patternListId="1" next="none" />
+		<!-- 디스폰 시키기 -->
+	  <EventTask type="despawn" huntingZoneId="810" territoryId="81000014" next="none" />
+	  <EventTask type="despawn" huntingZoneId="810" territoryId="81000020" next="none" />
+	  <EventTask type="despawn" huntingZoneId="810" territoryId="81000015" next="none" />
+	  <EventTask type="despawn" huntingZoneId="810" territoryId="81000016" next="none" />
+	  <EventTask type="despawn" huntingZoneId="810" territoryId="81000017" next="none" />
+	  <EventTask type="despawn" huntingZoneId="810" territoryId="81000018" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000079" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000080" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000081" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000082" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000083" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000084" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000085" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+		<!-- 다시 세팅하기 -->
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000014" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000020" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000015" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000016" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000017" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000018" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000001" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000002" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000003" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000005" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000006" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000007" next="none" />
+	  <EventTask type="spawn" huntingZoneId="810" territoryId="81000007" next="time" nextValue="3"/>	  
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,173" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,174" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,153" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,154" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,133" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,134" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,123" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,124" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,143" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,144" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,163" turn="on" next="none" />
+	  <EventTask type="abnormality" abnormalityId="9810001" target="npc" targetNpcId="810,164" turn="on" next="none" />
+	  <EventTask type="dynamicGeo" objectId="981001" door="open" next="none" /> <!-- 문 열어주기 -->
+		</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+    <EventGroup type="npcReset" uniqueId="810,3003" repeat="true"> <!-- 각성한 루드킨 리셋 시 작동  -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="changePatternList" targetNpcId="810,3003" patternListId="1" next="none" />
+		<!-- 디스폰 시키기 -->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000079" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000080" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000081" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000082" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000083" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000084" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+		<EventTask type="spawn" huntingZoneId="810" territoryId="81000085" next="none" /> <!-- 제물 패턴으로 생성되는 몬스터 죽이기용-->
+		<EventTask type="despawn" huntingZoneId="810" territoryId="81000070" next="none"/> 
+	    <EventTask type="despawn" huntingZoneId="810" territoryId="81000077" next="none" /> <!-- 라칸의 뱀머리 시전자 디스폰 -->
+		<!-- 다시 세팅하기 -->
+		<EventTask type="dynamicGeo" objectId="981001" door="open" next="none" /> <!-- 문 열어주기 -->
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+
+</Dungeon>

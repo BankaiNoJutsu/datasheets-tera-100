@@ -1,0 +1,642 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3017" name="@dungeon:3017" startPos="35879,-96514,1739" exitContinentId="7005" exitPos="11920,18969,966" startDir="160">
+	<Condition type="raid" value="2" />
+	<Condition type="maxMemberCount" value="7" />
+	<Condition type="levelOver" value="65" />
+	<Condition type="notSolo"/>
+	<ClearCondition huntingZoneId="3017" templateId="3000" amount="1" killCount="1" />
+	<Retry retryId="2" />
+	
+<!-- 던전 입장 -->
+    <EventGroup type="initialize">
+	  <Event>
+		<EventTaskGroup>
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200008" next="none" />  <!-- 입구로 나가는 차원의 마법석 스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000006" next="none" />  <!-- 1네임드 출구 문 스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="70200001" next="none" />  <!-- 입구 길막용 투명 npc 스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200001" next="none" />  <!-- 1네임드 스폰 -->
+		  <EventTask type="guideOn" nameId="3017,92001" id="1" pos="34900.68750000,-96109.50000000,247.89654541" next="none" />
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+
+	
+<!-- 1네임드 -->
+
+<!-- 1네임드 전투 시작 시 -->
+	<EventGroup type="npcState" uniqueId="3017,1000" value="combat" repeat="true"> 
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000020" next="none" /> <!-- 입구 막는 투명npc 스폰 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+<!-- 1네임드 리셋 시 -->
+    <EventGroup type="npcReset" uniqueId="3017,1000" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30171001" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30171002" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30171003" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30171004" turn="off" target="player" next="none" />
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="90200001" next="time" nextValue="5" />  <!-- 1네임드 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000020" next="time" nextValue="1" /> <!-- 입구 막는 투명npc 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000020" next="time" nextValue="1" /> <!-- 입구 막는 투명npc 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000020" next="time" nextValue="1" /> <!-- 입구 막는 투명npc 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000020" next="time" nextValue="1" /> <!-- 입구 막는 투명npc 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000020" next="time" nextValue="1" /> <!-- 입구 막는 투명npc 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200001" next="none" />  <!-- 1네임드 스폰 -->
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+<!-- 1네임드 사망 시 -->
+    <EventGroup type="npcHp" uniqueId="3017,1000" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30171001" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30171002" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30171003" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30171004" turn="off" target="player" next="none" />
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000008" next="none" />  <!-- 2네임드 출구 문 스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200002" next="none" />	 <!-- 2네임드 스폰-->
+		  <EventTask type="guideOn" nameId="3017,92002" id="2" pos="38232.72656250,-99310.03125000,225.24987793" next="none" />
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000006" next="none" />  <!-- 1네임드 출구 문 디스폰 -->
+          <EventTask type="flag" name="1네임드죽음" value="1" next="none" /> <!-- 1네임드 사망 플래그 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000020" next="none" /> <!-- 입구 막는 투명npc 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000020" next="none" /> <!-- 입구 막는 투명npc 디스폰 -->
+		  <EventTask type="guideOff" id="1" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+
+<!-- 패턴 관련 데이터 -->
+  <EventGroup type="none" id="100" name="1네임드_광역 근-원" repeat="true">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="abnormality" abnormalityId="30171000" target="npc" targetNpcId="3017,1000" turn="on" next="none" />	
+		</EventTaskGroup>
+	</Event>
+  </EventGroup>
+  <EventGroup type="none" id="101" name="1네임드_5인 원근 누킹" repeat="true">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="empty" next="time" nextValue="2" />
+		<EventTask type="abnormality" abnormalityId="30171000" target="npc" targetNpcId="3017,1000" turn="on" next="none" />	
+		</EventTaskGroup>
+	</Event>
+  </EventGroup>
+  <EventGroup type="none" id="102" name="1네임드_밀쳐내기_이후 도넛" repeat="true">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="abnormality" abnormalityId="30171000" target="npc" targetNpcId="3017,1000" turn="on" next="none" />
+		</EventTaskGroup>
+	</Event>
+  </EventGroup>
+  <EventGroup type="none" id="103" name="1네임드_1인 스턴 누킹" repeat="true">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="30171000" target="npc" targetNpcId="3017,1000" turn="on" next="none" />
+		</EventTaskGroup>
+	</Event>
+  </EventGroup>
+  <EventGroup type="none" id="104" name="1네임드_1인 장판 누킹" repeat="true">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="abnormality" abnormalityId="30171000" target="npc" targetNpcId="3017,1000" turn="on" next="none" />
+		</EventTaskGroup>
+	</Event>
+  </EventGroup>
+  <EventGroup type="none" id="105" name="1네임드_패턴 제한용 이상상태 부여" repeat="true">
+	<Event>
+	  <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="30171000" target="npc" targetNpcId="3017,1000" turn="on" next="none" />
+		</EventTaskGroup>
+	</Event>
+  </EventGroup>
+
+<!-- 2네임드 -->
+
+<!-- 2네임드 전투 시작 시 -->
+	<EventGroup type="npcState" uniqueId="3017,2000" value="combat" repeat="true"> 
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000006" next="none" />  <!-- 1네임드 출구 문 디스폰. TRQA-1217 kill명령어 예외 처리 -->
+		  <EventTask type="message" string="@dungeon:9204000" style="combat" next="none" />
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000003" next="time" nextValue="5" /> <!-- 던전 입구에 2넴으로 가는 차원의 마법석 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000007" next="none" />  <!-- 2네임드 입구 문 스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="90200020" next="none" /> <!-- 비키3(2네임드전) 디스폰 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+<!-- 2네임드 리셋 시 -->
+    <EventGroup type="npcReset" uniqueId="3017,2000" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30172000" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30172002" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30172003" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30172004" turn="off" target="player" next="none" />
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000007" next="none" />  <!-- 2네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="90200002" next="time" nextValue="5" />  <!-- 2네임드 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000003" next="none" /> <!-- 던전 입구에 2넴으로 가는 차원의 마법석 스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000007" next="time" nextValue="1" />  <!-- 2네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000007" next="time" nextValue="1" />  <!-- 2네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000007" next="time" nextValue="1" />  <!-- 2네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000007" next="time" nextValue="1" />  <!-- 2네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000007" next="time" nextValue="1" />  <!-- 2네임드 입구 문 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200002" next="none" />  <!-- 2네임드 스폰 -->
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+<!-- 2네임드 사망 시 -->
+    <EventGroup type="npcHp" uniqueId="3017,2000" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30172000" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30172002" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30172003" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30172004" turn="off" target="player" next="none" />
+		  <EventTask type="guideOn" nameId="3017,92003" id="3" pos="41345.94921875,-98299.50781250,220.45642090" next="none" />
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000003" next="none" /> <!-- 던전 입구에 2넴으로 가는 차원의 마법석 스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000007" next="none" />  <!-- 2네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000008" next="none" />  <!-- 2네임드 출구 문 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000009" next="none" />  <!-- 3네임드 다리 막는 투명 NPC 스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000010" next="none" />  <!-- 3네임드 다리 앞 쫄 스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000019" next="none" />  <!-- 3네임드 입구 문 스폰 -->
+          <EventTask type="flag" name="2네임드죽음" value="1" next="none" /> <!-- 2네임드 사망 플래그 -->
+		  <EventTask type="guideOff" id="2" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+
+<!-- 패턴 관련 데이터 -->
+	<EventGroup type="none" id="200" name="2네임드_주시 대사" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="message" string="@dungeon:9202000" style="combat" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="201" name="액션 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30172005" target="npc" targetNpcId="3017,2000" turn="on" next="none" /> <!-- 액션 및 일부 패턴 사용 제한용 -->
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+<!-- 2네임드 50% 미만 추가 저주 알람 이상상태 삭제 -->
+    <EventGroup type="npcHp" uniqueId="3017,2000" value="50" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30172008" target="npc" targetNpcId="3017,2000" turn="on" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30172006" target="npc" targetNpcId="3017,2000" turn="off" next="none" />
+		  <EventTask type="message" string="@dungeon:9201001" style="combat" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+<!-- 2네임드 20% 미만 추가 저주 알람 이상상태 삭제 -->
+    <EventGroup type="npcHp" uniqueId="3017,2000" value="20" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30172008" target="npc" targetNpcId="3017,2000" turn="on" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30172007" target="npc" targetNpcId="3017,2000" turn="off" next="none" />
+		  <EventTask type="message" string="@dungeon:9201002" style="combat" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="none" id="202" name="브레스 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30172009" target="npc" targetNpcId="3017,2000" turn="on" next="none" /> <!-- 브레스 사용 제한용 -->
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="203" name="라운드 어택 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30172010" target="npc" targetNpcId="3017,2000" turn="on" next="none" /> <!-- 라운드 어택 사용 제한용 -->
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+<!-- 3네임드 -->
+
+
+
+<!-- 3네임드 전투 시작 시 -->
+	<EventGroup type="npcState" uniqueId="3017,3000" value="combat" repeat="true"> 
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="message" string="@dungeon:9204000" style="combat" next="time" nextValue="5" />
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000003" next="none" /> <!-- 2넴으로 이동하는 차원의 마법석 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000004" next="none" /> <!-- 3넴으로 이동하는 차원의 마법석 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000019" next="none" />  <!-- 3네임드 입구 문 스폰 -->
+         </EventTaskGroup>
+      </Event>
+	</EventGroup>
+<!-- 3네임드 리셋 시 -->
+    <EventGroup type="npcReset" uniqueId="3017,3000" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173000" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173006" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173007" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173008" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173009" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173010" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173011" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173012" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173016" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173017" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173019" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173030" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173037" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173038" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173039" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173048" turn="off" target="player" next="none" />
+		  <EventTask type="doActionScript" targetNpcId="3017,3000" actionScriptId="781002" next="none" /> <!-- 액션 스크립트 화면 연출 해제 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="90200003" next="time" nextValue="5" />  <!-- 3네임드 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000004" next="none" /> <!-- 3넴으로 이동하는 차원의 마법석 스폰 -->
+		  <EventTask type="doActionScript" targetNpcId="3017,3000" actionScriptId="781002" next="none" /> <!-- 액션 스크립트 화면 연출 해제 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000019" next="time" nextValue="1" />  <!-- 3네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000019" next="time" nextValue="1" />  <!-- 3네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000019" next="time" nextValue="1" />  <!-- 3네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000019" next="time" nextValue="1" />  <!-- 3네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000019" next="time" nextValue="1" />  <!-- 3네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000019" next="time" nextValue="1" />  <!-- 3네임드 입구 문 디스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000019" next="time" nextValue="3" />  <!-- 3네임드 입구 문 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000004" next="time" nextValue="1" /> <!-- 3넴으로 이동하는 차원의 마법석 스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200003" next="none" />  <!-- 3네임드 스폰 -->
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+<!-- 3네임드 사망 시 -->
+    <EventGroup type="npcHp" uniqueId="3017,3000" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173000" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173006" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173007" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173008" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173009" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173010" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173011" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173012" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173016" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173017" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173019" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173030" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173037" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173038" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173039" turn="off" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173048" turn="off" target="player" next="time" nextValue="1" />
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="90200003" next="time" nextValue="1" />  <!-- 3네임드 테리토리 디스폰 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000005" next="none" /> <!-- 퇴장용 차원의 마법석 스폰 -->
+		  <EventTask type="doActionScript" targetNpcId="3017,3000" actionScriptId="781002" next="none" /> <!-- 액션 스크립트 화면 연출 해제 -->
+		  <EventTask type="guideOff" id="3" next="none" />
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="92000004" next="none" /> <!-- 3넴으로 이동하는 차원의 마법석 스폰 -->
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="92000019" next="none" />  <!-- 3네임드 입구 문 디스폰 -->
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+
+<!-- 패턴 관련 데이터 -->
+	<EventGroup type="none" id="300" name="3네임드_광역기 끝난 후 가두기 투명 NPC 제거" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="killNpc" targetNpcId="3017,3001" next="none" /><!-- 가두기 npc 제거 -->
+		  <EventTask type="abnormality" abnormalityId="30173028" target="npc" targetNpcId="3017,3000" turn="on" next="none" /> <!-- 액션 및 일부 패턴 사용 제한용 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="301" name="3네임드_구슬 다이나믹 스폰 알람" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173021" target="npc" targetNpcId="3017,3000" turn="on" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173016" turn="on" target="player" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173017" target="classrandom" targetUserClass="priest,elementalist,lancer,fighter,archer,assassin,berserker,engineer,slayer,sorcerer,soulless,warrior,Glaiver" min="3" max="3" next="time" nextValue="12" />
+		  <EventTask type="abnormality" abnormalityId="30173005" target="npc" targetNpcId="3017,3000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="302" name="3네임드_원or근 누킹 알람" repeat="true"> <!-- 사용 안함 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="message" string="@dungeon:9203001" style="combat" next="time" nextValue="5" />
+		  <EventTask type="abnormality" abnormalityId="30173005" target="npc" targetNpcId="3017,3000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="303" name="3네임드_마력 폭발" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="message" string="@dungeon:9203002" style="combat" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="304" name="3네임드_마력 폭발 후 이상상태 초기화" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173006" target="player" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173007" target="player" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173008" target="player" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173009" target="player" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173010" target="player" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173011" target="player" turn="off" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="305" name="3네임드_5인누킹 가두기" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="message" string="@dungeon:9203003" style="combat" next="none" />
+		  <EventTask type="empty" next="time" nextValue="5" />
+		  <EventTask type="abnormality" abnormalityId="30173005" target="npc" targetNpcId="3017,3000" turn="on" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="306" name="터져라 투명NPC 제거" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="10" />
+		  <EventTask type="killNpc" targetNpcId="3017,3004" next="none" /> <!-- 터져라 npc 제거 -->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="307" name="터져라 다이나믹 스폰 시작용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173005" target="npc" targetNpcId="3017,3000" turn="on" next="none" />
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="308" name="액션 패턴 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173020" target="npc" targetNpcId="3017,3000" turn="on" next="none" />
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="309" name="패턴 제한용 이상상태" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173005" target="npc" targetNpcId="3017,3000" turn="on" next="none" />
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="310" name="파멸의 일격 1번_분신 제거" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173029" target="npc" targetNpcId="3017,3100" turn="on" next="none" /> <!-- 분신 투명화 -->
+		  <EventTask type="abnormality" abnormalityId="30173029" target="npc" targetNpcId="3017,3101" turn="on" next="none" />
+		  <EventTask type="empty" next="time" nextValue="2" />
+		  <EventTask type="killNpc" targetNpcId="3017,3100" next="none" /><!-- 제거 -->
+		  <EventTask type="killNpc" targetNpcId="3017,3101" next="none" /><!-- 제거 -->
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="311" name="파멸의 일격 1번_분신포함 이상상태 부여" repeat="true">
+      <Event>
+        <EventTaskGroup probability="0.5"> <!-- 브레스 -->
+		  <EventTask type="abnormality" abnormalityId="30173024" target="npc" targetNpcId="3017,3000" turn="on" next="none" />
+		  <EventTask type="empty" next="time" nextValue="1" />
+		  <EventTask type="abnormality" abnormalityId="30173024" target="npc" targetNpcId="3017,3100" turn="on" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173024" target="npc" targetNpcId="3017,3101" turn="on" next="none" />
+       </EventTaskGroup>
+        <EventTaskGroup probability="0.5"> <!-- 회전 베기 -->
+		  <EventTask type="abnormality" abnormalityId="30173026" target="npc" targetNpcId="3017,3000" turn="on" next="none" />
+		  <EventTask type="empty" next="time" nextValue="1" />
+		  <EventTask type="abnormality" abnormalityId="30173026" target="npc" targetNpcId="3017,3100" turn="on" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173026" target="npc" targetNpcId="3017,3101" turn="on" next="none" />
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="312" name="파멸의 일격 1번_분신포함 이상상태 제거, 패턴 제한용 이상상태 부여" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173028" target="npc" targetNpcId="3017,3000" turn="on" next="none" /> <!-- 액션 및 일부 패턴 사용 제한용 -->
+		  <EventTask type="abnormality" abnormalityId="30173024" target="npc" targetNpcId="3017,3000" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173024" target="npc" targetNpcId="3017,3100" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173024" target="npc" targetNpcId="3017,3101" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173026" target="npc" targetNpcId="3017,3000" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173026" target="npc" targetNpcId="3017,3100" turn="off" next="none" />
+		  <EventTask type="abnormality" abnormalityId="30173026" target="npc" targetNpcId="3017,3101" turn="off" next="none" />
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3017,3000" value="50" repeat="true"> <!-- HP 50%미만 화면 연출 변경 & 광폭화 -->
+	  <Event>
+		<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9203004" style="combat" next="time" nextValue="1" />
+			<EventTask type="message" string="@dungeon:9203005" style="combat" next="none" />
+			<EventTask type="doActionScript" targetNpcId="3017,3000" actionScriptId="781001" next="none" />
+			<EventTask type="abnormality" abnormalityId="30173018" target="npc" targetNpcId="3017,3000" turn="on" next="time" nextValue="5" />
+			<EventTask type="doActionScript" targetNpcId="3017,3000" actionScriptId="781002" next="none" /> <!-- 액션 스크립트 화면 연출 해제 -->
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+	<EventGroup type="none" id="313" name="40%_중앙이동 후 패턴셋 2번으로 변경" repeat="true"> <!-- HP 40%미만 패턴셋 변경 -->
+	  <Event>
+		<EventTaskGroup>
+			<EventTask type="changePatternList" targetNpcId="3017,3000" patternListId="2" next="none" />
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+	<EventGroup type="none" id="314" name="40%_보호막 깨진 후 패턴셋 1번으로 변경. 가두기 NPC제거. 저주 이상상태 제거" repeat="true"> <!-- HP 40%미만 패턴셋 변경 -->
+	  <Event>
+		<EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="30173037" target="player" turn="off" next="none" />
+			<EventTask type="abnormality" abnormalityId="30173038" target="player" turn="off" next="none" />
+			<EventTask type="abnormality" abnormalityId="30173039" target="player" turn="off" next="none" />
+			<EventTask type="changePatternList" targetNpcId="3017,3000" patternListId="1" next="none" />
+			<EventTask type="killNpc" targetNpcId="3017,3010" next="time" nextValue="5"/><!-- 제거 -->
+			<EventTask type="killNpc" targetNpcId="3017,3102" next="none" /><!-- 제거 -->
+			<EventTask type="killNpc" targetNpcId="3017,3103" next="none" /><!-- 제거 -->
+			<EventTask type="killNpc" targetNpcId="3017,3104" next="none" /><!-- 제거 -->
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+	<EventGroup type="none" id="315" name="40%_보호막_저주패턴_시작용" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" abnormalityId="30173043" target="npc" targetNpcId="3017,3000" turn="on" next="none" /> <!-- 액션 및 일부 패턴 사용 제한용 -->
+       </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="316" name="40%_보호막_저주패턴_유저 이상상태 부여" repeat="true"> <!-- 40% 보호막 저주 패턴 유저에게 이상상태 부여 -->
+	  <Event>
+		<EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="30173037" huntingZoneId="3017" territoryId="90200003" target="random" min="5" max="5" next="none" />
+			<EventTask type="abnormality" abnormalityId="30173038" huntingZoneId="3017" territoryId="90200003" target="random" min="2" max="2" next="none" />
+			<EventTask type="abnormality" abnormalityId="30173039" huntingZoneId="3017" territoryId="90200003" target="random" min="1" max="2" next="none" />
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+
+<!--아래부터 퀘스트 관련 데이터-->
+   <EventGroup type="userCountInTerritory" uniqueId="3017,90200008" value="1" repeat="true"> <!--유저 진입 시 입구 길막용 npc 디스폰 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="3.0" /> 
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="70200001" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3017,72000010"> <!-- 비키1 앞 PC 이동위치 들어오면 비키1 스폰 -->
+      <Event>
+        <EventTaskGroup>
+	    <EventTask type="spawn" huntingZoneId="3017" territoryId="90200009" next="none" />  <!-- 비키1 스폰 아랫줄에 사운드 추가 필요 -->
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>			
+		<EventGroup type="enterTerritory" uniqueId="3017,72000016"> <!-- 비키2(1네임드킬) 스폰 플래그 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="비키2영역" value="1" next="none" />
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>	
+	<EventGroup type="flag" name="1네임드죽음,비키2영역" repeat="false">
+		<Event>
+		  <EventTaskGroup>  
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200019" next="none" />
+		  <EventTask type="flag" name="비키2영역" value="0" next="none" />
+		  <EventTask type="flag" name="비키2스폰여부" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3017,72000007"> <!-- 비키2(1네임드킬) 디스폰 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="90200019" next="none" />
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>	
+	<EventGroup type="enterTerritory" uniqueId="3017,90200014"> <!-- 비키3(2네임드전) 전 PC 이동위치 들어오면 비키3 스폰 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200020" next="none" />  <!-- 비키3(2네임드전) 스폰 아랫줄에 사운드 추가 필요 -->
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3017,72000012"> <!-- 비키3(2네임드전) 대사 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="message" string="@dungeon:9205000" targetNpcId="3017,4003" next="none"/>
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3017,72000018"> <!-- 비키4(2네임드킬) 스폰 플래그 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="비키4영역" value="1" next="none" /> 
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>		
+	
+	<EventGroup type="flag" name="2네임드죽음,비키4영역" repeat="false">
+		<Event>
+		  <EventTaskGroup>  
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200021" next="none" />
+		  <EventTask type="flag" name="비키4영역" value="0" next="none" />
+		  <EventTask type="flag" name="비키4스폰여부" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="enterTerritory" uniqueId="3017,72000008"> <!-- 비키4(2네임드킬) 디스폰 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="90200021" next="none" />
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>		
+    <EventGroup type="enterTerritory" uniqueId="3017,90200022"> <!-- 비키5(쫄구간 전) 스폰 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="90200022" next="none" /> <!-- 비키5(쫄구간 전) 스폰 아랫줄에 사운드 추가 필요 -->
+		  <EventTask type="spawn" huntingZoneId="3017" territoryId="72000006" next="none" /> <!-- 카메라 셰이킹용 투명npc 스폰 -->
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="enterTerritory" uniqueId="3017,72000013"> <!-- 비키5(쫄구간 전) 대사 -->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="message" string="@dungeon:9205001" targetNpcId="3017,4005" next="none"/>
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>	
+    <EventGroup type="enterTerritory" uniqueId="3017,90200015"> <!-- 비키5(쫄구간 전) 디스폰-->
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="3017" territoryId="90200022" next="none" />
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="eliminate" territoryId="92000010"> <!-- 쫄몹들 처치시 마법다리 스폰 연출 -->
+	  <Event>
+		<EventTaskGroup>
+			<EventTask type="doActionScript" targetNpcId="3017,5100" actionScriptId="972001" next="time" nextValue="2.0"/> <!-- 카메라 셰이킹 -->
+		    <EventTask type="Soundon" soundType="effectSound" soundId="9920001" playTime="3000" next="none" />
+		    <EventTask type="spawn" huntingZoneId="3017" territoryId="90200005" next="time" nextValue="1.0" /> <!-- 마법다리 스폰  -->
+		    <EventTask type="despawn" huntingZoneId="3017" territoryId="92000009" next="none" />  <!-- 3네임드 다리 막는 투명 NPC 디스폰 -->
+			<EventTask type="spawn" huntingZoneId="3017" territoryId="70200002" next="none" /> <!-- 비키7(3네임드방) 스폰 -->
+		    <EventTask type="spawn" huntingZoneId="3017" territoryId="90200003" next="none" />	 <!-- 3네임드 스폰-->
+		</EventTaskGroup>
+	  </Event>
+    </EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3017,72000005"> <!-- 비키6(3네임드전) 전 PC 이동위치 들어오면 비키6 스폰 -->
+      <Event>
+        <EventTaskGroup>
+			<EventTask type="spawn" huntingZoneId="3017" territoryId="90200023" next="none" /> <!-- 비키6(3네임드전) 스폰 아랫줄에 사운드 추가 필요  -->
+			<EventTask type="message" string="@dungeon:9205002" targetNpcId="3017,4006" next="none"/> <!-- 비키6(3네임드전) 대사 --> 
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3017,72000014"> <!-- 비키6(3네임드전) 대사 -->
+      <Event>
+        <EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9205002" targetNpcId="3017,4006" next="none"/> <!-- 비키6(3네임드전) 대사 --> 
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3017,72000009"> <!-- 비키7(3네임드방) 디스폰 -->
+      <Event>
+        <EventTaskGroup>
+		    <EventTask type="empty" next="time" nextValue="1.5" /> 
+		    <EventTask type="despawn" huntingZoneId="3017" territoryId="70200002" next="none" />
+	    </EventTaskGroup>
+      </Event>
+    </EventGroup>	
+	
+	
+<!-- 업적 관련 데이터 -->
+	<EventGroup type="talkNpc" uniqueId="3017,5004" repeat="true"> <!-- 업적1 -->
+		<Event textId="2">
+			<EventTaskGroup>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="talkNpc" uniqueId="3017,5005" repeat="true"> <!-- 업적2-->
+		<Event textId="2">
+			<EventTaskGroup>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="talkNpc" uniqueId="3017,5006" repeat="true"> <!-- 업적3 -->
+		<Event textId="2">
+			<EventTaskGroup>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="enterTerritory" name="3네임드 입구 제거" uniqueId="3017,90200016" repeat="false">
+ 		<Event>
+			<EventTaskGroup>
+			    <EventTask type="despawn" huntingZoneId="3017" territoryId="92000019" next="none" /> <!-- 3네임드방 문 디스폰  --> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+</Dungeon>

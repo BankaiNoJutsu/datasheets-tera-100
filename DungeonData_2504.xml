@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="2504" name="@dungeon:2504" startPos="57385,54081,884" startDir="-169" exitContinentId="2500" exitPos="-18242,-16975,982" destroyWaitMin="0">
+	<Condition type="solo" />
+	<Condition type="levelOver" value="1" />
+	<ClearCondition huntingZoneId="2504" templateId="6000" amount="1" killCount="1" />
+	<RestoreTargetQuest id="250022" forceRestore="true"/>
+	
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="1차쫄시작" value="0" next="none"/>
+				<EventTask type="flag" name="1차쫄종료" value="0" next="none"/>
+				<EventTask type="flag" name="2차쫄시작" value="0" next="none"/>
+				<EventTask type="flag" name="2차쫄연출" value="0" next="none"/>
+				<EventTask type="flag" name="2차쫄종료" value="0" next="none"/>
+				<EventTask type="flag" name="칼리가르킬" value="0" next="none"/>
+				<EventTask type="flag" name="퇴장진입" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 입장 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400051" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400048" next="none"/>
+				<EventTask type="guideOn" nameId="2504,2000" id="1" pos="55842,54067,1207" next="time" nextValue="2.0" />
+				<EventTask type="message" string="@dungeon:25040001" next="time" nextValue="0.5" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="enterTerritory" uniqueId="2504,250400026" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3113" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 입장시 나뉨 전 연출  -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400004" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="1" next="none"/>
+				<EventTask type="doActionScript" targetNpcId="2504,2000" actionScriptId="250400001" next="time" nextValue="2.0"/>
+				<EventTask type="doActionScript" targetNpcId="2504,3000" actionScriptId="250400002" next="time" nextValue="2.0"/>
+				<EventTask type="updateQuest" questId="250022" taskId="2" next="none"/>
+				<EventTask type="guideOn" nameId="2504,50000" id="2" pos="55424,55236,1206" next="time" nextValue="3.0"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040101" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400003" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400001" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 1차 쫄 전투 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400007" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400009" next="none"/>				
+				<EventTask type="message" string="@dungeon:25040002" next="none" />
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400005" next="time" nextValue="0.1"/>
+				<EventTask type="doActionScript" targetNpcId="2504,100" actionScriptId="250400018" next="none"/>
+				<EventTask type="message" style="speechbubble" targetNpcId="2504,100" string="@dungeon:25040200" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400006" next="time" nextValue="0.1"/>
+				<EventTask type="doActionScript" targetNpcId="2504,200" actionScriptId="250400018" next="none"/>
+				<EventTask type="message" style="speechbubble" targetNpcId="2504,200" string="@dungeon:25040201" next="none"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040100" next="none"/>
+				<EventTask type="flag" name="1차쫄시작" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--1차쫄전투 이후 -->
+	<EventGroup type="eliminate" territoryId="250400005,250400006" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="2" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400005" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400006" next="none"/>				
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400010" next="time" nextValue="0.1"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400011" next="time" nextValue="0.1"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400031" next="time" nextValue="1"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400009" next="none"/>				
+				<!--<EventTask type="message" style="speechbubble" string="@dungeon:25040003" next="none" />-->
+				<EventTask type="guideOn" nameId="2504,50000" id="3" pos="52575,55602,1202" next="none"/>
+				<EventTask type="flag" name="1차쫄종료" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<!-- 2차 쫄 전투 전, 칼리가르 연출 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400009" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+			<!--<EventTask type="spawn" huntingZoneId="2504" territoryId="250400031" next="time" nextValue="1"/>-->
+				<EventTask type="flag" name="2차쫄연출" value="1" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="flag" name="1차쫄종료,2차쫄연출" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="2504,10001" actionScriptId="250400007" next="time" nextValue="9.0"/>
+				<EventTask type="doActionScript" targetNpcId="2504,300" actionScriptId="250400018" next="none"/>
+				<EventTask type="doActionScript" targetNpcId="2504,400" actionScriptId="250400018" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400031" next="time" nextValue="2.0"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040102" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--2차쫄전투 이후 -->
+	<EventGroup type="eliminate" territoryId="250400010,250400011" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400010" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400011" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400017" next="time" nextValue="1.0"/>
+				<EventTask type="doActionScript" targetNpcId="2504,2001" actionScriptId="250400003" next="time" nextValue="9"/>
+				<EventTask type="abnormality" abnormalityId="21030001" target="player" strictly="true" turn="on" next="none" />
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400017" next="none"/>
+				<EventTask type="updateQuest" questId="250022" taskId="3" next="none"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040103" next="none"/>
+				<EventTask type="flag" name="2차쫄종료" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 2층 입장 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400019" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2층진입" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="2차쫄종료,2층진입" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="3" next="none"/>
+				<EventTask type="message" string="@dungeon:25040004" next="none" />
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400018" next="time" nextValue="0.5"/>
+				<EventTask type="doActionScript" targetNpcId="2504,2002" actionScriptId="250400004" next="time" nextValue="7.0"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400027" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400018" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400030" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400042" next="none"/>
+				<EventTask type="guideOn" nameId="2504,2006" id="5" pos="50319,54090,2850" next="none"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040104" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2층 일반 제어장치 방향가이드 연출 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400016" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:25040005" next="time" nextValue="0.5" />
+				<EventTask type="doActionScript" targetNpcId="2504,2006" actionScriptId="250400005" next="time" nextValue="3.0"/>
+				<EventTask type="workObjectSpawn" huntingZoneId="2504" templateId="250401" next="none"/>
+				<EventTask type="updateQuest" questId="250022" taskId="4" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400020" next="none"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040112" next="time" nextValue="5.0"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400027" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2층 일반 제어장치 연출 -->
+	<EventGroup type="talkNpc" uniqueId="2504,5004">
+		<Event textId="2">
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="2504,5004" actionScriptId="250400020" next="none"/>
+				<EventTask type="guideOff" id="5" next="none"/>
+				<EventTask type="guideOn" nameId="2504,2006" id="6" pos="53500,51047,2738" next="none"/>
+				<EventTask type="message" string="@dungeon:25040006" next="time" nextValue="0.5" />
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040105" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400042" next="none"/>
+				<EventTask type="updateQuest" questId="250022" taskId="5" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2층 쫄전투 연출 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400045" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400046" next="time" nextValue="0.1"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400047" next="time" nextValue="0.1"/>
+				<EventTask type="message" style="speechbubble" targetNpcId="2504,100" string="@dungeon:25040202" next="none"/>
+				<EventTask type="message" style="speechbubble" targetNpcId="2504,300" string="@dungeon:25040202" next="none"/>
+				<EventTask type="message" string="@dungeon:25040002" next="time" nextValue="0.5" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--2층 쫄전투 이후 -->
+	<EventGroup type="eliminate" territoryId="250400046,250400047" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" style="speechbubble" targetNpcId="2504,300" string="@dungeon:25040203" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400046" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400047" next="none"/>
+				<EventTask type="message" string="@dungeon:25040007" next="time" nextValue="0.5" />
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040111" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 2층 메인 제어장치 방향가이드 연출 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400015" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="6" next="none"/>
+				<EventTask type="guideOn" nameId="2504,4000" id="7" pos="54030,53558,2690" next="none"/>
+				<EventTask type="doActionScript" targetNpcId="2504,2003" actionScriptId="250400006" next="time" nextValue="5.0"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400021" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400032" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400020" next="none"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040105" next="time" nextValue="0.5" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2층 메인 제어장치 폭탄설치 연출 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400033" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="2504,3001" actionScriptId="250400008" next="time" nextValue="3.0"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400028" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400036" next="none"/>			
+				<EventTask type="workObjectSpawn" huntingZoneId="2504" templateId="250402" next="time" nextValue="3.0"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040106" next="time" nextValue="0.5" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2층 칼리가르 등장 연출 -->
+	<EventGroup type="talkNpc" uniqueId="2504,4000">
+		<Event textId="2">
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="7" next="none"/>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2504" next="none">
+					<Pos value="54036,53649,2144" />
+				</EventTask>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400033" next="none"/> <!-- 폭탄 설치 에어리어 -->
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400034" next="time" nextValue="1.0"/> <!-- 2층 칼리가르 10002 스폰-->
+				<EventTask type="doActionScript" targetNpcId="2504,5003" actionScriptId="250400009" next="time" nextValue="10.0"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400037" next="time" nextValue="3.0"/> <!-- 장풍 투명 NPC-->
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400037" next="time" nextValue="10"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400034" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400021" next="none"/> <!-- 2004 엘리온 디스폰 -->
+				<EventTask type="doActionScript" targetNpcId="2504,3001" actionScriptId="250400015" next="time" nextValue="1.0"/> <!-- 트로 대화 -->
+				<EventTask type="abnormality" abnormalityId="21030002" target="player" strictly="true" turn="on" next="none" />
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040009" next="time" nextValue="0.5" />
+				<EventTask type="guideOn" nameId="2504,50001" id="8" pos="54064,50438,2726" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400030" next="none"/> <!-- 2층 투명벽 -->
+				<EventTask type="updateQuest" questId="250022" taskId="8" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 3층 입장 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400024" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400049" next="none"/>
+				<EventTask type="guideOff" id="8" next="none"/>
+				<EventTask type="guideOn" nameId="2504,2100" id="9" pos="54065,53371,5166" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400029" next="none"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400032" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400025" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400022" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400035" next="time" nextValue="2.0"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040110" next="time" nextValue="0.5" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!-- 3층 폭발 연출 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400041" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:25040008" next="none" />
+				<EventTask type="doActionScript" targetNpcId="2504,5002" actionScriptId="250400016" next="time" nextValue="2.0"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400028" next="none"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040107" next="time" nextValue="0.5" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3층 엘리온 연출 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400038" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="9" next="none"/>
+				<EventTask type="doActionScript" targetNpcId="2504,2100" actionScriptId="250400014" next="time" nextValue="2.5"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040108" next="time" nextValue="0.5" />
+				<EventTask type="message" style="speechbubble" targetNpcId="2504,10000" string="@dungeon:25040205" next="none"/>
+				<EventTask type="guideOn" nameId="2504,10000" id="10" pos="54076.8672,54086.6289,5163.7100" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 3층 칼리가르 퇴장 연출 -->
+	<EventGroup type="npcHp" uniqueId="2504,10000" value="30" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOff" id="10" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400039" next="time" nextValue="0.1"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400022" next="none"/>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="true" huntingZoneId="2504" next="none">
+					<Pos value="53985,53365,5165" />
+				</EventTask>
+				<EventTask type="doActionScript" targetNpcId="2504,10004" actionScriptId="250400017" next="time" nextValue="6.5"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400044" next="time" nextValue="1.0"/>
+				<EventTask type="message" style="speechbubble" targetNpcId="2504,2100" string="@dungeon:25040204" next="time" nextValue="1.0"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400040" next="time" nextValue="0.1"/>
+				<EventTask type="doActionScript" targetNpcId="2504,1000" actionScriptId="250400019" next="time" nextValue="11.0"/>
+				<EventTask type="doActionScript" targetNpcId="2504,10004" actionScriptId="250400021" next="time" nextValue="3.5"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400039" next="time" nextValue="2.0"/>
+				<EventTask type="doActionScript" targetNpcId="2504,1000" actionScriptId="250400022" next="time" nextValue="3.0"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400049" next="none"/>
+				<EventTask type="doActionScript" targetNpcId="2504,1000" actionScriptId="250400024" next="time" nextValue="3.0"/>
+				<EventTask type="doActionScript" targetNpcId="2504,2100" actionScriptId="250400025" next="time" nextValue="2.0"/>
+				<EventTask type="doActionScript" targetNpcId="2504,1000" actionScriptId="250400026" next="time" nextValue="1.5"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040114" next="time" nextValue="0.5"/>
+				<EventTask type="guideOn" nameId="2504,6000" id="11" pos="54111,58287,4627" next="none"/>
+				<EventTask type="flag" name="칼리가르킬" value="1" next="none"/>
+				<EventTask type="updateQuest" questId="250022" taskId="11" next="time" nextValue="12"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400040" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 탈출 연출 -->
+	<EventGroup type="enterTerritory" uniqueId="2504,250400050" repeat="true">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="퇴장진입" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="leaveTerritory" uniqueId="2504,250400050" repeat="true">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="퇴장진입" value="0" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="칼리가르킬,퇴장진입" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400025" next="none"/>
+				<EventTask type="message" style="speechbubble" string="@dungeon:25040113" next="time" nextValue="0.5" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--퇴장 차원석 소환 이후 -->
+	<EventGroup type="eliminate" territoryId="250400048" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="2504,6000" actionScriptId="250400027" next="time" nextValue="2.0"/>
+				<EventTask type="despawn" huntingZoneId="2504" territoryId="250400048" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2504" territoryId="250400052" next="time" nextValue="1.0"/>
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

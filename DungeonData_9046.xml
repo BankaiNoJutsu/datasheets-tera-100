@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9046" name="@dungeon:9046" startPos="-60140,119204,1299" exitContinentId="7005" exitPos="-1281,7501,2173">
+  <!-- 골렘 전투 던전 -->
+   <!-- 소인국 던전 -->
+  <Condition type="solo" value="1" />
+  <Condition type="levelOver" value="60" />
+  <!-- 인던 입장 -->
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <!-- PC가 던전에 입장하면 시스템 메시지 출력, 마법 삼총사 스폰  -->
+        <EventTask type="spawn" huntingZoneId="446" territoryId="44600003" next="none" />
+		<!-- PC가 던전에 입장하면 시스템 메시지 출력, 스톤 헤드 스폰  -->
+		<EventTask type="spawn" huntingZoneId="446" territoryId="44600005" next="none" />
+      </EventTaskGroup>
+    </Event>
+	 <!-- 스톤헤드 죽음 골렘 시작 -->
+  </EventGroup>
+   <EventGroup type="eliminate" territoryId="44600005">
+    <Event>
+      <EventTaskGroup>   
+	    <!-- 마법삼총사 자리 이동  -->
+	    <EventTask type="despawn" huntingZoneId="446" territoryId="44600003" next="none" />
+        <EventTask type="spawn" huntingZoneId="446" territoryId="44600004" next="none" />
+		<!-- 골렘A 스폰  -->
+		<EventTask type="spawn" huntingZoneId="446" territoryId="44600007" next="time" timeValue="15" />
+		<!-- 골렘B 스폰  -->
+		<!-- 골렘C 스폰 -->
+		<!-- 골렘 쫄 스폰 -->
+		<EventTask type="spawn" huntingZoneId="446" territoryId="44600011" next="time" timeValue="5" />
+		<EventTask type="spawn" huntingZoneId="446" territoryId="44600012" next="time" timeValue="5" />
+		<EventTask type="spawn" huntingZoneId="446" territoryId="44600013" next="time" timeValue="5" />
+		<EventTask type="spawn" huntingZoneId="446" territoryId="44600014" next="time" timeValue="5" />
+		<EventTask type="spawn" huntingZoneId="446" territoryId="44600015" next="time" timeValue="5" />
+		<EventTask type="spawn" huntingZoneId="446" territoryId="44600016" next="none" />
+	  </EventTaskGroup>
+    </Event>
+  </EventGroup>
+</Dungeon>

@@ -1,0 +1,2829 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9069" name="@dungeon:9069" startPos="-32559,-71507,8509" startDir="-120" exitContinentId="7031" exitPos="22598,10206,6638" exitDir="17050" scenarioUIOn="true" scenarioQuestId="46901" coolTimeApplyType = "enter">
+	<Condition type="solo"  />
+	<Condition type="maxMemberCount" value="1"  />   
+	<Condition type="levelOver" value="65"  />
+	<Condition type="minItemLevel" value="355"  />
+	
+	<ClearCondition huntingZoneId="569" templateId="3001" amount="1" killCount="1"/>
+	<RestoreTargetQuest id="46901" forceRestore="true"/>
+	<VisibleBGGroup defaultGroupId="0">
+		<VisibleBG groupId="0" name="Laknan_Memory_Canopy" />
+		<VisibleBG groupId="2" name="Laknan_Memory_StainedGlass" />
+	</VisibleBGGroup>
+	
+	<EventGroup type="initialize"> 
+	<!-- 던전 생성 되자마자 실행되는 이벤트 -->    
+		<Event>
+		  <EventTaskGroup>
+			<!--다이나믹 지오 '지하 문' -->
+			<!--
+			<EventTask type="dynamicGeo" objectId="906911" door="close" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906912" door="close" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906913" door="close" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906914" door="close" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906915" door="close" next="none" /> 
+			-->
+			<!--다이나믹 지오 '지상 문' -->
+			<!--
+			<EventTask type="dynamicGeo" objectId="906921" door="close" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906922" door="close" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906923" door="close" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906924" door="close" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906925" door="close" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906920" door="close" next="none" /> 
+			-->
+			<!--다이나믹 지오 '비밀 문'-->
+			<!--
+			<EventTask type="dynamicGeo" objectId="906930" door="close" next="none" /> 
+			-->
+			<!-- 추가임무 완료 초기화 --> 
+			<EventTask type="flag" name="사육사미완료" value="1" next="none" />
+			<EventTask type="flag" name="유품미완료" value="1" next="none" />
+			<EventTask type="flag" name="고블린미완료" value="1" next="none" />
+			<EventTask type="flag" name="펜던트미완료" value="1" next="none" />
+			<EventTask type="additionalWorkUi" id="1" uiOn="false" completion="false" message="@dungeon:90699003" tip="@dungeon:90699004" next="none" />
+			<EventTask type="additionalWorkUi" id="2" uiOn="false" completion="false" message="@dungeon:90699003" tip="@dungeon:90699004" next="none" />
+			<EventTask type="additionalWorkUi" id="3" uiOn="false" completion="false" message="@dungeon:90699003" tip="@dungeon:90699004" next="none" />
+			<EventTask type="additionalWorkUi" id="4" uiOn="false" completion="false" message="@dungeon:90699003" tip="@dungeon:90699004" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="annihilated" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+			<!--EventTask type="abnormality" abnormalityId="5690001" target="player" next="none" /-->
+			<EventTask type="abnormality" abnormalityId="5690002" target="player" next="none" />	  <!-- 제자리 부활 버프 -->
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+
+	<!-- 퀘스트 시작 용 기억의 석판 생성 -->
+	<EventGroup type="enterTerritory" uniqueId="469,46900180">
+ 		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="석판진입" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="석판진입" repeat="true">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900306" next="none" />
+			<EventTask type="flag" name="석판진입" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="석판진입,석판삭제" repeat="true">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900306" next="none" />
+			<EventTask type="flag" name="석판진입" value="0" next="none" />
+			<EventTask type="flag" name="석판삭제" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="석판진입,최종완료" repeat="true">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900306" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<EventGroup type="flag" name="석판삭제" repeat="true">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900306" next="none" />
+			<EventTask type="flag" name="석판삭제" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+
+<!--↓↓↓↓↓↓↓↓↓↓   퀘스트, 스토리, 연출 관련 작업 내용 시작(passionjh0104)   ↓↓↓↓↓↓↓↓↓↓-->  
+		
+    <EventGroup type="questProgress"> 
+		<Event questId="46901" taskId="1">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_1" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+    <EventGroup type="flag" name="46901_1">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900003" next="none" /> <!--시작지점 시오나+랜던(1)-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900003" next="time" nextValue="1.0"/> <!--시작지점 시오나+랜던(1)-->
+			<EventTask type="flag" name="46901_1" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="questProgress"> 
+		<Event questId="46901" taskId="2">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_1" value="0" next="none" />
+			<EventTask type="flag" name="46901_2" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_2">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900003" next="none"/> <!--시작지점 시오나+랜던(1)-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900175" next="none" /> 
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900175" next="time" nextValue="1.0"/> 
+			<EventTask type="message" string="@dungeon:9069203" targetNpcId="469,200" next="time" nextValue="1.0"/> 
+			<!--랜던: 거의 다 온 것 같은데..? 가보자!-->
+			<EventTask type="message" string="@dungeon:9069605" targetNpcId="469,600" next="time" nextValue="1.0"/> 
+			<!--리비: 이제 곧 세렌님이 예언하신 아룬의 샘에 갈 수 있는 건가요?!-->
+			<EventTask type="message" string="@dungeon:9069100" targetNpcId="469,100" next="time" nextValue="0.5"/> 
+			<!--시오나: 응! 라크난 성 어딘가에 아룬의 샘이 표시된 지도가 숨겨져 있대!-->
+			<EventTask type="flag" name="46901_2" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+    <EventGroup type="questProgress">
+		<Event questId="46901" taskId="3">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_2" value="0" next="none" />
+			<EventTask type="flag" name="46901_3" value="1" next="none" />		  <!--2번 완료, 3번 시작 -->
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_3">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900155" next="none" /> <!--괴수사육장 갇혀 있는 로니드-->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900092" next="none" />  <!--괴수사육장 1네임드 전투용 감옥 스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900177" next="none"  /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900175" next="none" /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900084" next="none" />  <!--괴수사육장 친위대 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900177" next="time" nextValue="0.5" /> 
+			<EventTask type="message" string="@dungeon:9069209" targetNpcId="469,200" next="time" nextValue="1.0" />
+			<!--랜던: 혹시 이번에도 아룬의 샘을 못 찾으면..어떻게 되는 거지?-->
+			<EventTask type="message" string="@dungeon:9069606" targetNpcId="469,600" next="time" nextValue="1.0" />
+			<!--리비: 그런 말씀 마세요! 그렇게 되면 세계의 벽이..!-->
+			<EventTask type="message" string="@dungeon:9069102" targetNpcId="469,100" next="time" nextValue="1.0" />			
+			<!--시오나: 그럴 일은 없어. 내가 찾아서 반드시 막아낼 거야.-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900175" next="none"  /> 
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900155" next="none" /> <!--괴수사육장 갇혀 있는 로니드-->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900092" next="none" />  <!--괴수사육장 1네임드 전투용 감옥 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900084" next="time" nextValue="1.0" />  <!--괴수사육장 친위대 스폰-->
+			<EventTask type="flag" name="46901_3" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="4">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_3" value="0" next="none" />		  <!--2번 완료, 3번 시작 -->
+			<EventTask type="flag" name="46901_5" value="0" next="none" />
+			<EventTask type="flag" name="46901_6" value="0" next="none" />
+			<EventTask type="flag" name="46901_4" value="1" next="none" />		  <!--3번 완료, 4번 시작 -: 괴수 사육장 앞에 서있는 시오나 랜던 -->
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_4">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900178" next="none"/> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900177" next="none"  /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900155" next="none" /> <!--괴수사육장 갇혀 있는 로니드-->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900092" next="none" />  <!--괴수사육장 1네임드 전투용 감옥 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900084" next="none" />  <!--괴수사육장 친위대 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900155" next="none" /> <!--괴수사육장 갇혀 있는 로니드-->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900092" next="none" />  <!--괴수사육장 1네임드 전투용 감옥 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900084" next="none" />  <!--괴수사육장 친위대 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900178" next="time" nextValue="1.0"/> 
+			<EventTask type="message" string="@dungeon:9069607" targetNpcId="469,600" next="time" nextValue="3.0" />
+			<!--리비: 어?! 저쪽에 불빛입니다! 시오나 공주님!-->
+			<EventTask type="message" string="@dungeon:9069104" targetNpcId="469,100" next="time" nextValue="3.0" />
+			<!--시오나: 쉿... 안에 누군가 있어.-->
+			<EventTask type="flag" name="46901_4" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="5"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_4" value="0" next="none" />
+			<EventTask type="flag" name="46901_5" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_5">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900084" next="none"  />  <!--친위대 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900084" next="none"  />  <!--친위대 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900178" next="time" nextValue="1.0"/>  <!-- 시작 구간 시오나+랜던(4) 디스폰-->
+			<EventTask type="flag" name="46901_5" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="6"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_5" value="0" next="none" />
+			<EventTask type="flag" name="46901_6" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_6">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900084" next="none"  />  
+			<!--친위대 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900084" next="none"  />  
+			<!--친위대 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900292" next="none"  />  
+			<!--괴수사육장 도망가는 랜던 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900290" next="none"  />  
+			<!--괴수사육장 준비하는 시오나 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900155" next="none" /> 
+			<!--괴수사육장 갇혀 있는 로니드-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900155" next="none" /> 
+			<!--괴수사육장 갇혀 있는 로니드-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900286" next="none" />  
+			<!--괴수사육장 대사 연출용 감옥 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900286" next="none" />  
+			<!--괴수사육장 대사 연출용 감옥 스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900008" next="none"  />  
+			<!--괴수사육장 내에 시오나+랜던(1) 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900008" next="time" nextValue="0.5"  />  
+			<!--괴수사육장 내에 시오나+랜던(1) 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="46901_6,1네임드입장">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="message" string="@dungeon:9069103" targetNpcId="469,100" next="time" nextValue="1.0" />
+			<!--시오나: 다들 봤어? 데바들이..-->
+			<EventTask type="doActionScript" targetNpcId="469,301" actionScriptId="4692406" next="none"   /> 
+			<!--로니드 아래 2개 대사 강조-->
+			<EventTask type="message" string="@dungeon:90693010" targetNpcId="469,301" next="time" nextValue="1.0" />
+			<!--로니드: 살려주세요!!-->
+			<EventTask type="message" string="@dungeon:90693011" targetNpcId="469,301" next="time" nextValue="0.5" />
+			<!--로니드: 으으..제발 저를 밖으로 데리고 가주세요!!-->
+			<EventTask type="message" string="@dungeon:9069200" targetNpcId="469,200" next="time" nextValue="0.7" />
+			<!--랜던: 신경쓰지 말고 어서 가자. 시오나.-->
+			<EventTask type="message" string="@dungeon:9069201" targetNpcId="469,200" next="time" nextValue="0.7" />
+			<!--랜던: 지도부터 찾아내야 해!-->
+			<EventTask type="message" string="@dungeon:9069202" targetNpcId="469,200" next="time" nextValue="1.0" />
+			<!--랜던: 더 지체하면 아룬의 샘이 말라 없어질거야.-->
+			<EventTask type="message" string="@dungeon:90693012" targetNpcId="469,301" next="time" nextValue="1.0" />
+			<!--로니드: 찾으시는 물건이 어디에 있는 지 알고 있어요!!-->
+			<EventTask type="message" string="@dungeon:90693013" targetNpcId="469,301" next="time" nextValue="1.0" />
+			<!--로니드: 다 알려드리겠습니다! 으으으..살려주세요!-->
+			<EventTask type="doActionScript" targetNpcId="469,301" actionScriptId="4692404" next="time" nextValue="1.5"  /> 
+			<!--식인괴수 등장 전 분위기 조성-->
+			<EventTask type="message" string="@dungeon:9069204" targetNpcId="469,200" next="time" nextValue="0.5" />
+			<!--랜던: 으윽! 뭔가 나올 것 같아!-->
+			<EventTask type="message" string="@dungeon:9069105" targetNpcId="469,100" next="time" nextValue="0.5" />
+			<!--시오나: 랜던, 어서 피해!-->
+			<EventTask type="message" string="@dungeon:90699900" style="speechbubble" next="time" nextValue="0.5"  />
+			<!--플레이어: 다들 준비됐지?-->
+			<EventTask type="message" string="@dungeon:9069602" targetNpcId="469,600" next="time" nextValue="0.5" />
+			<!--리비: 물론입니다!-->	
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900008" next="none"  />  
+			<!--괴수사육장 내에 시오나+랜던(1) 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900292" next="none"  />  
+			<!--괴수사육장 도망가는 랜던 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900290" next="none"  />  
+			<!--괴수사육장 준비하는 시오나 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900293" next="none"  />  
+			<!--괴수사육장 준비하는 리비 엘린 스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900286" next="none" />  
+			<!--괴수사육장 대사 연출용 감옥 디스폰-->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900092" next="time" nextValue="3.0" />  
+			<!--괴수사육장 1네임드 전투용 감옥 스폰-->
+			<EventTask type="updateQuest" questId="46901" taskId="6" next="time" nextValue="1.0"/>
+			<EventTask type="flag" name="46901_6" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="7"> 
+		  <EventTaskGroup>
+			<!--EventTask type="flag" name="46901_6" value="0" next="none" /-->
+			<EventTask type="flag" name="46901_7" value="1" next="none" />	
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+	 <EventGroup type="flag" name="46901_7" repeat="true" >
+		<Event>
+		  <EventTaskGroup>  
+		<!--이전 단계 디스폰 -->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900084" next="none"  />
+			<!--친위대 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900008" next="none"  />
+			<!--괴수사육장 내에 시오나+랜던+리비(1) 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900292" next="none"   />
+			<!--괴수사육장 도망가는 랜던 디스폰-->
+		<!--현재 단계 디스폰 -->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900155" next="none" />
+			<!--괴수사육장 갇혀 있는 로니드-->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900092" next="none" />
+			<!--괴수사육장 1네임드 전투용 감옥 스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900290" next="none"   />
+			<!--괴수사육장 준비하는 시오나 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900293" next="none"  />  
+			<!--괴수사육장 준비하는 리비 엘린 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900291" next="none"  />  
+			<!--괴수사육장 준비하는 전투중 기다리는 랜던 디스폰-->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900001" next="none" /> 
+			<!--1네임드 디스폰-->
+		<!--현재 단계 스폰 -->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900155" next="none" />
+			<!--괴수사육장 갇혀 있는 로니드-->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900092" next="none" />
+			<!--괴수사육장 1네임드 전투용 감옥 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900290" next="none"  />
+			<!--괴수사육장 준비하는 시오나 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900293" next="none"  />  
+			<!--괴수사육장 준비하는 리비 엘린 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900291" next="none"  />
+			<!--괴수사육장 준비하는 전투중 기다리는 랜던 스폰-->
+			<EventTask type="flag" name="46901_7" value="0" next="none" />
+			<EventTask type="flag" name="1네임드준비" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="569,56900093" repeat="true" >
+ 		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="1네임드입장" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	 <EventGroup type="flag" name="1네임드준비,1네임드입장" repeat="true" >
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900001" next="time" nextValue="1" /> 
+			<!--1네임드 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900084" next="none"  />  <!--친위대 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900178" next="none"  />  <!-- 시작 구간 시오나+랜던(4) 디스폰-->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900001" next="none"  />		  
+			<!--1네임드 스폰-->
+			<EventTask type="npcAi" targetNpcId="469,100" aiid="100" next="time" nextValue="0.5" /> 
+			<EventTask type="npcAi" targetNpcId="469,600" aiid="60" next="none" /> 
+			<!--시오나 전투 준비-->
+			<EventTask type="flag" name="1네임드입장" value="0" next="none" />		 
+			<EventTask type="flag" name="1네임드준비" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+		
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="8"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_7" value="0" next="none" />	
+			<EventTask type="flag" name="46901_8" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_8">
+		<Event>
+		  <EventTaskGroup>  
+		<!--이전 단계 디스폰 -->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900092" next="none" />  
+			<!--괴수사육장 1네임드 전투용 감옥 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900290" next="none"   />  
+			<!--괴수사육장 준비하는 시오나 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900293" next="none"  />  
+			<!--괴수사육장 준비하는 리비 엘린 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900291" next="none"  />  
+			<!--괴수사육장 전투중 기다리는 랜던 디스폰-->
+		<!--현재 단계 디스폰 -->
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900155" next="none" /> 
+			<!--괴수사육장 갇혀 있는 로니드 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900286" next="none" />  
+			<!--괴수사육장 대사 연출용 감옥 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900277" next="none" /> 
+			<!--괴수사육장 랜던_전투끝난후 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900083" next="none" /> 
+			<!--괴수사육장 시오나_전투끝난후 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900295" next="none" /> 
+			<!--괴수사육장 리비_전투끝난후 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900207" next="none" /> 
+			<!--괴수사육장 풀려난 로니드1 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900287" next="none" /> 
+			<!--괴수사육장 풀려난 로니드2 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900285" next="none" /> 
+			<!--괴수사육장 랜던분기연출 1 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900276" next="none"/> 
+			<!--괴수사육장 랜던분기연출 2 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900279" next="none"/> 
+			<!--괴수사육장 시오나분기연출1 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900298" next="none" /> 
+			<!--괴수사육장 리비 분기연출1 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900283" next="none" /> 
+			<!--괴수사육장 풀려난 로니드2 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900280" next="none" /> 
+			<!--괴수사육장 시오나분기연출2 디스폰-->
+		<!--현재 단계 스폰 -->		
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900155" next="none" /> 
+			<!--괴수사육장 갇혀 있는 로니드 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900286" next="none" />  
+			<!--괴수사육장 대사 연출용 감옥 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900277" next="none" /> 
+			<!--괴수사육장 랜던_전투끝난후 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900083" next="none" /> 
+			<!--괴수사육장 시오나_전투끝난후 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900295" next="time" nextValue="0.1"/> 
+			<!--괴수사육장 리비_전투끝난후 스폰-->
+			<EventTask type="npcAi" targetNpcId="469,100" aiid="0" next="none" /> 
+			<!--시오나 전투 모드 종료-->
+			<EventTask type="npcAi" targetNpcId="469,600" aiid="0" next="time" nextValue="6.0" /> 
+			<!--리비 전투 모드 종료-->			
+		<!--연출 진행-->
+			<EventTask type="doActionScript" targetNpcId="469,100" actionScriptId="4692402" next="time" nextValue="5.5" /> 
+			<!--시오나 먹이 우리 제거-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900155" next="none" /> 
+			<!--괴수사육장 갇혀 있는 로니드 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900207" next="time" nextValue="1.0" /> 
+			<!--괴수사육장 풀려난 로니드1 스폰-->
+			<EventTask type="message" string="@dungeon:9069303" targetNpcId="469,300" next="time" nextValue="1.0" />
+			<!--로니드: 살려주셔서 감사합니다!-->
+			<EventTask type="message" string="@dungeon:9069014" targetNpcId="469,300" next="time" nextValue="1.0" />
+			<!--로니드: 제가 그 지도를 물라님의 방에서 본 것 같습니다-->
+			<EventTask type="message" string="@dungeon:9069016" targetNpcId="469,300" next="time" nextValue="1.0" />
+			<!--로니드: 로니드, 은혜는 꼭 갚습니다!-->
+			<EventTask type="message" string="@dungeon:9069015" targetNpcId="469,300" next="time" nextValue="1.0" />
+			<!--로니드: 제가 물라님의 방으로 모셔다 드리겠습니다!-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900207" next="none" /> 
+			<!--괴수사육장 풀려난 로니드1 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900287" next="time" nextValue="2.0" /> 
+			<!--괴수사육장 풀려난 로니드2 스폰-->
+			<EventTask type="message" string="@dungeon:9069017" targetNpcId="469,302" next="time" nextValue="1.0" /> 
+			<!--로니드: 이쪽으로 들어가시면 됩니다!-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900277" next="none" /> 
+			<!--괴수사육장 랜던_전투끝난후 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900286" next="none" />  
+			<!--괴수사육장 대사 연출용 감옥 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900285" next="time" nextValue="0.5" /> 
+			<!--괴수사육장 랜던분기연출 1 스폰-->
+			<EventTask type="message" string="@dungeon:9069205" targetNpcId="469,201" next="time" nextValue="1.0" /> 
+			<!--랜던: 이쪽에도 문이 있는데?!-->
+			<EventTask type="message" string="@dungeon:9069018" targetNpcId="469,302" next="time" nextValue="1.0" /> 
+			<!--로니드: 으으아..그쪽은 병사들도 많고 새로 만든 병기까지 있어 너무 위험합니다.-->
+			<EventTask type="message" string="@dungeon:9069206" targetNpcId="469,201" next="time" nextValue="1.0" /> 
+			<!--랜던: 병기?! 우와.. 신형 병기란 말이지?!-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900285" next="none" /> 
+			<!--괴수사육장 랜던분기연출 1 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900276" next="time" nextValue="1.0"/> 
+			<!--괴수사육장 랜던분기연출 2 스폰-->
+			<EventTask type="message" string="@dungeon:9069207" targetNpcId="469,200" next="time" nextValue="0.5" /> 
+			<!-- 랜던: 신형 병기! 신형 병기! 이쪽으로 가자!-->
+			<EventTask type="message" string="@dungeon:9069020" targetNpcId="469,302" next="time" nextValue="0.5" /> 
+			<!-- 랜던: 제,제발..! 저 같이 약한 놈은 바로 죽습니다! 살려주세요!-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900083" next="none" /> 
+			<!--괴수사육장 시오나_전투끝난후 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900279" next="time" nextValue="1.0" /> 
+			<!--괴수사육장 시오나분기연출1 스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900295" next="none" /> 
+			<!--괴수사육장 리비_전투끝난후 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900298" next="time" nextValue="0.5" /> 
+			<!--괴수사육장 리비 분기연출1 스폰-->
+			<EventTask type="message" string="@dungeon:9069601" targetNpcId="469,601" next="time" nextValue="1.0" /> 
+			<!--리비: 시오나 공주님! 혼자 움직이시면 안 돼요~!-->
+			<EventTask type="message" string="@dungeon:9069109" targetNpcId="469,102" next="time" nextValue="0.5" /> 
+			<!--시오나: 난 이쪽으로 가겠어.-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900287" next="time" nextValue="0.0" /> 
+			<!--괴수사육장 풀려난 로니드2 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900283" next="time" nextValue="0.2" /> 
+			<!--괴수사육장 풀려난 로니드2 스폰-->
+			<EventTask type="message" string="@dungeon:9069322" targetNpcId="469,300" next="time" nextValue="0.5" /> 
+			<!--로니드: 감사합니다. 시오나님, 이쪽으로..!-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900279" next="none" /> 
+			<!--괴수사육장 시오나분기연출1 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900280" next="time" nextValue="0.5" /> 
+			<!--괴수사육장 시오나분기연출2 스폰-->
+			<EventTask type="message" string="@dungeon:9069610" targetNpcId="469,601" next="time" nextValue="2.0" /> 
+			<!--리비: 어떻게 하시겠습니까?-->
+			<EventTask type="updateQuest" questId="46901" taskId="8" next="time" nextValue="1.0"/>
+			<EventTask type="flag" name="46901_8" value="0" next="none" />	
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="9"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_8" value="0" next="none" />	
+			<EventTask type="flag" name="46901_9" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<EventGroup type="flag" name="46901_9">
+	<!--분기 선택 -->
+		<Event>
+		<EventTaskGroup>  
+	<!--이전 단계 디스폰-->
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900155" next="none" /> 
+			<!--괴수사육장 갇혀 있는 로니드 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900286" next="none" />  
+			<!--괴수사육장 대사 연출용 감옥 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900277" next="none" /> 
+			<!--괴수사육장 랜던_전투끝난후 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900083" next="none" /> 
+			<!--괴수사육장 시오나_전투끝난후 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900295" next="none" /> 
+			<!--괴수사육장 리비_전투끝난후 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900207" next="none" /> 
+			<!--괴수사육장 풀려난 로니드1 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900287" next="none" /> 
+			<!--괴수사육장 풀려난 로니드2 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900285" next="none" /> 
+			<!--괴수사육장 랜던분기연출 1 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900276" next="none"/> 
+			<!--괴수사육장 랜던분기연출 2 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900279" next="none"/> 
+			<!--괴수사육장 시오나분기연출1 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900298" next="none" /> 
+			<!--괴수사육장 리비 분기연출1 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900283" next="none" /> 
+			<!--괴수사육장 풀려난 로니드2 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900280" next="none" /> 
+			<!--괴수사육장 시오나분기연출2 디스폰-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900090" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900198" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900199" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900200" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900201" next="none"  />
+	        <!--지하 이동마커 디스폰-->
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900091" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900193" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900194" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900195" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900197" next="none" />
+	        <!--지상 이동마커 디스폰-->
+		<!--현재 단계 디스폰 -->		
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900299" next="none" /> 
+			<!--괴수사육장 리비 제자리  디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900304" next="none" /> 
+			<!--괴수사육장 로니드 제자리 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900305" next="none" /> 
+			<!--괴수사육장 시오나 제자리 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900278" next="none" /> 
+			<!--괴수사육장 랜던 제자리 디스폰-->
+		<!--현재 단계 스폰 -->		
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900299" next="none" /> 
+			<!--괴수사육장 리비 제자리  스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900304" next="none" /> 
+			<!--괴수사육장 로니드 제자리 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900305" next="none" /> 
+			<!--괴수사육장 시오나 제자리 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900278" next="none" /> 
+			<!--괴수사육장 랜던 제자리 스폰-->
+
+		<!--이동 마커들-->
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900090" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900198" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900199" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900200" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900201" next="none"  />
+	        <!--지하 이동마커 스폰-->
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900091" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900193" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900194" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900195" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900197" next="none"  />
+	        <!--지상 이동마커 스폰-->
+			<EventTask type="message" string="@dungeon:90699901" style="speechbubble" next="time" nextValue="0.5"  />
+			<!--플레이어: 선택은 내 몫이란 거지?-->
+			<EventTask type="flag" name="46901_9" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+<!--지하 동선 시작-->	
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="10"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_9" value="0" next="none" />
+			<EventTask type="flag" name="46901_10" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_10">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906911" door="open" next="none"/>
+			<!--괴수 사육장 지하 출구 열림-->
+	<!--이전 단계 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900283" next="none" /> 
+			<!--괴수사육장 풀려난 로니드2 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900280" next="none" /> 
+			<!--괴수사육장 시오나분기연출2 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900298" next="none" /> 
+			<!--괴수사육장 리비 분기연출1 디스폰-->
+	        <!--지하 이동마커 디스폰 시작-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900090" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900198" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900199" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900200" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900201" next="none"  />
+	        <!--지하 이동마커 디스폰 끝-->
+	        <!--지상 이동마커 디스폰 시작-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900091" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900193" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900194" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900195" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900197" next="none"  />
+	        <!--지상 이동마커 디스폰 끝-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900299" next="none" /> 
+			<!--괴수사육장 리비 제자리  디스폰-->
+			<!--EventTask type="despawn" huntingZoneId="469" territoryId="46900278" next="none" /--> 
+			<!--괴수사육장 랜던 제자리 디스폰-->
+	<!--현재 단계 선택하지 않은 쪽 디스폰/스폰 -->		
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900278" next="none" /> 
+			<!--괴수사육장 랜던 제자리 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900297" next="none" /> 
+			<!--괴수사육장 620 리비 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900278" next="none" /> 
+			<!--괴수사육장 랜던 제자리 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900297" next="none" /> 
+			<!--괴수사육장 620 리비 스폰-->
+	<!--현재 단계 선택한 쪽 디스폰/스폰-->
+			<EventTask type="message" string="@dungeon:90699902" style="speechbubble" next="time" nextValue="0.5"  />
+			<!--플레이어: 좋아. 시오나와 함께 가겠어!-->
+			<EventTask type="message" string="@dungeon:9069603" targetNpcId="469,620" next="time" nextValue="0.5"/> 
+			<!--리비: 그럼 전 랜던님을 호위하겠습니다.-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900304" next="none" /> 
+			<!--괴수사육장 로니드 제자리 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900305" next="none" /> 
+			<!--괴수사육장 시오나 제자리 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900284" next="none" /> 
+			<!--괴수사육장 304 로니드 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900289" next="none" /> 
+			<!--괴수사육장 104 시오나 디스폰-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900307" next="none" />
+			<!--지하 제자리 디스폰 -->		
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900284" next="none" /> 
+			<!--괴수사육장 304 로니드 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900289" next="none" /> 
+			<!--괴수사육장 104 시오나 스폰-->		
+			<EventTask type="message" string="@dungeon:9069317" targetNpcId="469,304" next="none" />
+			<!--로니드: 쿠웩..구역질이 나지 않습니까.. 저희들이 지내는 곳입니다. 조심하십시오..아주 더럽습니다.-->
+	<!--차원의마법석(석판)-->		
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.5"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+			<EventTask type="flag" name="46901_10" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="11"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_10" value="0" next="none" />
+			<EventTask type="flag" name="46901_11" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_11">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906911" door="open" next="none"/>
+			<!--괴수 사육장 지하 출구 열림-->
+	<!--차원의마법석(석판)-->		
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	<!--이전 단계 디스폰-->			
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900278" next="none" /> 
+			<!--괴수사육장 랜던 제자리 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900297" next="none" /> 
+			<!--괴수사육장 620 리비 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900284" next="none" /> 
+			<!--괴수사육장 304 로니드 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900289" next="none" /> 
+			<!--괴수사육장 104 시오나 디스폰-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900307" next="none" />
+			<!--지하 제자리 디스폰 -->		
+	<!--현재 단계 디스폰-->	
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900129" next="none" /> 
+			<!--수용소 몬스터 전체-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900043" next="none"  /> 
+			<!--몬스터 인식 1100 시오나, 1300 로니드 디스폰-->
+	<!--현재 단계 스폰-->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900129" next="none" /> 
+			<!--수용소 몬스터 전체-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900043" next="time" nextValue="0.5" /> 
+			<!--몬스터 인식 1100 시오나, 1300 로니드 스폰-->
+			<EventTask type="message" string="@dungeon:90693901" targetNpcId="469,1300" next="time" nextValue="1.0" /> 
+			<!--로니드: 로니드, 기회를 얻었습니다...흐흐흐..-->
+			<EventTask type="flag" name="46901_11" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+<!--지하수용소-->	
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="12"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_11" value="0" next="none" />
+			<EventTask type="flag" name="46901_12" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_12">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906911" door="open" next="none" /> 
+			<!--괴수사육장 지하동선 출구 열림-->	
+			<EventTask type="dynamicGeo" objectId="906913" door="close" next="none" /> 
+			<!--지하수용소 출구 닫힘-->	
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900209" next="none"  /> 
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900129" next="none" /> 
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900129" next="none" /> 
+			<!--수용소 몬스터 전체-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900264" next="time" nextValue="0.5"  />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900206" next="none"  /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900043" next="time" nextValue="1.0"  /> 
+			<EventTask type="message" string="@dungeon:90693001" targetNpcId="469,300" next="time" nextValue="1.0" /> 
+			<!--로니드: 한 때는 동료였던 놈들입니다..-->
+			<EventTask type="message" string="@dungeon:90693002" targetNpcId="469,300" next="time" nextValue="1.0" /> 
+			<!--로니드: 하수인 놈들은 우리들 중에 인도의 방으로 보낼 제물을 선별합니다.-->
+			<EventTask type="message" string="@dungeon:9069110" targetNpcId="469,100" next="time" nextValue="1.0" /> 
+			<!--시오나: 제물이라니?!-->
+			<EventTask type="message" string="@dungeon:90693003" targetNpcId="469,300" next="time" nextValue="0.7" /> 
+			<!--로니드: 물라님의 신성한 의식에 쓰이는 것입니다. 크크큭..-->
+			<EventTask type="message" string="@dungeon:9069117" targetNpcId="469,100" next="time" nextValue="1.0" /> 
+			<!--시오나: 난 로니드에게 자세한 설명을 들어야 겠어. 수용소 안을 부탁해!-->
+			<EventTask type="dynamicGeo" objectId="906912" door="open" next="time" nextValue="0.5" /> 
+			<EventTask type="flag" name="46901_12" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eliminate" territoryId="56900129" repeat="false">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="지하수용소모두사망" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+	
+     <EventGroup type="flag" name="지하수용소모두사망" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="dynamicGeo" objectId="906911" door="close" next="none" /> 
+			<!--괴수사육장 지하동선 출구 닫음-->	
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900206" next="none"  /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900209" next="none"  /> 
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900209" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906912" door="open" next="none"/>
+			<!--지하수용소 입구 열림-->
+			<EventTask type="dynamicGeo" objectId="906913" door="open" next="time" nextValue="3.0" /> 
+			<!--지하수용소 출구 열림-->
+			<EventTask type="message" string="@dungeon:9069118" targetNpcId="469,1103" next="time" nextValue="0.7" /> 
+			<!--시오나: 저 데바들은..?-->
+			<EventTask type="message" string="@dungeon:90693005" targetNpcId="469,1304" next="time" nextValue="1.0"/> 
+			<!--로니드: 흐흐.. 놔두셔도 됩니다..여길 벗어나는 걸 더 무서워하는 놈들이니..-->
+			<EventTask type="message" string="@dungeon:90693006" targetNpcId="469,1304" next="time" nextValue="0.5" /> 
+			<!--로니드: 키킥..멍청한 것들..-->
+			<EventTask type="flag" name="지하수용소모두사망" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="13"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_12" value="0" next="none" />
+			<EventTask type="flag" name="46901_13" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_13">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906912" door="open" next="none"/>
+			<!--지하수용소 입구 열림-->
+			<EventTask type="dynamicGeo" objectId="906913" door="open" next="none"/>
+			<!--지하수용소 출구 열림-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900209" next="none"  /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900100" next="none"  /> 
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900100" next="time" nextValue="1.0"  /> 
+			<!--EventTask type="message" string="@dungeon:90693004" targetNpcId="469,1303" next="time" nextValue="1.5" /--> 
+			<!--로니드: 약한 놈들끼리 서열싸움이라니 흐흐흐..비웃으셔도 됩니다!-->
+			<EventTask type="message" string="@dungeon:90693900" targetNpcId="469,1303" next="time" nextValue="1.5" /> 
+			<!--로니드: 그 물건만 손에 넣으면..-->
+			<EventTask type="message" string="@dungeon:9069116" targetNpcId="469,1102" next="time" nextValue="0.7" /> 
+			<!--시오나: 응?-->
+			<EventTask type="message" string="@dungeon:90693910" targetNpcId="469,1303" next="time" nextValue="0.5" /> 
+			<!--로니드: ..아,아닙니다..-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900209" next="none"  /> 
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900266" next="time" nextValue="0.5"  />
+			<EventTask type="flag" name="46901_13" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!--고문실-->
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="14"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_13" value="0" next="none" />
+			<EventTask type="flag" name="46901_14" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_14">
+		<Event>
+		  <EventTaskGroup>  
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900266" next="time" nextValue="0.5"  />
+			<EventTask type="dynamicGeo" objectId="906912" door="close" next="none" /> 
+			<!--지하수용소 입구 닫힘-->
+			<EventTask type="dynamicGeo" objectId="906913" door="close" next="none" /> 
+			<!--지하수용소 출구 닫힘-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900100" next="none"  /> 
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900210" next="none"  /> 
+			<EventTask type="message" string="@dungeon:9069111" targetNpcId="469,100" next="time" nextValue="0.7" /> 
+			<!--시오나: 시체들이..!!-->
+			<EventTask type="message" string="@dungeon:9069112" targetNpcId="469,100" next="time" nextValue="1.0" /> 
+			<!--시오나: 이건..흑마법에 당한..?!-->
+			<EventTask type="message" string="@dungeon:9069113" targetNpcId="469,100" next="time" nextValue="1.0" /> 
+			<!--시오나: 먼저 가. 난 로니드와 이곳을 좀 더 조사해야 겠어. 곧 따라 갈게!-->
+			<EventTask type="flag" name="46901_14" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="15"> 
+		  <EventTaskGroup>
+			<!--EventTask type="flag" name="46901_14" value="0" next="none" /-->
+			<EventTask type="flag" name="46901_15" value="1" next="none" />	
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_15" repeat="true" >
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="flag" name="사디킨죽음" value="0" next="none" />
+			<EventTask type="flag" name="일반2네임드모두사망" value="0" next="none" />
+			<EventTask type="dynamicGeo" objectId="906914" door="open" next="none" /> 
+			<!--인도의 방 입구 열림-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900210" next="none" />
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900037" next="none" /> 
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900038" next="none" /> 
+			<!-- 차원의마법석 여기부터-->	
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900266" next="none" />
+			<!-- 차원의마법석 여기까지-->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900037" next="none" /> 
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900038" next="time" nextValue="0.5" /> 
+			<EventTask type="flag" name="46901_15" value="0" next="none" />	
+		  </EventTaskGroup>  
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcState" uniqueId="569,6900" value="combat" repeat="true">
+ 		<Event>
+		  <EventTaskGroup>
+			<!--
+			<EventTask type="dynamicGeo" objectId="906914" door="close" next="time" nextValue="3.0" /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900057" next="none"  /> 
+			<EventTask type="empty" next="time" nextValue="3.0"  /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900206" next="none"  /> 
+			-->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="eliminate" territoryId="56900037,56900038" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="일반2네임드모두사망" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="일반2네임드모두사망">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906914" door="open" next="none" /> 
+			<!--인도의 방 입구 열림-->
+<!--이전 단계 디스폰-->			
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900210" next="none" />
+<!--현재 단계 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901244" next="none"  />  <!--로니드1-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900211" next="none"  />  <!--로니드2-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901242" next="none"  />  <!--시오나1-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901243" next="none"  />  <!--시오나1-->
+<!--현재 단계 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46901244" next="none"  />  <!--로니드1-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46901242" next="time" nextValue="1.5" />  <!--시오나1-->
+			<EventTask type="message" string="@dungeon:9069114" targetNpcId="469,1101" next="time" nextValue="1.0" /> 
+			<!--시오나: 여..여긴?! 역시 예상대로 흑마법 의식을...-->
+			<EventTask type="message" string="@dungeon:9069115" targetNpcId="469,1101" next="time" nextValue="1.0" /> 
+			<!--시오나: 로니드! 남은 길을 안내해주고 돌아와! 난 이곳을 조사하고 있을게!-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901244" next="none"  />  <!--로니드1-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900211" next="time" nextValue="3.0"/>  <!--로니드2-->
+			<EventTask type="dynamicGeo" objectId="906915" door="open" next="time" nextValue="0.5" /> 
+			<!--인도의 방 출구 열림-->
+			<EventTask type="message" string="@dungeon:90693007" targetNpcId="469,1301" next="none" /> 
+			<!--로니드: 로니드, 명을 따릅니다!-->
+			<EventTask type="flag" name="사디킨죽음" value="0" next="none" />
+			<EventTask type="flag" name="마즈키전투모드" value="0" next="time" nextValue="1.0" />
+			<EventTask type="flag" name="일반2네임드모두사망" value="0" next="none" />	
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--
+	<EventGroup type="enterTerritory" uniqueId="469,46900220">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="empty" next="time" nextValue="3.0"  /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900057" next="none"  /> 
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	-->
+	<EventGroup type="npcHp" uniqueId="569,4000" value="0" repeat="true"> 
+		<Event>
+		  <EventTaskGroup>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="16"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_15" value="0" next="none" />	
+			<EventTask type="flag" name="46901_16" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_16">
+		<Event>
+		  <EventTaskGroup>  
+<!--이전 단계 디스폰-->			
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901242" next="none"  />  <!--시오나1-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900211" next="none"  />  <!--로니드2-->
+<!--현재 단계 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901243" next="none"  />  <!--시오나2-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900221" next="none"  />  <!--로니드1-->
+<!--현재 단계 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46901243" next="none"  />  <!--시오나2-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900221" next="none"  />  <!--로니드1-->
+			<EventTask type="dynamicGeo" objectId="906914" door="close" next="none" /> 
+			<!--인도의 방 입구 닫힘-->
+			<EventTask type="dynamicGeo" objectId="906915" door="open" next="none"  /> 
+			<!--인도의 방 출구 열림-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.5"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900267" next="time" nextValue="0.5"  />
+			<EventTask type="message" string="@dungeon:90693008" targetNpcId="469,1302" next="time" nextValue="1.5" /> 
+			<!--로니드: 이쪽으로...-->
+			<EventTask type="message" string="@dungeon:90693031" targetNpcId="469,1302" next="time" nextValue="1.0" /> 
+			<!--로니드: 이런 곳에 비밀 통로가 있었습니다. 흐흐흐.. -->
+			<EventTask type="message" string="@dungeon:90693032" targetNpcId="469,1302" next="time" nextValue="1.0" /> 
+			<!--로니드: 기회는 다시 올겁니다..크크큭.. -->
+			<EventTask type="flag" name="46901_16" value="0" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	  
+	  
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="17"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_16" value="0" next="none" />
+			<EventTask type="flag" name="46901_17" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_17">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906915" door="close" next="none"  /> 
+			<!--인도의 방 출구 닫힘-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900267" next="time" nextValue="0.5"  />
+			<!--EventTask type="despawn" huntingZoneId="469" territoryId="46900227" next="none"  /-->  <!--로니드2-->
+			<!--EventTask type="spawn" huntingZoneId="469" territoryId="46900227" next="none"  /-->  <!--로니드2-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901243" next="none"  />  <!--시오나2-->
+			<EventTask type="message" string="@dungeon:90693009" targetNpcId="469,1302" next="time" nextValue="1.0" /> 
+			<!--로니드: 계단 꼭대기에 있는 비밀 문을 찾으시면 됩니다.. 물라님의 궁전과 이어져 있습니다..-->
+			<EventTask type="message" string="@dungeon:90693033" targetNpcId="469,1302" next="time" nextValue="1.0" /> 
+			<!--로니드: 전 시오나 공주님께 돌아가야 합니다.. 흐흐.. 계단을 오르십시오...-->
+			<EventTask type="flag" name="46901_17" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="18"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_17" value="0" next="none" />
+			<EventTask type="flag" name="46901_18" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_18">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906915" door="close" next="none"  /> 
+			<!--인도의 방 출구 닫힘-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900267" next="time" nextValue="1.0"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900221" next="none"  />  <!--로니드1-->
+			<EventTask type="flag" name="비밀문" value="1" next="none" />
+			<EventTask type="flag" name="46901_18" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="workObject" uniqueId="469,81820" repeat="true">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906930" door="open" next="none" /> 
+			<!--비밀문 열림-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+<!--지하 동선 끝-->	
+
+<!--지상 동선 시작-->
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="19"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_9" value="0" next="none" />
+			<EventTask type="flag" name="46901_19" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_19">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="message" string="@dungeon:90699903" style="speechbubble" next="none"  />
+			<!--플레이어: 불안해서 안 되겠네. 랜던과 함께 가겠어.-->
+	<!--이전 단계 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900298" next="none" /> 
+			<!--괴수사육장 리비 분기연출1 디스폰-->
+	        <!--지하 이동마커 디스폰 시작-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900090" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900198" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900199" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900200" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900201" next="none"  />
+	        <!--지하 이동마커 디스폰 끝-->
+	        <!--지상 이동마커 디스폰 시작-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900091" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900193" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900194" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900195" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900197" next="none"  />
+	        <!--지상 이동마커 디스폰 끝-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900299" next="none" /> 
+			<!--괴수사육장 리비 제자리  디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900304" next="none" /> 
+			<!--괴수사육장 로니드 제자리 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900305" next="none" /> 
+			<!--괴수사육장 시오나 제자리 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900288" next="none" /> 
+			<!--승강기로 가는 랜던 203 디스폰-->
+			<EventTask type="dynamicGeo" objectId="906921" door="close" next="none" /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900296" next="none" /> 
+			<!--시오나에게 가는 리비 610 디스폰-->
+	<!--현재 단계 스폰/디스폰 -->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900278" next="none" /> 
+			<!--괴수사육장 랜던 제자리 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900278" next="none" /> 
+			<!--괴수사육장 랜던 제자리 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900304" next="none" /> 
+			<!--괴수사육장 로니드 제자리 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900305" next="none" /> 
+			<!--괴수사육장 시오나 제자리 스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900296" next="time" nextValue="0.5" /> 
+			<!--시오나에게 가는 리비 610 스폰-->
+			<EventTask type="message" string="@dungeon:9069604" targetNpcId="469,610" next="none" /> 
+			<!--리비: 잘 됐군요. 그럼 전 시오나 공주님을!-->
+			<EventTask type="dynamicGeo" objectId="906921" door="open" next="time" nextValue="0.5" /> 
+			<!--괴수사육장 승강기 입구 열림-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900278" next="none" /> 
+			<!--괴수사육장 랜던 제자리 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900288" next="time" nextValue="2.5"/> 
+			<!--승강기로 가는 랜던 203 스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900288" next="time" nextValue="1"/> 
+			<!--승강기로 가는 랜던 203 디스폰-->
+			<EventTask type="flag" name="46901_19" value="0" next="none" />
+		 </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="20"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_19" value="0" next="none" />
+			<EventTask type="flag" name="46901_20" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_20" >
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="dynamicGeo" objectId="906921" door="open" next="none" /> 
+			<!--괴수사육장 승강기 입구 열림-->
+			<EventTask type="Shuttle" objectId="906901" action="move" next="time" nextValue="0"  />     
+			<EventTask type="Shuttle" objectId="906902" action="move" next="time" nextValue="1"  />
+			<EventTask type="message" string="@dungeon:90692200" style="combat" next="none"/>
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900130" next="none"  />
+			<EventTask type="empty" next="time" nextValue="1.0"  />
+			<EventTask type="updateQuest" questId="46901" taskId="20" next="time" nextValue="1"/>
+			<EventTask type="flag" name="46901_20" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+	<Event questId="46901" taskId="21"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_20" value="0" next="none" />
+			<EventTask type="flag" name="46901_21" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_21">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906921" door="open" next="none" /> 
+			<!--괴수사육장 승강기 입구 열림-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900271" next="time" nextValue="0.5"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900130" next="none"  />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900130" next="none"  />
+			<EventTask type="dynamicGeo" objectId="906920" door="close" next="time" nextValue="0.5" /> 
+			<EventTask type="dynamicGeo" objectId="906920" door="open" next="time" nextValue="0.5" /> 
+			<!--지상 승강기 출구 열림-->
+			<EventTask type="flag" name="46901_21" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="questProgress">  
+	<Event questId="46901" taskId="22">
+	<!--무기연구실로 이동하라는 단계-->
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_21" value="0" next="none" />
+			<EventTask type="flag" name="46901_22" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_22">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906920" door="open" next="none" /> 
+			<!--지상 승강기 출구 열림-->
+			<EventTask type="dynamicGeo" objectId="906921" door="close" next="none" /> 
+			<!--괴수사육장 승강기 입구 닫힘-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900130" next="none"  />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900170" next="none"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900271" next="time" nextValue="2"  />
+			<EventTask type="message" string="@dungeon:90692201" targetNpcId="469,2214" next="time" nextValue="2"/>
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900130" next="none"  />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900254" next="time" nextValue="1"  />
+			<EventTask type="message" string="@dungeon:90692202" targetNpcId="469,2213" next="time" nextValue="20"/>
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900254" next="none"  />
+			<EventTask type="flag" name="46901_22" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="23"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_22" value="0" next="none" />
+			<EventTask type="flag" name="46901_23" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_23">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900502" next="none" /> <!-- 연출용 RK-8 디스폰 -->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900502" next="none" /> <!-- 연출용 RK-8 스폰 -->
+			<!-- 단계에 맞는 이동 마법석 디스폰 / 스폰 -->
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none" />
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none" />
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none" />
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none" />
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none" />
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none" />
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none" />
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none" />
+		    <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900272" next="none" />
+			
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900249" next="none" /> <!-- 조사 중인 랜던 -->
+			<EventTask type="dynamicGeo" objectId="906920" door="close" next="none" /> 
+			<!--지상 승강기 출구 닫힘-->
+			<EventTask type="dynamicGeo" objectId="906922" door="open" next="time" nextValue="0.5" /> 
+			<!--무기 연구실 입구 열림-->
+			<EventTask type="flag" name="46901_23" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="24"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_23" value="0" next="none" />
+			<EventTask type="flag" name="46901_24" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_24">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="flag" name="46901_24" value="0" next="none"/>
+			<EventTask type="dynamicGeo" objectId="906922" door="close" next="none" /> 
+			<!--무기 연구실 입구 닫힘-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900249" next="none" /> <!-- 조사 중인 랜던 -->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900249" next="none" /> <!-- 조사 중인 랜던 -->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900002" next="none" /> <!-- RK-8 디스폰 -->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900502" next="none" /> <!-- 연출용 RK-8 디스폰 -->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900502" next="none" /> <!-- 연출용 RK-8 스폰 -->
+			
+			<!-- 단계에 맞는 이동 마법석 디스폰 / 스폰 -->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900272" next="none" />
+			
+			<!-- 조사 중인 랜던의 대사 -->
+			<EventTask type="message" string="@dungeon:90692101" targetNpcId="469,2210" next="time" nextValue="1.0" /> 
+			<EventTask type="message" string="@dungeon:90692102" targetNpcId="469,2210" next="time" nextValue="2.0" /> 
+			<EventTask type="message" string="@dungeon:90692103" targetNpcId="469,2210" next="time" nextValue="2.0" /> 
+			<EventTask type="doActionScript" targetNpcId="469,2210" actionScriptId="4692422" next="none" /> 
+			<EventTask type="message" string="@dungeon:90692104" targetNpcId="469,2210" next="time" nextValue="2.0" /> 
+			<EventTask type="message" string="@dungeon:90692105" targetNpcId="569,2100" next="time" nextValue="1.0" /> 
+			<EventTask type="message" string="@dungeon:90692106" targetNpcId="469,2210" next="none" /> 
+			
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900502" next="none" /> <!-- 연출용 RK-8 디스폰 -->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900002" next="none" /> <!-- RK-8 스폰 -->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900249" next="none" /> <!-- 조사 중인 랜던 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900275" next="time" nextValue="7" /> <!-- 도망가는 랜던 스폰-->			
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900275" next="none" /> <!-- 도망가는 랜던 디스폰-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900248" next="none" /> <!-- 도망 후 랜던 스폰-->	
+			
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="25"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_24" value="0" next="none" />
+			<EventTask type="flag" name="46901_25" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_25">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900248" next="none" /> <!-- 도망 후 랜던 스폰-->	
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900248" next="none" /> <!-- 도망 후 랜던 스폰-->	
+		        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+		        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+		        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+		        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+		        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+		        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+		        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+		        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+		        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+		        <EventTask type="spawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.5"  />
+			<EventTask type="message" string="@dungeon:90692107" targetNpcId="469,2212" next="none" /> 
+			<EventTask type="dynamicGeo" objectId="906923" door="open" next="time" nextValue="1.0"/> 
+			<!--무기 연구실 출구-->	
+			<EventTask type="flag" name="46901_25" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="26"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_25" value="0" next="none" />
+			<EventTask type="flag" name="46901_26" value="1" next="none" />
+			<EventTask type="flag" name="궁전입구" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_26">
+		<Event>
+		  <EventTaskGroup>  
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900268" next="time" nextValue="0.5"  />
+			<EventTask type="dynamicGeo" objectId="906923" door="open" next="none"/> 
+			<!--무기 연구실 출구-->	
+			<EventTask type="dynamicGeo" objectId="906924" door="open" next="time" nextValue="1.0"/> 
+			<!--라크난 궁 입구-->
+			<EventTask type="flag" name="46901_26" value="0" next="none" />	
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--공통 루트-->	
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="27"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_18" value="0" next="none" />
+			<EventTask type="flag" name="46901_26" value="0" next="none" />	
+			<EventTask type="flag" name="46901_27" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_27,궁전입구">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906924" door="open" next="none"/> 
+			<!--라크난 궁 입구 열림-->
+			<EventTask type="dynamicGeo" objectId="906930" door="close" next="none" /> 
+			<!--비밀문 닫힘-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900268" next="time" nextValue="0.5"  />
+			<EventTask type="dynamicGeo" objectId="906923" door="close" next="time" nextValue="1.0"/> 
+			<EventTask type="flag" name="46901_27" value="0" next="none" />	
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+     <EventGroup type="flag" name="46901_27,비밀문">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906924" door="close" next="none"/> 
+			<!--라크난 궁 입구 닫힘-->
+			<EventTask type="dynamicGeo" objectId="906930" door="open" next="none" /> 
+			<!--비밀문 열림-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900268" next="time" nextValue="0.5"  />
+			<EventTask type="dynamicGeo" objectId="906923" door="close" next="time" nextValue="1.0"/> 
+			<EventTask type="flag" name="46901_27" value="0" next="none" />	
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+     <EventGroup type="flag" name="46901_27">
+		<Event>
+		  <EventTaskGroup>  
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900268" next="time" nextValue="0.5"  />
+			<EventTask type="dynamicGeo" objectId="906923" door="close" next="time" nextValue="1.0"/> 
+			<EventTask type="flag" name="46901_27" value="0" next="none" />	
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="28"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_27" value="0" next="none" />	
+			<EventTask type="flag" name="46901_28" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_28">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="dynamicGeo" objectId="906930" door="close" next="none" /> 
+			<!--비밀문 닫힘-->
+			<EventTask type="dynamicGeo" objectId="906924" door="close" next="none"/> 
+			<!--라크난 궁 입구 닫힘-->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.5"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+			<EventTask type="dynamicGeo" objectId="906925" door="open" next="time" nextValue="0.5"/> 
+			<!--물라의 방 입구 열림-->
+			<EventTask type="flag" name="46901_28" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+			
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="29"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_28" value="0" next="none" />
+			<EventTask type="flag" name="46901_29" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_29">
+		<Event>
+		  <EventTaskGroup>  
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+			<EventTask type="visibleBG" groupId="1" next="none"  /> 
+			<!--캐노피삭제-->
+			<EventTask type="empty" next="time" nextValue="1.5"  /> 
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900073" next="none"/> 
+			<!--변신 전 물라 스폰-->
+			<EventTask type="flag" name="46901_29" value="0" next="none" />		 
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="30"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_29" value="0" next="none" />
+			<EventTask type="flag" name="46901_30" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_30" repeat="true" >
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="visibleBG" groupId="1" next="none"  /> 
+			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="1" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900259" next="none"/>
+			<!--로니드 디스폰-->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900073" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900003" next="none"/>
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900073" next="time" nextValue="1.0"/>
+			<EventTask type="flag" name="46901_30" value="0" next="none" />		 
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+     <EventGroup type="flag" name="46901_30,변신전사망">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="visibleBG" groupId="1" next="none"  /> 
+			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="1" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900259" next="none"/>
+			<!--로니드 디스폰-->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900073" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900003" next="time" nextValue="1.0"/>
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900073" next="none"/>
+			<EventTask type="flag" name="46901_30" value="0" next="none" />		 
+			<EventTask type="flag" name="변신전사망" value="0" next="none" />		 
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="31"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_30" value="0" next="none" />
+			<EventTask type="flag" name="46901_31" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_31">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="visibleBG" groupId="1" next="none"/> 
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900003" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900073" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900113" next="none"/>
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="1.0"  />
+			<EventTask type="flag" name="46901_31" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="32"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_31" value="0" next="none" />
+			<EventTask type="flag" name="46901_32" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_32">
+		<Event>
+		  <EventTaskGroup>  
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+			<EventTask type="visibleBG" groupId="1" next="time" nextValue="1.0"/> 
+			<EventTask type="flag" name="46901_32" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="33"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_32" value="0" next="none" />
+			<EventTask type="flag" name="46901_33" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_33">
+		<Event>
+		  <EventTaskGroup> 
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+			<EventTask type="visibleBG" groupId="1" next="none"  /> 
+			<EventTask type="visibleBG" groupId="2" next="none"  /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900071" next="time" nextValue="0.1" /> 
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900071" next="time" nextValue="0.5" />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901240" next="none"/>
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46901240" next="none"/>
+			<EventTask type="flag" name="46901_33" value="0" next="none" />
+			<!-- 시오나 일행 대사 -->
+			<EventTask type="message" string="@dungeon:90693201" targetNpcId="469,3204" next="none" /> 
+			<EventTask type="message" string="@dungeon:90693202" targetNpcId="469,3100" next="none" /> 
+			<EventTask type="flag" name="계단앞연출" value="1" next="none" />
+			<!--스테인드글라스 보이기-->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="enterTerritory" uniqueId="469,46900303" repeat="true" >
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="계단앞도착" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="계단앞연출,계단앞도착">  
+		<Event> 
+		  <EventTaskGroup>
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900071" next="none"  />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900302" next="none"  />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900302" next="time" nextValue="0.5"  />
+			<EventTask type="message" string="@dungeon:90693203" targetNpcId="469,3201" next="time" nextValue="1" /> 
+			<EventTask type="message" string="@dungeon:90693204" targetNpcId="469,3601" next="time" nextValue="1" /> 
+			<EventTask type="message" string="@dungeon:90693205" targetNpcId="469,3101" next="none" /> 
+			<EventTask type="flag" name="계단앞도착" value="0" next="none" />
+			<EventTask type="flag" name="계단앞연출" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="34"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_33" value="0" next="none" />
+			<EventTask type="flag" name="46901_34" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_34">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901240" next="none"/>
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900240" next="none"/>
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+			<EventTask type="message" string="@dungeon:90693207" targetNpcId="469,3201" next="none" /> 
+			<EventTask type="visibleBG" groupId="2" next="time" nextValue="0.5" /> 
+			<EventTask type="flag" name="46901_34" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="35"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_34" value="0" next="none" />
+			<EventTask type="flag" name="46901_35" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_35">
+		<Event>
+		  <EventTaskGroup>  
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none"  />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.1"  />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="time" nextValue="0.5"  />
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+			<EventTask type="visibleBG" groupId="2" next="time" nextValue="1.0"  /> 
+			<!--EventTask type="despawn" huntingZoneId="469" territoryId="46900078" next="none"/-->
+			<!--EventTask type="spawn" huntingZoneId="469" territoryId="46900078" next="none"/-->
+			<!--EventTask type="despawn" huntingZoneId="469" territoryId="46900258" next="time" nextValue="1.0"/-->
+			<!--EventTask type="spawn" huntingZoneId="469" territoryId="46900258" next="none"/-->
+			<EventTask type="updateQuest" questId="46901" taskId="35" next="none"/>
+			<EventTask type="flag" name="46901_35" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="36"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_35" value="0" next="none" />
+			<EventTask type="flag" name="46901_36" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+			<!--EventTask type="flag" name="최종완료" value="1" next="none" /-->
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+     <EventGroup type="flag" name="46901_36">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="flag" name="46901_36" value="0" next="none" />
+			<!-- 기억의 석판 -->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="time" nextValue="0.5" />
+	        <EventTask type="spawn" huntingZoneId="469" territoryId="46900270" next="none" />
+			
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+			<EventTask type="visibleBG" groupId="2" next="none"  /> 
+			
+			<!-- 퀘스트 완료 용 석판 -->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900078" next="none"/>
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901078" next="none"/> <!-- 화살표 -->
+			<!--EventTask type="despawn" huntingZoneId="469" territoryId="46900258" next="none"/-->
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900078" next="none"/>
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46901078" next="none"/> <!-- 화살표 -->
+			<EventTask type="message" string="@dungeon:90693206" targetNpcId="469,3102" next="time" nextValue="1.0" /> 
+			<!--EventTask type="spawn" huntingZoneId="469" territoryId="46900258" next="time" nextValue="1.0"/-->
+			<EventTask type="message" string="@dungeon:90693208" targetNpcId="469,3601" next="time" nextValue="0.5" /> 
+						
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900302" next="none"  />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900080" next="time" nextValue="0.5" />
+			
+			<EventTask type="message" string="@dungeon:90693209" targetNpcId="469,3202" next="time" nextValue="3" /> 
+			<EventTask type="message" string="@dungeon:90693210" targetNpcId="469,3602" next="time" nextValue="3" /> 
+			<EventTask type="message" string="@dungeon:90693211" targetNpcId="469,3102" next="time" nextValue="3" /> 
+			<EventTask type="message" string="@dungeon:90693212" targetNpcId="469,3102" next="time" nextValue="3" />
+			<EventTask type="message" string="@dungeon:90693213" targetNpcId="469,3202" next="time" nextValue="3" />
+			<EventTask type="message" string="@dungeon:90693214" targetNpcId="469,3102" next="time" nextValue="3" />
+			<EventTask type="message" string="@dungeon:90693215" targetNpcId="469,3602" next="time" nextValue="3" />
+			
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900080" next="none" />
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46901241" next="time" nextValue="2" />
+			<EventTask type="message" string="@dungeon:90693216" targetNpcId="469,3103" next="time" nextValue="0.5" />
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46901241" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="talkNpc" uniqueId="469,500" repeat="true">
+		<Event textId="2" >
+			<EventTaskGroup>
+				<EventTask type="updateQuest" questId="46901" taskId="36" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="questProgress">  
+		<Event questId="46901" taskId="37"> 
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_36" value="0" next="none" />
+			<EventTask type="flag" name="46901_37" value="1" next="none" />
+			<EventTask type="empty" next="time" nextValue="1"	/> 
+			<EventTask type="flag" name="석판삭제" value="1" next="none" />
+			<EventTask type="flag" name="최종완료" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+    <EventGroup type="flag" name="46901_37">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="flag" name="46901_37" value="0" next="none" />
+			<!-- 기억의 석판 -->
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46901078" next="none"/> <!-- 화살표 -->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900264" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900266" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900267" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900268" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900269" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900270" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900271" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900272" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900273" next="none" />
+	        <EventTask type="despawn" huntingZoneId="469" territoryId="46900258" next="time" nextValue="1.0"/>
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900258" next="none"/>
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900319" next="none"/>
+		    </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+<!--↑↑↑↑↑↑↑↑↑↑   퀘스트, 스토리, 연출 관련 작업 내용 끝(passionjh0104)   ↑↑↑↑↑↑↑↑↑↑-->
+	
+	
+<!--↓↓↓↓↓↓↓↓↓↓   3네임드(Boss) 관련 작업 내용 시작(passionjh0104)   ↓↓↓↓↓↓↓↓↓↓-->   
+	
+	<EventGroup type="npcState" uniqueId="569,3000" value="combat" repeat="true">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="1" next="none" />
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900259" next="none"/>
+			<!--로니드 디스폰-->
+			<EventTask type="dynamicGeo" objectId="906925" door="close" next="none" /> 
+			<!--물라의 방 문 닫힘-->
+			<EventTask type="dynamicGeo" objectId="906930" door="close" next="none" /> 
+			<!--비밀문 닫힘-->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+  			<EventTask type="changePatternList"  targetNpcId="569,3000" patternListId="4" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="569,3000" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="turnAi" turn="off" huntingZoneId="569" territoryId="56900073" templateId="3000" next="time" nextValue="1.0" />
+  			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="1" next="none" />
+			<EventTask type="killNpc" targetNpcId="569,3009" next="none" /> 
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900259" next="none"/>
+			<!--로니드 디스폰-->
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+			<EventTask type="message" string="@dungeon:90693000" style="combat" next="time" nextValue="1.0" />
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+			<EventTask type="turnAi" turn="on" huntingZoneId="569" territoryId="56900073" templateId="3000" next="none" />
+  			<EventTask type="changePatternList"  targetNpcId="569,3000" patternListId="4" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>
+
+	  
+
+	<!-- 물라 변신 전 패턴--> 
+	<EventGroup type="none" id="99" name="물라 리액션 이상상태 면역" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+  			<EventTask type="abnormality" abnormalityId="5693007" target="npc" targetNpcId="569,3000" next="none" />
+ 		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="1" name="거미줄스킬 시작" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+  			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="2" next="none" />
+ 		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="2" name="거미줄스킬 시작 후: 패턴1 종료, 패턴2 시작" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+  			<EventTask type="changePatternList"  targetNpcId="569,3000" patternListId="2" next="none" />
+  			<EventTask type="abnormality" abnormalityId="5693003" target="npc" targetNpcId="569,3000" next="none" />     		<!-- 몬스터에게 무적해제 -->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="100" name="거미소환: 변신 전 소환 대사" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="Soundon" soundType="effectSound" soundId="7102" playTime="10000" next="none" />
+			<EventTask type="message" string="@dungeon:90693103" targetNpcId="569,3000" next="time" nextValue="1.0" /> 
+ 		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="3" name="거미소환후: 물라 패턴3, 거미 패턴 2, 거미줄 패턴 4로전환" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+  			<EventTask type="changePatternList"  targetNpcId="569,3000" patternListId="3" next="none" />
+  			<EventTask type="changePatternList"  targetNpcId="569,3009" patternListId="2" next="none" />
+  			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="4" next="none" />
+			<EventTask type="abnormality" abnormalityId="5693008" target="npc" targetNpcId="569,3009" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="5" name="거미사망후: 투명NPC 패턴5로전환" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+  			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="5" next="none" />
+  			<EventTask type="abnormality" abnormalityId="5693003" target="npc" targetNpcId="569,3000" next="none" />     		<!-- 몬스터에게 무적해제 -->
+			<EventTask type="Soundon" soundType="effectSound" soundId="7103" playTime="10000" next="none" />
+			<EventTask type="message" string="@dungeon:90693100" targetNpcId="569,3000" next="time" nextValue="4.5" /> 
+			<EventTask type="spawn" huntingZoneId="469" territoryId="46900259" next="time" nextValue="1.5"/> <!--로니드 스폰 -->
+			<EventTask type="message" string="@dungeon:90699905" style="speechbubble" next="none"  />
+			<!--플레이어: 로니드! 지금 뭐 하는 거야?!-->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="569,3000" value="0" repeat="true"> 
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="flag" name="변신전사망" value="1" next="none" />
+				<EventTask type="despawn" huntingZoneId="569" territoryId="56900073" next="none" /> <!--물라 변신 전  디스폰-->
+				<EventTask type="empty" next="time" nextValue="1.5" /> 
+				<EventTask type="spawn" huntingZoneId="569" territoryId="56900003" next="time" nextValue="1.0"/> <!--물라 변신 후 스폰 -->
+				<EventTask type="despawn" huntingZoneId="569" territoryId="56900113"  next="none" /> <!--물라 변신 전 감추기용 투명 NPC 디스폰-->
+				<EventTask type="despawn" huntingZoneId="469" territoryId="46900259" next="none"/> <!--로니드 디스폰 -->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+<!--물라: 변신 후 70,40,10% 패턴 -->
+<!-- 거미줄 소환-->
+	  <EventGroup type="npcState" uniqueId="569,3001" value="combat" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="killNpc" targetNpcId="569,3900" next="none" /> 
+			<EventTask type="empty" next="time" nextValue="1.5" /> 
+			<EventTask type="Soundon" soundType="effectSound" soundId="7104" playTime="10000" next="none" />
+			<EventTask type="message" string="@dungeon:90693101" targetNpcId="569,3001" next="none" /> 
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900109" next="time" nextValue="1.0"/>
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900109" next="time" nextValue="1.0"/>
+  			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="3" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	  </EventGroup>
+
+	<EventGroup type="npcReset" uniqueId="569,3001" repeat="true">
+    <Event>
+      <EventTaskGroup>
+			<EventTask type="turnAi" turn="off" huntingZoneId="569" territoryId="56900003" templateId="3001" next="time" nextValue="1.0" />
+			<EventTask type="killNpc" targetNpcId="569,3013" next="none" /> 
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+			<EventTask type="message" string="@dungeon:90693000" style="combat" next="time" nextValue="1.0" />
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+			<EventTask type="turnAi" turn="on" huntingZoneId="569" territoryId="56900003" templateId="3001" next="none" />
+  			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="3" next="none" />
+  			<EventTask type="changePatternList"  targetNpcId="569,3001" patternListId="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	  
+<!--새끼거미 소환-->
+	<EventGroup type="none" id="904" name="부하 소환 시작_AI용이상상태" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+  			<EventTask type="abnormality" abnormalityId="5693007" target="npc" targetNpcId="569,3001" next="none" />
+ 		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="910" name="거미소환: 변신 후 소환 대사" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="Soundon" soundType="effectSound" soundId="7105" playTime="10000" next="none" />
+			<EventTask type="message" string="@dungeon:90693104" targetNpcId="569,3001" next="time" nextValue="1.0" /> 
+ 		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="905" name="부하 소환 후 패턴 2 시작" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+  			<EventTask type="changePatternList"  targetNpcId="569,3013" patternListId="2" next="none" />
+  			<EventTask type="changePatternList"  targetNpcId="569,3001" patternListId="2" next="time" nextValue="1.0" />
+  			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="4" next="time" nextValue="1.0" />
+ 			<EventTask type="abnormality" abnormalityId="5693003" target="npc" targetNpcId="569,3001" next="none" />
+			<EventTask type="abnormality" abnormalityId="5693008" target="npc" targetNpcId="569,3013" next="none" />
+ 		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="906" name="거미비_AI용이상상태" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+  			<EventTask type="abnormality" abnormalityId="5693009" target="npc" targetNpcId="569,3001" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="920" name="거미비_스킬패턴대사" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+ 			<EventTask type="Soundon" soundType="effectSound" soundId="7106" playTime="10000" next="none" />
+			<EventTask type="message" string="@dungeon:90693105" targetNpcId="569,3001" next="time" nextValue="3.5" /> 
+ 			<EventTask type="Soundon" soundType="effectSound" soundId="7107" playTime="10000" next="none" />
+			<EventTask type="message" string="@dungeon:90693106" targetNpcId="569,3001" next="none" /> 
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="907" name="패턴 2 종료, 패턴 1 시작" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+  			<EventTask type="changePatternList"  targetNpcId="569,3001" patternListId="1" next="time" nextValue="1.0" />
+  			<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="3" next="none" />
+ 			<EventTask type="abnormality" abnormalityId="5693010" target="npc" targetNpcId="569,3001" next="none" />
+ 		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!--물라(독살자) 사망 시 -->
+	<EventGroup type="npcHp" uniqueId="569,3001" value="0" repeat="true"> 
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="569" territoryId="56900109" next="none"/>
+				<EventTask type="changePatternList"  targetNpcId="569,3012" patternListId="1" next="none" />
+				<EventTask type="killNpc" targetNpcId="569,3013" next="time" nextValue="3.0" /> <!--새끼거미 kill-->
+				<EventTask type="Soundon" soundType="effectSound" soundId="7108" playTime="10000" next="none" />
+				<EventTask type="message" string="@dungeon:90693102" targetNpcId="569,3001" next="time" nextValue="5.0" /> 
+				<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="none"/>
+				<EventTask type="doActionScript" targetNpcId="469,2401" actionScriptId="4692401" next="time" nextValue="4.0" /> 
+				<EventTask type="updateQuest" questId="46901" taskId="31"  next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="469,501" value="0" repeat="true"> 
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="flag" name="보상상자" value="1" next="none" />		 
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!-- 물라 결계 밖으로 나갔을 때 데려오기 -->
+	<EventGroup type="none" id="921" name="결계 잠시 없앴다가 다시 나타나기" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+ 			<EventTask type="despawn" huntingZoneId="569" territoryId="56900112" next="time" nextValue="0.5" />  <!--결계 디스폰-->
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900112" next="none"  />  <!--결계 스폰-->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+<!--↑↑↑↑↑↑↑↑↑↑   3네임드(Boss) 관련 작업 내용 끝(passionjh0104)   ↑↑↑↑↑↑↑↑↑↑-->
+
+<!--↓↓↓↓↓↓↓↓↓↓   기억의석판, 탈출용 마법석 스폰 조건  (passionjh0104)   ↓↓↓↓↓↓↓↓↓↓-->   
+	<EventGroup type="npcHp" uniqueId="469,501" value="0" repeat="true"> 
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="469" territoryId="46900078" next="none"/>
+				<!--EventTask type="spawn" huntingZoneId="469" territoryId="46900258" next="none"/-->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+<!--↑↑↑↑↑↑↑↑↑↑  기억의석판, 탈출용 마법석 스폰 조건  (passionjh0104)    ↑↑↑↑↑↑↑↑↑↑-->
+
+<!--↓↓↓↓↓↓↓↓↓↓   추가임무 작업 내용 시작  (passionjh0104)   ↓↓↓↓↓↓↓↓↓↓-->   
+
+<!-- 추가임무: 사육사의 일지 (/@bookmark 46901) -->	
+	<EventGroup type="enterTerritory" uniqueId="469,46900242" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="사육사숨김" value="0" next="none" />
+				<EventTask type="flag" name="사육사노출" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="사육사미완료,사육사노출" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="1" uiOn="true" completion="false" message="@dungeon:90699001" tip="@dungeon:90699002" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="enterTerritory" uniqueId="569,56900093" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="사육사노출" value="0" next="none" />
+				<EventTask type="flag" name="사육사숨김" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="사육사미완료,사육사숨김" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="1" uiOn="false" completion="false" message="@dungeon:90699001" tip="@dungeon:90699002" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="talkNpc" uniqueId="469,1000" repeat="true">
+		<Event textId="2">
+			<EventTaskGroup>
+				<EventTask type="flag" name="사육사미완료" value="0" next="none" />
+				<EventTask type="flag" name="사육사완료" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="사육사완료" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="1" uiOn="false" completion="false" message="@dungeon:90699001" tip="@dungeon:90699002" next="time" nextValue="0.2" />
+				<EventTask type="additionalWorkUi" id="1" uiOn="true" completion="true" message="@dungeon:90699010" tip="@dungeon:90699009" next="time" nextValue="3" />
+				<EventTask type="additionalWorkUi" id="1" uiOn="false" completion="true" message="@dungeon:90699010" tip="@dungeon:90699009" next="none" />
+				<EventTask type="flag" name="사육사달성" value="1" next="none" />
+				<EventTask type="abnormality" abnormalityId="5694001" target="player" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="사육사노출,사육사달성" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="1" uiOn="false" completion="false" message="@dungeon:90699001" tip="@dungeon:90699002" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="사육사숨김,사육사달성" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="1" uiOn="false" completion="false" message="@dungeon:90699001" tip="@dungeon:90699002" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<!-- 추가임무: 주인없는 유품 (/@bookmark 46902) -->	
+	<EventGroup type="enterTerritory" uniqueId="469,46900218" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="유품숨김" value="0" next="none" />
+				<EventTask type="flag" name="유품노출" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="유품미완료,유품노출" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="2" uiOn="true" completion="false" message="@dungeon:90699003" tip="@dungeon:90699004" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="enterTerritory" uniqueId="469,46900246" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="유품노출" value="0" next="none" />
+				<EventTask type="flag" name="유품숨김" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="유품미완료,유품숨김" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="2" uiOn="false" completion="false" message="@dungeon:90699003" tip="@dungeon:90699004" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="talkNpc" uniqueId="469,1001" repeat="true">
+		<Event textId="2">
+			<EventTaskGroup>
+				<EventTask type="flag" name="유품미완료" value="0" next="none" />
+				<EventTask type="flag" name="유품완료" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="유품완료" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="2" uiOn="false" completion="false" message="@dungeon:90699003" tip="@dungeon:90699004" next="time" nextValue="0.2" />
+				<EventTask type="additionalWorkUi" id="2" uiOn="true" completion="true" message="@dungeon:90699010" tip="@dungeon:90699009" next="time" nextValue="3" />
+				<EventTask type="additionalWorkUi" id="2" uiOn="false" completion="true" message="@dungeon:90699010" tip="@dungeon:90699009" next="none" />
+				<EventTask type="flag" name="유품달성" value="1" next="none" />
+				<EventTask type="abnormality" abnormalityId="5694002" target="player" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="flag" name="유품노출,유품달성" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="2" uiOn="false" completion="false" message="@dungeon:90699003" tip="@dungeon:90699004" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="유품숨김,유품달성" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="2" uiOn="false" completion="false" message="@dungeon:90699003" tip="@dungeon:90699004" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	
+	
+	<!-- 추가 임무: 고블린 (/@bookmark 46903) -->	
+	
+
+	<EventGroup type="enterTerritory" uniqueId="469,46900169" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="고블린숨김" value="0" next="none" />
+				<EventTask type="flag" name="고블린노출" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="고블린미완료,고블린노출" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="3" uiOn="true" completion="false" message="@dungeon:90699005" tip="@dungeon:90699006" next="none" />
+				<EventTask type="flag" name="고블린대사" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="flag" name="고블린대사" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:90694008" style="combat" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+		
+	<EventGroup type="leaveTerritory" uniqueId="469,46900169" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="고블린노출" value="0" next="none" />
+				<EventTask type="flag" name="고블린숨김" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="고블린미완료,고블린숨김" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="3" uiOn="false" completion="false" message="@dungeon:90699005" tip="@dungeon:90699006" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="eliminate" territoryId="56900108">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:90694001" targetNpcId="469,1002" next="time" nextValue="2.0" />
+				<EventTask type="message" string="@dungeon:90694002" targetNpcId="469,1002" next="time" nextValue="2.0" />
+				<EventTask type="message" string="@dungeon:90694003" targetNpcId="469,1002" next="time" nextValue="2.0" />
+				<EventTask type="message" string="@dungeon:90694004" targetNpcId="469,1002" next="time" nextValue="2.0" />
+				<EventTask type="message" string="@dungeon:90694005" targetNpcId="469,1002" next="time" nextValue="2.0" />
+				<EventTask type="message" string="@dungeon:90694006" targetNpcId="469,1002" next="time" nextValue="2.0" />
+				<EventTask type="message" string="@dungeon:90694007" targetNpcId="469,1002" next="time" nextValue="2.0" />				
+				<EventTask type="abnormality" abnormalityId="5694003" target="player" next="none" />
+				<EventTask type="flag" name="고블린미완료" value="0" next="none" />
+				<EventTask type="flag" name="고블린완료" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="고블린완료" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="3" uiOn="false" completion="false" message="@dungeon:90699005" tip="@dungeon:90699006" next="time" nextValue="0.2" />
+				<EventTask type="additionalWorkUi" id="3" uiOn="true" completion="true" message="@dungeon:90699010" tip="@dungeon:90699009" next="time" nextValue="3" />
+				<EventTask type="additionalWorkUi" id="3" uiOn="false" completion="true" message="@dungeon:90699010" tip="@dungeon:90699009" next="none" />
+				<EventTask type="flag" name="고블린달성" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="flag" name="고블린노출,고블린달성" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="3" uiOn="false" completion="false" message="@dungeon:90699005" tip="@dungeon:90699006" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="고블린숨김,고블린달성" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="3" uiOn="false" completion="false" message="@dungeon:90699005" tip="@dungeon:90699006" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+	<!-- 추가 임무: 펜던트 (/@bookmark 46904) -->
+	
+	<EventGroup type="enterTerritory" uniqueId="469,46900171" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="펜던트숨김" value="0" next="none" />
+				<EventTask type="flag" name="펜던트노출" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="펜던트미완료,펜던트노출" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="4" uiOn="true" completion="false" message="@dungeon:90699007" tip="@dungeon:90699008" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="leaveTerritory" uniqueId="469,46900171" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="펜던트노출" value="0" next="none" />
+				<EventTask type="flag" name="펜던트숨김" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="펜던트미완료,펜던트숨김" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="4" uiOn="false" completion="false" message="@dungeon:90699007" tip="@dungeon:90699008" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="talkNpc" uniqueId="469,1003" repeat="true">
+		<Event textId="2">
+			<EventTaskGroup>
+				<EventTask type="flag" name="펜던트미완료" value="0" next="none" />
+				<EventTask type="flag" name="펜던트완료" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="flag" name="펜던트완료" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="4" uiOn="false" completion="false" message="@dungeon:90699007" tip="@dungeon:90699008" next="time" nextValue="0.2" />
+				<EventTask type="additionalWorkUi" id="4" uiOn="true" completion="true" message="@dungeon:90699010" tip="@dungeon:90699009" next="time" nextValue="3" />
+				<EventTask type="additionalWorkUi" id="4" uiOn="false" completion="true" message="@dungeon:90699010" tip="@dungeon:90699009" next="none" />
+				<EventTask type="flag" name="펜던트달성" value="1" next="none" />
+				<EventTask type="abnormality" abnormalityId="5694004" target="player" next="none" />
+				<EventTask type="message" string="@dungeon:90694009" targetNpcId="469,1003" next="time" nextValue="1.0" /> <!-- 소매치기 대사 -->
+				<EventTask type="despawn" huntingZoneId="469" territoryId="46900170" next="none"  /> <!--소매치기 디스폰-->	 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="flag" name="펜던트노출,펜던트달성" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="4" uiOn="false" completion="false" message="@dungeon:90699007" tip="@dungeon:90699008" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="펜던트숨김,펜던트달성" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="additionalWorkUi" id="4" uiOn="false" completion="false" message="@dungeon:90699007" tip="@dungeon:90699008" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+
+	
+<!--↑↑↑↑↑↑↑↑↑↑  추가 임무 작업 내용 끝(passionjh0104)   ↑↑↑↑↑↑↑↑↑↑-->
+
+
+<!--↓↓↓↓↓↓↓↓↓↓   전투 진행 연출 시작  (passionjh0104)   ↓↓↓↓↓↓↓↓↓↓-->   
+
+	<!--1네임드 연출 -->	
+	<EventGroup type="npcHp" uniqueId="569,1000" value="30" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9069010" targetNpcId="469,301" next="time" nextValue="1.5" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="569,1000" value="60" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9069010" targetNpcId="469,301" next="time" nextValue="1.5" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="569,1000" value="90" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9069010" targetNpcId="469,301" next="time" nextValue="1.5" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="569,1000" value="70" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9069011" targetNpcId="469,301" next="time" nextValue="1.5" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="569,1000" value="40" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9069011" targetNpcId="469,301" next="time" nextValue="1.5" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="569,1000" value="10" repeat="true">
+		<Event>
+			<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:9069011" targetNpcId="469,301" next="time" nextValue="1.5" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--↑↑↑↑↑↑↑↑↑↑  전투 진행 연출 끝 (passionjh0104)   ↑↑↑↑↑↑↑↑↑↑-->
+
+	
+<!--↓↓↓↓↓↓↓↓↓↓   1네임드, 2네임드 작업 내용 시작(bbkim)   ↓↓↓↓↓↓↓↓↓↓-->
+
+	<!-- 1네임드 입장 -->
+	
+	<EventGroup type="npcReset" uniqueId="569,1000" repeat="true">
+	<Event>
+     <EventTaskGroup>
+			<EventTask type="message" string="@dungeon:90693000" style="combat" next="time" nextValue="3" />
+ 			<EventTask type="despawn" huntingZoneId="569" territoryId="56900092" next="none"  /> <!--먹이우리 디스폰-->	  
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900001" next="none" /> <!--보스 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900155" next="none" /> <!--로니드 디스폰-->
+ 			<EventTask type="spawn" huntingZoneId="469" territoryId="46900155" next="none"  /> <!--로니드 스폰-->	  
+ 			<EventTask type="spawn" huntingZoneId="569" territoryId="56900092" next="none"  /> <!--먹이우리 스폰-->	  
+			<EventTask type="empty" next="time" nextValue="1" />
+ 			<EventTask type="spawn" huntingZoneId="569" territoryId="56900001" next="none"  /> <!--보스 스폰-->	  
+     </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	  
+	<!--1네임드 전투 돌입-->
+	  <EventGroup type="npcState" uniqueId="569,1000" value="combat" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="npcAi" targetNpcId="469,100" aiid="100" next="none" /> <!--시오나 전투 준비-->
+			<!--EventTask type="flag" name="46901_7" value="0" next="none" /-->		 
+			<!--EventTask type="flag" name="1네임드입장" value="0" next="none" /-->		 
+			<EventTask type="empty" next="time" nextValue="1" />
+			<EventTask type="message" string="@dungeon:90691001" targetNpcId="569,1000" next="time" nextValue="4" /> 
+			<EventTask type="message" string="@dungeon:90691003" style="combat" next="time" nextValue="4" />
+			<EventTask type="message" string="@dungeon:90691004" targetNpcId="469,301" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	  </EventGroup>	
+
+
+	<!--1네임드 우리 파괴 시 재시작-->
+	  <EventGroup type="npcHp" uniqueId="569,1001" value="0" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="message" string="@dungeon:90691005" style="combat" next="none" />
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900001" next="none" /> <!--보스 디스폰-->
+			<EventTask type="despawn" huntingZoneId="469" territoryId="46900155" next="time" nextValue="3" /> <!--로니드 디스폰-->
+ 			<EventTask type="spawn" huntingZoneId="469" territoryId="46900155" next="none"  /> <!--로니드 스폰-->	  
+ 			<EventTask type="spawn" huntingZoneId="569" territoryId="56900092" next="none"  /> <!--먹이우리 스폰-->	  
+ 			<EventTask type="spawn" huntingZoneId="569" territoryId="56900001" next="none"  /> <!--보스 스폰-->	  
+		  </EventTaskGroup>
+		</Event>
+	  </EventGroup>
+	
+	  
+	<!-- 2네임드 입장 -->
+	  
+	  <EventGroup type="enterTerritory" uniqueId="469,46900249">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="updateQuest" questId="46901" taskId="23"  next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	  </EventGroup>
+
+	  <EventGroup type="npcState" uniqueId="569,2000" value="combat" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="46901_24" value="0" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	  </EventGroup>
+
+	<EventGroup type="npcReset" uniqueId="569,2000" repeat="true">
+	<Event>
+     <EventTaskGroup>
+			<EventTask type="empty" next="time" nextValue="1.0"  /> 
+			<EventTask type="message" string="@dungeon:90693000" style="combat" next="time" nextValue="1.0"  />
+			<EventTask type="despawn" huntingZoneId="569" territoryId="56900002" next="none" />
+			<EventTask type="spawn" huntingZoneId="569" territoryId="56900002" next="time" nextValue="1.0" />
+			<EventTask type="flag" name="46901_24" value="0" next="none" />
+     </EventTaskGroup>
+    </Event>
+    </EventGroup>
+	  
+<!--↑↑↑↑↑↑↑↑↑↑   1네임드, 2네임드 작업 내용 끝(bbkim)   ↑↑↑↑↑↑↑↑↑↑-->
+
+
+<!--↓↓↓↓↓↓↓↓↓↓   일반 2네임드 작업 내용 시작(crimers)   ↓↓↓↓↓↓↓↓↓↓-->
+	
+	<!-- 2네임드(일반) 스킬 사용 -->
+	
+	<!-- 사디킨 방어도 업 -->
+	
+	<EventGroup type="none" id="23" name="사디킨 보호막 사용" repeat="true" >
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="사디킨보호막" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="사디킨보호막" repeat="false">
+		<Event>
+		  <EventTaskGroup>
+		  	<EventTask type="flag" name="사디킨보호막" value="0" next="none" />
+			<EventTask type="flag" name="1차완료" value="1" next="none" />
+			<EventTask type="abnormality" abnormalityId="5692006" target="npc" targetNpcId="569,6900" next="none" />
+			<EventTask type="message" string="@dungeon:90692014" style="combat" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="사디킨보호막,1차완료" repeat="false">
+		<Event>
+		  <EventTaskGroup>
+		  	<EventTask type="flag" name="사디킨보호막" value="0" next="none" />
+			<EventTask type="flag" name="1차완료" value="0" next="none" />
+			<EventTask type="abnormality" abnormalityId="5692006" target="npc" targetNpcId="569,6900" next="none" />
+			<EventTask type="message" string="@dungeon:90692018" style="combat" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="none" id="20" name="마즈키 회복 사용" repeat="true" >
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="마즈키회복" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="마즈키회복" repeat="false">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="마즈키회복" value="0" next="none" />
+			<EventTask type="flag" name="마즈키회복완료" value="1" next="time" nextValue="1.0" />
+			<EventTask type="message" string="@dungeon:90692001" style="combat" next="time" nextValue="0.0"  />
+			<EventTask type="abnormality" abnormalityId="5692003" target="npc" targetNpcId="569,4000" next="time" nextValue="2.0" />
+			<EventTask type="message" string="@dungeon:90692002" style="combat" next="time" nextValue="1.0" />
+			<EventTask type="message" string="@dungeon:90692003" targetNpcId="569,6900" next="time" nextValue="1.0" />
+			<EventTask type="abnormality" abnormalityId="5692008" target="npc" targetNpcId="569,6900" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="마즈키회복,마즈키회복완료" repeat="false">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="message" string="@dungeon:90692001" style="combat" next="time" nextValue="0.0"  />
+			<EventTask type="abnormality" abnormalityId="5692003" target="npc" targetNpcId="569,4000" next="time" nextValue="3.0" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="21" name="사디킨 죽이기 전 대사" repeat="false" >
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="message" string="@dungeon:90692004" targetNpcId="569,6900" next="time" nextValue="2.0" />
+			<EventTask type="abnormality" abnormalityId="5692008" target="npc" targetNpcId="569,6900" next="time" nextValue="1.0" />
+			<EventTask type="message" string="@dungeon:90692005" targetNpcId="569,6900" next="time" nextValue="2.0" />
+			<EventTask type="message" string="@dungeon:90692015" style="combat" next="time" nextValue="1.0" />
+			<EventTask type="message" string="@dungeon:90692016" targetNpcId="569,6900" next="time" nextValue="1.0" />
+			<EventTask type="message" string="@dungeon:90692006" style="combat" next="time" nextValue="2.0" />
+			<EventTask type="message" string="@dungeon:90692007" targetNpcId="569,6900" next="time" nextValue="2.0" />
+			<EventTask type="message" string="@dungeon:90692008" targetNpcId="569,4000" next="time" nextValue="1.0" />
+			<EventTask type="message" string="@dungeon:90692009" targetNpcId="569,6900" next="time" nextValue="1.0" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="24" name="마즈키 방어도 다운" repeat="true" >
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="abnormality" abnormalityId="5692007" target="npc" targetNpcId="569,4000" next="none" />
+			<EventTask type="message" string="@dungeon:90692012" style="combat" next="time" nextValue="6.0" />
+			<EventTask type="abnormality" abnormalityId="5692001" target="npc" targetNpcId="569,4000" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcHp" uniqueId="569,4000" value="0" repeat="true"> 
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="message" string="@dungeon:90692017" targetNpcId="569,4000" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	  </EventGroup>
+
+	<EventGroup type="npcHp" uniqueId="569,6900" value="0" repeat="true"> 
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="사디킨죽음" value="1" next="none" />
+			<EventTask type="message" string="@dungeon:90692010" targetNpcId="569,4000" next="time" nextValue="1.0" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcState" uniqueId="569,4000" value="Caution" repeat="true" >
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="마즈키전투모드" value="1" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	
+	<EventGroup type="flag" name="사디킨죽음,마즈키전투모드" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+			<EventTask type="flag" name="마즈키전투모드" value="0" next="none" />
+			<EventTask type="abnormality" abnormalityId="5692002" target="npc" targetNpcId="569,4000" next="time" nextValue="1.0"/>
+			<EventTask type="message" string="@dungeon:90692011" targetNpcId="569,4000" next="time" nextValue="1.0" />
+			<EventTask type="message" string="@dungeon:90692013" style="combat" next="time" nextValue="1.0" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	  
+	<!-- 끝! -->
+<!--↑↑↑↑↑↑↑↑↑↑   일반 2네임드 작업 내용 끝(crimers)   ↑↑↑↑↑↑↑↑↑↑-->
+
+</Dungeon>

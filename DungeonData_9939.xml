@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9939" name="@dungeon:9939" startPos="56352,-101167,2735" startDir="180" exitContinentId="7013" exitPos="-60538,60715,1056">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="65" />
+	<Retry retryId="2" />
+	<ClearCondition huntingZoneId="939" templateId="3001" amount="1" killCount="1" />
+	<VisibleBGGroup defaultGroupId="2">
+		<VisibleBG groupId="0" name="Revolt_Village_Before" />
+		<VisibleBG groupId="2" name="Revolt_Village_After" />
+	</VisibleBGGroup>
+<!--던전 초기 설정-->	
+	<!--던전 생성 초기화 이벤트 / 1네임드 스폰 -->
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900002" next="none" /> <!-- 1네임드 전투 구간 스폰  -->
+				<!--1네임드 길찾기 가이드-->
+				<EventTask type="guideOn" nameId="939,911" id="1" pos="55529.26953125,-97410.90625000,2197.61328125" next="none" />
+				<!--입구~1넴 쫄 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900026" next="none" />
+				<!-- 모든 차폐문 스폰  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900056" next="none" /> <!-- 1입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900050" next="none" /> <!-- 1출구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900051" next="none" /> <!-- 2입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900052" next="none" /> <!-- 2출구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900053" next="none" /> <!-- 3입구 차폐문  -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--잠입경로1 침묵-->
+	<EventGroup type="enterTerritory" uniqueId="939,93900058" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93900004" target="player" turn="on" territoryId="93900058" huntingZoneId="939" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="leaveTerritory" uniqueId="939,93900058" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93900004" target="player" turn="off" exceptTerritoryId="93900058,93900059" exceptHuntingZoneId="939" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="939,93900002" repeat="true"><!--1네임드 전투 공간 진입 시 살금살금 해제-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93900004" target="player" turn="off" territoryId="93900002" huntingZoneId="939" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="939,93900061" repeat="true"><!--추락하여 일반경로로 진입 시 살금살금 해제-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93900004" target="player" turn="off" territoryId="93900061" huntingZoneId="939" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--잠입경로2 침묵-->
+	<EventGroup type="enterTerritory" uniqueId="939,93900059" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93900004" target="player" turn="on" territoryId="93900059" huntingZoneId="939" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="leaveTerritory" uniqueId="939,93900059" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93900004" target="player" turn="off" exceptTerritoryId="93900058,93900059" exceptHuntingZoneId="939" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="939,93900062" repeat="true"><!--추락하여 일반 경로 진입 시 살금살금 해제-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93900004" target="player" turn="off" territoryId="93900062" huntingZoneId="939" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="939,93900003" repeat="true"><!--2네임드 테리토리 진입 시 살금살금 해제-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93900004" target="player" turn="off" territoryId="93900003" huntingZoneId="939" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 입구~1넴구간 쫄 처치 시 1입구 차폐문 디스폰 -->
+	<EventGroup type="eliminate" territoryId="93900026">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900056" next="none" /><!-- 1입구 차폐문  -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1넴~퀘스트구간 쫄 처치 시 퀘스트 지역 입구문 처치 가능 -->
+	<EventGroup type="eliminate" territoryId="93900027">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="2"/>
+				<EventTask type="abnormality" abnormalityId="93900002" target="npc" turn="off" targetNpcId="939,4009" next="none" /><!-- 1입구 차폐문  -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--2넴 앞 쫄 처치 시 2네임드 입구 문 디스폰-->		
+	<EventGroup type="eliminate" territoryId="93900028">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900051" next="none" /><!-- 2입구 차폐문  -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!--1넴 초기 설정-->	
+	<!-- 1네임드 리셋 / 1네임드 테리토리 디스폰 후 스폰 -->	
+	<EventGroup type="npcReset" uniqueId="939,1000" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--1네임드 처치 시 타이밍 이슈를 막기 위한 던전 이벤트 실행 취소-->
+				<EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900005" next="none" /><!--투명npc 테리토리 디스폰-->
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="93910002" target="player" turn="off" next="none" /><!--스턴5초-->
+				<EventTask type="abnormality" abnormalityId="93910003" target="player" turn="off" next="none" /><!--출혈15초-->
+				<EventTask type="abnormality" abnormalityId="93910005" target="player" turn="off" next="none" /><!--인화물질 중독45초-->
+				<EventTask type="abnormality" abnormalityId="93910006" target="player" turn="off" next="none" /><!--인화물질 시간초과10초-->
+				<EventTask type="abnormality" abnormalityId="93910007" target="player" turn="off" next="none" /><!--인화물질 면역3초-->
+				<EventTask type="abnormality" abnormalityId="93910008" target="player" turn="off" next="none" /><!--라운드어택 피격체크5초-->
+				<EventTask type="abnormality" abnormalityId="93910010" target="player" turn="off" next="none" /><!--인화물질 스턴 5초-->
+				<EventTask type="abnormality" abnormalityId="93910013" target="player" turn="off" next="none" /><!--화상10초-->
+				<!--1네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900056" next="none" /> <!-- 1입구 차폐문  -->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900057" next="none" /> <!-- 던전 입구 차폐문  -->
+				<!-- 1네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900033" next="none" />
+				<!--1네임드 테리토리 디스폰 후 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900002" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900002" next="none" />
+				<!--1네임드 처치 시 타이밍이슈로 인하여 인화물질 중독 이상상태가 해제되지 않는 문제 해결을 위한 안전장치-->
+				<EventTask type="abnormality" abnormalityId="93910005" target="player" turn="off" next="none" /><!--인화물질 중독45초-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1네임드 HP99에 입구 차단문 생성 -->
+	<EventGroup type="npcHp" uniqueId="939,1000" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--차단문 생성 메세지-->
+				<EventTask type="message" string="@dungeon:9939001" style="combat" next="time" nextValue="5" />
+				<!--1네임드 입구 문 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900056" next="none" /> <!-- 1입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900057" next="none" /> <!-- 던전 입구 차폐문  -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1네임드 전투상태 돌입 / 차원의 마법석 제거 -->
+	<EventGroup type="npcState" name="1네임드 전투 상태되면 1네임드 앞으로 이동하는 차원의 마법석 제거" uniqueId="939,1000" value="combat" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+				<!-- 1네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900033" next="none" />
+				<!--1네임드 앞 쫄구간-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900026" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1네임드 처치 / 1네임드, 1네임드 출입구 디스폰 / 2네임드 스폰 -->
+	<EventGroup type="npcHp" uniqueId="939,1000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--1네임드 처치 시 타이밍 이슈를 막기 위한 던전 이벤트 실행 취소-->
+				<EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" />
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="93910002" target="player" turn="off" next="none" /><!--스턴5초-->
+				<EventTask type="abnormality" abnormalityId="93910003" target="player" turn="off" next="none" /><!--출혈15초-->
+				<EventTask type="abnormality" abnormalityId="93910005" target="player" turn="off" next="none" /><!--인화물질 중독45초-->
+				<EventTask type="abnormality" abnormalityId="93910006" target="player" turn="off" next="none" /><!--인화물질 시간초과10초-->
+				<EventTask type="abnormality" abnormalityId="93910007" target="player" turn="off" next="none" /><!--인화물질 면역3초-->
+				<EventTask type="abnormality" abnormalityId="93910008" target="player" turn="off" next="none" /><!--라운드어택 피격체크5초-->
+				<EventTask type="abnormality" abnormalityId="93910010" target="player" turn="off" next="none" /><!--인화물질 스턴 5초-->
+				<EventTask type="abnormality" abnormalityId="93910013" target="player" turn="off" next="none" /><!--화상10초-->
+				<!--2네임드 길찾기 가이드-->
+				<EventTask type="guideOff" id="1" next="none" />
+				<EventTask type="guideOn" nameId="939,912" id="2" pos="53484.55078125,-92430.19531250,1381.29882813" next="none" />
+				<!--2네임드, 투석기 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900003" next="none" />
+				<!--1네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900056" next="none" /> <!-- 1입구 차폐문  -->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900057" next="none" /> <!-- 던전 입구 차폐문  -->
+				<!--1네임드 출구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900050" next="none" /> <!-- 1출구 차폐문  -->
+				<!--이동구간 오칸 일반몹 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900027" next="none" />
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900028" next="none" />
+				<!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900034" next="none" />
+				<!--1네임드 디스폰 대기-->
+				<EventTask type="empty" next="time" nextValue="3" />
+				<!--1네임드 테리토리 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900002" next="time" nextValue="1"/>
+				<!--1네임드 처치 시 타이밍이슈로 인하여 인화물질 중독 이상상태가 해제되지 않는 문제 해결을 위한 안전장치-->
+				<EventTask type="abnormality" abnormalityId="93910005" target="player" turn="off" next="none" /><!--인화물질 중독45초-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!--2넴 초기 설정-->
+	<!-- 2네임드 리셋 / 2네임드 테리토리 디스폰 후 스폰 -->	
+	<EventGroup type="npcReset" uniqueId="939,2000" repeat="true">
+		<Event>
+			<EventTaskGroup>			
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="93920001" target="player" turn="off" next="none" /><!--스턴5초-->
+				<EventTask type="abnormality" abnormalityId="93920002" target="player" turn="off" next="none" /><!--스턴5초-->
+				<EventTask type="abnormality" abnormalityId="93920003" target="player" turn="off" next="none" /><!--출혈15초-->
+				<EventTask type="abnormality" abnormalityId="93920004" target="player" turn="off" next="none" /><!--투석기 1대상-->
+				<EventTask type="abnormality" abnormalityId="93920005" target="player" turn="off" next="none" /><!--투석기 2대상-->
+				<EventTask type="abnormality" abnormalityId="93920006" target="player" turn="off" next="none" /><!--투석기 3대상-->
+				<EventTask type="abnormality" abnormalityId="93920007" target="player" turn="off" next="none" /><!--투석기 4대상-->
+				<EventTask type="abnormality" abnormalityId="93920008" target="player" turn="off" next="none" /><!--집중포화-->
+				<EventTask type="abnormality" abnormalityId="93920010" target="player" turn="off" next="none" /><!--탱커 보호용-->
+				<EventTask type="abnormality" abnormalityId="93920012" target="player" turn="off" next="none" /><!--끈끈이 이속감소-->
+				<EventTask type="abnormality" abnormalityId="93920013" target="player" turn="off" next="none" /><!--회오리 면역-->
+				<EventTask type="abnormality" abnormalityId="93920014" target="player" turn="off" next="none" /><!--회오리 효과-->
+				<EventTask type="abnormality" abnormalityId="93920015" target="player" turn="off" next="none" /><!--회오리 효과 면역-->
+				<EventTask type="abnormality" abnormalityId="93920019" target="player" turn="off" next="none" /><!--포획용 스턴-->
+				<!--2네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900051" next="none" /> <!-- 2입구 차폐문  -->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900057" next="none" /> <!-- 던전 입구 차폐문  -->
+				<!--입구에 2넴 앞 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900034" next="none" />
+				<!--2네임드 테리토리 디스폰 후 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900003" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900003" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!-- 2네임드 전투상태 돌입 / 차원의 마법석 제거 -->
+	<EventGroup type="npcState" name="2네임드 전투 상태되면 2네임드 앞으로 이동하는 차원의 마법석 제거" uniqueId="939,2000" value="combat" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+				<!-- 2네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900034" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 HP99에 입구 차단문 생성 -->
+	<EventGroup type="npcHp" uniqueId="939,2000" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--차단문 생성 메세지-->
+				<EventTask type="message" string="@dungeon:9939001" style="combat" next="time" nextValue="5" />
+				<!--2네임드 입구 문 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900051" next="none" /> <!-- 2입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900057" next="none" /> <!-- 던전 입구 차폐문  -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2네임드 처치 / 2네임드, 2네임드 출입구 디스폰 / 3네임드 스폰 -->
+	<EventGroup type="npcHp" uniqueId="939,2000" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="93920001" target="player" turn="off" next="none" /><!--스턴5초-->
+				<EventTask type="abnormality" abnormalityId="93920002" target="player" turn="off" next="none" /><!--스턴5초-->
+				<EventTask type="abnormality" abnormalityId="93920003" target="player" turn="off" next="none" /><!--출혈15초-->
+				<EventTask type="abnormality" abnormalityId="93920004" target="player" turn="off" next="none" /><!--투석기 1대상-->
+				<EventTask type="abnormality" abnormalityId="93920005" target="player" turn="off" next="none" /><!--투석기 2대상-->
+				<EventTask type="abnormality" abnormalityId="93920006" target="player" turn="off" next="none" /><!--투석기 3대상-->
+				<EventTask type="abnormality" abnormalityId="93920007" target="player" turn="off" next="none" /><!--투석기 4대상-->
+				<EventTask type="abnormality" abnormalityId="93920008" target="player" turn="off" next="none" /><!--집중포화-->
+				<EventTask type="abnormality" abnormalityId="93920010" target="player" turn="off" next="none" /><!--탱커 보호용-->
+				<EventTask type="abnormality" abnormalityId="93920012" target="player" turn="off" next="none" /><!--끈끈이 이속감소-->
+				<EventTask type="abnormality" abnormalityId="93920013" target="player" turn="off" next="none" /><!--회오리 면역-->
+				<EventTask type="abnormality" abnormalityId="93920014" target="player" turn="off" next="none" /><!--회오리 효과-->
+				<EventTask type="abnormality" abnormalityId="93920015" target="player" turn="off" next="none" /><!--회오리 효과 면역-->
+				<EventTask type="abnormality" abnormalityId="93920019" target="player" turn="off" next="none" /><!--포획용 스턴-->
+				<!--3네임드 길찾기 가이드-->
+				<EventTask type="guideOff" id="2" next="none" />
+				<EventTask type="guideOn" nameId="939,913" id="3" pos="51412.06250000,-86915.17187500,1167.32385254" next="none" />
+				<!--3네임드 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900004" next="none" />
+				<!--2네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900051" next="none" /> <!-- 2입구 차폐문  -->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900057" next="none" /> <!-- 던전 입구 차폐문  -->
+				<!--2네임드 출구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900052" next="none" /> <!-- 2출구 차폐문  -->
+				<!--3네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900053" next="none" /> <!-- 3입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900055" next="none" /> <!-- 3입구 차폐문(열림)  -->
+				<!--입구에 3넴 앞 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900035" next="none" />
+				<!--2네임드 디스폰 대기-->
+				<EventTask type="empty" next="time" nextValue="3" />
+				<!--2네임드, 투석기 테리토리 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900003" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--2네임드 HP대역별 AI 활성화-->
+	<EventGroup type="npcHp" uniqueId="939,2000" value="90" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93920010" target="aggro" targetNpcId="939,2000" min="1" max="1" next="none" />
+				<EventTask type="message" string="@dungeon:9939201" style="default" next="time" nextValue="0" />
+				<EventTask type="changePatternList" targetNpcId="939,93921" patternListId="2" next="none" />
+				<EventTask type="abnormality" abnormalityId="93920022" target="npc" targetNpcId="939,93921" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="939,2000" value="70" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93920010" target="aggro" targetNpcId="939,2000" min="1" max="1" next="none" />
+				<EventTask type="message" string="@dungeon:9939202" style="default" next="time" nextValue="0" />
+				<EventTask type="changePatternList" targetNpcId="939,93922" patternListId="2" next="none" />
+				<EventTask type="abnormality" abnormalityId="93920022" target="npc" targetNpcId="939,93922" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="939,2000" value="50" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93920010" target="aggro" targetNpcId="939,2000" min="1" max="1" next="none" />
+				<EventTask type="message" string="@dungeon:9939203" style="default" next="time" nextValue="0" />
+				<EventTask type="changePatternList" targetNpcId="939,93923" patternListId="2" next="none" />
+				<EventTask type="abnormality" abnormalityId="93920022" target="npc" targetNpcId="939,93923" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="939,2000" value="30" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93920010" target="aggro" targetNpcId="939,2000" min="1" max="1" next="none" />
+				<EventTask type="message" string="@dungeon:9939204" style="default" next="time" nextValue="0" />
+				<EventTask type="changePatternList" targetNpcId="939,93924" patternListId="2" next="none" />
+				<EventTask type="abnormality" abnormalityId="93920022" target="npc" targetNpcId="939,93924" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+
+<!--3넴 초기 설정-->
+	<!-- 3네임드 리셋 / 3네임드 테리토리 디스폰 후 스폰 -->
+	<EventGroup type="npcReset" uniqueId="939,3001" repeat="true">
+		<Event>
+			<EventTaskGroup>			
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="93930001" target="player" turn="off" next="none" /><!--누킹 대상1-->
+				<EventTask type="abnormality" abnormalityId="93930002" target="player" turn="off" next="none" /><!--누킹 대상2-->
+				<EventTask type="abnormality" abnormalityId="93930003" target="player" turn="off" next="none" /><!--누킹 대상3-->
+				<EventTask type="abnormality" abnormalityId="93930004" target="player" turn="off" next="none" /><!--누킹 대상4-->
+				<EventTask type="abnormality" abnormalityId="93930005" target="player" turn="off" next="none" /><!--누킹 대상5-->
+				<EventTask type="abnormality" abnormalityId="93930007" target="player" turn="off" next="none" /><!--대쉬 대상1-->
+				<EventTask type="abnormality" abnormalityId="93930008" target="player" turn="off" next="none" /><!--대쉬 대상2-->
+				<EventTask type="abnormality" abnormalityId="93930009" target="player" turn="off" next="none" /><!--대쉬 대상3-->
+				<EventTask type="abnormality" abnormalityId="93930010" target="player" turn="off" next="none" /><!--스턴 4초-->
+				<EventTask type="abnormality" abnormalityId="93930011" target="player" turn="off" next="none" /><!--출혈 10초-->
+				<EventTask type="abnormality" abnormalityId="93930012" target="player" turn="off" next="none" /><!--스턴 5초-->
+				<EventTask type="abnormality" abnormalityId="93930014" target="player" turn="off" next="none" /><!--3페이즈 누킹 탱커-->
+				<EventTask type="abnormality" abnormalityId="93930015" target="player" turn="off" next="none" /><!--3페이즈 누킹 대상-->
+				<EventTask type="abnormality" abnormalityId="93930017" target="player" turn="off" next="none" /><!--일격타 대상-->
+				<!--3네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900053" next="none" /> <!-- 3입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900055" next="none" /> <!-- 3입구 차폐문(열림)  -->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900057" next="none" /> <!-- 던전 입구 차폐문  -->
+				<!-- 3네임드 입구로 가는 차원의 마법석 -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900035" next="none" /> 
+				<!--3네임드 테리토리 디스폰 후 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900004" next="time" nextValue="2" />
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900004" next="time" nextValue="2" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!-- 3네임드 전투상태 돌입 / 차원의 마법석 제거 -->
+	<EventGroup type="npcState" name="3네임드 전투 상태되면 3네임드 앞으로 이동하는 차원의 마법석 제거" uniqueId="939,3001" value="combat" repeat="true">
+ 		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900035" next="none" /> <!-- 3네임드 입구로 가는 차원의 마법석 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3네임드 HP99에 입구 차단문 생성 -->
+	<EventGroup type="npcHp" uniqueId="939,3001" value="99" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!--차단문 생성 메세지-->
+				<EventTask type="message" string="@dungeon:9939001" style="combat" next="time" nextValue="5" />
+				<!--3네임드 입구 문 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900055" next="none" /> <!-- 3입구 차폐문(열림)  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900053" next="none" /> <!-- 3입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900057" next="none" /> <!-- 던전 입구 차폐문  -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3네임드 처치 / 3네임드, 3네임드 출입구 디스폰 / 3네임드 스폰 -->
+	<EventGroup type="npcHp" uniqueId="939,3001" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<!-- PC에게 걸리는 이상상태 해제 (임시) -->
+				<EventTask type="abnormality" abnormalityId="93930001" target="player" turn="off" next="none" /><!--누킹 대상1-->
+				<EventTask type="abnormality" abnormalityId="93930002" target="player" turn="off" next="none" /><!--누킹 대상2-->
+				<EventTask type="abnormality" abnormalityId="93930003" target="player" turn="off" next="none" /><!--누킹 대상3-->
+				<EventTask type="abnormality" abnormalityId="93930004" target="player" turn="off" next="none" /><!--누킹 대상4-->
+				<EventTask type="abnormality" abnormalityId="93930005" target="player" turn="off" next="none" /><!--누킹 대상5-->
+				<EventTask type="abnormality" abnormalityId="93930007" target="player" turn="off" next="none" /><!--대쉬 대상1-->
+				<EventTask type="abnormality" abnormalityId="93930008" target="player" turn="off" next="none" /><!--대쉬 대상2-->
+				<EventTask type="abnormality" abnormalityId="93930009" target="player" turn="off" next="none" /><!--대쉬 대상3-->
+				<EventTask type="abnormality" abnormalityId="93930010" target="player" turn="off" next="none" /><!--스턴 4초-->
+				<EventTask type="abnormality" abnormalityId="93930011" target="player" turn="off" next="none" /><!--출혈 10초-->
+				<EventTask type="abnormality" abnormalityId="93930012" target="player" turn="off" next="none" /><!--스턴 5초-->
+				<EventTask type="abnormality" abnormalityId="93930014" target="player" turn="off" next="none" /><!--3페이즈 누킹 탱커-->
+				<EventTask type="abnormality" abnormalityId="93930015" target="player" turn="off" next="none" /><!--3페이즈 누킹 대상-->
+				<EventTask type="abnormality" abnormalityId="93930017" target="player" turn="off" next="none" /><!--일격타 대상-->
+				<!--3네임드 길찾기 가이드 off-->
+				<EventTask type="guideOff" id="3" next="none" />
+				<!--퇴장용 마법석-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900036" next="none" />
+				<!--3네임드 입구 문 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900053" next="none" /> <!-- 3입구 차폐문  -->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900055" next="none" /> <!-- 3입구 차폐문(열림) -->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900057" next="none" /> <!-- 던전 입구 차폐문  -->
+				<!--입구에 3넴 앞 마법석 스폰-->
+				<EventTask type="spawn" huntingZoneId="939" territoryId="93900035" next="none" />
+				<!--3네임드 디스폰 대기-->
+				<EventTask type="empty" next="time" nextValue="3" />
+				<!--3네임드 테리토리 디스폰-->
+				<EventTask type="deSpawn" huntingZoneId="939" territoryId="93900004" next="time" nextValue="2" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+	
+<!--공통 사용 이벤트-->
+	<!--AI용 던전 이벤트-->
+	<EventGroup type="none" id="1" name="효과없음" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+<!--1넴 사용 이벤트-->
+	<!--1넴 _인화물질 이상상태 관련 이벤트 그룹-->
+	<EventGroup type="none" id="101" name="1넴 인화물질 이상상태 부여" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93910007" target="aggro" targetNpcId="939,1000" min="1" max="1" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="93910005" target="random" strictly="false" previousTargetAbnormalityKind="28807" min="2" max="2" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="102" name="1넴 불기둥 스킬 사용 트리거" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="93910009" target="npc" targetNpcId="939,93911" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="93910009" target="npc" targetNpcId="939,93912" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="93910009" target="npc" targetNpcId="939,93913" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="93910009" target="npc" targetNpcId="939,93914" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+<!--2넴 사용 이벤트-->	
+	<!--2넴 _ 투석기 작동-->
+	<EventGroup type="none" id="201" name="투석기 작동 정지[형광물질]" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93920009" target="npc" targetNpcId="939,93921" next="none" />
+				<EventTask type="abnormality" abnormalityId="93920009" target="npc" targetNpcId="939,93922" next="none" />
+				<EventTask type="abnormality" abnormalityId="93920009" target="npc" targetNpcId="939,93923" next="none" />
+				<EventTask type="abnormality" abnormalityId="93920009" target="npc" targetNpcId="939,93924" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!--2넴 _ 광역 폭발 패턴가이드-->
+	<EventGroup type="none" id="202" name="2넴 패턴 가이드_전멸" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="none" targetBossId="939,2000" patternGuide="annihilation" patternShowTime="5"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!--2넴 _ 탱커 이상상태 뿌리기-->
+	<EventGroup type="none" id="203" name="2넴 투석기 대상 탱커제외" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93920010" target="aggro" targetNpcId="939,2000" min="1" max="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+
+<!--3넴 사용 이벤트-->	
+	<!--3넴 _ 2페이즈 돌입, 무기 생성-->
+	<EventGroup type="none" id="301" name="3넴 무기 생성_2페이즈 돌입" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="939,3001" patternListId="2" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--3넴 _ 회피요구 스킬 쿨타임 이상상태 부여-->
+	<EventGroup type="none" id="302" name="3네임드 회피요구스킬 쿨타임 이상상태" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93930016" target="npc" targetNpcId="939,3001" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!--3넴 _ 3페이즈 돌입-->
+	<EventGroup type="none" id="303" name="3넴 3페이즈 돌입" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="939,3001" patternListId="3" next="none" />
+				<EventTask type="empty" next="none" targetBossId="939,3001" patternGuide="berserk" patternShowTime="0"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--대쉬어택 대상자 탱커 제외-->
+	<EventGroup type="none" id="304" name="3넴 2단 대쉬어택 대상자 지정(탱커보호)" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93930009" target="aggro" targetNpcId="939,3001" min="1" max="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--3페이즈 누킹 대상자 탱커 제외-->
+	<EventGroup type="none" id="305" name="3넴 3페이즈 누킹 대상자 지정(탱커보호)" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="93930014" target="aggro" targetNpcId="939,3001" min="1" max="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--3페이즈 누킹 대상자 탱커 제외-->
+	<EventGroup type="none" id="306" name="3넴 1단 대쉬어택 대상자 지정" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="93930007" target="aggro" targetNpcId="939,3001" min="2" max="2" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="93930007" target="aggro" targetNpcId="939,3001" min="3" max="3" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="93930007" target="aggro" targetNpcId="939,3001" min="4" max="4" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="abnormality" abnormalityId="93930007" target="aggro" targetNpcId="939,3001" min="5" max="5" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

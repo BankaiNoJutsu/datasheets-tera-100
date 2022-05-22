@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9826" name="@dungeon:9826" startPos="-5144,-132089,342" exitContinentId="7031" exitPos="38405.4961,45876.0820,9011.9961" destroyWaitMin="0">
+  <Condition type="solo" />
+  <Condition type="levelOver" value="60" />
+  <RestoreTargetQuest id="19112" forceRestore="true"/>
+  <Condition type="progressQuest" value="19112" taskId="1" />
+  <Condition type="completeQuest" value="19112" />  
+
+
+  	<!--퀘스트 2단계-->
+	   <EventGroup type="questProgress">
+			<Event questId="19112" taskId="2">
+			  <EventTaskGroup>
+				<EventTask type="flag" name="미션" value="1" next="none" />		  
+			  </EventTaskGroup>
+			</Event>
+	  </EventGroup>
+
+	  
+     <EventGroup type="flag" name="미션">
+		<Event>
+		  <EventTaskGroup>  
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600021" next="none" /> <!--로도스(호위) 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600005" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600006" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600007" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600008" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600009" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600010" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600012" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600014" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600016" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600017" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600018" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600019" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600026" next="none" /> <!--병사들 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600025" next="none" /> <!--문 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600031" next="none" /> <!--투명 벽 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600033" next="none" /> <!--투명(연출용) 스폰-->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	
+	<!--하사관 발견하면 대사-->
+	  <EventGroup type="npcState" uniqueId="826,3005" value="combat">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="826,3005" actionScriptId="826005" next="none" /> <!--대사-->	
+		  </EventTaskGroup>
+		</Event>
+	  </EventGroup>	
+	
+	<!--하사관 죽으면 문 디스폰 / 듀리온, 베로니쿠스 디스폰-->
+	<EventGroup type="npcHp" uniqueId="826,3005" value="0" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="826" territoryId="82600025" next="none" /> <!--문 디스폰-->		
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600032" next="none" /> <!--듀리온(연출) 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600002" next="none" /> <!--베로니쿠스 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	
+	<!--로도스 호위 끝-->
+    <EventGroup type="questProgress">
+		<Event questId="19112" taskId="3">
+		  <EventTaskGroup>
+				<EventTask type="flag" name="미션3" value="1" next="none" />	
+				<EventTask type="doActionScript" targetNpcId="826,4001" actionScriptId="826001" next="none" /> <!--중간 포커스-->	
+				<EventTask type="doActionScript" targetNpcId="826,1003" actionScriptId="826008" next="none" /> <!--베로니쿠스 대사-->	
+				<EventTask type="doActionScript" targetNpcId="826,2000" actionScriptId="826009" next="none" /> <!--듀리온 대사-->	
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+     <EventGroup type="flag" name="미션3">
+		<Event>
+		  <EventTaskGroup>  
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600020" next="time" nextValue="1" /> <!--로도스 스폰-->			
+				<EventTask type="turnAi" turn="off" huntingZoneId="826" territoryId="82600020" templateId="1001" next="none" /> <!--로도스off-->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<!--퀘스트 4단계-->
+	   <EventGroup type="questProgress">
+			<Event questId="19112" taskId="4">
+			  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="826,6001" actionScriptId="826006" next="time" nextValue="1" />
+				<EventTask type="despawn" huntingZoneId="826" territoryId="82600002" next="none" /> <!--베로니쿠스 디스폰-->
+				<EventTask type="despawn" huntingZoneId="826" territoryId="82600032" next="none" /> <!--듀리온(연출) 디스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600003" next="none" /> <!--듀리온(전투) 스폰-->
+				<EventTask type="despawn" huntingZoneId="826" territoryId="82600031" next="none" /> <!--투명 벽 디스폰-->
+				<EventTask type="turnAi" turn="on" huntingZoneId="826" territoryId="82600020" templateId="1001" next="none" /> <!--로도스on-->	  
+				<EventTask type="doActionScript" targetNpcId="826,1001" actionScriptId="826007" next="none" /> <!--로도스 대사-->
+			  </EventTaskGroup>
+			</Event>
+	  </EventGroup>
+
+
+	<!-- 듀리온 암흑 보호막 -->
+	<EventGroup type="none" id="2" name="암흑 보호막" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="82605" target="npc" targetNpcId="826,2001" next="none" /> <!--보호막-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	
+	<!-- 듀리온 HP 30% (암흑 보호막 로도스 속박)-->
+	<EventGroup type="none" id="1" name="암흑 보호막 로도스 속박" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAi" turn="off" huntingZoneId="826" territoryId="82600020" templateId="1001" next="none" />
+				<EventTask type="abnormality" abnormalityId="82607" target="npc" targetNpcId="826,1001" next="none" /> <!--로도스 속박-->
+				<EventTask type="abnormality" abnormalityId="82605" target="npc" targetNpcId="826,2001" next="none" /> <!--보호막-->
+		</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	
+	<!-- 듀리온 HP 30% (부하, 마석 스폰)-->
+	<EventGroup type="none" id="3" name="부하,마석스폰" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600028" next="none" /> <!--부하 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600027" next="time" nextValue="1" /> <!--마석 스폰-->
+				<EventTask type="message" string="@dungeon:9826001" style="combat" next="none" />
+		</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+
+	
+	
+	<!-- 마석1 이펙트 -->
+	<EventGroup type="none" id="4" name="마석1 이펙트" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="826,5000" actionScriptId="826002" next="none"  /> <!--대사-->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<!-- 마석2 이펙트 -->
+	<EventGroup type="none" id="5" name="마석2 이펙트" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="826,5001" actionScriptId="826003" next="none"  /> <!--대사-->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<!-- 마석3 이펙트 -->
+	<EventGroup type="none" id="6" name="마석3 이펙트" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="826,5002" actionScriptId="826004" next="none"  /> <!--대사-->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	<!--마석1파괴-->
+	<EventGroup type="npcHp" uniqueId="826,5000" value="0" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="마석1" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	<!--마석2파괴-->
+	<EventGroup type="npcHp" uniqueId="826,5001" value="0" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="마석2" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	<!--마석3파괴-->
+	<EventGroup type="npcHp" uniqueId="826,5002" value="0" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="마석3" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+		
+
+	<!-- 마석 모두 파괴 시 -->
+	<EventGroup type="flag" name="마석1,마석2,마석3">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="turnAi" turn="on" huntingZoneId="826" territoryId="82600020" templateId="1001" next="none" />
+				<EventTask type="abnormality" abnormalityId="82607" target="npc" targetNpcId="826,1001" turn="off" next="none"/> <!--로도스 이상상태 off-->
+				<EventTask type="abnormality" abnormalityId="82608" target="npc" targetNpcId="826,1001" next="none" /> <!--로도스 이상상태 on-->
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	
+	<!--듀리온 사망하면 부하 디스폰, 투명npc 스폰, 베로니쿠스, 로도스 스폰-->
+	<EventGroup type="npcHp" uniqueId="826,2001" value="0" >
+		<Event>
+			<EventTaskGroup>
+			    <EventTask type="despawn" huntingZoneId="826" territoryId="82600028" next="none" /> <!--부하 디스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600030" next="time" nextValue="1" /> <!--투명 스폰-->
+				<EventTask type="despawn" huntingZoneId="826" territoryId="82600002" next="none" /> <!--베로니쿠스 디스폰-->
+				<EventTask type="despawn" huntingZoneId="826" territoryId="82600020" next="none" /> <!--로도스 디스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600024" next="none" /> <!--로도스 스폰-->
+				<EventTask type="spawn" huntingZoneId="826" territoryId="82600023" next="none" /> <!--베로니쿠스 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	
+</Dungeon>

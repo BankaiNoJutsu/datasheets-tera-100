@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9821" name="@dungeon:9821" startPos="-23698, -145259, 55" exitContinentId="7031" exitPos="39295,43625,9725" destroyWaitMin="0" >
+  <Condition type="solo" />
+  <Condition type="levelOver" value="60" />
+  <RestoreTargetQuest id="19110" forceRestore="true"/>
+  <Condition type="progressQuest" value="19110" taskId="1" />
+  <Condition type="completeQuest" value="19110" />
+
+
+	<!--퀘스트 2단계-->
+	   <EventGroup type="questProgress">
+			<Event questId="19110" taskId="2">
+			  <EventTaskGroup>
+				<EventTask type="flag" name="미션" value="1" next="none" />		  
+			  </EventTaskGroup>
+			</Event>
+	  </EventGroup>
+
+	  
+     <EventGroup type="flag" name="미션">
+		<Event>
+		  <EventTaskGroup>  
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100005" next="none" /> <!--듀리온 스폰-->
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100018" next="none" /> <!--연합군 병사 스폰-->
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100019" next="none" /> <!--연합군 병사 스폰-->
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100020" next="none" /> <!--연합군 병사 스폰-->
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100021" next="none" /> <!--연합군 병사 스폰-->
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100012" next="none" /> <!--아크데바 병사 스폰-->
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100013" next="none" /> 
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100014" next="none" /> 
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100015" next="none" /> 
+
+
+
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100001" next="none" /> <!--로도스 스폰-->
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100010" next="none" /> <!--포아롱 스폰-->		
+
+
+			<EventTask type="turnAi" turn="off" huntingZoneId="821" territoryId="82100001" templateId="1001" next="none" /> <!--로도스off-->
+			<EventTask type="turnAi" turn="off" huntingZoneId="821" territoryId="82100010" templateId="1005" next="time" nextValue="1" /> <!--포아롱off-->
+
+			<EventTask type="doActionScript" targetNpcId="821,2001" actionScriptId="821003" next="none" /> <!--듀리온 공중에 둥실-->
+			
+			<EventTask type="empty" next="time" nextValue="2" /> <!--잠시 대기-->
+			<EventTask type="doActionScript" targetNpcId="821,2001" actionScriptId="821001" next="time" nextValue="5" />		
+			
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100006" next="none" />	<!--아크데바 마법사, 사제 추가 스폰-->		
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100007" next="none" />				
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100016" next="none" />				
+			<EventTask type="spawn" huntingZoneId="821" territoryId="82100017" next="none" />			
+			
+			<EventTask type="turnAi" turn="on" huntingZoneId="821" territoryId="82100001" templateId="1001" next="none" /> <!--로도스on-->
+			<EventTask type="turnAi" turn="on" huntingZoneId="821" territoryId="82100010" templateId="1005" next="none" /> <!--포아롱on-->	
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+  
+  <!--아크데바 모두 사망-->
+   <EventGroup type="eliminate" territoryId="82100006,82100007,82100012,82100013,82100014,82100015,82100016,82100017" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="turnAi" turn="off" huntingZoneId="821" territoryId="82100001" templateId="1001" next="none" /> <!--로도스off-->
+				<EventTask type="turnAi" turn="off" huntingZoneId="821" territoryId="82100010" templateId="1005" next="none" /> <!--포아롱off-->		
+				<EventTask type="turnAi" turn="off" huntingZoneId="821" territoryId="82100001" templateId="1101" next="none" /> <!--병사off-->
+				<EventTask type="turnAi" turn="off" huntingZoneId="821" territoryId="82100010" templateId="1102" next="none" /> <!--병사off-->		
+				<EventTask type="doActionScript" targetNpcId="821,1001" actionScriptId="821001" next="time" nextValue="2" />
+				<EventTask type="doActionScript" targetNpcId="821,1005" actionScriptId="821001" next="time" nextValue="5" />
+				<EventTask type="doActionScript" targetNpcId="821,2001" actionScriptId="821002" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="821" territoryId="82100009" next="time" nextValue="1" />	<!--투명npc스폰-->
+				<EventTask type="spawn" huntingZoneId="821" territoryId="82100008" next="none" />	<!--시오즈 스폰-->
+				<EventTask type="killNpc" targetNpcId="821,1101" next="time" nextValue="1" /> <!--빌리저 사망-->
+				<EventTask type="killNpc" targetNpcId="821,1102" next="time" nextValue="1" /> <!--빌리저 사망-->		
+				<EventTask type="despawn" huntingZoneId="821" territoryId="82100005" next="none" /> <!--듀리온 디스폰-->
+				<EventTask type="despawn" huntingZoneId="821" territoryId="82100001" next="none" /> <!--로도스 디스폰-->
+				<EventTask type="despawn" huntingZoneId="821" territoryId="82100010" next="none" /> <!--포아롱 디스폰-->		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 시오즈 빈사 / 플레이어 연민 연출 -->
+	<EventGroup type="npcHp" uniqueId="821,3001" value="50" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="821100" target="npc" targetNpcId="821,3001" next="none" />
+				<EventTask type="doActionScript" targetNpcId="821,3001" actionScriptId="821005" next="time" nextValue="3" />
+				<EventTask type="abnormality" abnormalityId="821101" target="player" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	<!-- 시오즈 사망 시 연민 이상상태 해제 -->
+	<EventGroup type="npcHp" uniqueId="821,3001" value="0" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId="821101" target="player" turn="off" next="none"/>
+				<EventTask type="spawn" huntingZoneId="821" territoryId="82100001" next="none" /> <!--로도스 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+
+	
+</Dungeon>

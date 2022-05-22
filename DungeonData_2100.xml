@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="2100" name="@dungeon:9505" startPos="12345,4336,15047" startDir="290" exitContinentId="2000" exitPos="103632,-119558,14973" exitDir="130" destroyWaitMin="0">
+	<Condition type="maxMemberCount" value="1" />
+	<Condition type="levelOver" value="65" />
+	<RestoreTargetQuest id="200003" forceRestore="true"/>
+	<Condition type="progressQuest" value="200003" taskId="5" />
+	
+	<!--던전 입구 문열림-->
+	<!--<EventGroup type="enterTerritory" uniqueId="2100,210000001">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2100" territoryId="210000111" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+	
+	<!--로가쉬 연출-->
+	<EventGroup type="enterTerritory" uniqueId="2100,210000117">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2100" territoryId="210000125" next="none" />
+				<EventTask type="doActionScript" targetNpcId="2100,20100" actionScriptId="20000306" next="none" />
+				<EventTask type="empty" next="time" nextValue="8" />
+				<EventTask type="despawn" huntingZoneId="2100" territoryId="210000125" next="none" />
+				<!--<EventTask type="spawn" huntingZoneId="2100" territoryId="210000112" next="none" />-->
+				<!--<EventTask type="doActionScript" targetNpcId="2100,20601" actionScriptId="20000307" next="none" />-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--후문 닫는 연출-->
+	<!--<EventGroup type="enterTerritory" uniqueId="2100,210000124">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="5" />
+				<EventTask type="spawn" huntingZoneId="2100" territoryId="210000112" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+	
+	<!--이벤트 개체 스폰-->
+	<EventGroup type="eliminate" territoryId="210000002">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="4" />
+				<EventTask type="spawn" huntingZoneId="2100" territoryId="210000113" next="none" />
+				<EventTask type="empty" next="time" nextValue="1" />
+				<EventTask type="doActionScript" targetNpcId="2100,20300" actionScriptId="20000308" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+</Dungeon>

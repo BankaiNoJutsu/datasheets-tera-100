@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- DungeonRetry.xml에 대한 설명
+desc : 던전 재도전 시스템(오샤르)에서 사용할 데이터시트이다.
+
+retryLimitCost : 재도전 시스템 비용에 대한 제한금액("골드"단위) - 아무것도 안적으면 기본 10000 골드
+reshowRetryUITime : retry UI를 취소한 뒤, 자동으로 몇초 뒤에 UI를 재출력할 것인지에 대한 표시(초 단위) - 아무것도 안적으면 기본 30초
+	id : DungeonData_#.xml에서 <Retry id="">를 입력함으로써 사용할 수 있다.
+	clearCount : 던전 클리어 횟수가 입력 값 이하인 경우 뜨도록 적용
+	cost : 재도전 시스템을 이용함으로써 지불할 금액("골드" 단위이므로 주의 : cost < 1000 validate check)
+	reviveLimit : 재도전 시스템을 이용하여 부활할 수 있는 횟수
+	increaseCost : 재도전 시스템을 이용함으로써 지불할 금액이 늘어나는 비율(정수로만 입력가능 - 코퍼 혹은 실버단위로 부활되는 것을 막기 위함)
+		type : class 고유번호를 list로 나열한다. (1,2,3,4 형태로 나열)
+			Abnormality : 적용시켜줄 이상상태 id를 적는다. (이상상태의 최대 개수를 넘기 않도록 주의 : MAX = 40)
+			Charm : 적용시켜줄 charm id를 적는다.
+			desc: 효과 설명. 디자이너 확인 목적
+	Class: 적용 받는 클래스 타입을 입력 한다. 클래스 TemplateId를 입력하고, 복수로 입력할 때에는 ','로 구분 한다.
+			하나의 RetryId에는 모든 클래스 Id가 입력되어야 한다.
+			ClassTemplateId
+			0 = 검투사
+			1 = 창기사
+			2 = 무사
+			3 = 광전사
+			4 = 마법사
+			5 = 궁수
+			6 = 사제
+			7 = 정령사
+			8 = 비검사
+			9 = 마공사
+			10 = 권술사
+			11 = 암술사
+			12 = 월광무사
+			
+	Show 노드에는 UI에 출력될 아이템들을 입력 한다.
+		Item@templateId: 출력할 아이템의 Id
+		Item@desc: 아이템에 대한 설명. 디자이너 확인 목적
+	
+	Tip
+		원하는 아이템에 입력된 정확한 AbnormalityId와 CharmId를 모를 경우.
+		1. AbnormalityId는 ItemTemplate.xml에서 해당 아이템에 입력된 UserSkill을 참고 하면 쉽게 찾을 수 있다. (UserSkillData_Common.xml에서 UserSkillId를 검색해 확인)
+		2. CharmId를 찾을 때 UserSkillData_Common에서 UserSkillId를 검색하면 CharmCategoryId값을 확인 할 수 있다. CharmCategory.xml데이터시트에서 CharmCategoryId로 검색한다. 해당 카테고리 값 아래 CharmId가 입력되어 있을 것이다.
+-->
+
+<DungeonRetry retryLimitCost="10000" reshowRetryUITime="10">
+	<!-- 중, 하위 던전 재도전 장치-->
+	<Retry id="1" clearCount="999" cost="50" reviveLimit="999" increaseCost="1.0">
+		<Class type="0,1,2,3,5,8,9,10,12">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4020" desc="상급 전투 비약(중갑/경갑)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="4,11">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4024" desc="상급 전투 비약(법사/인술)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="6,7">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4021" desc="상급 전투 비약(힐러)"/>
+				<Abnormality id="4023" desc="상급 전투 비약(힐러)"/> <!--카테고리용-->		
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		
+	</Retry>
+	<!-- 상위 던전 재도전 장치-->
+	<Retry id="2" clearCount="999" cost="250" reviveLimit="99" increaseCost="1.0" >
+		<Class type="0,1,2,3,5,8,9,10,12">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4020" desc="상급 전투 비약(중갑/경갑)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="4,11">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4024" desc="상급 전투 비약(법사/인술)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="6,7">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4021" desc="상급 전투 비약(힐러)"/>
+				<Abnormality id="4023" desc="상급 전투 비약(힐러)"/> <!--카테고리용-->	
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+	</Retry>
+	<!-- 솔로던전용 --> 
+	<Retry id="3" clearCount="999" cost="30" reviveLimit="99" increaseCost="1.0">
+		<Class type="0,1,2,3,5,8,9,10,12">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4020" desc="상급 전투 비약(중갑/경갑)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="4,11">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4024" desc="상급 전투 비약(법사/인술)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="6,7">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4021" desc="상급 전투 비약(힐러)"/>
+				<Abnormality id="4023" desc="상급 전투 비약(힐러)"/> <!--카테고리용-->		
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+	</Retry>
+	<!--하급 성장구간 던전용-->
+	<Retry id="4" clearCount="999" cost="3" reviveLimit="99" increaseCost="1.0">
+		<Class type="0,1,2,3,5,8,9,10,12">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4000" desc="하급 전투 비약(탱커/딜러)"/>
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200997" desc="하급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="4,11">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4004" desc="하급 전투 비약(탱커/딜러)"/>
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200997" desc="하급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="6,7">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4001" desc="하급 전투 비약(힐러)"/>
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200997" desc="하급 전투 비약"/>
+			</Show>
+		</Class>
+				
+	</Retry>
+	<!--중급 성장구간 던전용-->
+	<Retry id="5" clearCount="999" cost="5" reviveLimit="99" increaseCost="1.0">
+		<Class type="0,1,2,3,5,8,9,10,12">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4010" desc="중급 전투 비약(탱커/딜러)"/>
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200998" desc="중급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="4,11">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4014" desc="중급 전투 비약(탱커/딜러)"/>
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200998" desc="중급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="6,7">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4011" desc="중급 전투 비약(힐러)"/>
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200998" desc="중급 전투 비약"/>
+			</Show>
+		</Class>
+				
+	</Retry>
+	<!--상급 성장구간 던전용-->
+	<Retry id="6" clearCount="999" cost="10" reviveLimit="99" increaseCost="1.0">
+		<Class type="0,1,2,3,5,8,9,10,12">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4020" desc="상급 전투 비약(중갑/경갑)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="4,11">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4024" desc="상급 전투 비약(법사/인술)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="6,7">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4021" desc="상급 전투 비약(힐러)"/>
+				<Abnormality id="4023" desc="상급 전투 비약(힐러)"/> <!--카테고리용-->		
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>		
+	</Retry>
+	
+	<!-- 필드 보너스 던전용 --> 
+	<Retry id="7" clearCount="999" cost="30" reviveLimit="5" increaseCost="1.0">
+		<Class type="0,1,2,3,5,8,9,10,12">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4020" desc="상급 전투 비약(중갑/경갑)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="4,11">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4024" desc="상급 전투 비약(법사/인술)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="6,7">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4021" desc="상급 전투 비약(힐러)"/>
+				<Abnormality id="4023" desc="상급 전투 비약(힐러)"/> <!--카테고리용-->		
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+	</Retry>
+	<!-- 최상위 던전 재도전 장치-->
+	<Retry id="8" clearCount="10" cost="500" reviveLimit="5" increaseCost="1.5">
+		<Class type="0,1,2,3,5,8,9,10,12">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4020" desc="상급 전투 비약(중갑/경갑)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="4,11">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4024" desc="상급 전투 비약(법사/인술)"/>
+				<Abnormality id="4022" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="6,7">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="4021" desc="상급 전투 비약(힐러)"/>
+				<Abnormality id="4023" desc="상급 전투 비약(힐러)"/> <!--카테고리용-->		
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="200999" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+	</Retry>
+	<!-- 가이드 던전 공짜 오샤르 -->
+	<Retry id="9" clearCount="999" cost="0" reviveLimit="999" increaseCost="1.0">
+		<Class type="0,1,2,3,5,8,9,10,12">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="6042" desc="상급 전투 비약(중갑/경갑)"/>
+				<Abnormality id="6044" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="602176" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="4,11">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="6046" desc="상급 전투 비약(법사/인술)"/>
+				<Abnormality id="6044" desc="상급 전투 비약(탱커/딜러)"/> <!--카테고리용-->
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="602176" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+		<Class type="6,7">
+			<Apply>
+				<!--AbnormalityId는 Abnormality.xml에서 확인.-->
+				<Abnormality id="6043" desc="상급 전투 비약(힐러)"/>
+				<Abnormality id="6045" desc="상급 전투 비약(힐러)"/> <!--카테고리용-->		
+				<Abnormality id="60950514" desc="무적"/>
+			</Apply>
+			<Show>
+				<!--아이템은 최대 6개 까지만 입력 가능. 초과시 에러-->
+				<Item templateId="602176" desc="상급 전투 비약"/>
+			</Show>
+		</Class>
+	</Retry>	
+</DungeonRetry>

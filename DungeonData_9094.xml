@@ -1,0 +1,2204 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9094" name="@dungeon:9094" startPos="33672, 175732, -3830" exitContinentId="7014" exitPos="-68678, 24510, -2239">
+  <!-- 살레론의 공중정원-->
+	<Condition type="party" value="1" />
+	<Condition type="levelOver" value="53" />
+	<ClearCondition huntingZoneId="494" templateId="5049" amount="1" killCount="1" />
+	<ClearCondition huntingZoneId="494" templateId="5050" amount="1" killCount="1" />
+	<ClearCondition huntingZoneId="494" templateId="5051" amount="1" killCount="1" />
+	<Retry retryId="6" />	
+
+		
+<!-- 성장 구간 인던 지원 시스템 테스트용 -->		
+  <!-- <SupportMatchingEffect type="changeLevel" value="53"/>
+  <SupportMatchingEffect type="abnormality" valueList="9999003,9999018,9999019"/> -->
+
+  <!-- 시작시 길찾기 가이드 추가 -->
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,911" id="1" pos="37354.0664,179745.8281,-3129.1211" next="none" />
+		<EventTask type="empty" next="time" nextValue="3" /> <!--도핑 가이드 메시지 HUD-->
+		<EventTask type="message" style="default" string="@dungeon:3001200" next="none" />   
+		<EventTask type="message" style="default" string="@dungeon:3001201" next="none" />
+		<EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="message" style="default" string="@dungeon:3001200" next="none" />		  
+		<EventTask type="message" style="default" string="@dungeon:3001201" next="none" />
+		<EventTask type="empty" next="time" nextValue="3" />
+		<EventTask type="message" style="default" string="@dungeon:3001200" next="none" />		  
+		<EventTask type="message" style="default" string="@dungeon:3001201" next="none" />
+		<EventTask type="empty" next="time" nextValue="3" />	  	 		  
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>    
+
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 살레론의 공중정원 전체 모습을 보여주는 동영상 재생 -->
+  <EventGroup type="enterTerritory" uniqueId="494, 49400105">
+    <!-- 입구 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="playMovie" id="79" next="time" nextValue="3" />
+        <!-- 살레론의 공중정원 전체 모습을 보여주는 동영상 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 입장 시, 살레론의 목소리 -->
+  <EventGroup type="enterTerritory" uniqueId="494, 49400081">
+    <!-- 입구에서 복도로 진입하는 곳 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="494" templateId="52" next="none" />
+        <!-- 자유사냥으로 텔레포트되는 오브젝트 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400083" next="none" />
+        <!-- 입구 문          -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400012" next="none" />
+        <!-- 1번방 출구 문 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400018" next="none" />
+        <!-- 2번방 출구 문 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400027" next="none" />
+        <!-- 4번방 출구 문 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400035" next="none" />
+        <!-- 5번방 출구 문 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400041" next="none" />
+        <!-- 6번방 출구 문 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400045" next="none" />
+        <!-- 7번방 출구 문 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400053" next="none" />
+        <!-- 8번방 출구 문 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400063" next="none" />
+        <!-- 8번방 출구 문 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400008" next="none" />
+        <!-- 1번방 시작 오브젝트 -->
+        <!--EventTask type="spawn" huntingZoneId="494" territoryId="49400030" next="none" /-->
+        <!-- 4번방 시작 오브젝트 -->
+        <!--EventTask type="spawn" huntingZoneId="494" territoryId="49400042" next="none" /-->
+        <!-- 6번방 시작 오브젝트 -->
+        <!--EventTask type="spawn" huntingZoneId="494" territoryId="49400047" next="none" /-->
+        <!-- 7번방 시작 오브젝트 -->
+        <!--EventTask type="spawn" huntingZoneId="494" territoryId="49400061" next="none" /-->
+        <!-- 10번방 시작 오브젝트 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3001" playTime="0" next="none" />
+        <!-- (음성)시험을 시작하마 -->
+        <EventTask type="message" string="@dungeon:9094001" style="default" next="time" nextValue="5" />
+        <!--시험을 시작하마. -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3009" playTime="0" next="none" />
+        <!-- (음성)날 실망시키 마라 -->
+        <EventTask type="message" string="@dungeon:9094002" style="default" next="time" nextValue="6" />
+        <!--날 실망시키지 마라. -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400083" next="none" />
+        <!-- 입구에 있는 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 1-1 첫번째 방  소환 -->
+  <EventGroup type="npcHp" uniqueId="494,6000" value="0" repeat="true">
+    <!-- 1번방 시작 오브젝트 -->
+    <!-- 1-1 방, 2조합 중 랜덤 스폰 -->
+    <Event>
+      <!-- 조합A 싸리싸리킹 + 물소 -->
+      <EventTaskGroup probability="0.5">
+        <EventTask type="guideOn" nameId="494,912" id="1" pos="37846.1836,179777.7656,-3122.0664" next="none" />
+		<EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--3초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400011" next="time" nextValue="3" />
+        <!-- 입구 문 스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400007" next="time" nextValue="1" />
+        <!--두더지 스폰. 클리어 시 사라져야 하기때문에 같이 처리 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400009" next="none" />
+        <!--싸리싸리 킹 + 물소 스폰 -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400014" next="none" />
+      </EventTaskGroup>
+      <!-- 조합B 싸리싸리킹 + 싸리싸리 -->
+      <EventTaskGroup probability="0.5">
+        <EventTask type="guideOn" nameId="494,912" id="1" pos="37846.1836,179777.7656,-3122.0664" next="none" />
+		<EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--3초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400011" next="time" nextValue="3" />
+        <!-- 입구 문 스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400007" next="time" nextValue="1" />
+        <!--두더지 스폰. 클리어 시 사라져야 하기때문에 같이 처리 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400010" next="none" />
+        <!--싸리싸리 킹 + 싸리싸리 스폰 -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400014" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 싸리싸리킹 A 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5001" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,913" id="1" pos="42721.7227,177761.5469,-2384.5000" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400009" next="time" nextValue="3" />
+        <!-- 남은 물소 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400007" next="time" nextValue="3" />
+        <!-- 두더지 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400085" next="time" nextValue="5" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400011" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400012" next="none" />
+        <!-- 출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 싸리싸리킹 B 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5003" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,913" id="1" pos="42721.7227,177761.5469,-2384.5000" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400010" next="time" nextValue="3" />
+        <!-- 남은 싸리싸리 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400007" next="time" nextValue="3" />
+        <!-- 두더지 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400085" next="time" nextValue="5" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400011" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400012" next="none" />
+        <!-- 출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 싸리싸리킹 A와 전투 중 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5001" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400011" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400007" next="none" />
+        <!-- 두더지 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400009" next="time" nextValue="3" />
+        <!-- 싸리싸리킹 + 물소  디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400008" next="none" />
+        <!-- 시작 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 싸리싸리킹 B와 전투 중 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5003" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400011" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400007" next="none" />
+        <!-- 두더지 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400010" next="time" nextValue="3" />
+        <!-- 싸리싸리킹 + 싸리싸리  디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400008" next="none" />
+        <!-- 시작 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 1-N 첫번째 네임드 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,6005" value="0">
+    <!-- 2번방 시작오브젝트 -->
+    <Event>
+      <!-- 밤피르 신사 -->
+      <EventTaskGroup probability="0.33">
+        <EventTask type="guideOn" nameId="494,914" id="1" pos="42721.7227,177761.5469,-2384.5000" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3002" playTime="5000" next="none" />
+        <!-- (음성)첫번째 시련이다 -->
+        <EventTask type="message" string="@dungeon:9094003" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 첫번째 시련이다.-->
+        <EventTask type="message" string="@dungeon:9094004" style="default" next="time" nextValue="3" />
+        <!-- 너희들이 지나온 길이 거짓이 아님을 증명해 보아라. -->
+        <EventTask type="message" string="@dungeon:9094005" style="default" next="time" nextValue="3" />
+        <!-- 자, 밤피르 저택에서 싸웠던 공작 볼페론이다.-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400015" next="none" />
+        <!-- 밤피르 신사 소환 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3007" playTime="5000" next="none" />
+        <!-- (음성)시련을 넘을 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094008" style="default" next="none" />
+        <!-- (울리는 목소리) 시련을 넘을 수 있겠는가? -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400030" next="none" />
+      </EventTaskGroup>
+      <!-- 테르카시아 -->
+      <EventTaskGroup probability="0.33">
+        <EventTask type="guideOn" nameId="494,924" id="1" pos="42721.7227,177761.5469,-2384.5000" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3002" playTime="5000" next="none" />
+        <!-- (음성)첫번째 시련이다 -->
+        <EventTask type="message" string="@dungeon:9094003" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 첫번째 시련이다. -->
+        <EventTask type="message" string="@dungeon:9094004" style="default" next="time" nextValue="3" />
+        <!-- 너희들이 지나온 길이 거짓이 아님을 증명해 보아라. -->
+        <EventTask type="message" string="@dungeon:9094006" style="default" next="time" nextValue="3" />
+        <!-- 자, 사교도 은신처에서 싸웠던 테르카시아다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400016" next="none" />
+        <!-- 테르카시아 소환 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3007" playTime="5000" next="none" />
+        <!-- (음성)시련을 넘을 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094008" style="default" next="none" />
+        <!-- (울리는 목소리) 시련을 넘을 수 있겠는가? -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400030" next="none" />
+      </EventTaskGroup>
+      <!-- 카라스챠 -->
+      <EventTaskGroup probability="0.34">
+        <EventTask type="guideOn" nameId="494,934" id="1" pos="42721.7227,177761.5469,-2384.5000" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3002" playTime="5000" next="none" />
+        <!-- (음성)첫번째 시련이다 -->
+        <EventTask type="message" string="@dungeon:9094003" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 첫번째 시련이다. -->
+        <EventTask type="message" string="@dungeon:9094004" style="default" next="time" nextValue="3" />
+        <!-- 너희들이 지나온 길이 거짓이 아님을 증명해 보아라. -->
+        <EventTask type="message" string="@dungeon:9094007" style="default" next="time" nextValue="3" />
+        <!-- 자, 역병의 날개 카라스챠다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400017" next="none" />
+        <!-- 카라스챠 소환 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3007" playTime="5000" next="none" />
+        <!-- (음성)시련을 넘을 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094008" style="default" next="none" />
+        <!-- (울리는 목소리) 시련을 넘을 수 있겠는가? -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400030" next="none" />
+      </EventTaskGroup>
+    </Event>
+    <!--입구 문 소환 -->
+    <!-- 분기에 상관없이 무조건 소환되기 때문에 따로 처리 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400019" next="none" />
+        <!-- 입구문 소환-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400092" next="time" nextValue="5" />
+        <!-- 첫번째 네임드 텔레포트 NPC 소환-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400107" next="none" />
+        <!-- 입구문 앞에 첫번째 네임드 텔레포트 NPC 소환-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 밤피르 신사 HP 50% -->
+  <EventGroup type="npcHp" uniqueId="494,5006" value="50" repeat="true">
+    <!-- 밤피르 신사 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094029" style="default" next="time" nextValue="1" />
+        <!-- 감히 우리 가문에게 칼을 드리데다니! -->
+        <EventTask type="message" string="@dungeon:9094031" style="default" next="time" nextValue="2" />
+        <!-- 네 놈들을 용서하지 않겠다 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400106" next="none" />
+        <!-- 밤피르 숙녀 소환 -->
+        <EventTask type="message" string="@dungeon:9094030" style="alert" next="none" />
+        <!-- 공작부인이 나타났다 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1-N 첫번째 네임드 밤피르 신사 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5006" value="0">
+    <!-- 밤피르 신사 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,915" id="1" pos="50399.2070,178399.3594,-963.7656" next="none" />
+		<EventTask type="message" string="@dungeon:9094009" style="default" next="time" nextValue="3" />
+        <!-- 첫번째 시련을 넘었구나. -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400015" next="none" />
+        <!-- 밤피르 신사가 속해있던 테리토리 디스폰. 남아있는 부하를 디스폰시키기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400106" next="none" />
+        <!-- 밤피르 숙녀가 속해있던 테리토리 디스폰. 남아있는 부하를 디스폰시키기 위해 -->
+        <EventTask type="message" string="@dungeon:9094010" style="default" next="time" nextValue="3" />
+        <!-- 그러나 아직 시련은 많이 남아있다. -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3008" playTime="3000" next="none" />
+        <!-- (음성)여기까지 올 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094011" style="default" next="time" nextValue="3" />
+        <!-- (울리는 목소리) 여기까지 올 수 있겠는가? -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400107" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400086" next="time" nextValue="5" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400019" next="none" />
+        <!-- 입구 문 디스폰-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400018" next="none" />
+        <!-- 출구 문 디스폰-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1-N 첫번째 네임드 테르카시아 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5008" value="0">
+    <!-- 테르카시아 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,915" id="1" pos="50399.2070,178399.3594,-963.7656" next="none" />
+		<EventTask type="message" string="@dungeon:9094009" style="default" next="time" nextValue="3" />
+        <!-- 첫번째 시련을 넘었구나. -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400016" next="none" />
+        <!-- 테르카시아가 속해있던 테리토리 디스폰. 남아있는 부하를 디스폰시키기 위해 -->
+        <EventTask type="message" string="@dungeon:9094010" style="default" next="time" nextValue="3" />
+        <!-- 그러나 아직 시련은 많이 남아있다. -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3008" playTime="3000" next="none" />
+        <!-- (음성)여기까지 올 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094011" style="default" next="time" nextValue="3" />
+        <!-- (울리는 목소리) 여기까지 올 수 있겠는가? -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400107" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400086" next="time" nextValue="5" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400019" next="none" />
+        <!-- 입구 문 디스폰-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400018" next="none" />
+        <!-- 출구 문 디스폰-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 1-N 첫번째 네임드 카라스챠 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5010" value="0">
+    <!-- 카라스챠 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,915" id="1" pos="50399.2070,178399.3594,-963.7656" next="none" />
+		<EventTask type="message" string="@dungeon:9094009" style="default" next="time" nextValue="3" />
+        <!-- 첫번째 시련을 넘었구나. -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400017" next="none" />
+        <!-- 카라스챠가 속해있던 테리토리 디스폰. 남아있는 부하를 디스폰시키기 위해 -->
+        <EventTask type="message" string="@dungeon:9094010" style="default" next="time" nextValue="3" />
+        <!-- 그러나 아직 시련은 많이 남아있다. -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3008" playTime="3000" next="none" />
+        <!-- (음성)여기까지 올 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094011" style="default" next="time" nextValue="3" />
+        <!-- (울리는 목소리) 여기까지 올 수 있겠는가? -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400107" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400086" next="time" nextValue="5" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400019" next="none" />
+        <!-- 입구 문 디스폰-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400018" next="none" />
+        <!-- 출구 문 디스폰-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 밤피르 신사와 전투 중 밤피르 신사 때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5006" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400015" next="none" />
+        <!-- 밤피르 신사 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400106" next="none" />
+        <!--  밤피르 숙녀 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400015" next="none" />
+        <!-- 밤피르 신사 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 밤피르 신사와 전투 중 비스크레이디 때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5007" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400015" next="none" />
+        <!-- 밤피르 신사 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400106" next="none" />
+        <!--  밤피르 숙녀 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400015" next="none" />
+        <!-- 밤피르 신사 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 밤피르 신사와 전투 중 밤피르 숙녀  때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,6017" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400015" next="none" />
+        <!-- 밤피르 신사 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400106" next="none" />
+        <!--  밤피르 숙녀 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400015" next="none" />
+        <!-- 밤피르 신사 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 테르카시아와 전투 중 테르카시아 때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5008" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400016" next="none" />
+        <!-- 테르카시아 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400016" next="none" />
+        <!-- 테르카시아 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 테르카시아와 전투 중 저주받은 실험체 때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5009" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400016" next="none" />
+        <!-- 테르카시아 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400016" next="none" />
+        <!-- 테르카시아 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 카라스챠와 전투 중 카라스차 때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5010" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400017" next="none" />
+        <!-- 카라스챠 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400017" next="none" />
+        <!-- 카라스챠 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 카라스챠와 전투 중 어둠의 약탈자 때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5011" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400017" next="none" />
+        <!-- 카라스챠 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400017" next="none" />
+        <!-- 카라스챠 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 2-1 세번째 방  소환 -->
+  <EventGroup type="npcHp" uniqueId="494,6005" value="0">
+    <!--2번방 시작 오브젝트. 2번방 전투 시작할 때 3번방 몬스터가 스폰된다. -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400021" next="complete" />
+        <!-- 프리온 소환. 소환된 프리온이 전멸해야 다음 이벤트로 진행 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400025" next="none" />
+        <!-- 버프주는 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 2-2 네번째 방  소환 -->
+  <EventGroup type="npcHp" uniqueId="494, 6006" value="0" repeat="true">
+    <!-- 4번방 시작 오브젝트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,916" id="1" pos="50399.2070,178399.3594,-963.7656" next="none" />
+		<EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400026" next="time" nextValue="3" />
+        <!-- 입구 문 소환-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400028" next="none" />
+        <!-- 시칸다리 + 메코나리 소환 -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400033" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2-2 네번째 방  적에게 버프주는 오브젝트 스폰 -->
+  <EventGroup type="npcHp" uniqueId="494, 5019" value="50" repeat="true">
+    <!-- 메코나리 주술사 HP 50%-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400031" next="none" />
+        <!-- 몬스터에게 버프주는 오브젝트 소환 -->
+        <EventTask type="message" string="@dungeon:9094022" style="default" next="time" nextValue="1" />
+        <!-- 붉은 마석이 소환되었다!-->
+        <EventTask type="message" string="@dungeon:9094028" style="alert" next="none" />
+        <!-- 주변의 적들의 힘이 상승하였다!!-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2-2 네번째 방 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494, 5019" value="0">
+    <!-- 메코나리 주술사 사망-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,917" id="1" pos="47689.8867,173380.1719,-227.5781" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="1" />
+        <!-- 시간 조절용 빈 텍스트-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400028" next="time" nextValue="2" />
+        <!-- 몬스터 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094039" style="default" next="none" />
+        <!-- 투리글이 죽자 주변의 몬스터가 사라졌다!-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400031" next="time" nextValue="2" />
+        <!-- 몬스터에게 버프주는 오브젝트 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400101" next="time" nextValue="3" />
+        <!-- 입구 문 소환-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400026" next="none" />
+        <!--입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400027" next="none" />
+        <!--출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2-2 네번째 방 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5019" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400028" next="none" />
+        <!-- 메코나리 + 시칸다리 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400031" next="none" />
+        <!-- 버프 마석 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400026" next="none" />
+        <!-- 입구문 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400030" next="none" />
+        <!-- 시작 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2-2 네번째 방 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5017" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400028" next="none" />
+        <!-- 메코나리 + 시칸다리 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400031" next="none" />
+        <!-- 버프 마석 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400026" next="none" />
+        <!-- 입구문 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400030" next="none" />
+        <!-- 시작 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 2-N 두번째 네임드 소환 -->
+  <EventGroup type="npcHp" uniqueId="494, 6007" value="0">
+    <!-- 5번방 시작 오브젝트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,918" id="1" pos="47689.8867,173380.1719,-227.5781" next="none" />
+		<EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400034" next="none" />
+        <!-- 입구 문 소환 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3003" playTime="0" next="none" />
+        <!-- (음성)두번째 시련이다-->
+        <EventTask type="message" string="@dungeon:9094012" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 두번째 시련이다.-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3007" playTime="0" next="none" />
+        <!-- (음성)시련을 넘을 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094008" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 시련을 넘을 수 있겠는가?-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400036" next="none" />
+        <!-- 거인 + 바실2종 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400092" next="none" />
+        <!--첫번째 네임드 가는 거 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400104" next="time" nextValue="5" />
+        <!-- 두번째 네임드 가는 텔레포트 스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400108" next="none" />
+        <!-- 입구문 앞 두번째 네임드 가는 텔레포트 스폰 -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400042" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2-N 두번째 네임드 클리어-->
+  <EventGroup type="npcHp" uniqueId="494, 5021" value="0">
+    <!-- 거인 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,919" id="1" pos="51827.0273,172471.2969,472.6406" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="message" string="@dungeon:9094018" style="default" next="none" />
+        <!-- 두번째 시련을 넘었구나.-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400036" next="time" nextValue="3" />
+        <!-- 거인이 있는 테리토리 디스폰. 남아있는 바실리스크 디스폰 위해-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400108" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400087" next="time" nextValue="5" />
+        <!-- 이속 버프 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400034" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400035" next="none" />
+        <!-- 출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2-N 두번째 네임드 리셋 : 거인 때문에 리셋-->
+  <EventGroup type="npcReset" uniqueId="494,5021" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400036" next="none" />
+        <!-- 거인 + 바실 2종 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400036" next="none" />
+        <!-- 거인 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2-N 두번째 네임드 리셋 : 바실리스크 수컷 때문에리셋-->
+  <EventGroup type="npcReset" uniqueId="494,5022" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400036" next="none" />
+        <!-- 거인 + 바실 2종 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400036" next="none" />
+        <!-- 거인 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2-N 두번째 네임드 리셋 : 바실리스크 암컷 때문에리셋-->
+  <EventGroup type="npcReset" uniqueId="494,5023" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400036" next="none" />
+        <!-- 거인 + 바실 2종 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400036" next="none" />
+        <!-- 거인 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 3-1 여섯번째 방  소환 -->
+  <EventGroup type="npcHp" uniqueId="494, 6008" value="0" repeat="true">
+    <!-- 6번방 시작 오브젝트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,950" id="1" pos="51827.0273,172471.2969,472.6406" next="none" />
+		<EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400040" next="time" nextValue="3" />
+        <!-- 입구 문 소환-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400039" next="time" nextValue="1" />
+        <!-- 목표 골렘들 소환 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400043" next="none" />
+        <!-- 주변 골렘들 + 증오의 마법석 소환 -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400047" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-1 여섯번째 방  클리어-->
+  <EventGroup type="npcHp" uniqueId="494,5026" value="0">
+    <!-- 목표 나이트 플라즈마 가디언 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,951" id="1" pos="55178.9453,172421.3438,793.9624" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400039" next="none" />
+        <!-- 목표 나이트 플라즈마 가디언이 있는 테리토리 디스폰. 남은 부하 디스폰-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400043" next="time" nextValue="5" />
+        <!-- 주변 골렘 + 증오의 마법석 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400040" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400041" next="none" />
+        <!-- 출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--  3-1 여섯번째 방 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5026" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400039" next="none" />
+        <!-- 목표 골렘 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400043" next="none" />
+        <!-- 주변 골렘 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400040" next="none" />
+        <!-- 입구문 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400042" next="none" />
+        <!-- 시작 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 3-2 일곱번째 방  소환 -->
+  <EventGroup type="npcHp" uniqueId="494, 6009" value="0" repeat="true">
+    <!-- 7번방 시작 오브젝트-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,952" id="1" pos="55178.9453,172421.3438,793.9624" next="none" />
+		<EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400044" next="none" />
+        <!-- 입구 문 소환 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400049" next="none" />
+        <!-- 켈사이크 알 소환, 어둠의 흑마술사 소환-->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400051" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-2 일곱번째 방  클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5030" value="0">
+    <!-- 켈사이크 알 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,953" id="1" pos="58385.7266,177442.7813,1517.7559" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400049" next="none" />
+        <!-- 어둠의 흑마술사, 분노의 파괴자 갈란 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400046" next="time" nextValue="5" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400044" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400045" next="none" />
+        <!-- 출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-2 일곱번째 방 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5030" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400049" next="none" />
+        <!-- 켈사이크 알 소환, 어둠의 흑마술사 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400044" next="none" />
+        <!-- 입구문 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400047" next="none" />
+        <!-- 시작 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 3-N 세번째 네임드 소환 -->
+  <EventGroup type="npcHp" uniqueId="494, 6010" value="0">
+    <!-- 8번방 시작 오브젝트 -->
+    <Event>
+      <!-- 마술사 드라곤 -->
+      <EventTaskGroup probability="0.34">
+        <EventTask type="guideOn" nameId="494,954" id="1" pos="58385.7266,177442.7813,1517.7559" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3004" playTime="0" next="none" />
+        <!-- (음성)세번째 시련이다-->
+        <EventTask type="message" string="@dungeon:9094013" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 세번째 시련이다. -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3007" playTime="0" next="none" />
+        <!-- (음성)시련을 넘을 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094008" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 시련을 넘을 수 있겠는가? -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400055" next="none" />
+        <!-- 마술사 드라곤 소환 -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400061" next="none" />
+      </EventTaskGroup>
+      <!-- 다크 리퍼 -->
+      <EventTaskGroup probability="0.33">
+        <EventTask type="guideOn" nameId="494,964" id="1" pos="58385.7266,177442.7813,1517.7559" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3004" playTime="0" next="none" />
+        <!-- (음성)세번째 시련이다-->
+        <EventTask type="message" string="@dungeon:9094013" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 세번째 시련이다. -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3007" playTime="0" next="none" />
+        <!-- (음성)시련을 넘을 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094008" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 시련을 넘을 수 있겠는가? -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400054" next="none" />
+        <!-- 다크 리퍼 소환 -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400061" next="none" />
+      </EventTaskGroup>
+      <!-- 언데드 장군 -->
+      <EventTaskGroup probability="0.33">
+        <EventTask type="guideOn" nameId="494,974" id="1" pos="58385.7266,177442.7813,1517.7559" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3004" playTime="0" next="none" />
+        <!-- (음성)세번째 시련이다-->
+        <EventTask type="message" string="@dungeon:9094013" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 세번째 시련이다. -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3007" playTime="0" next="none" />
+        <!-- (음성)시련을 넘을 수 있겠는가-->
+        <EventTask type="message" string="@dungeon:9094008" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 시련을 넘을 수 있겠는가? -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400056" next="none" />
+        <!-- 언데드 5인팟 소환 -->
+		<EventTask type="spawn" huntingZoneId="494" territoryId="49400061" next="none" />
+      </EventTaskGroup>
+    </Event>
+    <!-- 입구 문 스폰 -->
+    <!-- 분기에 상관없이 스폰되기 때문이 따로 처리-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400052" next="none" />
+        <!-- 입구 문 스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400104" next="none" />
+        <!-- 두번째 네임드 가는 텔레포트 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400102" next="time" nextValue="5" />
+        <!-- 세번째 네임드 가는 텔레포트 스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400109" next="none" />
+        <!-- 입구문 앞 세번째 네임드 가는 텔레포트 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-N 세번째 네임드 마술사 드라곤 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5032" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400055" next="time" nextValue="3" />
+        <!-- 마술사 드라곤 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400055" next="none" />
+        <!-- 마술사 드라곤 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-N 세번째 네임드 다크리퍼 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5031" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400054" next="time" nextValue="3" />
+        <!-- 다크리퍼 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400054" next="none" />
+        <!-- 다크리퍼 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-N 세번째 네임드 언데드장군과 전투 중 언데드장군 때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5033" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400056" next="time" nextValue="3" />
+        <!-- 언데드장군 + 부하들 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400056" next="none" />
+        <!-- 언데드장군 + 부하들 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-N 세번째 네임드 언데드장군과 전투 중 언데드기병 때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5035" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400056" next="time" nextValue="3" />
+        <!-- 언데드장군 + 부하들 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400056" next="none" />
+        <!-- 언데드장군 + 부하들 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-N 세번째 네임드 언데드장군과 전투 중 언데드창병 때문에 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5034" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400056" next="time" nextValue="3" />
+        <!-- 언데드장군 + 부하들 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400056" next="none" />
+        <!-- 언데드장군 + 부하들 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-N 네임드 언데드 장군 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5033" value="0">
+    <!-- 언데드 장군 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,955" id="1" pos="66057.8828,172777.5156,2555.6055" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400078" next="none" />
+        <!-- 보스방에 보스C를 스폰하는 시작 오브젝트 소환 -->
+        <EventTask type="message" string="@dungeon:9094020" style="default" next="time" nextValue="3" />
+        <!-- 이제 하나의 시련만이 남아있다. -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400056" next="none" />
+        <!-- 언데드 장군이 있던 테리토리 디스폰. 남은 부하 디스폰 위해 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400088" next="none" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3009" playTime="0" next="none" />
+        <!-- (음성)날 실망시키 마라 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400109" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094002" style="default" next="time" nextValue="5" />
+        <!--(울리는 목소리)날 실망시키지 마라. -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400052" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400053" next="none" />
+        <!-- 출구 문 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400088" next="none" />
+        <!-- 이속 버프 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-N 네임드 다크리퍼 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5031" value="0">
+    <!-- 다크 리퍼 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,955" id="1" pos="66057.8828,172777.5156,2555.6055" next="none" />
+		<EventTask type="message" string="@dungeon:9094020" style="default" next="time" nextValue="3" />
+        <!-- 이제 하나의 시련만이 남아있다. -->
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400054" next="none" />
+        <!-- 다크 리퍼가 있던 테리토리 디스폰. 남은 부하 디스폰 위해 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400088" next="none" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3009" playTime="0" next="none" />
+        <!-- (음성)날 실망시키 마라 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400109" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094002" style="default" next="time" nextValue="5" />
+        <!--(울리는 목소리)날 실망시키지 마라. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400076" next="none" />
+        <!-- 보스방에 보스 A를 스폰시키는 시작 오브젝트 스폰-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400052" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400053" next="none" />
+        <!-- 출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3-N 네임드 마술사 드라곤 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5032" value="0">
+    <!-- 마술사 드라곤 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,955" id="1" pos="66057.8828,172777.5156,2555.6055" next="none" />
+		<EventTask type="message" string="@dungeon:9094020" style="default" next="time" nextValue="3" />
+        <!-- 이제 하나의 시련만이 남아있다. -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400055" next="none" />
+        <!-- 마술사 드라곤이 있던 테리토리 디스폰. 남은 부하 디스폰 위해-->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400088" next="none" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3009" playTime="0" next="none" />
+        <!-- (음성)날 실망시키 마라 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400109" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰 -->
+        <EventTask type="message" string="@dungeon:9094002" style="default" next="time" nextValue="5" />
+        <!--(울리는 목소리)날 실망시키지 마라. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400077" next="none" />
+        <!-- 보스방에 보스 B를 스폰시키는 시작 오브젝트 스폰-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400052" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400053" next="none" />
+        <!-- 출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 4-1 아홉번째 방  소환 -->
+  <EventGroup type="npcHp" uniqueId="494, 6010" value="0">
+    <!-- 8번방 시작 오브젝트. 8번방 시작할 때, 9번 방에도 몬스터 스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400058" next="none" />
+        <!-- 쉐도우 아머 + 풀베기 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-1 아홉번째 방 중간 이벤트 -->
+  <EventGroup type="npcHp" uniqueId="494,5036" value="50">
+    <!-- 쉐도우 아머 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094021" style="alert" next="none" />
+        <!-- 크하하! 내가 너를 막겠다!! -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400059" next="none" />
+        <!-- 쉐도우 아머 엘리트 + 풀베기 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-1 아홉번째 방 클리어 이벤트 -->
+  <EventGroup type="npcHp" uniqueId="494,5038" value="0">
+    <!-- 쉐도우 아머 엘리트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400058" next="none" />
+        <!-- 쉐도우 아머가 있던 테리토리 디스폰. 남아있는 몬스터 디스폰 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400059" next="time" nextValue="3" />
+        <!-- 쉐도우 아머 엘리트가 있던 테리토리 디스폰. 남아있는 몬스터 디스폰 위해 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400060" next="none" />
+        <!-- 유저에게 버프주는 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 4-2 열번째 방  소환 -->
+  <EventGroup type="npcHp" uniqueId="494,6011" value="0" repeat="true">
+    <!-- 10번방 시작 오브젝트 -->
+    <Event>
+      <!-- 무사 그룹 소환 -->
+      <EventTaskGroup probability="0.5">
+        <EventTask type="guideOn" nameId="494,956" id="1" pos="66057.8828,172777.5156,2555.6055" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400065" next="none" />
+        <!-- 무사 석상 + 무사3 소환 -->
+      </EventTaskGroup>
+      <!-- 마법사 그룹 소환 -->
+      <EventTaskGroup probability="0.5">
+        <EventTask type="guideOn" nameId="494,966" id="1" pos="66057.8828,172777.5156,2555.6055" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400068" next="none" />
+        <!-- 마법사 석상 + 마법사3 소환 -->
+      </EventTaskGroup>
+    </Event>
+    <!-- 롯팅데드, 입구 문 소환-->
+    <!-- 애는 무조건 스폰되기 때문에 별도 구분한 것-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400062" next="none" />
+        <!-- 입구 문 소환 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400064" next="none" />
+        <!-- 롯팅데드 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  무사 2단계 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5041" value="0" repeat="true">
+    <!-- 무사3 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="1" />
+        <!-- 시간 조절용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400066" next="none" />
+        <!-- 무사2 소환 -->
+        <EventTask type="message" string="@dungeon:9094023" style="default" next="none" />
+        <!-- 고대의 중급 무사가 나타났다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  무사 2단계 1번이 죽어서 무사 1단계 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5042" value="0" repeat="true">
+    <!-- 무사2-1 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="1" />
+        <!-- 시간 조절용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400067" next="none" />
+        <!-- 무사1 소환 -->
+        <EventTask type="message" string="@dungeon:9094024" style="default" next="none" />
+        <!-- 고대의 하급 무사가 나타났다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  무사 2단계 2번이 죽어서 무사 1단계 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,6015" value="0" repeat="true">
+    <!-- 무사2-2 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="1" />
+        <!-- 시간 조절용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400094" next="none" />
+        <!-- 무사 1 소환 -->
+        <EventTask type="message" string="@dungeon:9094024" style="default" next="none" />
+        <!-- 고대의 하급 무사가 나타났다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  마법사  2단계 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5045" value="0" repeat="true">
+    <!-- 마법사3 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="1" />
+        <!-- 시간 조절용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400069" next="none" />
+        <!-- 마법사2 소환 -->
+        <EventTask type="message" string="@dungeon:9094025" style="default" next="none" />
+        <!-- 고대의 중급 마법사가 나타났다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  마법사 2단계 1번이 죽어서 마법사 1단계 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5046" value="0" repeat="true">
+    <!-- 마법사 2-1 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="1" />
+        <!-- 시간 조절용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400070" next="none" />
+        <!-- 마법사1 소환 -->
+        <EventTask type="message" string="@dungeon:9094026" style="default" next="none" />
+        <!-- 고대의 하급 마법사가 나타났다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  마법사 2단계 2번이 죽어서 마법사 1단계 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,6016" value="0" repeat="true">
+    <!-- 마법사 2-2 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="1" />
+        <!-- 시간 조절용 빈 메시지 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400095" next="none" />
+        <!-- 마법사1 소환 -->
+        <EventTask type="message" string="@dungeon:9094026" style="default" next="none" />
+        <!-- 고대의 하급 마법사가 나타났다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  무사 클리어  -->
+  <EventGroup type="npcHp" uniqueId="494,5040" value="0">
+    <!-- 무사 석상 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,957" id="1" pos="72127,171948,3309" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400065" next="none" />
+        <!-- 무사 석상 +무사3 있는 테리토리 디스폰. 무사3를 디스폰 하기 위해-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400066" next="none" />
+        <!-- 무사2 있던 테리토리 디스폰. 무사3 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400067" next="none" />
+        <!-- 무사1 있던 테리토리 디스폰. 무사1 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400094" next="none" />
+        <!-- 무사1 있던 테리토리 디스폰. 무사1 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400064" next="none" />
+        <!-- 롯팅데드 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400089" next="time" nextValue="5" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400062" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400063" next="none" />
+        <!-- 출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  마법사 클리어  -->
+  <EventGroup type="npcHp" uniqueId="494,5044" value="0">
+    <!-- 마법사 석상 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,957" id="1" pos="72127,171948,3309" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400068" next="none" />
+        <!-- 마법사 석상 + 마법사3 있는 테리토리 디스폰. 마법사3를 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400069" next="none" />
+        <!-- 마법사2 있는 테리토리 디스폰. 마법사2 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400070" next="none" />
+        <!-- 마법사1 있는 테리토리 디스폰. 마법사1 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400095" next="none" />
+        <!-- 마법사1 있는 테리토리 디스폰. 마법사1 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400064" next="none" />
+        <!-- 롯팅데드 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400089" next="time" nextValue="5" />
+        <!-- 이속 버프 오브젝트 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400062" next="none" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400063" next="none" />
+        <!-- 출구 문 디스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  마법사 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5044" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400068" next="none" />
+        <!-- 마법사 석상 + 마법사3 있는 테리토리 디스폰. 마법사3를 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400069" next="none" />
+        <!-- 마법사2 있는 테리토리 디스폰. 마법사2 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400070" next="none" />
+        <!-- 마법사1 있는 테리토리 디스폰. 마법사1 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400095" next="none" />
+        <!-- 마법사1 있는 테리토리 디스폰. 마법사1 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400064" next="none" />
+        <!-- 롯팅데드 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400062" next="time" nextValue="3" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400061" next="none" />
+        <!-- 시작  오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-2 열번째 방  무사 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5040" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400065" next="none" />
+        <!-- 무사 석상 +무사3 있는 테리토리 디스폰. 무사3를 디스폰 하기 위해-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400066" next="none" />
+        <!-- 무사2 있던 테리토리 디스폰. 무사3 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400067" next="none" />
+        <!-- 무사1 있던 테리토리 디스폰. 무사1 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400094" next="none" />
+        <!-- 무사1 있던 테리토리 디스폰. 무사1 디스폰 하기 위해 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400064" next="none" />
+        <!-- 롯팅데드 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400062" next="time" nextValue="3" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400061" next="none" />
+        <!-- 시작 오브젝트 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 4-N 보스 네임드  A 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,6012" value="0">
+    <!-- 11번방 시작 오브젝트A -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,958" id="1" pos="72127,171948,3309" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3005" playTime="0" next="none" />
+        <!-- (음성) 이것이 마지막 시련이다 -->
+        <EventTask type="message" string="@dungeon:9094014" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 이것이 마지막 시련이다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400073" next="none" />
+        <!-- 보스A 소환 -->
+      </EventTaskGroup>
+    </Event>
+    <!-- 입구 문 스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400079" next="none" />
+        <!-- 입구 문 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400102" next="none" />
+        <!-- 세번째 네임드 가는 텔레포트 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400103" next="time" nextValue="5" />
+        <!-- 보스 네임드 가는 텔레포트 스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400110" next="none" />
+        <!--입구문 앞 보스 네임드 가는 텔레포트 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-N 보스 네임드  B 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,6013" value="0">
+    <!-- 11번방 시작 오브젝트B -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,968" id="1" pos="72127,171948,3309" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3005" playTime="0" next="none" />
+        <!-- (음성) 이것이 마지막 시련이다 -->
+        <EventTask type="message" string="@dungeon:9094014" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 이것이 마지막 시련이다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400074" next="none" />
+        <!-- 보스B 소환 -->
+      </EventTaskGroup>
+    </Event>
+    <!-- 입구 문 스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400079" next="none" />
+        <!-- 입구 문 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400102" next="none" />
+        <!-- 세번째 네임드 가는 텔레포트 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400103" next="time" nextValue="5" />
+        <!-- 보스 네임드 가는 텔레포트 스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400110" next="none" />
+        <!--입구문 앞 보스 네임드 가는 텔레포트 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-N 보스 네임드  C 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,6014" value="0">
+    <!-- 11번방 시작 오브젝트C -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOn" nameId="494,978" id="1" pos="72127,171948,3309" next="none" />
+		<EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="6" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="3005" playTime="0" next="none" />
+        <!-- (음성) 이것이 마지막 시련이다 -->
+        <EventTask type="message" string="@dungeon:9094014" style="default" next="time" nextValue="5" />
+        <!-- (울리는 목소리) 이것이 마지막 시련이다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400075" next="none" />
+        <!-- 보스C 소환 -->
+      </EventTaskGroup>
+    </Event>
+    <!-- 입구 문 스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094032" style="alert" next="time" nextValue="3" />
+        <!--5초 후에 문이 닫힙니다 -->
+        <!--<EventTask type="message" string="@dungeon:9094033" style="alert" next="time" nextValue="1"/>	5 -->
+        <!--<EventTask type="message" string="@dungeon:9094034" style="alert" next="time" nextValue="1"/>	4 -->
+        <!--<EventTask type="message" string="@dungeon:9094035" style="alert" next="time" nextValue="1"/>	3 -->
+        <!--<EventTask type="message" string="@dungeon:9094036" style="alert" next="time" nextValue="1"/>	2 -->
+        <!--<EventTask type="message" string="@dungeon:9094037" style="alert" next="time" nextValue="1"/>	1 -->
+        <EventTask type="message" string="@dungeon:9094038" style="alert" next="none" />
+        <!--문이 닫힙니다. -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400079" next="none" />
+        <!-- 입구 문 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400102" next="none" />
+        <!-- 세번째 네임드 가는 텔레포트 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400103" next="time" nextValue="5" />
+        <!-- 보스 네임드 가는 텔레포트 스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400110" next="none" />
+        <!--입구문 앞 보스 네임드 가는 텔레포트 스폰 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 네임드 A과 전투 중 키 몬스터 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5049" value="50">
+    <!-- 보스A Hp 50% -->
+    <Event>
+      <!-- 스폰되는 이벤트 -->
+      <EventTaskGroup probability="0.8">
+        <EventTask type="message" string="@dungeon:9094017" style="default" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9094040" style="default" next="none" />
+        <EventTask type="timerUi" time="10" next="none" />
+        <!-- 타이머 UI 작동 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400083" next="time" nextValue="10" />
+        <!-- 키 몬스터 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400083" next="none" />
+        <!-- 키몬스터 디스폰 -->
+      </EventTaskGroup>
+      <!-- 스폰 안되는 이벤트 -->
+      <EventTaskGroup probability="0.2"></EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 네임드 B과 전투 중 키 몬스터 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5050" value="50">
+    <!-- 보스B Hp 50% -->
+    <Event>
+      <!-- 스폰되는 이벤트 -->
+      <EventTaskGroup probability="0.8">
+        <EventTask type="message" string="@dungeon:9094017" style="default" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9094040" style="default" next="none" />
+        <EventTask type="timerUi" time="10" next="none" />
+        <!-- 타이머 UI 작동 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400083" next="time" nextValue="10" />
+        <!-- 키 몬스터 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400083" next="none" />
+        <!-- 키몬스터 디스폰 -->
+      </EventTaskGroup>
+      <!-- 스폰 안되는 이벤트 -->
+      <EventTaskGroup probability="0.2"></EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 네임드 C과 전투 중 키 몬스터 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5051" value="50">
+    <!-- 보스C Hp 50% -->
+    <Event>
+      <!-- 스폰되는 이벤트 -->
+      <EventTaskGroup probability="0.8">
+        <EventTask type="message" string="@dungeon:9094017" style="default" next="time" nextValue="1" />
+		<EventTask type="message" string="@dungeon:9094040" style="default" next="none" />
+        <EventTask type="timerUi" time="10" next="none" />
+        <!-- 타이머 UI 작동 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400083" next="time" nextValue="10" />
+        <!-- 키 몬스터 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400083" next="none" />
+        <!-- 키몬스터 디스폰 -->
+      </EventTaskGroup>
+      <!-- 스폰 안되는 이벤트 -->
+      <EventTaskGroup probability="0.2"></EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 네임드 A HP 70%  방해 오브젝트 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5049" value="70" repeat="true">
+    <!-- 보스A Hp 70% -->
+    <Event>
+      <!-- 스폰되는 이벤트 -->
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400096" next="none" />
+        <!-- 방해 오브젝트 소환 소환 -->
+        <EventTask type="message" string="@dungeon:9094027" style="default" next="none" />
+        <!-- 저주의 석상이 소환되었다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 네임드 B HP 70%  방해 오브젝트 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5050" value="70" repeat="true">
+    <!-- 보스B Hp 70% -->
+    <Event>
+      <!-- 스폰되는 이벤트 -->
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400096" next="none" />
+        <!-- 방해 오브젝트 소환 소환 -->
+        <EventTask type="message" string="@dungeon:9094027" style="default" next="none" />
+        <!-- 저주의 석상이 소환되었다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 네임드 C HP 70%  방해 오브젝트 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5051" value="70" repeat="true">
+    <!-- 보스C Hp 70% -->
+    <Event>
+      <!-- 스폰되는 이벤트 -->
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400096" next="none" />
+        <!-- 방해 오브젝트 소환 -->
+        <EventTask type="message" string="@dungeon:9094027" style="default" next="none" />
+        <!-- 저주의 석상이 소환되었다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 네임드 A HP 30%  방해 오브젝트 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5049" value="30" repeat="true">
+    <!-- 보스A Hp 30% -->
+    <Event>
+      <!-- 스폰되는 이벤트 -->
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400097" next="none" />
+        <!-- 방해 오브젝트 소환 소환 -->
+        <EventTask type="message" string="@dungeon:9094027" style="default" next="none" />
+        <!-- 저주의 석상이 소환되었다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 네임드 B HP 30%  방해 오브젝트 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5050" value="30" repeat="true">
+    <!-- 보스B Hp 30% -->
+    <Event>
+      <!-- 스폰되는 이벤트 -->
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400097" next="none" />
+        <!-- 방해 오브젝트 소환 소환 -->
+        <EventTask type="message" string="@dungeon:9094027" style="default" next="none" />
+        <!-- 저주의 석상이 소환되었다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 보스 네임드 C HP 30%  방해 오브젝트 소환 -->
+  <EventGroup type="npcHp" uniqueId="494,5051" value="30" repeat="true">
+    <!-- 보스C Hp 30% -->
+    <Event>
+      <!-- 스폰되는 이벤트 -->
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400097" next="none" />
+        <!-- 방해 오브젝트 소환 -->
+        <EventTask type="message" string="@dungeon:9094027" style="default" next="none" />
+        <!-- 저주의 석상이 소환되었다! -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-N 보스 A타입 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5049" value="0">
+    <!-- 보스A 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOff" id="1" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="3006" playTime="0" next="none" />
+        <!-- (음성) 훌륭하군. 충분히 즐거웠다 -->
+        <EventTask type="message" string="@dungeon:9094016" style="default" next="time" nextValue="6" />
+        <!-- (울리는 목소리) 훌륭하군. 충분히 즐거웠다…-->
+      </EventTaskGroup>
+    </Event>
+    <!-- 입구 문 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400096" next="none" />
+        <!-- 방해 오브젝트 소환 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400097" next="none" />
+        <!-- 방해 오브젝트 소환 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400079" next="time" nextValue="5" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400110" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400091" next="none" />
+        <!-- 퇴장 차원의 마법석 소환 -->
+        <EventTask type="workObjectSpawn" huntingZoneId="494" templateId="52" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-N 보스 B타입 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5050" value="0">
+    <!-- 보스B 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOff" id="1" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="3006" playTime="0" next="none" />
+        <!-- (음성) 훌륭하군. 충분히 즐거웠다 -->
+        <EventTask type="message" string="@dungeon:9094016" style="default" next="time" nextValue="6" />
+        <!-- (울리는 목소리) 훌륭하군. 충분히 즐거웠다…-->
+      </EventTaskGroup>
+    </Event>
+    <!-- 입구 문 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400096" next="none" />
+        <!-- 방해 오브젝트 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400097" next="none" />
+        <!-- 방해 오브젝트 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400079" next="time" nextValue="5" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400110" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400091" next="none" />
+        <!-- 퇴장 차원의 마법석 소환 -->
+        <EventTask type="workObjectSpawn" huntingZoneId="494" templateId="52" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-N 보스 C타입 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5051" value="0">
+    <!-- 보스C 죽음 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="guideOff" id="1" next="none" />
+		<EventTask type="Soundon" soundType="effectSound" soundId="3006" playTime="0" next="none" />
+        <!-- (음성) 훌륭하군. 충분히 즐거웠다 -->
+        <EventTask type="message" string="@dungeon:9094016" style="default" next="time" nextValue="6" />
+        <!-- (울리는 목소리) 훌륭하군. 충분히 즐거웠다…-->
+      </EventTaskGroup>
+    </Event>
+    <!-- 입구 문 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400096" next="none" />
+        <!-- 방해 오브젝트 소환 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400097" next="none" />
+        <!-- 방해 오브젝트 소환 소환 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400079" next="time" nextValue="5" />
+        <!-- 입구 문 디스폰 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400110" next="none" />
+        <!-- 입구문 앞 텔레포트 장치 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400091" next="none" />
+        <!-- 퇴장 차원의 마법석 소환 -->
+        <EventTask type="workObjectSpawn" huntingZoneId="494" templateId="52" next="none" />
+        <!-- 퇴장 차원의 마법석 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-N 보스 A타입 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5049" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400096" next="none" />
+        <!-- HP 70% 때 소환된 롯팅데드 디스폰-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400097" next="none" />
+        <!-- HP 30% 때 소환된 롯팅데드 디스폰-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-N 보스 B타입 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5050" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400096" next="none" />
+        <!-- HP 70% 때 소환된 롯팅데드 디스폰-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400097" next="none" />
+        <!-- HP 30% 때 소환된 롯팅데드 디스폰-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 4-N 보스 C타입 리셋 -->
+  <EventGroup type="npcReset" uniqueId="494,5051" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400096" next="none" />
+        <!-- HP 70% 때 소환된 롯팅데드 디스폰-->
+        <EventTask type="deSpawn" huntingZoneId="494" territoryId="49400097" next="none" />
+        <!-- HP 30% 때 소환된 롯팅데드 디스폰-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <!-- 자유사냥 네임드있는 곳으로 이동  -->
+  <EventGroup type="Workobject" uniqueId="494,52">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9094999" style="default" next="time" nextValue="3" />
+        <!-- 테스트용 빈 메시지 -->
+        <EventTask type="teleport" continentId="9094" pos="67501,180927,9869" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 자유사냥 네임드 클리어 -->
+  <EventGroup type="npcHp" uniqueId="494,5053" value="0">
+    <!-- 자유사냥 네임드 죽음 -->
+    <!-- 입구 문 디스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="494" territoryId="49400093" next="none" />
+        <!-- 퇴장 차원의 마법석 소환 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- =================================================================================================== -->
+  <!-- =================================================================================================== -->
+  <Condition type="maxMemberCount" value="3" />
+
+   <!--오샤르 적용으로 고대신의 축복 삭제-->
+   <!-- 네임드 재도전 장치
+  <EventGroup type="npcHp" uniqueId="494,5010" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5008" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5006" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5021" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5031" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5032" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5033" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5050" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5049" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5051" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5053" value="99.99999999" repeat="true" stopWhenReset="true"  stopWhenDeath="true" >
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="120" />
+        <EventTask type="message" string="@dungeon:9094100" style="default" next="time" nextValue="0" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총1" value="60" next="time" nextValue="65" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총2" value="120" next="time" nextValue="125" timerUiOff="false" />
+        <EventTask type="timer" action="start" direction="reverse" name="벨릭의 은총3" value="180" next="time" nextValue="0" timerUiOff="false" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  -->
+  <!-- 보스 사망 시 재도전 장치 스톱
+  <EventGroup type="npcHp" uniqueId="494,5010" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5008" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5006" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5021" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5031" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5032" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5033" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5050" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5049" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5051" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="494,5053" value="0">
+    <Event>
+      <EventTaskGroup>
+       <EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  -->
+  <!-- 보스 리셋 시 재도전 장치 스톱
+  <EventGroup type="npcReset" uniqueId="494,5010" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5008" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5006" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5021" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5031" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5032" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5033" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5050" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5049" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5051" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcReset" uniqueId="494,5053" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="timer" action="stop" name="벨릭의 은총1" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총2" next="time" nextValue="0" />
+        <EventTask type="timer" action="stop" name="벨릭의 은총3" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="timer" timerName="벨릭의 은총1" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9094101" style="default" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="timer" timerName="벨릭의 은총2" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9094102" style="default" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="timer" timerName="벨릭의 은총3" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="1650" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="1660" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000116" target="player" next="none" />
+        <EventTask type="abnormality" abnormalityId="45000117" target="player" next="none" />
+        <EventTask type="message" string="@dungeon:9094103" style="default" next="time" nextValue="0" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+-->
+  
+  
+  
+  
+  </Dungeon>
+<!--
+입장 했을 때
+	(울리는 목소리) 시험을 시작하마.
+	(울리는 목소리) 날 실망시키지 마라.
+
+첫번째 네임드
+	(울리는 목소리) 첫번째 시련이다.
+	너희들이 지나온 길이 거짓이 아님을 증명해 보아라.
+	XXXXX에서 싸웠던 XXXX다.
+	(울리는 목소리) 시련을 넘을 수 있겠는가?
+
+	
+첫번째 네임드 클리어
+	첫번째 시련을 넘어섰구나.
+	그러나 아직 시련은 많이 남아있다.
+	(울리는 목소리) 여기까지 올 수 있겠는가?
+	
+	
+두번째 네임드	
+	(울리는 목소리) 두번째 시련이다.
+	(울리는 목소리) 시련을 넘을 수 있겠는가?
+	
+	
+세번째 네임드
+	(울리는 목소리) 세번째 시련이다.
+	(울리는 목소리) 시련을 넘을 수 있겠는가?
+
+	
+네번째 네임드
+	(울리는 목소리) 이것이 마지막 시련이다.
+	(울리는 목소리) 날 실망시키지 마라.
+
+	
+네번째 네임드 클리어
+	(울리는 목소리) 훌륭하군. 충분히 즐거웠다…
+	
+	
+(울리는 목소리) 시험을 시작하마.
+(울리는 목소리) 첫번째 시련이다.
+
+
+
+
+(울리는 목소리) 시련을 넘을 수 있겠는가?
+(울리는 목소리) 날 실망시키지 마라.
+
+
+-->

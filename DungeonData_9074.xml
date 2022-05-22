@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9074" name="@dungeon:9074" startPos="63036,-98662,-8647" exitContinentId="7021" exitPos="-54879,57853,4793" destroyWaitMin="0">
+  <!-- 부활의 성소 -->
+  <RestoreTargetQuest id="5602" forceRestore="true"/>
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="51" />
+  <Condition type="progressQuest" value="5602" taskId="2" />
+  <Condition type="completeQuest" value="5602" />
+  <Condition type="maxMemberCount" value="5" />
+  <EventGroup type="initialize"> <!-- 던전 생성 되자마자 실행되는 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="474" territoryId="47400013" next="none"/>
+		<EventTask type="spawn" huntingZoneId="474" territoryId="47400014" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="474,47400014">
+    <Event>
+	<EventTaskGroup>
+		<EventTask type="spawn" huntingZoneId="474" territoryId="47400008" next="none"/>
+		<EventTask type="spawn" huntingZoneId="474" territoryId="47400007" next="none"/>
+	</EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--PC이동 후 1차 전투 몬스터 스폰-->
+  <EventGroup type="enterTerritory" uniqueId="474,47400013">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="bgm" soundId="9074001" playTime="1000" next="none" />
+        <EventTask type="spawn" huntingZoneId="474" territoryId="47400001" next="complete" nextValue="0" />
+        <EventTask type="Soundon" soundType="bgm" soundId="9074002" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9074003" style="default" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="474" territoryId="47400004" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--2차 전투중 아르곤 칼라쉬 수호자 50%일 때 부하(켈바) 스폰-->
+  <EventGroup type="npcHp" uniqueId="474,5006" value="50">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="474" territoryId="47400010" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="474" territoryId="47400009" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--아르곤 칼라쉬 수호자의 hp에 따라서 몬스터 신관 스폰, 신관 처치 후 켈사이크 스폰-->
+  <EventGroup type="npcHp" uniqueId="474,5006" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="bgm" soundId="9074003" playTime="1000" next="none" />
+        <EventTask type="message" string="@dungeon:9074004" style="default" next="time" nextValue="0" />
+        <EventTask type="despawn" huntingZoneId="474" territoryId="47400007" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="474" territoryId="47400005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="5602" taskId="8">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9074001" style="default" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="474" territoryId="47400006" next="none" />
+        <EventTask type="despawn" huntingZoneId="474" territoryId="47400008" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--켈사이크 hp에 따라서 강력한 스킬을 쓰는 ai로 변경 -->
+  <EventGroup type="npcHp" uniqueId="474,5009" value="99.75">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9074002" style="default" next="none" />
+        <EventTask type="npcAi" targetNpcId="474,5009" aiid="9" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="5602" taskId="9">
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="3" />
+        <EventTask type="despawn" huntingZoneId="474" territoryId="47400006" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+</Dungeon>

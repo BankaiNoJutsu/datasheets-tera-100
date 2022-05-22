@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9021" name="@dungeon:9021" startPos="70557,-85019,-1751" exitContinentId="7003" exitPos="-30379, -34705, -1932" startDir="31374" destroyWaitMin="0">
+  <RestoreTargetQuest id="2003" forceRestore="true"/>
+  <!-- 망자의 토굴 미션 특수공간 -->
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="27" />
+  <Condition type="progressQuest" value="2003" taskId="2" />
+  <Condition type="completeQuest" value="2003" />
+  <EventGroup type="npcHp" uniqueId="421,1" value="50">
+    <!-- 가면의 남자(몬스터) 사망 시 몬스터 디스폰, 영상 플레이, npc들 스폰 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="421" territoryId="42100003" next="time" nextValue="1" />
+        <EventTask type="playMovie" id="28" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="421" territoryId="42100004" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

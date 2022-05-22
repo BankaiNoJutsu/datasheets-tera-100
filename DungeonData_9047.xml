@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9047" name="@dungeon:9047" startPos="10575,146374,-468" exitContinentId="7002" exitPos="-21365,23155,1865" destroyWaitMin="0" enterLimitCount="5">
+  <Condition type="maxMemberCount" value="3" />
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="10" />
+  <!--사운드 시작-->
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="bgm" soundId="9047001" playTime="9999999" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--마녀 시작 대화-->
+  <EventGroup type="talkNpc" uniqueId="447,200">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="flag" name="전투" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="전투">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9047001" style="combat" next="time" nextValue="5" />
+        <EventTask type="message" string="@dungeon:9047002" style="combat" next="time" nextValue="2" />
+        <EventTask type="message" string="@dungeon:9047029" style="combat" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9047030" style="combat" next="time" nextValue="1" />
+        <EventTask type="message" string="@dungeon:9047031" style="combat" next="time" nextValue="1" />
+        <EventTask type="flag" name="전투" value="0" next="none"/>
+        <EventTask type="flag" name="타이머온" value="1"  next="none" />
+        <EventTask type="timer" action="start" direction="reverse" value="150" name="타이머" next="none" />
+        <EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+        <EventTask type="flag" name="웨이브1" value="1" next="time" nextValue="15" />
+        <EventTask type="flag" name="웨이브2" value="1" next="time" nextValue="15" />
+        <EventTask type="flag" name="웨이브3" value="1" next="time" nextValue="15" />
+        <EventTask type="flag" name="웨이브4" value="1" next="time" nextValue="15" />
+        <EventTask type="flag" name="웨이브5" value="1" next="time" nextValue="10" />
+        <EventTask type="flag" name="잭오랜턴" value="1" next="time" nextValue="75" />
+        <EventTask type="flag" name="끝" value="1" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9047009" style="combat" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9047008" style="combat" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9047010" style="combat" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9047011" style="combat" next="time" nextValue="3" />
+     </EventTaskGroup>
+    </Event>
+  </EventGroup>
+<!-- 전투 종료-->
+  <EventGroup type="flag" name="끝">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="CoolTime" next="none" />
+		<EventTask type="flag" name="타이머온" value="0" next="none" />
+        <EventTask type="timer" action="stop" value="0" name="타이머" next="none" />
+        <EventTask type="rankSystem" state="end" next="none" />
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700055" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700064" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700065" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700072" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700073" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700074" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700061" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700066" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700067" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700075" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700076" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700077" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700063" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700070" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700071" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700078" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700079" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700080" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700081" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700082" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700083" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700084" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700085" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700086" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700087" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700088" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700089" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700090" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700091" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700092" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700093" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700094" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700095" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700096" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700097" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700098" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700102" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700103" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700104" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700105" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700106" next="none"/>
+        <EventTask type="despawn" huntingZoneId="447" territoryId="44700107" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 잭 오 랜턴 사망 시 모든 몬스터 슬로우 -->
+  <EventGroup type="npcHp" uniqueId="447,400" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9047018" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070011" target="npc" targetNpcId="447,100" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070011" target="npc" targetNpcId="447,101" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070011" target="npc" targetNpcId="447,102" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070011" target="npc" targetNpcId="447,110" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070011" target="npc" targetNpcId="447,112" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070011" target="npc" targetNpcId="447,120" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070011" target="npc" targetNpcId="447,121" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070011" target="npc" targetNpcId="447,122" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 유령 사망 시 랜덤 효과 적용 -->
+  <EventGroup type="npcHp" uniqueId="447,110" value="0" repeat="true">
+    <Event>
+	<!-- 이속 증가 -->
+      <EventTaskGroup probability="0.2">
+        <EventTask type="message" string="@dungeon:9047019" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070012" target="npc" targetNpcId="447,100" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070012" target="npc" targetNpcId="447,101" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070012" target="npc" targetNpcId="447,102" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070012" target="npc" targetNpcId="447,120" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070012" target="npc" targetNpcId="447,121" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070012" target="npc" targetNpcId="447,122" next="none" />
+      </EventTaskGroup>
+	<!-- 맷집 감소 -->
+      <EventTaskGroup probability="0.4">
+        <EventTask type="message" string="@dungeon:9047019" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070013" target="npc" targetNpcId="447,100" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070013" target="npc" targetNpcId="447,101" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070013" target="npc" targetNpcId="447,102" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070013" target="npc" targetNpcId="447,120" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070013" target="npc" targetNpcId="447,121" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070013" target="npc" targetNpcId="447,122" next="none" />
+      </EventTaskGroup>
+	<!-- 불태우기 -->
+      <EventTaskGroup probability="0.4">
+        <EventTask type="message" string="@dungeon:9047019" style="combat" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070014" target="npc" targetNpcId="447,100" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070014" target="npc" targetNpcId="447,101" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070014" target="npc" targetNpcId="447,102" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070014" target="npc" targetNpcId="447,120" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070014" target="npc" targetNpcId="447,121" next="none" />
+        <EventTask type="abnormality" abnormalityId="99070014" target="npc" targetNpcId="447,122" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 웨이브 1 후카 -->
+  <EventGroup type="flag" name="웨이브1,타이머온" repeat="true">
+    <Event>
+      <EventTaskGroup probability="1">
+        <EventTask type="message" string="@dungeon:9047003" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700055" next="none" /> <!--할로윈G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700066" next="none" /> <!--폭탄G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700071" next="time" nextValue="1" /> <!--돌격병G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700075" next="none" /> <!--폭탄G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700074" next="time" nextValue="2" /> <!--할로윈G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700076" next="none" /> <!--폭탄G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700061" next="none" /> <!--할로윈G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700070" next="none" /> <!--폭탄G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700065" next="time" nextValue="2" /> <!--돌격병G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700078" next="none" /> <!--폭탄G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700077" next="time" nextValue="2" /> <!--할로윈G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700079" next="none" /> <!--폭탄G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700063" next="none" /> <!--할로윈G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700064" next="none" /> <!--폭탄G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700067" next="time" nextValue="2" /> <!--돌격병G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700072" next="none" /> <!--폭탄G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700080" next="time" nextValue="2" /> <!--할로윈G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700073" next="none" /> <!--폭탄G1-->
+        <EventTask type="flag" name="웨이브1" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 웨이브 2 언데드&후카 -->
+  <EventGroup type="flag" name="웨이브2,타이머온" repeat="true">
+    <Event>
+      <EventTaskGroup probability="1">
+        <EventTask type="message" string="@dungeon:9047004" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700055" next="none" /> <!--할로윈G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700090" next="none" /> <!--추격자G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700071" next="time" nextValue="2" /> <!--돌격병G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700091" next="none" /> <!--추격자G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700074" next="time" nextValue="2" /> <!--할로윈G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700092" next="none" /> <!--추격자G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700061" next="none" /> <!--할로윈G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700096" next="none" /> <!--추격자G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700065" next="time" nextValue="2" /> <!--돌격병G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700097" next="none" /> <!--추격자G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700077" next="time" nextValue="2" /> <!--할로윈G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700098" next="none" /> <!--추격자G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700063" next="none" /> <!--할로윈G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700084" next="none" /> <!--추격자G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700067" next="time" nextValue="2" /> <!--돌격병G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700085" next="none" /> <!--추격자G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700080" next="time" nextValue="2" /> <!--할로윈G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700086" next="none" /> <!--추격자G1-->
+        <EventTask type="flag" name="웨이브2" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 웨이브 3 언데드 창병 -->
+  <EventGroup type="flag" name="웨이브3,타이머온" repeat="true">
+    <Event>
+      <EventTaskGroup probability="1">
+        <EventTask type="message" string="@dungeon:9047005" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700055" next="none" /> <!--할로윈G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700090" next="none" /> <!--추격자G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700093" next="time" nextValue="2" /> <!--창병G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700091" next="none" /> <!--추격자G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700074" next="time" nextValue="2" /> <!--할로윈G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700092" next="none" /> <!--추격자G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700061" next="none" /> <!--할로윈G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700096" next="none" /> <!--추격자G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700081" next="time" nextValue="2" /> <!--창병G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700097" next="none" /> <!--추격자G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700077" next="time" nextValue="2" /> <!--할로윈G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700098" next="none" /> <!--추격자G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700063" next="none" /> <!--할로윈G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700084" next="none" /> <!--추격자G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700087" next="time" nextValue="2" /> <!--창병G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700085" next="none" /> <!--추격자G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700080" next="time" nextValue="2" /> <!--할로윈G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700086" next="none" /> <!--추격자G1-->
+        <EventTask type="flag" name="웨이브3" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 웨이브 4 언데드 야수 -->
+  <EventGroup type="flag" name="웨이브4,타이머온" repeat="true">
+    <Event>
+      <EventTaskGroup probability="1">
+        <EventTask type="message" string="@dungeon:9047006" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700081" next="none" /> <!--창병G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700087" next="none" /> <!--창병G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700093" next="time" nextValue="5" /> <!--창병G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700082" next="none" /> <!--사육야수G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700081" next="none" /> <!--창병G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700087" next="none" /> <!--창병G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700093" next="time" nextValue="5" /> <!--창병G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700088" next="none" /> <!--사육야수G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700081" next="none" /> <!--창병G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700087" next="none" /> <!--창병G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700093" next="time" nextValue="5" /> <!--창병G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700094" next="none" /> <!--사육야수G3-->
+        <EventTask type="flag" name="웨이브4" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 웨이브 5 언데드 장군 -->
+  <EventGroup type="flag" name="웨이브5,타이머온" repeat="true">
+    <Event>
+      <EventTaskGroup probability="1">
+        <EventTask type="message" string="@dungeon:9047022" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700081" next="none" /> <!--창병G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700087" next="none" /> <!--창병G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700093" next="time" nextValue="5" /> <!--창병G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700082" next="none" /> <!--사육야수G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700089" next="none" /> <!--장군G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700096" next="time" nextValue="1" /> <!--추격자G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700097" next="time" nextValue="2" /> <!--추격자G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700098" next="none" /> <!--추격자G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700081" next="none" /> <!--창병G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700087" next="none" /> <!--창병G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700093" next="time" nextValue="5" /> <!--창병G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700088" next="none" /> <!--사육야수G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700095" next="none" /> <!--장군G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700084" next="time" nextValue="1" /> <!--추격자G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700085" next="time" nextValue="2" /> <!--추격자G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700086" next="none" /> <!--추격자G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700081" next="none" /> <!--창병G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700087" next="none" /> <!--창병G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700093" next="time" nextValue="5" /> <!--창병G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700094" next="none" /> <!--사육야수G3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700083" next="none" /> <!--장군G1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700090" next="time" nextValue="1" /> <!--추격자G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700091" next="time" nextValue="2" /> <!--추격자G2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700092" next="none" /> <!--추격자G2-->
+        <EventTask type="flag" name="웨이브5" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <!-- 웨이브 6 잭 오 랜턴 -->
+  <EventGroup type="flag" name="잭오랜턴,타이머온" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.33">
+        <EventTask type="message" string="@dungeon:9047007" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700103" next="none" /> <!--친구1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700105" next="none" /> <!--친구2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700107" next="time" nextValue="3" /> <!--친구3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700102" next="none" /> <!--잭오랜턴1-->
+        <EventTask type="flag" name="잭오랜턴" value="0" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.33">
+        <EventTask type="message" string="@dungeon:9047007" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700103" next="none" /> <!--친구1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700105" next="none" /> <!--친구2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700107" next="time" nextValue="3" /> <!--친구3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700104" next="none" /> <!--잭오랜턴2-->
+        <EventTask type="flag" name="잭오랜턴" value="0" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.34">
+        <EventTask type="message" string="@dungeon:9047007" style="combat" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700103" next="none" /> <!--친구1-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700105" next="none" /> <!--친구2-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700107" next="time" nextValue="3" /> <!--친구3-->
+        <EventTask type="spawn" huntingZoneId="447" territoryId="44700106" next="none" /> <!--잭오랜턴3-->
+        <EventTask type="flag" name="잭오랜턴" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+</Dungeon>

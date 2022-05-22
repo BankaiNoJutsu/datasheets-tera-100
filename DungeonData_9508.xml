@@ -1,0 +1,645 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9508" name="@dungeon:9508" startPos="-39328,-7749,5" exitContinentId="7004" exitPos="116263,91059,6445" destroyWaitMin="0">
+	<RestoreTargetQuest id="50526,50527,50528,50529,50530" forceRestore="true" />
+   <Condition type="solo"/>
+  <Condition type="levelOver" value="65"/> 
+	
+	<EventGroup type="initialize" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundon" soundType="bgm" soundId="9508005" playTime="9999999" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	
+	 <EventGroup type="flag" name="초기화">
+		<Event>
+			<EventTaskGroup>
+				<!-- 더렵혀진 영혼 -->		
+				<EventTask type="spawn"  huntingZoneId="508" territoryId="50800001" next="time" nextValue="1" /> 				
+				<!-- 영혼들 소환 -->
+				<EventTask type="flag" name="시오즈" value="1" next="none"/>					
+				<EventTask type="flag" name="포아롱" value="1" next="none"/>					
+				<EventTask type="flag" name="바라카" value="1" next="none"/>					
+				<EventTask type="flag" name="마다트" value="1" next="none"/>					
+				<EventTask type="flag" name="한나" value="1" next="none"/>
+				<EventTask type="flag" name="카라로르샤" value="1" next="none"/>
+				<EventTask type="flag" name="로크란" value="1" next="none"/>
+				<EventTask type="flag" name="포포리꼬마" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+  
+	<EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="508,50800046">						<!-- 정령사로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300002" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	<EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="508,50800046">						<!-- 사제로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300003" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+  
+     <EventGroup type="questProgress">
+		<Event questId="50526" taskId="9" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="초기화" value="1" next="none"/>		
+				<!-- 용계 전멸 연출용 포스트 프로세스(하얀색) 삭제 -->
+				<EventTask type="abnormality" abnormalityId ="950500004" target="player" strictly="true" turn="on" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId ="950500009" target="player" strictly="true" turn="on" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId ="950500001" target="player" strictly="true" turn="on" next="time" nextValue="1" />
+				<EventTask type="abnormality" abnormalityId ="950800018" target="player" strictly="true" turn="on" next="none" />
+				<EventTask type="message" string="@dungeon:9508002" style="alert"  next="time" nextValue="3" />						
+				<EventTask type="message" string="@dungeon:9508001" style="alert"  next="time" nextValue="3" />
+				<EventTask type="message" string="@dungeon:9508003" style="alert"  next="none" />
+				<EventTask type="flag" name="웨이브1-1" value="1" next="none"/>
+	
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup> 
+   <EventGroup type="flag" name="웨이브1-1">
+		<Event>
+			<EventTaskGroup>
+					<!-- 1차 웨이브 -->
+					<EventTask type="doActionScript"  targetNpcId="508,1001" actionScriptId="9505017" next="time" nextValue="1" />	
+				 	<EventTask type="spawn"  huntingZoneId="508" territoryId="50800005" next="none"/>					
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800006" next="none"/>					
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800007" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="eliminate" territoryId="50800005,50800006,50800007">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="웨이브1-2" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup> 
+	
+	 <EventGroup type="flag" name="웨이브1-2">
+		<Event>
+			<EventTaskGroup>
+					<!-- 1차 웨이브 -->
+					<EventTask type="doActionScript"  targetNpcId="508,1001" actionScriptId="9505017" next="time" nextValue="1" />					
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800008" next="none"/>
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800012" next="none"/> 
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800016" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="eliminate" territoryId="50800008,50800012,50800016">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="웨이브1-3" value="1" next="none"/>
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup> 
+  
+  	 <EventGroup type="flag" name="웨이브1-3">
+		<Event>
+			<EventTaskGroup>
+					<!-- 1차 웨이브 -->
+					<EventTask type="doActionScript"  targetNpcId="508,1001" actionScriptId="9505017" next="time" nextValue="1" />
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800008" next="none"/>
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800058" next="none"/>								
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800016" next="none"/>
+					<EventTask type="flag" name="웨이브1-3" value="0" next="none"/>								
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	
+	<EventGroup type="eliminate" territoryId="50800008,50800058,50800016" >
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="flag" name="용계" value="1" next="none"/>
+				<!--
+				<EventTask type="flag" name="영혼" value="0" next="none" repeat="true"/>										
+				-->
+			</EventTaskGroup>			
+		</Event>
+	</EventGroup>		
+	
+	 <EventGroup type="flag" name="용계">
+		<Event>
+			<EventTaskGroup>					
+					<!-- 2차 웨이브 -->
+					<!--  내면 세계용 포스트 프로세스 삭제 -->
+					<EventTask type="abnormality" abnormalityId ="950500001" target="player" strictly="true" turn="off" next="none" />					
+					<EventTask type="message" string="@dungeon:9508008" style="alert"  next="time" nextValue="5" />		
+					
+					<!-- 더럽혀진 영혼 디스폰 -->
+					<EventTask type="despawn"  huntingZoneId="508" territoryId="50800001" next="time" nextValue="2" />	
+					<!-- 각성 연출 용 이펙트 표시용 이상상태 유저에게 검 -->					
+					<!--
+					<EventTask type="abnormality" abnormalityId ="950700005" target="player" strictly="true" turn="on" next="none" />				
+					-->
+					<!-- 퀘스트 갱신 -->
+					<EventTask type="updateQuest" questId="50526" taskId="9" next="none"/>
+					<!-- 미스텔 소환 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800004" next="none"/>
+					<!-- 중형 2차 소환 연출용 투명 NPC -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800057" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>   
+  
+	<!-- 각성 스킬 획득 후 미스텔과 대화 시 연출용 이펙트 재생용 이상상태를 유저에게 적용 -->
+    <EventGroup type="questProgress">
+		<Event questId="50526" taskId="10" >
+			<EventTaskGroup>				
+				<EventTask type="flag" name="연출1" value="1" next="none"/>										
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>  
+  
+	<EventGroup type="flag" name="연출1">
+		<Event>
+			<EventTaskGroup>
+			
+				<!-- 각성 스킬 획득 후 미스텔과 대화 시 연출용 이펙트 재생용 이상상태 해제 -->
+				<!--
+				<EventTask type="abnormality" abnormalityId ="950700005" target="player" strictly="true" turn="off" next="time" nextValue="2" />					
+				-->
+				<!-- 각성 영상 재생 >
+				<EventTask type="playMovie" id="3044" next="none"/-->
+				
+				<EventTask type="flag" name="마다트해방" value="1" next="none"/>					
+				<EventTask type="flag" name="한나해방" value="1" next="none"/>
+				<EventTask type="flag" name="카라로르샤해방" value="1" next="none"/>
+				<EventTask type="flag" name="로크란해방" value="1" next="none"/>
+				<EventTask type="flag" name="포포리꼬마해방" value="1" next="none"/>			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<EventGroup type="flag" name="27초기화">
+		<Event>
+			<EventTaskGroup>				
+				<!-- 영혼들 소환 -->
+				<EventTask type="flag" name="시오즈noActionScript" value="1" next="none"/>					
+				<EventTask type="flag" name="포아롱noActionScript" value="1" next="none"/>					
+				<EventTask type="flag" name="바라카noActionScript" value="1" next="none"/>
+				<EventTask type="abnormality" abnormalityId ="950800003" target="player" strictly="true" turn="on" next="time" nextValue="3" />
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800004" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 각성 스킬 단계별 지급 시작 -->
+	<!-- 2차 분 -->
+	<EventGroup type="questProgress">
+		<Event questId="50527" taskId="1" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="연출1" value="1" next="none"/>
+				<EventTask type="flag" name="27초기화" value="1" next="none"/>
+				<EventTask type="abnormality" abnormalityId ="950500001" target="player" strictly="true" turn="off" next="none" />					
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800001,50800051,50800053,50800054,50800055" next="none" />	
+				<EventTask type="abnormality" abnormalityId ="950800040" target="player" strictly="true" turn="on" next="time" nextValue="9.2" />			
+				<EventTask type="message" string="@dungeon:9508033" style="default" next="time" nextValue="5" />
+				<!-- 사운드 테스트 -->
+				<!--
+				<EventTask type="Soundon" soundId="9083001" soundType ="bgm" playTime="10000" next="none"/>
+				-->
+				<!-- 중형 스폰 전 클래스 별 각성 스킬 쿨타임 감소 버프 적용 -->
+				<!--EventTask type="abnormality" abnormalityId ="950800013" target="class" targetUserClass="lancer" value="1" strictly="true" turn="on" next="none" /-->
+								
+				<!--EventTask type="abnormality" abnormalityId ="950800009" target="class" targetUserClass="slayer" value="1" strictly="true" turn="on" next="none" /-->
+								
+				<EventTask type="message" string="@dungeon:9508019" style="alert" next="time" nextValue="2"/>				
+			
+				<EventTask type="message" string="@dungeon:9508024" style="default" next="none"/>
+				<EventTask type="flag" name="사운드" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>  	
+	
+	<EventGroup type="flag" name="사운드">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundon" soundType="bgm" soundId="9508001" playTime="30" next="time" nextValue="30"/>
+				<EventTask type="Soundon" soundId="9508002" soundType ="bgm" playTime="10000" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="questProgress">
+		<Event questId="50527" taskId="2" >
+			<EventTaskGroup>				
+				<EventTask type="message" string="@dungeon:9508030" style="default" next="none"/>
+				
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>  	
+	
+	<!-- 퍼져가는 분노 소환 -->
+	<EventGroup type="talkNpc" uniqueId="508,2003">    
+		<Event textId="2" questId="50527" taskId="2">
+			<EventTaskGroup>
+				<!-- 내면 세계 연출 용 포스트 프로세스 -->
+				<EventTask type="abnormality" abnormalityId ="950800001" target="player" strictly="true" turn="on" next="none" />					
+				
+				<!-- 최악의 분노 스폰 -->
+				<EventTask type="doActionScript"  targetNpcId="508,8002" actionScriptId="9508003" next="time" nextValue="2" />	
+				<EventTask type="spawn"  huntingZoneId="508" territoryId="50800021" next="time" nextValue="1" />	
+				
+				<EventTask type="message" string="@dungeon:9508027" style="default" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!-- 최악의 분노 처치 시 바라카 디스폰 -->	
+	<EventGroup type="eliminate"  territoryId="50800021" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript"  targetNpcId="508,2003" actionScriptId="9508005" next="time" nextValue="2"/>
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800052" next="time" nextValue="1" />				
+			</EventTaskGroup>			
+		</Event>
+	</EventGroup>		
+	
+	<EventGroup type="flag" name="28초기화">
+		<Event>
+			<EventTaskGroup>				
+				<!-- 영혼들 소환 -->
+				<EventTask type="flag" name="시오즈noActionScript" value="1" next="none"/>					
+				<EventTask type="flag" name="포아롱noActionScript" value="1" next="none"/>	
+				<EventTask type="abnormality" abnormalityId ="950800003" target="player" strictly="true" turn="on" next="time" nextValue="3" />
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800004" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3차 분 -->
+	<EventGroup type="questProgress">
+		<Event questId="50528" taskId="1" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="28초기화" value="1" next="none"/>
+				<EventTask type="abnormality" abnormalityId ="950500001" target="player" strictly="true" turn="off" next="none" />					
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800001,50800051,50800053,50800054,50800055" next="none" />	
+				<EventTask type="flag" name="내면세계포스트프로세스해제" value="1" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId ="950800040" target="player" strictly="true" turn="off" next="time" nextValue="1.5"/>
+				<EventTask type="abnormality" abnormalityId ="950800042" target="player" strictly="true" turn="on" next="time" nextValue="1.2"/>
+				<EventTask type="message" string="@dungeon:9508036" style="default" next="time" nextValue="3"/>
+				<EventTask type="message" string="@dungeon:9508025" style="default" next="none"/>
+				<!-- 최악의 기억 스폰-->	
+				<!--
+				<EventTask type="flag" name="포아롱해방" value="1" next="none"/>
+				-->
+				<!-- 사운드 테스트 -->
+				<!--
+				<EventTask type="Soundoff" soundId="9083001" soundType ="bgm" playTime="10000" next="none"/>				
+				-->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	
+	<EventGroup type="questProgress">
+		<Event questId="50528" taskId="2" >
+			<EventTaskGroup>				
+				<EventTask type="message" string="@dungeon:9508031" style="default" next="none"/>
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>  	
+	
+	<!-- 피어오르는 어두운 기억 소환 -->
+	<EventGroup type="talkNpc" uniqueId="508,2001">    
+		<Event textId="2" questId="50528" taskId="2">
+			<EventTaskGroup>
+				<!-- 내면 세계 연출 용 포스트 프로세스 -->
+				<EventTask type="abnormality" abnormalityId ="950800001" target="player" strictly="true" turn="on" next="none" />					
+				
+				<!-- 피어오르는 어두운 기억 스폰 -->
+				<EventTask type="doActionScript"  targetNpcId="508,8002" actionScriptId="9508003" next="time" nextValue="2" />	
+				<EventTask type="spawn"  huntingZoneId="508" territoryId="50800020" next="time" nextValue="1" />	
+
+				<EventTask type="message" string="@dungeon:9508028" style="default" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!-- 피어오르는 어두운 기억 처치시 포아롱 디스폰 -->
+	<EventGroup type="eliminate"  territoryId="50800020" >
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="doActionScript"  targetNpcId="508,2001" actionScriptId="9508005" next="time" nextValue="2"/>
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800050" next="none" /> 
+			</EventTaskGroup>			
+		</Event>
+	</EventGroup>			
+	
+	<EventGroup type="flag" name="29초기화">
+		<Event>
+			<EventTaskGroup>				
+				<!-- 영혼들 소환 -->
+				<EventTask type="flag" name="시오즈noActionScript" value="1" next="none"/>
+				<EventTask type="abnormality" abnormalityId ="950800003" target="player" strictly="true" turn="on" next="time" nextValue="3" />				
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800004" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 4차 분 -->
+	<EventGroup type="questProgress">
+		<Event questId="50529" taskId="1" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="29초기화" value="1" next="none"/>
+				<EventTask type="abnormality" abnormalityId ="950500001" target="player" strictly="true" turn="off" next="none" />					
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800001,50800051,50800053,50800054,50800055" next="none" />	
+				<EventTask type="flag" name="내면세계포스트프로세스해제" value="1" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId ="950800042" target="player" strictly="true" turn="off" next="time" nextValue="1.5"/>
+				<EventTask type="abnormality" abnormalityId ="950800044" target="player" strictly="true" turn="on" next="time" nextValue="1.2"/>
+				<EventTask type="message" string="@dungeon:9508034" style="default" next="time" nextValue="3"/>
+				<EventTask type="message" string="@dungeon:9508026" style="default" next="none"/>					
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	
+	<EventGroup type="questProgress">
+		<Event questId="50529" taskId="2" >
+			<EventTaskGroup>				
+				<EventTask type="message" string="@dungeon:9508032" style="default" next="none"/>
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>  	
+	
+	<!-- 사람질 수 없는 사념 소환 -->
+	<EventGroup type="talkNpc" uniqueId="508,2000">    
+		<Event textId="2" questId="50529" taskId="2">
+			<EventTaskGroup>
+				<!-- 내면 세계 연출 용 포스트 프로세스 -->
+				<EventTask type="abnormality" abnormalityId ="950800001" target="player" strictly="true" turn="on" next="none" />					
+				
+				<!-- 사람질 수 없는 사념 스폰 -->
+				<EventTask type="doActionScript"  targetNpcId="508,8002" actionScriptId="9508003" next="time" nextValue="2" />	
+				<EventTask type="spawn"  huntingZoneId="508" territoryId="50800062" next="none" /> 		
+
+				<EventTask type="message" string="@dungeon:9508029" style="default" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	
+	<!-- 사람질 수 없는 사념 처치 시 시오즈 디스폰 -->
+	<EventGroup type="eliminate"  territoryId="50800062" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundoff" soundType="additionalbgm" soundId="9508002" next="none" />
+				<EventTask type="Soundon" soundType="bgm" soundId="9508003" playTime="14" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="508,2000" actionScriptId="9508005" next="time" nextValue="2"/>
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800049" next="time" nextValue="1" /> 
+			</EventTaskGroup>			
+		</Event>
+	</EventGroup>			
+	
+	  <!-- 미스텔 방문 -->
+    <EventGroup type="questProgress">
+		<Event questId="50530" taskId="1" >
+			<EventTaskGroup>				
+				<EventTask type="flag" name="내면세계포스트프로세스해제" value="1" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId ="950800044" target="player" strictly="true" turn="off" next="time" nextValue="1.5"/>
+				<EventTask type="playMovie" id="3044" next="time" nextValue="33"/>	
+				<EventTask type="empty" next="time" nextValue="1"/>
+				<EventTask type="abnormality" abnormalityId ="950800046" target="player" strictly="true" turn="on" next="none"/>
+				<EventTask type="despawn"  huntingZoneId="508" territoryId="50800001,50800049,50800050,50800051,50800052,50800053,50800054,50800055,50800056" next="none" />
+				<EventTask type="spawn"  huntingZoneId="508" territoryId="50800004" next="none"/>
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup>  	
+				
+     <!-- 용계로 이동 시켜주는 미스텔의 기운 스폰 -->
+    <EventGroup type="questProgress">
+		<Event questId="50530" taskId="2" >
+			<EventTaskGroup>				
+				<EventTask type="flag" name="미스텔기운" value="1" next="none"/>										
+			</EventTaskGroup>
+		</Event>  
+  </EventGroup>  
+  
+  <EventGroup type="flag" name="미스텔기운">
+		<Event>
+			<EventTaskGroup>				
+				<!-- 미스텔의 기운 스폰 -->				
+				<EventTask type="message" string="@dungeon:9508035" style="default" next="time" nextValue="1.2" />
+				<EventTask type="message" string="@dungeon:9508037" style="default" next="time" nextValue="1.2" />
+				<EventTask type="message" string="@dungeon:9508038" style="default" next="time" nextValue="1.2" />
+				<EventTask type="message" string="@dungeon:9508039" style="default" next="time" nextValue="1" />				
+				<EventTask type="spawn" huntingZoneId="508" territoryId="50800048" next="none" /> 	
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>	
+	
+	<!--EventGroup type="flag" name="창기사데미지이상상태해제" repeat="true">
+		<Event>
+			<EventTaskGroup>					
+					<EventTask type="abnormality" abnormalityId ="950800029" target="class" targetUserClass="lancer" value="1" strictly="true" turn="off" next="none" />
+					<EventTask type="abnormality" abnormalityId ="950800030" target="class" targetUserClass="lancer" value="1" strictly="true" turn="off" next="none" />				
+					<EventTask type="abnormality" abnormalityId ="950800031" target="class" targetUserClass="lancer" value="1" strictly="true" turn="off" next="none" />				
+					<EventTask type="abnormality" abnormalityId ="950800032" target="class" targetUserClass="lancer" value="1" strictly="true" turn="off" next="none" />
+					<EventTask type="flag" name="창기사데미지이상상태해제" value="0" next="none"/>	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	
+	<!--EventGroup type="flag" name="광전사데미지이상상태해제" repeat="true">
+		<Event>
+			<EventTaskGroup>					
+					<EventTask type="abnormality" abnormalityId ="950800023" target="class" targetUserClass="berserker" value="1" strictly="true" turn="off" next="none" />
+					<EventTask type="abnormality" abnormalityId ="950800024" target="class" targetUserClass="berserker" value="1" strictly="true" turn="off" next="none" />				
+					<EventTask type="abnormality" abnormalityId ="950800025" target="class" targetUserClass="berserker" value="1" strictly="true" turn="off" next="none" />				
+					<EventTask type="abnormality" abnormalityId ="950800026" target="class" targetUserClass="berserker" value="1" strictly="true" turn="off" next="none" />
+					<EventTask type="abnormality" abnormalityId ="950800027" target="class" targetUserClass="berserker" value="1" strictly="true" turn="off" next="none" />
+					<EventTask type="abnormality" abnormalityId ="950800028" target="class" targetUserClass="berserker" value="1" strictly="true" turn="off" next="none" />
+					<EventTask type="flag" name="광전사데미지이상상태해제" value="0" next="none"/>	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	
+	<!--EventGroup type="flag" name="무사데미지이상상태해제" repeat="true">
+		<Event>
+			<EventTaskGroup>					
+					<EventTask type="abnormality" abnormalityId ="950800029" target="class" targetUserClass="slayer" value="1" strictly="true" turn="off" next="none" />
+					<EventTask type="abnormality" abnormalityId ="950800030" target="class" targetUserClass="slayer" value="1" strictly="true" turn="off" next="none" />				
+					<EventTask type="abnormality" abnormalityId ="950800031" target="class" targetUserClass="slayer" value="1" strictly="true" turn="off" next="none" />				
+					<EventTask type="abnormality" abnormalityId ="950800032" target="class" targetUserClass="slayer" value="1" strictly="true" turn="off" next="none" />			
+					<EventTask type="flag" name="무사데미지이상상태해제" value="0" next="none"/>	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	
+	<EventGroup type="flag" name="내면세계포스트프로세스해제" repeat="true">
+		<Event>
+			<EventTaskGroup>					
+				<!-- 내면 세계 연출 용 포스트 프로세스 해제 -->
+				<EventTask type="abnormality" abnormalityId ="950800001" target="player" strictly="true" turn="off" next="none" />				
+				<EventTask type="flag" name="내면세계포스트프로세스해제" value="0" next="none"/>														
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 원혼들 소환 및 이펙트 연출 -->	
+		<EventGroup type="flag" name="시오즈">
+		<Event>
+			<EventTaskGroup>
+					<!-- 시오즈 엘린 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800049" next="time" nextValue="1.5" /> 
+					<EventTask type="doActionScript"  targetNpcId="508,2000" actionScriptId="9508004" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="포아롱">
+		<Event>
+			<EventTaskGroup>
+					<!-- 포아롱 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800050" next="time" nextValue="1.5" /> 
+					<EventTask type="doActionScript"  targetNpcId="508,2001" actionScriptId="9508004" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="바라카">
+		<Event>
+			<EventTaskGroup>					
+					<!-- 바라카 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800052" next="time" nextValue="1.5" /> 
+					<EventTask type="doActionScript"  targetNpcId="508,2003" actionScriptId="9508004" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="한나">
+		<Event>
+			<EventTaskGroup>
+					<!-- 한나 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800053" next="time" nextValue="1.5" /> 
+					<EventTask type="doActionScript"  targetNpcId="508,2004" actionScriptId="9508004" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="카라로르샤">
+		<Event>
+			<EventTaskGroup>
+					<!-- 카라 로르샤 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800054" next="time" nextValue="1.5" /> 
+					<EventTask type="doActionScript"  targetNpcId="508,2005" actionScriptId="9508004" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="로크란">
+		<Event>
+			<EventTaskGroup>
+					<!-- 로크란 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800055" next="time" nextValue="1.5" /> 
+					<EventTask type="doActionScript"  targetNpcId="508,2006" actionScriptId="9508004" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="포포리꼬마">
+		<Event>
+			<EventTaskGroup>
+					<!-- 포포리 꼬마 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800056" next="time" nextValue="1.5" /> 
+					<EventTask type="doActionScript"  targetNpcId="508,2007" actionScriptId="9508004" next="none"/>	
+					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<EventGroup type="flag" name="마다트">
+		<Event>
+			<EventTaskGroup>
+					<!-- 마다트 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800051" next="time" nextValue="1.5" /> 
+					<EventTask type="doActionScript"  targetNpcId="508,2002" actionScriptId="9508004" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!-- 시오즈, 포아롱, 바라카를 제외한 나머지 원혼들 해방 연출 -->	
+	<EventGroup type="flag" name="한나">
+		<Event>
+			<EventTaskGroup>
+					<!-- 한나 영혼 -->
+					<EventTask type="doActionScript"  targetNpcId="508,2004" actionScriptId="9508005" next="time" nextValue="2"/>
+					<EventTask type="despawn"  huntingZoneId="508" territoryId="50800053" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="카라로르샤해방">
+		<Event>
+			<EventTaskGroup>
+					<!-- 카라 로르샤 영혼 -->
+					<EventTask type="empty"  next="time" nextValue="1" />
+					<EventTask type="doActionScript"  targetNpcId="508,2005" actionScriptId="9508005" next="time" nextValue="2"/>
+					<EventTask type="despawn"  huntingZoneId="508" territoryId="50800054" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="로크란해방">
+		<Event>
+			<EventTaskGroup>
+					<!-- 로크란 영혼 -->
+					<EventTask type="empty"  next="time" nextValue="2" />
+					<EventTask type="doActionScript"  targetNpcId="508,2006" actionScriptId="9508005" next="time" nextValue="2"/>
+					<EventTask type="despawn"  huntingZoneId="508" territoryId="50800055" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="포포리꼬마해방">
+		<Event>
+			<EventTaskGroup>
+					<!-- 포포리 꼬마 영혼 -->					
+					<EventTask type="doActionScript"  targetNpcId="508,2007" actionScriptId="9508005" next="time" nextValue="2"/>
+					<EventTask type="despawn"  huntingZoneId="508" territoryId="50800056" next="none" />					
+					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<EventGroup type="flag" name="마다트해방">
+		<Event>
+			<EventTaskGroup>
+					<!-- 마다트 영혼 -->
+					<EventTask type="empty"  next="time" nextValue="2" />
+					<EventTask type="doActionScript"  targetNpcId="508,2002" actionScriptId="9508005" next="time" nextValue="2"/>
+					<EventTask type="despawn"  huntingZoneId="508" territoryId="50800051" next="none" /> 					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 원혼들 소환 및 이펙트 연출 -->	
+		<EventGroup type="flag" name="시오즈noActionScript">
+		<Event>
+			<EventTaskGroup>
+					<!-- 시오즈 엘린 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800049" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="포아롱noActionScript">
+		<Event>
+			<EventTaskGroup>
+					<!-- 포아롱 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800050" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="바라카noActionScript">
+		<Event>
+			<EventTaskGroup>					
+					<!-- 바라카 영혼 -->
+					<EventTask type="spawn"  huntingZoneId="508" territoryId="50800052" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+</Dungeon>

@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="2103" name="@dungeon:9505" startPos="50482,54063,876" exitContinentId="2000" exitPos="105624,-79342,12928" destroyWaitMin="0">
+	<Condition type="solo" />
+	<Condition type="maxMemberCount" value="1" />
+	<Condition type="levelOver" value="65" />
+	<RestoreTargetQuest id="200303" forceRestore="true"/>
+	<Condition type="progressQuest" value="200303" taskId="2" />
+	<Condition type="completeQuest" value="200302" />
+	
+	<!-- 1층, 쟈넬라 설명 후, 이동 -->
+	<EventGroup type="questProgress" >
+		<Event questId="200303" taskId="6">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:2103100" targetNpcId="2103,100" next="time" nextValue="2.0" />
+				<EventTask type="message" string="@dungeon:2103101" targetNpcId="2103,100" next="time" nextValue="2.0" />
+				<EventTask type="doActionScript" targetNpcId="2103,100" actionScriptId="210300" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103604" targetNpcId="2103,122" next="none" />
+				<EventTask type="doActionScript" targetNpcId="2103,122" actionScriptId="210300" next="time" nextValue="2.0" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 1층, 나가 경비 1차 소환 -->
+	<EventGroup type="questProgress" >
+		<Event questId="200303" taskId="7">
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300003" next="none" />
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300016" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103200" targetNpcId="2103,1002" next="none" />
+				<EventTask type="message" string="@dungeon:2103300" targetNpcId="2103,1003" next="time" nextValue="2.0" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 1층, 나가 경비 2차 소환 -->
+	<EventGroup type="questProgress">
+		<Event questId="200303" taskId="9">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2103" territoryId="210300003" next="none" />
+				<EventTask type="despawn" huntingZoneId="2103" territoryId="210300016" next="none" />
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300004" next="none" />
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300017" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103300" targetNpcId="2103,1000" next="none" />
+				<EventTask type="message" string="@dungeon:2103400" targetNpcId="2103,1001" next="time" nextValue="2.0" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 1층, 쟈넬라 점프기어 사용 -->
+	<EventGroup type="eliminate" territoryId="210300004,210300017" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="21030001" target="player" strictly="true" turn="on" next="none" />
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300022" next="none" />
+				<EventTask type="despawn" huntingZoneId="2103" territoryId="210300004" next="none" />
+				<EventTask type="despawn" huntingZoneId="2103" territoryId="210300017" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:2103103" targetNpcId="2103,103" next="time" nextValue="1.0" />
+				<EventTask type="doActionScript" targetNpcId="2103,103" actionScriptId="210301" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103104" targetNpcId="2103,103" next="time" nextValue="1.5" />
+				<EventTask type="doActionScript" targetNpcId="2103,103" actionScriptId="210304" next="none" />
+				<EventTask type="doActionScript" targetNpcId="2103,103" actionScriptId="210305" next="time" nextValue="3.0" />
+				<EventTask type="despawn" huntingZoneId="2103" territoryId="210300022" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2층,쟈넬라 달리기 -->
+	<EventGroup type="enterTerritory" uniqueId="2103,210300028" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300023" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:2103102" targetNpcId="2103,104" next="time" nextValue="0.5" />
+				<EventTask type="doActionScript" targetNpcId="2103,104" actionScriptId="210302" next="time" nextValue="10.0" />
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300006" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2층, 쟈넬라 반대편 제어장치로 향하기 -->
+	<EventGroup type="questProgress" >
+		<Event questId="200303" taskId="11">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:2103105" targetNpcId="2103,101" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103106" targetNpcId="2103,101" next="time" nextValue="1.0" />
+				<EventTask type="doActionScript" targetNpcId="2103,101" actionScriptId="210307" next="time" nextValue="9.0" />
+				<EventTask type="despawn" huntingZoneId="2103" territoryId="210300006" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<!--2층, 폭탄 설치-->
+	<EventGroup type="questProgress" repeat="true" >
+		<Event questId="200303" taskId="15">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2103" territoryId="210300023" next="none" />
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300027" next="none" />
+				<EventTask type="message" string="@dungeon:2103603" targetNpcId="2103,121" next="time" nextValue="1.0" />
+				<EventTask type="doActionScript" targetNpcId="2103,121" actionScriptId="210308" next="none" />
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300033" next="none" />
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300034" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2층, 폭탄 설치 후, 트로 대사-->
+	<EventGroup type="questProgress" >
+		<Event questId="200303" taskId="16">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:2103605" targetNpcId="2103,121" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103606" targetNpcId="2103,121" next="none" />
+				<EventTask type="abnormality" abnormalityId="21030002" target="player" strictly="true" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 3층, 엘리온 대사-->
+	<EventGroup type="questProgress" >
+		<Event questId="200303" taskId="19">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="2103" territoryId="210300033" next="none" />
+				<EventTask type="despawn" huntingZoneId="2103" territoryId="210300034" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:2103800" targetNpcId="2103,112" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103801" targetNpcId="2103,112" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<!-- 칼리가르 전투 중, 영상 재생 이벤트-->
+	<EventGroup type="npcHp" uniqueId="2103,2000" value="50">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:2103700" targetNpcId="2103,2000" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103701" targetNpcId="2103,2000" next="time" nextValue="2.0" />				
+				<EventTask type="deSpawn" huntingZoneId="2103" territoryId="210300011" next="none" />
+				<EventTask type="updateQuest" questId="200303" taskId="19" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 3층, 트로 등장 -->
+	<EventGroup type="questProgress" >
+		<Event questId="200303" taskId="22">
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="2103,111" actionScriptId="210303" next="none"/>
+				<EventTask type="spawn" huntingZoneId="2103" territoryId="210300024" next="none" />
+				<EventTask type="message" string="@dungeon:2103602" targetNpcId="2103,120" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103600" targetNpcId="2103,120" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:2103601" targetNpcId="2103,120" next="time" nextValue="1.0" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 3층,텔포 탈출 -->
+	<EventGroup type="questProgress">
+		<Event questId="200303" taskId="23">
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="21030001" target="player" strictly="true" turn="off" next="none" /> 
+				<EventTask type="abnormality" abnormalityId="21030002" target="player" strictly="true" turn="off" next="none" /> 
+				<EventTask type="teleport" continentId="7005" pos="-95,10007,2173" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+</Dungeon>

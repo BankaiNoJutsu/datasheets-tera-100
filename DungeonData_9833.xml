@@ -1,0 +1,960 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9833" name="@dungeon:9833" startPos="-132608,20286,2098" exitContinentId="7005" exitPos="1599,3195,1748" enterLimitCount="1" destroyWaitMin="0">
+	<RestoreTargetQuest id="50511,50512" forceRestore="true" />
+	<Condition type="solo"/>
+	<Condition type="levelOver" value="65"/>  
+	<EventGroup type="initialize"> 
+	<!-- 던전 생성 되자마자 실행되는 이벤트 -->    
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300182" next="none"/> <!--용족 수하 1200번 스폰-->
+				<!--EventTask type="despawn" huntingZoneId="833" territoryId="83300127" next="none"/-->
+				<EventTask type="despawn" huntingZoneId="833" territoryId="83300180" next="none"/> <!-- 최종 포탈 앞 학자와 조수 디스폰-->	
+				<EventTask type="despawn" huntingZoneId="833" territoryId="83300272" next="none"/>
+				<EventTask type="despawn" huntingZoneId="833" territoryId="83300385" next="none"/>
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300262" next="none"/>	
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300383" next="none"/>
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300384" next="none"/>				
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="833,83300005">						<!-- 정령사로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300002" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	<EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="833,83300005">						<!-- 사제로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300003" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	<!--마을 주민 투덜대는 연출-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50511" taskId="5">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833046" targetNpcId="833,1026" next="time" nextValue="0.7" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--격리구역 경비병과 병든 주민 연출-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="1">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833039" targetNpcId="833,1081" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:9833040" targetNpcId="833,1219" next="time" nextValue="1.0" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 쓰러진 케이론 넬슨 발견 메시지 
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="3">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833045" style="default" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+
+	<!-- 7 초기화 -->
+	<EventGroup type="flag" name="7초기화">
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300362" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="50512" taskId="7" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="7초기화" value="1" next="none"/>			
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	<EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="833,83300005">						<!-- 정령사로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300002" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	<EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="833,83300005">						<!-- 사제로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300003" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	
+	<!-- 넬슨 가까이 가면 학자가 등장 -->
+	<EventGroup type="questProgress" > 
+		<Event questId="50512" taskId="7" >
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833004" targetNpcId="833,1048" next="time" nextValue="1" />
+				<EventTask type="flag" name="505127" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="505127" >
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300127" next="time" nextValue="5"/>
+				<EventTask type="message" string="@dungeon:9833033" targetNpcId="833,1292" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 검은 용 출몰 -->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="9">
+			<EventTaskGroup>
+				<EventTask type="flag" name="검은용과수하등장" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="flag" name="검은용과수하등장">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="doActionScript"  targetNpcId="833,1048" actionScriptId="9505034" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300427" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300127" next="none" />
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300356,83300357,83300358" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>			
+
+	<!-- 명령을 내리는 용족 수하와 드래곤 연출 -->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="10">
+			<EventTaskGroup>
+				<EventTask type="flag" name="505129" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="flag" name="505129">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="message" string="@dungeon:9833016" targetNpcId="833,1202" next="none" nextValue="0.7" />
+				<EventTask type="message" string="@dungeon:9833017" targetNpcId="833,1296" next="time" nextValue="0.7" />
+				<EventTask type="doActionScript" targetNpcId="833,1215" actionScriptId="9833047" next="time" nextValue="1.0"/>	
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300383" next="time" nextValue="0.5" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300384" next="time" nextValue="1" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300357,83300358" next="time" nextValue="1" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300356" next="none" />
+				<!--EventTask type="Spawn" huntingZoneId="833" territoryId="83300376" next="none" /-->
+				<!--EventTask type="doActionScript" targetNpcId="833,1235" actionScriptId="9833045" next="time" nextValue="3.2"/-->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>			
+
+	<EventGroup type="enterTerritory" uniqueId="833,83300428" targetNpcId="833,1284" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300427" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300376" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기1전용대사3-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300495" targetNpcId="833,1284" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833065" targetNpcId="833,1284" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기1전용대사1-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300440" targetNpcId="833,1284" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833050" targetNpcId="833,1284" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기1전용대사2-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300441" targetNpcId="833,1284" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833051" targetNpcId="833,1284" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="11">
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300385" next="time" nextValue="0.3" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+   <!--테리토리 진입하면 절벽 위에서 용족 수하와 학자 대화-->
+  	<!--EventGroup type="enterTerritory" uniqueId="833,83300376" repeat="false">	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300376" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300127" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="flag" name="505128">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="message" string="@dungeon:9833006" targetNpcId="833,1235" next="time" nextValue="0.7" /> 
+				<EventTask type="message" string="@dungeon:9833016" targetNpcId="833,1234" next="time" nextValue="0.7" /> 
+				<EventTask type="doActionScript" targetNpcId="833,1214" actionScriptId="9833040" next="time" nextValue="4.5"/>	
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300380" next="time" nextValue="3.5" />
+				<EventTask type="message" string="@dungeon:9833007" targetNpcId="833,1234" next="time" nextValue="0.7" /> 
+				<EventTask type="doActionScript" targetNpcId="833,1234" actionScriptId="9833003" next="time" nextValue="10.0"/>	
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300378" next="time" nextValue="3.5" />
+				<EventTask type="flag" name="505128" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	
+	<!--베르다슈 달리기 2-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="12">
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈달리기2" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="flag" name="베르다슈달리기2">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300376" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300429" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300430" targetNpcId="833,1285" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300429" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300272" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기2전용대사1-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300442" targetNpcId="833,1285" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833052" targetNpcId="833,1285" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기2전용대사2-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300443" targetNpcId="833,1285" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833053" targetNpcId="833,1285" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--첫 식물 유인용 학자 스폰>
+	<EventGroup type="questProgress">
+		<Event questId="50512" taskId="13">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833028" targetNpcId="833,1237" next="time" nextValue="1.0" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	
+	<!--공격범위 진입하면 판두러스 스폰-->
+	<EventGroup type="questProgress">
+		<Event questId="50512" taskId="14">
+			<EventTaskGroup>
+				<EventTask type="flag" name="505130" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="flag" name="505130">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300366" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:9833032" targetNpcId="833,1237" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:9833068" targetNpcId="833,1237" next="time" nextValue="1.0" />
+				<!--ventTask type="doActionScript" targetNpcId="833,1237" actionScriptId="9833044" next="time" nextValue="2" /-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	
+	<!--소환된 판두러스 제거하면 학자 스폰 -->
+	<EventGroup type="enterTerritory" uniqueId="833,83300496" targetNpcId="833,1237" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="목표식물소환" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="flag" name="목표식물소환">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300272" next="none" />
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300367" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 7 초기화 -->
+	<EventGroup type="flag" name="15초기화">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300272" next="none" />
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300367" next="time" nextValue="1.0" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300383" next="time" nextValue="1.0" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300384" next="time" nextValue="1.0" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300269" next="time" nextValue="1.0" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="50512" taskId="15" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="15초기화" value="1" next="none"/>			
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	<EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="833,83300005">						<!-- 정령사로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300002" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	<EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="833,83300005">						<!-- 사제로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300003" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--베르다슈 달리기 4-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="16">
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈달리기4" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="flag" name="베르다슈달리기4">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300266" next="none" /> <!--두번째 식물 스폰-->
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300367" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300431" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300432" targetNpcId="833,1286" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833023" targetNpcId="833,1286" next="time" nextValue="1" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<!--공격범위 진입하면 판두러스 스폰 두번째-->
+	<EventGroup type="questProgress">
+		<Event questId="50512" taskId="17">
+			<EventTaskGroup>
+				<EventTask type="flag" name="505131" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+    <EventGroup type="flag" name="505131">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300369" next="time" nextValue="1.0" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--소환된 판두러스 제거하면 학자 스폰 -->
+	<EventGroup type="enterTerritory" uniqueId="833,83300432" targetNpcId="833,1286" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈달리기10" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="베르다슈달리기10">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300431" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300469" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300470" targetNpcId="833,1238" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300469" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300371" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 7 초기화 -->
+	<EventGroup type="flag" name="18초기화">
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300469" next="none" />
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300371" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="50512" taskId="18" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="18초기화" value="1" next="none"/>			
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	<EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="833,83300005">						<!-- 정령사로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300002" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	<EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="833,83300005">						<!-- 사제로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300003" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--베르다슈 달리기 5-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="19">
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈달리기5" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="flag" name="베르다슈달리기5">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300371" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300433" next="none" />
+				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300464" targetNpcId="833,1287" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈6소환" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="베르다슈6소환">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300433" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300390" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 시체 더미 앞 메시지 출력 -->
+	<EventGroup type="userCountInTerritory" uniqueId="833,83300387" value="1" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<!-- <EventTask type="message" string="@dungeon:9833022" style="default" next="time" nextValue="1" />  -->
+				<EventTask type="message" string="@dungeon:9833041" targetNpcId="833,1287" next="time" nextValue="1" />  
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<!--테리토리 진입하면 용족 수하 출현-->
+	<EventGroup type="questProgress">
+		<Event questId="50512" taskId="20">
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300133" next="time" nextValue="0.5"/>
+				<EventTask type="message" string="@dungeon:9833013" targetNpcId="833,1239" next="time" nextValue="1" /> 
+				<EventTask type="message" string="@dungeon:9833067" targetNpcId="833,1260" next="none" />
+				<EventTask type="message" string="@dungeon:9833067" targetNpcId="833,1287" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 용족 수하 체력 50% 미만으로 떨어지면 드래곤 소환후 사라짐-->
+	<EventGroup type="npchp" uniqueId="833,1239" value="50">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="updateQuest" questId="50512" taskId="20" next="time" nextValue="0.3" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300372" next="time" nextValue="0.3" />
+				<EventTask type="message" string="@dungeon:9833008" targetNpcId="833,1239" next="time" nextValue="0.7" /> 
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300133" next="time" nextValue="0.3" />
+				<!--포탈 주변 드래곤 스폰-->
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300424" next="none" />
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300425" next="none" />
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300426" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  	
+	<!--용족 수하가 소환한 드래곤 처치하면 학자 및 드래곤 무리 스폰됨-->
+	<EventGroup type="npcHp" uniqueId="833,1240" value="0" repeat="false">                             
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833018" targetNpcId="833,1260" next="time" nextValue="1" />
+				<EventTask type="message" string="@dungeon:9833018" targetNpcId="833,1287" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--베르다슈 달리기 6-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="24">
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈달리기6" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="flag" name="베르다슈달리기6">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300390" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300434" next="none" />
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300381" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300435" targetNpcId="833,1288" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300434" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300392" next="none" />
+				<EventTask type="message" string="@dungeon:9833010" targetNpcId="833,1261" next="time" nextValue="2" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기6전용대사1-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300444" targetNpcId="833,1288" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833054" targetNpcId="833,1288" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기6전용대사2-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300445" targetNpcId="833,1288" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833055" targetNpcId="833,1288" next="time" nextValue="2.0" /> 
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300381" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기6전용대사3-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300446" targetNpcId="833,1288" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833056" targetNpcId="833,1288" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기6전용대사4-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300447" targetNpcId="833,1288" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833057" targetNpcId="833,1288" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<!--드래곤 캠프 안으로 진입하면 테리토리 삭제 -->
+	<!--EventGroup type="enterTerritory" uniqueId ="833,83300175" targetNpcId ="833,1119" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300381" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	<!--EventGroup type="npcState" uniqueId="833,1202" value="combat" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833042" targetNpcId="833,1202" next="time" nextValue="0.7" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup-->
+	
+	<!--캠프 안으로 진입하면 스폰된 학자가 PC 시선끌기>
+  	<EventGroup type="enterTerritory" uniqueId="833,83300391" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300392" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	<EventGroup type="flag" name="26초기화">
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300434" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300392" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="50512" taskId="26" >
+			<EventTaskGroup>
+				<EventTask type="flag" name="26초기화" value="1" next="none"/>			
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup> 
+	<EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="833,83300499">						<!-- 정령사로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300002" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	<EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="833,83300499">						<!-- 사제로 해당 테리토리에 진입하면 버프 적용-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId ="983300003" target="player" strictly="true" turn="on" next="time" nextValue="1" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--베르다슈 달리기 7-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="28">
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈달리기7" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="flag" name="베르다슈달리기7">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300392" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300436" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300437" targetNpcId="833,1289" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300436" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300136" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기7전용대사1-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300448" targetNpcId="833,1289" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833058" targetNpcId="833,1289" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기7전용대사2-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300449" targetNpcId="833,1289" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833059" targetNpcId="833,1289" next="time" nextValue="2.0" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--베르다슈 달리기 8-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="30">
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈달리기8" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>ㅈ
+	</EventGroup>	
+	<EventGroup type="flag" name="베르다슈달리기8">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300136" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300438" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300451" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300439" targetNpcId="833,1290" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300438" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300417" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--달리기8전용대사1-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300450" targetNpcId="833,1290" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833060" targetNpcId="833,1290" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300465" targetNpcId="833,1290" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833061" targetNpcId="833,1290" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300466" targetNpcId="833,1290" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833062" targetNpcId="833,1290" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300467" targetNpcId="833,1290" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833063" targetNpcId="833,1290" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300468" targetNpcId="833,1290" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833064" targetNpcId="833,1290" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--판두러스 치킨런-->
+  	<EventGroup type="enterTerritory" uniqueId="833,83300177" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300404" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300405" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300403" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300402" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300394" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300401" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300400" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300399" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300396" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300398" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300397" next="time" nextValue="0.7"/>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300395" next="time" nextValue="0.7"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!--식물 근처 다가가면 드래곤 소환(1)-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300458" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300459" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--식물 가로수길 통과하면 뼈찾는친구들 스폰-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="31">
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300137" next="time" nextValue="1"/>
+				<EventTask type="message" string="@dungeon:9833011" targetNpcId="833,1296" next="time" nextValue="3" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="833,83300460" targetNpcId="833,1296" repeat="false">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300137" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--갇힌 주민 살려달라고 외치기 -->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="32">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833029" targetNpcId="833,1272" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="33">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833030" targetNpcId="833,1267" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--갇힌 주민 옆 학자 생성 및 대사-->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="34">
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833021" targetNpcId="833,1264" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--갇힌 주민 대사 (2) -->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="35">
+			<EventTaskGroup>
+				<EventTask type="flag" name="감옥경비2" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="감옥경비2">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300452" next="time" nextValue="0.7"/>
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300417" next="none" />
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300471" next="time" nextValue="1.2" />
+				<EventTask type="message" string="@dungeon:9833070" targetNpcId="833,1291" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--베르다슈 달리기 8-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300472" targetNpcId="833,1291" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈달리기11" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="flag" name="베르다슈달리기11">
+		<Event>
+			<EventTaskGroup>  
+				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--갇힌 주민 대사 (3) -->
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="36">
+			<EventTaskGroup>
+			<EventTask type="flag" name="주민대사3" value="1" next="time" nextValue="0.3"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="flag" name="주민대사3">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="message" string="@dungeon:9833030" targetNpcId="833,1271" next="time" nextValue="1" />
+				<EventTask type="message" string="@dungeon:9833034" targetNpcId="833,1274" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+				
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="37">
+			<EventTaskGroup>
+				<EventTask type="flag" name="감옥경비3" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="감옥경비3">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300455" next="none" />
+				
+				<EventTask type="message" string="@dungeon:9833069" targetNpcId="833,1291" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="39">
+			<EventTaskGroup>
+				<EventTask type="flag" name="마지막안내" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="마지막안내">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300471" next="none" />
+				<EventTask type="spawn" huntingZoneId="833" territoryId="83300422" next="time" nextValue="2" />
+				<EventTask type="message" string="@dungeon:9833066" targetNpcId="833,1265" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--식물 근처 다가가면 드래곤 소환(2)-->
+	<EventGroup type="enterTerritory" uniqueId="833,83300456" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300457" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="40">
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300243" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--용족 수하 피 깎이면 학자와 조수 스폰-->
+	<EventGroup type="npcState" uniqueId="833,1295" value="combat" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833009" targetNpcId="833,1295" next="time" nextValue="0.7" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<EventGroup type="npcHp" uniqueId="833,1295" value="90" repeat="false">                             
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9833014" targetNpcId="833,1295" next="time" nextValue="2.0"	/> 
+				<EventTask type="message" string="@dungeon:9833015" targetNpcId="833,1295" next="time" nextValue="2.0"	/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="npcHp" uniqueId="833,1295" value="50" repeat="false">                             
+		<Event>
+			<EventTaskGroup>
+				
+				<!--<EventTask type="message" string="@dungeon:9833027" style="default" next="time" nextValue="2.0"	/> -->
+				<EventTask type="message" string="@dungeon:9833019" targetNpcId="833,1295" next="time" nextValue="1.0"	/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="833,1295" value="20" repeat="false">                             
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="833,1279" actionScriptId="9833001" next="time" nextValue="5.0"/>	
+				<EventTask type="doActionScript" targetNpcId="833,1280" actionScriptId="9833001" next="none" />	
+				<EventTask type="message" string="@dungeon:9833026" targetNpcId="833,1295" next="time" nextValue="2.0"	/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="833,1295" value="0" repeat="false">                             
+		<Event>
+			<EventTaskGroup>				
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300422" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300424" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300425" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300426" next="none" />
+				<EventTask type="Spawn" huntingZoneId="833" territoryId="83300180" next="none"/>
+				<EventTask type="updateQuest" questId="50512" taskId="40" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress"> 
+		<Event questId="50512" taskId="43">
+			<EventTaskGroup>
+				<EventTask type="flag" name="베르다슈디스폰" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="베르다슈디스폰">
+		<Event>
+			<EventTaskGroup>  
+				<EventTask type="doActionScript" targetNpcId="833,1087" actionScriptId="9833048" next="time" nextValue="5.0"/>	
+				<EventTask type="deSpawn" huntingZoneId="833" territoryId="83300180" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

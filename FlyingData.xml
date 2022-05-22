@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+설명충
+FlyingData
+	maxFlightEnergy = 최대 에너지
+	recoveryEnergy = 초당 회복량 (땅에 있을 때에만 회복됨)
+	normalFOV = 기본 비행 시 카메라 FOV (땅에서 디폴트는 71)
+	fastFOV = 부스트 비행 시 카메라 FOV
+	fallingByLimitSpeed = 고도 제한 넘어갔을때에 초당 z값 떨구는 속도. 적당히 크게 잡으면 된다.
+	guideShowTime = 가이드가 노출되는 시간. 초 단위.
+	boostCameraRotateLimit = 부스트 도중에 카메라 RotateSpeed 제한값. 단위는 각도/(초 * 픽셀) (참고로 기본값 18)
+
+Data
+	id : 0은 Invalid 입니다. 쓰지 마세요.
+	Speed류 : Float 입니다. 소수점 써도 됩니다. 
+	RotateSpeed : 초당 각도(Degree단위) 입니다. 비행 탈것은 방향을 바꿔도 RotateSpeed로 천천히 회전합니다. 소수점 가능
+	AdditionalCharacterPitch류 : 해당 State에서 캐릭터 방향에 Pitch를 더하는 로직입니다. 애니메이션 없이 캐릭터를 살짝 들게 하고 싶은 것. Up 상태는 move를 따라 갑니다.
+	descentCharacterMin/MaxPitch : 활강중 캐릭터 pitch 제한. 다른 경우에는 그냥 카메라 따라 갑니다. Degree 단위 입니다.
+	cost류 : 초당 FE 닳는 값. upCost의 경우만 Z값이 바뀔 때마다 깎이는 FE 량 / uu
+	accel : 초당 속도 증가량. 상태가 바뀌면 속도가 바로 적용되는게 아니라 Accel따라 변합니다.
+-->
+
+<FlyingData maxFlightEnergy="1000" recoveryEnergy="100" normalFOV="80" fastFOV="90" fallingByLimitSpeed="500" descentMinDegree="-60" descentMaxDegree="-30" guideShowTime="10.0" flightEnergyAlarmPercent="30.0" blurBlendTime="1.0" boostCameraRotateLimit="20" minCameraPitch="-75" maxCameraPitch="65">
+	<!-- 순백의 페가수스(30일), 칠흑의 페가수스 -->                                                                         
+	<Data id="1" forwardSpeed="270"	backwardSpeed="135"	fastSpeed="500" descentSpeed="250" descentMaxSpeed="500" accel="250" rotateSpeed="90" basicCost="20" descentCost="10" upCost="0" boostCost="100" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 기본 갈색 비행 탈 것 -->
+	<Data id="2" forwardSpeed="270"	backwardSpeed="135"	fastSpeed="500" descentSpeed="250" descentMaxSpeed="500" accel="250" rotateSpeed="90" basicCost="26" descentCost="13" upCost="0" boostCost="100" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 백사자/흑사자/바하르/바하르(브라운)/바하르(골드)/바하르(실버) -->
+	<Data id="3" forwardSpeed="280"	backwardSpeed="140"	fastSpeed="510" descentSpeed="255" descentMaxSpeed="500" accel="250" rotateSpeed="90" basicCost="18" descentCost="9" upCost="0" boostCost="100" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 순백의 페가수스, 칠흑의 페가수스 TW-->                                                                         
+	<Data id="4" forwardSpeed="280"	backwardSpeed="140"	fastSpeed="510" descentSpeed="255" descentMaxSpeed="500" accel="250" rotateSpeed="90" basicCost="18" descentCost="9" upCost="0" boostCost="100" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 테라 드래곤 탈것 (일반) -->                                                                         
+	<Data id="5" forwardSpeed="290"	backwardSpeed="150"	fastSpeed="520" descentSpeed="255" descentMaxSpeed="500" accel="255" rotateSpeed="90" basicCost="15" descentCost="9" upCost="0" boostCost="83" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 테라 드래곤 탈것 (레어) -->                                                                         
+	<Data id="6" forwardSpeed="290"	backwardSpeed="150"	fastSpeed="520" descentSpeed="255" descentMaxSpeed="500" accel="255" rotateSpeed="90" basicCost="12" descentCost="9" upCost="0" boostCost="66" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 비행 코스튬 메카닉의상 (일반) -->                                                                         
+	<Data id="7" forwardSpeed="290"	backwardSpeed="150"	fastSpeed="520" descentSpeed="255" descentMaxSpeed="500" accel="255" rotateSpeed="180" basicCost="15" descentCost="9" upCost="0" boostCost="83" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 비행 코스튬 메카닉의상 (레어) -->                                                                         
+	<Data id="8" forwardSpeed="290"	backwardSpeed="150"	fastSpeed="520" descentSpeed="255" descentMaxSpeed="500" accel="255" rotateSpeed="180" basicCost="12" descentCost="9" upCost="0" boostCost="66" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 얼음 드래곤 탈것 (일반) -->                                                                         
+	<Data id="9" forwardSpeed="310"	backwardSpeed="150"	fastSpeed="520" descentSpeed="255" descentMaxSpeed="500" accel="255" rotateSpeed="180" basicCost="15" descentCost="9" upCost="0" boostCost="83" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 얼음 드래곤 탈것 (레어) -->                                                                         
+	<Data id="10" forwardSpeed="320" backwardSpeed="150" fastSpeed="520" descentSpeed="255" descentMaxSpeed="500" accel="255" rotateSpeed="180" basicCost="12" descentCost="9" upCost="0" boostCost="66" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- '20윙슈트 (일반) -->                                                                         
+	<Data id="11" forwardSpeed="310" backwardSpeed="150" fastSpeed="520" descentSpeed="255" descentMaxSpeed="500" accel="255" rotateSpeed="180" basicCost="14" descentCost="8" upCost="0" boostCost="75" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- '20윙슈트 (레어) -->                                                                         
+	<Data id="12" forwardSpeed="320" backwardSpeed="150" fastSpeed="520" descentSpeed="255" descentMaxSpeed="500" accel="255" rotateSpeed="180" basicCost="11" descentCost="8" upCost="0" boostCost="60" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+	<!-- 공룡 날탈 -->                                                                         
+	<Data id="13" forwardSpeed="290" backwardSpeed="150" fastSpeed="520" descentSpeed="255" descentMaxSpeed="500" accel="255" rotateSpeed="180" basicCost="12" descentCost="9" upCost="0" boostCost="66" idleAdditionalCharacterPitch="0" moveAdditionalCharacterPitch="0" backAdditionalCharacterPitch="0" descentCharacterMinPitch="-60"  descentCharacterMaxPitch="-30" maxCharacterRoll="30" boostSideMoveRate="0.54"/>
+</FlyingData>

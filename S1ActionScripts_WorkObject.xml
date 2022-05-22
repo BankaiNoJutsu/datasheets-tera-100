@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- type은 사용하지 않습니다. 그냥 구별용임 -->
+<!-- WorkObject 관련, 3만번대 사용 -->
+<!-- 주의사항 : Npc가 아니라 WorkObject를 대상으로 작동하기 때문에 Move와 같은 놈은 작동하지 않습니다. -->
+<S1ActionScripts type="WorkObject">
+
+  <Script id="30201" playingTime="10000">
+    <Action type="sound" cueName="PCModuleSound_01.Moving_Cue.Bell_08" volume="1.0" radius="1.0" pitch="1.0">
+      <Action time="2000" type="cameraShake" duration="2000" power="0.05" speed="3000">
+        <!--<Action type="cameraShake" duration="2000" power="0.1" speed="3000">
+          <Action type="cameraShake" duration="2000" power="0.15" speed="3000">
+            <Action type="cameraShake" duration="2000" power="0.2" speed="3000"/>
+          </Action>
+        </Action>-->
+      </Action>
+    </Action>
+  </Script>
+
+  <Script id="30202" playingTime="10000">
+    <Action type="cameraShake" duration="3000" power="0.5" speed="3000">
+      <Action type="systemMessage" message="@sysmsg:SMT_QUEST_DIRECTING_WORKOBJECT2_END"/>
+    </Action>
+  </Script>
+
+  <Script id="30301" playingTime="1000">
+    <Action type="sound" cueName="PCModuleSound_01.Moving_Cue.Bell_08" volume="1.0" radius="1.0" pitch="1.0">
+      <Action time="2000" type="cameraShake" duration="2000" power="0.05" speed="3000">
+        <Action type="cameraShake" duration="2000" power="0.1" speed="3000">
+          <Action type="cameraShake" duration="2000" power="0.15" speed="3000">
+            <Action type="cameraShake" duration="2000" power="0.2" speed="3000"/>
+          </Action>
+        </Action>
+      </Action>
+    </Action>
+  </Script>
+
+  <Script id="30302" playingTime="1000">
+    <Action type="systemMessage" message="@sysmsg:SMT_QUEST_DIRECTING_WORKOBJECT3_END"/>
+    <Action type="cameraShake" duration="3000" power="0.5" speed="3000">
+    </Action>
+  </Script>
+
+  <Script id="30401" playingTime="1000">
+    <Action type="sound" cueName="PCModuleSound_01.Moving_Cue.Bell_09" volume="1.0" radius="1.0" pitch="1.0">
+      <Action type="systemMessage" message="@sysmsg:SMT_QUEST_DIRECTING_WORKOBJECT4_START"/>
+    </Action>
+  </Script>
+
+  <Script id="30501" playingTime="1000">
+    <Action type="sound" cueName="PCModuleSound_01.Moving_Cue.Bell_10" volume="1.0" radius="1.0" pitch="1">
+      <Action type="systemMessage" message="@sysmsg:SMT_QUEST_DIRECTING_WORKOBJECT5_START"/>
+    </Action>
+  </Script>
+  
+    <Script id="30511" playingTime="1000">
+    <Action type="sound" cueName="PCModuleSound_01.Moving_Cue.Bell_10" volume="1.0" radius="1.0" pitch="10">
+      <Action type="systemMessage" message="@sysmsg:SMT_QUEST_DIRECTING_WORKOBJECT5_START"/>
+    </Action>
+  </Script>
+<!-- 3M 미션, 그림자의 정령 미션, 봉인 해제 시 아르곤 장치 연출 호출 -->
+	<Script id="125511561" playingTime="1000">
+		<Action type="actionScript" huntingZoneId="255" templateId="1156" scriptId="125511562"/>
+	</Script>
+<!-- 봉인 해제 시 아르곤 장치 연출 내용 -->
+	<Script id="125511562" playingTime="1000">
+	<Action type="animation" animName="offstart">
+		<Action type="animation" animName="off">
+		</Action>
+    </Action>
+		<Action time="0" type="effect" effectId="5041342"/>
+		<Action time="1000" type="effect" effectId="5041342"/>
+		<Action time="3000" type="effect" effectId="5041342"/>
+		<Action time="4000" type="effect" effectId="5041342"/>
+		<Action time="4000" type="visible" visibility="false"/>
+		<Action time="0" type="cameraShake" duration="10000" power="0.4" speed="1000"/>
+		<Action time="1000" type="actionScript" huntingZoneId="255" templateId="1159" scriptId="125511591"/>
+		<Action time="5000" type="actionScript" huntingZoneId="255" templateId="1158" scriptId="125511581"/>
+	</Script>
+<!-- 봉인 해제 시 물 이펙트 연출-->
+	<Script id="125511591" playingTime="1000">
+	<Action time="0" type="effect" effectId="2200"/>
+	<Action time="4000" type="effect" effectId="2200"/>
+	<Action time="8000" type="effect" effectId="2200"/>
+	</Script>
+<!-- 봉인 해제 시 지팡이 연출-->
+	<Script id="125511581" playingTime="1000">
+	<Action time="0" type="translationZ" from="0.0" to="400.0" duration="1500" power="0.2"/>
+	<Action time="1500" type="effect" effectId="2199"/>
+	<Action time="5000" type="effect" effectId="2199"/>
+	<Action time="9000" type="effect" effectId="2199"/>
+	<Action time="12000" type="effect" effectId="2199"/>
+	<Action time="15000" type="effect" effectId="2199"/>
+	<Action time="18000" type="effect" effectId="2199"/>
+	<Action time="21000" type="effect" effectId="2199"/>
+	<Action time="25000" type="effect" effectId="2199"/>
+	<Action time="28000" type="effect" effectId="2199"/>
+	<Action time="31000" type="effect" effectId="2199"/>
+	<Action time="34000" type="effect" effectId="2199"/>
+	</Script>	
+
+<!-- 평상 시에 아르곤 장치에서 나오는 연출 -->	
+	<Script id="125511563" playingTime="1000">
+	<Action time="0" type="effect" effectId="504082"/>
+	<Action type="animation" animName="onstart">
+		<Action type="animation" animName="on">
+		</Action>
+    </Action>
+	</Script>
+	
+
+	<!-- 청공의 계곡 정화 장치  --> 
+	<Script id="610001" playingTime="100000">
+		<Action time="0" type="actionScript" huntingZoneId="245" templateId="3301" scriptId="610004"/>
+		<Action time="500" type="actionScript" huntingZoneId="245" templateId="3302" scriptId="610004"/>
+		<Action time="1000" type="actionScript" huntingZoneId="245" templateId="3303" scriptId="610004"/>
+		<Action time="3000" type="actionScript" huntingZoneId="245" templateId="3101" scriptId="610003"/>
+		<Action time="3500" type="actionScript" huntingZoneId="245" templateId="3102" scriptId="610003"/>
+		<Action time="4000" type="actionScript" huntingZoneId="245" templateId="3103" scriptId="610003"/>
+		<Action time="3000" type="actionScript" huntingZoneId="245" templateId="3111" scriptId="610003"/>
+		<Action time="3500" type="actionScript" huntingZoneId="245" templateId="3112" scriptId="610003"/>
+		<Action time="4000" type="actionScript" huntingZoneId="245" templateId="3113" scriptId="610003"/>
+	</Script>
+	
+	<Script id="610002" playingTime="5000">
+		<Action time="0" type="scale" scale="0.01" duration="5000" power="2"/>
+	</Script>
+
+	<Script id="610003" playingTime="5000">
+		<Action time="0" type="scale" scale="100" duration="5000" power="2"/>
+	</Script>
+
+	<Script id="610004" playingTime="30000">
+		<Action time="0" type="translationZ" from="0" to="50" duration="2000" power="2.8"/>
+		<Action time="1" type="effect" effectId="20359001"/>
+		<Action time="2001" type="effect" effectId="20359001"/>
+		<Action time="4001" type="effect" effectId="20359001"/>
+		<Action time="6001" type="effect" effectId="20359001"/>
+		<Action time="8001" type="effect" effectId="20359001"/>
+		<Action time="10001" type="effect" effectId="20359001"/>
+		<Action time="12001" type="effect" effectId="20359001"/>
+		<Action time="14001" type="effect" effectId="20359001"/>
+		<Action time="16001" type="effect" effectId="20359001"/>
+		<Action time="18001" type="effect" effectId="20359001"/>
+		<Action time="20001" type="effect" effectId="20359001"/>
+		<Action time="22001" type="effect" effectId="20359001"/>
+		<Action time="24001" type="effect" effectId="20359001"/>
+		<Action time="26001" type="effect" effectId="20359001"/>
+		<Action time="2000" type="translationZ" from="50" to="20" duration="2000" power="2.8"/>
+		<Action time="4000" type="translationZ" from="20" to="50" duration="2000" power="2.8"/>
+		<Action time="6000" type="translationZ" from="50" to="20" duration="2000" power="2.8"/>
+		<Action time="8000" type="translationZ" from="20" to="50" duration="2000" power="2.8"/>
+		<Action time="10000" type="translationZ" from="50" to="20" duration="2000" power="2.8"/>
+		<Action time="12000" type="translationZ" from="20" to="50" duration="2000" power="2.8"/>
+		<Action time="14000" type="translationZ" from="50" to="20" duration="2000" power="2.8"/>
+		<Action time="16000" type="translationZ" from="20" to="50" duration="2000" power="2.8"/>
+		<Action time="18000" type="translationZ" from="50" to="20" duration="2000" power="2.8"/>
+		<Action time="20000" type="translationZ" from="20" to="50" duration="2000" power="2.8"/>
+		<Action time="22000" type="translationZ" from="50" to="20" duration="2000" power="2.8"/>
+		<Action time="24000" type="translationZ" from="20" to="50" duration="2000" power="2.8"/>
+		<Action time="26000" type="translationZ" from="50" to="0" duration="4000" power="2.8"/>
+	</Script>
+	
+	<Script id="950001" playingTime="30000">
+		<Action time="1000" type="actionScript" huntingZoneId="230" templateId="3016" scriptId="950002"/>
+		<Action time="1500" type="actionScript" huntingZoneId="230" templateId="3017" scriptId="950002"/>
+	</Script>
+	
+	<Script id="950002" playingTime="44000">
+		<Action time="0" type="animation" animName="OnStart" rate="0.1"/>
+		<Action time="22000" type="animation" animName="OffStart" rate="0.1"/>
+	</Script>
+	
+	<!-- 세렌의 비석 On, off 1 --> 
+	<Script id="950003" playingTime="6000">
+		<Action time="0" type="animation" animName="OnStart" rate="0.1"/>
+		<Action time="4800" type="effect" effectId="4577"/>
+		<Action time="4900" type="animation" animName="OffStart" rate="0.1"/>
+	</Script>		
+
+	<Script id="950006" playingTime="9000">
+		<Action time="1000" type="actionScript" huntingZoneId="230" templateId="1081" scriptId="230010813"/>
+	</Script>
+
+	<!-- 세렌의 비석 On, off 2 --> 
+	<Script id="950004" playingTime="6000">
+		<Action time="0" type="animation" animName="OnStart" rate="0.1"/>
+		<Action time="4800" type="effect" effectId="4577"/>
+		<Action time="4900" type="animation" animName="OffStart" rate="0.1"/>
+	</Script>
+	
+	<Script id="950007" playingTime="6000">
+		<Action time="1000" type="actionScript" huntingZoneId="230" templateId="1082" scriptId="230010823"/>
+	</Script>
+	
+	<!-- 테양의 정원 석등 --> 
+	<Script id="950005" playingTime="6000">
+		<Action time="500" type="effect" effectId="200023"/>
+	</Script>
+	
+	<!-- 혁명단 은거지 -->
+	<Script id="973901" playingTime="2000">
+		<Action time="0" type="actionScript" huntingZoneId="739" templateId="4009" scriptId="973903"/>
+	</Script>
+	<Script id="973902" playingTime="2000">
+		<Action time="0" type="actionScript" huntingZoneId="739" templateId="4010" scriptId="973903"/>
+	</Script>
+	<Script id="973903" playingTime="1000000000">
+		<Action time="0" type="animation" animName="Opening" rate="1.0"/>
+		<Action time="3000" type="visible" visibility="false"/>
+		<Action time="3000" type="scale" scale="0.000001" duration="1000000000" power="10"/>
+	</Script>
+	<!--바하르의 신전 가이드 퀘스트--> 
+	<Script id="904401" playingTime="3000">
+		<Action type="SystemMessage" message="@quest:6140044" style="SMS_CHAT_INFO_QUEST"/>
+		<Action time="0" type="effect" effectId="200023"/>
+		<Action time="0" type="PostProcess" postprocessSet="1" on="true">
+			<Action time="0" type="PostProcessMaterial" postprocessSet="1" param="Strength" from="1.0f" to="1.4f" duration="3000" />
+		</Action>
+		<Action isFinal="true" type="PostProcess" postprocessSet="1" on="false" />
+	</Script>
+	<!-- 61907 퀘스트 -->
+	<Script id="61907002" playingTime="1000">
+		<Action time="500" type="effect" effectId="7267"/>
+		<Action time="1000" type="cameraShake" duration="2000" power="0.05" speed="3000"/>
+	</Script>	
+	
+	<Script id="75000005"><!-- 카슈바르 협곡 물폭탄 항아리 조작 메시지 -->
+		<Action type="SystemMessage" message="@dungeon:9750018" style="SYSTEM_MSG_DUNGEON_MSG"/>
+	</Script>
+</S1ActionScripts>

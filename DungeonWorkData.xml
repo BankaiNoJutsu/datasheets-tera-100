@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonWorkData workControlCount="2" showTab="true" buyMenuListId="610">
+
+	<!-- 과제 타입들에 대한 정의 -->
+	<!-- type(DungeonWork의 type과 링크)-->
+	<WorkType type="hitcount"  workTooltip="@dungeonwork:501" tooltipText="@dungeonwork:1000"/>
+	<WorkType type="timer" workTooltip="@dungeonwork:502" tooltipText="@dungeonwork:2000" />
+	<WorkType type="abnormalityapply" workTooltip="@dungeonwork:503" tooltipText="@dungeonwork:4000"/>
+	<WorkType type="maxcombocount" workTooltip="@dungeonwork:504" tooltipText="@dungeonwork:3000"/>
+	
+	<!-- 과제 선택 UI에 출력될 던전 순서 지정 (지정 안되어있으면 던전 ID순으로 출력됨)-->
+	<WorkDungeonListUISortPriority dungeonIds="9032,9031,3016,9033"/>
+	
+	<DungeonWorkFont confirmBtnTooltip="@dungeonwork:500"/>
+	
+<!-- 과제 던전과 과제들 -->
+	<WorkList dungeonId="9031" minWorkCount="1" maxWorkCount="2" dungeonLevel="65">
+		<DungeonWork id="1"  useRankId="1" type="hitcount" title="@dungeonwork:1" innerText="@dungeonwork:10" />
+		<DungeonWork id="2"  useRankId="3" type="timer" flagName="dwTimer" title="@dungeonwork:2" innerText="@dungeonwork:11" />
+		<DungeonWork id="3"  useRankId="2" type="maxcombocount" title="@dungeonwork:3" innerText="@dungeonwork:12" />
+		<Random id="4" randomBonusRate="0.1"  tooltip="@dungeonwork:505"/>
+	</WorkList>
+	<WorkList dungeonId="9032" minWorkCount="1" maxWorkCount="2" dungeonLevel="65">
+		<DungeonWork id="1"  useRankId="1" type="hitcount" title="@dungeonwork:1" innerText="@dungeonwork:10" />
+		<DungeonWork id="2"  useRankId="3" type="timer" flagName="dwTimer" title="@dungeonwork:2" innerText="@dungeonwork:11" />
+		<DungeonWork id="3"  useRankId="2" type="maxcombocount" title="@dungeonwork:3" innerText="@dungeonwork:12" />
+		<Random id="4" randomBonusRate="0.1" tooltip="@dungeonwork:505" />
+	</WorkList>	
+	<!--WorkList dungeonId="9033" minWorkCount="1" maxWorkCount="2" dungeonLevel="65">
+		<DungeonWork id="1"  useRankId="1" type="hitcount" title="@dungeonwork:1" innerText="@dungeonwork:10" />
+		<DungeonWork id="2"  useRankId="3" type="timer" flagName="dwTimer" title="@dungeonwork:2" innerText="@dungeonwork:11" />
+		<DungeonWork id="3"  useRankId="2" type="maxcombocount" title="@dungeonwork:3" innerText="@dungeonwork:12" />
+		<Random id="4" randomBonusRate="0.3" tooltip="@dungeonwork:505"/>
+	</WorkList-->
+	<WorkList dungeonId="3016" minWorkCount="1" maxWorkCount="2" dungeonLevel="65">
+		<DungeonWork id="1"  useRankId="1" type="hitcount" title="@dungeonwork:1" innerText="@dungeonwork:10" />
+		<DungeonWork id="2"  useRankId="3" type="timer" flagName="dwTimer" title="@dungeonwork:2" innerText="@dungeonwork:11" />
+		<DungeonWork id="3"  useRankId="2" type="maxcombocount" title="@dungeonwork:3" innerText="@dungeonwork:12" />
+		<Random id="4" randomBonusRate="0.3" tooltip="@dungeonwork:505"/>
+	</WorkList>	
+	<!-- grade : 5(SS) 4(S) 3(A) 2(B) 1(C) -->
+	<RankList id="1"> 
+	<!-- 로직은 위에서부터 검사하는 형태 이다. 유저의 value가 데이터 시트의 value이상인가? 맞으면 stop, 틀리면 밑에 조건으로 다시 검사 --> 
+	<!-- 피격 횟수 과제 -->
+			<Rank value="200" grade="1"/>
+			<Rank value="80" grade="2"/>
+			<Rank value="30" grade="3"/>
+			<Rank value="5" grade="4"/>
+			<Rank value="0" grade="5"/>
+			<Rank value="0" grade="5" isDummy="true" />
+	</RankList>
+	<RankList id="2">
+	<!-- 콤보 횟수 -->
+		<Rank value="150" grade="5"/>
+		<Rank value="100" grade="4"/>
+		<Rank value="50" grade="3"/>
+		<Rank value="20" grade="2"/>
+		<Rank value="0" grade="1"/>
+		<Rank value="0" grade="1" isDummy="true"/>
+	</RankList>
+	<RankList id="3">
+	<!-- 시간 과제 -->
+		<Rank value="330" grade="1"/>
+		<Rank value="270" grade="2"/>
+		<Rank value="210" grade="3"/>
+		<Rank value="180" grade="4"/>
+		<Rank value="0" grade="5"/>
+		<Rank value="0" grade="5" isDummy="true"/>
+	</RankList>
+	
+	<GradeList numOfGrade="5">
+		<Grade grade="1" medal="30"/> <!-- C -->
+		<Grade grade="2" medal="80"/> <!-- B -->
+		<Grade grade="3" medal="100"/> <!-- A -->
+		<Grade grade="4" medal="105"/> <!-- S -->
+		<Grade grade="5" medal="110"/> <!-- SS -->
+	</GradeList>
+</DungeonWorkData>

@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AIData huntingZoneId="2101">
+  <Ai id="100" name="더미AI">
+    <CautionState alertRadius="250" rotateTime="10" probAvoid="0.000000" avoidSkill="" alertAngle="360" rotateAngle="45" checkInterval="5000" probActiveMove="0.000000" enable="false" hpResetWhenCombatEnd="true">
+      <ActiveMove id="0" />
+    </CautionState>
+    <CombatState watchRotateTime="10" watchRotateAngle="45" playSocialWhenFirstAggro="false" enable="false">
+      <Attack>
+        <WorkList>
+          <Work id="1" desc="" normalBehaviorId="1" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="1" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" />
+          <Work id="2" desc="" normalBehaviorId="2" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="2" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="1" prob="1.000000" distanceRate="1.000000" />
+            <Info workId="2" prob="1.000000" distanceRate="1.000000" />
+          </Tension>
+        </TensionList>
+      </Attack>
+      <Avoid avoidSkillId="0" cooltime="10000" />
+      <Cooperation concurrentAttackDuration="5000" sequentialAttackDelay="1000" escapeDuration="3000">
+        <WorkList>
+          <Work id="1" desc="" normalBehaviorId="1" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="1" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" sendOrderId="1" sendOrderRange="400" sendOrderMaxCount="2" sendOrderRefTarget="0" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="1" prob="1.000000" distanceRate="1.000000" />
+          </Tension>
+        </TensionList>
+        <ReceiveOrderList>
+          <ReceiveOrder orderId="1" prob="0.000000" attackId="1" />
+        </ReceiveOrderList>
+      </Cooperation>
+      <CounterFlee workId="2" toAnger="true" speedUpRate="1.100000" maxMovingTime="10000" recentHitTime="30000" recentPcBehaviorTime="20000" />
+      <Idle duration="1000" />
+      <MonsterFlee hpRate="0.000000" executionRate="0.100000" fleeDistance="1000" shareAggroRange="500" />
+      <MonsterSummon hpRate="0.200000" executionRate="0.000000" summonNum="1" summonRange="300" summonTemplateId="0" />
+      <Move targetDistance="100" timeout="5000" />
+      <PatternList>
+        <Pattern default="true">
+          <AngerMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="0.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </AngerMode>
+          <NormalMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="0.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </NormalMode>
+        </Pattern>
+        <Pattern minHpRatio="0.000000" maxHpRatio="0.400000">
+          <AngerMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="0.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </AngerMode>
+          <NormalMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="0.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </NormalMode>
+        </Pattern>
+      </PatternList>
+      <ShorttermTarget>
+        <StTensionList>
+          <StTension id="1">
+            <Info stWorkId="1" prob="0.000000" />
+          </StTension>
+        </StTensionList>
+        <StWorkList>
+          <StWork id="1" desc="" preProcess="PcTargetByAggro()" immediateAttackId="1" />
+        </StWorkList>
+      </ShorttermTarget>
+      <Social socialMotionId="1" />
+    </CombatState>
+    <PeaceState checkInterval="15000" minLeaderDistance="100" maxLeaderDistance="150" followNearUser="false">
+      <Buff range="0" coolTime="0" />
+      <RandomMove moveMinDistance="100" moveMaxDistance="300" probSocial="0.000000" moveRadius="1000" probMove="0.000000" />
+    </PeaceState>
+  </Ai>
+  <Ai id="209" name="M_나무감옥문">
+		<CautionState alertRadius="250" rotateTime="10" probAvoid="0.000000" avoidSkill="" alertAngle="360" rotateAngle="45" checkInterval="5000" probActiveMove="0.000000" enable="false" hpResetWhenCombatEnd="true">
+			<ActiveMove id="0"/>
+		</CautionState>
+		<CombatState watchRotateTime="10" watchRotateAngle="45" playSocialWhenFirstAggro="false" enable="false">
+			<Attack>
+				<WorkList>
+					<Work id="1" desc="" normalBehaviorId="1" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="1" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId=""/>
+					<Work id="2" desc="" normalBehaviorId="2" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="2" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId=""/>
+				</WorkList>
+				<TensionList>
+					<Tension id="1">
+						<Info workId="1" prob="1.000000" distanceRate="1.000000"/>
+						<Info workId="2" prob="1.000000" distanceRate="1.000000"/>
+					</Tension>
+				</TensionList>
+			</Attack>
+			<Avoid avoidSkillId="0" cooltime="10000"/>
+			<Cooperation concurrentAttackDuration="5000" sequentialAttackDelay="1000" escapeDuration="3000">
+				<WorkList>
+					<Work id="1" desc="" normalBehaviorId="1" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="1" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" sendOrderId="1" sendOrderRange="400" sendOrderMaxCount="2" sendOrderRefTarget="0" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId=""/>
+				</WorkList>
+				<TensionList>
+					<Tension id="1">
+						<Info workId="1" prob="1.000000" distanceRate="1.000000"/>
+					</Tension>
+				</TensionList>
+				<ReceiveOrderList>
+					<ReceiveOrder orderId="1" prob="0.000000" attackId="1"/>
+				</ReceiveOrderList>
+			</Cooperation>
+			<CounterFlee workId="2" toAnger="true" speedUpRate="1.100000" maxMovingTime="10000" recentHitTime="30000" recentPcBehaviorTime="20000"/>
+			<Idle duration="1000"/>
+			<MonsterFlee hpRate="0.000000" executionRate="0.100000" fleeDistance="1000" shareAggroRange="500"/>
+			<MonsterSummon hpRate="0.200000" executionRate="0.000000" summonNum="1" summonRange="300" summonTemplateId="0"/>
+			<Move targetDistance="100" timeout="5000"/>
+			<PatternList>
+				<Pattern default="true">
+					<AngerMode>
+						<Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1"/>
+						<Incline attackProb="0.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000"/>
+					</AngerMode>
+					<NormalMode>
+						<Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1"/>
+						<Incline attackProb="0.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000"/>
+					</NormalMode>
+				</Pattern>
+				<Pattern minHpRatio="0.000000" maxHpRatio="0.400000">
+					<AngerMode>
+						<Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1"/>
+						<Incline attackProb="0.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000"/>
+					</AngerMode>
+					<NormalMode>
+						<Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1"/>
+						<Incline attackProb="0.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000"/>
+					</NormalMode>
+				</Pattern>
+			</PatternList>
+			<ShorttermTarget>
+				<StTensionList>
+					<StTension id="1">
+						<Info stWorkId="1" prob="0.000000"/>
+					</StTension>
+				</StTensionList>
+				<StWorkList>
+					<StWork id="1" desc="" preProcess="PcTargetByAggro()" immediateAttackId="1"/>
+				</StWorkList>
+			</ShorttermTarget>
+			<Social socialMotionId="1"/>
+		</CombatState>
+		<PeaceState checkInterval="5000" minLeaderDistance="100" maxLeaderDistance="150" followNearUser="false" popupMsg="" msgProb="0.000000" msgInterval="0" followDungeonUser="false" followQuestUser="false" questPatrol="false">
+			<Buff range="0" coolTime="0"/>
+			<RandomMove moveMinDistance="50" moveMaxDistance="200" probSocial="0.000000" moveRadius="200" probMove="0.000000"/>
+		</PeaceState>
+	</Ai>
+  <Ai id="30392001" name="fdi_BLS_애벌레">
+    <CautionState alertRadius="300" rotateTime="5" probAvoid="0.000000" avoidSkill="" alertAngle="360" rotateAngle="45" checkInterval="5000" probActiveMove="0.000000" enable="true" hpResetWhenCombatEnd="true" />
+    <CombatState watchRotateTime="5" watchRotateAngle="90" playSocialWhenFirstAggro="false" enable="true" hpResetWhenCombatEnd="true">
+      <AbsolutelyAttack>
+        <CutAllBehaviorList />
+        <CutNextAttackList />
+        <WorkList />
+      </AbsolutelyAttack>
+      <AggroChangeAttack nearTargetAttackId="0" showAggroChangeMotionAfterNearTargetAttack="false" distantTargetAttackId="0" showAggroChangeMotionAfterDistantTargetAttack="false" />
+      <Attack>
+        <WorkList>
+          <Work id="1" desc="앞깨물기" normalBehaviorId="1101" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorId="2101" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="IsInSkillAttackRange(1101, 1, 1)" distanceType="2" distanceRate="1.000000" coolTime="0" isDirectionRevision="true" nextAttackProb="" nextAttackId="" referenceNextAttackPreprocess="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" />
+          <Work id="2" desc="헛울기 + [독 토하기]" normalBehaviorId="1102" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorId="2102" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="IsInSkillAttackRange(1102, 1, 1)" distanceType="1" distanceRate="0.800000" coolTime="25000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" referenceNextAttackPreprocess="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" />
+          <Work id="3" desc="원거리 독뱉기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="IsInSkillAttackRange(1103, 0.85, 1.15)" distanceType="1" distanceRate="0.000000" coolTime="15000" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1103" angerBehaviorId="2103" />
+          <Work id="4" desc="힘모아 박치기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="1" distanceType="2" distanceRate="1.000000" coolTime="5000" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1104" angerBehaviorId="2104" />
+          <Work id="6" desc="[헛울기] + 독 토하기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="GetTargetDistance()&lt;150" distanceType="1" distanceRate="0.000000" coolTime="15000" isDirectionRevision="true" referenceNextAttackPreprocess="false" nextAttackProb="1.0" nextAttackId="2" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1105" angerBehaviorId="1105" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="4" prob="0.350000" distanceRate="1.000000" />
+            <Info workId="6" prob="0.800000" distanceRate="1.000000" />
+            <Info workId="2" prob="0.000000" distanceRate="0.000000" />
+            <Info workId="3" prob="0.500000" distanceRate="1.000000" />
+            <Info workId="1" prob="1.000000" distanceRate="1.000000" />
+          </Tension>
+        </TensionList>
+      </Attack>
+      <Avoid avoidSkillId="0" cooltime="10000" />
+      <Cooperation concurrentAttackDuration="5000" sequentialAttackDelay="1000" escapeDuration="3000">
+        <WorkList>
+          <Work id="1" desc="" normalBehaviorId="1" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="1" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" sendOrderId="1" sendOrderRange="400" sendOrderMaxCount="2" sendOrderRefTarget="0" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="1" prob="1.000000" distanceRate="1.000000" />
+          </Tension>
+        </TensionList>
+        <ReceiveOrderList>
+          <ReceiveOrder orderId="1" prob="0.000000" attackId="1" />
+        </ReceiveOrderList>
+      </Cooperation>
+      <CounterFlee workId="0" toAnger="true" speedUpRate="1.100000" maxMovingTime="10000" recentHitTime="30000" recentPcBehaviorTime="20000" />
+      <Idle duration="1000" />
+      <MonsterFlee hpRate="0.000000" executionRate="0.100000" fleeDistance="100" shareAggroRange="800" />
+      <MonsterSummon hpRate="0.200000" executionRate="0.000000" summonNum="1" summonRange="300" summonTemplateId="0" />
+      <Move targetDistance="300" timeout="1000" />
+      <PatternList id="1">
+        <Pattern default="true">
+          <AngerMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="1.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </AngerMode>
+          <NormalMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="1.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </NormalMode>
+        </Pattern>
+      </PatternList>
+      <ShorttermTarget>
+        <StTensionList>
+          <StTension id="1" />
+        </StTensionList>
+        <StWorkList />
+      </ShorttermTarget>
+      <Social socialMotionId="1" />
+      <Social socialMotionId="2" />
+    </CombatState>
+    <PeaceState checkInterval="7000" minLeaderDistance="50" maxLeaderDistance="100" followNearUser="false" popupMsg="" msgProb="0.000000" msgInterval="0" followDungeonUser="false" followQuestUser="false" questPatrol="false">
+      <Buff range="0" coolTime="0" />
+      <RandomMove moveMinDistance="50" moveMaxDistance="150" probSocial="0.650000" moveRadius="500" probMove="0.700000">
+        <Social motionId="1" />
+        <Social motionId="2" />
+      </RandomMove>
+    </PeaceState>
+  </Ai>
+  <Ai id="30392027" name="fdi_나가_여성_노동자">
+    <CautionState alertRadius="300" rotateTime="10" probAvoid="0.000000" avoidSkill="" alertAngle="360" rotateAngle="45" checkInterval="5000" probActiveMove="0.000000" enable="true" hpResetWhenCombatEnd="true" />
+    <CombatState watchRotateTime="5" watchRotateAngle="90" playSocialWhenFirstAggro="false" enable="true" hpResetWhenCombatEnd="true">
+      <AbsolutelyAttack>
+        <CutAllBehaviorList />
+        <CutNextAttackList />
+        <WorkList />
+      </AbsolutelyAttack>
+      <AggroChangeAttack nearTargetAttackId="3" showAggroChangeMotionAfterNearTargetAttack="false" distantTargetAttackId="1" showAggroChangeMotionAfterDistantTargetAttack="false" />
+      <Attack>
+        <WorkList>
+          <Work id="1" desc="직선투척atk01" normalBehaviorId="1101" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorId="1101" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro()" distanceType="2" distanceRate="1.000000" coolTime="9000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" referenceNextAttackPreprocess="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" />
+          <Work id="2" desc="곡선투척atk02" normalBehaviorId="1102" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorId="2102" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND IsInSkillAttackRange(1102, 1, 0.8) AND GetTargetDistance() &gt; 150" distanceType="1" distanceRate="1.000000" coolTime="10000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" referenceNextAttackPreprocess="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" />
+          <Work id="3" desc="양손 뿌리치기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="GetTargetDistance() &lt; 70 AND PcTargetByAggro() " distanceType="2" distanceRate="0.800000" coolTime="5000" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1103" angerBehaviorId="1103" />
+          <Work id="4" desc="회피공격atk04" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND GetTargetDistance() &lt; 120 AND GetHpRatio() &lt; 0.6" distanceType="1" distanceRate="0.800000" coolTime="15000" isDirectionRevision="false" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1104" angerBehaviorId="2104" />
+          <Work id="5" desc="헉헉" normalBehaviorType="skill" offFlockOnNormalMode="false" angerBehaviorType="skill" offFlockOnAngerMode="false" preProcess="GetHpRatio() &lt; 0.3" distanceType="1" distanceRate="0.000000" coolTime="60000" isDirectionRevision="false" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1110" angerBehaviorId="1110" />
+          <Work id="6" desc="접근" normalBehaviorType="activeMove" offFlockOnNormalMode="true" angerBehaviorType="activeMove" offFlockOnAngerMode="true" preProcess="PcTargetByAggro()" distanceType="1" distanceRate="0.000000" coolTime="10000" isDirectionRevision="false" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="94" angerBehaviorId="94" />
+          <Work id="7" desc="발로차 밀기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND  GetTargetDistance() &lt; 120 AND GetCombatTime() &gt; 2000" distanceType="1" distanceRate="0.800000" coolTime="7000" isDirectionRevision="false" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1105" angerBehaviorId="2105" />
+          <Work id="8" desc="왼쪽으로 회피" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND GetTargetDistance() &lt; 150 AND GetTargetDir() &gt; 30 AND GetTargetDir() &lt; 150 " distanceType="1" distanceRate="1.000000" coolTime="30000" isDirectionRevision="false" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1114" angerBehaviorId="1114" />
+          <Work id="9" desc="오른쪽으로 회피" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND GetTargetDistance() &lt; 150 AND GetTargetDir() &gt; 210 AND GetTargetDir() &lt; 330 " distanceType="1" distanceRate="1.000000" coolTime="30000" isDirectionRevision="false" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1115" angerBehaviorId="1115" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="2" prob="0.800000" distanceRate="1.000000" />
+            <Info workId="7" prob="0.600000" distanceRate="1.000000" />
+            <Info workId="4" prob="0.400000" distanceRate="1.000000" />
+            <Info workId="3" prob="0.600000" distanceRate="1.000000" />
+            <Info workId="8" prob="0.100000" distanceRate="0.800000" />
+            <Info workId="9" prob="0.100000" distanceRate="0.800000" />
+            <Info workId="5" prob="0.150000" distanceRate="1.000000" />
+            <Info workId="6" prob="0.050000" distanceRate="1.000000" />
+            <Info workId="1" prob="1.000000" distanceRate="1.000000" />
+          </Tension>
+        </TensionList>
+      </Attack>
+      <Avoid avoidSkillId="1113" cooltime="10000" />
+      <Cooperation concurrentAttackDuration="5000" sequentialAttackDelay="1000" escapeDuration="3000">
+        <WorkList>
+          <Work id="1" desc="미사용" normalBehaviorId="1" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="1" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" sendOrderId="1" sendOrderRange="400" sendOrderMaxCount="2" sendOrderRefTarget="0" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" orderType="normal" formationId="0" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="1" prob="0.000000" distanceRate="0.000000" />
+          </Tension>
+        </TensionList>
+        <ReceiveOrderList>
+          <ReceiveOrder orderId="1" prob="0.000000" attackId="1" />
+        </ReceiveOrderList>
+      </Cooperation>
+      <CounterFlee workId="0" toAnger="true" speedUpRate="1.100000" maxMovingTime="10000" recentHitTime="30000" recentPcBehaviorTime="20000" />
+      <Idle duration="1000" />
+      <MonsterFlee hpRate="0.000000" executionRate="0.100000" fleeDistance="600" shareAggroRange="500" />
+      <MonsterSummon hpRate="0.200000" executionRate="0.000000" summonNum="1" summonRange="300" summonTemplateId="0" />
+      <Move targetDistance="100" timeout="5000" />
+      <PatternList id="1">
+        <Pattern default="true">
+          <AngerMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="1.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </AngerMode>
+          <NormalMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="1.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </NormalMode>
+        </Pattern>
+      </PatternList>
+      <ShorttermTarget>
+        <StTensionList>
+          <StTension id="1" />
+        </StTensionList>
+        <StWorkList />
+      </ShorttermTarget>
+      <Social socialMotionId="1" />
+    </CombatState>
+    <PeaceState checkInterval="5000" minLeaderDistance="100" maxLeaderDistance="150" followNearUser="false" popupMsg="" msgProb="0.000000" msgInterval="0" followDungeonUser="false" followQuestUser="false" questPatrol="false">
+      <Buff range="0" coolTime="0" />
+      <RandomMove moveMinDistance="200" moveMaxDistance="300" probSocial="0.000000" moveRadius="1000" probMove="0.500000" />
+    </PeaceState>
+  </Ai>
+  <Ai id="30392025" name="fdi_나가_근육_아들">
+    <CautionState alertRadius="400" rotateTime="10" probAvoid="0.000000" avoidSkill="" alertAngle="360" rotateAngle="45" checkInterval="5000" probActiveMove="0.000000" enable="true" hpResetWhenCombatEnd="true" />
+    <CombatState watchRotateTime="5" watchRotateAngle="90" playSocialWhenFirstAggro="false" enable="true" hpResetWhenCombatEnd="true">
+      <AbsolutelyAttack>
+        <CutAllBehaviorList />
+        <CutNextAttackList />
+        <WorkList />
+      </AbsolutelyAttack>
+      <AggroChangeAttack nearTargetAttackId="1" showAggroChangeMotionAfterNearTargetAttack="false" distantTargetAttackId="10" showAggroChangeMotionAfterDistantTargetAttack="false" />
+      <Attack>
+        <WorkList>
+          <Work id="1" desc="오른손 돌려치기" normalBehaviorId="1101" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorId="2101" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="IsInSkillAttackRange(1101, 1, 0.8)" distanceType="2" distanceRate="1.000000" coolTime="8000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" referenceNextAttackPreprocess="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" />
+          <Work id="2" desc="오른손 기모아 내려치기" normalBehaviorId="1102" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorId="2102" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="IsInSkillAttackRange(1102, 1, 0.8)" distanceType="2" distanceRate="1.000000" coolTime="8000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" referenceNextAttackPreprocess="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" />
+          <Work id="3" desc="점프 공격" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="1" distanceType="2" distanceRate="1.000000" coolTime="17000" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1103" angerBehaviorId="2103" />
+          <Work id="4" desc="오른손 발도 공격" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="IsInSkillAttackRange(1104, 1, 0.8)" distanceType="2" distanceRate="1.000000" coolTime="12000" isDirectionRevision="true" referenceNextAttackPreprocess="true" nextAttackProb="0.400000" nextAttackId="2" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1104" angerBehaviorId="2104" />
+          <Work id="5" desc="왼손 밀치기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="IsInSkillAttackRange(1105, 1, 0.8) AND GetHpRatio() &lt; 0.7" distanceType="2" distanceRate="1.000000" coolTime="7000" isDirectionRevision="true" referenceNextAttackPreprocess="true" nextAttackProb="0.500000" nextAttackId="2" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1105" angerBehaviorId="2105" />
+          <Work id="8" desc="포효" normalBehaviorType="skill" offFlockOnNormalMode="false" angerBehaviorType="skill" offFlockOnAngerMode="false" preProcess="IsInSkillAttackRange(1103, 1, 0.8) AND GetCombatTime()&gt;12000" distanceType="1" distanceRate="1.000000" coolTime="18000" isDirectionRevision="true" referenceNextAttackPreprocess="false" nextAttackProb="1" nextAttackId="3" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1120" angerBehaviorId="2120" />
+          <Work id="9" desc="[30%]탈진" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="GetHpRatio()&lt;0.3 AND IsPrevAttack(1, 8)==0" distanceType="1" distanceRate="1.000000" coolTime="80000" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1121" angerBehaviorId="2121" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="8" prob="0.500000" distanceRate="1.000000" />
+            <Info workId="9" prob="1.000000" distanceRate="1.000000" />
+            <Info workId="4" prob="0.400000" distanceRate="1.000000" />
+            <Info workId="1" prob="0.600000" distanceRate="1.000000" />
+            <Info workId="5" prob="0.400000" distanceRate="1.000000" />
+            <Info workId="3" prob="0.000000" distanceRate="0.000000" />
+            <Info workId="2" prob="1.000000" distanceRate="1.000000" />
+          </Tension>
+        </TensionList>
+      </Attack>
+      <Avoid avoidSkillId="0" cooltime="10000" />
+      <Cooperation concurrentAttackDuration="5000" sequentialAttackDelay="1000" escapeDuration="3000">
+        <WorkList>
+          <Work id="1" desc="" normalBehaviorId="1" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="1" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" sendOrderId="1" sendOrderRange="400" sendOrderMaxCount="2" sendOrderRefTarget="0" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="1" prob="1.000000" distanceRate="1.000000" />
+          </Tension>
+        </TensionList>
+        <ReceiveOrderList>
+          <ReceiveOrder orderId="1" prob="0.000000" attackId="1" />
+        </ReceiveOrderList>
+      </Cooperation>
+      <CounterFlee workId="2" toAnger="true" speedUpRate="1.100000" maxMovingTime="10000" recentHitTime="30000" recentPcBehaviorTime="20000" />
+      <Idle duration="1000" />
+      <MonsterFlee hpRate="0.000000" executionRate="0.100000" fleeDistance="600" shareAggroRange="500" />
+      <MonsterSummon hpRate="0.200000" executionRate="0.000000" summonNum="1" summonRange="300" summonTemplateId="0" />
+      <Move targetDistance="100" timeout="5000" />
+      <PatternList id="1">
+        <Pattern default="true">
+          <AngerMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="1.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </AngerMode>
+          <NormalMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="1.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </NormalMode>
+        </Pattern>
+      </PatternList>
+      <ShorttermTarget>
+        <StTensionList>
+          <StTension id="1">
+            <Info stWorkId="1" prob="0.000000" />
+          </StTension>
+        </StTensionList>
+        <StWorkList>
+          <StWork id="1" desc="" preProcess="PcTargetByAggro()" immediateAttackId="1" coolTime="0" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" showSTMark="true" />
+        </StWorkList>
+      </ShorttermTarget>
+      <Social socialMotionId="1" />
+    </CombatState>
+    <PeaceState checkInterval="5000" minLeaderDistance="100" maxLeaderDistance="150" followNearUser="false" popupMsg="" msgProb="0.000000" msgInterval="0" followDungeonUser="false" followQuestUser="false" questPatrol="false">
+      <Buff range="0" coolTime="0" />
+      <RandomMove moveMinDistance="100" moveMaxDistance="300" probSocial="0.000000" moveRadius="1000" probMove="0.000000" />
+    </PeaceState>
+  </Ai>
+  <Ai id="30392017" name="fdi_나가_전투_가신">
+    <CautionState alertRadius="400" rotateTime="10" probAvoid="0.000000" avoidSkill="" alertAngle="360" rotateAngle="45" checkInterval="5000" probActiveMove="0.000000" enable="true" hpResetWhenCombatEnd="true" />
+    <CombatState watchRotateTime="5" watchRotateAngle="90" playSocialWhenFirstAggro="false" enable="true" hpResetWhenCombatEnd="true">
+      <AbsolutelyAttack>
+        <CutAllBehaviorList />
+        <CutNextAttackList />
+        <WorkList />
+      </AbsolutelyAttack>
+      <AggroChangeAttack nearTargetAttackId="0" showAggroChangeMotionAfterNearTargetAttack="false" distantTargetAttackId="7" showAggroChangeMotionAfterDistantTargetAttack="false" />
+      <Attack>
+        <WorkList>
+          <Work id="2" desc="2회치기" normalBehaviorId="1102" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorId="2102" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND GetTargetDistance() &lt; 100" distanceType="2" distanceRate="1.000000" coolTime="8000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" referenceNextAttackPreprocess="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" />
+          <Work id="3" desc="올려치기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND GetHpRatio() &lt; 0.8 AND GetTargetDistance()&lt;200" distanceType="2" distanceRate="1.000000" coolTime="11000" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1103" angerBehaviorId="2103" />
+          <Work id="4" desc="걷어차기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND GetTargetDistance() &lt; 50" distanceType="1" distanceRate="1.000000" coolTime="10000" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1104" angerBehaviorId="2104" />
+          <Work id="5" desc="빙돌려때리기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND GetTargetDistance()&lt;180" distanceType="1" distanceRate="1.000000" coolTime="16000" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1105" angerBehaviorId="2105" />
+          <Work id="10" desc="포효" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND GetCombatTime() &gt; 30000" distanceType="1" distanceRate="1.000000" coolTime="35000" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1150" angerBehaviorId="1150" />
+          <Work id="12" desc="[대회전치기] + 50% 좌로 움직이며 치기, 50% 우로 움직이며 치기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro() AND GetHpRatio() &lt; 0.6 AND GetTargetDistance()&lt;160" distanceType="1" distanceRate="1.000000" coolTime="21000" isDirectionRevision="true" referenceNextAttackPreprocess="false,false" nextAttackProb="0.5,0.5" nextAttackId="13,14" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1106" angerBehaviorId="2106" />
+          <Work id="13" desc="대회전치기 + [50% 좌로 움직이며 치기], 50% 우로 움직이며 치기" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="PcTargetByAggro()" distanceType="1" distanceRate="1.000000" coolTime="0" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1107" angerBehaviorId="2107" />
+          <Work id="14" desc="대회전치기 + 50% 좌로 움직이며 치기, [50% 우로 움직이며 치기]" normalBehaviorType="skill" offFlockOnNormalMode="true" angerBehaviorType="skill" offFlockOnAngerMode="true" preProcess="1" distanceType="1" distanceRate="1.000000" coolTime="0" isDirectionRevision="true" referenceNextAttackPreprocess="" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" normalBehaviorId="1108" angerBehaviorId="2108" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="10" prob="0.100000" distanceRate="1.000000" />
+            <Info workId="3" prob="0.600000" distanceRate="1.000000" />
+            <Info workId="4" prob="0.400000" distanceRate="1.000000" />
+            <Info workId="5" prob="0.800000" distanceRate="1.000000" />
+            <Info workId="12" prob="0.700000" distanceRate="1.000000" />
+            <Info workId="13" prob="0.000000" distanceRate="0.000000" />
+            <Info workId="14" prob="0.000000" distanceRate="0.000000" />
+            <Info workId="2" prob="1.000000" distanceRate="1.000000" />
+          </Tension>
+        </TensionList>
+      </Attack>
+      <Avoid avoidSkillId="1107" cooltime="10000" />
+      <Cooperation concurrentAttackDuration="5000" sequentialAttackDelay="1000" escapeDuration="3000">
+        <WorkList>
+          <Work id="1" desc="" normalBehaviorId="1" normalBehaviorType="social" offFlockOnNormalMode="false" angerBehaviorId="1" angerBehaviorType="social" offFlockOnAngerMode="false" preProcess="PcTargetByAggro()" sendOrderId="1" sendOrderRange="400" sendOrderMaxCount="2" sendOrderRefTarget="0" distanceType="2" distanceRate="1.000000" coolTime="1000" isDirectionRevision="true" nextAttackProb="" nextAttackId="" nextShorttermTargetProb="0.000000" nextShorttermTargetId="0" noCancelNextAttackByAggroChanged="false" orderType="normal" formationId="0" msgImmediately="false" msg="" msgInterval="0" msgProb="0.000000" activeMoveIdForSkillOnNormalMode="0" activeMoveIdForSkillOnAngerMode="0" />
+        </WorkList>
+        <TensionList>
+          <Tension id="1">
+            <Info workId="1" prob="1.000000" distanceRate="1.000000" />
+          </Tension>
+        </TensionList>
+        <ReceiveOrderList />
+      </Cooperation>
+      <CounterFlee workId="0" toAnger="true" speedUpRate="1.000000" maxMovingTime="10000" recentHitTime="30000" recentPcBehaviorTime="20000" />
+      <Idle duration="1000" />
+      <MonsterFlee hpRate="0.000000" executionRate="0.000000" fleeDistance="400" shareAggroRange="500" />
+      <MonsterSummon hpRate="0.000000" executionRate="0.000000" summonNum="0" summonRange="0" summonTemplateId="0" />
+      <Move targetDistance="100" timeout="5000" />
+      <PatternList id="1">
+        <Pattern default="true">
+          <AngerMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="1.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </AngerMode>
+          <NormalMode>
+            <Tension attackTension="1" cooperationTension="1" shorttermTargetTension="1" />
+            <Incline attackProb="1.000000" cooperationProb="0.000000" shorttermTargetProb="0.000000" avoidProb="0.000000" moveProb="0.000000" socialProb="0.000000" />
+          </NormalMode>
+        </Pattern>
+      </PatternList>
+      <ShorttermTarget>
+        <StTensionList>
+          <StTension id="1" />
+        </StTensionList>
+        <StWorkList />
+      </ShorttermTarget>
+      <Social socialMotionId="1" />
+    </CombatState>
+    <PeaceState checkInterval="5000" minLeaderDistance="50" maxLeaderDistance="100" followNearUser="false" popupMsg="" msgProb="0.000000" msgInterval="0" followDungeonUser="false" followQuestUser="false" questPatrol="false">
+      <Buff range="0" coolTime="0" />
+      <RandomMove moveMinDistance="200" moveMaxDistance="200" probSocial="0.400000" moveRadius="200" probMove="0.000000">
+        <Social motionId="1" />
+        <Social motionId="2" />
+        <Social motionId="3" />
+      </RandomMove>
+    </PeaceState>
+  </Ai>
+</AIData>

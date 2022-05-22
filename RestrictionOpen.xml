@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RestrictionOpenList>
+  <!-- CBT용: A대륙만 사용할 수 있도록 막기 -->
+  <RestrictionOpen level="1">
+    <PegasusException pegasusId="21,29,30,93,121,132,130,113,103,27"/>
+    <BuyListException itemId="141,142,151,159"/>
+    <HuntingZoneException hzId="61,361,4,204,304,8,208,308,10,210,310"/>
+    <TerritoryException>
+      <Territory hzId="212" territoryId="21200007"/>
+    </TerritoryException>
+    <CollectionException>
+      <ContinentList>
+        <Continent continentId="7004">
+          <Territory territoryId="1,116,125,126"/>
+        </Continent>
+      </ContinentList>
+    </CollectionException>
+  </RestrictionOpen>
+
+  <!-- PvE Server 예외 처리 -->
+  <RestrictionOpen pve="true">
+    <GuardPolicyException policyId="1" />
+    <BuyListException itemId="352,150005,219000" />
+    <QuestException questId="7289,7299,6389" />
+  </RestrictionOpen>
+  <!-- 던전 서버 예외 처리 (PvP 퀘스트 삭제) -->
+  <RestrictionOpen server="dungeon">
+    <QuestException questId="7289,7299,6389"/>
+  </RestrictionOpen>
+  <!-- 전장 서버 예외 처리 (PvP 퀘스트 삭제) -->
+  <RestrictionOpen server="battlefield">
+    <QuestException questId="7289,7299,6389"/>
+  </RestrictionOpen>
+  
+  <!-- FOG는 여름 이벤트 Npc (T-Cat)이 나오지 않도록 막는다 -->
+  <RestrictionOpen publisher="FOG">
+    <NpcException>
+      <!-- Exclude 판도라 Npc -->
+      <Npc hzId="213" templateId="1020"/>
+      <!-- Exclude 던전입구 npc -->
+      <!--<Npc hzId="209" templateId="1501"/>
+		<Npc hzId="236" templateId="1501"/>-->
+      <!-- Exclude T-Cat Npc -->
+      <Npc hzId="59" templateId="9000"/>
+      <Npc hzId="60" templateId="9000"/>
+      <Npc hzId="61" templateId="9000"/>
+      <Npc hzId="62" templateId="9000"/>
+      <Npc hzId="63" templateId="9000"/>
+      <Npc hzId="64" templateId="9000"/>
+      <Npc hzId="65" templateId="9000"/>
+      <Npc hzId="66" templateId="9000"/>
+      <Npc hzId="67" templateId="9000"/>
+      <Npc hzId="68" templateId="9000"/>
+      <Npc hzId="69" templateId="9000"/>
+      <Npc hzId="70" templateId="9000"/>
+      <Npc hzId="71" templateId="9000"/>
+      <Npc hzId="72" templateId="9000"/>
+      <Npc hzId="73" templateId="9000"/>
+      <Npc hzId="74" templateId="9000"/>
+      <Npc hzId="75" templateId="9000"/>
+      <Npc hzId="76" templateId="9000"/>
+      <Npc hzId="77" templateId="9000"/>
+      <Npc hzId="78" templateId="9000"/>
+      <Npc hzId="79" templateId="9000"/>
+      <Npc hzId="80" templateId="9000"/>
+      <Npc hzId="81" templateId="9000"/>
+      <Npc hzId="83" templateId="9000"/>
+      <Npc hzId="84" templateId="9000"/>
+      <!-- Exclude Summer Event Npc -->
+      <Npc hzId="59" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="60" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="61" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="62" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="63" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="65" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="66" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="67" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="68" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="69" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="70" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="72" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="73" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="74" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="75" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="79" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="80" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="81" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="83" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="84" templateId="1955,1956,1957,1958,1959"/>
+    </NpcException>
+    <!-- Enchant Guide Quest -->
+    <QuestException questId="6382,4180,6378,477,6377"/>
+  </RestrictionOpen>
+
+  <!-- EME는 T-Cat Npc가 Federation Bill 형태로 나타나게 된다 -->
+  <RestrictionOpen publisher="EME">
+    <NpcException>
+      <!-- Exclude 판도라 Npc -->
+      <Npc hzId="213" templateId="1020"/>
+      <!-- Exclude 던전입구 npc -->
+      <!--<Npc hzId="209" templateId="1501"/>
+		<Npc hzId="236" templateId="1501"/>-->
+      <!-- Exclude Summer Event Npc -->
+      <Npc hzId="59" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="60" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="61" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="62" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="63" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="65" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="66" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="67" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="68" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="69" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="70" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="72" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="73" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="74" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="75" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="79" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="80" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="81" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="83" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="84" templateId="1955,1956,1957,1958,1959"/>
+    </NpcException>
+    <!-- Enchant Guide Quest -->
+    <QuestException questId="6382,4180,6378,477,6377"/>
+  </RestrictionOpen>
+
+  <!-- 눈싸움 전장 퀘스트 수주 제외 -->
+  <RestrictionOpen level="0">
+    <QuestException questId="6378"/>
+  </RestrictionOpen>
+  
+  <!-- RUS는 여름 이벤트 Npc (T-Cat)이 나오지 않도록 막는다 -->
+  <RestrictionOpen publisher="RUS">
+    <NpcException>
+      <!-- Exclude 판도라 Npc -->
+      <Npc hzId="213" templateId="1020"/>
+      <!-- Exclude 던전입구 npc -->
+      <!--<Npc hzId="209" templateId="1501"/>
+		<Npc hzId="236" templateId="1501"/>-->
+      <!-- Exclude T-Cat Npc -->
+      <!-- Exclude Summer Event Npc -->
+      <Npc hzId="59" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="60" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="61" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="62" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="63" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="65" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="66" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="67" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="68" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="69" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="70" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="72" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="73" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="74" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="75" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="79" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="80" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="81" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="83" templateId="1955,1956,1957,1958,1959"/>
+      <Npc hzId="84" templateId="1955,1956,1957,1958,1959"/>
+	  <!-- 타오르는 돌 수집가 NPC 삭제 (CBT2 스펙)-->
+    </NpcException>
+    <!-- Enchant Guide Quest -->
+    <QuestException questId="6382,4180,6378,477,6377"/>
+    <!-- 중요 117763 : [LIVE28.05][퀘스트] 공개되지 않는 컨텐츠의 가이드 퀘스트가 수주되는 문제 -->
+	<BuyListException itemId="72051,72027,91965"/>
+  </RestrictionOpen>
+  
+</RestrictionOpenList>

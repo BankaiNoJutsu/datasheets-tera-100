@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!--	배팅 시스템 
+	BettingRule : 배팅 룰, 배팅 아이템 등에 관한 정보를 기술 
+					- ruleType 
+							default : 전체 배팅액을 이긴 팀에게 비율에 따라 균등 분배 (둘 중 하나의 팀에만 배팅 가능)
+							
+					- additionalBetting	: 추가 배팅 가능 여부
+					
+				- BettingItem : 배팅에 사용 될 아이템에 관한 공통정보 type = (gold, item) , minValue="최소 배팅값" , maxValue="최소 배팅값", unitValue="배팅 단위"
+
+				- TeamInfo : 배팅을 걸 수 있는 팀(?) 수			
+	AdditionalReward : 베팅 시 추가 보상 지급
+	
+
+		관련 노드 <AdditionalReward  type="item" itemTemplateId="아이템 ID" amount="지급 아이템 수" />
+				
+	Ready	 :  투기장 준비단계(경기시작 xx 분 전~ 경기시작 시간까지)동안 제어해야 할 일들.
+-->
+
+
+
+
+<BettingData>
+
+<!-- 일반전 베팅 (황금 - 황금)	-->
+	<Betting id="1" titleText="@betting: 190001" subText="@betting: 190002" inputEnable="true" voteEnable="true">
+		<BettingRule additionalBetting="false" teamCount="2" tex="10">
+			<BettingItem type="item" minValue="100" maxValue="100000" unitValue="100" itemTemplateId="71468" />						
+		</BettingRule>
+		</Betting>
+	
+<!-- 대박전 베팅1 (다이아 - 다이아)	-->
+	<Betting id="2" titleText="@betting: 190001" subText="@betting: 190002" inputEnable="true" voteEnable="true">
+		<BettingRule additionalBetting="false" teamCount="2" tex="10">
+			<BettingItem type="item" minValue="100" maxValue="30000" unitValue="100" itemTemplateId="71471" />						
+		</BettingRule>
+		</Betting> 
+<!-- 대박전 베팅2 (다이아 - 다이아)	-->
+	<Betting id="3" titleText="@betting: 190001" subText="@betting: 190002" inputEnable="true" voteEnable="true">
+		<BettingRule additionalBetting="false" teamCount="2" tex="10">
+			<BettingItem type="item" minValue="100" maxValue="30000" unitValue="100" itemTemplateId="71471" />						
+		</BettingRule>
+		</Betting> 
+
+
+<!-- 라이브 대응 시 베팅 (황금 - 가챠)			
+	<Betting id="1" titleText="@betting: 190001" subText="@betting: 190002" inputEnable="true" voteEnable="true">
+		<BettingRule additionalBetting="false" teamCount="2" tex="100">
+			<BettingItem type="item" minValue="1" maxValue="1" unitValue="1" itemTemplateId="71468" rewardItemTemplateId="80086"/>						
+		</BettingRule>
+	</Betting>  -->
+</BettingData>

@@ -1,0 +1,937 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9068" name="@dungeon:9068" startPos="-65517,36352,95" exitContinentId="7031" exitPos="34051,10632,6379">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="65" />
+	<ClearCondition huntingZoneId="468" templateId="3000" amount="1" killCount="1" />
+	<Retry retryId="2" />
+	
+	<!-- 길드 경쟁 타이머 온 오프 -->
+	
+		<!-- 1네임드 전투 돌입 시, 타이머 킴 -->
+	<EventGroup type="npcState" uniqueId="468,1000" value="combat" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+		<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+		<EventTask type="timer" action="start" direction="reverse" value="3600" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="468,3000" value="0" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+		<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+		<EventTask type="rankSystem" state="end" next="none" />
+		<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 길찾기 -->
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="468,911" id="1" pos="-63419.21484375,39482.81640625,-301.15625000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 일반몬스터 구간 -->
+	<EventGroup type="eliminate" territoryId="46800040" repeat="false"> <!-- 2넴 가는길 일반 몬스터 다 잡으면 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800039" next="none"/> <!-- 문열기 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800037" next="none"/> <!-- 2넴 가는길 마석 소환 테리토리 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800040" next="none"/> <!-- 2넴 가는길 쫄 테리토리 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800002" next="none" /> <!-- 2네임드 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800044" next="none" /> <!-- 2네임드 가는 포탈 스폰 -->
+				<EventTask type="guideOn" nameId="468,913" id="1" pos="-71791.76562500,44268.33593750,-961.72265625" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<EventGroup type="eliminate" territoryId="46800042" repeat="false"> <!-- 3넴 가는길 일반 몬스터 다 잡으면 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800041" next="none"/> <!-- 문열기 -->
+				<EventTask type="playMovie" id="3013" next="none" />	
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800044" next="none" /> <!-- 2네임드 가는 포탈 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800045" next="none" /> <!-- 3네임드 가는 포탈 스폰 -->
+				<EventTask type="guideOn" nameId="468,915" id="1" pos="-65304.40625000,52905.42968750,-6735.62939453" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<!-- 1네임드 -->
+	<EventGroup type="npcState" uniqueId="468,1000" value="combat" repeat="true"> <!-- 1네임드 암흑 수호 골렘 전투 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800004" next="none" /> <!-- 1넴 뒤 메인 문 닫힘 -->
+				<EventTask type="message" string="@dungeon:9068004" style="combat" next="none" /> <!-- 문 닫힘 메세지 -->
+				<!-- <EventTask type="timer" action="start" direction="reverse" name="1st_Berserk" value="720" timerUiOff="false" next="none" /> 1네임드 전투 시작 720초 후 광폭화 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="timer" timerName="1st_Berserk" value="0" repeat="true"> <!-- 광폭화 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068021" style="combat" next="none" /> 
+				<EventTask type="abnormality" abnormalityId="468049" target="npc" targetNpcId="468,1000" turn="on" next="none" /> <!-- 1넴 광폭화 이상상태 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="468,1000" value="98" repeat="true"> <!-- 1네임드 암흑 수호 골렘 HP 98% 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800016" next="none" /> <!-- 1넴 입구 철창 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="468,1000" repeat="true"> <!-- 1네임드 암흑 수호 골렘 리셋 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="1st_Berserk" value="0" timerUiOff="true" next="none"  />
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800016" next="none"/>
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800001" next="time" nextValue="1"/> <!-- 1 네임드 디스폰 후 다시 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800001" next="none" />
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800016" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="468,1000" value="0" repeat="true"> <!-- 1네임드 암흑 수호 골렘 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="1st_Berserk" value="0" timerUiOff="true" next="none"  />
+				<EventTask type="playMovie" id="3012" next="none" />
+				<EventTask type="guideOn" nameId="468,912" id="1" pos="-65286.52343750,44352.16406250,-732.96093750" next="none" />
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800015" next="none"/> <!-- 출구 철창 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800016" next="none" /> <!-- 입구 철창 디스폰 -->				
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800005" next="time" nextValue="2"/> <!-- 다리 스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800015" next="none"/> <!-- 출구 철창 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800016" next="none" /> <!-- 입구 철창 디스폰 -->				
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800037" next="none"/> <!-- 2넴 가는길 마석 소환 테리토리 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800039" next="none"/> <!-- 2넴 가는길 마석 소환 길막 테리토리 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800040" next="none"/> <!-- 2넴 가는길 쫄 테리토리 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800048" next="none"/> <!-- 공간이동불가오브젝트스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800004" next="none" /> <!-- 1넴 뒤 메인 문 열림 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800001" next="none"/> <!-- 1넴 디스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="36" name="마석 소환 재물" repeat="true"> <!-- 마석 소환 재물 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468021" target="aggro" targetNpcId="468,1000" min="2" max="4" next="none" /> <!-- 2 ~ 4 어글자에게 마석 소환 재물 제공 -->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="13" name="1네임드 저주 패턴 알림" repeat="true"> <!-- 1네임드 저주 걸기 패턴 알림 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068001" style="combat" next="none" /> 	 <!-- 저주알림 메세지 -->	
+				<!-- <EventTask type="abnormality" abnormalityId="468012" target="aggro" targetNpcId="468,1000" min="2" max="2" next="none" /> 두번째 어글자에게 저주 시전 -->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="14" name="1네임드 강해짐 알림" repeat="true"> <!-- 1네임드 마석 먹고 강해짐 알림 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068002" style="combat" next="none" /> 	 <!-- 강해짐 알림 메세지 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="19" name="마석 흡수" repeat="true"> <!-- 마석 흡수 알림 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068008" style="combat" next="none" /> 
+				<EventTask type="abnormality" abnormalityId="468002" target="npc" targetNpcId="468,2003" turn="on" next="none" /> <!-- 마석 현재 행동 취소 -->	
+				<EventTask type="abnormality" abnormalityId="468020" target="npc" targetNpcId="468,1000" turn="on" next="none" /> <!-- 1넴 마석 흡수 이상상태 on -->	
+				<EventTask type="changePatternList" targetNpcId="468,2003" patternListId="5" next="none" /> <!-- 마석을 아무것도 하지 않는 텐션으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="468,2006" patternListId="2" next="time" nextValue="10" /> <!-- 마석 관리 투명NPC를 아무것도 하지 않는 텐션으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="468,2006" patternListId="1" next="none" /> <!-- 10초 후 마석 관리 투명NPC를 다시 작동 -->
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="20" name="마석 근폭 텐션으로 변경" repeat="true"> <!-- 마석 근폭 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="468,2003" patternListId="2" next="none" /> <!-- 마석 근폭 텐션으로 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="21" name="마석 원폭 텐션으로 변경" repeat="true"> <!-- 마석 원폭 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="468,2003" patternListId="3" next="none" /> <!-- 마석 원폭 텐션으로 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="22" name="마석 레이저 텐션으로 변경" repeat="true"> <!-- 마석 레이저 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="468,2003" patternListId="4" next="none" /> <!-- 마석 레이저 텐션으로 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="23" name="마석 대기 텐션으로 변경" repeat="true"> <!-- 마석 기본 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="468,2003" patternListId="1" next="none" /> <!-- 마석 기본 텐션으로 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="54" name="마석 대기 텐션으로 변경" repeat="true"> <!-- 마석 기본 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468002" target="npc" targetNpcId="468,2003" turn="on" next="none" /> <!-- 마석 현재 행동 취소 -->	
+				<EventTask type="changePatternList" targetNpcId="468,2003" patternListId="5" next="none" /> <!-- 마석을 아무것도 하지 않는 텐션으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="468,2006" patternListId="2" next="none" /> <!-- 마석 관리 투명NPC를 아무것도 하지 않는 텐션으로 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2네임드 전투 관련 -->
+	<EventGroup type="npcState" uniqueId="468,2000" value="combat" repeat="true"> <!-- 2네임드 듀리온과 전투 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="none" />
+				<EventTask type="message" string="@dungeon:9068004" style="combat" next="none" /> <!-- 문 닫힘 메세지 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcHp" uniqueId="468,2000" value="98" repeat="true"> <!-- 2넴 듀리온 98% 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800017" next="none" /> <!-- 2넴 입구 철창 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcReset" uniqueId="468,2000" repeat="true"> <!-- 2네임드 듀리온 리셋 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468011" target="player" turn="off" next="none" /> 
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800017" next="none"/> <!-- 입구 삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800007" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800008" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800009" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800010" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800011" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800012" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800013" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800023" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800024" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800025" next="none" /> <!-- 2넴 쫄 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800031" next="none"/> <!-- 2넴 쫄 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800032" next="none"/> <!-- 2넴 쫄 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800033" next="none"/> <!-- 2넴 쫄 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800002" next="time" nextValue="1"/> <!-- 1 네임드 디스폰 후 다시 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800002" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcHp" uniqueId="468,2000" value="20" repeat="true"> <!-- 2넴 듀리온 20% 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068017" style="combat" next="none" /> <!-- 듀리온 흡수 메세지 -->	
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800028" next="none" /> <!-- 연출용 투명NPC 스폰 -->
+				<EventTask type="abnormality" abnormalityId="468002" target="npc" targetNpcId="468,2000" turn="on" next="none" /> <!-- 2넴 현재 행동 취소 -->	
+				<EventTask type="changePatternList" targetNpcId="468,2000" patternListId="2" next="none" /> <!-- 2넴 연출패턴으로 변경 -->
+				<EventTask type="abnormality" abnormalityId="468011" target="player" turn="off" next="none" /> 
+				<EventTask type="abnormality" abnormalityId="468043" target="npc" targetNpcId="468,2000" turn="off" next="none" /> <!-- 만약 방어 버프 있을 경우 버프 취소 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<EventGroup type="npcHp" uniqueId="468,2000" value="10" repeat="true"> <!-- 2넴 듀리온 10% 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundon" soundType="effectSound" soundId="0512" playTime="3000" next="none" />
+				<EventTask type="abnormality" abnormalityId="468011" target="player" turn="off" next="none" /> 
+				<EventTask type="guideOn" nameId="468,914" id="1" pos="-65292.79296875,50589.54687500,-6625.84472656" next="none" />
+				<EventTask type="doActionScript" targetNpcId="468,2300" actionScriptId="4680001" next="none" /> <!-- 화면 액션스크립트 -->	
+				<EventTask type="message" string="@dungeon:9068014" style="combat" next="none" /> <!-- 듀리온 도망 메세지 -->	
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800002" next="none" /> <!-- 2 네임드 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800027" next="none" /> <!-- 보물 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800042" next="none" /> <!-- 3네임드 일반 몬스터 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800003" next="none"/> <!-- 3네임드 스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800007" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800008" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800009" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800010" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800011" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800012" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800013" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800023" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800024" next="none" /> <!-- 구슬 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800017" next="none"/> <!-- 입구 삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800018" next="none"/> <!-- 출구 삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800031" next="none"/> <!-- 2넴 쫄 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800032" next="none"/> <!-- 2넴 쫄 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800033" next="none"/> <!-- 2넴 쫄 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800025" next="time" nextValue="3" /> <!-- 2넴 쫄 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800002" next="none" /> <!-- 2 네임드 디스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="1" name="2네임드 은신 삭제" repeat="true"> <!-- 2네임드 은신 취소 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468003" target="npc" targetNpcId="468,2000" turn="on" next="none" /> <!-- 2넴 등장 abnormality on -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="2" name="2네임드 1번 구슬 소환" repeat="true"> <!-- 구슬 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800009" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="3" name="2네임드 2번 구슬 소환" repeat="true"> <!-- 구슬 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800011" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="4" name="2네임드 3번 구슬 소환" repeat="true"> <!-- 구슬 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800008" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="5" name="2네임드 4번 구슬 소환" repeat="true"> <!-- 구슬 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800013" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="6" name="2네임드 5번 구슬 소환" repeat="true"> <!-- 구슬 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800010" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="7" name="2네임드 6번 구슬 소환" repeat="true"> <!-- 구슬 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800012" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="24" name="2네임드 8번 구슬 소환" repeat="true"> <!-- 구슬 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800023" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="25" name="2네임드 9번 구슬 소환" repeat="true"> <!-- 구슬 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800024" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="8" name="2네임드 7번 구슬 소환" repeat="true"> <!-- 구슬 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800007" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="9" name="2네임드 1구 솟아나는 마석 삭제" repeat="true"> <!-- 2네임드 마석 제거 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="468,2012" next="none" /> <!-- 1구 솟아나는 마석 제거 -->					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="10" name="2네임드 2구 솟아나는 마석 삭제" repeat="true"> <!-- 2네임드 마석 제거 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="468,2013" next="none" /> <!-- 2구 솟아나는 마석 제거 -->					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="26" name="2네임드 1구 떨어지는 마석 삭제" repeat="true"> <!-- 2네임드 마석 제거 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="468,2014" next="none" /> <!-- 1구 떨어지는 마석 제거 -->					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="27" name="2네임드 2구 떨어지는 마석 삭제" repeat="true"> <!-- 2네임드 마석 제거 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="468,2015" next="none" /> <!-- 2구 떨어지는 마석 제거 -->					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="37" name="2넴 레이저 패턴 시작(35%)" repeat="true"> <!-- 2넴 무적 및 쫄 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468043" target="npc" targetNpcId="468,2000" turn="on" next="none" /> <!-- 2넴 무적 이상상태 on -->	
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800025" next="none" /> <!-- 2넴 쫄 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="42" name="2넴 레이저 패턴 시작(95%)" repeat="true"> <!-- 2넴 무적 및 쫄 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468043" target="npc" targetNpcId="468,2000" turn="on" next="none" /> <!-- 2넴 무적 이상상태 on -->	
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800031" next="none" /> <!-- 2넴 쫄 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="43" name="2넴 레이저 패턴 시작(75%)" repeat="true"> <!-- 2넴 무적 및 쫄 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468043" target="npc" targetNpcId="468,2000" turn="on" next="none" /> <!-- 2넴 무적 이상상태 on -->	
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800032" next="none" /> <!-- 2넴 쫄 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="44" name="2넴 레이저 패턴 시작(55%)" repeat="true"> <!-- 2넴 무적 및 쫄 소환 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468043" target="npc" targetNpcId="468,2000" turn="on" next="none" /> <!-- 2넴 무적 이상상태 on -->	
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800033" next="none" /> <!-- 2넴 쫄 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="38" name="2넴 이상상태 지우기" repeat="true"> <!-- 2넴 무적 지우기 및 쫄들 이상상태 제공 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468017" target="npc" targetNpcId="468,2016" turn="on" next="none" /> <!-- 2넴 구슬로 변하는 이상상태 on -->	
+				<EventTask type="abnormality" abnormalityId="468017" target="npc" targetNpcId="468,2017" turn="on" next="none" /> <!-- 2넴 구슬로 변하는 이상상태 on -->	
+				<EventTask type="abnormality" abnormalityId="468017" target="npc" targetNpcId="468,2019" turn="on" next="none" /> <!-- 2넴 구슬로 변하는 이상상태 on -->	
+				<EventTask type="abnormality" abnormalityId="468017" target="npc" targetNpcId="468,2023" turn="on" next="none" /> <!-- 2넴 구슬로 변하는 이상상태 on -->	
+				<EventTask type="abnormality" abnormalityId="468043" target="npc" targetNpcId="468,2000" turn="off" next="none" /> <!-- 2넴 무적 이상상태 off -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="40" name="마석 흡수 패턴 시작" repeat="true"> <!-- 마석 흡수 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468005" target="npc" targetNpcId="468,2000" turn="on" next="none" /> <!-- 2넴 보호막 이상상태 on -->	
+				<EventTask type="Soundon" soundType="effectSound" soundId="0509" playTime="3000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="50" name="2넴 시작 대사" repeat="true"> <!-- 2넴 시작 대사 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundon" soundType="effectSound" soundId="0508" playTime="3000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="52" name="어그로 면역" repeat="true"> <!-- 2넴 어그로 면역 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468011" target="player" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="53" name="어그로 면역 삭제" repeat="true"> <!-- 2넴 어그로 면역 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468011" target="player" turn="off" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 3네임드 전투 관련 -->
+	<EventGroup type="npcState" uniqueId="468,3000" value="combat" repeat="true"> <!-- 3네임드 완전체 듀리온과 전투 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068004" style="combat" next="none" /> <!-- 문 닫힘 메세지 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcReset" uniqueId="468,3000" repeat="true"> <!-- 3네임드 완전체 듀리온 리셋 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800021" next="none"/> <!-- 입구 삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800022" next="none"/> <!-- 전멸 투명NPC 삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800026" next="none"/> <!-- 쫄테리토리삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800034" next="none"/> <!-- 쫄테리토리삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800035" next="none"/> <!-- 쫄테리토리삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800036" next="none"/> <!-- 쫄테리토리삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800049" next="none"/> <!-- 들어오는 입구쪽 철창 삭제 -->
+				<EventTask type="timer" action="stop" name="Durion_Berserk" value="0" timerUiOff="true" next="none"  />
+				<EventTask type="killNpc" targetNpcId="468,3007" next="none" /> <!-- 어보미 제거 -->					
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800003" next="time" nextValue="1"/> <!-- 1 네임드 디스폰 후 다시 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800003" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="468,3000" value="98" repeat="true"> <!-- 3네임드 98%시 문 닫힘 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800021" next="none" /> <!-- 1넴 입구 철창 스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800049" next="none"/> <!-- 들어오는 입구쪽 철창 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="468,3000" value="0" repeat="true"> <!-- 3네임드 완전체 듀리온 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468039" target="player" turn="off" next="none" /> <!-- 3넴 저주 삭제 -->
+				<EventTask type="abnormality" abnormalityId="468039" target="player" turn="off" next="none" /> <!-- 3넴 저주 삭제 -->
+				<EventTask type="abnormality" abnormalityId="468039" target="player" turn="off" next="none" /> <!-- 3넴 저주 삭제 -->
+				<EventTask type="abnormality" abnormalityId="468039" target="player" turn="off" next="none" /> <!-- 3넴 저주 삭제 -->
+				<EventTask type="abnormality" abnormalityId="468039" target="player" turn="off" next="none" /> <!-- 3넴 저주 삭제 -->
+				<EventTask type="guideOff" id="1" next="none" />
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800026" next="none"/> <!-- 쫄테리토리삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800034" next="none"/> <!-- 쫄테리토리삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800035" next="none"/> <!-- 쫄테리토리삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800036" next="none"/> <!-- 쫄테리토리삭제 -->
+				<EventTask type="killNpc" targetNpcId="468,3007" next="none" /> <!-- 어보미 제거 -->					
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800021" next="none"/> <!-- 문 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800049" next="none"/> <!-- 들어오는 입구쪽 철창 삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800020" next="none"/> <!-- 문 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800014" next="none"/> <!-- 구슬 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800047" next="none" /> <!-- 이르카 근교로 가는 포탈 스폰 -->
+				<EventTask type="timer" action="stop" name="Durion_Berserk" value="0" timerUiOff="true" next="time" nextValue="1"  />
+				<EventTask type="playMovie" id="3014" next="time" nextValue="1" />
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800003" next="time" nextValue="3"/> <!-- 3넴 디스폰 -->
+				<EventTask type="killNpc" targetNpcId="468,9004" next="none" /> <!-- 창문 제거 -->					
+				<EventTask type="killNpc" targetNpcId="468,9005" next="none" /> <!-- 창문틀 제거 -->					
+				<EventTask type="killNpc" targetNpcId="468,9003" next="none" /> <!-- 듀리온 동상 제거 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800021" next="none"/> <!-- 입구 삭제 -->
+				<EventTask type="despawn" huntingZoneId="468" territoryId="46800049" next="none"/> <!-- 들어오는 입구쪽 철창 삭제 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- <EventGroup type="npcHp" uniqueId="468,3000" value="15" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068019" style="alert" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" name="Durion_Berserk" value="120" timerUiOff="false" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup> 3네임드 hp 15% 되면 120초 후 광폭화 -->
+
+	<EventGroup type="none" id="11" name="3네임드 레이저 원근폭 패턴 시작 알림" repeat="true"> <!-- 3네임드 레이저 원근폭 패턴 시작 알림 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="12" name="3네임드 구슬 소환 패턴 시작" repeat="true"> <!-- 3네임드 구슬 소환 패턴 시작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068010" style="combat" next="time" nextValue="2.5" /> 
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800014" next="none"/> <!-- 구슬 Territory Spawn -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="15" name="3네임드 찔러서 내려찍기 패턴 시작" repeat="true"> <!-- 3네임드 찔러서 내려찍기 패턴 시작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068003" style="combat" next="none" /> 	 <!-- 찌르기 패턴 시작 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="32" name="전멸" repeat="true"> <!-- 전멸 시전 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="468,3000" actionScriptId="4600003" next="none" /> 
+				<EventTask type="message" string="@dungeon:9068007" style="combat" next="none" /> 	 
+				<EventTask type="abnormality" abnormalityId="457056" target="player" next="none" /> 
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800022" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="17" name="3네임드 3단폭 사용" repeat="true"> <!-- 3네임드 3단폭 사용 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068005" style="combat" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcHp" uniqueId="468,3001" value="0" repeat="true"> <!-- 3네임드 비석1 깨질때 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="down1" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="468,3002" value="0" repeat="true"> <!-- 3네임드 비석2 깨질때 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="down2" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="468,3003" value="0" repeat="true"> <!-- 3네임드 비석3 깨질때 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="down3" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="468,3004" value="0" repeat="true"> <!-- 3네임드 비석4 깨질때 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="down4" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="18" name="콤보공격시작" repeat="true"> <!-- 콤보공격시작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundon" soundType="effectSound" soundId="6004" playTime="3000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="16" name="저주걸기" repeat="true"> <!-- 저주 시작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="1위_랜덤어브노말" value="1" next="none" />
+				<EventTask type="flag" name="2위_랜덤어브노말" value="1" next="none" />
+				<EventTask type="flag" name="3위_랜덤어브노말" value="1" next="none" />
+				<EventTask type="flag" name="4위_랜덤어브노말" value="1" next="none" />
+				<EventTask type="flag" name="5위_랜덤어브노말" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="1위_랜덤어브노말" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="flag" name="1위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="flag" name="1위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="flag" name="1위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+		  <EventTask type="flag" name="1위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="2위_랜덤어브노말" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="flag" name="2위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="flag" name="2위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="flag" name="2위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="2" max="2"  next="none" />
+		  <EventTask type="flag" name="2위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="3위_랜덤어브노말" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="flag" name="3위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="flag" name="3위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="flag" name="3위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="3" max="3"  next="none" />
+		  <EventTask type="flag" name="3위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="4위_랜덤어브노말" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="flag" name="4위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="flag" name="4위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="flag" name="4위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="4" max="4"  next="none" />
+		  <EventTask type="flag" name="4위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="5위_랜덤어브노말" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="flag" name="5위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="flag" name="5위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="flag" name="5위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">	
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="abnormality" abnormalityId="468039" target="aggro" targetNpcId="468,3000" min="5" max="5"  next="none" />
+		  <EventTask type="flag" name="5위_랜덤어브노말" value="0" next="none" />
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="28" name="비석 안전 텐션으로 변경" repeat="true"> <!-- 마석 무적 뿌리기 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="468,3001" patternListId="2" next="none" /> <!-- 증오의 비석 무적 뿌리기 텐션으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="468,3002" patternListId="2" next="none" /> <!-- 탐욕의 비석 무적 뿌리기 텐션으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="468,3003" patternListId="2" next="none" /> <!-- 절망의 비석 무적 뿌리기 텐션으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="468,3004" patternListId="2" next="none" /> <!-- 살생의 비석 무적 뿌리기 텐션으로 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="29" name="비석 기본 텐션으로 변경" repeat="true"> <!-- 마석 기본 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="468,3001" patternListId="1" next="none" /> <!-- 증오의 비석 기본 텐션으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="468,3002" patternListId="1" next="none" /> <!-- 탐욕의 비석 기본 텐션으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="468,3003" patternListId="1" next="none" /> <!-- 절망의 비석 기본 텐션으로 변경 -->
+				<EventTask type="changePatternList" targetNpcId="468,3004" patternListId="1" next="none" /> <!-- 살생의 비석 기본 텐션으로 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="30" name="저주 시작" repeat="true"> <!-- 저주 실행 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068011" style="combat" next="none" /> 
+				<EventTask type="changePatternList" targetNpcId="468,2007" patternListId="2" next="none" /> <!-- 저주 실행 텐션으로 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="31" name="전멸패턴 가림막 삭제" repeat="true"> <!-- 전멸패턴 가림막 삭제 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="468,3006" next="none" /> <!-- 투명NPC 제거 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="33" name="암흑패기 사전앱노멀 주기" repeat="true"> <!-- 전멸패턴 가림막 삭제 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068013" style="combat" next="none" /> 
+				<EventTask type="abnormality" abnormalityId="468019" target="aggro" targetNpcId="468,3000" min="1" max="1"  next="none" />
+				<EventTask type="Soundon" soundType="effectSound" soundId="6007" playTime="3000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="35" name="3넴 마력방패 제공" repeat="true"> <!-- 전멸패턴 가림막 삭제 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468042" target="npc" targetNpcId="468,3000" turn="on" next="none" /> <!-- 3넴 마력방패 이상상태 on -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="34" name="암흑패기 삭제" repeat="true"> <!-- 암흑패기 삭제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468008" turn="off" target="player" next="none" /> <!-- 스턴 삭제 -->				
+				<EventTask type="abnormality" abnormalityId="468009" turn="off" target="player" next="none" /> <!-- 스턴 삭제 -->				
+				<EventTask type="abnormality" abnormalityId="468019" turn="off" target="player" next="none" /> <!-- 스턴 삭제 -->				
+				<EventTask type="abnormality" abnormalityId="468042" target="npc" targetNpcId="468,3000" turn="off" next="none" /> <!-- 3넴 보호 이상상태 off -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="39" name="3넴 쫄 스폰(15%)" repeat="true"> <!-- 쫄 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800026" next="none" /> <!-- 쫄 스폰 -->
+				<EventTask type="Soundon" soundType="effectSound" soundId="6006" playTime="3000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="41" name="듀리온 강화" repeat="true"> <!-- 듀리온 강화 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068016" style="combat" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="45" name="3넴 쫄 스폰(85%)" repeat="true"> <!-- 쫄 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800034" next="none" /> <!-- 쫄 스폰 -->
+				<EventTask type="Soundon" soundType="effectSound" soundId="6006" playTime="3000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="46" name="3넴 쫄 스폰(65%)" repeat="true"> <!-- 쫄 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800035" next="none" /> <!-- 쫄 스폰 -->
+				<EventTask type="Soundon" soundType="effectSound" soundId="6006" playTime="3000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="47" name="3넴 쫄 스폰(35%)" repeat="true"> <!-- 쫄 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="468" territoryId="46800036" next="none" /> <!-- 쫄 스폰 -->
+				<EventTask type="Soundon" soundType="effectSound" soundId="6006" playTime="3000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="48" name="듀리온 강화 시작" repeat="true"> <!-- 듀리온 강화 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068016" style="combat" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="timer" timerName="Durion_Berserk" value="0" repeat="true"> <!-- 광폭화 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9068018" style="alert" next="none" /> 
+				<EventTask type="abnormality" abnormalityId="468047" target="npc" targetNpcId="468,3000" turn="on" next="none" /> <!-- 3넴 광폭화 이상상태 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="49" name="3넴 보호막 해제" repeat="true"> <!-- 유저에게 도착하면 보호막 해제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="468042" target="npc" targetNpcId="468,3000" turn="off" next="none" /> <!-- 3넴 마력방패 이상상태 off -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="none" id="51" name="3넴 시작 대사" repeat="true"> <!-- 3넴 시작 대사 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="468,3000" actionScriptId="60029801" next="none" /> <!-- 대사 액션스크립트 -->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

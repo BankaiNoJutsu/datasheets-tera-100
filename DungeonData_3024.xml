@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3024" name="@dungeon:3024" startPos="50520,160844,1948" exitContinentId="7031" exitPos="21222,5919,6216" startDir="85" destroyWaitMin="1">
+	<Condition type="solo" value="1" />
+	<Condition type="maxMemberCount" value="1" />
+	<Condition type="levelOver" value="65" />
+	<Retry retryId="7" />
+	<ClearCondition huntingZoneId="3024" templateId="3000" amount="1" killCount="1" />
+
+	<!--초기화-->
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투1" value="1" next="none" />
+				<EventTask type="flag" name="전투2" value="0" next="none" />
+				<EventTask type="flag" name="전투3" value="0" next="none" />
+				<EventTask type="flag" name="타이머1" value="1" next="none" />
+				<EventTask type="flag" name="타이머2" value="1" next="none" />
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400003" next="none" /> <!-- 가이드용 npc 스폰 -->
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400005" next="none" /> <!-- 차폐문 npc 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3024,302400003" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<!--입장 가이드 메세지-->
+				<EventTask type="message" string="@dungeon:3024001" style="combat" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--입장 인원별 밸런싱
+	<EventGroup type="userCountInTerritory" uniqueId="3024,302400002" min="2" max="2" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30240011" target="npc" targetNpcId="3024,1000" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240011" target="npc" targetNpcId="3024,2000" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240011" target="npc" targetNpcId="3024,1001" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240011" target="npc" targetNpcId="3024,2001" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240011" target="npc" targetNpcId="3024,3000" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="userCountInTerritory" uniqueId="3024,302400002" min="3" max="3" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30240012" target="npc" targetNpcId="3024,1000" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240012" target="npc" targetNpcId="3024,2000" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240012" target="npc" targetNpcId="3024,1001" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240012" target="npc" targetNpcId="3024,2001" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240012" target="npc" targetNpcId="3024,3000" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="userCountInTerritory" uniqueId="3024,302400002" min="4" max="4" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30240013" target="npc" targetNpcId="3024,1000" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240013" target="npc" targetNpcId="3024,2000" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240013" target="npc" targetNpcId="3024,1001" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240013" target="npc" targetNpcId="3024,2001" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240013" target="npc" targetNpcId="3024,3000" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="userCountInTerritory" uniqueId="3024,302400002" min="5" max="5" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="30240014" target="npc" targetNpcId="3024,1000" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240014" target="npc" targetNpcId="3024,2000" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240014" target="npc" targetNpcId="3024,1001" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240014" target="npc" targetNpcId="3024,2001" turn="on" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240014" target="npc" targetNpcId="3024,3000" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+
+	<!--가이드 npc와 대화 후 전투 시작-->
+	<EventGroup id="100" type="talkNpc" uniqueId="3024,9000">
+		<Event textId="2">
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="3024,9000" actionScriptId="3024001" next="none" /><!--카메라 셰이크-->
+				<EventTask type="message" string="@dungeon:3024002" style="default" next="time" nextValue="3" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400003" next="none" /> <!-- 가이드용 npc 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400101" next="none" /> <!-- 파르프유충 파티 소환1 -->
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400102" next="none" /> <!-- 파르프유충 파티 소환2 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 1페이즈 전투 시작 / 타이머1 On -->
+	<EventGroup type="npcState" name="1페이즈 시작" uniqueId="3024,1000" value="combat" repeat="false">
+ 		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="start" direction="reverse" name="파르프 유충" value="90" next="none" timerUiOff="false" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--전투1 이벤트-->
+	<EventGroup type="eliminate" territoryId="302400101"><!--파르프 전멸1 / 파르프 전투 3 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400103" next="none" /> <!-- 파르프유충 파티3 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400102"><!--파르프 전멸2 / 파르프 전투 4 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400104" next="none" /> <!-- 파르프유충 파티4 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400103"><!--파르프 전멸3 / 파르프 전투 5 + 보너스 파르프 소환-->
+		<Event>
+			<EventTaskGroup probability="0.9">
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400105" next="none" /> <!-- 파르프유충 파티5 소환 -->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.1">
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400105" next="none" /> <!-- 파르프유충 파티5 소환 -->
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400109" next="none" /> <!-- 보너스 황금유충1 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400104"><!--파르프 전멸4 / 파르프 전투 6 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400106" next="none" /> <!-- 파르프유충 파티6 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400105"><!--파르프 전멸5 / 파르프 전투 7 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400107" next="none" /> <!-- 파르프유충 파티7 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400106"><!--파르프 전멸6 / 파르프 전투 8 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400108" next="none" /> <!-- 파르프유충 파티8 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400101,302400102,302400103,302400104,302400105,302400106,302400107,302400108"><!--파르프 전부 종료 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투2" value="1" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400101" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400102" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400103" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400104" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400105" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400106" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400107" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400108" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400109" next="none" />
+				<EventTask type="timer" action="stop" name="파르프 유충" value="0" timerUiOff="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--타이머1 시간 경과_모든 1페이즈 테리토리 디스폰-->
+	<EventGroup type="timer" timerName="파르프 유충" value="0" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="파르프 유충" value="0" timerUiOff="true" next="none"/>
+				<EventTask type="flag" name="타이머1" value="0" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400101" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400102" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400103" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400104" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400105" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400106" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400107" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400108" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400109" next="time" nextValue="1" />
+				<EventTask type="flag" name="전투2" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--전투1 종료 이벤트 _제한 시간 내 처치 시 마석 스폰-->
+	<EventGroup type="flag" name="전투2,타이머1" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400901" next="none" /> <!-- 보라마석 소환 -->
+				<EventTask type="message" string="@dungeon:3024003" style="combat" next="time" nextValue="1" />
+				<EventTask type="message" string="@dungeon:3024004" style="combat" next="time" nextValue="20" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400901" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<!--전투2 시작-->
+	<EventGroup type="flag" name="전투2" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400201" next="none" />
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400202" next="time" nextValue="1" />
+				<EventTask type="flag" name="전투2" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 2페이즈 전투 시작 / 타이머2 On -->
+	<EventGroup type="npcState" name="2페이즈 시작" uniqueId="3024,2000" value="combat" repeat="false">
+ 		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="start" direction="reverse" name="파르폰 유충" value="150" next="none" timerUiOff="false" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--전투2 이벤트-->
+	<EventGroup type="eliminate" territoryId="302400201"><!--파르폰 전멸1 / 파르폰 전투 3 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400203" next="none" /> <!-- 파르프유충 파티3 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400202"><!--파르폰 전멸2 / 파르폰 전투 4 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400204" next="none" /> <!-- 파르프유충 파티4 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400203"><!--파르폰 전멸3 / 파르폰 전투 5 + 보너스 파르폰 소환-->
+		<Event>
+			<EventTaskGroup probability="0.9">
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400205" next="none" /> <!-- 파르프유충 파티5 소환 -->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.1">
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400205" next="none" /> <!-- 파르프유충 파티5 소환 -->
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400209" next="none" /> <!-- 보너스 황금유충1 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400204"><!--파르폰 전멸4 / 파르폰 전투 6 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400206" next="none" /> <!-- 파르프유충 파티6 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400205"><!--파르폰 전멸5 / 파르폰 전투 7 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400207" next="none" /> <!-- 파르프유충 파티7 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400206"><!--파르폰 전멸6 / 파르폰 전투 8 소환-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400208" next="none" /> <!-- 파르프유충 파티8 소환 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="eliminate" territoryId="302400201,302400202,302400203,302400204,302400205,302400206,302400207,302400208"><!--파르폰 전부 종료 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="전투3" value="1" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400201" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400202" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400203" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400204" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400205" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400206" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400207" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400208" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400209" next="none" />
+				<EventTask type="timer" action="stop" name="파르폰 유충" value="0" timerUiOff="true" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--타이머2 시간 경과_모든 2페이즈 테리토리 디스폰-->
+	<EventGroup type="timer" timerName="파르폰 유충" value="0" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="파르폰 유충" value="0" timerUiOff="true" next="none"/>
+				<EventTask type="flag" name="타이머2" value="0" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400201" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400202" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400203" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400204" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400205" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400206" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400207" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400208" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400209" next="time" nextValue="1" />
+				<EventTask type="flag" name="전투3" value="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--전투2 종료 이벤트 _제한 시간 내 처치 시 마석 스폰-->
+	<EventGroup type="flag" name="전투3,타이머2" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400901" next="none" /> <!-- 보라마석 소환 -->
+				<EventTask type="message" string="@dungeon:3024003" style="combat" next="time" nextValue="1" />
+				<EventTask type="message" string="@dungeon:3024004" style="combat" next="time" nextValue="20" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400901" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	
+	<!--전투3 시작-->
+	<EventGroup type="flag" name="전투3" repeat="false">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400301" next="time" nextValue="1" />
+				<EventTask type="flag" name="전투3" value="0" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--전투3 종료 이벤트-->
+	<EventGroup type="npcHp" uniqueId="3024,3000" value="0">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400005" next="none" /> <!-- 차폐문 npc 스폰 -->
+				<!--유저 이상상태 모두 종료-->
+				<EventTask type="abnormality" abnormalityId="30240000" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240002" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240003" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240004" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="30240005" target="player" turn="off" next="none" />
+				<EventTask type="empty" next="time" nextValue="3" />  <!--190417 타이밍이슈로 3네임드 보상이 드랍되지 않는 문제 해결-->
+				<!-- 전투테리토리 디스폰 -->
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400301" next="none" />
+				<EventTask type="deSpawn" huntingZoneId="3024" territoryId="302400901" next="none" />
+				<!--퇴장안내메세지-->
+				<EventTask type="message" string="@dungeon:3024000" style="combat" next="none" />
+				<EventTask type="spawn" huntingZoneId="3024" territoryId="302400004" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

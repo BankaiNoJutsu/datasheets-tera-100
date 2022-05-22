@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?><!--사령술 연구소-->
+<Dungeon continentId="9871" name="@dungeon:9871" startPos="73017,57135,2231" exitContinentId="7012" exitPos="-28916,-66901,3195" coolTime="0" coolTimeForPartyMatching="0" enterLimitCount="30" needBattlePoint="13"  coolTimeApplyType="enter" >
+<ClearCondition huntingZoneId="871" templateId="13" amount="1"/> 
+<ClearCondition huntingZoneId="871" templateId="14" amount="1"/> 
+  <RandomStart pos="73017,57135,2231" />
+  <RandomStart pos="73249,56539,2230" />
+  <!-- 사령술 연구소 던전 데이터 -->
+  <Condition type="maxMemberCount" value="3" />
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="41" />
+  <!-- 1인 인던 입장 버프 마석 소환-->
+  <EventGroup type="enterTerritory" uniqueId="871,87100075">
+    <Event>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100190" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100191" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100192" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.7">
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="871,87100195">
+    <Event>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100196" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100197" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100198" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.7">
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="871,13" value="80">
+    <!-- 스위트 스크림 hp 80% 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100085" next="time" nextValue="0" />
+        <EventTask type="message" string="@dungeon:9871002" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="871,13" value="60">
+    <!-- 스위트 스크림 hp 60% 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100089" next="time" nextValue="0" />
+        <EventTask type="message" string="@dungeon:9871002" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="871,13" value="40">
+    <!-- 스위트 스크림 hp 40% 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100090" next="time" nextValue="0" />
+        <EventTask type="message" string="@dungeon:9871003" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="871,13" value="20">
+    <!-- 스위트 스크림 hp 20% 이벤트 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100091" next="time" nextValue="0" />
+        <EventTask type="message" string="@dungeon:9871003" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 네임드 쉐도우 아머 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="871,12" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="871" territoryId="87100184" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 네임드 카이둔 사망 시 목책 제거 -->
+  <EventGroup type="npcHp" uniqueId="871,15" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="871" territoryId="87100185" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 함정방 목책 제거 -->
+  <EventGroup type="enterTerritory" uniqueId="871,87100188">
+    <!-- 함정방 입구 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100153" next="complete" />
+        <EventTask type="despawn" huntingZoneId="871" territoryId="87100183" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 이벤트 -->
+  <EventGroup type="npcHp" uniqueId="871,14" value="70">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9871009" style="default" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100181" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="871,14" value="50">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9871009" style="default" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100180" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="871,14" value="30">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9871009" style="default" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="871" territoryId="87100182" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="871,14" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="871" territoryId="87100181" next="none" />
+        <EventTask type="despawn" huntingZoneId="871" territoryId="87100180" next="none" />
+        <EventTask type="despawn" huntingZoneId="871" territoryId="87100182" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+</Dungeon>

@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9036" name="@dungeon:9036" startPos="71302.2891,-10704.2598,-173.6070" exitContinentId="13" exitPos="53169,-70241,-5663" destroyWaitMin="0">
+  <!-- 1337 카라스챠 퀘스트 
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="9" />
+  <Condition type="progressQuest" value="1316" taskId="3" />
+  <Condition type="completeQuest" value="1316" />
+  <EventGroup type="enterTerritory" uniqueId="436,43600015"> -->
+    <!-- 카라스챠 등장 동영상 이벤트 
+    <Event questId="1316" taskId="4">
+      <EventTaskGroup>
+        <EventTask type="playMovie" id="5" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <ActionRecordRoot>
+    <Pin id="1" slot="5" next="1" bonusPoint="1000" desc="일반타">
+      <CompareCondition target="doerGender" kind="female" />
+      <CompareCondition target="doerUserRace" kind="castanic" />
+      <CompareCondition target="doerUserClass" kind="lancer" />
+      <CompareCondition target="doeeNpcKind" kind="equal" value="1001" />
+      <CompareCondition target="doeeNpcSize" kind="basic" />
+      <CompareCondition target="actionType" kind="equal" strValue="skill" />
+      <CompareCondition target="skillId" kind="equal" value="1" />
+      <CompareCondition target="skillType" kind="equal" strValue="combo" />
+      <CompareCondition target="damage" kind="greaterThan" value="1" />
+    </Pin>
+    <Pin id="2" bonusPoint="1000" desc="일반타킬">
+      <CompareCondition target="doerUserRace" kind="castanic" />
+      <CompareCondition target="doerUserClass" kind="lancer" />
+      <CompareCondition target="actionType" kind="equal" strValue="skill" />
+      <CompareCondition target="skillId" kind="equal" value="1" />
+      <CompareCondition target="kill" kind="true" />
+    </Pin>
+  </ActionRecordRoot>
+  <ActionRecord id="1">
+    <Pin id="1" timeLimit="10000" bonusPoint="3000" desc="일반타데미지100이상">
+      <CompareCondition target="doerId" kind="same" />
+      <CompareCondition target="skillId" kind="same" />
+      <CompareCondition target="damageTracking" kind="greaterThan" value="100" />
+    </Pin>
+  </ActionRecord>
+  <Condition type="maxMemberCount" value="5" />-->
+
+  <Condition type="solo" />
+  <Condition type="levelOver" value="65" />
+  <RestoreTargetQuest id="21306,21307" forceRestore="true"/>
+  <Condition type="maxMemberCount" value="1" /> 
+
+ 
+	<!--퀘스트 8단계-->
+	<EventGroup type="questProgress">
+		<Event questId="21306" taskId="8">
+		  <EventTaskGroup>
+			<EventTask type="flag" name="미션6" value="1" next="none" />		  
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+ 
+ 
+	<EventGroup type="flag" name="미션6">
+		<Event>
+		    <EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="70451" target="player" next="time" nextValue="1"/> <!--입장 시 pc 투명화-->
+				<EventTask type="spawn" huntingZoneId="436" territoryId="43600031,43600038" next="none" /> <!--지크 그룹, 상자 스폰-->  
+				<EventTask type="spawn" huntingZoneId="436" territoryId="43600032" next="time" nextValue="4" /> <!--지크, 조엘그룹 스폰-->  
+
+				<EventTask type="message" string="@dungeon:9037033" targetNpcId="436,8009" next="time" nextValue="4"/> <!--조엘 대사-->		
+				<EventTask type="message" string="@dungeon:9037034" targetNpcId="436,8009" next="time" nextValue="5"/> <!--조엘 대사-->		
+
+				<EventTask type="message" string="@dungeon:9037035" targetNpcId="436,8008" next="time" nextValue="5"/> <!--지크 대사-->		
+
+				<EventTask type="message" string="@dungeon:9037036" targetNpcId="436,8009" next="time" nextValue="5"/> <!--조엘 대사-->		
+				
+				<EventTask type="spawn" huntingZoneId="436" territoryId="43600028" next="none" /> <!--리안 그룹 스폰-->  
+				<EventTask type="abnormality" abnormalityId="70452" target="player" next="time" nextValue="1" /> <!--입장 시 pc 투명화 해제-->
+
+				<EventTask type="message" string="@dungeon:9037037" targetNpcId="436,8002" next="time" nextValue="1"/> <!--리안 대사-->		
+				<EventTask type="doActionScript" targetNpcId="436,8008" actionScriptId="2130609" next="none" />  <!--지크 회전-->		
+				<EventTask type="message" string="@dungeon:9037038" targetNpcId="436,8008" next="time" nextValue="0.5"/> <!--지크 대사-->		
+				<EventTask type="doActionScript" targetNpcId="436,8009" actionScriptId="2130610" next="none" />  <!--지크 회전-->		
+				<EventTask type="message" string="@dungeon:9037039" targetNpcId="436,8009" next="time" nextValue="1"/> <!--조엘 대사-->		
+
+							
+				<EventTask type="message" string="@dungeon:9037040" targetNpcId="436,8002" next="time" nextValue="1"/> <!--리안 대사-->		
+				<EventTask type="despawn" huntingZoneId="436" territoryId="43600038" next="none" /> <!--생명의 정기 디스폰-->  
+				<EventTask type="message" string="@dungeon:9037041" targetNpcId="436,8008" next="time" nextValue="0.5" /> <!--지크 대사-->		
+
+				<EventTask type="doActionScript" targetNpcId="436,8008" actionScriptId="2130605" next="time" nextValue="0.5" />  <!--지크 도망치는 연출-->		
+				<EventTask type="doActionScript" targetNpcId="436,8004" actionScriptId="2130605" next="time" nextValue="0.1" />	<!--부하1 도망치는 연출-->		
+				<EventTask type="doActionScript" targetNpcId="436,8005" actionScriptId="2130605" next="time" nextValue="0.5" />	<!--부하1 도망치는 연출-->		
+
+				<EventTask type="doActionScript" targetNpcId="436,8009" actionScriptId="2130606" next="time" nextValue="0.3" />	<!--조엘 도망치는 연출-->		
+				<EventTask type="doActionScript" targetNpcId="436,8010" actionScriptId="2130606" next="time" nextValue="0.1" />	<!--조엘 그룹 도망치는 연출-->		
+				<EventTask type="doActionScript" targetNpcId="436,8003" actionScriptId="2130608" next="time" nextValue="0.1" />	<!--조엘 그룹 도망치는 연출-->		
+				
+
+				<EventTask type="message" string="@dungeon:9037042" targetNpcId="436,8002" next="time" nextValue="0.5" /> <!--리안 대사-->		
+				<EventTask type="doActionScript" targetNpcId="436,8002" actionScriptId="2130606" next="time" nextValue="0.1" />	<!--리안 추적 연출-->		
+				<EventTask type="doActionScript" targetNpcId="436,8006" actionScriptId="2130606" next="time" nextValue="0.1" />	<!--리안 그룹 추적 연출-->		
+				<EventTask type="doActionScript" targetNpcId="436,8007" actionScriptId="2130606" next="time" nextValue="0.1" />	<!--리안 그룹 추적 연출-->		
+
+		
+				<EventTask type="doActionScript" targetNpcId="436,1502" actionScriptId="2130607" next="time" nextValue="0.6" /> <!--화면 어두워지는 연출-->		
+
+				<EventTask type="despawn" huntingZoneId="436" territoryId="43600031,43600032,43600028" next="none" /> <!--지크, 조엘, 리안그룹 디스폰-->  
+
+				<EventTask type="spawn" huntingZoneId="436" territoryId="43600034" next="none" /> <!--투명npc 소환-->  
+				<EventTask type="spawn" huntingZoneId="436" territoryId="43600035,43600027" next="none" /> <!--조엘, 리안그룹 교체-->  
+				
+				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--보통 173370 : [LIVE74.01~TRUNK75.05][퀘스트] 씁쓸한 진실 퀘스트가 자동 수주되었을 때 던전 재입장 시 조원 리오나스 NPC가 스폰되어 있지 않는 문제 -->
+	<EventGroup type="questProgress">
+		<Event questId="21307" taskId="1">
+			<EventTaskGroup>
+				<EventTask type="flag" name="미션완료후재입장" value="1" next="none" />		  
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="미션완료후재입장">
+		<Event>
+		    <EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="436" territoryId="43600035,43600027" next="none" /> <!--조엘, 리안그룹 교체-->  
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+</Dungeon>

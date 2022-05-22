@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9051" name="@dungeon:9051" startPos="-23006.7090,77413.0781,103.1353" exitContinentId="7015" exitPos="-8186.5063,79194.4297,-1299.6886">
+  <Condition type="solo" />
+  <Condition type="levelOver" value="58" />
+  <Condition type="maxMemberCount" value="1" />
+  <Condition type="progressQuest" value="70102" taskId="2" />
+  <Condition type="completeQuest" value="70102" />
+  <EventGroup type="initialize">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45114" next="none" />
+        <!-- 세스콘 제어장치 일반용 -->
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45103" next="none" />
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45104" next="none" />
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45105" next="none" />
+        <!--분수-->
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45103" next="none" />
+        <!--비석1-->
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45111" next="none" />
+        <!--비석2-->
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45106" next="none" />
+        <!--거울1-->
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45113" next="none" />
+        <!--거울2-->
+        <!-- 슬로스 -->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100084" next="none" />
+        <!-- 자쿤 -->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100029" next="none" />
+        <!--문-->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100186" next="none" />
+        <!-- 길리두 벽 -->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100090" next="none" />
+        <!--고장난 정원사 오브젝트-->
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45102" next="none" />
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45107" next="none" />
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45108" next="none" />
+        <!-- 고장난 정원사 npc -->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100102" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100104" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100105" next="none" />
+        <EventTask type="doActionScript" targetNpcId="451,52" actionScriptId="4510002" next="none" />
+        <EventTask type="doActionScript" targetNpcId="451,53" actionScriptId="4510002" next="none" />
+        <EventTask type="doActionScript" targetNpcId="451,54" actionScriptId="4510002" next="none" />
+        <!-- 지하 수로 관리자 AI-->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100033" next="time" nextValue="0.1" />
+        <EventTask type="turnAi" turn="off" huntingZoneId="451" territoryId="45100033" templateId="20" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 가이드 미션 단계 -->
+  <EventGroup type="questProgress">
+    <Event questId="70102" taskId="3">
+      <EventTaskGroup>
+        <EventTask type="flag" name="가이드3단계" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="70102" taskId="5">
+      <EventTaskGroup>
+        <EventTask type="flag" name="가이드5단계" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="70102" taskId="6">
+      <EventTaskGroup>
+        <EventTask type="flag" name="가이드6단계" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="questProgress">
+    <Event questId="70102" taskId="9">
+      <EventTaskGroup>
+        <EventTask type="flag" name="가이드9단계" value="1" next="none" />
+        <!--가이드 퀘스트 9단계에서 나하드 스폰-->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100098" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- PC가 입장했을 때 -->
+  <EventGroup type="enterTerritory" uniqueId="451,45100128">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="입장" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 지하 구역 : 가이드 3단계 진행 중일 때 PC가 입장하면 퀘스트용 제어장치 스폰, 일반용 디스폰-->
+  <EventGroup type="flag" name="가이드3단계,입장">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="451" templateId="45114" next="none" />
+        <!-- 세스콘 제어장치 일반용 -->
+        <EventTask type="workObjectSpawn" huntingZoneId="451" templateId="45101" next="none" />
+        <!--세스콘 제어장치 퀘스트용 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 지하 구역 : 가이드 4단계 진행 중일 때 세스콘을 작동시키라는 메시지 출력 -->
+  <EventGroup type="questProgress">
+    <Event questId="70102" taskId="4">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9051001" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 지하 구역 : 세스콘 제어장치 퀘스트용을 작동시키면 청소기 AI On -->
+  <EventGroup type="Workobject" uniqueId="451,45101" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="turnAi" turn="on" huntingZoneId="451" territoryId="45100033" templateId="20" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9051002" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 지하 구역 : 세스콘 제어장치 퀘스트용을 작동시키면 메시지 출력 -->
+  <EventGroup type="Workobject" uniqueId="451,45101">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="turnAi" turn="on" huntingZoneId="451" territoryId="45100033" templateId="20" next="time" nextValue="3" />
+        <EventTask type="message" string="@dungeon:9051002" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 지하 구역 : 세스콘 제어장치 일반용을 작동시키면 청소기 AI On-->
+  <EventGroup type="Workobject" uniqueId="451,45114" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="turnAi" turn="on" huntingZoneId="451" territoryId="45100033" templateId="20" next="time" nextValue="3" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 자쿤이 전투상태가 됐을 때 거대 길리두, 꼬마 길리두 소환-->
+  <EventGroup type="npcState" uniqueId="451,14" value="combat">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="자쿤전투" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 가이드 5단계 진행 중일 때 자쿤이 전투상태가 되면 처치하라는 메시지 출력 -->
+  <EventGroup type="flag" name="가이드5단계,자쿤전투">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9051003" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+        <EventTask type="flag" name="자쿤전투" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 자쿤 사망 후 슬로스 디스폰, 길리두들 스폰, 세스콘 AI off , 문 open-->
+  <EventGroup type="npcHp" uniqueId="451,14" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100186" next="none" />
+        <!--문-->
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100084" next="none" />
+        <!--슬로스들-->
+        <!-- 거대 길리두 -->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100083" next="none" />
+        <!-- 꼬마 길리두 -->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100037" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100001" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100042" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100043" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100100" next="time" nextValue="4" />
+        <!-- 투명npc-->
+        <EventTask type="turnAi" turn="off" huntingZoneId="451" territoryId="45100033" templateId="20" next="none" />
+        <EventTask type="flag" name="자쿤사망" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 가이드 6단계에서 자쿤 사망 후 정원으로 안내하는 메시지 출력-->
+  <EventGroup type="flag" name="가이드6단계,자쿤사망">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9051004" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+        <EventTask type="flag" name="자쿤사망" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 가이드 7단계 진행 시 길리두를 처치하고 정원관리사를 수리하라는 메시지 출력 -->
+  <EventGroup type="questProgress">
+    <Event questId="70102" taskId="7">
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="2" />
+        <EventTask type="message" string="@dungeon:9051008" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="time" nextValue="5" />
+        <EventTask type="message" string="@dungeon:9051005" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 연못 구역 - 정원사 1 고치기  -->
+  <EventGroup type="Workobject" uniqueId="451,45102">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="451" templateId="45102" next="none" />
+        <EventTask type="doActionScript" targetNpcId="451,52" actionScriptId="4510003" next="time" nextValue="3" />
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100102" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100103" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 연못 구역 - 정원사 2 고치기  -->
+  <EventGroup type="Workobject" uniqueId="451,45107">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="451" templateId="45107" next="none" />
+        <EventTask type="doActionScript" targetNpcId="451,53" actionScriptId="4510003" next="time" nextValue="3" />
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100104" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100107" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 연못 구역 - 정원사 3 고치기  -->
+  <EventGroup type="Workobject" uniqueId="451,45108">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="451" templateId="45108" next="none" />
+        <EventTask type="doActionScript" targetNpcId="451,54" actionScriptId="4510003" next="time" nextValue="3" />
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100105" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100108" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 분수 정화 -->
+  <EventGroup type="Workobject" uniqueId="451,45105">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="451" templateId="45105" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100124" next="time" nextValue="1" />
+        <EventTask type="doActionScript" targetNpcId="451,3001" actionScriptId="4510005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 비석 1 정화 -->
+  <EventGroup type="Workobject" uniqueId="451,45103">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="451" templateId="45103" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100125" next="time" nextValue="1" />
+        <EventTask type="doActionScript" targetNpcId="451,3003" actionScriptId="4510005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 비석 2 정화 -->
+  <EventGroup type="Workobject" uniqueId="451,45111">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="451" templateId="45111" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100126" next="time" nextValue="1" />
+        <EventTask type="doActionScript" targetNpcId="451,3004" actionScriptId="4510005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 거울정화 1-->
+  <EventGroup type="Workobject" uniqueId="451,45106">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="451" templateId="45106" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100183" next="time" nextValue="1" />
+        <EventTask type="doActionScript" targetNpcId="451,3002" actionScriptId="4510005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 거울정화 2-->
+  <EventGroup type="Workobject" uniqueId="451,45113">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="workObjectDespawn" huntingZoneId="451" templateId="45113" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100184" next="time" nextValue="1" />
+        <EventTask type="doActionScript" targetNpcId="451,3005" actionScriptId="4510005" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 거대 길리두 사망 시 부하, 벽 디스폰,  좀포리, 밤피르 소환, 카루, 항아리, 뱀, 소환 -->
+  <EventGroup type="npcHp" uniqueId="451,501" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100037" next="none" />
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100001" next="none" />
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100042" next="none" />
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100043" next="none" />
+        <EventTask type="despawn" huntingZoneId="451" territoryId="45100090" next="none" />
+        <!--좀포리,밤피르-->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100092" targetNpcId="451,801" next="none" />
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100093" targetNpcId="451,802" next="none" />
+        <!--카루-->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100185" targetNpcId="451,7004" next="none" />
+        <!--항아리-->
+        <EventTask type="spawn" huntingZoneId="451" territoryId="45100176" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 밤피르, 좀포리와 가까워졌을 때 -->
+  <EventGroup type="enterTerritory" uniqueId="451,45100095">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="밤피르발견" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 가이드 9단계 진행 중 95테리토리에 입장하면 나하드를 도우라는 메시지 출력 -->
+  <EventGroup type="flag" name="가이드9단계,밤피르발견">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9051006" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+        <EventTask type="flag" name="밤피르발견" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 가이드가 모두 끝난 후 신전 청소를 완료하였다는 메시지 출력-->
+  <EventGroup type="questProgress">
+    <Event questId="70102" taskId="12">
+      <EventTaskGroup>
+        <EventTask type="empty" next="time" nextValue="5" />
+        <EventTask type="message" string="@dungeon:9051007" style="combat" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="7001" playTime="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+</Dungeon>

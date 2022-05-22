@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9002" name="@dungeon:9002" startPos="52092,-69021,5150" exitContinentId="7011" exitPos="48877,-63980,4851" destroyWaitMin="0">
+  <!-- 생명의 계곡 퀘스트 특수공간 -->
+  <RestoreTargetQuest id="2801" forceRestore="true"/>
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="39" />
+  <Condition type="progressQuest" value="2801" taskId="6" />
+  <Condition type="completeQuest" value="2801" />
+  <EventGroup type="talkNpc" uniqueId="402,1003">
+    <Event questId="2801" textId="2" taskId="8">
+      <!-- 몬스터 릴레이 소환 이벤트 -->
+      <EventTaskGroup>
+        <!-- 웨이브0 영상 재생 + 골렘 스폰 -->
+        <EventTask type="playMovie" id="34" next="time" nextValue="26" />
+        <EventTask type="message" string="@dungeon:9002000" style="default" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="402" territoryId="40200028" startAggro="50" next="complete" />
+        <EventTask type="message" string="@dungeon:9002001" style="default" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="402" territoryId="40200007" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 베그디어가 스폰한 쿠마스 디스폰 이벤트-->
+  <EventGroup type="npcHp" uniqueId="463,3000" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="463" territoryId="40200007" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

@@ -1,0 +1,2256 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Field continentId="7003" >
+	<!-- 모래바람부락 -->
+	<FieldEvent id="1" startTerritoryId="626,62600001" startPos="-84817,-64338,740" startDir="180" revivePos="-84817,-64338,740" reviveTownNameId="7777" revivalRecoveryRate="1" nonPkSectionId="7003,ASW_C_P,1">
+	<Condition type="maxMemberCount" value="15" />
+		<Condition type="teleportMemberCount" value="10" />
+		<Condition type="minLevel" value="65" />
+		<Condition type="maxLevel" value="70" />
+
+		<!-- 진행도 관련 조건문 -->
+		<ClearCondition progressTime="330" endWhenProgressFull="false" endIntervalTime="30" />
+		<Progress maxValue="100000" dividerPercent="25,50,100" isSharedChannel="false" standardPlayerCount="30" />
+
+		<!-- 유저 수에 따른 밸런싱 -->
+		<AutoEventBalance>
+			<Balance userMin="0" userMax="1">							
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770002"/> <!-- 10배 -->				
+			</Balance>
+			<Balance userMin="2" userMax="2">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770004"/> <!-- 5배 -->				
+			</Balance>
+			<Balance userMin="3" userMax="3">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770006"/> <!-- 3.333배 -->				
+			</Balance>
+			<Balance userMin="4" userMax="4">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770008"/> <!-- 2.5배 -->				
+			</Balance>
+			<Balance userMin="5" userMax="5">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770010"/> <!-- 2배 -->				
+			</Balance>
+			<Balance userMin="6" userMax="6">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770012"/> <!-- 1.667배 -->				
+			</Balance>
+			<Balance userMin="7" userMax="7">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770014"/> <!-- 1.429배 -->				
+			</Balance>
+			<Balance userMin="8" userMax="8">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770016"/> <!-- 1.25배 -->				
+			</Balance>
+			<Balance userMin="9" userMax="9">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770018"/> <!-- 1.111배 -->				
+			</Balance>
+			<Balance userMin="10" userMax="10">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770020"/> <!-- 1배 -->				
+			</Balance>
+			<Balance userMin="11" userMax="11">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770022"/> <!-- 0.909 -->
+			</Balance>
+			<Balance userMin="12" userMax="12">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770024"/> <!-- 0.833배 -->    				
+			</Balance>
+			<Balance userMin="13" userMax="13">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770026"/> <!-- 0.769배 -->  				
+			</Balance>
+			<Balance userMin="14" userMax="14">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770028"/> <!-- 0.714배 -->				
+			</Balance>
+			<Balance userMin="15" userMax="15">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770030"/> <!-- 0.667배 -->				
+			</Balance>
+		</AutoEventBalance>
+		<!-- 점수 데이터 정의 -->
+		<EventPoint>
+			<Point id="1" type="dealing" value="1.6" />
+			<Point id="2" type="healing" value="1.0" />
+		</EventPoint>
+
+		<!-- 전용 UI -->
+		<Guide titleString="@field:700301" eventSize="small" description="@field:7003010" >
+			<Task id="1" target="@creature:626#3002" string="@field:100007" iconId="1" >
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_01" markerPos="-84817,-64338,740" markerScaleX="0.3" markerScaleY="0.3" />
+			</Task>
+			<Task id="2" target="@creature:626#3002" string="@field:100007" iconId="1" >
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_01" markerPos="-86559,-63969,828" markerScaleX="0.5" markerScaleY="0.5" />
+			</Task>
+			<Task id="3" target="@creature:626#3002" string="@field:100007" iconId="2" >
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_02" markerPos="-86559,-63969,828" markerScaleX="0.5" markerScaleY="0.5" />
+			</Task>
+			<Task id="4" target="@creature:626#3002" string="@field:100007" iconId="3" >
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_03" markerPos="-86559,-63969,828" markerScaleX="0.5" markerScaleY="0.5" />
+			</Task>
+			<Task id="5" target="@creature:626#3002" string="@field:100007" iconId="1" >
+				<Marker/>
+			</Task>
+		</Guide>
+
+		<!-- 이벤트 초기화 -->
+		<EventGroup type="initialize" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="일회성" value="1" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400238" next="none" />
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600013" next="none" />				<!--갇힌 강아지 -->
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600014" next="none" />				<!-- 연합 깃발 -->
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600015" next="none" />				<!-- 경비병 Start-->					
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600018" next="none" />
+					<EventTask type="point" id="1" turn="on" next="none"/>
+					<EventTask type="point" id="2" turn="on" next="none"/>
+					<EventTask type="guide" guideId="1" guideType="add" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		
+		<!-- startTerritory에 1명 이상 들어오는 순간부터 기본버프 부여 -->
+		<EventGroup type="userCountInTerritory" uniqueId="626,62600001" value="1" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="기본버프" value="1" next="none" />
+					<EventTask type="flag" name="캠핑페널티" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		
+		<EventGroup type="flag" name="기본버프" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="기본버프" value="0" next="none" />
+					<!-- 기본 이상상태 부여 -->
+					<EventTask type="abnormality" abnormalityId ="77771001" target="player" aliveOnly="true" territoryId="62600001" huntingZoneId="626" turn="on" next="none" />
+					<!-- <EventTask type="abnormality" abnormalityId ="77771002" target="player" aliveOnly="true" territoryId="62600001" huntingZoneId="626" turn="on" next="none" /> -->
+					<EventTask type="abnormality" abnormalityId ="77771003" target="player" aliveOnly="true" territoryId="62600001" huntingZoneId="626" turn="on" next="none" />
+					<EventTask type="abnormality" abnormalityId ="77771004" target="player" aliveOnly="true" territoryId="62600001" huntingZoneId="626" turn="on" next="none" />						
+					<EventTask type="abnormality" abnormalityId ="77771005" target="player" aliveOnly="true" territoryId="62600001" huntingZoneId="626" turn="on" next="none" />						
+					<EventTask type="empty" next="time" nextValue="5" />
+					<EventTask type="flag" name="기본버프" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>		
+		<EventGroup type="flag" name="캠핑페널티" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="캠핑페널티" value="0" next="none" />
+					<!-- 매크로 방지 페널티 -->
+					<EventTask type="abnormality" abnormalityId ="77772003" target="player" aliveOnly="false" territoryId="62600001" huntingZoneId="626" turn="on" next="none" />
+					
+					<EventTask type="empty" next="time" nextValue="30" />
+					<EventTask type="flag" name="캠핑페널티" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<!-- 30초 준비 -->
+		<EventGroup type="progressTimer" value="320" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700301820" next="time" nextValue="0.0" />
+					<EventTask type="message" string="@field:700301101" style="speechbubble" targetNpcId="626,3002" next="time" nextValue="4.0" />
+					<EventTask type="message" string="@field:700301102" style="speechbubble" targetNpcId="626,3002" next="time" nextValue="0.0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="310" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700301810" next="time" nextValue="0.0" />
+					<EventTask type="eventDialog" id="700301001" next="time" nextValue="5.0" />
+					<EventTask type="eventDialog" id="700301002" next="time" nextValue="5.0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>		
+		
+		<!-- pc가 테리토리에 들어오면 시작 -->
+		<EventGroup type="progressTimer" value="300" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="준비끝1" value="1" next="none" />
+					<EventTask type="flag" name="예외처리1" value="1" next="none" />			
+					<EventTask type="guide" guideId="1" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="2" guideType="add" next="none" />
+					<EventTask type="message" string="@field:700301005" style="combat" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInTerritory" uniqueId="626,62600018" value="1" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="준비끝2" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="준비끝1,준비끝2,예외처리1" repeat="false" >
+			<Event>
+				<EventTaskGroup>
+					<!-- 경비병 디스폰 -->
+					<EventTask type="guide" guideId="2" guideType="complete" next="time" nextValue="1.0" />
+					<EventTask type="guide" guideId="2" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="3" guideType="add" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600015" next="none" />
+					
+					<EventTask type="eventDialog" id="700301003" next="none" />
+					
+					<EventTask type="progressType" progressType="npcHp" targetNpcId="626,1000" progressValue="25000" next="none" />
+					
+					<EventTask type="message" string="@field:700301201" style="speechbubble" targetNpcId="626,3001" next="none" /> <!-- 멍멍 -->
+					
+					<EventTask type="message" string="@field:700301001" style="combat" next="time" nextValue="0" />
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600002" next="time" nextValue="3" />
+					<EventTask type="message" string="@field:700301002" style="combat" next="time" nextValue="5" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="progress" value="25" repeat="false" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progressType" progressType="basic" next="time" nextValue="0.5" />
+					<EventTask type="progressType" progressType="npcHp" targetNpcId="626,1000" progressValue="25000" next="none" />
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600003" next="time" nextValue="3" />
+					<EventTask type="message" string="@field:700301002" style="combat" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="progress" value="50" repeat="false" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="guide" guideId="3" guideType="complete" next="time" nextValue="1.0" />
+					<EventTask type="guide" guideId="3" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="4" guideType="add" next="none" />
+					<EventTask type="message" string="@field:700301004" style="combat" next="time" nextValue="0" />
+					<EventTask type="timer" action="stop" name="1p" direction="forward" value="0" timerUiOff="true" next="none" />
+					<EventTask type="eventDialog" id="700301004" next="time" nextValue="3.0" />
+
+					<EventTask type="progressType" progressType="npcHp" targetNpcId="626,1004" progressValue="50000" next="none" />
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600005" next="time" nextValue="1" />
+					<EventTask type="timer" action="start" name="1p" direction="forward" value="0" timerUiOff="true" next="none" />
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600010" next="time" nextValue="3" />
+					<EventTask type="message" string="@field:700301002" style="combat" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		
+		<!-- 임무 완료 -->
+		<EventGroup type="progress" value="100" repeat="false">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="임무완료" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="임무완료,일회성" repeat="false" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="일회성" value="0" next="none" />
+					<EventTask type="guide" guideId="4" guideType="complete" next="time" nextValue="1.0" />
+					<EventTask type="empty" next="time" nextValue="2" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600002" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600003" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600004" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600005" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600006" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600007" next="time" nextValue="0" />
+					
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600013" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600014" next="time" nextValue="1" />
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600016" next="none" />				<!-- 풀린 강아지-->
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600017" next="none" />				<!-- 경비병 End-->
+					
+					<EventTask type="eventDialog" id="700301005" next="time" nextValue="5.0" />
+					<EventTask type="eventDialog" id="700301007" next="time" nextValue="5.0" />
+					<EventTask type="eventDialog" id="700301008" next="time" nextValue="5.0" />
+					<EventTask type="message" string="@field:700301003" style="combat" next="none" />
+					<EventTask type="guide" guideId="4" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="5" guideType="add" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<!-- 임무 종료 -->
+		<EventGroup type="progressTimer" value="0" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="임무종료" value="1" next="none" />
+					<EventTask type="flag" name="예외처리1" value="0" next="none" />			
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="임무종료,일회성" repeat="false" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="일회성" value="0" next="none" />
+					<EventTask type="empty" next="time" nextValue="2" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600002" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600003" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600004" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600005" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600006" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600007" next="time" nextValue="0" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600015" next="none" />
+					
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600013" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600014" next="time" nextValue="1" />
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600016" next="none" />				<!-- 풀린 강아지-->
+					<EventTask type="spawn" huntingZoneId="626" territoryId="62600017" next="none" />				<!-- 경비병 End-->					
+					<!-- npc 간 대화 (도망) -->
+					<EventTask type="eventDialog" id="700301006" next="time" nextValue="5.0" />
+					<EventTask type="eventDialog" id="700301007" next="time" nextValue="5.0" />
+					<EventTask type="eventDialog" id="700301008" next="time" nextValue="5.0" />
+					<EventTask type="message" string="@field:700301003" style="combat" next="none" />
+					<EventTask type="guide" guideId="1,2,3,4" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="5" guideType="add" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		
+		<!-- 시간 경고 -->
+		<EventGroup type="progressTimer" value="30" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700301930" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="20" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700301920" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="10" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700301910" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<!-- 이벤트 종료 -->
+		<EventGroup type="beforeEndEvent" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600002" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600003" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600004" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600005" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600006" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600007" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="beforeDeleteEvent" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400238" next="none" />
+					
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600002" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600003" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600004" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600005" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600006" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600007" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600013" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600014" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600015" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600016" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600017" next="none" />
+					<EventTask type="despawn" huntingZoneId="626" territoryId="62600018" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+	</FieldEvent>
+	
+	<!-- 바람과 불의 광시곡 -->
+	<FieldEvent id="2" startTerritoryId="630,63000001" startPos="-44555,-20327,150" revivePos="-44555,-20327,150" reviveTownNameId="7777" revivalRecoveryRate="1" type="1" execOnlyChannel="1,2,3">
+		<Condition type="maxMemberCount" value="50" />
+		<Condition type="teleportMemberCount" value="40" />
+		<Condition type="minLevel" value="65" />
+		<Condition type="maxLevel" value="70" />
+
+		<!-- 진행도 관련 조건문 -->
+		<ClearCondition progressTime="440" endWhenProgressFull="false" endIntervalTime="30" />
+		<Progress maxValue="100000" dividerPercent="30,70,100" isSharedChannel="false" standardPlayerCount="30" />
+
+		<ClearRewardPool weightSum="100">
+			<ClearReward id="70030201" weight="100"/>
+		</ClearRewardPool>
+		
+		<SpawnAreaList id="1">
+			<SpawnArea center="-66998,-74080,300" dir="-92" randomRange="0" />
+		</SpawnAreaList>
+		<SpawnAreaList id="2">
+			<SpawnArea center="-61319,-63352,500" dir="5" randomRange="0" />
+		</SpawnAreaList>
+		<SpawnAreaList id="3">
+			<SpawnArea center="-68817,-49960,1000" dir="175" randomRange="0" />
+		</SpawnAreaList>
+		<!-- <SpawnAreaList id="4">
+			<SpawnArea center="-35085,-50832,1700" dir="-159" randomRange="0" />
+		</SpawnAreaList> -->
+		<SpawnAreaList id="5">
+			<SpawnArea center="-44555,-20327,150" dir="-22" randomRange="0" />
+		</SpawnAreaList>
+		<SpawnAreaList id="6">
+			<SpawnArea center="-66998,-74080,300" dir="-92" randomRange="0" />
+			<SpawnArea center="-61319,-63352,500" dir="5" randomRange="0" />
+			<SpawnArea center="-68817,-49960,1000" dir="175" randomRange="0" />
+			<!-- <SpawnArea center="-35085,-50832,1700" dir="-159" randomRange="0" /> -->
+			<SpawnArea center="-44555,-20327,150" dir="-22" randomRange="0" />
+		</SpawnAreaList>
+
+		<FieldEventCloud		
+		asyncLoadDistance="1500000"
+		targetRadius="100000"
+		aeroBlendingRadiusFactor="0.85"
+		areaSpreadSpeed="100000"
+		primaryAeroWeight="40"
+		secondaryAeroWeight="50"		
+		aeroCylinderHeight="10000"
+		aeroLoc="-44555,-20327,150">
+		<AeroList>			
+			<Aero step="1" aeroName="AA_AEROSet.Special.Blackcrack_02_AERO" />
+		</AeroList>
+		</FieldEventCloud>
+		
+		<AeroTerritory id="630,63000001"/>
+		
+		<!-- 유저 수에 따른 진행도 밸런싱 -->
+		<AutoEventBalance>
+			<Balance userMin="0" userMax="1">
+				<Setting progressType="basic" value="1"/>
+			</Balance>
+			<Balance userMin="2" userMax="2">
+				<Setting progressType="basic" value="0.5"/>
+			</Balance>
+			<Balance userMin="3" userMax="3">
+				<Setting progressType="basic" value="0.333"/>
+			</Balance>
+			<Balance userMin="4" userMax="4">
+				<Setting progressType="basic" value="0.25"/>
+			</Balance>
+			<Balance userMin="5" userMax="5">
+				<Setting progressType="basic" value="0.2"/>
+			</Balance>
+			<Balance userMin="6" userMax="7">
+				<Setting progressType="basic" value="0.167"/>
+			</Balance>
+			<Balance userMin="8" userMax="9">
+				<Setting progressType="basic" value="0.125"/>
+			</Balance>
+			<Balance userMin="10" userMax="14">
+				<Setting progressType="basic" value="0.1"/>
+			</Balance>
+			<Balance userMin="15" userMax="19">
+				<Setting progressType="basic" value="0.067"/>
+			</Balance>
+			<Balance userMin="20" userMax="24">
+				<Setting progressType="basic" value="0.05"/>
+			</Balance>
+			<Balance userMin="25" userMax="29">
+				<Setting progressType="basic" value="0.04"/>
+			</Balance>
+			<Balance userMin="30" userMax="34">
+				<Setting progressType="basic" value="0.033"/>
+			</Balance>
+			<Balance userMin="35" userMax="39">
+				<Setting progressType="basic" value="0.029"/>
+			</Balance>
+			<Balance userMin="40" userMax="44">
+				<Setting progressType="basic" value="0.025"/>
+			</Balance>
+			<Balance userMin="45" userMax="49">
+				<Setting progressType="basic" value="0.022"/>
+			</Balance>
+			<Balance userMin="50" userMax="54">
+				<Setting progressType="basic" value="0.02"/>
+			</Balance>
+			<Balance userMin="55" userMax="60">
+				<Setting progressType="basic" value="0.018"/>
+			</Balance>
+		</AutoEventBalance>
+
+		<!-- 점수 데이터 정의 -->
+		<EventPoint>
+			<Point id="1" type="npcInteraction" value="1.0" />
+		</EventPoint>
+
+		<!-- 전용 UI -->
+		<Guide titleString="@field:700302" eventSize="flying_medium" description="@field:7003020" >
+			<Task id="0" target="" string="@field:100000" iconId="1" >
+				<Marker/>
+			</Task>
+			<Task id="1" target="" string="@field:630001" iconId="1" >
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_01" markerPos="-65260,-76225,163" markerScaleX="1.0" markerScaleY="1.0" />
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_01" markerPos="-58563,-61517,307" markerScaleX="1.0" markerScaleY="1.0" />
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_01" markerPos="-72074,-50536,690" markerScaleX="1.0" markerScaleY="1.0" />
+				<!-- <Marker markerType="MARKER_FIELD_EVENT_AREA_01" markerPos="-38428,-52788,1449" markerScaleX="1.0" markerScaleY="1.0" /> -->
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_01" markerPos="-41136,-21352,101" markerScaleX="1.0" markerScaleY="1.0" />
+			</Task>
+			<Task id="2" target="" string="@field:630002" iconId="1" >
+				<Marker/>
+			</Task>
+			<Task id="3" target="" string="@field:630003" iconId="3" >
+				<Marker/>
+			</Task>
+			<Task id="4" target="" string="@field:630004" iconId="3" >
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_03" markerPos="-62427,-77662,97" markerScaleX="1.3" markerScaleY="2.6" />
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_03" markerPos="-57393,-55944,1463" markerScaleX="2.6" markerScaleY="1.3" />
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_03" markerPos="-73009,-55810,376" markerScaleX="2.6" markerScaleY="1.3" />
+				<!-- <Marker markerType="MARKER_FIELD_EVENT_AREA_03" markerPos="-38324,-58436,2210" markerScaleX="2.6" markerScaleY="1.3" /> -->
+				<Marker markerType="MARKER_FIELD_EVENT_AREA_03" markerPos="-42537,-14413,406" markerScaleX="2.6" markerScaleY="1.3" />
+			</Task>
+			<Task id="5" target="" string="@field:111111" iconId="1" >
+				<Marker/>
+			</Task>
+		</Guide>
+
+		<!-- 기본버프 -->
+		<EventGroup type="flag" name="기본버프" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="기본버프" value="0" next="none" />
+
+					<EventTask type="abnormality" abnormalityId ="77771101" target="player" aliveOnly="true" territoryId="63000001" huntingZoneId="630" turn="on" next="none" />
+					<EventTask type="empty" next="time" nextValue="5" />
+					<EventTask type="flag" name="기본버프" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="기본버프2" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="기본버프2" value="0" next="none" />
+
+					<EventTask type="abnormality" abnormalityId ="630210" target="player" aliveOnly="true" territoryId="63000001" huntingZoneId="630" turn="on" next="none" />
+					<EventTask type="empty" next="time" nextValue="5" />
+					<EventTask type="flag" name="기본버프2" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="캠핑페널티" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="캠핑페널티" value="0" next="none" />
+					<!-- 매크로 방지 페널티(해제) -->
+					<EventTask type="abnormality" abnormalityId ="77772008" target="player" aliveOnly="false" territoryId="63000001" huntingZoneId="630" turn="on" next="none" />
+					
+					<EventTask type="empty" next="time" nextValue="30" />
+					<EventTask type="flag" name="캠핑페널티" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<!-- 이벤트 초기화 -->
+		<EventGroup type="initialize" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="point" id="1" turn="on" next="none"/>
+									
+					<EventTask type="flag" name="1페이즈" value="1" next="none" />
+					<EventTask type="flag" name="2페이즈" value="0" next="none" />
+					<EventTask type="flag" name="1페이즈_실패대사" value="1" next="none" />
+					<EventTask type="flag" name="2페이즈_실패대사" value="0" next="none" />
+
+					<EventTask type="guide" guideId="0" guideType="add" next="none" />
+
+					<EventTask type="changePos" method="start" id="1" next="none" />
+					<EventTask type="changePos" method="revive" id="6" next="none" />
+					
+					<EventTask type="aero" step="1" next="none" />
+
+					<EventTask type="flag" name="원래몬스터_디스폰_1" value="1" next="time" nextValue="1" />
+					<EventTask type="flag" name="원래몬스터_디스폰_2" value="1" next="time" nextValue="1" />
+					<EventTask type="flag" name="원래몬스터_디스폰_3" value="1" next="time" nextValue="1" />
+					<!-- <EventTask type="flag" name="원래몬스터_디스폰_4" value="1" next="time" nextValue="1" /> -->
+					<EventTask type="flag" name="원래몬스터_디스폰_5" value="1" next="time" nextValue="1" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<!-- 인원수에 따른 플래그 설정 -->
+		<EventGroup type="userCountInEvent" min="1" max="1" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스1" value="1" next="none" />
+					<EventTask type="flag" name="밸런스2" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="2" max="2" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스1" value="0" next="none" />
+					<EventTask type="flag" name="밸런스2" value="1" next="none" />
+					<EventTask type="flag" name="밸런스3" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="3" max="3" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스2" value="0" next="none" />
+					<EventTask type="flag" name="밸런스3" value="1" next="none" />
+					<EventTask type="flag" name="밸런스4" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="4" max="4" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스3" value="0" next="none" />
+					<EventTask type="flag" name="밸런스4" value="1" next="none" />
+					<EventTask type="flag" name="밸런스5" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="5" max="5" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스4" value="0" next="none" />
+					<EventTask type="flag" name="밸런스5" value="1" next="none" />
+					<EventTask type="flag" name="밸런스6" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="6" max="7" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스5" value="0" next="none" />
+					<EventTask type="flag" name="밸런스6" value="1" next="none" />
+					<EventTask type="flag" name="밸런스8" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="8" max="9" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스6" value="0" next="none" />
+					<EventTask type="flag" name="밸런스8" value="1" next="none" />
+					<EventTask type="flag" name="밸런스10" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="10" max="14" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스8" value="0" next="none" />
+					<EventTask type="flag" name="밸런스10" value="1" next="none" />
+					<EventTask type="flag" name="밸런스15" value="0" next="none" />
+					<!-- 10명째에 순간이동 지점 변경, 11명째 부터는 지역2로 순간이동 -->
+					<EventTask type="changePos" method="start" id="2" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="15" max="19" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스10" value="0" next="none" />
+					<EventTask type="flag" name="밸런스15" value="1" next="none" />
+					<EventTask type="flag" name="밸런스20" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="2" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="20" max="24" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스15" value="0" next="none" />
+					<EventTask type="flag" name="밸런스20" value="1" next="none" />
+					<EventTask type="flag" name="밸런스25" value="0" next="none" />
+					<!-- 20명째에 순간이동 지점 변경, 21명째 부터는 지역3로 순간이동 -->
+					<EventTask type="changePos" method="start" id="3" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="25" max="29" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스20" value="0" next="none" />
+					<EventTask type="flag" name="밸런스25" value="1" next="none" />
+					<EventTask type="flag" name="밸런스30" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="3" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="30" max="34" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스25" value="0" next="none" />
+					<EventTask type="flag" name="밸런스30" value="1" next="none" />
+					<EventTask type="flag" name="밸런스35" value="0" next="none" />
+					<!-- 30명째에 순간이동 지점 변경, 31명째 부터는 지역4로 순간이동 -->
+					<EventTask type="changePos" method="start" id="5" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="35" max="39" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스30" value="0" next="none" />
+					<EventTask type="flag" name="밸런스35" value="1" next="none" />
+					<EventTask type="flag" name="밸런스40" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="5" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="40" max="44" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스35" value="0" next="none" />
+					<EventTask type="flag" name="밸런스40" value="1" next="none" />
+					<EventTask type="flag" name="밸런스45" value="0" next="none" />
+					<!-- 40명째에 순간이동 지점 변경, 41명째 부터는 지역5로 순간이동 -->
+					<EventTask type="changePos" method="start" id="6" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="45" max="49" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스40" value="0" next="none" />
+					<EventTask type="flag" name="밸런스45" value="1" next="none" />
+					<EventTask type="flag" name="밸런스50" value="0" next="none" />
+					<EventTask type="changePos" method="start" id="6" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="50" max="54" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스45" value="0" next="none" />
+					<EventTask type="flag" name="밸런스50" value="1" next="none" />
+					<EventTask type="flag" name="밸런스55" value="0" next="none" />
+					<!-- 50명째에 순간이동 지점 변경, 51명째 부터는 지역1~5로 랜덤 순간이동, 그러나 51명째부터는 maxTeleportCount에 걸려 실제 이동되지는 않을 것 -->
+					<EventTask type="changePos" method="start" id="6" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInEvent" min="55" max="60" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="밸런스50" value="0" next="none" />
+					<EventTask type="flag" name="밸런스55" value="1" next="none" />
+					<EventTask type="changePos" method="start" id="6" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		
+		<!-- 이벤트 시작 전 처리 -->
+		<EventGroup type="progressTimer" value="430" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302904" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="425" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="eventDialog" id="700302001" next="time" nextValue="7.0" />
+					<EventTask type="eventDialog" id="700302002" next="time" nextValue="7.0" />
+					<EventTask type="eventDialog" id="700302003" next="time" nextValue="7.0" />
+					<EventTask type="eventDialog" id="700302004" next="time" nextValue="7.0" />
+					<EventTask type="eventDialog" id="700302005" next="time" nextValue="7.0" />
+					<EventTask type="flag" name="준비끝1" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="userCountInTerritory" uniqueId="630,63000001" value="1" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="기본버프" value="1" next="none" />
+					<EventTask type="flag" name="캠핑페널티" value="1" next="none" />
+					<EventTask type="flag" name="준비끝2" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="420" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302903" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="410" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302902" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="400" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302901" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="390" >
+			<Event>
+				<EventTaskGroup>										
+					
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="준비끝1,준비끝2,1페이즈" repeat="false" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="일반배치_스폰" value="1" next="time" nextValue="1" />
+
+					<EventTask type="flag" name="특수배치_스폰" value="1" next="none" />
+					
+					<EventTask type="message" string="@field:700302009" style="combat" next="time" nextValue="0" />					
+
+					<EventTask type="guide" guideId="0" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="1,2" guideType="add" next="time" nextValue="2" />
+					
+					<!-- 튜토리얼 메시지 1 -->
+					<EventTask type="abnormality" abnormalityId="630201" target="player" aliveOnly="false" turn="on" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<!-- 이벤트 종료 전 처리 -->
+		<EventGroup type="progressTimer" value="30" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302953" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="20" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302952" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="10" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302951" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="1" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="1페이즈" value="0" next="none" />
+					<EventTask type="flag" name="2페이즈" value="0" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="progressTimer" value="0" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="empty" next="time" nextValue="20" />
+					<EventTask type="flag" name="원래몬스터_스폰_1" value="1" next="time" nextValue="1" />
+					<EventTask type="flag" name="원래몬스터_스폰_2" value="1" next="time" nextValue="1" />
+					<EventTask type="flag" name="원래몬스터_스폰_3" value="1" next="time" nextValue="1" />
+					<!-- <EventTask type="flag" name="원래몬스터_스폰_4" value="1" next="time" nextValue="1" /> -->
+					<EventTask type="flag" name="원래몬스터_스폰_5" value="1" next="time" nextValue="1" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="progress" value="30" repeat="false">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="기본버프2" value="1" next="none" />
+					
+					<EventTask type="guide" guideId="1,2" guideType="complete" next="none" />
+					<EventTask type="flag" name="1페이즈" value="0" next="none" />
+					<EventTask type="flag" name="2페이즈" value="1" next="none" />
+					<EventTask type="flag" name="1페이즈_실패대사" value="0" next="none" />
+					<EventTask type="flag" name="2페이즈_실패대사" value="1" next="none" />
+					
+					<EventTask type="progress" action="change" value="30000" next="none"/>
+					<!-- progressType="npcHp" 선언이 먼저 -->
+					<EventTask type="progressType" progressType="npcHp" targetNpcId="630,9998" next="none" />
+
+					<EventTask type="empty" next="time" nextValue="1" />
+
+					<EventTask type="flag" name="일반배치_디스폰" value="1" next="none" />
+					<EventTask type="flag" name="특수배치_디스폰" value="1" next="none" />
+
+					<!-- 카메라 쉐이크 + 사운드 -->
+					<EventTask type="abnormality" abnormalityId="630301" target="player" aliveOnly="false" territoryId="63000001" huntingZoneId="630" turn="on" next="none" />
+					
+					<EventTask type="flag" name="하늘고래1_스폰" value="1" next="none" />
+
+					<EventTask type="message" string="@field:700302004" style="combat" next="time" nextValue="2" />					
+
+					<EventTask type="eventDialog" id="700302006" next="time" nextValue="7.0" />
+					<EventTask type="eventDialog" id="700302007" next="time" nextValue="7.0" />
+					<EventTask type="eventDialog" id="700302008" next="time" nextValue="7.0" />
+					
+					<EventTask type="message" string="@field:700302008" style="combat" next="time" nextValue="0" />
+					
+					<EventTask type="guide" guideId="1,2" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="3,4" guideType="add" next="time" nextValue="2" />
+
+					<!-- 튜토리얼2 -->
+					<EventTask type="abnormality" abnormalityId="630202" target="player" aliveOnly="false" turn="on" next="none" />					
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="progress" value="70" repeat="false">
+			<Event>
+				<EventTaskGroup>
+					<!-- 하늘고래 포효 애니메이션 + 사운드 -->
+					<EventTask type="doActionScript" targetNpcId="630,1000" actionScriptId="630001" next="time" nextValue="0" />
+					<!-- 카메라 쉐이크 + 사운드 -->
+					<EventTask type="abnormality" abnormalityId="630301" target="player" aliveOnly="false" territoryId="63000001" huntingZoneId="630" turn="on" next="time" nextValue="1" />
+
+					<EventTask type="eventDialog" id="700302009" next="time" nextValue="7.0" />
+					<EventTask type="eventDialog" id="700302010" next="time" nextValue="7.0" />
+
+					<EventTask type="flag" name="하늘고래1_모드변경" value="1" next="none" />
+					
+					<EventTask type="message" string="@field:700302007" style="combat" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<!-- 보스 거대 사막유령 HP 감소 메소드 -->
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스1" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스1" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-10.00" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스2" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스2" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-5.00" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스3" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스3" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-3.33" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스4" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스4" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.50" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스5" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스5" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-2.00" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스6" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스6" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.667" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스8" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스8" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.25" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스10" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스10" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-1.00" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스15" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스15" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.667" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스20" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스20" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.500" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스25" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스25" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.400" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스30" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스30" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.333" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스35" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스35" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.286" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스40" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스40" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.250" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스45" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스45" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.222" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스50" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스50" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.200" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="202" checkFlag="밸런스55" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="203" checkFlag="밸런스55" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63000830" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63001087" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63001094" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63001101" next="none" />
+					<EventTask type="changeHp" method="rate" amount="-0.182" targetHuntingZoneId="630" targetInstanceId="63001108" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<!-- 보스 거대 사막유령 HP 더미 사망 -->
+		<EventGroup type="npcHp" uniqueId="630,9998" value="0" repeat="false">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="50000" next="none"/>
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000445" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<!-- 피버타임 시간에 따른 시간표시 / 종료 처리 -->
+		<EventGroup type="timer" name="FeverTime" timerName="FeverTime" value="30" repeat="false">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302933" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="timer" name="FeverTime" timerName="FeverTime" value="20" repeat="false">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302932" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="timer" name="FeverTime" timerName="FeverTime" value="10" repeat="false">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302931" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="timer" name="FeverTime" timerName="FeverTime" value="0" repeat="false">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="message" string="@field:700302006" style="combat" next="time" nextValue="0" />
+					<EventTask type="timer" action="stop" name="FeverTime" direction="reverse" value="60" timerUiOff="true" next="none" />
+					<EventTask type="flag" name="하늘고래1_모드복귀" value="1" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<!-- 1페이즈 정수 인터랙션 시 진행도 증가 -->
+		<EventGroup type="npcInteraction" value="100" checkFlag="1페이즈" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="375" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcInteraction" value="101" checkFlag="1페이즈" repeat="true">
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="375" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		
+		<!-- 사막유령 디스폰 시 처리 -->
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001074" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001075" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001076" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001077" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001078" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001079" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001080" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001081" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001082" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="npcDespawn" targetHuntingZoneId="630" targetInstanceId="63001083" checkFlag="1페이즈" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="progress" action="plus" value="7500" next="none"/>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+
+		<!-- 하늘고래 중앙부 다이내믹 스폰 (1페이즈) -->
+		<EventGroup type="timer" name="whale1M_P1" timerName="whale1M_P1" value="2" repeat="true">
+			<!-- 타이머 -->
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="timer" action="start" name="whale1M_P1" direction="forward" value="0" timerUiOff="true" next="none" />
+				</EventTaskGroup>
+			</Event>
+			<!-- 좌완부 -->
+			<Event>
+				<EventTaskGroup probability="0.25">
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000806" dynamicSpawnTemplateId="101" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000969" dynamicSpawnTemplateId="101" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000997" dynamicSpawnTemplateId="101" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001025" dynamicSpawnTemplateId="101" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001053" dynamicSpawnTemplateId="101" next="time" nextValue="0" />
+				</EventTaskGroup>
+				<EventTaskGroup probability="0.25">
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000806" dynamicSpawnTemplateId="102" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000969" dynamicSpawnTemplateId="102" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000997" dynamicSpawnTemplateId="102" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001025" dynamicSpawnTemplateId="102" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001053" dynamicSpawnTemplateId="102" next="time" nextValue="0" />
+				</EventTaskGroup>
+				<EventTaskGroup probability="0.25">
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000806" dynamicSpawnTemplateId="103" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000969" dynamicSpawnTemplateId="103" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000997" dynamicSpawnTemplateId="103" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001025" dynamicSpawnTemplateId="103" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001053" dynamicSpawnTemplateId="103" next="time" nextValue="0" />
+				</EventTaskGroup>
+				<EventTaskGroup probability="0.25">
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000806" dynamicSpawnTemplateId="104" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000969" dynamicSpawnTemplateId="104" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000997" dynamicSpawnTemplateId="104" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001025" dynamicSpawnTemplateId="104" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001053" dynamicSpawnTemplateId="104" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+			<!-- 우완부 -->
+			<Event>
+				<EventTaskGroup probability="0.25">
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000813" dynamicSpawnTemplateId="201" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000976" dynamicSpawnTemplateId="201" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001004" dynamicSpawnTemplateId="201" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001032" dynamicSpawnTemplateId="201" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001060" dynamicSpawnTemplateId="201" next="time" nextValue="0" />
+				</EventTaskGroup>
+				<EventTaskGroup probability="0.25">
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000813" dynamicSpawnTemplateId="202" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000976" dynamicSpawnTemplateId="202" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001004" dynamicSpawnTemplateId="202" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001032" dynamicSpawnTemplateId="202" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001060" dynamicSpawnTemplateId="202" next="time" nextValue="0" />
+				</EventTaskGroup>
+				<EventTaskGroup probability="0.25">
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000813" dynamicSpawnTemplateId="203" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000976" dynamicSpawnTemplateId="203" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001004" dynamicSpawnTemplateId="203" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001032" dynamicSpawnTemplateId="203" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001060" dynamicSpawnTemplateId="203" next="time" nextValue="0" />
+				</EventTaskGroup>
+				<EventTaskGroup probability="0.25">
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000813" dynamicSpawnTemplateId="204" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000976" dynamicSpawnTemplateId="204" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001004" dynamicSpawnTemplateId="204" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001032" dynamicSpawnTemplateId="204" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001060" dynamicSpawnTemplateId="204" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<!-- 하늘고래 중앙부 다이내믹 스폰 (2페이즈) -->
+		<EventGroup type="timer" name="whale1M_P2" timerName="whale1M_P2" value="2" repeat="true">
+			<!-- 타이머 -->
+			<Event>
+				<EventTaskGroup>					
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000820" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000820" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000820" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000820" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000806" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000806" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000806" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000806" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000813" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000813" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000813" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000813" dynamicSpawnTemplateId="2" next="time" nextValue="0" />
+					<EventTask type="timer" action="start" name="whale1M_P2" direction="forward" value="0" timerUiOff="true" next="none" />
+				</EventTaskGroup>
+			</Event>
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000983" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000983" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000983" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000983" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000969" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000969" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000969" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000969" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000976" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000976" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000976" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000976" dynamicSpawnTemplateId="2" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001011" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001011" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001011" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001011" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000997" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000997" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000997" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63000997" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001004" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001004" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001004" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001004" dynamicSpawnTemplateId="2" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001039" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001039" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001039" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001039" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001025" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001025" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001025" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001025" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001032" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001032" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001032" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001032" dynamicSpawnTemplateId="2" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001067" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001067" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001067" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001067" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001053" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001053" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001053" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001053" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001060" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001060" dynamicSpawnTemplateId="2" next="time" nextValue="2" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001060" dynamicSpawnTemplateId="1" next="time" nextValue="0" />
+					<EventTask type="dynamicSpawn" huntingZoneId="630" targetInstanceId="63001060" dynamicSpawnTemplateId="2" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		
+		<!-- 성공 시 -->
+		<EventGroup type="progress" value="100" >
+			<Event>
+				<EventTaskGroup>
+					<!-- 보스 디스폰 연출 -->
+					<EventTask type="doActionScript" targetNpcId="630,2200" actionScriptId="6310009" next="time" nextValue="0" />
+					
+					<EventTask type="flag" name="1페이즈" value="0" next="none" />
+					<EventTask type="flag" name="2페이즈" value="0" next="none" />
+					<EventTask type="flag" name="임무성공" value="1" next="none" />
+					
+					<!-- 임무 성공 시 실패대사가 발생하지 않도록 실패대사 플래그 전부 OFF 처리 -->
+					<EventTask type="flag" name="1페이즈_실패대사" value="0" next="none" />
+					<EventTask type="flag" name="2페이즈_실패대사" value="0" next="none" />
+					
+					<EventTask type="guide" guideId="3,4" guideType="complete" next="none" />
+					
+					<EventTask type="flag" name="일반배치_디스폰" value="1" next="none" />
+					<EventTask type="flag" name="특수배치_디스폰" value="1" next="none" />
+					<EventTask type="flag" name="하늘고래1_디스폰" value="1" next="none" />
+					<EventTask type="timer" action="stop" name="FeverTime" direction="reverse" value="60" timerUiOff="true" next="none" />
+					
+					<EventTask type="message" string="@field:700302011" style="combat" next="time" nextValue="1" />
+					<EventTask type="eventDialog" id="700302013" next="time" nextValue="7.0" />
+					<EventTask type="eventDialog" id="700302014" next="time" nextValue="7.0" />
+					<EventTask type="message" string="@field:700302999" style="combat" next="time" nextValue="0" />					
+					
+					<EventTask type="guide" guideId="3,4" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="5" guideType="add" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		
+		<!-- 실패 시 대사 분기 -->
+		<EventGroup type="flag" name="실패대사,1페이즈_실패대사" repeat="false" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="실패대사" value="0" next="none" />
+					<EventTask type="message" string="@field:700302010" style="combat" next="time" nextValue="0" />
+					<EventTask type="eventDialog" id="700302011" next="time" nextValue="7.0" />
+					<EventTask type="message" string="@field:700302999" style="combat" next="time" nextValue="0" />					
+					<EventTask type="guide" guideId="1,2" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="5" guideType="add" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="실패대사,2페이즈_실패대사" repeat="false" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="실패대사" value="0" next="none" />
+					<EventTask type="message" string="@field:700302005" style="combat" next="time" nextValue="0" />
+					<EventTask type="eventDialog" id="700302012" next="time" nextValue="7.0" />
+					<EventTask type="message" string="@field:700302999" style="combat" next="time" nextValue="0" />
+					<EventTask type="guide" guideId="3,4" guideType="remove" next="none" />
+					<EventTask type="guide" guideId="5" guideType="add" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		
+		<!-- 이벤트 종료 -->
+		<EventGroup type="beforeEndEvent" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="실패대사" value="1" next="none" />
+				
+					<EventTask type="flag" name="일반배치_디스폰" value="1" next="none" />
+					<EventTask type="flag" name="특수배치_디스폰" value="1" next="none" />
+					<EventTask type="flag" name="하늘고래1_디스폰" value="1" next="none" />
+					
+					<EventTask type="timer" action="stop" name="FeverTime" direction="reverse" value="60" timerUiOff="true" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="beforeDeleteEvent" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="일반배치_디스폰" value="1" next="none" />
+					<EventTask type="flag" name="특수배치_디스폰" value="1" next="none" />
+					<EventTask type="flag" name="하늘고래1_디스폰" value="1" next="none" />					
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="flag" name="원래몬스터_디스폰_1" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_디스폰_1" value="0" next="none" />
+					<!-- 1 -->
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400145" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400139" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400143" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400556" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400144" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400518" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400549" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400554" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400551" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400561" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400562" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400147" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400560" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400553" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400555" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400550" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400177" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400185" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400579" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400176" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400184" next="none" />
+					<!-- 로라 엘린 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000487" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="원래몬스터_디스폰_2" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_디스폰_2" value="0" next="none" />
+					<!-- 2 -->
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400103" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400431" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400590" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400106" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400602" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400428" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400432" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400580" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400448" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400581" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400583" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400446" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400586" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400584" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400585" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400443" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400441" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400194" next="none" />
+					<!-- 로라 엘린 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000488" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="원래몬스터_디스폰_3" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_디스폰_3" value="0" next="none" />
+					<!-- 3 -->
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400389" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400416" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400414" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400047" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400045" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400390" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400047" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400057" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400415" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400387" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400042" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400386" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400422" next="none" />
+					<EventTask type="despawn" huntingZoneId="24" territoryId="2400419" next="none" />
+					<!-- 로라 엘린 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000489" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="원래몬스터_디스폰_4" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_디스폰_4" value="0" next="none" />					
+					<!-- 4 -->
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800992" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800993" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800994" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800746" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800748" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800753" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800760" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800755" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800750" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800749" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800757" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800500" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800509" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800736" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800743" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800758" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800759" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800757" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800712" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800716" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800719" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800721" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800723" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800697" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800699" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800698" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800707" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800705" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800741" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800738" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800644" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800635" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800636" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800499" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800634" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800631" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800688" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800695" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800683" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800702" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800692" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800761" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800679" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800681" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800641" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800645" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800498" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800664" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800673" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800694" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800677" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800669" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800670" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800663" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800650" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800654" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800770" next="none" />
+					<EventTask type="despawn" huntingZoneId="18" territoryId="1800630" next="none" />
+					<!-- 로라 엘린 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000490" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="원래몬스터_디스폰_5" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_디스폰_5" value="0" next="none" />
+					<!-- 5 -->
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100751" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100746" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100754" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100747" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100748" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100744" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100742" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100750" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100766" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100740" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100758" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100759" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100641" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100629" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100637" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100635" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100631" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100634" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100632" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100420" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100627" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100633" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100402" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100428" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100628" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100644" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100630" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100636" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100643" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100649" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100399" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100403" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100717" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100718" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100350" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100404" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100646" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100642" next="none" />
+					<EventTask type="despawn" huntingZoneId="21" territoryId="2100454" next="none" />
+					<!-- 로라 엘린 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000491" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="원래몬스터_스폰_1" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_스폰_1" value="0" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400145" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400139" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400143" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400556" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400144" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400518" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400549" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400554" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400551" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400561" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400562" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400147" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400560" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400553" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400555" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400550" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400177" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400185" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400579" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400176" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400184" next="none" />					
+					<!-- 로라 엘린 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000487" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="원래몬스터_스폰_2" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_스폰_2" value="0" next="none" />
+					<!-- 2 -->
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400103" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400431" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400590" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400106" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400602" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400428" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400432" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400580" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400448" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400581" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400583" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400446" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400586" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400584" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400585" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400443" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400441" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400194" next="none" />
+					<!-- 로라 엘린 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000488" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="원래몬스터_스폰_3" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_스폰_3" value="0" next="none" />
+					<!-- 3 -->
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400389" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400416" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400414" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400047" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400045" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400390" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400047" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400057" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400415" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400387" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400042" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400386" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400422" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="24" territoryId="2400419" next="none" />
+					<!-- 로라 엘린 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000489" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="원래몬스터_스폰_4" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_스폰_4" value="0" next="none" />
+					<!-- 4 -->
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800992" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800993" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800994" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800746" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800748" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800753" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800760" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800755" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800750" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800749" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800757" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800500" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800509" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800736" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800743" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800758" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800759" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800757" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800712" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800716" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800719" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800721" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800723" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800697" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800699" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800698" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800707" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800705" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800741" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800738" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800644" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800635" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800636" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800499" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800634" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800631" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800688" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800695" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800683" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800702" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800692" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800761" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800679" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800681" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800641" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800645" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800498" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800664" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800673" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800694" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800677" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800669" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800670" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800663" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800650" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800654" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800770" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="18" territoryId="1800630" next="none" />
+					<!-- 로라 엘린 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000490" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="원래몬스터_스폰_5" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="원래몬스터_스폰_5" value="0" next="none" />
+					<!-- 5 -->
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100751" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100746" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100754" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100747" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100748" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100744" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100742" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100750" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100766" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100740" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100758" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100759" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100641" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100629" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100637" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100635" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100631" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100634" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100632" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100420" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100627" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100633" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100402" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100428" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100628" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100644" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100630" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100636" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100643" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100649" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100399" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100403" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100717" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100718" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100350" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100404" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100646" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100642" next="none" />
+					<EventTask type="spawn" isEventNpc="false" huntingZoneId="21" territoryId="2100454" next="none" />
+					<!-- 로라 엘린 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000491" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="flag" name="일반배치_스폰" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="일반배치_스폰" value="0" next="none" />
+					<!-- 1 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000473" next="time" nextValue="0" />
+					<!-- 2 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000474" next="time" nextValue="1" />
+					<!-- 3 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000475" next="time" nextValue="0" />
+					<!-- 4 -->
+					<!-- <EventTask type="spawn" huntingZoneId="630" territoryId="63000476" next="time" nextValue="1" /> -->
+					<!-- 5 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000477" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="flag" name="일반배치_디스폰" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="일반배치_디스폰" value="0" next="none" />
+					<!-- 1 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000473" next="time" nextValue="0" />
+					<!-- 2 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000474" next="time" nextValue="1" />
+					<!-- 3 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000475" next="time" nextValue="0" />
+					<!-- 4 -->
+					<!-- <EventTask type="despawn" huntingZoneId="630" territoryId="63000476" next="time" nextValue="1" /> -->
+					<!-- 5 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000477" next="time" nextValue="0" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="flag" name="특수배치_스폰" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="특수배치_스폰" value="0" next="none" />
+					<!-- 1 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000482" next="none" />
+					<!-- 2 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000483" next="none" />
+					<!-- 3 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000484" next="none" />
+					<!-- 4 -->
+					<!-- <EventTask type="spawn" huntingZoneId="630" territoryId="63000485" next="none" /> -->
+					<!-- 5 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000486" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="특수배치_디스폰" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="특수배치_디스폰" value="0" next="none" />
+					<!-- 1 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000482" next="none" />
+					<!-- 2 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000483" next="none" />
+					<!-- 3 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000484" next="none" />
+					<!-- 4 -->
+					<!-- <EventTask type="despawn" huntingZoneId="630" territoryId="63000485" next="none" /> -->
+					<!-- 5 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000486" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+
+		<EventGroup type="flag" name="하늘고래1_스폰" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="하늘고래1_스폰" value="0" next="none" />
+					<!-- 1 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000002" next="none" />
+					<!-- 2 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000478" next="none" />
+					<!-- 3 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000479" next="none" />
+					<!-- 4 -->
+					<!-- <EventTask type="spawn" huntingZoneId="630" territoryId="63000480" next="none" /> -->
+					<!-- 5 -->
+					<EventTask type="spawn" huntingZoneId="630" territoryId="63000481" next="time" nextValue="10"  />
+					<!-- 다이내믹 스폰 타이머 켜기 -->
+					<EventTask type="timer" action="start" name="whale1M_P1" direction="forward" value="0" timerUiOff="true" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="하늘고래1_모드변경" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="하늘고래1_모드변경" value="0" next="none" />
+					<!-- 피버타임 타이머 카운트다운 시작 -->
+					<EventTask type="timer" action="start" name="FeverTime" direction="reverse" value="60" timerUiOff="true" next="none" />
+					<!-- 정수 대량 스폰 시작 -->
+					<EventTask type="timer" action="stop" name="whale1M_P1" direction="forward" value="0" timerUiOff="true" next="none" />
+					<EventTask type="timer" action="start" name="whale1M_P2" direction="forward" value="0" timerUiOff="true" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="하늘고래1_모드복귀" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="하늘고래1_모드복귀" value="0" next="none" />
+					<EventTask type="timer" action="stop" name="whale1M_P2" direction="forward" value="0" timerUiOff="true" next="time" nextValue="3" />
+
+					<EventTask type="timer" action="start" name="whale1M_P1" direction="forward" value="0" timerUiOff="true" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+		<EventGroup type="flag" name="하늘고래1_디스폰" repeat="true" >
+			<Event>
+				<EventTaskGroup>
+					<EventTask type="flag" name="하늘고래1_디스폰" value="0" next="none" />					
+					<!-- 1 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000002" next="none" />
+					<!-- 2 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000478" next="none" />
+					<!-- 3 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000479" next="none" />
+					<!-- 4 -->
+					<!-- <EventTask type="despawn" huntingZoneId="630" territoryId="63000480" next="none" /> -->
+					<!-- 5 -->
+					<EventTask type="despawn" huntingZoneId="630" territoryId="63000481" next="none" />
+					<EventTask type="timer" action="stop" name="whale1M_P1" direction="forward" value="0" timerUiOff="true" next="none" />
+					<EventTask type="timer" action="stop" name="whale1M_P2" direction="forward" value="0" timerUiOff="true" next="none" />
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+	</FieldEvent>
+
+	<!--공중섬 이동용 더미 임무-->
+	<FieldEvent id="93" startTerritoryId="18,1801077" startPos="-25661,-77148,4370" startDir="200" revivePos="-25661,-77148,4370" reviveTownNameId="7777" revivalRecoveryRate="1" >
+		<Condition type="maxMemberCount" value="15" />
+		<Condition type="teleportMemberCount" value="10" />
+		<Condition type="minLevel" value="1" />
+		<Condition type="maxLevel" value="65" />
+
+		<!-- 진행도 관련 조건문 -->
+		<ClearCondition progressTime="330" endWhenProgressFull="false" endIntervalTime="30" />
+		<Progress maxValue="100000" dividerPercent="100" isSharedChannel="false" standardPlayerCount="30" />
+
+		<!--
+		<AutoUserBalance>
+			<Balance itemLevelMin="1" itemLevelMax="4" abnormalityId="77770003"/>
+			<Balance itemLevelMin="5" itemLevelMax="10" abnormalityId="77770004"/>
+			<Balance itemLevelMin="11" itemLevelMax="15" abnormalityId="77770005"/>
+			<Balance itemLevelMin="16" itemLevelMax="20" abnormalityId="77770006"/>
+			<Balance itemLevelMin="21" abnormalityId="1"/>
+		</AutoUserBalance>
+		-->
+
+		<!-- 유저 수에 따른 밸런싱 -->
+		<AutoEventBalance>
+			<Balance userMin="0" userMax="1">
+				<BasicAbnormality targetNpcId="0,0" abnormalityId="77770002"/> <!-- 10배 -->
+			</Balance>
+		</AutoEventBalance>
+
+		<!-- 점수 데이터 정의 -->
+		<EventPoint>
+			<Point id="1" type="dealing" value="1.05" />
+			<Point id="2" type="healing" value="1.0" />
+		</EventPoint>
+
+
+		<!-- 전용 UI -->
+		<Guide titleString="@field:701402" eventSize="dragon_island" description="@field:7014020" > <!--월드맵창에서 보이는 내용-->
+			<Task/>
+			<!--Task id="1" target="@creature:621#2003" string="@field:100007" iconId="1" --><!--콘텐츠 진입시 보이는 내용-->
+				<!--Marker markerType="MARKER_FIELD_EVENT_AREA_01" markerPos="-49132,20823,1015" markerScaleX="0.3" markerScaleY="0.3"/-->
+			<!--/Task-->
+		</Guide>
+
+		<!-- 이벤트 초기화 -->
+		<EventGroup type="initialize" >
+			<Event>
+				<EventTaskGroup>
+				</EventTaskGroup>
+			</Event>
+		</EventGroup>
+	</FieldEvent>
+</Field>

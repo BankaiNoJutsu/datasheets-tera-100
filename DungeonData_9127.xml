@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9127" name="@dungeon:9127" startPos="-130619,-117502,-84" exitContinentId="7005" exitPos="27180,16334,881" newbieBonusOff="true">
+	<Condition type="party" value="5" />
+	<Condition type="levelOver" value="65" />
+	<Condition type="unionDungeon" value="100"/>
+	<Condition type="notSolo"/>
+
+	<EventGroup type="userCountInDungeon" value="5">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="127" territoryId="12700004" next="none"/>
+				<EventTask type="timer" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:912701" style="combat" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcState" uniqueId="127,102" value="combat" repeat="true" next="time" nextValue="3">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="127" territoryId="12700003" next="none"/>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" action="start" direction="forward" value="0" name="timerB" timerUiOff="false" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+	<EventGroup type="npcHp" uniqueId="127,102" value="0" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="127" territoryId="12700003" next="none"/>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />			
+				<EventTask type="timer" action="stop" timerUiOff="false" name="timerB" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" action="stop" direction="forward" name="timerB" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="127" territoryId="12700005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 몬스터 리셋 시-->
+	<EventGroup type="npcReset" uniqueId="127,102" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" name="timerA" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="timer" name="timerB" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="despawn" huntingZoneId="127" territoryId="12700003" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+  
+</Dungeon>

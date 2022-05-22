@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9028" name="@dungeon:9028" startPos="69025,-116776,-2" exitContinentId="2" exitPos="904, -8107, 6840">
+  <RestoreTargetQuest id="7203" />
+  <Condition type="solo" value="1"/>
+  <Condition type="levelOver" value="60" />
+  <!-- 중앙 제어 장치 움직이고 책장 등장 -->
+  <EventGroup type="questProgress">
+    <Event questId="7202" taskId="11">
+      <EventTaskGroup>
+        <EventTask type="doActionScript" targetNpcId="428,1010" actionScriptId="42810101" next="time" nextValue="6" />
+        <EventTask type="despawn" huntingZoneId="428" territoryId="42800013" next="none" />
+        <EventTask type="spawn" huntingZoneId="428" territoryId="42800004" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 제라드의 소환 명령에 소환되는 마법석 등장 -->
+  <EventGroup type="questProgress">
+    <Event questId="7203" taskId="3">
+      <EventTaskGroup>
+        <EventTask type="doActionScript" targetNpcId="428,1017" actionScriptId="42810171" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="428" territoryId="42800006" next="time" nextValue="2" />
+        <EventTask type="doActionScript" targetNpcId="428,1010" actionScriptId="42810102" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="428" territoryId="42800003" next="time" nextValue="1" />
+        <EventTask type="doActionScript" targetNpcId="428,1017" actionScriptId="42810103" next="time" nextValue="11" />
+        <EventTask type="doActionScript" targetNpcId="428,1017" actionScriptId="42830001" next="time" nextValue="14" />
+        <EventTask type="despawn" huntingZoneId="428" territoryId="42800003" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="428" territoryId="42800012" startAggro="1" next="time" nextValue="1" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 악마 사망 후 마법석 등장 -->
+  <EventGroup type="questProgress">
+    <Event questId="7203" taskId="4">
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="428" territoryId="42800011" next="time" nextValue="1" />
+        <EventTask type="doActionScript" targetNpcId="428,1017" actionScriptId="42810172" next="time" nextValue="8" />
+        <EventTask type="doActionScript" targetNpcId="428,1017" actionScriptId="40000" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="428" territoryId="42800011" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

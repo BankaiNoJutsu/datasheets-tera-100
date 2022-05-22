@@ -1,0 +1,599 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9506" name="@dungeon:9506" startPos="-35918,23848,2172" startDir="8712" exitContinentId="7005" exitPos="986,3929,1777" destroyWaitMin="0">
+  <Condition type="solo"/>
+  <Condition type="levelOver" value="65"/>
+  <RestoreTargetQuest id="50501,50502" forceRestore="true" />
+    <EventGroup type="initialize" >
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="flag" name="초기화" value="1" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	
+	 <EventGroup type="flag" name="초기화">
+		<Event>
+			<EventTaskGroup>
+				 	<EventTask type="spawn"  huntingZoneId="506" territoryId="50600002" next="none" /> <!-- 미치광이 스폰 -->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600017" next="none" /> <!-- 연회장 경비대 스폰 -->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600013" next="none" /> <!-- 뛰어가는 아이들 스폰 -->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600010" next="none" /> <!-- 춤추는 사람들 스폰 -->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600008" next="none" /> <!-- 연회장 좌측 테이블 -->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600009" next="none" /> <!-- 연회장 좌측 테이블 -->					
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600022" next="none" /> <!-- 연회장 연극 -->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600023" next="none" /> <!-- 연회장 연극 관란객-->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600024" next="none" /> <!-- 연회장 거지-->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600020" next="none" /> <!-- 사령부 통로 -->					
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600021" next="none" /> <!-- 사령부 통로 -->					
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600015" next="none" /> <!-- 사령부 그레이엄 -->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600011" next="none" /> <!-- 연회장 단상 앞 사람들 -->	
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600025" next="none" /> <!-- 연회 안내인-->	
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600042" next="none" /> <!-- 입구 바리케이트 앞 경비병-->	
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600037" next="none" /> <!-- 폭죽 연출 -->	
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600051" next="none" /> <!-- 입구 뒤편  바리케이트-->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600050" next="none" /> <!-- 연회장 내 계단 앞  바리케이트-->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600056" next="none" /> <!-- 벨리카 그룹 연회 연출 용 NPC-->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600055" next="none" /> <!-- 엘린 그룹 연회 연출 용 NPC-->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600054" next="none" /> <!-- 이르카 그룹 연회 연출 용 NPC-->
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600052" next="none" /> <!-- 케스타니카 그룹 연회 연출 용 NPC-->
+					<EventTask type="despawn" huntingZoneId="506" territoryId="50600038" next="none" /> <!-- 문 디스폰 -->
+					<EventTask type="despawn" huntingZoneId="506" territoryId="50600053" next="none" /> <!-- 단상 뒤 경비병 디스폰 -->
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>
+	
+	  	<!-- 문 닫기 -->
+	<EventGroup type="questProgress">
+		<Event questId="50501" taskId="5" >
+			<EventTaskGroup>	
+				<EventTask type="flag" name="문닫기" value="1" next="none"/> 
+			</EventTaskGroup>
+		</Event>  		
+	</EventGroup>
+	 <EventGroup type="flag" name="문닫기">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="506" territoryId="50600038" next="time" nextValue="0.5" /> <!-- 문 디스폰 -->			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!-- 입구에서 미치광이가 따라오는 연출 -->
+	<!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="5">
+			  <EventTaskGroup>
+					<EventTask type="flag" name="미치광이" value="1" next="none"/>				
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	
+	<EventGroup type="flag" name="미치광이">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="506" territoryId="50600026" next="time" nextValue="2" />	
+				<EventTask type="message" string="@dungeon:9506001" style="speechbubble" targetNpcId="506,3002" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+  
+  
+  <!-- 연회장 경비병 앞 도달 시 미치광이 교체 -->
+  <!--
+   	<EventGroup type="enterTerritory" uniqueId="506,50500027" triggerUserClass = "lancer;warrior;slayer;berserker;sorcerer;archer;priest;elementalist;engineer;fighter;assassin" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+				
+				<EventTask type="despawn" huntingZoneId="506" territoryId="50500017" next="none" />				
+				
+				<EventTask type="despawn" huntingZoneId="506" territoryId="50500026" next="none" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>-->
+	
+	<!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="5">
+			<EventTaskGroup>
+				<EventTask type="flag" name="미치광이교체" value="1" next="none"/>							
+			</EventTaskGroup>		
+		</Event>
+	</EventGroup> 
+
+	 <EventGroup type="flag" name="미치광이교체">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="506" territoryId="50600017" next="none" />								
+				<EventTask type="spawn" huntingZoneId="506" territoryId="50600026" next="none" />	
+				<EventTask type="flag" name="미치광이교체" value="0" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+  </EventGroup-->	
+	
+  <!-- 연회장 입장 시 경비병과 미치광이 연출 -->  
+  	<EventGroup type="questProgress">
+		<Event questId="50501" taskId="7">
+			  <EventTaskGroup>
+					<EventTask type="killInTerritory" huntingZoneId="506" territoryId="50600038" target="objectnpc" targetTemplateId="7011" next="time" nextValue="0" />
+					<!--EventTask type="despawn" huntingZoneId="506" territoryId="50600038" next="none" /-->
+					<!--
+					<EventTask type="flag" name="입구" value="1" next="none"/> -->
+					<EventTask type="flag" name="연회초입" value="1" next="none"/> 
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	<!--
+	<EventGroup type="flag" name="입구">
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="doActionScript"  targetNpcId="506,3001" actionScriptId="9506001" next="time" nextValue="3" />		  
+					<EventTask type="doActionScript"  targetNpcId="506,1003" actionScriptId="9506002" next="time" nextValue="4" />
+					<EventTask type="doActionScript"  targetNpcId="506,1004" actionScriptId="9506003" next="time" nextValue="10" />
+					<EventTask type="message" string="@dungeon:9506001" style="speechbubble" targetNpcId="506,3001" next="time" nextValue="5"/>
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>	
+  -->
+  	<EventGroup type="flag" name="연회초입">
+		<Event>
+			<EventTaskGroup>
+			<!--
+				<EventTask type="message" string="@dungeon:9506002" style="speechbubble" targetNpcId="506,1003" next="time" nextValue="1" />
+				<EventTask type="message" string="@dungeon:9506003" style="speechbubble" targetNpcId="506,1003" next="none"/>
+				-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="506" templateId="50501" next="none" /> <!-- 단상앞 그레이엄 헤인즈 워크오브젝트 -->
+				<EventTask type="spawn"  huntingZoneId="506" territoryId="50600040" next="none" /> <!--바리케이트 열기용 투명 NPC-->						
+				
+				<!-- 뛰어 오는 아이들 -->
+				<EventTask type="doActionScript"  targetNpcId="506,2010" actionScriptId="9506004" next="time" nextValue="2" />		  
+				<EventTask type="doActionScript"  targetNpcId="506,2025" actionScriptId="9506005" next="time" nextValue="2" />
+				<EventTask type="doActionScript"  targetNpcId="506,2002" actionScriptId="9506006" next="time" nextValue="3" />
+				<!-- 엘린 무리들 연출 시작 -->
+				<EventTask type="spawn"  huntingZoneId="506" territoryId="50600043" next="time" nextValue="20" />
+				<!-- 뛰어 오는 아이들 디스폰 -->	
+				<EventTask type="despawn" huntingZoneId="506" territoryId="50600013" next="none" /> <!-- 문 디스폰 -->				
+			</EventTaskGroup>
+		</Event>
+  </EventGroup>	
+  
+  	<!-- 춤추는 사람들 -->
+	<EventGroup type="questProgress">
+		<Event questId="50501" taskId="9" >
+			<EventTaskGroup>			
+				<EventTask type="message" string="@dungeon:9506136" style="speechbubble" targetNpcId="506,2018" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9506137" style="speechbubble" targetNpcId="506,2006" next="none" />
+				<EventTask type="message" string="@dungeon:9506138" style="speechbubble" targetNpcId="506,2013" next="time" nextValue="1"/>
+				<EventTask type="message" string="@dungeon:9506139" style="speechbubble" targetNpcId="506,2021" next="none" />
+			</EventTaskGroup>
+		</Event>  		
+	</EventGroup>
+	
+  <!-- 연극 연출 용 -->
+  <!-- 연극 테스트 번호 : 16, 31, 41, 66, 88 -->  
+     <!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="16">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="연극1" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+		
+	<!--EventGroup type="flag" name="연극1">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timerUi" time="20" next="none" />
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4101" actionScriptId="9506014" next="none" />		  
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4102" actionScriptId="9506015" next="time" nextValue="3"/>
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4201" actionScriptId="9506016" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4202" actionScriptId="9506017" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4203" actionScriptId="9506018" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4204" actionScriptId="9506019" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4205" actionScriptId="9506020" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4206" actionScriptId="9506021" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4207" actionScriptId="9506022" next="time" nextValue="17" />												
+				<EventTask type="updateQuest" questId="50501" taskId="16" next="none"/>
+				<EventTask type="flag" name="연극1" value="0" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->		
+	
+	<!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="31">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="연극2" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+		
+	<!--EventGroup type="flag" name="연극2">
+		<Event>
+			<EventTaskGroup>	
+				<EventTask type="timerUi" time="20" next="none" />
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4101" actionScriptId="9506014" next="none" />		  
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4102" actionScriptId="9506015" next="time" nextValue="3"/>
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4201" actionScriptId="9506016" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4202" actionScriptId="9506017" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4203" actionScriptId="9506018" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4204" actionScriptId="9506019" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4205" actionScriptId="9506020" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4206" actionScriptId="9506021" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4207" actionScriptId="9506022" next="time" nextValue="17" />													
+				
+				<EventTask type="updateQuest" questId="50501" taskId="31" next="none"/>
+				<EventTask type="flag" name="연극2" value="0" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+
+	 <!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="41">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="연극3" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+		
+	<!--EventGroup type="flag" name="연극3">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timerUi" time="20" next="none" />
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4101" actionScriptId="9506014" next="none" />		  
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4102" actionScriptId="9506015" next="time" nextValue="3"/>
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4201" actionScriptId="9506016" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4202" actionScriptId="9506017" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4203" actionScriptId="9506018" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4204" actionScriptId="9506019" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4205" actionScriptId="9506020" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4206" actionScriptId="9506021" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4207" actionScriptId="9506022" next="time" nextValue="17" />												
+				
+				<EventTask type="updateQuest" questId="50501" taskId="41" next="none"/>		
+				<EventTask type="flag" name="연극3" value="0" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->			
+	
+	 <!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="66">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="연극4" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+		
+	<!--EventGroup type="flag" name="연극4">
+		<Event>
+			<EventTaskGroup>	
+				<EventTask type="timerUi" time="20" next="none" />
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4101" actionScriptId="9506014" next="none" />		  
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4102" actionScriptId="9506015" next="time" nextValue="3"/>
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4201" actionScriptId="9506016" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4202" actionScriptId="9506017" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4203" actionScriptId="9506018" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4204" actionScriptId="9506019" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4205" actionScriptId="9506020" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4206" actionScriptId="9506021" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4207" actionScriptId="9506022" next="time" nextValue="17" />												
+				
+				<EventTask type="updateQuest" questId="50501" taskId="66" next="none"/>	
+				<EventTask type="flag" name="연극4" value="0" next="none"/>								
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->		
+	
+	<!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="88">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="연극5" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+		
+	<!--EventGroup type="flag" name="연극5">
+		<Event>
+			<EventTaskGroup>	
+				<EventTask type="timerUi" time="20" next="none" />
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4101" actionScriptId="9506014" next="none" />		  
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4102" actionScriptId="9506015" next="time" nextValue="3"/>
+				
+				<EventTask type="doActionScript"  targetNpcId="506,4201" actionScriptId="9506016" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4202" actionScriptId="9506017" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4203" actionScriptId="9506018" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4204" actionScriptId="9506019" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4205" actionScriptId="9506020" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4206" actionScriptId="9506021" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,4207" actionScriptId="9506022" next="time" nextValue="17" />														
+				
+				<EventTask type="updateQuest" questId="50501" taskId="88" next="none"/>	
+				<EventTask type="flag" name="연극5" value="0" next="none"/>								
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->		
+	
+	<!-- 행운 상자 연출 용 -->
+	<!-- 행운 상자 Task : 19, 28, 47, 60, 91 -->
+	<EventGroup type="questProgress">
+		<Event questId="50501" taskId="21">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="행운상자" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="28">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="행운상자" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	
+	<!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="47">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="행운상자" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	
+	<!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="60">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="행운상자" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	
+	<!--EventGroup type="questProgress">
+		<Event questId="50501" taskId="91">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="행운상자" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	
+	<EventGroup type="flag" name="행운상자">
+		<Event>
+			<EventTaskGroup>				
+				<!-- 행운 상자 관람객 연출용 대사 -->
+				<EventTask type="doActionScript"  targetNpcId="506,2008" actionScriptId="9506016" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,2009" actionScriptId="9506017" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,5024" actionScriptId="9506018" next="none" />
+				<EventTask type="doActionScript"  targetNpcId="506,5013" actionScriptId="9506019" next="none" />				
+				<EventTask type="doActionScript"  targetNpcId="506,2015" actionScriptId="9506020" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+
+	<!-- 사령부 그레이엄 디스폰 -->
+     <EventGroup type="questProgress">
+		<Event questId="50501" taskId="23">
+			  <EventTaskGroup>
+					<EventTask type="flag" name="그레이엄" value="1" next="none"/>				
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<EventGroup type="flag" name="그레이엄">
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="despawn"  huntingZoneId="506" territoryId="50600021" next="none" /> <!-- 사령부 그레이엄 디스폰 -->	
+					<!-- 단상 그레이엄 워크오브젝트 스폰 -->
+					<EventTask type="workObjectSpawn" huntingZoneId="506" templateId="50501" next="none" />
+					<EventTask type="spawn"  huntingZoneId="506" territoryId="50600053" next="none" /> <!-- 단상 그레이엄 뒤 경비병 스폰-->	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 워크오브젝트 타임 그레이엄 헤인즈 대사 연출 -->
+	<EventGroup type="Workobject" uniqueId="506,50501" >
+		<Event>
+			  <EventTaskGroup>
+					<EventTask type="doActionScript"  targetNpcId="506,6000" actionScriptId="9506056" next="none" />			
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	
+	<!-- 연극 배우 2명 단상 아래로 이동 >
+	   <EventGroup type="questProgress">
+		<Event questId="50502" taskId="1">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="단상" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup-->
+		
+	<!--EventGroup type="flag" name="단상">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript"  targetNpcId="506,4101" actionScriptId="9506054" next="none" />		  
+				<EventTask type="doActionScript"  targetNpcId="506,4102" actionScriptId="9506055" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->		
+	
+	 <EventGroup type="questProgress">
+		<Event questId="50502" taskId="2">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="마커" value="1" next="none"/>
+					<EventTask type="flag" name="그레이엄" value="1" next="none"/>	
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="flag" name="마커">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript"  targetNpcId="506,6000" actionScriptId="9506057" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<!--영상재생실험-->
+	<!--EventGroup type="questProgress">
+		<Event questId="50502" taskId="3">
+			  <EventTaskGroup>	
+					<EventTask type="flag" name="영상" value="1" next="none"/>						
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="flag" name="영상">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3041" next="none" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+   <!-- 연극 관람객 연설장으로 이동 -->
+   <!--
+	<EventGroup type="questProgress">
+		<Event questId="50501" taskId="26">
+			  <EventTaskGroup>
+				<EventTask type="flag" name="연설장이동" value="1" next="none"/>	
+			  </EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	
+	<EventGroup type="flag" name="연설장이동">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript"  targetNpcId="506,4201" actionScriptId="9506032" next="time" nextValue="1" />		  
+				<EventTask type="doActionScript"  targetNpcId="506,4202" actionScriptId="9506033" next="time" nextValue="1" />
+				<EventTask type="doActionScript"  targetNpcId="506,4203" actionScriptId="9506034" next="time" nextValue="1" />
+				<EventTask type="doActionScript"  targetNpcId="506,4204" actionScriptId="9506035" next="time" nextValue="1" />
+				<EventTask type="doActionScript"  targetNpcId="506,4207" actionScriptId="9506036" next="time" nextValue="1" />
+				<EventTask type="doActionScript"  targetNpcId="506,4205" actionScriptId="9506037" next="time" nextValue="1" />
+				<EventTask type="doActionScript"  targetNpcId="506,4206" actionScriptId="9506038" next="time" nextValue="1" />			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>			
+	-->
+	
+	<!--
+	<EventGroup type="questProgress">
+		<Event questId="50501" taskId="28">
+				<EventTaskGroup>
+					<EventTask type="playMovie" id="3041" next="time" nextValue="15"/>
+				</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+ 	-->
+	<!--
+	<EventGroup type="questProgress">
+		<Event questId="50502" taskId="1">
+				<EventTaskGroup>					
+					
+				</EventTaskGroup>
+		</Event>
+	</EventGroup> 
+	-->
+	<!-- 댄스 지역 앞 지날 시 대사 연출 -->
+	 <EventGroup type="enterTerritory" uniqueId="506,50600044"  targetNpcId="506,8005" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+					<!-- 페레미아 엘린 포라엘리누 외교관 -->
+					<EventTask type="message" string="@dungeon:9506100" style="speechbubble" targetNpcId="506,8005" next="time" nextValue="2"/>
+					<!-- 리엔 엘린 궁정 기사단장 -->
+					<EventTask type="message" string="@dungeon:9506110" style="speechbubble" targetNpcId="506,8001" next="time" nextValue="1"/>
+					<!-- 크란 엘린 궁정 기사단-->
+					<EventTask type="message" string="@dungeon:9506120" style="speechbubble" targetNpcId="506,8000" next="time" nextValue="1"/>
+					<!-- 메리아 엘린 궁정 기사단 -->
+					<EventTask type="message" string="@dungeon:9506130" style="speechbubble" targetNpcId="506,8002" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 음식 지역 앞 지날 시 대사 연출 -->
+	 <EventGroup type="enterTerritory" uniqueId="506,50600046"  targetNpcId="506,8005" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+					<!-- 페레미아 엘린 포라엘리누 외교관 -->
+					<EventTask type="message" string="@dungeon:9506101" style="speechbubble" targetNpcId="506,8005" next="time" nextValue="2"/>
+					<!-- 리엔 엘린 궁정 기사단장 -->
+					<EventTask type="message" string="@dungeon:9506111" style="speechbubble" targetNpcId="506,8001" next="time" nextValue="1"/>
+					<!-- 크란 엘린 궁정 기사단-->
+					<EventTask type="message" string="@dungeon:9506121" style="speechbubble" targetNpcId="506,8000" next="time" nextValue="1"/>
+					<!-- 메리아 엘린 궁정 기사단 -->
+					<EventTask type="message" string="@dungeon:9506131" style="speechbubble" targetNpcId="506,8002" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 행운상자 지역 앞 지날 시 대사 연출 -->
+	 <EventGroup type="enterTerritory" uniqueId="506,50600047"  targetNpcId="506,8005" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+					<!-- 페레미아 엘린 포라엘리누 외교관 -->
+					<EventTask type="message" string="@dungeon:9506102" style="speechbubble" targetNpcId="506,8005" next="time" nextValue="2"/>
+					<!-- 리엔 엘린 궁정 기사단장 -->
+					<EventTask type="message" string="@dungeon:9506112" style="speechbubble" targetNpcId="506,8001" next="time" nextValue="1"/>
+					<!-- 크란 엘린 궁정 기사단-->
+					<EventTask type="message" string="@dungeon:9506122" style="speechbubble" targetNpcId="506,8000" next="time" nextValue="1"/>
+					<!-- 메리아 엘린 궁정 기사단 -->
+					<EventTask type="message" string="@dungeon:9506132" style="speechbubble" targetNpcId="506,8002" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 연극 지역 앞 지날 시 대사 연출 -->
+	 <EventGroup type="enterTerritory" uniqueId="506,50600045"  targetNpcId="506,8005" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+					<!-- 페레미아 엘린 포라엘리누 외교관 -->
+					<EventTask type="message" string="@dungeon:9506103" style="speechbubble" targetNpcId="506,8005" next="time" nextValue="2"/>
+					<!-- 리엔 엘린 궁정 기사단장 -->
+					<EventTask type="message" string="@dungeon:9506113" style="speechbubble" targetNpcId="506,8001" next="time" nextValue="1"/>
+					<!-- 크란 엘린 궁정 기사단-->
+					<EventTask type="message" string="@dungeon:9506123" style="speechbubble" targetNpcId="506,8000" next="time" nextValue="1"/>
+					<!-- 메리아 엘린 궁정 기사단 -->
+					<EventTask type="message" string="@dungeon:9506133" style="speechbubble" targetNpcId="506,8002" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 총 지배인 지역 앞 지날 시 대사 연출 -->
+	 <EventGroup type="enterTerritory" uniqueId="506,50600048"  targetNpcId="506,8005" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+					<!-- 페레미아 엘린 포라엘리누 외교관 -->
+					<EventTask type="message" string="@dungeon:9506104" style="speechbubble" targetNpcId="506,8005" next="time" nextValue="2"/>
+					<!-- 페레미아 엘린 포라엘리누 외교관 -->
+					<EventTask type="message" string="@dungeon:9506105" style="speechbubble" targetNpcId="506,8005" next="time" nextValue="1"/>
+					<!-- 리엔 엘린 궁정 기사단장 -->
+					<EventTask type="message" string="@dungeon:9506114" style="speechbubble" targetNpcId="506,8001" next="time" nextValue="1"/>
+					<!-- 크란 엘린 궁정 기사단-->
+					<EventTask type="message" string="@dungeon:9506124" style="speechbubble" targetNpcId="506,8000" next="time" nextValue="1"/>
+					<!-- 메리아 엘린 궁정 기사단 -->
+					<EventTask type="message" string="@dungeon:9506134" style="speechbubble" targetNpcId="506,8002" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 연설장 앞 지날 시 대사 연출 -->
+	 <EventGroup type="enterTerritory" uniqueId="506,50600049"  targetNpcId="506,8005" repeat="false">	
+		<Event >
+			<EventTaskGroup>
+					<!-- 페레미아 엘린 포라엘리누 외교관 -->
+					<EventTask type="message" string="@dungeon:9506106" style="speechbubble" targetNpcId="506,8005" next="time" nextValue="2"/>					
+					<!-- 리엔 엘린 궁정 기사단장 -->
+					<EventTask type="message" string="@dungeon:9506114" style="speechbubble" targetNpcId="506,8001" next="time" nextValue="1"/>
+					<!-- 크란 엘린 궁정 기사단-->
+					<EventTask type="message" string="@dungeon:9506125" style="speechbubble" targetNpcId="506,8000" next="time" nextValue="1"/>
+					<!-- 메리아 엘린 궁정 기사단 -->
+					<EventTask type="message" string="@dungeon:9506135" style="speechbubble" targetNpcId="506,8002" next="time" nextValue="1"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+</Dungeon>

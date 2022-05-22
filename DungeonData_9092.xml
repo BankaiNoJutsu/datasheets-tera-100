@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9092" name="@dungeon:9092" startPos="68232,113763,94" exitContinentId="7013" exitPos="-70697,53682,57">
+  <!--  다곤의 신전 특수공간 9092, 492 : 동영상 재생, 퀘스트 몬스터 사냥 -->
+  <RestoreTargetQuest id="4201" />
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="45" />
+  <Condition type="progressQuest" value="4202" taskId="10" />
+  <Condition type="completeQuest" value="4202" />
+  <!-- 다곤의 부활 저지 퀘스트로 변경. 4205번 퀘스트 지정 -->
+  <EventGroup type="npcHp" uniqueId="492,2002" value="0">
+    <!--마지막 바리케이드(약) HP 0일 때 동영상 재생-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9092001" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="401,3" value="99">
+    <!-- 메코나리 야만전사  HP감소 시 대사 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9092002" targetNpcId="492,1" style="default" nextValue="50" next="npcHp" />
+        <EventTask type="message" string="@dungeon:9092003" targetNpcId="492,1" style="default" nextValue="0" next="npcHp" />
+        <EventTask type="message" string="@dungeon:9092004" targetNpcId="492,1" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="401,1" value="99">
+    <!-- 대족장  HP감소 시 대사 -->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9092005" targetNpcId="492,1" style="default" nextValue="50" next="npcHp" />
+        <EventTask type="message" string="@dungeon:9092006" targetNpcId="492,1" style="default" nextValue="0" next="npcHp" />
+        <EventTask type="message" string="@dungeon:9092007" targetNpcId="492,1" style="default" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

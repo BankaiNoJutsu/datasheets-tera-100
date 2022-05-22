@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9124" name="@dungeon:9124" startPos="-130619,-117502,-84" exitContinentId="7005" exitPos="27180,16334,881" coolTimeWithContinentId="9125,9126" newbieBonusOff="true">
+  <Condition type="solo" value="1" />
+  <Condition type="levelOver" value="65" />
+  <Condition type="unionDungeon" value="100" />
+
+	<EventGroup type="userCountInDungeon" value="1">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="124" territoryId="12400003" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="lancer" type="enterTerritory" uniqueId="124,12400007">						<!-- 창기사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400004" next="none"/>				<!-- 창기사용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,102" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="timer" timerName="buff" value="60" repeat="true" id="91241">                                     <!-- 타이머UI 출력 및 1분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7003" playTime="0" next="none" />
+				<EventTask type="message" string="@dungeon:9124001" style="combat" next="time" nextValue="3" />
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,102" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" direction="forward" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup triggerUserClass="warrior" type="enterTerritory" uniqueId="124,12400007">		<!-- 검투사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400008" next="none"/>				<!-- 근딜용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,103" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,103" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="slayer" type="enterTerritory" uniqueId="124,12400007">		<!-- 무사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400008" next="none"/>				<!-- 근딜용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,103" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,103" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="berserker" type="enterTerritory" uniqueId="124,12400007">		<!-- 광전사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400008" next="none"/>				<!-- 근딜용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,103" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,103" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup triggerUserClass="sorcerer" type="enterTerritory" uniqueId="124,12400007">		<!-- 마법사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400009" next="none"/>				<!-- 원딜용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,104" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,104" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="archer" type="enterTerritory" uniqueId="124,12400007">			<!-- 궁수로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400009" next="none"/>				<!-- 원딜용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,104" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,104" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="124,12400007">			<!-- 사제로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400012" next="none"/>				<!-- 힐러용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="abnormality" abnormalityId="91240000" target="player" next="none"/>     		<!-- 힐러용 공격력 강화 이상상태 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,106" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,106" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none"/>				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="124,12400007">	<!-- 정령사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400010" next="none"/>				<!-- 힐러용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="abnormality" abnormalityId="91240000" target="player" next="none"/>     		<!-- 힐러용 공격력 강화 이상상태 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,105" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,105" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+    
+	<EventGroup triggerUserClass="soulless" type="enterTerritory" uniqueId="124,12400007">		<!-- 비검사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400009" next="none"/>				<!-- 원딜용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,104" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,104" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="engineer" type="enterTerritory" uniqueId="124,12400007">			<!-- 마공사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400009" next="none"/>				<!-- 원딜용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,104" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,104" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="fighter" type="enterTerritory" uniqueId="124,12400007">						<!-- 권술사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400004" next="none"/>				<!-- 창기사용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,102" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="timer" timerName="buff" value="60" repeat="true" id="91241">                                     <!-- 타이머UI 출력 및 1분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Soundon" soundType="effectSound" soundId="7003" playTime="0" next="none" />
+				<EventTask type="message" string="@dungeon:9124001" style="combat" next="time" nextValue="3" />
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="time" nextValue="30"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" next="none"/>     <!-- 5분 강화 버프 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,102" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" direction="forward" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup triggerUserClass="assassin" type="enterTerritory" uniqueId="124,12400007">		<!-- 인술사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400008" next="none"/>				<!-- 근딜용 몬스터 스폰-->
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup type="npcState" uniqueId="124,103" value="combat" repeat="true">                                     <!-- 타이머UI 출력 및 5분 지난후 이상상태 효과 지급 -->      
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+				<EventTask type="timer" action="start" direction="reverse" value="1800" name="timerA" timerType="rank" timerUiOff="true" next="none" />
+				<EventTask type="timer" name="buff" action="start" direction="forward" value="0" timerUiOff="false" next="time" nextValue="3"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 닫기-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="124,103" value="0"  repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="timerA" timerType="rank" next="time" nextValue="5" />
+				<EventTask type="rankSystem" state="end" next="none" />
+				<EventTask type="timer" action="stop" value="0" name="timerA" next="none" />	
+				<EventTask type="timer" name="buff" action="stop" timerUiOff="false" next="time" nextValue="3"/>				
+				<EventTask type="message" string="@dungeon:9124002" style="combat" next="time" nextValue="2"/>
+				<EventTask type="timer" name="buff" action="stop" direction="forward" value="0" timerUiOff="true" next="none"/>				
+				<EventTask type="message" string="@dungeon:9124003" style="combat" next="none"/>
+				<EventTask type="Spawn" huntingZoneId="124" territoryId="12400005" next="none" />				<!-- 몬스터 죽으면 문 열고 차원의 마법석 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 보스몬스터 리셋 시-->
+	<EventGroup type="npcReset" uniqueId="124,102" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="timer" name="buff" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="timer" name="timerA" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="eventState" id="91241" state="stop" stateType="eventGroup" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" turn="off" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="124,103" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="timer" name="buff" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="timer" name="timerA" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="eventState" id="91241" state="stop" stateType="eventGroup" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" turn="off" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="124,104" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="timer" name="buff" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="timer" name="timerA" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="eventState" id="91241" state="stop" stateType="eventGroup" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" turn="off" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="124,105" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="timer" name="buff" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="timer" name="timerA" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="eventState" id="91241" state="stop" stateType="eventGroup" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240000" target="player" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" turn="off" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="124,106" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="deSpawn" huntingZoneId="124" territoryId="12400003" next="none"/>				<!-- 입구문 열기-->
+				<EventTask type="timer" name="buff" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="timer" name="timerA" action="stop" next="time" nextValue="1" value="0" timerUiOff="true" />
+				<EventTask type="eventState" id="91241" state="stop" stateType="eventGroup" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240000" target="player" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240001" target="player" turn="off" next="none" />
+				<EventTask type="abnormality" abnormalityId="91240002" target="player" turn="off" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 힐러 클래스 제자리 부활시 훈련교관의 지원 이상상태 부여-->
+	<EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="124,12400011" repeat="true" >			<!-- 사제로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91240000" target="player" next="none"/>     		<!-- 힐러용 공격력 강화 이상상태 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	<EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="124,12400011" repeat="true" >	<!-- 정령사로 해당 테리토리에 진입하면-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="91240000" target="player" next="none"/>     		<!-- 힐러용 공격력 강화 이상상태 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	
+	
+</Dungeon>

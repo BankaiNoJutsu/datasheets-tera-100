@@ -1,0 +1,943 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9767" name="@dungeon:9767" startPos="-136282.8281,-75203.6016,1.2047" exitContinentId="7031" exitPos="39522,33646,7969">
+	<Condition type="raid" value="2" />
+	<Condition type="maxMemberCount" value="7" />
+	<Condition type="levelOver" value="66" />
+	<Condition type="notSolo"/>
+	<ClearCondition huntingZoneId="767" templateId="46704" amount="1" killCount="1" />
+	<Retry retryId="1" />
+	
+    <EventGroup type="initialize">
+	  <Event>
+		<EventTaskGroup>
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700139,46700143,46700142,46700153" next="none" />	 
+  	      <EventTask type="guideOn" nameId="767,911" id="1" pos="-134192.21875000,-74520.38281250,-130.41256714" next="none" />
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+
+    <EventGroup type="eliminate" territoryId="46700093" >
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="flag" name="1번" value="1" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+    <EventGroup type="eliminate" territoryId="46700094" >
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="flag" name="2번" value="1" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+    <EventGroup type="eliminate" territoryId="46700095" >
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="flag" name="3번" value="1" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="flag" name="1번,2번,3번" ><!--1번방 문열기-->
+     <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="3" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700139" next="none" />	 
+	   	  <EventTask type="flag" name="1번" value="0" next="none" />
+	   	  <EventTask type="flag" name="2번" value="0" next="none" />
+	   	  <EventTask type="flag" name="3번" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700015,46700100,46700101,46700102,46700103" next="none" />	 
+		  </EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+  <!-- 버프 확인 NPC 생성
+  <EventGroup type="enterTerritory" uniqueId="767,46700154" repeat="false">
+    <Event>
+      <EventTaskGroup>
+  		<EventTask type="spawn" huntingZoneId="767" territoryId="76700006" next="none"/>
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  버프 확인 메세지 걸기
+  <EventGroup type="enterTerritory" uniqueId="767,76700006" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860033" turn="on" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  버프 확인
+  <EventGroup type="none" id="48" name="버프 확인" repeat="true">
+  	<Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860033" turn="off" target="player" next="none" /> 물약/주문서 가이드 이상상태 제거
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> 가이드 삭제용 이상상태 시작
+  	    <EventTask type="guideOn" nameId="767,911" id="1" pos="-134192.21875000,-74520.38281250,-130.41256714" next="none" />
+		<EventTask type="message" string="@dungeon:9860020" style="combat" next="none" />
+		<EventTask type="despawn" huntingZoneId="767" territoryId="76700005" next="none"/>
+		<EventTask type="despawn" huntingZoneId="767" territoryId="76700006" next="none"/>
+	  </EventTaskGroup>
+	</Event>
+  </EventGroup>
+
+  재입장했을 때 이상상태 860033 해제해 주기
+  <EventGroup type="enterTerritory" uniqueId="767,76700007" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> 가이드 삭제용 이상상태 시작
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  
+  <EventGroup type="enterTerritory" uniqueId="767,76700009" repeat="true"> 2네임드 입구
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> 가이드 삭제용 이상상태 시작
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>  
+  
+  <EventGroup type="enterTerritory" uniqueId="767,76700010" repeat="true"> 3네임드 입구
+    <Event>
+      <EventTaskGroup>
+		<EventTask type="abnormality" abnormalityId="860034" turn="on" target="player" next="none" /> 가이드 삭제용 이상상태 시작
+      </EventTaskGroup>
+    </Event>
+  </EventGroup> -->
+  
+    <!-- 1넴 시작 -->
+    <EventGroup type="npcState" uniqueId="767,46701" value="combat" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@MonsterBehavior:46751" style="combat" next="none" />	 
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46701" value="98" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700139" next="none" />	 
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>	
+    <EventGroup type="npcHp" uniqueId="767,46702" value="98" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700139" next="none" />	 
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>	
+
+    <EventGroup type="npcHp" uniqueId="767,46702" value="80" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067011" style="combat" next="time" nextValue="2" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46757" target="npc" targetNpcId="767,46702" next="none" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46701" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46702" value="60" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067011" style="combat" next="time" nextValue="2" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46757" target="npc" targetNpcId="767,46702" next="none" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46701" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46702" value="40" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067011" style="combat" next="time" nextValue="2" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46757" target="npc" targetNpcId="767,46702" next="none" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46701" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46702" value="20" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067011" style="combat" next="time" nextValue="2" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46757" target="npc" targetNpcId="767,46702" next="none" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46701" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46702" value="5" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067011" style="combat" next="time" nextValue="2" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46757" target="npc" targetNpcId="767,46702" next="none" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46701" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46702" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="changePatternList" targetNpcId="767,46701" patternListId="2" next="time" nextValue="2" />	
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700012" next="none" />	 
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700139,46700143" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="10" />
+          <EventTask type="killNpc" targetNpcId="767,46701" next="none" />	  
+		  <EventTask type="guideOn" nameId="767,912" id="1" pos="-129570.54687500,-69590.23437500,-1172.48229980" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="none" id="7" name="1네임드 사망 남" repeat="true">
+      <Event>
+        <EventTaskGroup>
+          <EventTask type="killNpc" targetNpcId="767,46701" next="none" />	  
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="8" name="1네임드 베라 무적 해제" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="1" />
+		  <EventTask type="abnormality" turn="off" abnormalityId="46757" target="npc" targetNpcId="767,46702" next="none" />
+		  <EventTask type="abnormality" turn="off" abnormalityId="46755" target="npc" targetNpcId="767,46701" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>	
+	<!-- 1네임드 여자 무적 46755의 카인드값=28909-->
+    <EventGroup type="npcHp" uniqueId="767,46701" value="80" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067010" style="combat" next="time" nextValue="1" />
+		  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067012" style="combat" next="time" nextValue="1" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46702" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46701" value="60" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067010" style="combat" next="time" nextValue="1" />
+		  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067012" style="combat" next="time" nextValue="1" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46702" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46701" value="40" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067010" style="combat" next="time" nextValue="1" />
+		  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067012" style="combat" next="time" nextValue="1" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46702" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46701" value="20" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067010" style="combat" next="time" nextValue="1" />
+		  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067012" style="combat" next="time" nextValue="1" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46702" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46701" value="5" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067010" style="combat" next="time" nextValue="1" />
+		  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067012" style="combat" next="time" nextValue="1" />
+		  <EventTask type="abnormality" turn="on" abnormalityId="46755" target="npc" targetNpcId="767,46702" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+    <EventGroup type="npcHp" uniqueId="767,46701" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="changePatternList" targetNpcId="767,46702" patternListId="2" next="time" nextValue="2" />	
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700012" next="none" />	 
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700139,46700143" next="none" />	 
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700016" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="10" />
+          <EventTask type="killNpc" targetNpcId="767,46702" next="none" />	  
+		  <EventTask type="guideOn" nameId="767,912" id="1" pos="-129570.54687500,-69590.23437500,-1172.48229980" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+
+	<EventGroup type="none" id="9" name="1네임드 사망 여" repeat="true">
+      <Event>
+        <EventTaskGroup>
+          <EventTask type="killNpc" targetNpcId="767,46702" next="none" />	  
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="10" name="1네임드 프리마 무적 해제" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="empty" next="time" nextValue="1" />
+		  <EventTask type="abnormality" turn="off" abnormalityId="46755" target="npc" targetNpcId="767,46702" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+    <EventGroup type="npcReset" uniqueId="767,46701" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+		<EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="despawn" huntingZoneId="767" territoryId="46700015" resetNpcHpDungeonTask="true" next="none" />	 
+		<EventTask type="empty" next="time" nextValue="5" />
+		<EventTask type="spawn" huntingZoneId="767" territoryId="46700015" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="11" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700139" next="none" />	 
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+    <EventGroup type="npcReset" uniqueId="767,46702" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+		<EventTask type="empty" next="time" nextValue="1" />
+		<EventTask type="despawn" huntingZoneId="767" territoryId="46700015" resetNpcHpDungeonTask="true" next="none" />	 
+		<EventTask type="empty" next="time" nextValue="5" />
+		<EventTask type="spawn" huntingZoneId="767" territoryId="46700015" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="11" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700139" next="none" />	 
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup>
+
+    <EventGroup type="eliminate" territoryId="46700151" >
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="flag" name="문1" value="1" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+    <EventGroup type="eliminate" territoryId="46700099" >
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="flag" name="문2" value="1" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="flag" name="문1,문2" ><!--2번방 문열기-->
+     <Event>
+        <EventTaskGroup>
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700153" next="none" />	 
+	   	  <EventTask type="flag" name="문1" value="0" next="none" />
+	   	  <EventTask type="flag" name="문2" value="0" next="none" />
+		  </EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+    <EventGroup type="npcState" uniqueId="767,46703" value="combat" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700144" next="none" />	 
+  		<EventTask type="spawn" huntingZoneId="767" territoryId="46700139" next="none" />	 <!--1네임드 문 막기 -->
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	
+	<!-- 2네임드 랜덤 장판 패턴 변경 -->
+	<EventGroup type="none" id="99" name="장판패턴시작_맛보기" repeat="true">
+      <Event>
+        <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067020" style="combat" next="none" />
+		  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067021" style="combat" next="none" />
+		  <EventTask type="flag" name="2바닥_1차" value="1" next="time" nextValue="3" />
+		  <EventTask type="flag" name="2바닥_2차" value="1" next="time" nextValue="3" />
+		  <EventTask type="flag" name="2바닥_1차" value="1" next="time" nextValue="3" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="100" name="장판패턴시작_왼쪽 or 오른쪽" repeat="true">
+      <Event>
+	    <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067020" style="combat" next="none" />
+		  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067021" style="combat" next="none" />
+		  <EventTask type="flag" name="2바닥_1차" value="1" next="time" nextValue="3" />
+		  <EventTask type="flag" name="2바닥_2차" value="1" next="time" nextValue="3" />
+		  <EventTask type="flag" name="2바닥_1차" value="1" next="time" nextValue="3" />
+		  <EventTask type="flag" name="2바닥_2차" value="1" next="time" nextValue="3" />
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="101" name="장판패턴시작_오른쪽 or 왼쪽 or 랜덤" repeat="true">
+      <Event>
+	    <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067020" style="combat" next="none" />
+		  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067021" style="combat" next="none" />
+		  <EventTask type="flag" name="2바닥_1차" value="1" next="time" nextValue="3" />
+		  <EventTask type="flag" name="2바닥_2차" value="1" next="time" nextValue="3" />
+		  <EventTask type="flag" name="2바닥_1차" value="1" next="time" nextValue="3" />
+		  <EventTask type="flag" name="2바닥_2차" value="1" next="time" nextValue="3" />
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+    <EventGroup type="none" id="102" name="장판패턴시작_랜덤3,4,3,4번공격" repeat="true">
+      <Event>
+	    <EventTaskGroup>
+	   	  <EventTask type="message" chat="true" chatType="y" string="@dungeon:9067025" style="combat" next="none" />
+		  <EventTask type="empty" next="time" nextValue="1" />
+		  <EventTask type="flag" name="2바닥_1차" value="1" next="time" nextValue="5" />
+	   	  <EventTask type="flag" name="4바닥랜덤" value="1" next="time" nextValue="5" />
+		  <EventTask type="flag" name="2바닥_1차" value="1" next="time" nextValue="5" />
+	   	  <EventTask type="flag" name="4바닥랜덤" value="1" next="time" nextValue="5" />
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<!-- 랜덤 위치에 3개 장판 생성 -->
+	<EventGroup type="flag" name="랜덤_3바닥_1차" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700060" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700060" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700061" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700061" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700062" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700062" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700063" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700063" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700064" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700064" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700065" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700065" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700066" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700066" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700067" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700067" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700068" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700068" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700082" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700082" next="none" />	 
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="flag" name="랜덤_3바닥_2차" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700073" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700073" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700074" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700074" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700075" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700075" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700076" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700076" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700077" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700077" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700078" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700078" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700079" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700079" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700080" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700080" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700081" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700081" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.1">
+		  <EventTask type="flag" name="랜덤_3바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700084" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700084" next="none" />	 
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<!-- 랜덤 위치에 2개 장판 생성 -->
+	<EventGroup type="flag" name="2바닥_1차" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="flag" name="2바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700066" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700066" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="flag" name="2바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700067" next="time" nextValue="5" />	
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700067" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="flag" name="2바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700068" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700068" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="flag" name="2바닥_1차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700082" next="time" nextValue="5" />	
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700082" next="none" />	 
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2바닥_2차" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="flag" name="2바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700079" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700079" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="flag" name="2바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700080" next="time" nextValue="5" />	
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700080" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="flag" name="2바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700081" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700081" next="none" />	 
+		</EventTaskGroup>
+	    <EventTaskGroup probability="0.25">
+		  <EventTask type="flag" name="2바닥_2차" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700084" next="time" nextValue="5" />	
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700084" next="none" />	 
+		</EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<!-- 순차 장판 -->	
+	<EventGroup type="flag" name="3바닥_왼오" repeat="true"><!-- 장판패턴시작_왼쪽->오른쪽 -->
+     <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="3바닥_왼오" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700054" next="time" nextValue="3" />	 
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700053" next="time" nextValue="3" />	 
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700052" next="time" nextValue="3" />	 
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700051" next="time" nextValue="3" />	 
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700050" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700050,46700051,46700052,46700053,46700054" next="none" />	 
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="flag" name="3바닥_오왼" repeat="true"><!-- 장판패턴시작_오른쪽->왼쪽 -->
+     <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="3바닥_오왼" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700050" next="time" nextValue="3" />	 
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700051" next="time" nextValue="3" />	 
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700052" next="time" nextValue="3" />	 
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700053" next="time" nextValue="3" />	 
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700054" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700050,46700051,46700052,46700053,46700054" next="none" />	 
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<!-- 4바닥 랜덤 장판 -->	
+	<EventGroup type="flag" name="4바닥랜덤" repeat="true">
+     <Event>
+	    <EventTaskGroup probability="0.33333">
+		  <EventTask type="flag" name="4바닥랜덤" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700051" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700051" next="none" />	 
+        </EventTaskGroup>
+	    <EventTaskGroup probability="0.33333">
+		  <EventTask type="flag" name="4바닥랜덤" value="0" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700052" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700052" next="none" />	 
+        </EventTaskGroup>
+	    <EventTaskGroup probability="0.33334">
+		  <EventTask type="flag" name="4바닥랜덤" value="0" next="none" />
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700053" next="time" nextValue="5" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700053" next="none" />	 
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	
+	<!-- 장판 종료용 플래그 -->
+	<EventGroup type="flag" name="장판종료" repeat="true">
+     <Event>
+	    <EventTaskGroup>
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700063,46700064,46700065,46700066,46700067,46700068,46700073,46700074" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700075,46700076,46700077,46700078,46700079,46700080,46700081,46700084,46700082" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700050,46700051,46700052,46700053,46700054,46700060,46700061,46700062" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="1" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700063,46700064,46700065,46700066,46700067,46700068,46700073,46700074" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700075,46700076,46700077,46700078,46700079,46700080,46700081,46700084,46700082" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700050,46700051,46700052,46700053,46700054,46700060,46700061,46700062" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="1" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700063,46700064,46700065,46700066,46700067,46700068,46700073,46700074" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700075,46700076,46700077,46700078,46700079,46700080,46700081,46700084,46700082" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700050,46700051,46700052,46700053,46700054,46700060,46700061,46700062" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="1" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700063,46700064,46700065,46700066,46700067,46700068,46700073,46700074" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700075,46700076,46700077,46700078,46700079,46700080,46700081,46700084,46700082" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700050,46700051,46700052,46700053,46700054,46700060,46700061,46700062" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="1" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700063,46700064,46700065,46700066,46700067,46700068,46700073,46700074" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700075,46700076,46700077,46700078,46700079,46700080,46700081,46700084,46700082" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700050,46700051,46700052,46700053,46700054,46700060,46700061,46700062" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="1" />
+		  </EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<!-- 2네임드 무적 -->
+	<EventGroup type="none" id="1033" name="무적 삭제" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" turn="off" abnormalityId="46752" target="npc" targetNpcId="767,46703" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="103" name="2네임드 패턴 시작 시 무적 30초 " repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <!--<EventTask type="abnormality" turn="on" abnormalityId="46752" target="npc" targetNpcId="767,46703" next="none" />-->
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+    <EventGroup type="npcHp" uniqueId="767,46703" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="eventState" stateType="EventGroup" id="99" state="stop" next="none" />  <!-- 장판 패턴 종료 -->
+          <EventTask type="eventState" stateType="EventGroup" id="100" state="stop" next="none" /> <!-- 장판 패턴 종료 -->
+          <EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" /> <!-- 장판 패턴 종료 -->
+		  <EventTask type="eventState" stateType="EventGroup" id="102" state="stop" next="none" /> <!-- 장판 패턴 종료 -->
+		  <EventTask type="despawn" targetNpcId="767,46725" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+		  <EventTask type="despawn" targetNpcId="767,46726" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+		  <EventTask type="despawn" targetNpcId="767,46727" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+		  <EventTask type="despawn" targetNpcId="767,46728" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+		  <EventTask type="despawn" targetNpcId="767,46729" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+		  <EventTask type="despawn" targetNpcId="767,46735" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+		  <EventTask type="despawn" targetNpcId="767,46736" next="none" /> <!-- 장판 패턴 NPC 제거 -->	  
+		  <EventTask type="despawn" targetNpcId="767,46737" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+		  <EventTask type="despawn" targetNpcId="767,46738" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+		  <EventTask type="despawn" targetNpcId="767,46739" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+		  <EventTask type="despawn" targetNpcId="767,46740" next="none" /> <!-- 장판 패턴 NPC 제거 -->
+  		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700139" next="none" />	 <!--1네임드 문 막기 -->
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="76700002,76700001" next="none" />	 
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700142" next="none" />	 
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700100,46700101,46700102,46700103,46700144" next="none" />
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700050,46700051,46700052,46700053,46700054,46700060,46700061,46700062,46700063,46700064,46700065,46700066,46700067,46700068,46700082,46700073,46700074,46700075,46700076,46700077,46700078,46700079,46700080,46700081,46700084" next="none" />
+		  <EventTask type="killNpc" targetNpcId="767,46731" next="none" /> <!-- 소환물 NPC 제거 -->
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700142" next="none" />	
+          <EventTask type="abnormality" abnormalityId="46761" turn="off" target="player" next="none" />  <!-- 오염된 폐수 이상상태 제거 --> 
+		  <EventTask type="abnormality" abnormalityId="76756" turn="off" target="player" next="none" />  <!-- 부패한 폐수 이상상태 제거 --> 
+		  <EventTask type="abnormality" abnormalityId="76756" turn="off" target="player" next="time" nextValue="1" />
+		  <EventTask type="abnormality" abnormalityId="76756" turn="off" target="player" next="time" nextValue="1" />
+		  <EventTask type="eventState" stateType="EventGroup" id="99" state="stop" next="none" />  <!-- 장판 패턴 종료 -->
+          <EventTask type="eventState" stateType="EventGroup" id="100" state="stop" next="none" /> <!-- 장판 패턴 종료 -->
+          <EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="none" /> <!-- 장판 패턴 종료 -->
+		  <EventTask type="eventState" stateType="EventGroup" id="102" state="stop" next="none" /> <!-- 장판 패턴 종료 -->
+		  <EventTask type="guideOn" nameId="767,913" id="1" pos="-126600.56250000,-66099.79687500,-1535.75000000" next="none" />
+		  <EventTask type="flag" name="영상1" value="1" next="none" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="flag" name="장판종료" value="1" next="time" nextValue="2.5" />
+		  <EventTask type="abnormality" abnormalityId="76756" turn="off" target="player" next="time" nextValue="1" />
+		  </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	
+    <EventGroup type="npcReset" uniqueId="767,46703" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700144" next="none" />	 <!-- 2넴 이동 마석-->
+  		<EventTask type="despawn" huntingZoneId="767" territoryId="46700139" next="none" />	 <!--1네임드 문 막기 -->
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700012" resetNpcHpDungeonTask="true" next="none" />	
+		  <EventTask type="empty" next="time" nextValue="5" />
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700012" next="none" />	 
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700154" next="none" />	 
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+	
+
+    <EventGroup type="npcState" uniqueId="767,46704" value="combat" repeat="true">
+      <Event>
+        <EventTaskGroup>
+  		<EventTask type="spawn" huntingZoneId="767" territoryId="46700139" next="none" />	 <!--1네임드 문 막기 -->
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700155" next="none" />	 <!-- 3네임드 가는 마석-->
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<!-- 3네임드 정면 유저 확인 -->
+	<EventGroup type="none" id="108" name="1차 확인 - 방어력 증가 경고" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" turn="on" abnormalityId="46753" target="npc" targetNpcId="767,46704" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="109" name="2차 확인 - 베르노 방어력 증가" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" turn="on" abnormalityId="46751" target="npc" targetNpcId="767,46704" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="105" name="3차 확인 - 세번째 유저 없음 확인 공방증가" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="abnormality" turn="on" abnormalityId="46750" target="npc" targetNpcId="767,46704" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<!--3네임드 90~60 장판 랜덤 스폰-->	
+	<EventGroup type="none" id="1066" name="90% 레이져 1단" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="랜덤_장판" value="1" next="none" />
+		  <EventTask type="flag" name="레이져1차_1" value="1" next="none" />
+		  <EventTask type="empty" next="time" nextValue="4" />
+		  <EventTask type="flag" name="레이져1차" value="1" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="none" id="106" name="70% 랜덤 레이져 1단" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="랜덤_장판" value="1" next="none" />
+		  <EventTask type="flag" name="레이져1차_1" value="1" next="none" />
+		  <EventTask type="empty" next="time" nextValue="4" />
+		  <EventTask type="flag" name="레이져1차" value="1" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>
+    <EventGroup type="none" id="107" name="50% 랜덤 레이져 2단" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="랜덤_장판" value="1" next="none" />
+		  <EventTask type="flag" name="레이져1차_1" value="1" next="none" />
+		  <EventTask type="empty" next="time" nextValue="4" />
+		  <EventTask type="flag" name="레이져1차" value="1" next="none" />
+        </EventTaskGroup>
+      </Event>
+	</EventGroup>	
+    <EventGroup type="none" id="110" name="30% 랜덤 레이져 2단" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="랜덤_장판" value="1" next="none" />
+		  <EventTask type="flag" name="레이져1차_1" value="1" next="none" />
+		  <EventTask type="empty" next="time" nextValue="4" />
+		  <EventTask type="flag" name="레이져1차" value="1" next="none" />
+        </EventTaskGroup>
+      </Event>
+    </EventGroup>	
+    <EventGroup type="none" id="111" name="10% 랜덤 레이져 2단" repeat="true">
+      <Event>
+        <EventTaskGroup>
+		  <EventTask type="flag" name="랜덤_장판" value="1" next="none" />
+		  <EventTask type="flag" name="레이져2차_1" value="1" next="none" />
+		  <EventTask type="empty" next="time" nextValue="4" />
+		  <EventTask type="flag" name="레이져2차" value="1" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	<EventGroup type="flag" name="랜덤_장판" repeat="true">
+     <Event>
+        <EventTaskGroup probability="0.125">
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700133,46700127" next="none" />	 
+	   </EventTaskGroup>
+        <EventTaskGroup probability="0.125">
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700124,46700130" next="none" />	 
+	   </EventTaskGroup>
+        <EventTaskGroup probability="0.125">
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700132,46700126" next="none" />	 
+	   </EventTaskGroup>
+        <EventTaskGroup probability="0.125">
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700131,46700125" next="none" />	 
+	   </EventTaskGroup>
+        <EventTaskGroup probability="0.125">
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700132,46700131" next="none" />	 
+	   </EventTaskGroup>
+        <EventTaskGroup probability="0.125">
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700125,46700126" next="none" />	 
+	   </EventTaskGroup>
+        <EventTaskGroup probability="0.125">
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700129,46700127" next="none" />	 
+	   </EventTaskGroup>
+        <EventTaskGroup probability="0.125">
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700128,46700130" next="none" />	 
+	   </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="flag" name="장판_디스폰" repeat="true">
+     <Event>
+        <EventTaskGroup >
+		  <EventTask type="flag" name="장판_디스폰" value="0" next="none" />
+		  <EventTask type="flag" name="랜덤_장판" value="0" next="none" />
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700123,46700124,46700125,46700126,46700127,46700128,46700129,46700130,46700131,46700132,46700133,46700134" next="none" />	 
+	   </EventTaskGroup>
+      </Event>
+	</EventGroup>
+
+	<!--360도 회전 장판-->
+	<EventGroup type="flag" name="레이져1차,레이져1차_1" repeat="true">
+     <Event>
+        <EventTaskGroup>
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700090" next="none" />	 
+		  <EventTask type="flag" name="레이져1차" value="0" next="none" />
+		  <EventTask type="flag" name="레이져1차_1" value="0" next="none" />
+		  <EventTask type="empty" next="time" nextValue="10" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700090" next="none" />	 
+	   </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="flag" id="1" name="레이져2차,레이져2차_1" repeat="true">
+     <Event>
+        <EventTaskGroup>
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700090" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="6" />
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700091" next="none" />	 
+		  <EventTask type="flag" name="레이져2차" value="0" next="none" />
+		  <EventTask type="flag" name="레이져2차_1" value="0" next="none" />
+		  <EventTask type="empty" next="time" nextValue="10" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700090,46700091" next="none" />	 
+	   </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	<EventGroup type="flag" name="레이져3차" repeat="true">
+     <Event>
+       <EventTaskGroup probability="0.33333">
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700090" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="6" />
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700091" next="none" />	 
+		  <EventTask type="flag" name="레이져3차" value="0" next="none" />
+		  <EventTask type="empty" next="time" nextValue="10" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700090,46700091" next="none" />	 
+	   </EventTaskGroup>
+	   <EventTaskGroup probability="0.33333">
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700092" next="none" />	 
+		  <EventTask type="flag" name="레이져3차" value="0" next="none" />
+		  <EventTask type="empty" next="time" nextValue="10" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700092" next="none" />	 
+	   </EventTaskGroup>
+	   <EventTaskGroup probability="0.33334">
+          <EventTask type="spawn" huntingZoneId="767" territoryId="46700136" next="none" />	 
+		  <EventTask type="flag" name="레이져3차" value="0" next="none" />
+		  <EventTask type="empty" next="time" nextValue="10" />
+          <EventTask type="despawn" huntingZoneId="767" territoryId="46700136" next="none" />	 
+	   </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	
+	
+    <EventGroup type="npcHp" uniqueId="767,46704" value="0" repeat="true">
+      <Event>
+        <EventTaskGroup>
+				<!-- PC에게 걸리는 이상상태 해제 -->
+				<EventTask type="abnormality" abnormalityId="46710" target="player" turn="off" next="none" /><!--살아있는폭탄1-->
+				<EventTask type="abnormality" abnormalityId="46711" target="player" turn="off" next="none" /><!--살아있는폭탄2-->
+				<EventTask type="abnormality" abnormalityId="46712" target="player" turn="off" next="none" /><!--살아있는폭탄3-->
+				<EventTask type="abnormality" abnormalityId="46713" target="player" turn="off" next="none" /><!--살아있는폭탄4-->
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700139" next="none" />	 <!--1네임드 문 막기 -->
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700155" next="none" />
+		  <EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none" />
+		  <EventTask type="flag" name="레이져1차_1" value="0" next="none" />
+		  <EventTask type="flag" name="레이져2차_1" value="0" next="none" />
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700090,46700091,46700092" next="none" />	 <!--360도 장판-->
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700011" next="none" />	 <!--텔레포트 마석-->
+		  <EventTask type="guideOff" id="1" next="time" nextValue="4" />
+		  <EventTask type="flag" name="레이져1차" value="0" next="none" />
+		  <EventTask type="flag" name="레이져2차" value="0" next="none" />
+	   </EventTaskGroup>
+      </Event>
+    </EventGroup>
+	
+    <EventGroup type="npcReset" uniqueId="767,46704" repeat="true">
+	  <Event>
+		<EventTaskGroup>
+  		<EventTask type="despawn" huntingZoneId="767" territoryId="46700139" next="none" />	 <!--1네임드 문 막기 -->
+          <EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none" />
+		  <EventTask type="flag" name="레이져1차_1" value="0" next="none" />
+		  <EventTask type="flag" name="레이져2차_1" value="0" next="none" />
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700017" resetNpcHpDungeonTask="true" next="none" />	<!-- 보스-->
+		  <EventTask type="flag" name="장판_디스폰" value="1" next="none" />
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700090,46700091,46700092,46700136" next="none" />	 <!--360도 장판-->
+		  <EventTask type="empty" next="time" nextValue="5" />
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700017" next="none" />	 
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="46700154" next="none" />	 
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700155" next="none" />
+		  <EventTask type="flag" name="레이져1차" value="0" next="none" />
+		  <EventTask type="flag" name="레이져2차" value="0" next="none" />
+		</EventTaskGroup>
+	  </Event>
+	</EventGroup> 
+	
+  <EventGroup type="enterTerritory" uniqueId="767,76700001" repeat="true">
+    <Event>
+      <EventTaskGroup>
+		  <EventTask type="flag" name="영상2" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+	<EventGroup type="flag" name="영상2,영상1">
+     <Event>
+       <EventTaskGroup>
+		  <EventTask type="despawn" huntingZoneId="767" territoryId="76700002" next="none" />	 
+		  <EventTask type="empty" next="time" nextValue="1" />
+		  <EventTask type="playMovie" id="3011" next="none" />
+		  <EventTask type="spawn" huntingZoneId="767" territoryId="46700017" next="none" />	 
+	   </EventTaskGroup>
+      </Event>
+	</EventGroup>
+	
+	
+</Dungeon>

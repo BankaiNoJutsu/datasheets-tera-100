@@ -1,0 +1,1524 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServantData>
+<!--
+	animation 노드의 default 값 (설정하지 않으면 자동 적용되는 값) 
+		- move = Walk		
+		- collecting = Herb
+		- itemLooting = Pickup
+		- move의 경우는 Walk아니면, Run만 설정 가능 (제작되는 이동 애니메이션도 이거 밖에 없다.)
+
+================================================================================================================================================================================================================
+	
+	type : Partner, Pet 정의
+	maxLevel : 최대 레벨
+	maxEnergy : 최대 기력/피로도
+	delEnergyPerMin : 소환 시 1분마다 감소하는 기력/피로도 양. 감소 타이머는 보유한 각 Servant마다 돌아가고 디스폰 시 멈추며 재접속 시 초기화됨
+	initEnergy : Servant 획득 시 보유한 기력/피로도 양
+	mentListId : Servant가 특정 조건에 말을 하는 기능. MentListData.xml에서 참조
+	basicSocialMotionId : 소환되어 가만히 있을 때 취하는 모션
+	defaultName : Servant의 기본 이름. StrSheet_Servant.xml에서 참조
+	wearableStyleItemId : 입을 수 있는 스타일 아이템. 파트너만 입을 수 있으며 ,로 복수 입력 가능
+	nearFrustumOffset : BTS.82697 - near Frustum 에 Culling 되는 문제로 Offset 설정
+	cameraZOffset : TRQA-4701 - 서번트 목록에서 3D모델링의 Z축을 이동시키는 노드
+	enableSRGB : 어두운 색의 서번트/펫을 UI메뉴 상에서 밝게 보이게 하기 위한 기능 False/True 값 입력
+	
+	Ability : 능력
+		- maxCount : 능력 보유 개수 제한
+		- initAbilityList : 서번트 획득 시 보유하고 있을 능력의 id 리스트
+	ActiveSkill : 파트너 버프 스킬
+		- id : ServantSkill.xml의 ActiveSkill에서 어느 스킬을 사용할지 참조
+	ConditionSkill : 파트너 조건부 스킬
+		- level : 파트너가 몇 레벨에 조건부 스킬을 습득할 지 지정. 1을 넣으면 파트너 획득 시 습득.
+		- number : 파트너가 조건부 스킬을 습득할 때 해당 풀에서 습득하는 조건부 스킬 개수
+		- SkillData
+			- id : ServantSkill.xml의 ConditionSkill에서 어느 조건부 스킬을 습득할지 지정. 이미 배운 조건부 스킬을 또 배울 수는 없음
+			- weight : 해당 id의 조건부 스킬을 획득하는 비중. 이미 배운 조건부 스킬은 제외하고 확률 판정
+	
+================================================================================================================================================================================================================-->
+
+	
+	<!-- 미션퀘 지급용 코코밍밍 -->
+	<Servant id="1000" huntingZoneId="1023" npcTemplateId="80055000" type="Partner" rareGrade="1" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="13" basicSocialMotionId="4,5,6,7" defaultName="@servant:1003" servantIconName="Icon_Servants.Partner_Coco_Tex" wearableStyleId="800551">
+		<Ability maxCount="6" initAbilityList="23"/>
+		<PartnerSkill>
+			<ActiveSkill id="1"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="8" weight="1"/>
+				<SkillData id="9" weight="1"/>
+				<SkillData id="10" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 마리 -->
+	<Servant id="1001" huntingZoneId="1023" npcTemplateId="80053000" type="Partner" rareGrade="1" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="11" basicSocialMotionId="4,5,6,7" defaultName="@servant:1000" servantIconName="Icon_Servants.Partner_Rumi_Tex" wearableStyleId="800532">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="1"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="2" weight="1"/>
+				<SkillData id="3" weight="1"/>
+				<SkillData id="4" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="14" weight="1"/>
+				<SkillData id="15" weight="1"/>
+				<SkillData id="16" weight="1"/>
+				<SkillData id="23" weight="1"/>
+				<SkillData id="24" weight="1"/>
+				<SkillData id="25" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1002" huntingZoneId="1023" npcTemplateId="80053000" type="Partner" rareGrade="2" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="11" basicSocialMotionId="4,5,6,7" defaultName="@servant:1000" servantIconName="Icon_Servants.Partner_Rumi_Tex" wearableStyleId="800532">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="2"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="2" weight="1"/>
+				<SkillData id="3" weight="1"/>
+				<SkillData id="4" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="14" weight="1"/>
+				<SkillData id="15" weight="1"/>
+				<SkillData id="16" weight="1"/>
+				<SkillData id="23" weight="1"/>
+				<SkillData id="24" weight="1"/>
+				<SkillData id="25" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1003" huntingZoneId="1023" npcTemplateId="80053000" type="Partner" rareGrade="3" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="11" basicSocialMotionId="4,5,6,7" defaultName="@servant:1000" servantIconName="Icon_Servants.Partner_Rumi_Tex" wearableStyleId="800532">
+		<Ability maxCount="6" initAbilityList="142"/>
+		<PartnerSkill>
+			<ActiveSkill id="3"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="2" weight="1"/>
+				<SkillData id="3" weight="1"/>
+				<SkillData id="4" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="14" weight="1"/>
+				<SkillData id="15" weight="1"/>
+				<SkillData id="16" weight="1"/>
+				<SkillData id="23" weight="1"/>
+				<SkillData id="24" weight="1"/>
+				<SkillData id="25" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 루미 -->
+	<Servant id="1004" huntingZoneId="1023" npcTemplateId="80053100" type="Partner" rareGrade="1" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="11" basicSocialMotionId="4,5,6,7" defaultName="@servant:1001" servantIconName="Icon_Servants.Partner_Rumi_01_Tex" wearableStyleId="800533">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="1"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="2" weight="1"/>
+				<SkillData id="3" weight="1"/>
+				<SkillData id="4" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="14" weight="1"/>
+				<SkillData id="15" weight="1"/>
+				<SkillData id="16" weight="1"/>
+				<SkillData id="23" weight="1"/>
+				<SkillData id="24" weight="1"/>
+				<SkillData id="25" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1005" huntingZoneId="1023" npcTemplateId="80053100" type="Partner" rareGrade="2" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="11" basicSocialMotionId="4,5,6,7" defaultName="@servant:1001" servantIconName="Icon_Servants.Partner_Rumi_01_Tex" wearableStyleId="800533">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="2"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="2" weight="1"/>
+				<SkillData id="3" weight="1"/>
+				<SkillData id="4" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="14" weight="1"/>
+				<SkillData id="15" weight="1"/>
+				<SkillData id="16" weight="1"/>
+				<SkillData id="23" weight="1"/>
+				<SkillData id="24" weight="1"/>
+				<SkillData id="25" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1006" huntingZoneId="1023" npcTemplateId="80053100" type="Partner" rareGrade="3" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="11" basicSocialMotionId="4,5,6,7" defaultName="@servant:1001" servantIconName="Icon_Servants.Partner_Rumi_01_Tex" wearableStyleId="800533">
+		<Ability maxCount="6" initAbilityList="142"/>
+		<PartnerSkill>
+			<ActiveSkill id="3"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="2" weight="1"/>
+				<SkillData id="3" weight="1"/>
+				<SkillData id="4" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="14" weight="1"/>
+				<SkillData id="15" weight="1"/>
+				<SkillData id="16" weight="1"/>
+				<SkillData id="23" weight="1"/>
+				<SkillData id="24" weight="1"/>
+				<SkillData id="25" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 쿤쿤 -->
+	<Servant id="1007" huntingZoneId="1023" npcTemplateId="80054000" type="Partner" rareGrade="1" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="12" basicSocialMotionId="4,5,6,7" defaultName="@servant:1002" servantIconName="Icon_Servants.Partner_Kunkun_Tex" wearableStyleId="800541">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="1"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="5" weight="1"/>
+				<SkillData id="6" weight="1"/>
+				<SkillData id="7" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="17" weight="1"/>
+				<SkillData id="18" weight="1"/>
+				<SkillData id="19" weight="1"/>
+				<SkillData id="26" weight="1"/>
+				<SkillData id="27" weight="1"/>
+				<SkillData id="28" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1008" huntingZoneId="1023" npcTemplateId="80054000" type="Partner" rareGrade="2" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="12" basicSocialMotionId="4,5,6,7" defaultName="@servant:1002" servantIconName="Icon_Servants.Partner_Kunkun_Tex" wearableStyleId="800541">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="2"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="5" weight="1"/>
+				<SkillData id="6" weight="1"/>
+				<SkillData id="7" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="17" weight="1"/>
+				<SkillData id="18" weight="1"/>
+				<SkillData id="19" weight="1"/>
+				<SkillData id="26" weight="1"/>
+				<SkillData id="27" weight="1"/>
+				<SkillData id="28" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1009" huntingZoneId="1023" npcTemplateId="80054000" type="Partner" rareGrade="3" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="12" basicSocialMotionId="4,5,6,7" defaultName="@servant:1002" servantIconName="Icon_Servants.Partner_Kunkun_Tex" wearableStyleId="800541">
+		<Ability maxCount="6" initAbilityList="142"/>
+		<PartnerSkill>
+			<ActiveSkill id="3"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="5" weight="1"/>
+				<SkillData id="6" weight="1"/>
+				<SkillData id="7" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="17" weight="1"/>
+				<SkillData id="18" weight="1"/>
+				<SkillData id="19" weight="1"/>
+				<SkillData id="26" weight="1"/>
+				<SkillData id="27" weight="1"/>
+				<SkillData id="28" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 코코밍밍 -->
+	<Servant id="1010" huntingZoneId="1023" npcTemplateId="80055000" type="Partner" rareGrade="1" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="13" basicSocialMotionId="4,5,6,7" defaultName="@servant:1003" servantIconName="Icon_Servants.Partner_Coco_Tex" wearableStyleId="800551">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="1"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="8" weight="1"/>
+				<SkillData id="9" weight="1"/>
+				<SkillData id="10" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1011" huntingZoneId="1023" npcTemplateId="80055000" type="Partner" rareGrade="2" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="13" basicSocialMotionId="4,5,6,7" defaultName="@servant:1003" servantIconName="Icon_Servants.Partner_Coco_Tex" wearableStyleId="800551">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="2"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="8" weight="1"/>
+				<SkillData id="9" weight="1"/>
+				<SkillData id="10" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1012" huntingZoneId="1023" npcTemplateId="80055000" type="Partner" rareGrade="3" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="13" basicSocialMotionId="4,5,6,7" defaultName="@servant:1003" servantIconName="Icon_Servants.Partner_Coco_Tex" wearableStyleId="800551">
+		<Ability maxCount="6" initAbilityList="142"/>
+		<PartnerSkill>
+			<ActiveSkill id="3"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="8" weight="1"/>
+				<SkillData id="9" weight="1"/>
+				<SkillData id="10" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 엘로 -->
+	<Servant id="1013" huntingZoneId="1023" npcTemplateId="80058000" type="Partner" rareGrade="1" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="14" basicSocialMotionId="4,5,6,7" defaultName="@servant:1004" servantIconName="Icon_Servants.Partner_Elo_Tex" wearableStyleId="800600">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="11"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="5" weight="1"/>
+				<SkillData id="6" weight="1"/>
+				<SkillData id="7" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="14" weight="1"/>
+				<SkillData id="15" weight="1"/>
+				<SkillData id="16" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1014" huntingZoneId="1023" npcTemplateId="80058000" type="Partner" rareGrade="2" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="14" basicSocialMotionId="4,5,6,7" defaultName="@servant:1004" servantIconName="Icon_Servants.Partner_Elo_Tex" wearableStyleId="800600">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="12"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="5" weight="1"/>
+				<SkillData id="6" weight="1"/>
+				<SkillData id="7" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="14" weight="1"/>
+				<SkillData id="15" weight="1"/>
+				<SkillData id="16" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1015" huntingZoneId="1023" npcTemplateId="80058000" type="Partner" rareGrade="3" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="14" basicSocialMotionId="4,5,6,7" defaultName="@servant:1004" servantIconName="Icon_Servants.Partner_Elo_Tex" wearableStyleId="800600">
+		<Ability maxCount="6" initAbilityList="142"/>
+		<PartnerSkill>
+			<ActiveSkill id="13"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="5" weight="1"/>
+				<SkillData id="6" weight="1"/>
+				<SkillData id="7" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="14" weight="1"/>
+				<SkillData id="15" weight="1"/>
+				<SkillData id="16" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 리코 -->
+	<Servant id="1016" huntingZoneId="1023" npcTemplateId="80059000" type="Partner" rareGrade="1" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="15" basicSocialMotionId="4,5,6,7" defaultName="@servant:1005" servantIconName="Icon_Servants.Partner_Rico_Tex" wearableStyleId="800610">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="21"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="2" weight="1"/>
+				<SkillData id="3" weight="1"/>
+				<SkillData id="4" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="26" weight="1"/>
+				<SkillData id="27" weight="1"/>
+				<SkillData id="28" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1017" huntingZoneId="1023" npcTemplateId="80059000" type="Partner" rareGrade="2" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="15" basicSocialMotionId="4,5,6,7" defaultName="@servant:1005" servantIconName="Icon_Servants.Partner_Rico_Tex" wearableStyleId="800610">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="22"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="2" weight="1"/>
+				<SkillData id="3" weight="1"/>
+				<SkillData id="4" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="26" weight="1"/>
+				<SkillData id="27" weight="1"/>
+				<SkillData id="28" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="1018" huntingZoneId="1023" npcTemplateId="80059000" type="Partner" rareGrade="3" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="15" basicSocialMotionId="4,5,6,7" defaultName="@servant:1005" servantIconName="Icon_Servants.Partner_Rico_Tex" wearableStyleId="800610">
+		<Ability maxCount="6" initAbilityList="142"/>
+		<PartnerSkill>
+			<ActiveSkill id="23"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="2" weight="1"/>
+				<SkillData id="3" weight="1"/>
+				<SkillData id="4" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="26" weight="1"/>
+				<SkillData id="27" weight="1"/>
+				<SkillData id="28" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 미션퀘 지급용 정령의 알 코코밍밍 -->
+	<Servant id="1019" huntingZoneId="1023" npcTemplateId="80055000" type="Partner" rareGrade="1" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="13" basicSocialMotionId="4,5,6,7" defaultName="@servant:1006" servantIconName="Icon_Servants.Partner_Coco_Tex" wearableStyleId="800551">
+		<Ability maxCount="6" initAbilityList="23"/>
+		<PartnerSkill>
+			<ActiveSkill id="4"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="8" weight="1"/>
+				<SkillData id="9" weight="1"/>
+				<SkillData id="10" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>	
+	<!-- 어리숙한 코코밍밍 -->
+	<Servant id="1020" huntingZoneId="1023" npcTemplateId="80055000" type="Partner" rareGrade="1" maxLevel="1" maxGrade="1" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="13" basicSocialMotionId="4,5,6,7" defaultName="@servant:1007" servantIconName="Icon_Servants.Partner_Coco_Tex" wearableStyleId="800551">
+		<Ability maxCount="1" initAbilityList="0"/>
+		<PartnerSkill>
+			<ActiveSkill id="1"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="8" weight="1"/>
+				<SkillData id="9" weight="1"/>
+				<SkillData id="10" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 희귀 RK-9 -->	
+	<Servant id="1021" huntingZoneId="1023" npcTemplateId="80056000" type="Partner" rareGrade="2" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="16" basicSocialMotionId="1,2" defaultName="@servant:1008" servantIconName="Icon_Servants.Pet_Stromkar_Tex" wearableStyleId="800551">
+		<Ability maxCount="6" initAbilityList=""/>
+		<PartnerSkill>
+			<ActiveSkill id="2"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="8" weight="1"/>
+				<SkillData id="9" weight="1"/>
+				<SkillData id="10" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 전설 RK-9 -->		
+	<Servant id="1022" huntingZoneId="1023" npcTemplateId="80056000" type="Partner" rareGrade="3" maxLevel="10" maxGrade="50" maxEnergy="300" delEnergyPerMin="1" initEnergy="190" mentListId="16" basicSocialMotionId="1,2" defaultName="@servant:1008" servantIconName="Icon_Servants.Pet_Stromkar_Tex">
+		<Ability maxCount="6" initAbilityList="142"/>
+		<PartnerSkill>
+			<ActiveSkill id="5"/>
+			<ConditionalSkill level="1" number="1">
+				<SkillData id="8" weight="1"/>
+				<SkillData id="9" weight="1"/>
+				<SkillData id="10" weight="1"/>
+				<SkillData id="11" weight="1"/>
+				<SkillData id="12" weight="1"/>
+				<SkillData id="13" weight="1"/>
+				<SkillData id="20" weight="1"/>
+				<SkillData id="21" weight="1"/>
+				<SkillData id="22" weight="1"/>
+				<SkillData id="29" weight="1"/>
+				<SkillData id="30" weight="1"/>
+				<SkillData id="31" weight="1"/>
+				<SkillData id="32" weight="1"/>
+				<SkillData id="33" weight="1"/>
+				<SkillData id="34" weight="1"/>
+			</ConditionalSkill>
+		</PartnerSkill>
+		<Animation move="Run" />
+	</Servant>	
+	<Servant id="1" huntingZoneId="1023" npcTemplateId="80033000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3" defaultName="@servant:1" servantIconName="Icon_Servants.Pet_HomunculusSmurf_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+	</Servant>
+	<Servant id="2" huntingZoneId="1023" npcTemplateId="80034000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:2" servantIconName="Icon_Servants.Pet_SsalissaliKing_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="3" huntingZoneId="1023" npcTemplateId="80035000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:3" servantIconName="Icon_Servants.Pet_TinyDragon_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="4" huntingZoneId="1023" npcTemplateId="80038000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4" defaultName="@servant:4" servantIconName="Icon_Servants.Pet_Cat_Tex">
+		<Ability maxCount="6" initAbilityList="11,21,51"/>
+		<Animation move="Run" />
+	</Servant>	
+	<Servant id="5" huntingZoneId="1023" npcTemplateId="30164000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:5" servantIconName="Icon_Servants.Pet_Bumpy_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+		<Animation itemLooting="Idle" />
+	</Servant>	
+	<Servant id="6" huntingZoneId="1023" npcTemplateId="30167000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:6" servantIconName="Icon_Servants.Pet_AngryPlants_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+		<Animation itemLooting="atk02" />
+	</Servant>	
+	<Servant id="7" huntingZoneId="1023" npcTemplateId="80022000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1" defaultName="@servant:7" nearFrustumOffset="-3.0f" servantIconName="Icon_Servants.Pet_CheerfulFrog_Tex">>
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+		<Animation itemLooting="Idle" />
+	</Servant>	
+	<Servant id="8" huntingZoneId="1023" npcTemplateId="40009000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:8" servantIconName="Icon_Servants.Pet_PoporiBoy_Tex">
+		<Ability maxCount="6" initAbilityList="21"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="9" huntingZoneId="1023" npcTemplateId="40009200" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:9" servantIconName="Icon_Servants.Pet_Popo_Tex">
+		<Ability maxCount="6" initAbilityList="12,21"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="10" huntingZoneId="1023" npcTemplateId="30166000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:10" servantIconName="Icon_Servants.Pet_HalloweenGhost_Tex">
+		<Ability maxCount="6" initAbilityList="13,31"/>
+		<Animation move="run" />
+	</Servant>
+	<Servant id="12" huntingZoneId="1023" npcTemplateId="80034000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:12" servantIconName="Icon_Servants.Pet_SsalissaliKing_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+	</Servant>
+	<Servant id="13" huntingZoneId="1023" npcTemplateId="40009100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:13" servantIconName="Icon_Servants.Pet_PoporiKid_Tex">
+		<Ability maxCount="6" initAbilityList="21"/>
+	</Servant>
+	<!--북미/유럽 전용 펫-->
+	<Servant id="14" huntingZoneId="1023" npcTemplateId="30112000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:700" servantIconName="Icon_Servants.Pet_DevilOfShurian_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+	</Servant>
+	<Servant id="15" huntingZoneId="1023" npcTemplateId="30125100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:701" servantIconName="Icon_Servants.Pet_ViskLady_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+	</Servant>	
+	<Servant id="16" huntingZoneId="1023" npcTemplateId="30018500" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:702" servantIconName="Icon_Servants.Pet_CuteFrog_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+	</Servant>
+	<Servant id="17" huntingZoneId="1023" npcTemplateId="30093000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:607" servantIconName="Icon_Servants.Pet_WitheredGillidu_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+	</Servant>
+	<Servant id="18" huntingZoneId="1023" npcTemplateId="30165000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:608" servantIconName="Icon_Servants.Pet_SkeletonGhost_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+	</Servant>
+	<Servant id="19" huntingZoneId="1023" npcTemplateId="30018501" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:703" servantIconName="Icon_Servants.Pet_CheerfulOrangeFrog_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+	</Servant>	
+	<Servant id="20" huntingZoneId="1023" npcTemplateId="30018502" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:704" servantIconName="Icon_Servants.Pet_BraveBlueFrog_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+	</Servant>
+	<Servant id="21" huntingZoneId="1023" npcTemplateId="80045000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="4" basicSocialMotionId="1,4" defaultName="@servant:21" servantIconName="Icon_Servants.Pet_GoldenPig_Tex"><!--골드줍기 펫-->
+		<Ability maxCount="6" initAbilityList="41"/>
+	   <Animation move="Run" />
+	</Servant>
+	<Servant id="22" huntingZoneId="1023" npcTemplateId="80045000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="4" basicSocialMotionId="1,4" defaultName="@servant:21" servantIconName="Icon_Servants.Pet_GoldenPig_Tex">
+		<Ability maxCount="6" initAbilityList="21,41"/>
+	   <Animation move="Run" />
+	</Servant>
+	<Servant id="23" huntingZoneId="1023" npcTemplateId="30017000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:600" servantIconName="Icon_Servants.Pet_CandyCat_Tex">
+		<Ability maxCount="6" initAbilityList="141"/>
+	</Servant>
+	<Servant id="24" huntingZoneId="1023" npcTemplateId="80007000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:24" servantIconName="Icon_Servants.Pet_CheerfulToto_Tex"><!--발랄한 토토-->
+		<Ability maxCount="6" initAbilityList="21"/>
+	</Servant>	
+	<!-- 다혈질 타미 -->
+	<Servant id="25" huntingZoneId="1023" npcTemplateId="80035100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:25" servantIconName="Icon_Servants.Pet_TinyDragon_Gold_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="27" huntingZoneId="1023" npcTemplateId="80035200" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:27" servantIconName="Icon_Servants.Pet_TinyDragon_Black_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="29" huntingZoneId="1023" npcTemplateId="80035400" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:29" servantIconName="Icon_Servants.Pet_TinyDragon_Red_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="31" huntingZoneId="1023" npcTemplateId="80035300" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:31" servantIconName="Icon_Servants.Pet_TinyDragon_Green_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="33" huntingZoneId="1023" npcTemplateId="80035500" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:33" servantIconName="Icon_Servants.Pet_TinyDragon_Silver_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!--JP RU 골드/블랙/레드/그린/실버 다혈질 타미-->
+	<Servant id="45" huntingZoneId="1023" npcTemplateId="80035100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:25" servantIconName="Icon_Servants.Pet_TinyDragon_Gold_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="46" huntingZoneId="1023" npcTemplateId="80035200" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:27" servantIconName="Icon_Servants.Pet_TinyDragon_Black_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="47" huntingZoneId="1023" npcTemplateId="80035300" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:31" servantIconName="Icon_Servants.Pet_TinyDragon_Green_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="48" huntingZoneId="1023" npcTemplateId="80035400" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:29" servantIconName="Icon_Servants.Pet_TinyDragon_Red_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="49" huntingZoneId="1023" npcTemplateId="80035500" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:33" servantIconName="Icon_Servants.Pet_TinyDragon_Silver_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	
+	<!-- 불 다혈질 타미, 블랙/그린 -->
+	<Servant id="50" huntingZoneId="1023" npcTemplateId="80070000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:50" enableSRGB="True" servantIconName="Icon_Servants.Pet_Fire_TinyDragon_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="51" huntingZoneId="1023" npcTemplateId="80071000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:51" enableSRGB="True" servantIconName="Icon_Servants.Pet_Fire_TinyDragon_Black_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="52" huntingZoneId="1023" npcTemplateId="80072000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:52" enableSRGB="True" servantIconName="Icon_Servants.Pet_Fire_TinyDragon_Green_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	
+	<!--TW 키티 돼지 펫-->
+	<Servant id="56" huntingZoneId="1023" npcTemplateId="80048000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:56" servantIconName="Icon_Servants.Pet_PigKitty_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>	
+	<!--메이플스토리 슬라임 펫-->
+	<Servant id="57" huntingZoneId="1023" npcTemplateId="80047000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:57" servantIconName="Icon_Servants.Pet_Slime_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!--Console 프라임 타미 펫-->
+	<Servant id="58" huntingZoneId="1023" npcTemplateId="80035600" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:58" servantIconName="Icon_Servants.Pet_TinyDragon_Purple_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!--키티 돼지 펫-->
+	<Servant id="60" huntingZoneId="1023" npcTemplateId="80048000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:60" servantIconName="Icon_Servants.Pet_PigKitty_Tex">
+		<Ability maxCount="6" initAbilityList="21,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="62" huntingZoneId="1023" npcTemplateId="80048000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:60" servantIconName="Icon_Servants.Pet_PigKitty_Tex">
+		<Ability maxCount="6" initAbilityList="41,51"/>
+		<Animation move="Run" />
+	</Servant>	
+	<Servant id="63" huntingZoneId="1023" npcTemplateId="80048000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:60" servantIconName="Icon_Servants.Pet_PigKitty_Tex">
+		<Ability maxCount="6" initAbilityList="21,41,51"/>
+		<Animation move="Run" />
+	</Servant>	
+	<!--JP 벚꽃 길리두 펫-->
+	<Servant id="64" huntingZoneId="1023" npcTemplateId="80049000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:64" servantIconName="Icon_Servants.Pet_CherryBlossomsGillidu_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 자동 물약 펫 -->
+	<Servant id="70" huntingZoneId="1023" npcTemplateId="80022000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1" defaultName="@servant:70" servantIconName="Icon_Servants.Pet_CheerfulFrog_Tex">
+		<Ability maxCount="6" initAbilityList="61"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="71" huntingZoneId="1023" npcTemplateId="30024200" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:71" servantIconName="Icon_Servants.Pet_BlueWingsPixie_Tex">
+		<Ability maxCount="6" initAbilityList="71"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="72" huntingZoneId="1023" npcTemplateId="30041000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:72" servantIconName="Icon_Servants.Pet_FukaChef_Tex">
+		<Ability maxCount="6" initAbilityList="81"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="73" huntingZoneId="1023" npcTemplateId="80022000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1" defaultName="@servant:70" servantIconName="Icon_Servants.Pet_CheerfulFrog_Tex">
+		<Ability maxCount="6" initAbilityList="101"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="74" huntingZoneId="1023" npcTemplateId="30024200" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:71" servantIconName="Icon_Servants.Pet_BlueWingsPixie_Tex">
+		<Ability maxCount="6" initAbilityList="111"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="75" huntingZoneId="1023" npcTemplateId="30041000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:72" servantIconName="Icon_Servants.Pet_FukaChef_Tex">
+		<Ability maxCount="6" initAbilityList="121"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="76" huntingZoneId="1023" npcTemplateId="30017000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:73" servantIconName="Icon_Servants.Pet_CandyCat_Tex">
+		<Ability maxCount="6" initAbilityList="131"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="77" huntingZoneId="1023" npcTemplateId="30017000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:73" servantIconName="Icon_Servants.Pet_CandyCat_Tex">
+		<Ability maxCount="6" initAbilityList="91"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="78" huntingZoneId="1023" npcTemplateId="30017000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:73" servantIconName="Icon_Servants.Pet_CandyCat_Tex">
+		<Ability maxCount="6" initAbilityList="92"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 듀리온 펫 -->
+	<Servant id="79" huntingZoneId="1023" npcTemplateId="80052000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:79" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="31,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="80" huntingZoneId="1023" npcTemplateId="80052000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:80" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="21,31,41,51,82"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="81" huntingZoneId="1023" npcTemplateId="80052000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:81" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="21,31,41,51,122"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="82" huntingZoneId="1023" npcTemplateId="80052000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:82" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="21,31,41,51,91"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="83" huntingZoneId="1023" npcTemplateId="80052000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:83" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="21,31,41,51,132"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 보름달 펫 -->
+	<Servant id="84" huntingZoneId="1023" npcTemplateId="80057000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:84" servantIconName="Icon_Servants.Pet_FullMoon_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 할로윈 펫 -->
+	<Servant id="85" huntingZoneId="1023" npcTemplateId="80062000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:85" cameraZOffset="-17.0" servantIconName="Icon_Servants.Pet_Bat_Tex">
+		<Ability maxCount="6" initAbilityList="82,122,21"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 친구 초대 보상 펫(양) -->
+	<Servant id="99" huntingZoneId="1023" npcTemplateId="80011000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="3" basicSocialMotionId="1,2" defaultName="@servant:99" servantIconName="Icon_Servants.Pet_CollectorMongsil_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" itemLooting="Idle02" />
+	</Servant>
+	<!--업적 전용 펫 id 600번대 사용-->
+	<Servant id="600" huntingZoneId="1023" npcTemplateId="30017000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:600" servantIconName="Icon_Servants.Pet_CandyCat_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="601" huntingZoneId="1023" npcTemplateId="30024200" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:601" servantIconName="Icon_Servants.Pet_BlueWingsPixie_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="602" huntingZoneId="1023" npcTemplateId="30103000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:602" servantIconName="Icon_Servants.Pet_Sinus_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="603" huntingZoneId="1023" npcTemplateId="30041000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:603" servantIconName="Icon_Servants.Pet_FukaChef_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="604" huntingZoneId="1023" npcTemplateId="30054000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:604" servantIconName="Icon_Servants.Pet_StoneHeadDumdum_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="605" huntingZoneId="1023" npcTemplateId="30070000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:605" servantIconName="Icon_Servants.Pet_DeliciousPigring_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="606" huntingZoneId="1023" npcTemplateId="30071000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:606" servantIconName="Icon_Servants.Pet_Okan_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="607" huntingZoneId="1023" npcTemplateId="30093000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:607" servantIconName="Icon_Servants.Pet_WitheredGillidu_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="608" huntingZoneId="1023" npcTemplateId="30165000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:608" servantIconName="Icon_Servants.Pet_SkeletonGhost_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="609" huntingZoneId="1023" npcTemplateId="30203000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:609" servantIconName="Icon_Servants.Pet_BlackMonkey_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="610" huntingZoneId="1023" npcTemplateId="64010000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:610" servantIconName="Icon_Servants.Pet_Watermelon_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="611" huntingZoneId="1023" npcTemplateId="30119000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:611" servantIconName="Icon_Servants.Pet_Dumfercan_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<!-- 부활절 토끼 펫 -->
+	<Servant id="620" huntingZoneId="1023" npcTemplateId="40009601" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:620" servantIconName="Icon_Servants.Pet_BunnyInTheMoon_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+		<Animation move="Run" />
+	</Servant>
+	<!--KR 2016 5주년 이벤트 보상: 메이플스토리 주황버섯 펫-->
+	<Servant id="613" huntingZoneId="1023" npcTemplateId="80046000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:613" servantIconName="Icon_Servants.Pet_Mushroom_Tex">
+		<Ability maxCount="6" initAbilityList="21,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!--축제 전용 펫 id 700번대 사용-->
+	<Servant id="700" huntingZoneId="1023" npcTemplateId="30112000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:700" servantIconName="Icon_Servants.Pet_DevilOfShurian_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<Servant id="701" huntingZoneId="1023" npcTemplateId="30125100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:701" servantIconName="Icon_Servants.Pet_ViskLady_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>	
+	<Servant id="702" huntingZoneId="1023" npcTemplateId="30018500" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:702" servantIconName="Icon_Servants.Pet_CuteFrog_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>	
+	<Servant id="703" huntingZoneId="1023" npcTemplateId="30018501" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:703" servantIconName="Icon_Servants.Pet_CheerfulOrangeFrog_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>	
+	<Servant id="704" huntingZoneId="1023" npcTemplateId="30018502" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:704" servantIconName="Icon_Servants.Pet_BraveBlueFrog_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+	</Servant>
+	<!--RU 전용 펫 id 800번대 사용-->
+	<Servant id="800" huntingZoneId="1023" npcTemplateId="80035000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:800" servantIconName="Icon_Servants.Pet_TinyDragon_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="801" huntingZoneId="1023" npcTemplateId="80033000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:801" servantIconName="Icon_Servants.Pet_HomunculusSmurf_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>		
+	<Servant id="802" huntingZoneId="1023" npcTemplateId="30165000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:802" servantIconName="Icon_Servants.Pet_SkeletonGhost_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="803" huntingZoneId="1023" npcTemplateId="30093000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:803" servantIconName="Icon_Servants.Pet_WitheredGillidu_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>	
+	<Servant id="804" huntingZoneId="1023" npcTemplateId="30018502" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:804" servantIconName="Icon_Servants.Pet_BraveBlueFrog_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>	
+	<Servant id="805" huntingZoneId="1023" npcTemplateId="30018501" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:805" servantIconName="Icon_Servants.Pet_CheerfulOrangeFrog_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>	
+	<Servant id="806" huntingZoneId="1023" npcTemplateId="30018500" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:806" servantIconName="Icon_Servants.Pet_CuteFrog_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>	
+	<Servant id="807" huntingZoneId="1023" npcTemplateId="30112000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:807" servantIconName="Icon_Servants.Pet_DevilOfShurian_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>		
+	<Servant id="808" huntingZoneId="1023" npcTemplateId="30125100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:808" servantIconName="Icon_Servants.Pet_ViskLady_Tex">
+		<Ability maxCount="6" initAbilityList="21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!--TH 전용 펫 id 900번대 사용-->
+	<Servant id="900" huntingZoneId="1023" npcTemplateId="80050000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:900" servantIconName="Icon_Servants.Pet_CheeseCat_Tex">
+		<Ability maxCount="6" initAbilityList="31,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="901" huntingZoneId="1023" npcTemplateId="80051000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:901" servantIconName="Icon_Servants.Pet_MackerelCat_Tex">
+		<Ability maxCount="6" initAbilityList="31,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="902" huntingZoneId="1023" npcTemplateId="80050000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:902" servantIconName="Icon_Servants.Pet_CheeseCat_Tex">
+		<Ability maxCount="6" initAbilityList="21,31,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="903" huntingZoneId="1023" npcTemplateId="80051000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:903" servantIconName="Icon_Servants.Pet_MackerelCat_Tex">
+		<Ability maxCount="6" initAbilityList="21,31,51"/>
+		<Animation move="Run" />
+	</Servant>
+	
+	<!-- 우편 지급용 서번트 -->
+	<Servant id="100" huntingZoneId="1023" npcTemplateId="80038000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4" defaultName="@servant:4" servantIconName="Icon_Servants.Pet_Cat_Tex">
+		<Ability maxCount="6" initAbilityList="11,24,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="101" huntingZoneId="1023" npcTemplateId="40009000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:8" servantIconName="Icon_Servants.Pet_PoporiBoy_Tex">
+		<Ability maxCount="6" initAbilityList="24"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="102" huntingZoneId="1023" npcTemplateId="40009200" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:9" servantIconName="Icon_Servants.Pet_Popo_Tex">
+		<Ability maxCount="6" initAbilityList="12,24"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="103" huntingZoneId="1023" npcTemplateId="40009100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:13" servantIconName="Icon_Servants.Pet_PoporiKid_Tex">
+		<Ability maxCount="6" initAbilityList="24"/>
+	</Servant>
+	<Servant id="104" huntingZoneId="1023" npcTemplateId="80007000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:24" servantIconName="Icon_Servants.Pet_CheerfulToto_Tex"><!--발랄한 토토-->
+		<Ability maxCount="6" initAbilityList="24"/>
+	</Servant>
+	<Servant id="105" huntingZoneId="1023" npcTemplateId="80035100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:25" servantIconName="Icon_Servants.Pet_TinyDragon_Gold_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="106" huntingZoneId="1023" npcTemplateId="80035200" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:27" servantIconName="Icon_Servants.Pet_TinyDragon_Black_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="107" huntingZoneId="1023" npcTemplateId="80035300" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:31" servantIconName="Icon_Servants.Pet_TinyDragon_Green_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="108" huntingZoneId="1023" npcTemplateId="80035400" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:29" servantIconName="Icon_Servants.Pet_TinyDragon_Red_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="109" huntingZoneId="1023" npcTemplateId="80035500" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:33" servantIconName="Icon_Servants.Pet_TinyDragon_Silver_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="110" huntingZoneId="1023" npcTemplateId="80048000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:60" servantIconName="Icon_Servants.Pet_PigKitty_Tex">
+		<Ability maxCount="6" initAbilityList="24,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="111" huntingZoneId="1023" npcTemplateId="80052000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:80" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="24,31,41,51,82"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="112" huntingZoneId="1023" npcTemplateId="80052000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:81" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="24,31,41,51,122"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="113" huntingZoneId="1023" npcTemplateId="80052000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:82" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="24,31,41,51,91"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="114" huntingZoneId="1023" npcTemplateId="80052000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:83" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="24,31,41,51,132"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="115" huntingZoneId="1023" npcTemplateId="80047000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:57" servantIconName="Icon_Servants.Pet_Slime_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="116" huntingZoneId="1023" npcTemplateId="80046000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:613" servantIconName="Icon_Servants.Pet_Mushroom_Tex">
+		<Ability maxCount="6" initAbilityList="24,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="117" huntingZoneId="1023" npcTemplateId="80050000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:902" servantIconName="Icon_Servants.Pet_CheeseCat_Tex">
+		<Ability maxCount="6" initAbilityList="24,31,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="118" huntingZoneId="1023" npcTemplateId="80051000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:903" servantIconName="Icon_Servants.Pet_MackerelCat_Tex">
+		<Ability maxCount="6" initAbilityList="24,31,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="119" huntingZoneId="1023" npcTemplateId="80048000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:60" servantIconName="Icon_Servants.Pet_PigKitty_Tex">
+		<Ability maxCount="6" initAbilityList="24,41,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="120" huntingZoneId="1023" npcTemplateId="80035000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:800" servantIconName="Icon_Servants.Pet_TinyDragon_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="121" huntingZoneId="1023" npcTemplateId="80033000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:801" servantIconName="Icon_Servants.Pet_HomunculusSmurf_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="122" huntingZoneId="1023" npcTemplateId="30165000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:802" servantIconName="Icon_Servants.Pet_SkeletonGhost_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="123" huntingZoneId="1023" npcTemplateId="30093000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2" defaultName="@servant:803" servantIconName="Icon_Servants.Pet_WitheredGillidu_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="124" huntingZoneId="1023" npcTemplateId="30018502" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:804" servantIconName="Icon_Servants.Pet_BraveBlueFrog_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="125" huntingZoneId="1023" npcTemplateId="30018501" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:805" servantIconName="Icon_Servants.Pet_CheerfulOrangeFrog_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="126" huntingZoneId="1023" npcTemplateId="30018500" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="2" basicSocialMotionId="1,2" defaultName="@servant:806" servantIconName="Icon_Servants.Pet_CuteFrog_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="127" huntingZoneId="1023" npcTemplateId="30112000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:807" servantIconName="Icon_Servants.Pet_DevilOfShurian_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="128" huntingZoneId="1023" npcTemplateId="30125100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:808" servantIconName="Icon_Servants.Pet_ViskLady_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="129" huntingZoneId="1023" npcTemplateId="80048000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:56" servantIconName="Icon_Servants.Pet_PigKitty_Tex">
+		<Ability maxCount="6" initAbilityList="24,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="130" huntingZoneId="1023" npcTemplateId="80045000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="4" basicSocialMotionId="1,4" defaultName="@servant:21" servantIconName="Icon_Servants.Pet_GoldenPig_Tex">
+		<Ability maxCount="6" initAbilityList="24,41"/>
+	   <Animation move="Run" />
+	</Servant>
+	<!--배그 콜라보 이벤트용 펫-->
+	<Servant id="200" huntingZoneId="1023" npcTemplateId="80052100" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:200" servantIconName="Icon_Servants.Pet_Durion_Tex">
+		<Ability maxCount="6" initAbilityList="31,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="201" huntingZoneId="1023" npcTemplateId="40009400" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:201" servantIconName="Icon_Servants.Pet_Popo_Tex">
+		<Ability maxCount="6" initAbilityList="21,31,41,51,91"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="202" huntingZoneId="1023" npcTemplateId="40009500" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:202" servantIconName="Icon_Servants.Pet_Popo_Tex">
+		<Ability maxCount="6" initAbilityList="31,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="203" huntingZoneId="1023" npcTemplateId="40009400" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:201" servantIconName="Icon_Servants.Pet_Popo_Tex">
+		<Ability maxCount="6" initAbilityList="24,31,41,51,91"/>
+		<Animation move="Run" />
+	</Servant>
+	<!--2019.하반기.동물펫5종 -->
+	<Servant id="204" huntingZoneId="1023" npcTemplateId="80063000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:204" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Bear_Tex">
+		<Ability maxCount="6" initAbilityList="151,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="205" huntingZoneId="1023" npcTemplateId="80063000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:204" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Bear_Tex">
+		<Ability maxCount="6" initAbilityList="151,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="206" huntingZoneId="1023" npcTemplateId="80063000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:204" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Bear_Tex">
+		<Ability maxCount="6" initAbilityList="161,21"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="207" huntingZoneId="1023" npcTemplateId="80063000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:204" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Bear_Tex">
+		<Ability maxCount="6" initAbilityList="151,161"/>
+		<Animation move="Run" />
+	</Servant>
+	
+	<Servant id="208" huntingZoneId="1023" npcTemplateId="80064000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:208" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Cat_Tex">
+		<Ability maxCount="6" initAbilityList="151,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="209" huntingZoneId="1023" npcTemplateId="80064000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:208" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Cat_Tex">
+		<Ability maxCount="6" initAbilityList="151,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="210" huntingZoneId="1023" npcTemplateId="80064000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:208" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Cat_Tex">
+		<Ability maxCount="6" initAbilityList="161,21"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="211" huntingZoneId="1023" npcTemplateId="80064000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:208" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Cat_Tex">
+		<Ability maxCount="6" initAbilityList="151,161"/>
+		<Animation move="Run" />
+	</Servant>
+	
+	<Servant id="212" huntingZoneId="1023" npcTemplateId="80065000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:212" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Panda_Tex">
+		<Ability maxCount="6" initAbilityList="151,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="213" huntingZoneId="1023" npcTemplateId="80065000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:212" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Panda_Tex">
+		<Ability maxCount="6" initAbilityList="151,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="214" huntingZoneId="1023" npcTemplateId="80065000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:212" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Panda_Tex">
+		<Ability maxCount="6" initAbilityList="161,21"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="215" huntingZoneId="1023" npcTemplateId="80065000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:212" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Panda_Tex">
+		<Ability maxCount="6" initAbilityList="151,161"/>
+		<Animation move="Run" />
+	</Servant>
+	
+	<Servant id="216" huntingZoneId="1023" npcTemplateId="80066000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:216" servantIconName="Icon_Servants.Pet_Animal_Rabbit_Tex">
+		<Ability maxCount="6" initAbilityList="151,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="217" huntingZoneId="1023" npcTemplateId="80066000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:216" servantIconName="Icon_Servants.Pet_Animal_Rabbit_Tex">
+		<Ability maxCount="6" initAbilityList="151,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="218" huntingZoneId="1023" npcTemplateId="80066000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:216" servantIconName="Icon_Servants.Pet_Animal_Rabbit_Tex">
+		<Ability maxCount="6" initAbilityList="161,21"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="219" huntingZoneId="1023" npcTemplateId="80066000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:216" servantIconName="Icon_Servants.Pet_Animal_Rabbit_Tex">
+		<Ability maxCount="6" initAbilityList="151,161"/>
+		<Animation move="Run" />
+	</Servant>
+	
+	<Servant id="220" huntingZoneId="1023" npcTemplateId="80067000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:220" servantIconName="Icon_Servants.Pet_Animal_Raccoon_Tex">
+		<Ability maxCount="6" initAbilityList="151,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="221" huntingZoneId="1023" npcTemplateId="80067000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:220" servantIconName="Icon_Servants.Pet_Animal_Raccoon_Tex">
+		<Ability maxCount="6" initAbilityList="151,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="222" huntingZoneId="1023" npcTemplateId="80067000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:220" servantIconName="Icon_Servants.Pet_Animal_Raccoon_Tex">
+		<Ability maxCount="6" initAbilityList="161,21"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="223" huntingZoneId="1023" npcTemplateId="80067000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:220" servantIconName="Icon_Servants.Pet_Animal_Raccoon_Tex">
+		<Ability maxCount="6" initAbilityList="151,161"/>
+		<Animation move="Run" />
+	</Servant>
+	
+	<!--11월 해외 이벤트 펫 2종 -->
+	<Servant id="300" huntingZoneId="1023" npcTemplateId="80068000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:300" servantIconName="Icon_Servants.Pet_SpiritofNature_A">
+		<Ability maxCount="6" initAbilityList="82,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="301" huntingZoneId="1023" npcTemplateId="80069000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,4" defaultName="@servant:301" servantIconName="Icon_Servants.Pet_SpiritofNature_B">
+		<Ability maxCount="6" initAbilityList="122,51"/>
+		<Animation move="Run" />
+	</Servant>
+	
+	<!-- 기린 이벤트 시즌2 레어 펫 3종 -->
+	<Servant id="400" huntingZoneId="1023" npcTemplateId="80070000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:400" enableSRGB="True" servantIconName="Icon_Servants.Pet_Fire_TinyDragon_Tex">
+		<Ability maxCount="6" initAbilityList="21,51,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="401" huntingZoneId="1023" npcTemplateId="80071000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:401" enableSRGB="True" servantIconName="Icon_Servants.Pet_Fire_TinyDragon_Black_Tex">
+		<Ability maxCount="6" initAbilityList="21,51,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="402" huntingZoneId="1023" npcTemplateId="80072000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:402" enableSRGB="True" servantIconName="Icon_Servants.Pet_Fire_TinyDragon_Green_Tex">
+		<Ability maxCount="6" initAbilityList="21,51,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 기린 이벤트 시즌2 펫 3종 -->
+	<Servant id="403" huntingZoneId="1023" npcTemplateId="80070000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:403" enableSRGB="True" servantIconName="Icon_Servants.Pet_Fire_TinyDragon_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="404" huntingZoneId="1023" npcTemplateId="80071000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:404" enableSRGB="True" servantIconName="Icon_Servants.Pet_Fire_TinyDragon_Black_Tex">
+		<Ability maxCount="6" initAbilityList="21"/>
+		<Animation move="Run" />
+	</Servant>
+	<Servant id="405" huntingZoneId="1023" npcTemplateId="80072000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,3" defaultName="@servant:405" enableSRGB="True" servantIconName="Icon_Servants.Pet_Fire_TinyDragon_Green_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+
+	<!-- 기니피그 아이템 루팅-->
+	<Servant id="500" huntingZoneId="1023" npcTemplateId="80074000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:500" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_GuineaPig_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 기니피그 자동 채집-->
+	<Servant id="501" huntingZoneId="1023" npcTemplateId="80074000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:501" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_GuineaPig_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 기니피그 보관함, 자동 먹이, 자동 대물-->
+	<Servant id="502" huntingZoneId="1023" npcTemplateId="80074000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:502" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_GuineaPig_Tex">
+		<Ability maxCount="6" initAbilityList="21,151,161"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 기니피그 급속 회복 물약, MP회복 물약, 자동 채집, 아이템 루팅-->
+	<Servant id="503" huntingZoneId="1023" npcTemplateId="80074000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:503" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_GuineaPig_Tex">
+		<Ability maxCount="6" initAbilityList="91,132,51,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 반달곰 아이템 루팅-->
+	<Servant id="504" huntingZoneId="1023" npcTemplateId="80073000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:504" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Thibetanus_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 반달곰 자동 채집-->
+	<Servant id="505" huntingZoneId="1023" npcTemplateId="80073000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:505" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Thibetanus_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 반달곰 보관함, 자동 먹이, 자동 대물-->
+	<Servant id="506" huntingZoneId="1023" npcTemplateId="80073000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:506" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Thibetanus_Tex">
+		<Ability maxCount="6" initAbilityList="21,151,161"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 반달곰 급속 회복 물약, MP회복 물약, 자동 채집, 아이템 루팅-->
+	<Servant id="507" huntingZoneId="1023" npcTemplateId="80073000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:507" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Thibetanus_Tex">
+		<Ability maxCount="6" initAbilityList="91,132,51,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 도마뱀A 무능력 -->
+	<Servant id="508" huntingZoneId="1023" npcTemplateId="80075000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:508" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_A_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 도마뱀A 아이템 루팅 -->
+	<Servant id="509" huntingZoneId="1023" npcTemplateId="80075000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:509" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_A_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 도마뱀A 개인 보관함 -->
+	<Servant id="510" huntingZoneId="1023" npcTemplateId="80075000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:510" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_A_Tex">
+		<Ability maxCount="6" initAbilityList="21"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 도마뱀A 자동 채집 -->
+	<Servant id="511" huntingZoneId="1023" npcTemplateId="80075000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:511" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_A_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 도마뱀B 무능력 -->
+	<Servant id="512" huntingZoneId="1023" npcTemplateId="80075001" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:512" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_B_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 도마뱀B 아이템 루팅 -->
+	<Servant id="513" huntingZoneId="1023" npcTemplateId="80075001" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:513" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_B_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 도마뱀B 개인 보관함 -->
+	<Servant id="514" huntingZoneId="1023" npcTemplateId="80075001" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:514" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_B_Tex">
+		<Ability maxCount="6" initAbilityList="21"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 도마뱀B 자동 채집 -->
+	<Servant id="515" huntingZoneId="1023" npcTemplateId="80075001" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:515" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_B_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 뱁새 급속 회복, 보관함, 골드 루팅-->
+	<Servant id="516" huntingZoneId="1023" npcTemplateId="80075001" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:516" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_B_Tex">
+		<Ability maxCount="6" initAbilityList="91,21,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 뱁새 급속 회복, 보관함, 골드 루팅 기간제-->
+	<Servant id="5160" huntingZoneId="1023" npcTemplateId="80075001" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:516" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_B_Tex">
+		<Ability maxCount="6" initAbilityList="91,24,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<!--뱁새 자동 먹이, 자동 대물, 자동 채집 -->
+	<Servant id="517" huntingZoneId="1023" npcTemplateId="80075001" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:517" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_B_Tex">
+		<Ability maxCount="6" initAbilityList="151,161,51"/>
+		<Animation move="Run" />
+	</Servant>	
+	<!--뱁새 아이템 루팅, 자동 채집 -->
+	<Servant id="518" huntingZoneId="1023" npcTemplateId="80075001" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:518" enableSRGB="True" servantIconName="Icon_Servants.Pet_Lizard_B_Tex">
+		<Ability maxCount="6" initAbilityList="31,51"/>
+		<Animation move="Run" />
+	</Servant>		
+	<!-- 늑대 급속 회복, 보관함, 골드 루팅-->
+	<Servant id="519" huntingZoneId="1023" npcTemplateId="80077000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:519" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Wolf_Tex">
+		<Ability maxCount="6" initAbilityList="91,21,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 늑대 자동 먹이, 자동 대물, 자동 채집 -->
+	<Servant id="520" huntingZoneId="1023" npcTemplateId="80077000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:520" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Wolf_Tex">
+		<Ability maxCount="6" initAbilityList="151,161,51"/>
+		<Animation move="Run" />
+	</Servant>	
+	<!-- 늑대 아이템 루팅, 보관함,자동 채집 -->
+	<Servant id="521" huntingZoneId="1023" npcTemplateId="80077000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:521" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Wolf_Tex">
+		<Ability maxCount="6" initAbilityList="31,21,51"/>
+		<Animation move="Run" />
+	</Servant>			
+	<!-- 늑대, 519에서 보관함 제외 -->
+	<Servant id="522" huntingZoneId="1023" npcTemplateId="80077000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:519" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Wolf_Tex">
+		<Ability maxCount="6" initAbilityList="91,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 늑대, 521에서 보관함 제외 -->	
+	<Servant id="523" huntingZoneId="1023" npcTemplateId="80077000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:521" enableSRGB="True" servantIconName="Icon_Servants.Pet_Animal_Wolf_Tex">
+		<Ability maxCount="6" initAbilityList="31,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 론 펫 무능력 -->
+	<Servant id="524" huntingZoneId="1023" npcTemplateId="80039000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:524" enableSRGB="True" servantIconName="Icon_Servants.Pet_Cat_B_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 론 펫 아이템 루팅 -->
+	<Servant id="525" huntingZoneId="1023" npcTemplateId="80039000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:525" enableSRGB="True" servantIconName="Icon_Servants.Pet_Cat_B_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 론 펫 개인 보관함 -->
+	<Servant id="526" huntingZoneId="1023" npcTemplateId="80039000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:526" enableSRGB="True" servantIconName="Icon_Servants.Pet_Cat_B_Tex">
+		<Ability maxCount="6" initAbilityList="21"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 론 펫 자동 채집 -->
+	<Servant id="527" huntingZoneId="1023" npcTemplateId="80039000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:527" enableSRGB="True" servantIconName="Icon_Servants.Pet_Cat_B_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 론 펫보관함 기간제-->
+	<Servant id="528" huntingZoneId="1023" npcTemplateId="80039000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:528" enableSRGB="True" servantIconName="Icon_Servants.Pet_Cat_B_Tex">
+		<Ability maxCount="6" initAbilityList="24"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 블루 펫 무능력 -->
+	<Servant id="529" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:529" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 블루 펫 아이템 루팅 -->
+	<Servant id="530" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:530" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 블루 펫 개인 보관함 -->
+	<Servant id="531" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:531" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList="21"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 블루 펫 자동 채집 -->
+	<Servant id="532" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:532" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 블루 펫보관함 기간제-->
+	<Servant id="533" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:533" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList="24"/>
+		<Animation move="Run" />
+	</Servant>	
+	<!-- 상어 핑크 펫 무능력 -->
+	<Servant id="534" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:534" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 핑크 펫 아이템 루팅 -->
+	<Servant id="535" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:535" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 핑크 펫 개인 보관함 -->
+	<Servant id="536" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:536" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList="21"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 핑크 펫 자동 채집 -->
+	<Servant id="537" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:537" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 핑크 펫보관함 기간제-->
+	<Servant id="538" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8" defaultName="@servant:538" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList="24"/>
+		<Animation move="Run" />
+	</Servant>		
+	
+	<!-- 상어 블루 급속 회복, 보관함, 골드 루팅-->
+	<Servant id="539" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:540" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList="91,21,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 블루 자동 먹이, 자동 대물, 자동 채집 -->
+	<Servant id="540" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:540" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList="151,161,51"/>
+		<Animation move="Run" />
+	</Servant>	
+	<!-- 상어 블루 아이템 루팅, 보관함,자동 채집 -->
+	<Servant id="541" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:540" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList="31,21,51"/>
+		<Animation move="Run" />
+	</Servant>			
+	<!-- 상어 블루, 519에서 보관함 제외 -->
+	<Servant id="542" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:540" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList="91,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 블루, 521에서 보관함 제외 -->	
+	<Servant id="543" huntingZoneId="1023" npcTemplateId="80080000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:540" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Blue_Tex">
+		<Ability maxCount="6" initAbilityList="31,51"/>
+		<Animation move="Run" />
+	</Servant>		
+	<!-- 상어 핑크 급속 회복, 보관함, 골드 루팅-->
+	<Servant id="544" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:539" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList="91,21,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 핑크 자동 먹이, 자동 대물, 자동 채집 -->
+	<Servant id="545" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:539" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList="151,161,51"/>
+		<Animation move="Run" />
+	</Servant>	
+	<!-- 상어 핑크 아이템 루팅, 보관함,자동 채집 -->
+	<Servant id="546" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:539" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList="31,21,51"/>
+		<Animation move="Run" />
+	</Servant>			
+	<!-- 상어 핑크, 519에서 보관함 제외 -->
+	<Servant id="547" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:539" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList="91,41"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 상어 핑크, 521에서 보관함 제외 -->	
+	<Servant id="548" huntingZoneId="1023" npcTemplateId="80081000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:539" cameraZOffset="-16.0" enableSRGB="True" servantIconName="Icon_Servants.Pet_Shark_Pink_Tex">
+		<Ability maxCount="6" initAbilityList="31,51"/>
+		<Animation move="Run" />	
+	</Servant>		
+	
+	<!-- 할로윈 유령 펫 무능력 -->
+	<Servant id="560" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:554" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList=""/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 할로윈 유령 펫 아이템 루팅 -->
+	<Servant id="561" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:554" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList="31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 할로윈 유령 펫 개인 보관함 -->
+	<Servant id="562" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:554" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList="21"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 할로윈 유령 펫 자동 채집 -->
+	<Servant id="563" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:554" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList="51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 할로윈 유령 급속 회복, 보관함, 골드 루팅-->
+	<Servant id="564" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:555" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList="91,21,31"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 할로윈 유령 아이템 루팅, 보관함,자동 채집 -->
+	<Servant id="565" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:555" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList="31,21,51"/>
+		<Animation move="Run" />
+	</Servant>	
+	<!-- 할로윈 유령, 개인 보관함, 자동 먹이, 대물 낚시 -->
+	<Servant id="566" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:555" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList="21,151,161"/>
+		<Animation move="Run" />
+	</Servant>	
+	<!-- 할로윈 유령, 아이템 루팅, 회복물약 -->
+	<Servant id="567" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:555" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList="31,91"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 할로윈 유령, 아이템 루팅, 자동 채집 -->	
+	<Servant id="568" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:555" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList="31,51"/>
+		<Animation move="Run" />
+	</Servant>
+	<!-- 할로윈 유령 자동 먹이, 자동 대물 -->
+	<Servant id="569" huntingZoneId="1023" npcTemplateId="80083000" type="Pet" rareGrade="0" maxLevel="10" maxEnergy="100" delEnergyPerMin="1" initEnergy="100" mentListId="1" basicSocialMotionId="1,2,3,4,5,6,7,8,9" defaultName="@servant:555" cameraZOffset="-30" enableSRGB="True" servantIconName="Icon_Servants.Pet_Ghost_Tex">
+		<Ability maxCount="6" initAbilityList="151,161"/>
+		<Animation move="Run" />
+	</Servant>	
+</ServantData>

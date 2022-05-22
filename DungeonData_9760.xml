@@ -1,0 +1,939 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9760" name="@dungeon:9760" startPos="-132788.04687500,54688.08593750,3261.36962891" exitContinentId="7004" exitPos="50887,72866,150">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="65" />
+	<ClearCondition huntingZoneId="760" templateId="3000" amount="1" killCount="1" />
+	<Retry retryId="1" />
+
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="760,911" id="1" pos="-131726.00000000,52546.30468750,3027.32983398" next="none" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000038" next="none"/> <!-- 결계장치 생성 -->
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000039" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000040" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000041" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000042" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000043" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000044" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000045" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 1넴 일반구간 관련 데이터 -->
+	<EventGroup type="eliminate" territoryId="76000055" repeat="false"> <!-- 1넴전 1차 쫄 구간 전멸 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="760,912" id="1" pos="-131255.34375000,51000.26953125,2923.54833984" next="none" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000060" next="none"/> <!-- 2차 쫄 구간 스폰 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000057" next="none"/> <!-- 결계장치 제거 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+
+	<EventGroup type="eliminate" territoryId="76000060" repeat="false"> <!-- 1넴전 2차 쫄 구간 전멸 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="760,913" id="1" pos="-132940.29687500,50945.12109375,2925.93017578" next="none" />
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000039" next="none"/> <!-- 결계장치 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000040" next="none"/> <!-- 결계장치 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000041" next="none"/> <!-- 결계장치 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000042" next="none"/> <!-- 결계장치 제거 -->
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000002" next="none"/> <!-- 1넴 소환 -->				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<!-- 1네임드 관련 데이터들 -->
+	<EventGroup type="npcState" uniqueId="760,2000" value="combat" repeat="true"> <!-- 1네임드 페페로 전투 시작시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="TankAggroBuff" value="1" next="none" />	<!--탱 어글버프-->
+				<EventTask type="changePatternList" targetNpcId="760,1004" patternListId="1" next="none" /> <!-- 오브젝트 텐션 변경 -->
+				<EventTask type="changePatternList" targetNpcId="760,1005" patternListId="1" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1006" patternListId="1" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1007" patternListId="1" next="none" />
+				<EventTask type="message" string="@dungeon:9760018" style="combat" next="time" nextValue="10" /> <!-- 문 닫힘 알림 -->					
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="TankAggroBuff" repeat="true"> <!--네임드 전투 중 탱 어글버프 제공-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="99009900" target="class" targetUserClass="lancer, fighter" value="1" strictly="true" turn="on" aliveOnly="false" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+		
+		<EventGroup type="npcHp" id="101" uniqueId="760,2000" value="98" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000038" next="none"/> <!-- 결계장치 생성 -->
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000039" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000040" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000041" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000042" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000043" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000044" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000045" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>							
+
+	<EventGroup type="npcReset" uniqueId="760,2000" repeat="true"> <!-- 1네임드 볼카누스(페페로) 리셋 시 --> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="457056" turn="off" target="player" next="none" /> <!-- 전멸 이상상태 제거 -->				
+				<EventTask type="killNpc" targetNpcId="760,1002" next="none" /> <!-- 투명NPC들 제거 -->					
+				<!-- 결계장치 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000039" next="none"/>
+				<EventTask type="flag" name="down1" value="0" next="none" />
+				<EventTask type="flag" name="down2" value="0" next="none" />
+				<EventTask type="flag" name="down3" value="0" next="none" />
+				<EventTask type="flag" name="down4" value="0" next="none" />
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000040" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000041" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000042" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000027" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000028" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000029" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000030" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000031" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000032" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000033" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000034" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000035" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000036" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000007" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000009" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000006" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000005" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000002" next="time" nextValue="5"/> <!-- 1 네임드 디스폰 후 다시 스폰 --> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000002" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000039" next="time" nextValue="2"/> <!-- 2초 후 입구 다시 삭제 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000040" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000041" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000042" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000039" next="time" nextValue="2"/> <!-- 2초 후 입구 다시 삭제 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000040" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000041" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000042" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000039" next="time" nextValue="2"/> <!-- 2초 후 입구 다시 삭제 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000040" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000041" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000042" next="none"/>			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="760,2000" value="0" repeat="true"> <!-- 1네임드 볼카누스(페페로) 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="TankAggroBuff" value="0" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="101" state="stop" next="time" nextValue="1" />
+				<EventTask type="guideOn" nameId="760,914" id="1" pos="-132850.28125000,45211.34765625,3531.49975586" next="none" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000079" next="none"/>
+				<EventTask type="flag" name="down1" value="0" next="none" />
+				<EventTask type="flag" name="down2" value="0" next="none" />
+				<EventTask type="flag" name="down3" value="0" next="none" />
+				<EventTask type="flag" name="down4" value="0" next="none" />
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000055" next="none"/> 		
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000060" next="none"/> 		
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000038" next="none"/> <!-- 결계장치 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000039" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000040" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000041" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000042" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000043" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000044" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000045" next="none"/>
+				<EventTask type="killNpc" targetNpcId="760,1002" next="none" /> <!-- 투명NPC들 제거 -->					
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000027" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000028" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000029" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000030" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000031" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000032" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000033" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000034" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000035" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000036" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000007" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000009" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000006" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000005" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000062" next="none"/> <!-- 2넴 일반구간 생성 -->		
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000063" next="none"/> 	
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000064" next="none"/> 	
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000066" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<EventGroup type="npcHp" uniqueId="760,2000" value="75" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,1004" patternListId="2" next="none" /> <!-- 투명NPC 텐션 변경 -->
+				<EventTask type="changePatternList" targetNpcId="760,1005" patternListId="2" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1006" patternListId="2" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1007" patternListId="2" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcHp" uniqueId="760,2000" value="60" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,1004" patternListId="3" next="none" /> <!-- 투명NPC 텐션 변경 -->
+				<EventTask type="changePatternList" targetNpcId="760,1005" patternListId="3" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1006" patternListId="3" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1007" patternListId="3" next="none" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="npcHp" uniqueId="760,2000" value="35" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,1004" patternListId="4" next="none" /> <!-- 투명NPC 텐션 변경 -->
+				<EventTask type="changePatternList" targetNpcId="760,1005" patternListId="4" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1006" patternListId="4" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1007" patternListId="4" next="none" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+				
+	<EventGroup type="npcHp" uniqueId="760,1004" value="0" repeat="true"> <!-- 1번 오브젝트 파괴시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="760,2000" actionScriptId="4600002" next="none" /> <!-- 배 흔들림 효과 추가 -->
+				<EventTask type="message" string="@dungeon:9760013" style="combat" next="none" /> 	 <!-- 오브젝트 파괴알림 -->	
+				<EventTask type="flag" name="down1" value="1" next="none" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000005" next="none" />				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+				
+	<EventGroup type="npcHp" uniqueId="760,1005" value="0" repeat="true"> <!-- 2번 오브젝트 파괴시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="760,2000" actionScriptId="4600002" next="none" /> <!-- 배 흔들림 효과 추가 -->
+				<EventTask type="message" string="@dungeon:9760011" style="combat" next="none" /> 	 <!-- 오브젝트 파괴알림 -->	
+				<EventTask type="flag" name="down2" value="1" next="none" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000005" next="none" />							
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="760,1006" value="0" repeat="true"> <!-- 3번 오브젝트 파괴시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="760,2000" actionScriptId="4600002" next="none" /> <!-- 배 흔들림 효과 추가 -->
+				<EventTask type="message" string="@dungeon:9760012" style="combat" next="none" /> 	 <!-- 오브젝트 파괴알림 -->	
+				<EventTask type="flag" name="down3" value="1" next="none" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000005" next="none" />							
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="760,1007" value="0" repeat="true"> <!-- 4번 오브젝트 파괴시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="760,2000" actionScriptId="4600002" next="none" /> <!-- 배 흔들림 효과 추가 -->
+				<EventTask type="message" string="@dungeon:9760014" style="combat" next="none" /> 	 <!-- 오브젝트 파괴알림 -->	
+				<EventTask type="flag" name="down4" value="1" next="none" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000005" next="none" />							
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="down1,down2,down3,down4" repeat="true"> <!-- 4개 오브젝트 모두 파괴시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="760,2000" actionScriptId="4600003" next="none" /> <!-- 배 흔들림 효과 추가 -->
+				<EventTask type="message" string="@dungeon:9760015" style="combat" next="none" /> 	 <!-- 오브젝트 파괴알림 -->	
+				<EventTask type="abnormality" abnormalityId="457056" target="player" next="none" /> <!-- 전멸 이상상태 제공 -->	
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000006" next="none" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="1" name="1네임드 투명 NPC 공격 후 디스폰" repeat="true"> <!-- 전체 데미지 주는 투명 NPC 공격 후 디스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000005" next="none" />			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	
+	<EventGroup type="none" id="33" name="1네임드 1번 오브젝트 삭제" repeat="true"> <!-- 오브젝트 없을 경우 투명NPC 삭제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="760,104" next="none" /> <!-- 투명NPC들 제거 -->			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="34" name="1네임드 2번 오브젝트 삭제" repeat="true"> <!-- 오브젝트 없을 경우 투명NPC 삭제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="760,105" next="none" /> <!-- 투명NPC들 제거 -->			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="35" name="1네임드 3번 오브젝트 삭제" repeat="true"> <!-- 오브젝트 없을 경우 투명NPC 삭제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="760,106" next="none" /> <!-- 투명NPC들 제거 -->			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="36" name="1네임드 4번 오브젝트 삭제" repeat="true"> <!-- 오브젝트 없을 경우 투명NPC 삭제 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="760,107" next="none" /> <!-- 투명NPC들 제거 -->			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="25" name="2번째 소환 텐션으로 변경" repeat="true"> <!-- 70% 몬스터 소환 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,1004" patternListId="2" next="none" /> <!-- 투명NPC 텐션 변경 -->
+				<EventTask type="changePatternList" targetNpcId="760,1005" patternListId="2" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1006" patternListId="2" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1007" patternListId="2" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="26" name="3번째 소환 텐션으로 변경" repeat="true"> <!-- 55% 몬스터 소환 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,1004" patternListId="3" next="none" /> <!-- 투명NPC 텐션 변경 -->
+				<EventTask type="changePatternList" targetNpcId="760,1005" patternListId="3" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1006" patternListId="3" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1007" patternListId="3" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="27" name="4번째 소환 텐션으로 변경" repeat="true"> <!-- 30% 몬스터 소환 텐션으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,1004" patternListId="4" next="none" /> <!-- 투명NPC 텐션 변경 -->
+				<EventTask type="changePatternList" targetNpcId="760,1005" patternListId="4" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1006" patternListId="4" next="none" />
+				<EventTask type="changePatternList" targetNpcId="760,1007" patternListId="4" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="31" name="장판 쫄 1 소환" repeat="true"> <!-- 장판쫄 소환 1번 -->
+		<Event>
+			<EventTaskGroup probability="0.4"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000033" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.6"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000034" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="32" name="장판 쫄 2 소환" repeat="true"> <!-- 장판쫄 소환 2번 -->
+		<Event>
+			<EventTaskGroup probability="0.4"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000035" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.6"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000036" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="2" name="1네임드 자폭병 위치 지정" repeat="true"> <!-- 1네임드가 자폭병들이 공격할 오브젝트를 지정하는 Abnormality 전달 -->
+		<Event>
+			<EventTaskGroup probability="0.2"> <!-- 자폭병 4개중 한개 랜덤하게 걸기 -->
+				<EventTask type="abnormality" abnormalityId="760001" target="npc" targetNpcId="760,104" turn="on" next="none" /> <!-- 자폭병 목표물 설정 -->	
+				<EventTask type="message" string="@dungeon:9760001" style="combat" next="none" /> <!-- 해당 위치가 어디인지 알림 -->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.23"> 
+				<EventTask type="abnormality" abnormalityId="760001" target="npc" targetNpcId="760,105" turn="on" next="none" />
+				<EventTask type="message" string="@dungeon:9760002" style="combat" next="none" /> 
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.27"> 
+				<EventTask type="abnormality" abnormalityId="760001" target="npc" targetNpcId="760,106" turn="on" next="none" />
+				<EventTask type="message" string="@dungeon:9760003" style="combat" next="none" /> 
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.3"> 
+				<EventTask type="abnormality" abnormalityId="760001" target="npc" targetNpcId="760,107" turn="on" next="none" />
+				<EventTask type="message" string="@dungeon:9760004" style="combat" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="3" name="자폭병 소환-1" repeat="true"> <!-- 자폭병 테리토리 소환 -->
+		<Event>
+			<EventTaskGroup probability="0.5"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000007" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000009" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="28" name="자폭병 소환-2" repeat="true"> <!-- 자폭병 테리토리 소환 -->
+		<Event>
+			<EventTaskGroup probability="0.5"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000027" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000028" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="29" name="자폭병 소환-3" repeat="true"> <!-- 자폭병 테리토리 소환 -->
+		<Event>
+			<EventTaskGroup probability="0.5"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000029" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000030" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="30" name="자폭병 소환-4" repeat="true"> <!-- 자폭병 테리토리 소환 -->
+		<Event>
+			<EventTaskGroup probability="0.5"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000031" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5"> 
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000032" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="17" name="큰 쫄 강화 패턴" repeat="true"> <!-- 큰 쫄 강화 패턴 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9760008" style="combat" next="none" /> <!-- 메세지 출력 -->
+				<EventTask type="abnormality" abnormalityId="760016" target="npc" targetNpcId="760,1003" turn="on" next="none" /> <!-- 큰 쫄에게 이상상태 전달 -->
+				<EventTask type="abnormality" abnormalityId="760016" target="npc" targetNpcId="760,1009" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="18" name="배 흔들기 패턴 알림" repeat="true"> <!-- 배 흔들기 패턴 알림메세지 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9760009" style="combat" next="none" /> <!-- 메세지 출력 -->
+				<EventTask type="abnormality" abnormalityId="760017" target="npc" targetNpcId="760,2000" turn="on" next="none" /> <!-- 네임드 스턴 가능하게 이상상태 획득 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="19" name="배 흔들기 액션스크립트" repeat="true"> <!-- 배 흔들기 액션스크립트 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="3"/>
+				<EventTask type="doActionScript" targetNpcId="760,2000" actionScriptId="4600002" next="none" /> <!-- 흔들리는 액션 스크립트 -->
+				<EventTask type="abnormality" abnormalityId="760019" target="player" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="none" id="21" name="1번 오브젝트 공격 알림" repeat="true"> <!-- 오브젝트 공격 알림 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="760001" target="npc" targetNpcId="760,1004" turn="on" next="none" /> <!-- 자폭병 목표물 설정 -->	
+				<EventTask type="message" string="@dungeon:9760003" style="combat" next="none" /> <!-- 해당 위치가 어디인지 알림 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="22" name="2번 오브젝트 공격 알림" repeat="true"> <!-- 오브젝트 공격 알림 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="760030" target="npc" targetNpcId="460,104" turn="off" next="none" /> <!-- 이전 자폭병목표 지우기 -->
+				<EventTask type="abnormality" abnormalityId="760001" target="npc" targetNpcId="760,1005" turn="on" next="none" /> <!-- 자폭병 목표물 설정 -->	
+				<EventTask type="message" string="@dungeon:9760001" style="combat" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="23" name="3번 오브젝트 공격 알림" repeat="true"> <!-- 오브젝트 공격 알림 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="760030" target="npc" targetNpcId="460,105" turn="off" next="none" /> <!-- 이전 자폭병목표 지우기 -->
+				<EventTask type="abnormality" abnormalityId="760001" target="npc" targetNpcId="760,1006" turn="on" next="none" /> <!-- 자폭병 목표물 설정 -->	
+				<EventTask type="message" string="@dungeon:9760002" style="combat" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="24" name="4번 오브젝트 공격 알림" repeat="true"> <!-- 오브젝트 공격 알림 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="760030" target="npc" targetNpcId="460,106" turn="off" next="none" /> <!-- 이전 자폭병목표 지우기 -->
+				<EventTask type="abnormality" abnormalityId="760001" target="npc" targetNpcId="760,1007" turn="on" next="none" /> <!-- 자폭병 목표물 설정 -->	
+				<EventTask type="message" string="@dungeon:9760004" style="combat" next="none" /> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 2넴 일반구간 관련 데이터 -->
+	<EventGroup type="eliminate" territoryId="76000066" repeat="false"> <!-- 2넴전 3차 쫄 구간 전멸 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="760,915" id="1" pos="-132803.35937500,47624.88281250,3668.18359375" next="none" />
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000022" next="none" /> <!-- 문열기 -->
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000003" next="none"/> <!-- 2넴 스폰 -->
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000049" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000050" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 2네임드 관련 데이터들 -->
+	<EventGroup type="npcState" uniqueId="760,1000" value="combat" repeat="true"> <!-- 2네임드 폴리페모스 전투 시작시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="TankAggroBuff" value="1" next="none" />
+				<EventTask type="eventGage" name="지뢰과부하" action="start" uiStyle="2" uiOn="true" string="@dungeon:9760019" next="none"/>
+				<EventTask type="message" string="@dungeon:9760018" style="combat" next="time" nextValue="10" /> <!-- 문 닫힘 알림 -->			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" id="201" uniqueId="760,1000" value="98" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000047" next="none"/> <!-- 결계장치 생성 -->
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000048" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000049" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000050" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="npcReset" uniqueId="760,1000" repeat="true"> <!--  2네임드 폴리페모스 리셋 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="지뢰과부하" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" string="@dungeon:9760019" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000003" next="time" nextValue="5"/> <!-- 폴리페모스 테리토리 디스폰 -->
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000003" next="none"/> <!-- 폴리페모스 테리토리 스폰 -->
+				<!-- 창살문 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000047" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000048" next="time" nextValue="10"/>
+				<!-- 입구 10초후 한번 더 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000047" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000048" next="time" nextValue="2"/>
+				<!-- 입구 2초후 한번 더 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000047" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000048" next="time" nextValue="2"/>
+				<!-- 입구 2초후 한번 더 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000047" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000048" next="time" nextValue="2"/>
+				<!-- 입구 2초후 한번 더 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000047" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000048" next="time" nextValue="2"/>
+				</EventTaskGroup>				
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="760,1000" value="0" repeat="true"> <!--  2네임드 폴리페모스 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="TankAggroBuff" value="0" next="none" />
+				<EventTask type="eventState" stateType="EventGroup" id="201" state="stop" next="time" nextValue="1" />
+				<EventTask type="guideOn" nameId="760,916" id="1" pos="-130394,48154,4100" next="none" />
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000079" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000080" string="@dungeon:9760019" next="none"/>
+				<EventTask name="지뢰과부하" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+				<!-- 창살문 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000047" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000048" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000049" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000050" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000073" next="none"/>				
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000077" next="none"/>				
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000074" next="none"/>				
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000076" next="none"/>				
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000067" next="none"/> <!-- 쫄 스폰 -->
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000068" next="time" nextValue="10" /> <!-- 쫄 스폰 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000003" next="none"/> <!-- 폴리페모스 테리토리 디스폰 -->
+				<EventTask name="지뢰과부하" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="time" nextValue="3"/>
+				<EventTask name="지뢰과부하" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="time" nextValue="3"/>
+				<EventTask name="지뢰과부하" type="eventGage" action="change" value="0" uiStyle="2" uiOn="false" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="20" name="점프 알리기" repeat="true"> <!-- 점프 알리기 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="4" name="2네임드 시한폭탄 작동" repeat="true"> <!-- 2네임드 시한폭탄 작동 패턴으로 변경 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="760001" target="npc" targetNpcId="760,2001" turn="on" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="5" name="2네임드 시한폭탄 패턴 시작" repeat="true"> <!-- 2네임드 시한폭탄 패턴 시작 메세지 출력 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="지뢰과부하" type="eventGage" action="plus" value="20" uiStyle="2" uiOn="true" string="@dungeon:9760019" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<EventGroup type="none" id="37" name="수상한 공격 준비" repeat="true"> <!-- 2네임드 수상한 공격 패턴 시작 메세지 출력 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9760017" style="combat" next="none" /> 	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcHp" uniqueId="760,2001" value="0" repeat="true"> <!--  2네임드 지뢰 터질 때 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="지뢰과부하" type="eventGage" action="minus" value="20" uiStyle="2" uiOn="true" string="@dungeon:9760019" next="none"/>
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eventGage" eventName="지뢰과부하" comparison="none" value="100" repeat="true"> <!-- 영혼 수치 100 도달 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask name="지뢰과부하" type="eventGage" action="change" value="0" uiStyle="2" uiOn="true" string="@dungeon:9760019" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<!-- 3넴 일반구간 관련 데이터 -->
+	
+	<EventGroup type="eliminate" territoryId="76000067" repeat="false"> <!-- 2넴전 3차 쫄 구간 전멸 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="760party1" value="1" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="eliminate" territoryId="76000068" repeat="false"> <!-- 2넴전 3차 쫄 구간 전멸 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="760party2" value="1" next="none" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="flag" name="760party1,760party2" repeat="false"> <!-- 2넴 뒤 다 잡으면 문열기 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="760,917" id="1" pos="-127743.11718750,48645.56640625,4299.89453125" next="none" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000069" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000082" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000083" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000051" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000077" next="none"/>				
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="eliminate" territoryId="76000069" repeat="false"> <!-- 3넴전 1차 쫄 구간 전멸 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="760party3" value="1" next="none" />	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="eliminate" territoryId="76000082" repeat="false"> <!-- 3넴전 2차 쫄 구간 전멸 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="760party4" value="1" next="none" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="eliminate" territoryId="76000083" repeat="false"> <!-- 3넴전 3차 쫄 구간 전멸 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="760party5" value="1" next="none" />		
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="flag" name="760party3" repeat="false"> <!-- 3넴 앞 쫄 구간 전멸 시 문 열기 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="760,918" id="1" pos="-127295.10937500,46227.98046875,4502.19140625" next="none" />
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000051" next="none"/>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000004" next="none"/>	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="47" name="모든 피시 감전" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="760003" target="player" turn="on" next="none" /> <!-- PC 감전 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+		
+	<!-- 3네임드 관련 데이터들 -->	
+	<EventGroup type="npcState" uniqueId="760,3000" value="combat" repeat="true"> <!-- 3네임드 켈리반 전투 시작시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="TankAggroBuff" value="1" next="none" />
+				<EventTask type="message" string="@dungeon:9760018" style="combat" next="time" nextValue="10" /> <!-- 문 닫힘 알림 -->			
+		<!--		<EventTask type="spawn" huntingZoneId="760" territoryId="76000051" next="none"/> 창살문 생성 -->
+		            <EventTask type="despawn" huntingZoneId="760" territoryId="76000074" next="none"/> <!-- 최적화 관련 일반구간 물 제거 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="760,3000" value="98" repeat="true"> 
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000051" next="none"/> <!-- 3네임드 입구 결계장치 생성 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="npcHp" uniqueId="760,3000" value="0" repeat="true"> <!--  3네임드 켈리반 사망 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="TankAggroBuff" value="0" next="none" />
+				<EventTask type="guideOff" id="1" next="none" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000081" next="none"/>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000051" next="none"/> <!-- 창살문 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000015" next="none" /> <!-- 네임드 물장판 제거 -->		
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000016" next="none" />				
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000017" next="none" />				
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000018" next="none" />				
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000019" next="none" />				
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000020" next="none" />		
+				<EventTask type="killNpc" targetNpcId="760,111" next="none" /> <!-- 투명NPC들 제거 -->			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="npcReset" uniqueId="760,3000" repeat="true"> <!--  3네임드 켈리반 리셋 시 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000051" next="none"/> <!-- 창살문 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000015" next="none" /> <!-- 네임드 물장판 제거 -->		
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000016" next="none" />				
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000017" next="none" />				
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000018" next="none" />				
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000019" next="none" />				
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000020" next="none" />		
+				<EventTask type="killNpc" targetNpcId="760,111" next="none" /> <!-- 투명NPC들 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000004" next="time" nextValue="5"/> <!-- 켈리반 테리토리 디스폰 -->				
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000004" next="none"/> <!-- 켈리반 테리토리 스폰 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000051" next="time" nextValue="2" /> <!-- 창살문 2초 후 한번 더 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000051" next="time" nextValue="2" /> <!-- 창살문 2초 후 한번 더 제거 -->
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000051" next="time" nextValue="2" /> <!-- 창살문 2초 후 한번 더 제거 -->
+				</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="6" name="3네임드 물 장판 생성" repeat="true">
+		<Event>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000015" next="time" nextValue="1" />				
+				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="4600002" next="none" />
+				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="4600001" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000016" next="time" nextValue="1" />				
+				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="4600002" next="none" />
+				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="4600001" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000017" next="time" nextValue="1" />				
+				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="4600002" next="none" />
+				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="4600001" next="none" />
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.25">
+				<EventTask type="empty" next="time" nextValue="2" />
+				<EventTask type="spawn" huntingZoneId="760" territoryId="76000018" next="time" nextValue="1" />				
+				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="4600002" next="none" />
+				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="4600001" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="7" name="3네임드 물장판 테리토리 디스폰-ai27" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000015" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="8" name="3네임드 물장판 테리토리 디스폰-ai28" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000016" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="9" name="3네임드 물장판 테리토리 디스폰-ai29" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000017" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="10" name="3네임드 물장판 테리토리 디스폰-ai30" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000018" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="11" name="3네임드 물장판 테리토리 디스폰-ai25" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000019" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="12" name="3네임드 물장판 테리토리 디스폰-ai24" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="760" territoryId="76000020" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="13" name="투명NPC 제거" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="760,111" next="none" /> <!-- 투명NPC들 제거 -->			
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="14" name="전멸패턴 ON" repeat="true"> <!-- 전멸패턴 피뢰침 동작 패턴 실행 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9760007" style="combat" next="none" /> 
+				<EventTask type="changePatternList" targetNpcId="760,3001" patternListId="2" next="none" /> <!-- 피뢰침 동작 패턴 실행 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="15" name="전멸패턴 OFF" repeat="true"> <!-- 전멸패턴 피뢰침 정지 패턴 실행 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,3001" patternListId="1" next="none" /> <!-- 피뢰침 정지 패턴 실행 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="16" name="화면 어두워지게 하기" repeat="true"> <!-- 화면 어두워지게 하기 --> 
+		<Event>
+			<EventTaskGroup>
+ 				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="766002" next="time" nextValue="10"/>
+				<EventTask type="doActionScript" targetNpcId="760,3000" actionScriptId="766003" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="38" name="PC 방어 이펙트 이상상태 해제" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="760011" target="player" turn="off" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="39" name="1번 물줄기 전기때리기" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,112" patternListId="2" next="none" /> <!-- 오브젝트 텐션 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="none" id="40" name="2번 물줄기 전기때리기" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,113" patternListId="2" next="none" /> <!-- 오브젝트 텐션 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="41" name="3번 물줄기 전기때리기" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,114" patternListId="2" next="none" /> <!-- 오브젝트 텐션 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="42" name="4번 물줄기 전기때리기" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,115" patternListId="2" next="none" /> <!-- 오브젝트 텐션 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="43" name="1번 물줄기 다시 물줄기로" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,112" patternListId="1" next="none" /> <!-- 오브젝트 텐션 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="44" name="2번 물줄기 다시 물줄기로" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,113" patternListId="1" next="none" /> <!-- 오브젝트 텐션 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="45" name="3번 물줄기 다시 물줄기로" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,114" patternListId="1" next="none" /> <!-- 오브젝트 텐션 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="none" id="46" name="4번 물줄기 다시 물줄기로" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changePatternList" targetNpcId="760,115" patternListId="1" next="none" /> <!-- 오브젝트 텐션 변경 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+</Dungeon>

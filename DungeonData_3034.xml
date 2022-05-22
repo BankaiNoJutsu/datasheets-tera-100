@@ -1,0 +1,1107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="3034" name="@dungeon:3034" startPos="-43486,40629,-953" exitContinentId="7031" exitPos="3436,-20408,797" startDir="0" exitDir="0" overlapConsoleEvent="true">
+	<Condition type="party" value="1" />
+	<Condition type="maxMemberCount" value="5" />
+	<Condition type="levelOver" value="70" />
+	<ClearCondition huntingZoneId="3034" templateId="3000" amount="1" killCount="1" />
+	<Retry retryId="" />
+
+	<!--던전 최초 설정-->
+	<EventGroup type="initialize" name="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303401500" next="none" /> <!--차원의 마법석 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403010" next="none" /> <!--1네임드 랜던 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403012" next="none" /> <!-- 입장 지점 랜던 스폰-->
+				<EventTask type="flag" name="mini1_ob1" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob2" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob3" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob4" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="1N_FallingDmgAmplify" value="0" next="none" /> <!--1네임드 전투 공간 내 낙하 피해 증폭 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="1N_Dead" value="0" next="none" /> <!--1네임드 사망 조건 플래그 초기화-->
+				<EventTask type="flag" name="mini_Clear" value="0" next="none" /> <!--미니게임 클리어 조건 플래그 초기화-->
+				<EventTask type="flag" name="mini_Silent" value="0" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="2N_Entered" value="0" next="none" /> <!--2네임드 진입 조건 플래그 초기화-->
+				<EventTask type="flag" name="2N_IgnoreVarianceDamage" value="0" next="none" /> <!--2네임드 피해 분산 공식 무시 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="3N_IgnoreVarianceDamage" value="0" next="none" /> <!--3네임드 피해 분산 공식 무시 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="3N_Dead" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 사망 Flag 초기화-->
+				<EventTask type="flag" name="NormalMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 노멀 모드 Flag 초기화-->
+				<EventTask type="flag" name="HardMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 하드 모드 Flag 초기화-->
+				<EventTask type="flag" name="3n_Achievement" value="1" next="none" /> <!--3네임드 레이더 시스템 근거리 폭발 업적 Flag 초기화-->
+				<EventTask type="flag" name="1nFallenPCsetPos" value="0" next="none" /> <!--BTS 159598 Flag 초기화-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--공용-->
+	<!--Do Nothing Event-->
+	<EventGroup type="none" id="0" name="DoNothing" repeat="true">
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="empty" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--업적-->
+	<EventGroup type="npcHp" uniqueId="3034,1009" value="0" repeat="true"> <!--시한 폭탄 제거됨-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303401018" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303401001" huntingZoneId="3034" next="none"/> <!--업적 Abn 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="70" name="3n_Achievement" repeat="true"> <!--레이더 시스템 근거리 폭발 사용함-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="3n_Achievement" value="0" next="none" /> <!--3네임드 레이더 시스템 근거리 폭발 업적 Flag OFF-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="3N_Dead,3n_Achievement"> <!--레이더 시스템 업적 조건 달성-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303403500" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303403000" huntingZoneId="3034" next="none"/> <!--업적 Abn 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--순차스폰-->
+	<EventGroup type="flag" name="1N_Dead"> <!--미니게임 테리토리 스폰-->
+		<Event>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="flag" name="mini_Silent" value="1" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 ON-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403009" next="none" /> <!--미니게임 랜던 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404000" next="none"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404001" next="time" nextValue="1"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="abnormality" abnormalityId="98850014" target="npc" targetNpcId="3034,4001" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+				<EventTask type="abnormality" abnormalityId="98850016" target="npc" targetNpcId="3034,4002" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="flag" name="mini_Silent" value="1" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 ON-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403009" next="none" /> <!--미니게임 랜던 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404000" next="none"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404001" next="time" nextValue="1"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="abnormality" abnormalityId="98850014" target="npc" targetNpcId="3034,4001" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+				<EventTask type="abnormality" abnormalityId="98850016" target="npc" targetNpcId="3034,4003" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="flag" name="mini_Silent" value="1" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 ON-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403009" next="none" /> <!--미니게임 랜던 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404000" next="none"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404001" next="time" nextValue="1"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="abnormality" abnormalityId="98850014" target="npc" targetNpcId="3034,4002" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+				<EventTask type="abnormality" abnormalityId="98850016" target="npc" targetNpcId="3034,4003" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="flag" name="mini_Silent" value="1" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 ON-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403009" next="none" /> <!--미니게임 랜던 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404000" next="none"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404001" next="time" nextValue="1"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="abnormality" abnormalityId="98850016" target="npc" targetNpcId="3034,4001" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+				<EventTask type="abnormality" abnormalityId="98850014" target="npc" targetNpcId="3034,4002" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.16">
+				<EventTask type="flag" name="mini_Silent" value="1" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 ON-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403009" next="none" /> <!--미니게임 랜던 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404000" next="none"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404001" next="time" nextValue="1"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="abnormality" abnormalityId="98850016" target="npc" targetNpcId="3034,4001" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+				<EventTask type="abnormality" abnormalityId="98850014" target="npc" targetNpcId="3034,4003" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.16">
+				<EventTask type="flag" name="mini_Silent" value="1" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 ON-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403009" next="none" /> <!--미니게임 랜던 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404000" next="none"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404001" next="time" nextValue="1"/> <!--미니게임 1번 구간 테리토리 스폰-->
+				<EventTask type="abnormality" abnormalityId="98850016" target="npc" targetNpcId="3034,4002" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+				<EventTask type="abnormality" abnormalityId="98850014" target="npc" targetNpcId="3034,4003" turn="on" next="none" /> <!--자기장 회전 장치 공격 속도 증가 Abn 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="mini_Clear,2N_Entered"> <!--2네임드 테리토리 스폰 및 연출-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="3034,915" id="1" pos="-32373.86718750,59134.90625000,1.24804688" next="none" /> <!--2네임드 처치 가이드-->
+				<EventTask type="message" string="@dungeon:3034406" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="message" string="@dungeon:3034407" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303402000" next="time" nextValue="1" /> <!--2네임드 스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403011" next="none" /> <!--2네임드 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드 1네임드-->
+	<EventGroup type="flag" name="1N_FallingDmgAmplify" repeat="true"> <!--1네임드 지역 낙하 피해 증폭 이상상태 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303400001" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303401001" huntingZoneId="3034" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcState" uniqueId="3034,1000" value="combat" repeat="true"> <!--1네임드 전투 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3034001" style="default" next="none" /> <!--포탈 제거 알림-->
+				<EventTask type="flag" name="1nFallenPCsetPos" value="1" next="none" /> <!--BTS 159598 Flag ON-->
+				<EventTask type="consoleEvent" triggerName="Fan01a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan01a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan02a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan02a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan03a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan03a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan04a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan04a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan05a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan05a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan06a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan06a" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="empty" next="time" nextValue="2"/> <!--Delay Time-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403010" next="none" /> <!--연출 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="3034,1000" repeat="true"> <!--1네임드 리셋-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="killNpc" targetNpcId="3034,1011" next="none" /> <!--Kill UltimateAtk TNPC-->
+				<EventTask type="killNpc" targetNpcId="3034,1009" next="none" /> <!--Kill TimeBomb MNPC-->
+				<EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none" /> <!---Randomized Fan Working 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="2" state="stop" next="none" /> <!---UltimateAtk Destroy 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="3" state="stop" next="none" /> <!---FloorRotate 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none" /> <!---FloorStop 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="5" state="stop" next="none" /> <!---Order2SpawnTimeBomb 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="6" state="stop" next="none" /> <!---DoNotUseFan 이벤트 즉시 중단-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303400100" next="none" /> <!--입구의 1네임드로 가는 포탈 스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303401000" resetNpcHpDungeonTask="true" next="none" /> <!--1네임드 테리토리 디스폰-->
+				<EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none"/> <!--무작위 환풍기 가동 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="2" state="stop" next="none"/> <!--전멸기 TNPC 제거 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="3" state="stop" next="none" /> <!---FloorRotate 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none" /> <!---FloorStop 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="5" state="stop" next="none"/> <!--시한 폭탄 생성 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="6" state="stop" next="time" nextValue="3"/> <!--환풍기 일시 정지 이벤트 즉시 중단-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303401000" next="none" /> <!--1네임드 테리토리 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3034,1000" value="0" repeat="true"> <!--1네임드 사망-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="3034,912" id="1" pos="-41854,40625,-951" next="none" /> <!--되돌아 가기 가이드-->
+				<EventTask type="killNpc" targetNpcId="3034,1011" next="none" /> <!--Kill UltimateAtk TNPC-->
+				<EventTask type="killNpc" targetNpcId="3034,1009" next="none" /> <!--Kill TimeBomb MNPC-->
+				<EventTask type="eventState" stateType="EventGroup" id="1" state="stop" next="none" /> <!---Randomized Fan Working 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="2" state="stop" next="none" /> <!---UltimateAtk Destroy 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="3" state="stop" next="none" /> <!---FloorRotate 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="4" state="stop" next="none" /> <!---FloorStop 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="5" state="stop" next="none" /> <!---Order2SpawnTimeBomb 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="6" state="stop" next="none" /> <!---DoNotUseFan 이벤트 즉시 중단-->
+				<EventTask type="flag" name="1N_FallingDmgAmplify" value="0" next="none" /> <!--1네임드 전투 공간 내 낙하 피해 증폭 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="1N_Dead" value="1" next="none" /> <!--1네임드 사망 조건 플래그 ON-->
+				<EventTask type="flag" name="1nFallenPCsetPos" value="0" next="none" /> <!--BTS 159598 Flag OFF-->
+				<EventTask type="abnormality" abnormalityId="303401001" target="player" turn="off" next="none"/> <!--1네임드 지속피해 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="303401004" target="player" turn="off" next="none"/> <!--1네임드 기절 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="303401005" target="player" turn="off" next="none"/> <!--1네임드 이속감소 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="303401008" target="player" turn="off" next="none"/> <!--1네임드 침묵 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="303401012" target="player" turn="off" next="none"/> <!--1네임드 포획 Abn 제거-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400100" next="none" /> <!--입구의 1네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303400101" next="none" /> <!--입구의 미니게임으로 가는 포탈 스폰-->
+				<EventTask type="consoleEvent" triggerName="FanStop01" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop01" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop02" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop02" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop03" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop03" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop04" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop04" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop05" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop05" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FanStop06" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FanStop06" turn="off" next="none" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="FloorStop" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FloorStop" turn="off" next="time" nextValue="5" /> <!--console event Initialize-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303401000" next="none" /> <!--1네임드 테리토리 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303401002" next="none" /> <!--입구로 가는 포탈 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3034,1000" value="98" repeat="true"> <!--1네임드 포탈 제거-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400100" next="none" /> <!--입구의 1네임드로 가는 포탈 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="1nFallenPCsetPos" repeat="true"> <!--맵 밖으로 이탈했을 때 1네임드 전투 공간으로 이동-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="setPos" target="player" delayTime="0" aliveOnly="false" huntingZoneId="3034" territoryId="303401003" next="none">
+					<Pos value="-38364,53760,1" />
+				</EventTask>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--패턴-->
+	<EventGroup type="npcHp" uniqueId="3034,1000" value="50" repeat="true"> <!--1네임드 시한 폭탄 난이도 증가-->
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="changePatternList" targetNpcId="3034,1002" patternListId="2" next="none" /> <!--TimeBomb Controller Pattern Change 2-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="1" name="Randomized Fan Working" repeat="true"> <!--무작위 환풍기 동작-->
+		<Event>
+			<EventTaskGroup probability="0.16">
+				<EventTask type="abnormality" abnormalityId="303401014" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="303401015" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb & Serial Explosion-->
+				<EventTask type="abnormality" abnormalityId="303401009" target="npc" targetNpcId="3034,1003" turn="on" next="time" nextValue="5" /> <!--1번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan01b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan01b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan01a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan01a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.16">
+				<EventTask type="abnormality" abnormalityId="303401014" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="303401015" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb & Serial Explosion-->
+				<EventTask type="abnormality" abnormalityId="303401009" target="npc" targetNpcId="3034,1004" turn="on" next="time" nextValue="5" /> <!--2번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan02b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan02b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan02a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan02a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="abnormality" abnormalityId="303401014" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="303401015" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb & Serial Explosion-->
+				<EventTask type="abnormality" abnormalityId="303401009" target="npc" targetNpcId="3034,1005" turn="on" next="time" nextValue="5" /> <!--3번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan03b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan03b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan03a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan03a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="abnormality" abnormalityId="303401014" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="303401015" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb & Serial Explosion-->
+				<EventTask type="abnormality" abnormalityId="303401009" target="npc" targetNpcId="3034,1006" turn="on" next="time" nextValue="5" /> <!--4번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan04b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan04b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan04a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan04a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="abnormality" abnormalityId="303401014" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="303401015" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb & Serial Explosion-->
+				<EventTask type="abnormality" abnormalityId="303401009" target="npc" targetNpcId="3034,1007" turn="on" next="time" nextValue="5" /> <!--5번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan05b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan05b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan05a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan05a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17">
+				<EventTask type="abnormality" abnormalityId="303401014" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Do Not Use UltimateAtk-->
+				<EventTask type="abnormality" abnormalityId="303401015" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Fan Used -> DoNotUseTimeBomb & Serial Explosion-->
+				<EventTask type="abnormality" abnormalityId="303401009" target="npc" targetNpcId="3034,1008" turn="on" next="time" nextValue="5" /> <!--6번 환풍기 작동-->
+				<EventTask type="consoleEvent" triggerName="Fan06b" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan06b" turn="off" next="time" nextValue="2" /> <!--console event Initialize-->
+				<EventTask type="consoleEvent" triggerName="Fan06a" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="Fan06a" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="2" name="UltimateAtk Destroy" repeat="true"> <!--전멸기 TNPC 제거-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="empty" next="time" nextValue="4"/> <!--Delay Time-->
+				<EventTask type="killNpc" targetNpcId="3034,1011" next="none" /> <!--Kill UltimateAtk TNPC-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>		
+	<EventGroup type="none" id="3" name="FloorRotate" repeat="true"> <!--전투 지역 회전 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303401011" target="npc" targetNpcId="3034,1010" turn="on" next="none" /> <!-- Give Condition 2 Fan Controller DoNotUseFan-->
+				<EventTask type="consoleEvent" triggerName="FloorRotate" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FloorRotate" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="4" name="FloorStop" repeat="true"> <!--전투 지역 회전 중지-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="consoleEvent" triggerName="FloorStop" turn="on" next="none" /> <!--Actual Order-->
+				<EventTask type="consoleEvent" triggerName="FloorStop" turn="off" next="none" /> <!--console event Initialize-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="5" name="Order2SpawnTimeBomb" repeat="true"> <!--시한 폭탄 생성-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303401006" target="npc" targetNpcId="3034,1002" turn="on" next="none" /> <!--Give Condition 2 TimeBombs-->
+				<EventTask type="abnormality" abnormalityId="303401013" target="npc" targetNpcId="3034,1000" turn="on" next="none" /> <!--Give Condition 2 1Named TimeBombUsed-->
+				<EventTask type="abnormality" abnormalityId="303401013" target="npc" targetNpcId="3034,1010" turn="on" next="none" /> <!--Give Condition 2 Fan Controller TimeBombUsed-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="6" name="DoNotUseFan" repeat="true"> <!--환풍기 일시 정지--> <!--모든 PC에게 낙하 피해 면역 이상상태 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303401011" target="npc" targetNpcId="3034,1010" turn="on" next="none" /> <!--Give Condition 2 Fan Controller DoNotUseFan-->
+				<EventTask type="abnormality" abnormalityId="303401000" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303401001" huntingZoneId="3034" next="none"/> <!--Give Falling Dmg Immune Abn to All(with Dead) PC Only in Territory-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="8" name="ConditionAbnOFF" repeat="true"> <!--시한 폭탄 사용 조건 Abn 제거-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303401006" target="npc" targetNpcId="3034,1002" turn="off" next="none" /> <!--OFF TimeBomb Condition Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!--2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드 2네임드-->
+	<EventGroup type="npcState" uniqueId="3034,2000" value="combat" repeat="true"> <!--2네임드 전투 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3034001" style="default" next="none" /> <!--포탈 제거 알림-->
+				<EventTask type="empty" next="time" nextValue="2"/> <!--Delay Time-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403011" next="none" /> <!--2네임드 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="3034,2000" repeat="true"> <!--2네임드 리셋-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303400102" next="none" /> <!--입구의 2네임드로 가는 포탈 스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303402000" resetNpcHpDungeonTask="true" next="none" /> <!--2네임드 테리토리 디스폰-->
+				<EventTask type="eventState" stateType="EventGroup" id="7" state="stop" next="none" /> <!---Order2Explode 이벤트 즉시 중단-->
+				<EventTask type="abnormality" abnormalityId="303402008" target="player" turn="off" next="none"/> <!--2네임드 업적 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="303402009" target="player" turn="off" next="none"/> <!--2네임드 업적 Abn 제거-->
+				<EventTask type="timer" action="stop" name="UltimateAtk" next="time" nextValue="3" /> <!--타이머 정지-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303402000" next="none" /> <!--2네임드 테리토리 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3034,2000" value="0" repeat="true"> <!--2네임드 사망-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="3034,912" id="1" pos="-41854,40625,-951" next="none" /> <!--되돌아 가기 가이드-->
+				<EventTask type="flag" name="2N_IgnoreVarianceDamage" value="0" next="none" /> <!--2네임드 피해 분산 공식 무시 이상상태 부여 플래그 OFF-->
+				<EventTask type="eventState" stateType="EventGroup" id="7" state="stop" next="none" /> <!---Order2Explode 이벤트 즉시 중단-->
+				<EventTask type="abnormality" abnormalityId="303402008" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303402000" huntingZoneId="3034" next="none"/> <!--2네임드 업적 달성 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="303402000" target="player" turn="off" next="none"/> <!--2네임드 지속피해 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="303402004" target="player" turn="off" next="none"/> <!--2네임드 조건 Abn 제거-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403000" next="none" /> <!--3네임드 테리토리 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403013" next="none" /> <!--3네임드 쓰러진 랜던 스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400102" next="none" /> <!--입구의 2네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303400103" next="time" nextValue="5" /> <!--입구의 3네임드로 가는 포탈 스폰-->
+				<EventTask type="abnormality" abnormalityId="303402008" target="player" turn="off" next="none"/> <!--2네임드 업적 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="303402009" target="player" turn="off" next="none"/> <!--2네임드 업적 Abn 제거-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303402000" next="none" /> <!--2네임드 테리토리 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303402001" next="none" /> <!--입구로 가는 포탈 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3034,2000" value="98" repeat="true"> <!--2네임드 포탈 제거-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400102" next="none" /> <!--입구의 2네임드로 가는 포탈 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--패턴-->
+	<EventGroup type="npcHp" uniqueId="3034,2000" value="96" repeat="true"> <!--프레스 작동 메시지 출력-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3034200" style="default" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3034,2000" value="51" repeat="true"> <!--2네임드 Press Tension Change 2-->
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="changePatternList" targetNpcId="3034,2001" patternListId="2" next="none" /> <!--Press Change-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3034,2000" value="16" repeat="true"> <!--2네임드 Press Tension Change 3-->
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="changePatternList" targetNpcId="3034,2001" patternListId="3" next="none" /> <!--Press Change-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="7" name="Order2Explode" repeat="true"> <!--Electricity Bomb-->
+		<Event>
+			<EventTaskGroup>
+					<EventTask type="changePatternList" targetNpcId="3034,2007" patternListId="2" next="none" /> <!--Electricity Bomb Tension Change 2-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3034,2000" value="90" repeat="true"> <!--전멸기 패턴 타이머 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" name="UltimateAtk" action="start" direction="reverse" value="80" timerUiOff="true" next="none"/> <!--80초 Timer 시작-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="timer" timerName="UltimateAtk" value="0" repeat="true"> <!--전멸기 패턴 타이머 종료-->
+		<Event>
+			<EventTaskGroup probability="0.5"> <!--With Pulling Order-->
+				<EventTask type="abnormality" abnormalityId="303402002" target="npc" targetNpcId="3034,2000" turn="on" next="none" /> <!--Give Conditional Abn-->
+				<EventTask type="timer" name="UltimateAtk" action="start" direction="reverse" value="80" timerUiOff="true" next="none"/> <!--Restart Timer-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5"> <!--Without Pulling Order-->
+				<EventTask type="abnormality" abnormalityId="303402003" target="npc" targetNpcId="3034,2000" turn="on" next="none" /> <!--Give Conditional Abn-->
+				<EventTask type="timer" name="UltimateAtk" action="start" direction="reverse" value="80" timerUiOff="true" next="none"/> <!--Restart Timer-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="2N_IgnoreVarianceDamage" repeat="true"> <!--2네임드 피해 분산 공식 무시 이상상태 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303400000" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303402000" huntingZoneId="3034" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="9" name="PressTurnON" repeat="true"> <!--모든 프레스 동작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303402006" target="npc" targetNpcId="3034,2001" turn="on" next="none" /> <!--ON Press Turn ON 10s Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!--3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드 3네임드-->
+	<EventGroup type="npcState" uniqueId="3034,3000" value="combat" repeat="true" logRecord="3NamedCombatStart"> <!--3네임드 전투 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3034001" style="default" next="none" /> <!--포탈 제거 알림-->
+				<EventTask type="flag" name="NormalMode" value="1" next="none" /> <!--3네임드 보상 설정 조건 중 노멀 모드 Flag ON-->
+				<EventTask type="changeNpcCylinder" huntingZoneId="3034" templateId="3000" cylinderId="1" next="none" /> <!--일반 실린더로 변경-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcReset" uniqueId="3034,3000" id="61" repeat="true" logRecord="3NamedReset"> <!--3네임드 리셋-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="changeNpcCylinder" huntingZoneId="3034" templateId="3000" cylinderId="1" next="none" /> <!--일반 실린더로 변경-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303400103" next="none" /> <!--입구에 3네임드로 가는 포탈 스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403004" next="none" /> <!--차단문 디스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403000" resetNpcHpDungeonTask="true" next="none" /> <!--3네임드 테리토리 디스폰-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303405" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303406" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303407" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303408" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303409" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="flag" name="3100ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+				<EventTask type="flag" name="3101ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+				<EventTask type="flag" name="3102ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+				<EventTask type="flag" name="3103ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+				<EventTask type="flag" name="3104ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+				<EventTask type="flag" name="3N_Dead" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 사망 Flag 초기화-->
+				<EventTask type="flag" name="NormalMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 노멀 모드 Flag 초기화-->
+				<EventTask type="flag" name="HardMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 하드 모드 Flag 초기화-->
+				<EventTask type="eventState" stateType="EventGroup" id="30" state="stop" next="none" /> <!--Thermal Sensing Randomize 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="31" state="stop" next="none" /> <!--Thermal Sensing Randomize 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="32" state="stop" next="none" /> <!--Thermal Sensing Randomize 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="40" state="stop" next="none" /> <!--MiniNuke-Normal Condition 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="41" state="stop" next="none" /> <!--MiniNuke-Ressurection Condition 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="50" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="51" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="52" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="53" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="54" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="60" state="stop" next="none" /> <!--DoNotUseClairDeLune 이벤트 즉시 중단-->
+				<EventTask type="timer" action="stop" name="ATSP" next="time" nextValue="5" /> <!--타이머 정지-->
+				<EventTask type="timer" action="stop" name="TheEnd" value="0" timerUiOff="true" next="none" /> <!--제한 시간 Timer UI OFF-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403000" next="none" /> <!--3네임드 테리토리 스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup  type="npcHp" uniqueId="3034,3000" value="0" repeat="true" logRecord="3NamedDead"> <!--3네임드 사망 시-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="timer" action="stop" name="TheEnd" value="0" timerUiOff="true" next="none" /> <!--제한 시간 Timer Stop-->
+				<!--EventTask type="playMovie" id="3057" next="none"/--> <!--영상 재생-->
+				<EventTask type="guideOff" id="1" next="none" /> <!--길찾기 메시지 제거-->
+				<EventTask type="flag" name="3N_IgnoreVarianceDamage" value="0" next="none" /> <!--3네임드 피해 분산 공식 무시 이상상태 부여 플래그 OFF-->
+				<EventTask type="flag" name="3N_Dead" value="1" next="none" /> <!--3네임드 보상 설정 조건 중 사망 Flag ON-->
+				<EventTask type="eventState" stateType="EventGroup" id="30" state="stop" next="none" /> <!--Thermal Sensing Randomize 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="31" state="stop" next="none" /> <!--Thermal Sensing Randomize 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="32" state="stop" next="none" /> <!--Thermal Sensing Randomize 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="40" state="stop" next="none" /> <!--MiniNuke-Normal Condition 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="41" state="stop" next="none" /> <!--MiniNuke-Ressurection Condition 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="50" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="51" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="52" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="53" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="54" state="stop" next="none" /> <!--Part Break 이벤트 즉시 중단-->
+				<EventTask type="eventState" stateType="EventGroup" id="60" state="stop" next="none" /> <!--DoNotUseClairDeLune 이벤트 즉시 중단-->
+				<EventTask type="abnormality" abnormalityId="303403001" target="player" turn="off" next="none"/> <!--3네임드 기절 Abn 제거-->
+				<EventTask type="abnormality" abnormalityId="303403009" target="player" turn="off" next="none"/> <!--3네임드 화상 Abn 제거-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303400103" next="none" /> <!--입구에 3네임드로 가는 포탈 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403001" next="none" /> <!--던전 출구 차원의 마법석 스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403004" next="none" /> <!--차단문 디스폰-->
+				<EventTask type="killNpc" targetNpcId="3034,3200" next="none" /> <!--Kill TNPC-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403013" next="time" nextValue="5" /> <!--쓰러진 랜던 디스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403000" next="none" /> <!--3네임드 테리토리 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--패턴-->
+	<EventGroup type="flag" name="3N_IgnoreVarianceDamage" repeat="true"> <!--3네임드 피해 분산 공식 무시 이상상태 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303400000" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303403000" huntingZoneId="3034" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3034,3000" value="98" repeat="true"> <!--3네임드 열감지 프로토콜 패턴 시작--> <!--3네임드 포탈 제거-->
+		<Event>
+			<EventTaskGroup probability="0.16"> <!--S l Band-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400103" next="none" /> <!--입구의 3네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403004" next="none" /> <!--차단문 스폰-->
+				<EventTask type="abnormality" abnormalityId="303403101" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--S Band Abn-->
+				<EventTask type="abnormality" abnormalityId="303403105" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--l Band Abn-->
+				<EventTask type="message" string="@dungeon:3034301" style="default" next="none" />  <!--S Status Massage-->
+				<EventTask type="message" string="@dungeon:3034302" style="alert" next="none" />  <!--S Status Massage-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.16"> <!--S x Band-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400103" next="none" /> <!--입구의 3네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403004" next="none" /> <!--차단문 스폰-->
+				<EventTask type="abnormality" abnormalityId="303403101" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--S Band Abn-->
+				<EventTask type="abnormality" abnormalityId="303403106" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--x Band Abn-->
+				<EventTask type="message" string="@dungeon:3034301" style="default" next="none" />  <!--S Status Massage-->
+				<EventTask type="message" string="@dungeon:3034302" style="alert" next="none" />  <!--S Status Massage-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17"> <!--L s Band-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400103" next="none" /> <!--입구의 3네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403004" next="none" /> <!--차단문 스폰-->
+				<EventTask type="abnormality" abnormalityId="303403102" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--L Band Abn-->
+				<EventTask type="abnormality" abnormalityId="303403104" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--s Band Abn-->
+				<EventTask type="message" string="@dungeon:3034301" style="default" next="none" />  <!--L Status Massage-->
+				<EventTask type="message" string="@dungeon:3034303" style="alert" next="none" />  <!--L Status Massage-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17"> <!--L x Band-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400103" next="none" /> <!--입구의 3네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403004" next="none" /> <!--차단문 스폰-->
+				<EventTask type="abnormality" abnormalityId="303403102" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--L Band Abn-->
+				<EventTask type="abnormality" abnormalityId="303403106" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--x Band Abn-->
+				<EventTask type="message" string="@dungeon:3034301" style="default" next="none" />  <!--L Status Massage-->
+				<EventTask type="message" string="@dungeon:3034303" style="alert" next="none" />  <!--L Status Massage-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17"> <!--X s Band-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400103" next="none" /> <!--입구의 3네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403004" next="none" /> <!--차단문 스폰-->
+				<EventTask type="abnormality" abnormalityId="303403103" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--X Band Abn-->
+				<EventTask type="abnormality" abnormalityId="303403104" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--s Band Abn-->
+				<EventTask type="message" string="@dungeon:3034301" style="default" next="none" />  <!--X Status Massage-->
+				<EventTask type="message" string="@dungeon:3034304" style="alert" next="none" />  <!--X Status Massage-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.17"> <!--X l Band-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400103" next="none" /> <!--입구의 3네임드로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403004" next="none" /> <!--차단문 스폰-->
+				<EventTask type="abnormality" abnormalityId="303403103" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--X Band Abn-->
+				<EventTask type="abnormality" abnormalityId="303403105" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--l Band Abn-->
+				<EventTask type="message" string="@dungeon:3034301" style="default" next="none" />  <!--X Status Massage-->
+				<EventTask type="message" string="@dungeon:3034304" style="alert" next="none" />  <!--X Status Massage-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcHp" uniqueId="3034,3000" value="90" repeat="true"> <!--3네임드 하드모드 공속 증가 버프-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303400009" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--S Band Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="30" name="TSP-Randomized-s_or_x" repeat="true"> <!--s Band or x Band-->
+		<Event>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="303403104" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--s Band Abn-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="303403106" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--x Band Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="31" name="TSP-Randomized-s_or_l" repeat="true"> <!--s Band or l Band-->
+		<Event>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="303403104" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--s Band Abn-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="303403105" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--l Band Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="32" name="TSP-Randomized-l_or_x" repeat="true"> <!--l Band or x Band-->
+		<Event>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="303403105" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--l Band Abn-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="abnormality" abnormalityId="303403106" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--x Band Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="40" name="MiniNuke-Normal" repeat="true"> <!--원거리 타겟 견제 사용됨 조건 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303403200" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--MiniNuke Normal Target Used Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="41" name="MiniNuke-Resurrector" repeat="true"> <!--부활 시전 타겟 견제 사용됨 조건 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303403201" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--MiniNuke Resurrector Target Used Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="50" name="PartBreak-Begin" repeat="true"> <!--부위 파괴 시작-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303403300" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--Use Condition Abn OFF-->
+				<EventTask type="changePatternList" targetNpcId="3034,3000" patternListId="2" next="none" /> <!--Tension Set Change-->
+				<EventTask type="workObjectSpawn" huntingZoneId="3034" templateId="303405" next="none" /> <!--ONPC Spawn-->
+				<EventTask type="workObjectSpawn" huntingZoneId="3034" templateId="303406" next="none" /> <!--ONPC Spawn-->
+				<EventTask type="workObjectSpawn" huntingZoneId="3034" templateId="303407" next="none" /> <!--ONPC Spawn-->
+				<EventTask type="workObjectSpawn" huntingZoneId="3034" templateId="303408" next="none" /> <!--ONPC Spawn-->
+				<EventTask type="workObjectSpawn" huntingZoneId="3034" templateId="303409" next="none" /> <!--ONPC Spawn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="51" name="PartBreak-Vulnerable" repeat="true"> <!--부위 파괴 선택-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303403303" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--Break Condition Abn ON-->
+				<EventTask type="abnormality" abnormalityId="303403301" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--Shield Abn OFF-->
+				<EventTask type="activeNpcPartBreak" partId="1" breakStageId="1" huntingZoneId="3034" templateId="3000" next="none" /> <!--Set Stage ID-->
+				<EventTask type="changeNpcCylinder" huntingZoneId="3034" templateId="3000" cylinderId="2" next="none" /> <!--부위 파괴 실린더로 변경-->
+				<EventTask type="flag" name="NormalMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 노멀 모드 Flag OFF-->
+				<EventTask type="flag" name="HardMode" value="1" next="none" /> <!--3네임드 보상 설정 조건 중 하드 모드 Flag ON-->
+	
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="52" name="PartBreak-NormalTensionChangeWithStageID_1" repeat="true"> <!--Normal Tension Change-->
+		<Event>
+			<EventTaskGroup>
+				<!--EventTask type="killNpc" targetNpcId="3034,3201" next="none" /--> <!--Kill Cylinder TNPC-->
+				<EventTask type="abnormality" abnormalityId="303403301" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--Shield Abn OFF-->
+				<EventTask type="abnormality" abnormalityId="303403400" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--ShieldBreak Pattern Abn ON-->
+				<EventTask type="abnormality" abnormalityId="303403401" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--Shield Abn OFF-->
+				<EventTask type="activeNpcPartBreak" partId="1" breakStageId="1" huntingZoneId="3034" templateId="3000" turn="off" next="none" /> <!--Set Stage ID-->
+				<EventTask type="changeNpcCylinder" huntingZoneId="3034" templateId="3000" cylinderId="1" next="none" /> <!--일반 실린더로 변경-->
+				<EventTask type="changePatternList" targetNpcId="3034,3000" patternListId="1" next="none" /> <!--Normal Tension Change-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303405" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303406" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303407" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303408" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303409" next="none" /> <!--ONPC deSpawn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="timer" timerName="ATSP" value="0" repeat="true"> <!--강화 열 감지 프로토콜 패턴 타이머 종료-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--사용 조건 이상상태 부여-->
+				<EventTask type="abnormality" abnormalityId="303403010" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열 감지 프로토콜 사용 중지 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="53" name="ATSP-Forward" repeat="true"> <!--열 감지 프로토콜 정방향 이상상태 부여-->
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--정방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 정 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034311" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="30" timerUiOff="true" next="none"/> <!--30초 Timer 시작-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--정방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 정 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034311" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="35" timerUiOff="true" next="none"/> <!--35초 Timer 시작-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--정방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 정 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034311" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="40" timerUiOff="true" next="none"/> <!--40초 Timer 시작-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--정방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 정 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034311" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="45" timerUiOff="true" next="none"/> <!--45초 Timer 시작-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--정방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 정 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034311" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="50" timerUiOff="true" next="none"/> <!--50초 Timer 시작-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="54" name="ATSP-Reverse" repeat="true"> <!--열 감지 프로토콜 역방향 이상상태 부여-->
+		<Event>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--역방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 역 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034312" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="30" timerUiOff="true" next="none"/> <!--30초 Timer 시작-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--역방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 역 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034312" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="35" timerUiOff="true" next="none"/> <!--35초 Timer 시작-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--역방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 역 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034312" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="40" timerUiOff="true" next="none"/> <!--40초 Timer 시작-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--역방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 역 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034312" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="45" timerUiOff="true" next="none"/> <!--45초 Timer 시작-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.2">
+				<EventTask type="abnormality" abnormalityId="303403005" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--사용 조건 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="off" next="none" /> <!--역방향 부여 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="abnormality" abnormalityId="303403108" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--정방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--역방향 이상상태 제거-->
+				<EventTask type="abnormality" abnormalityId="303403109" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--열감지 프로토콜 패턴 역 이상상태 부여-->
+				<EventTask type="message" string="@dungeon:3034312" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="50" timerUiOff="true" next="none"/> <!--50초 Timer 시작-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="55" name="ATSP-stop" value="0" repeat="true"> <!--정역 방향 변경 일시중지-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303403011" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--사용 조건 이상상태 부여-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="npcPartBreak" name="PartBreak" uniqueId="3034,3000" value="1" value2="1" repeat="true"> <!--부위 파괴 성공-->
+		<Event>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="doActionScript" targetNpcId="3034,3000" actionScriptId="3034001" next="none" /> <!--부위 파괴 성공 시 카메라 흔들기-->
+				<EventTask type="timer" name="TheEnd" action="start" direction="reverse" value="600" timerUiOff="false" next="none"/> <!--10분 Timer 시작-->
+				<EventTask type="changeNpcCylinder" huntingZoneId="3034" templateId="3000" cylinderId="1" next="none" /> <!--일반 실린더로 변경-->
+				<EventTask type="abnormality" abnormalityId="303403006" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="7" timerUiOff="true" next="none"/> <!--7초 Timer 시작-->
+				<EventTask type="abnormality" abnormalityId="303403008" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--Part Broken Status Abn ON-->
+				<EventTask type="abnormality" abnormalityId="303403301" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--Break Condition Abn OFF-->
+				<EventTask type="abnormality" abnormalityId="303403304" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--방어력 공격력 증가 Abn ON-->
+				<EventTask type="abnormality" abnormalityId="303403400" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--ShieldBreak Pattern Abn ON-->
+				<EventTask type="activeNpcPartBreak" partId="1" breakStageId="1" huntingZoneId="3034" templateId="3000" turn="off" next="none" /> <!--Set Stage ID-->
+				<EventTask type="message" string="@dungeon:3034309" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="changePatternList" targetNpcId="3034,3000" patternListId="1" next="none" /> <!--Normal Pattern Change 3Named-->
+				<EventTask type="changePatternList" targetNpcId="3034,3200" patternListId="2" next="none" /> <!--PartBroken Pattern Change TNPC-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303405" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303406" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303407" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303408" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303409" next="none" /> <!--ONPC deSpawn-->
+			</EventTaskGroup>
+			<EventTaskGroup probability="0.5">
+				<EventTask type="doActionScript" targetNpcId="3034,3000" actionScriptId="3034001" next="none" /> <!--부위 파괴 성공 시 카메라 흔들기-->
+				<EventTask type="timer" name="TheEnd" action="start" direction="reverse" value="600" timerUiOff="false" next="none"/> <!--10분 Timer 시작-->
+				<EventTask type="changeNpcCylinder" huntingZoneId="3034" templateId="3000" cylinderId="1" next="none" /> <!--일반 실린더로 변경-->
+				<EventTask type="abnormality" abnormalityId="303403007" target="npc" targetNpcId="3034,3200" turn="on" next="none" /> <!--다음 부여 방향 결정-->
+				<EventTask type="timer" name="ATSP" action="start" direction="reverse" value="7" timerUiOff="true" next="none"/> <!--7초 Timer 시작-->
+				<EventTask type="abnormality" abnormalityId="303403008" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--Part Broken Status Abn ON-->
+				<EventTask type="abnormality" abnormalityId="303403301" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--Break Condition Abn OFF-->
+				<EventTask type="abnormality" abnormalityId="303403304" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--방어력 공격력 증가 Abn ON-->
+				<EventTask type="abnormality" abnormalityId="303403400" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--ShieldBreak Pattern Abn ON-->
+				<EventTask type="activeNpcPartBreak" partId="1" breakStageId="1" huntingZoneId="3034" templateId="3000" turn="off" next="none" /> <!--Set Stage ID-->
+				<EventTask type="message" string="@dungeon:3034309" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="changePatternList" targetNpcId="3034,3000" patternListId="1" next="none" /> <!--Normal Pattern Change 3Named-->
+				<EventTask type="changePatternList" targetNpcId="3034,3200" patternListId="2" next="none" /> <!--PartBroken Pattern Change TNPC-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303405" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303406" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303407" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303408" next="none" /> <!--ONPC deSpawn-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303409" next="none" /> <!--ONPC deSpawn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="3034,303405" repeat="true"> <!--ONPC is Dead-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="3100ONPCDEAD" value="1" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303405" next="none" /> <!--ONPC 디스폰-->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="3034,303406" repeat="true"> <!--ONPC is Dead-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="3101ONPCDEAD" value="1" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303406" next="none" /> <!--ONPC 디스폰-->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="3034,303407" repeat="true"> <!--ONPC is Dead-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="3102ONPCDEAD" value="1" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303407" next="none" /> <!--ONPC 디스폰-->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="3034,303408" repeat="true"> <!--ONPC is Dead-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="3103ONPCDEAD" value="1" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303408" next="none" /> <!--ONPC 디스폰-->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="3034,303409" repeat="true"> <!--ONPC is Dead-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="3104ONPCDEAD" value="1" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303409" next="none" /> <!--ONPC 디스폰-->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="3100ONPCDEAD,3101ONPCDEAD,3102ONPCDEAD,3103ONPCDEAD,3104ONPCDEAD" repeat="true"> <!--All ONPC is Dead-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303403303" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--Break Condition Abn ON-->
+				<EventTask type="abnormality" abnormalityId="303403301" target="npc" targetNpcId="3034,3000" turn="off" next="none" /> <!--Shield Abn OFF-->
+				<EventTask type="activeNpcPartBreak" partId="1" breakStageId="1" huntingZoneId="3034" templateId="3000" next="none" /> <!--Set Stage ID-->
+				<EventTask type="changeNpcCylinder" huntingZoneId="3034" templateId="3000" cylinderId="2" next="none" /> <!--부위 파괴 실린더로 변경-->
+				<EventTask type="flag" name="NormalMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 노멀 모드 Flag OFF-->
+				<EventTask type="flag" name="HardMode" value="1" next="none" /> <!--3네임드 보상 설정 조건 중 하드 모드 Flag ON-->
+				<EventTask type="flag" name="3100ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+				<EventTask type="flag" name="3101ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+				<EventTask type="flag" name="3102ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+				<EventTask type="flag" name="3103ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+				<EventTask type="flag" name="3104ONPCDEAD" value="0" next="none" /> <!--부위 파괴 패턴 Flag 초기화-->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="timer" timerName="TheEnd" value="0" repeat="true"> <!--제한 시간 타이머 종료-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3034307" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="message" string="@dungeon:3034308" style="combat" next="none" /> <!--메시지 출력-->
+				<EventTask type="changePatternList" targetNpcId="3034,3000" patternListId="3" next="none" /> <!--UltimateAtk PatternSet Change-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="60" name="DoNotUseClairDeLune" repeat="true"> <!--달빛 베기 5초 간 사용 불가능한 조건 이상상태 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303403002" target="npc" targetNpcId="3034,3000" turn="on" next="none" /> <!--DuNotUseClairDeLune Abn-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--EventGroup type="none" id="46" name="딜1위 스턴" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:3034005" style="combat" next="none" /> 
+				<EventTask type="abnormality" abnormalityId="3034064" target="damage" targetNpcId="3034,3000" min="1" max="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup-->
+	<!--보상-->
+	<EventGroup type="flag" name="3N_Dead,NormalMode" logRecord="3NamedNormalCompensation"> <!--노멀 모드 보상 생성-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403002" next="none" /> <!--노멀 모드 보물 상자 스폰-->
+				<EventTask type="flag" name="3N_Dead" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 사망 Flag OFF-->
+				<EventTask type="flag" name="NormalMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 노멀 모드 Flag OFF-->
+				<EventTask type="flag" name="HardMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 하드 모드 Flag OFF-->
+				<EventTask type="abnormality" abnormalityId="303403501" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303403000" huntingZoneId="3034" next="none"/> <!--업적 Abn 부여-->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<EventGroup type="flag" name="3N_Dead,HardMode" logRecord="3NamedHardCompensation"> <!--하드 모드 보상 생성-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403003" next="none" /> <!--하드 모드 보물 상자 스폰-->
+				<EventTask type="flag" name="3N_Dead" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 사망 Flag OFF-->
+				<EventTask type="flag" name="NormalMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 노멀 모드 Flag OFF-->
+				<EventTask type="flag" name="HardMode" value="0" next="none" /> <!--3네임드 보상 설정 조건 중 하드 모드 Flag OFF-->
+				<EventTask type="abnormality" abnormalityId="303403502" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303403000" huntingZoneId="3034" next="none"/> <!--업적 Abn 부여-->
+				<EventTask type="abnormality" abnormalityId="303403503" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303403000" huntingZoneId="3034" next="none"/> <!--업적 Abn 부여-->
+			</EventTaskGroup>
+		</Event>  
+	</EventGroup>
+	<!--미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1 미니게임1-->
+	<EventGroup type="flag" name="mini1_ob1,mini1_ob2,mini1_ob3,mini1_ob4" repeat="true"> <!--모든 오브젝트 해제 시 미니게임1 구간 클리어-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="3034,912" id="1" pos="-41854,40625,-951" next="none" /> <!--되돌아 가기 가이드-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303400101" next="none" /> <!--입구에 미니게임으로 가는 포탈 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404002" next="none" /> <!--입구로 가는 포탈 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303400102" next="none" /> <!--입구에 2네임드로 가는 포탈 스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303403011" next="none" /> <!--2네임드 랜던 스폰-->
+				<EventTask type="flag" name="mini_Silent" value="0" next="none" /> <!--미니게임 공간 내 침묵 이상상태 부여 플래그 초기화-->
+				<EventTask type="flag" name="mini_Clear" value="1" next="none" /> <!--미니게임 클리어 조건 플래그 ON-->
+				<EventTask type="abnormality" abnormalityId="303404000" target="player" turn="off" next="none"/> <!--모든 플레이어의 침묵 Abn 제거-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303404000" next="none"/> <!--미니게임 1번 구간 테리토리 디스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303404001" next="time" nextValue="2"/> <!--미니게임 1번 구간 테리토리 디스폰-->
+				<EventTask type="message" string="@dungeon:3034314" style="default" next="time" nextValue="0.5" /> <!--미니게임 1번 구간 클리어 메시지-->
+				<EventTask type="message" string="@dungeon:3034315" style="default" next="none" /> <!--미니게임 1번 구간 클리어 메시지-->
+				<EventTask type="flag" name="mini1_ob1" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob2" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob3" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+				<EventTask type="flag" name="mini1_ob4" value="0" next="none" /> <!--미니게임 1번 구간 플래그 초기화-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="3034,303401" repeat="false"> <!--미니게임 1번 구간 1번 ONPC-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="mini1_ob1" value="1" next="none" /> <!--플래그 설정-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303401" next="none" /> <!--ONPC 디스폰-->
+				<EventTask type="message" string="@dungeon:3034313" style="default" next="none" /> <!--ONPC 동작 성공 메시지-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="3034,303402" repeat="false"> <!--미니게임 1번 구간 2번 ONPC-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="mini1_ob2" value="1" next="none" /> <!--플래그 설정-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303402" next="none" /> <!--ONPC 디스폰-->
+				<EventTask type="message" string="@dungeon:3034313" style="default" next="none" /> <!--ONPC 동작 성공 메시지-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="3034,303403" repeat="false"> <!--미니게임 1번 구간 3번 ONPC-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="mini1_ob3" value="1" next="none" /> <!--플래그 설정-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303403" next="none" /> <!--ONPC 디스폰-->
+				<EventTask type="message" string="@dungeon:3034313" style="default" next="none" /> <!--ONPC 동작 성공 메시지-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="Workobject" uniqueId="3034,303404" repeat="false"> <!--미니게임 1번 구간 4번 ONPC-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="mini1_ob4" value="1" next="none" /> <!--플래그 설정-->
+				<EventTask type="workObjectdeSpawn" huntingZoneId="3034" templateId="303404" next="none" /> <!--ONPC 디스폰-->
+				<EventTask type="message" string="@dungeon:3034313" style="default" next="none" /> <!--ONPC 동작 성공 메시지-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="mini_Silent" repeat="true"> <!--미니게임 공간 내 침묵 이상상태 부여-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="abnormality" abnormalityId="303404000" target="player" strictly="true" aliveOnly="false" turn="on" territoryId="303404444" huntingZoneId="3034" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!--연출 관련-->
+	<EventGroup type="enterTerritory" uniqueId="3034,303400100"> <!--영상 재생 및 마석 사라지기 연출-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="3055" next="time" nextValue="2" /> <!--영상 재생-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303404005" next="time" nextValue="1" /> <!-- 랜던 탈출용 포탈 스폰-->
+				<EventTask type="consoleEvent" triggerName="LakanStoneOff" turn="on" next="none" /> <!--라칸의 마석 숨기기-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403012" next="time" nextValue="2.5" /> <!--입장 지점 랜던 디스폰-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303400100" next="none" /> <!--1네임드 포탈 테리토리 스폰-->
+				<EventTask type="guideOn" nameId="3034,911" id="1" pos="-41535,40626,-946" next="none" /> <!--수상한 노인 추적 가이드-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3034,303403008"> <!--3네임드 지역 진입 확인-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="3N_IgnoreVarianceDamage" value="1" next="none" /> <!--3네임드 피해 분산 공식 무시 이상상태 부여 플래그 ON-->
+				<EventTask type="guideOn" nameId="3034,916" id="1" pos="-34841.88671875,40626.43359375,23.25000000" next="time" nextValue="1" /> <!--3네임드 처치 가이드-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3034,303401000"> <!--1네임드 지역 연출--> <!--1네임드 지역 입장 시-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="3034,913" id="1" pos="-38364,53760,1" next="none" /> <!--1네임드 처치 가이드-->
+				<EventTask type="flag" name="1N_FallingDmgAmplify" value="1" next="none" /> <!--1네임드 지역 낙하 피해 증폭 이상상태 부여 플래그 ON-->
+				<EventTask type="message" string="@dungeon:3034401" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="message" string="@dungeon:3034402" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="spawn" huntingZoneId="3034" territoryId="303401000" next="time" nextValue="1" /> <!--1네임드 스폰-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403010" next="none" /> <!--1네임드 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3034,303403009"> <!--미니게임방 연출-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="guideOn" nameId="3034,914" id="1" pos="-43953,48746,0" next="none" /> <!--미니게임 수행 가이드-->
+				<EventTask type="empty" next="time" nextValue="2" /> <!--연출 대사 대기-->
+				<EventTask type="message" string="@dungeon:3034403" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="message" string="@dungeon:3034404" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="message" string="@dungeon:3034405" next="time" nextValue="0.5" /> <!--연출 대사-->
+				<EventTask type="despawn" huntingZoneId="3034" territoryId="303403009" next="none" /> <!--미니게임 랜던 디스폰-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="3034,303402000"> <!--2네임드 지역 진입 확인-->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="2N_Entered" value="1" next="none" /> <!--2네임드 진입 조건 플래그 ON-->
+				<EventTask type="flag" name="2N_IgnoreVarianceDamage" value="1" next="none" /> <!--2네임드 피해 분산 공식 무시 이상상태 부여 플래그 ON-->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="talkNpc" uniqueId="3034,6005" repeat="true">
+		<Event textId="2" >
+			<EventTaskGroup>
+				<EventTask type="empty" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="talkNpc" uniqueId="3034,6006" repeat="true">
+		<Event textId="2" >
+			<EventTaskGroup>
+				<EventTask type="empty" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

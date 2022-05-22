@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?><!--황금 미궁-->
+<Dungeon continentId="9872" name="@dungeon:9872" startPos="62996,70055,-1664" exitContinentId="7004" exitPos="90854,57332,-1810" coolTime="0" coolTimeForPartyMatching="0" enterLimitCount="30" needBattlePoint="14"  coolTimeApplyType="enter" >
+<ClearCondition huntingZoneId="872" templateId="100" amount="1"/> 
+<ClearCondition huntingZoneId="872" templateId="101" amount="1"/> 
+  <RandomStart pos="62996,70055,-1664" />
+  <RandomStart pos="64016,67211,-1663" />
+  <!-- 식인종 소굴 스토리 던전 -->
+  <Condition type="maxMemberCount" value="3" />
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="48" />
+  <!-- 1인 인던 입장 버프 마석 소환-->
+  <EventGroup type="enterTerritory" uniqueId="872,87200126">
+    <Event>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200120" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200121" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200122" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.7">
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="enterTerritory" uniqueId="872,87200127">
+    <Event>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200123" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200124" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.1">
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200125" next="none" />
+      </EventTaskGroup>
+      <!-- 빈 테리토리 소환-->
+      <EventTaskGroup probability="0.7">
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 두번째 문 열기 -->
+  <EventGroup type="talkNpc" uniqueId="872,1012">
+    <Event textId="2">
+      <EventTaskGroup>
+        <!-- <EventTask type="deSpawn" huntingZoneId="872" territoryId="87200053" next="none" />	-->
+        <EventTask type="message" string="@dungeon:9872007" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="987205" next="none" />
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200017" targetNpcId="0,0" startAggro="0" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200018" targetNpcId="0,0" startAggro="0" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200019" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 발그모어 사망 시 마석 소환 -->
+  <EventGroup type="npcHp" uniqueId="872,5000" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200056" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 세번째 문 열기 -->
+  <EventGroup type="talkNpc" uniqueId="872,1013">
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9872007" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="987201" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 첫번째 네임드 쿠마스, 불의 파괴자 죽여서 문 열기 -->
+  <EventGroup type="npcHp" uniqueId="872,22" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9872007" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="987204" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200013" targetNpcId="0,0" startAggro="0" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200014" targetNpcId="0,0" startAggro="0" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200015" targetNpcId="0,0" startAggro="0" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="872" territoryId="87200016" targetNpcId="0,0" startAggro="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="872,11" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9872008" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="987203" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--<EventGroup type="npcHp" uniqueId="872,100" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9872008" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="987203" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>-->
+  <!-- 두번째 네임드 불카누스 죽여서 문 열기 -->
+  <EventGroup type="npcHp" uniqueId="872,23" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9872007" style="default" next="time" nextValue="1" />
+        <EventTask type="dynamicGeo" objectId="987202" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 엘리온 수호 이벤트_삭제 -->
+  <!-- 게르곤 이벤트 -->
+  <EventGroup type="npcHp" uniqueId="872,19" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="dynamicGeo" objectId="987206" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+</Dungeon>

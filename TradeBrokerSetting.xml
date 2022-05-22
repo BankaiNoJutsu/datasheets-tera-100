@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TradeBrokerSetting>
+  <Deal>
+    <Suggest lifeTime="180000" maxCount="20"/>
+  </Deal>
+  <SearchCondition>
+    <MaxEnchantLevel value="15" />
+    <MaxItemRank value="22" />
+	<MaxItemLevel value="513" />
+  </SearchCondition>
+  <!-- register max는 AccountTrait.xml 에 옮겨짐 -->
+  
+  <!--거래 중개소 물품등록시 알람 팝업-->
+  <!--
+  유저가 물품등록을 시도할 경우, 평균 거래가와 value만큼 가격 차이가 나면, 알람을 띄우는 기능입니다.
+  
+  보정치가 정의되지 않은 구간에는 공통적으로 defaultValue값을 넣어 계산합니다.
+  설정 범위는 '코퍼' 단위입니다. 따라서 1골드=10000으로 계산하여 입력합니다.
+
+ 보정치 값은  음수가 되거나, 1이상이 되어서는 안됩니다.
+ 보정치가 입력될 수 있는 값은 최대 21억 까지 입니다.
+ 
+ -->
+  <WarningPopUp defaultValue="0.99"> 
+	<Check value="0.87" min="0" max="500000"/>
+	<Check value="0.9" min="500001" max="20000000"/>
+	<Check value="0.91" min="20000001" max="200000000"/>
+	<Check value="0.93" min="200000001" max="700000000"/>
+	<Check value="0.95" min="700000001" max="1500000000"/>
+	<Check value="0.98" min="1500000001" max="2100000000"/>
+  </WarningPopUp>
+ </TradeBrokerSetting>

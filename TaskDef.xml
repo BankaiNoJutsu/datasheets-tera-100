@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--tooltype 
+ leaf 노드
+	default : 이름, 값만 있는 노드
+	dialog : dialog에 값이 있는 노드
+	stringsheet : stringsheet에 값이 있는 노드
+	hide : 실제로 사용하지 않아 숨겨져야하는 노드
+	parameters : ,로 구분된 여러 값을 가진 노드. parameterNames 속성도 함께 있어야한다. (ex. parameterNames="paramter1,paramter2")
+	npcId : npc id에 대한 노드, 대사관련 데이터가 있는 Task에는 반드시 하나가 있어야한다. parameterNames는 필요없음.
+	questId : (사용하지 말것!!!! 헤더의 퀘스트Id 노드에만 사용.)quest id에 대한 노드, 수정불가. 퀘스트 생성시 id 자동 배정. parameterNames는 필요없음.
+	itemTemplateId : itemTemplateId 를 가진 노드.
+	workObject : workObject id를 가진 노드.
+parent 노드
+	singleTypeList : 자식이 추가생성 가능하고 모두 같은 타입인 노드
+	multipleTypeList : 자식이 추가생성 가능하고 모두 다른 타입인 노드
+	root : 모든 자식 타입이 항상 필요한 노드
+-->		
+<TaskDef>
+  <TaskClass toolType="root" name="방문Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="방문그룹" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="NPCId" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+      <Param name="대사작성" type="script" min="1" max="1000" journalScript="true" toolType="journaldialog" />
+      <Param name="완료버튼Text" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="연출Id" type="int" min="0" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료시삽입아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="완료시삭제아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+	<Param name="아이템다시받기" type="dataObject" toolType="singleTypeList" maxCount="10">
+		<Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+		<Param name="전달수량" type="int" min="1" max="10" toolType="default" />
+	</Param>
+    <Param name="완료시이상상태적용" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="그룹사냥Task" description="" in="1" out="1">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="퍼블릭퀘스트" type="enum" values="TRUE|FALSE" toolType="combobox" />
+    <Param name="퍼블릭포인트" type="int" min="0" max="1000000" toolType="default" />
+    <Param name="몬스터그룹" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="그룹이름" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="사냥마리수" type="int" min="1" max="2000000000" toolType="default" />
+      <Param name="몬스터지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+        <Param name="몬스터Id" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+        <Param name="조우시대사" type="string" min="1" max="500" toolType="stringsheet" />
+        <Param name="사망시대사" type="string" min="1" max="500" toolType="stringsheet" />
+        <Param name="이상상태조건" type="int" min="0" max="2000000000" toolType="default" />
+      </Param>
+    </Param>
+    <Param name="진행조건" type="dataObject" toolType="singleTypeList" select="multi">
+      <Param name="사냥인원" type="enum" values="혼자|파티" toolType="combobox" />
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+      <Param name="사망시실패" type="enum" values="TRUE|FALSE" toolType="combobox" />
+      <Param name="연합파티" type="enum" values="적용|모두적용" toolType="combobox" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저렙케어조건" type="int" min="1" max="2000000000" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="사냥Task" description="" in="1" out="1">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="퍼블릭퀘스트" type="enum" values="TRUE|FALSE" toolType="combobox" />
+    <Param name="퍼블릭포인트" type="int" min="0" max="1000000" toolType="default" />
+    <Param name="몬스터지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="몬스터Id" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+      <Param name="사냥마리수" type="int" min="1" max="2000000000" toolType="default" />
+      <Param name="조우시대사" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="사망시대사" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="이상상태조건" type="int" min="0" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="진행조건" type="dataObject" toolType="singleTypeList" select="multi">
+      <Param name="사냥인원" type="enum" values="혼자|파티" toolType="combobox" />
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+      <Param name="사망시실패" type="enum" values="TRUE|FALSE" toolType="combobox" />
+      <Param name="연합파티" type="enum" values="적용|모두적용" toolType="combobox" />
+    </Param>
+    <Param name="아이템다시받기" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="전달수량" type="int" min="1" max="10" toolType="default" />
+    </Param>
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저렙케어조건" type="int" min="1" max="2000000000" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="찔러준아이템전달Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="수여자명입력" type="string" min="1" max="100" toolType="stringsheet" />
+    <Param name="Flag아이템이름" type="string" min="1" max="100" toolType="stringsheet" />
+    <Param name="전달수량" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="아이콘지정" type="iconId" min="1" max="2000000000" toolType="default" />
+    <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="대사작성" type="script" min="1" max="1000" journalScript="true" toolType="journaldialog" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료버튼Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료시삽입아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="완료시삭제아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="연출Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="완료시이상상태적용" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="분기Task" description="" in="1" out="5" hasJournalScript="true">
+    <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="분기선택전대사" type="script" min="1" max="1000" journalScript="true" toolType="journaldialog" />
+    <Param name="분기유형" type="enum" values="수동|자동" toolType="combobox" />
+    <Param name="분기작성" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="선택지Text" type="string" min="1" max="100" toolType="stringsheet" />
+      <Param name="선택후대사" type="script" min="1" max="1000" toolType="dialog" />
+      <Param name="연결Task" type="taskId" min="1" max="100" toolType="default" />
+      <Param name="확률" type="int" min="1" max="100" toolType="default" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료버튼Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="수호자임무보상획득Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="횟수" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+	<Param name="완료시삽입아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="완료시삭제아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="완료시이상상태적용" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="수호자임무완료Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="ContinentID" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="EventID" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="횟수" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="수호자임무점수획득Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="임무지정" type="dataObject" toolType="singleTypeList" maxCount="100" >
+      <Param name="대륙Id" type="int" min="1" max="2000000000" toolType="default" />
+      <Param name="이벤트Id" type="int" min="1" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="획득점수" type="int" min="1" max="2000000000" toolType="stringsheet" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="비행인터렉션횟수Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="횟수" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="사냥전달Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="퍼블릭퀘스트" type="enum" values="TRUE|FALSE" toolType="combobox" />
+    <Param name="퍼블릭포인트" type="int" min="0" max="1000000" toolType="default" />
+    <Param name="아이템작성" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="Flag아이템이름" type="string" min="1" max="100" toolType="stringsheet" />
+      <Param name="전달수량" type="int" min="1" max="2000000000" toolType="default" />
+      <Param name="아이콘지정" type="iconId" min="1" max="2000000000" toolType="default" />
+      <Param name="몬스터지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+        <Param name="몬스터Id" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+        <Param name="수여확률" type="int" min="1" max="100" toolType="default" />
+        <Param name="조우시대사" type="string" min="1" max="500" toolType="stringsheet" />
+        <Param name="사망시대사" type="string" min="1" max="500" toolType="stringsheet" />
+        <Param name="이상상태조건" type="int" min="0" max="2000000000" toolType="default" />
+      </Param>
+    </Param>
+    <Param name="순차분배" type="enum" values="미적용|적용" toolType="combobox" />
+    <Param name="진행조건" type="dataObject" toolType="singleTypeList" select="multi">
+      <Param name="사냥인원" type="enum" values="혼자|파티" toolType="combobox" />
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+      <Param name="사망시실패" type="enum" values="TRUE|FALSE" toolType="combobox" />
+      <Param name="연합파티" type="enum" values="적용|모두적용" toolType="combobox" />
+    </Param>
+    <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="완료시대사작성" type="script" min="1" max="1000" journalScript="true" toolType="journaldialog" />
+    <Param name="미완료시대사작성" type="script" min="1" max="1000" toolType="dialog" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저널Text2" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료버튼Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료시삽입아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="완료시삭제아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="연출Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="완료시이상상태적용" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+    <Param name="저렙케어조건" type="int" min="1" max="2000000000" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="반복Task" description="" in="1" out="1">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="퍼블릭퀘스트" type="enum" values="TRUE|FALSE" toolType="combobox" />
+    <Param name="퍼블릭포인트" type="int" min="0" max="1000000" toolType="default" />
+    <Param name="반복방식" type="enum" values="유한|무한" toolType="combobox" />
+    <Param name="반복목표" type="enum" values="사냥|전장" toolType="combobox" />
+    <Param name="반복횟수" type="int" min="1" max="100" toolType="default" />
+    <Param name="최대Flag소지량" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="아이템작성" type="dataObject" toolType="singleTypeList">
+      <Param name="Flag아이템이름" type="string" min="1" max="100" toolType="stringsheet" />
+      <Param name="전달수량" type="int" min="1" max="2000000000" toolType="default" />
+      <Param name="아이콘지정" type="iconId" min="1" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="몬스터지정" type="dataObject" toolType="singleTypeList" maxCount="100">
+      <Param name="몬스터Id" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+      <Param name="수여확률" type="int" min="1" max="100" toolType="default" />
+      <Param name="조우시대사" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="사망시대사" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="이상상태조건" type="int" min="0" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="전장승리" type="dataObject" toolType="singleTypeList" maxCount="100">
+      <Param name="전장Id" type="int" min="1" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="순차분배" type="enum" values="미적용|적용" toolType="combobox" />
+    <Param name="진행조건" type="dataObject" toolType="singleTypeList" select="multi">
+      <Param name="사냥인원" type="enum" values="혼자|파티" toolType="combobox" />
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+      <Param name="사망시실패" type="enum" values="TRUE|FALSE" toolType="combobox" />
+      <Param name="연합파티" type="enum" values="적용|모두적용" toolType="combobox" />
+    </Param>
+    <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="일반대사작성" type="script" min="1" max="1000" toolType="dialog" />
+    <Param name="미완료시대사작성" type="script" min="1" max="1000" toolType="dialog" />
+    <Param name="보상획득선택지Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료시삽입아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="완료시삭제아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="연출Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="완료시이상상태적용" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저널Text2" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저렙케어조건" type="int" min="1" max="2000000000" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="PC이동Task" description="" in="1" out="1">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="목표지역" type="territoryId" huntingZoneIdMin="1" huntingZoneIdMax="1024" territoryIdMin="1" territoryIdMax="2000000000" toolType="parameters" parameterNames="헌팅존ID,테리토리ID"/>
+    <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    <Param name="지역명" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="성공메시지" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="EventDialogID" type="string" min="1" max="500" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료시이상상태적용" type="int" min="0" max="2000000000" toolType="default" />
+	<Param name="완료시삭제아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+  </TaskClass>
+  <TaskClass toolType="root" name="던전이벤트Task" description="" in="1" out="5" hasJournalScript="true">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="PC이동분기Task" description="" in="1" out="5" hasJournalScript="true">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    <Param name="분기유형" type="enum" values="수동|자동" toolType="combobox" />
+    <Param name="분기작성" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="분기목표지역" type="territoryId" huntingZoneIdMin="1" huntingZoneIdMax="1024" territoryIdMin="1" territoryIdMax="2000000000" toolType="parameters" parameterNames="헌팅존ID,테리토리ID"/>
+      <Param name="지역명" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="성공메시지" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="연결Task" type="taskId" min="1" max="100" toolType="default" />
+      <Param name="완료시이상상태적용" type="int" min="0" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="제련Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="제련전대사작성" type="script" min="1" max="1000" toolType="dialog" />
+    <Param name="제련후대사작성" type="script" min="1" max="1000" toolType="dialog" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저널Text2" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료버튼Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="연출Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="사망Task" description="" in="1" out="1">
+    <Param name="몬스터Id" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="조우시대사" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="사망시대사" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="필요사망횟수" type="int" min="1" max="10" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="아이템전달Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="아이템지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="전달수량" type="int" min="1" max="2000000000" toolType="default" />
+      <Param name="완료시비삭제" type="enum" values="TRUE|FALSE" toolType="combobox" />
+    </Param>
+    <Param name="아이템다시받기" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="전달수량" type="int" min="1" max="10" toolType="default" />
+    </Param>
+    <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="완료시대사작성" type="script" min="1" max="1000" journalScript="true" toolType="journaldialog" />
+    <Param name="미완료시대사작성" type="script" min="1" max="1000" toolType="dialog" />
+    <Param name="제한시간설정" type="dataObject" toolType="singleTypeList" select="multi" >
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    </Param>
+    <Param name="완료버튼Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저널Text2" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="완료시삽입아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="완료시삭제아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="연출Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="완료시이상상태적용" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="잠입Task" description="" in="1" out="1">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="잠입지역지정" type="dataObject" toolType="singleTypeList" maxCount="100">
+      <Param name="잠입지역" type="territoryId" huntingZoneIdMin="1" huntingZoneIdMax="1024" territoryIdMin="1" territoryIdMax="2000000000" toolType="parameters" parameterNames="헌팅존ID,테리토리ID"/>
+    </Param>
+    <Param name="목표지역" type="territoryId" huntingZoneIdMin="1" huntingZoneIdMax="1024" territoryIdMin="1" territoryIdMax="2000000000" toolType="parameters" parameterNames="헌팅존ID,테리토리ID"/>
+    <Param name="몬스터지정" type="dataObject" toolType="singleTypeList" maxCount="100">
+      <Param name="몬스터Id" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+      <Param name="조우시대사" type="string" min="1" max="500" toolType="stringsheet" />
+    </Param>
+    <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="수호Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="어그로주입간격초" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="어그로주입수치" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="어그로전파범위uu" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    <Param name="수호후대사작성" type="string" min="1" max="1000" toolType="stringsheet" />
+    <Param name="대상몬스터지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="몬스터Id" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+      <Param name="조우시대사" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="사망시대사" type="string" min="1" max="500" toolType="stringsheet" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="호위Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="호위횟수" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="어그로주입간격초" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="어그로주입수치" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="어그로전파범위uu" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="시작버튼Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="호위전대사작성" type="script" min="1" max="2000000000" toolType="dialog" />
+    <Param name="호위후대사작성" type="string" min="1" max="1000" toolType="stringsheet" />
+    <Param name="호위후연출Id" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="AI설정" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="목표지역" type="territoryId" huntingZoneIdMin="1" huntingZoneIdMax="1024" territoryIdMin="1" territoryIdMax="2000000000" toolType="parameters" parameterNames="헌팅존ID,테리토리ID"/>
+    <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="채집Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="채집물지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="콜렉션Id" type="int" min="1" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="전달아이템지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="전달수량" type="int" min="1" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+    <Param name="완료시대사작성" type="script" min="1" max="1000" journalScript="true" toolType="journaldialog" />
+    <Param name="미완료시대사작성" type="script" min="1" max="1000" toolType="dialog" />
+    <Param name="제한시간설정" type="dataObject" toolType="singleTypeList" select="multi" >
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    </Param>
+    <Param name="완료버튼Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저널Text2" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="연출Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="완료시이상상태적용" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+    <Param name="저렙케어조건" type="int" min="1" max="2000000000" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="채집완료Task" description="" in="1" out="1" hasJournalScript="true">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="채집물지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="콜렉션Id" type="int" min="1" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="수집아이템지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="획득아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="목표수량" type="int" min="1" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="제한시간설정" type="dataObject" toolType="singleTypeList" select="multi" >
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="조건Task" description="" in="1" out="1">
+    <Param name="완료조건" type="dataObject" select="multi" toolType="singleTypeList">
+      <Param name="아이템사용" type="dataObject" toolType="singleTypeList">
+        <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+        <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+        <Param name="대상NPC지정" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+        <Param name="추가조건" type="enum" values="검은틈" toolType="combobox" />
+        <Param name="아이콘지정" type="int" toolType="default" />
+      </Param>
+      <Param name="도박시도" type="dataObject" toolType="default"/>
+      <Param name="휴식후컨디션MAX" type="dataObject" toolType="default"/>
+      <Param name="스킬습득" type="dataObject" toolType="singleTypeList">
+        <Param name="스킬종류" type="enum" values="전투|제작" toolType="combobox" />
+        <Param name="스킬Id" type="int" min="1" max="2000000000" toolType="default" />
+      </Param>
+      <Param name="전장승리" type="dataObject" toolType="singleTypeList">
+        <Param name="전장Id" type="int" min="1" max="2000000000" toolType="default" />
+        <Param name="승리횟수" type="int" min="1" max="2000000000" toolType="default" />
+      </Param>
+      <Param name="강화시도" type="dataObject" toolType="singleTypeList">
+        <Param name="강화횟수" type="int" min="1" max="100" toolType="default" />
+        <Param name="제물등급" type="enum" values="일반|고급|희귀|전설" toolType="combobox" />
+      </Param>
+    </Param>
+    <Param name="아이템다시받기" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="전달수량" type="int" min="1" max="10" toolType="default" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="EventDialogID" type="string" min="1" max="500" toolType="default" />
+    <Param name="성공메시지" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="동영상재생Task" description="" in="1" out="1">
+    <Param name="동영상Id" type="int" min="1" max="10000" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="오브젝트동작Task" description="" in="1" out="1">
+    <Param name="던전Id" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="오브젝트지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="오브젝트Id" type="int" min="0" max="2000000000" toolType="workObject" />
+      <Param name="동작횟수" type="int" min="1" max="10" toolType="default" />
+    </Param>
+    <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    <Param name="아이템다시받기" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="전달수량" type="int" min="1" max="10" toolType="default" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="사냥수집Task" description="" in="1" out="1" >
+    <Param name="수집아이템지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="획득아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="몬스터Id" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+      <Param name="획득확률" type="int" min="1" max="100" toolType="default" />
+      <Param name="획득수량" type="int" min="1" max="100" toolType="default" />
+      <Param name="목표수량" type="int" min="1" max="2000000000" toolType="default" />
+      <Param name="조우시대사" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="사망시대사" type="string" min="1" max="500" toolType="stringsheet" />
+      <Param name="이상상태조건" type="int" min="0" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="변신Task" description="" in="1" out="1" >
+    <Param name="변신전HuntingZoneId" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="변신전NpcInstanceId" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="변신후HuntingZoneId" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="변신후NpcInstanceId" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="변신메시지" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="이상상태Task" description="" in="1" out="1" >
+    <Param name="이상상태지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="몬스터Id" type="npcId" min="0" max="2000000000" toolType="npcId"/>
+      <Param name="이상상태Id" type="int" min="0" max="2000000000" toolType="default" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="스킬타격Task" description="" in="1" out="1" >
+    <Param name="진행조건" type="dataObject" toolType="singleTypeList" select="multi">
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+      <Param name="사망시실패" type="enum" values="TRUE|FALSE" toolType="combobox" />
+    </Param>
+    <Param name="스킬지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="스킬Id" type="int" min="1" max="2000000000" toolType="default" />
+      <Param name="대상NPC지정" type="npcId" min="1" max="2000000000" toolType="npcId"/>
+      <Param name="횟수" type="int" min="1" max="10" toolType="default" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="텔레포트Task" description="" in="1" out="1">
+    <Param name="대륙Id" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="좌표" type="string" min="1" max="500" toolType="default" />
+    <Param name="방향" type="int" min="0" max="359" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="검은틈Task" description="" in="1" out="1">
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="검은틈방문Task" description="" in="1" out="1">
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="아이템사용Task" description="" in="1" out="1">
+    <Param name="아이템지정" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="사용횟수" type="int" min="1" max="10" toolType="default" />
+    </Param>
+    <Param name="아이템다시받기" type="dataObject" toolType="singleTypeList" maxCount="10">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="전달수량" type="int" min="1" max="10" toolType="default" />
+    </Param>
+	<Param name="완료시삭제아이템" type="dataObject" toolType="singleTypeList" maxCount="5">
+      <Param name="아이템Id" type="itemId" min="1" max="2000000000" toolType="itemTemplateId" />
+      <Param name="아이템갯수" type="int" min="1" max="1000" toolType="default" />
+    </Param>
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="미니게임완료Task" description="" in="1" out="1">
+    <Param name="미니게임ID" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="연맹주둔지보상Task" description="" in="1" out="1">
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="보상" type="int" min="0" max="10" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="소셜Task" description="" in="1" out="1">
+    <Param name="소셜ID" type="int" min="0" max="2000000000" toolType="default" />
+    <Param name="EventDialogID" type="string" min="1" max="500" toolType="default" />
+    <Param name="성공메시지" type="string" min="1" max="500" toolType="stringsheet" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="성장구간인던지원Task" description="" in="1" out="1">
+    <Param name="목표수량" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="투기장승리Task" description="" in="1" out="1">
+	<Param name="진행조건" type="dataObject" toolType="singleTypeList" select="multi">
+      <Param name="사냥인원" type="enum" values="혼자|파티" toolType="combobox" />
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+      <Param name="사망시실패" type="enum" values="TRUE|FALSE" toolType="combobox" />
+      <Param name="연합파티" type="enum" values="적용|모두적용" toolType="combobox" />
+    </Param>
+    <Param name="목표수량" type="int" min="1" max="2000000000" toolType="default" />
+	<Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+	<Param name="저렙케어조건" type="int" min="1" max="2000000000" toolType="default" />
+  </TaskClass>
+  <TaskClass toolType="root" name="낚시성공Task" description="" in="1" out="1">
+    <Param name="낚시방법" type="enum" values="수동|자동수동" toolType="combobox" />
+    <Param name="제한시간설정" type="dataObject" toolType="singleTypeList" select="multi" >
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    </Param>
+    <Param name="횟수" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="납품성공Task" description="" in="1" out="1">
+    <Param name="상점Id" type="menuId" min="0" max="2000000000" toolType="default" />
+    <Param name="제한시간설정" type="dataObject" toolType="singleTypeList" select="multi" >
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    </Param>
+    <Param name="횟수" type="int" min="1" max="2000000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+  </TaskClass>
+  <TaskClass toolType="root" name="모험의주화소비Task" description="" in="1" out="1">
+    <Param name="소모수" type="int" min="1" max="1000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+	<Param name="제한시간설정" type="dataObject" toolType="singleTypeList" select="multi" >
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    </Param>
+  </TaskClass>
+  <TaskClass toolType="root" name="생산력소비Task" description="" in="1" out="1">
+    <Param name="소모수" type="int" min="1" max="1000000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+	<Param name="제한시간설정" type="dataObject" toolType="singleTypeList" select="multi" >
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    </Param>
+  </TaskClass>
+  <TaskClass toolType="root" name="지령서클리어Task" description="" in="1" out="1">
+    <Param name="횟수" type="int" min="1" max="10000" toolType="default" />
+    <Param name="저널Text" type="string" min="1" max="500" toolType="stringsheet" />
+	<Param name="제한시간설정" type="dataObject" toolType="singleTypeList" select="multi" >
+      <Param name="제한시간" type="time" toolType="parameters" parameterNames="미사용값,분"/>
+    </Param>
+  </TaskClass>
+</TaskDef>

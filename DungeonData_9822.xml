@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9822" name="@dungeon:9822" startPos="-40405,-147014,-546" exitContinentId="7031" exitPos="3799,-14281,1551" destroyWaitMin="0" >
+	<Condition type="solo" />
+	<Condition type="maxMemberCount" value="1" />
+	<Condition type="levelOver" value="60" />
+	<RestoreTargetQuest id="18201" forceRestore="true"/>
+	<Condition type="progressQuest" value="18201" taskId="1" />
+	<Condition type="completeQuest" value="18201" />
+	
+			
+	<!-- 동굴 입장 후 전령이 마법사에게 보고하는 장면 -->
+	
+	<EventGroup type="enterTerritory" uniqueId="822,82200001" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="822" territoryId="82200005" next="none" />
+				<EventTask type="spawn" huntingZoneId="822" territoryId="82200003" next="none" />
+				<EventTask type="spawn" huntingZoneId="822" territoryId="82200011" next="none" />
+				<EventTask type="spawn" huntingZoneId="822" territoryId="82200010" next="time" nextValue="0.1"/>
+				<EventTask type="doActionScript" targetNpcId="822,2005" actionScriptId="822000001" next="none" />
+				<EventTask type="doActionScript" targetNpcId="822,2006" actionScriptId="822000002" next="none" />
+				<EventTask type="doActionScript" targetNpcId="822,2004" actionScriptId="822000003" next="none" />
+				<EventTask type="doActionScript" targetNpcId="822,2002" actionScriptId="822000004" next="none" />
+				<EventTask type="doActionScript" targetNpcId="822,2003" actionScriptId="822000005" next="none" />
+				<EventTask type="message" string="@dungeon:9822002" targetNpcId="822,2007" next="time" nextValue="1.5" />
+				<EventTask type="message" string="@dungeon:9822003" targetNpcId="822,2000" next="time" nextValue="1" />
+				<EventTask type="message" string="@dungeon:9822012" targetNpcId="822,2005" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:9822013" targetNpcId="822,2006" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:9822005" targetNpcId="822,2007" next="time" nextValue="1" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 유저를 발견하고 마법사가 전령을 마물로 변화 시키는 장면-->
+	<EventGroup type="enterTerritory" uniqueId="822,82200008" >
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9822006" targetNpcId="822,2000" next="time" nextValue="1.5" />
+				<EventTask type="message" string="@dungeon:9822007" targetNpcId="822,2007" next="time" nextValue="2.5" />
+				<EventTask type="message" string="@dungeon:9822008" targetNpcId="822,2007" next="time" nextValue="1.5" />
+				<EventTask type="message" string="@dungeon:9822009" targetNpcId="822,2000" next="time" nextValue="1.5" />
+				<EventTask type="message" string="@dungeon:9822010" targetNpcId="822,2007" next="time" nextValue="1" />
+				<EventTask type="doActionScript" targetNpcId="822,2007" actionScriptId="822020071" next="time" nextValue="1.5" />
+				<EventTask type="doActionScript" targetNpcId="822,2000" actionScriptId="822020073" next="time" nextValue="0.5" />
+				<EventTask type="message" string="@dungeon:9822011" targetNpcId="822,2000" next="time" nextValue="1" />
+				<EventTask type="despawn" huntingZoneId="822" territoryId="82200004" next="time" nextValue="1" />
+				<EventTask type="spawn" huntingZoneId="822" territoryId="82200007" targetNpcId="822,1001" startAggro="50" next="none" />
+				<EventTask type="doActionScript" targetNpcId="822,2007" actionScriptId="822020072" next="time" nextValue="1" />
+				<EventTask type="message" string="@dungeon:9822019" targetNpcId="822,2004" next="time" nextValue="5" />				
+				<EventTask type="message" string="@dungeon:9822020" targetNpcId="822,2000" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- NPC의 HP가 0%이 되면 마다트가 나타남 -->
+	<!-- 2004 - 로도스 -->
+	<!-- 2002 - 길버트 -->
+	<EventGroup type="npcHp" uniqueId="822,1001" value="0">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="822" territoryId="82200013" next="time" nextValue="0.1" />
+				<EventTask type="doActionScript" targetNpcId="822,2012" actionScriptId="822000008" next="none" />
+				<EventTask type="spawn" huntingZoneId="822" territoryId="82200012" next="time" nextValue="3" />
+				<EventTask type="message" string="@dungeon:9822021" targetNpcId="822,2004" next="time" nextValue="1"/>
+				<EventTask type="doActionScript" targetNpcId="822,2002" actionScriptId="822000006" next="time" nextValue="0.5"/>
+				<EventTask type="message" string="@dungeon:9822022" targetNpcId="822,2002" next="time" nextValue="2"/>
+				<EventTask type="doActionScript" targetNpcId="822,2004" actionScriptId="822000007" next="time" nextValue="1"/>
+				<EventTask type="message" string="@dungeon:9822001" targetNpcId="822,2004" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9822004" targetNpcId="822,2002" next="time" nextValue="1"/>
+				<EventTask type="despawn" huntingZoneId="822" territoryId="82200007" next="none" />
+				<EventTask type="despawn" huntingZoneId="822" territoryId="82200002" next="none" />
+				<EventTask type="doActionScript" targetNpcId="822,2002" actionScriptId="822000014" next="time" nextValue="1" />
+				<EventTask type="doActionScript" targetNpcId="822,2004" actionScriptId="822000013" next="time" nextValue="9" />
+				<EventTask type="message" string="@dungeon:9822014" targetNpcId="822,2004" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9822015" targetNpcId="822,2003" next="time" nextValue="2"/>
+				<EventTask type="message" string="@dungeon:9822017" targetNpcId="822,2004" next="time" nextValue="2"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<!-- 마다트와 대화 후 길버트 바뀜 -->
+	<EventGroup type="questProgress">
+		<Event questId="18201" taskId="5">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="822" territoryId="82200003" next="none" />
+				<EventTask type="spawn" huntingZoneId="822" territoryId="82200013" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	
+	
+</Dungeon>

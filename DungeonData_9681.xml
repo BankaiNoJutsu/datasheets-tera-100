@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9681" name="@dungeon:9681" startPos="38292,-114217,17211" exitContinentId="7011" exitPos="57462,-69978,5251" startDir="65" exitDir="17" destroyWaitMin="0">
+	<RestoreTargetQuest id="50601" forceRestore="true" />
+	<Condition type="solo" value="1" />
+	<Condition type="levelOver" value="65" />
+	<Condition type="maxMemberCount" value="1" />
+	<Retry retryId="8" />
+
+	 <EventGroup type="initialize"> <!-- 1단계 npc 활성화 -->
+		<Event>
+		  <EventTaskGroup>
+			<!-- 카메라용 투명 NPC 생성 -->
+			<EventTask type="spawn" huntingZoneId="681" territoryId="68100001" next="none" />
+			<!-- 배경 벨릭들 생성 -->
+			<EventTask type="spawn" huntingZoneId="681" territoryId="68100004" next="none" />
+			<EventTask type="spawn" huntingZoneId="681" territoryId="68100005" next="none" />
+			<EventTask type="spawn" huntingZoneId="681" territoryId="68100006" next="none" />
+			<!-- 중앙 WO 생성 -->
+			<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50610" next="none" />
+			<!-- Stage1 Flag 설정 -->
+			<EventTask type="flag" name="check3101" value="0" next="none" />
+			<EventTask type="flag" name="check3102" value="0" next="none" />
+			<EventTask type="flag" name="check3201" value="0" next="none" />
+			<EventTask type="flag" name="check3202" value="0" next="none" />
+			<EventTask type="flag" name="check3203" value="0" next="none" />
+			<EventTask type="flag" name="check3204" value="0" next="none" />
+			<EventTask type="flag" name="check3301" value="0" next="none" />
+			<EventTask type="flag" name="check3302" value="0" next="none" />
+			<EventTask type="flag" name="check3303" value="0" next="none" />
+			<EventTask type="flag" name="check3304" value="0" next="none" />
+			<EventTask type="flag" name="check3305" value="0" next="none" />
+			<EventTask type="flag" name="check3306" value="0" next="none" />
+		  </EventTaskGroup>
+		</Event>
+    </EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="681,68100001"> <!-- 공간 진입시 설명 시작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="cameraSet" turn="on" territoryId="68100001" next="none" />								
+				<EventTask type="abnormality" abnormalityId="681010" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="time" nextValue="1.0" />
+				<!-- Stage1 Npc 및 WO 스폰-->
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100008" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100009" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100010" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100011" next="none" />
+				<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50612" next="none" />
+				<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50613" next="none" />
+				<!-- Stage1 EventGage 설정 -->
+				<!-- <EventTask type="eventGage" string="" name="Stage1_진행도" action="start" value="0" uiOn="true" uiStyle="2" next="none" /> -->				
+				<EventTask type="empty" next="time" nextValue="2.0" />
+				<EventTask type="message" string="@dungeon:9681004" style="combat" next="time" nextValue="0" />
+				<EventTask type="empty" next="time" nextValue="3.0" />
+				<EventTask type="abnormality" abnormalityId="681008" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="time" nextValue="3.0"/>
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+
+	<!-- Stage1 시작 -->
+	<EventGroup type="Workobject" uniqueId="681,50612" repeat="true"> <!-- 2번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2102" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2102" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<EventGroup type="Workobject" uniqueId="681,50613" repeat="true"> <!-- 3번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2101" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2101" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+
+	<EventGroup type="none" id="31010" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3101" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage1_진행도" action="minus" value="50" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="31011" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3101" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage1_진행도" action="plus" value="50" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3101" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3101" actionScriptId="681001" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="31020" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3102" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage1_진행도" action="minus" value="50" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="31021" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3102" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage1_진행도" action="plus" value="50" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3102" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3102" actionScriptId="681002" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3101,check3102" repeat="false">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9681005" style="combat" next="time" nextValue="1" />
+				<!-- Stage1 NPC 및 WO 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100008" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100009" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100010" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100011" next="none" />
+				<EventTask type="empty" next="time" nextValue="3.0" />
+				<EventTask type="abnormality" abnormalityId="681010" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="time" nextValue="1.0" />
+				<!-- 빛 연출 1단계 -->
+				<EventTask type="abnormality" abnormalityId="681005" target="npc" targetNpcId="681,1" turn="on" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50612" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50613" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage1_진행도" action="start" value="0" uiOn="false" uiStyle="2" next="none" /> -->
+				<EventTask type="empty" next="time" nextValue="1.0" />								
+				<!-- Stage2 NPC 및 WO 스폰 -->
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100012" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100013" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100014" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100015" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100016" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100017" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100018" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100019" next="none" />
+				<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50611" next="none" />
+				<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50612" next="none" /><EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50613" next="none" />
+				<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50614" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="start" value="0" uiOn="true" uiStyle="2" next="none" /> -->
+				<EventTask type="empty" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:9681006" style="combat" next="time" nextValue="0" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- Stage2 시작 -->
+	<EventGroup type="Workobject" uniqueId="681,50611" repeat="true"> <!-- 1번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2201" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2201" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<EventGroup type="Workobject" uniqueId="681,50612" repeat="true"> <!-- 2번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2202" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2202" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<EventGroup type="Workobject" uniqueId="681,50613" repeat="true"> <!-- 3번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2203" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2203" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<EventGroup type="Workobject" uniqueId="681,50614" repeat="true"> <!-- 4번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2204" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2204" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+
+	<EventGroup type="none" id="32010" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3201" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="minus" value="25" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="32011" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3201" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="plus" value="25" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3201" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3201" actionScriptId="681001" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="32020" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3202" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="minus" value="25" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="32021" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3202" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="plus" value="25" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3202" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3202" actionScriptId="681001" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="32030" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3203" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="minus" value="25" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="32031" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3203" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="plus" value="25" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3203" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3203" actionScriptId="681002" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="32040" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3204" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="minus" value="25" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="32041" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3204" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="plus" value="25" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3204" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3204" actionScriptId="681002" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3201,check3202,check3203,check3204" repeat="false">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9681007" style="combat" next="time" nextValue="1" />
+				<!-- Stage2 NPC 및 WO 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100012" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100013" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100014" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100015" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100016" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100017" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100018" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100019" next="none" />
+				<EventTask type="empty" next="time" nextValue="3.0" />
+				<EventTask type="abnormality" abnormalityId="681010" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="time" nextValue="1.0" />
+				<!-- 빛 연출 2단계 -->
+				<EventTask type="abnormality" abnormalityId="681006" target="npc" targetNpcId="681,1" turn="on" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50611" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50612" next="none" /><EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50613" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50614" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage2_진행도" action="start" value="0" uiOn="false" uiStyle="2" next="none" /> -->
+				<EventTask type="empty" next="time" nextValue="1.0" />
+				<!-- Stage3 NPC 및 WO 스폰 -->
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100020" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100021" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100022" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100023" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100024" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100025" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100026" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100027" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100028" next="none" />
+				<EventTask type="spawn" huntingZoneId="681" territoryId="68100029" next="none" />
+				<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50611" next="none" />
+				<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50612" next="none" /><EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50613" next="none" />
+				<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50614" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="start" value="0" uiOn="true" uiStyle="2" next="none" /> -->
+				<EventTask type="empty" next="time" nextValue="1.0" />
+				<EventTask type="message" string="@dungeon:9681008" style="combat" next="time" nextValue="0" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- Stage3 시작 -->
+	<EventGroup type="Workobject" uniqueId="681,50611" repeat="true"> <!-- 1번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2301" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2301" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<EventGroup type="Workobject" uniqueId="681,50612" repeat="true"> <!-- 2번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2302" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2302" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<EventGroup type="Workobject" uniqueId="681,50613" repeat="true"> <!-- 3번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2303" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2303" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+	<EventGroup type="Workobject" uniqueId="681,50614" repeat="true"> <!-- 4번 WO 동작 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,1" actionScriptId="9681008" next="none"/>
+				<EventTask type="abnormality" abnormalityId="681009" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="none"/>
+				<EventTask type="changePatternList" targetNpcId="681,2304" patternListId="2" next="time" nextValue="2" />
+				<EventTask type="changePatternList" targetNpcId="681,2304" patternListId="1" next="none" />
+			</EventTaskGroup>
+		</Event>
+    </EventGroup>
+
+	<EventGroup type="none" id="33010" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3301" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="minus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33011" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3301" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="plus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3301" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3301" actionScriptId="681001" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33020" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3302" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="minus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33021" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3302" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="plus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3302" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3302" actionScriptId="681001" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33030" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3303" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="minus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33031" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3303" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="plus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3303" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3303" actionScriptId="681001" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33040" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3304" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="minus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33041" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3304" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="plus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3304" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3304" actionScriptId="681002" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33050" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3305" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="minus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33051" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3305" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="plus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3305" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3305" actionScriptId="681002" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33060" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3306" value="0" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="minus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="none" id="33061" repeat="true">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="flag" name="check3306" value="1" next="none" />
+				<!-- <EventTask type="eventGage" string="" name="Stage3_진행도" action="plus" value="17" uiOn="true" uiStyle="2" next="none" /> -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3306" repeat="true">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="681,3306" actionScriptId="681002" next="none"/>
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="flag" name="check3301,check3302,check3303,check3304,check3305,check3306" repeat="false">
+		<Event>
+		  <EventTaskGroup>
+				<EventTask type="updateQuest" questId="50601" taskId="25" next="time" nextValue="1"/>
+				<EventTask type="message" string="@dungeon:9681009" style="combat" next="time" nextValue="1" />
+				<!-- Stage2 NPC 및 WO 디스폰 -->
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100020" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100021" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100022" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100023" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100024" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100025" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100026" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100027" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100028" next="none" />
+				<EventTask type="despawn" huntingZoneId="681" territoryId="68100029" next="none" />
+				<EventTask type="empty" next="time" nextValue="3.0" />
+				<EventTask type="abnormality" abnormalityId="681010" target="player" aliveOnly="false" territoryId="68100001" huntingZoneId="681" turn="on" next="time" nextValue="1.0" />
+				<!-- 빛 연출 3단계 -->
+				<EventTask type="abnormality" abnormalityId="681007" target="npc" targetNpcId="681,1" turn="on" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50610" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50611" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50612" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50613" next="none" />
+				<EventTask type="workObjectdeSpawn" huntingZoneId="681" templateId="50614" next="none" />
+				<EventTask type="empty" next="time" nextValue="1.0" />				
+				<EventTask type="workObjectSpawn" huntingZoneId="681" templateId="50615" next="none" />
+				<EventTask type="cameraSet" turn="off" territoryId="68100001" next="none" />				
+				<EventTask type="message" string="@dungeon:9681010" style="combat" next="time" nextValue="1" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>

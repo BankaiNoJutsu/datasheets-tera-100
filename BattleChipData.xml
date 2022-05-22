@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    battleChipPerAccount : 계정 당 지급되는 전술칩
+	dormantPeriod : 휴면 계정 판단 기준
+	minUserAccount : 길드전 선포, 피선포 최소 계정 수
+	maxUserAccount : 길드전 선포, 피선포 최대 계정 수
+	countLevel : 체크하는 캐릭터 레벨
+	checkSide : 어느 쪽을 체크하늕지 (0=체크 안함, 1=전술칩 적은 쪽, 2=전술칩 많은 쪽, 3=베팅 금액)
+	bettingMethod : 전술칩 베팅 방식 (0=정수, 1=비율)
+	Betting : 베팅 금액(bettingMethod에 정의된 방식에 따라 정수가 들어가거나, 비율 연산을 사용한다)
+	noLimitRaise : 제한 없이 추가 베팅할 수 있는 조건
+	raiseTimeLimit : 추가 베팅 가능한 제한 시간
+	startGiveUp : 처음 포기했을 때 뺏기는 양
+	giveUpIncreaseRate : 동일 길드를 상대로 포기를 선택할 때 증가하는 비율
+	maxGiveUp : 포기했을 때 뺴앗기는 비율의 상한선
+	minGiveUpBattleChip : 입력된 값보다 적게 보유하고 있으면 minGiveUpLose에 정의된 값만큼만 뻇음
+	minGiveUpLose : minGiveUpBattleChip에 입력된 값보다 적게 보유하면 입력된 값만큼만 뺏는다
+	cancelTime : 선포 취소를 사용 가능한 제한 시간
+	cancelLost : 선포 취소했을 때 사라지는 전술칩 비율(베팅 금액 대비 XX%)
+ -->
+<BattleChipData>
+	<GiveRule battleChipPerAccount="100" dormantPeriod="28" />
+	<Restriction minUserAccount="30" minUserAccountQa="2" maxUserAccount="100" maxUserAccountQa="4" countLevel="65"/>
+	<BettingRule>
+		<MaxBettingRule checkSide="1" bettingMethod="1" Betting="0.5" />
+		<MinBettingRule checkSide="0" bettingMethod="0" Betting="60" noLimitBattlechip="60" />
+		<RaiseBettingRule checkSide="3" bettingMethod="1" Betting="0.5" noLimitRaise="0.5" raiseTimeLimit="43200"/>
+		<GiveUpRule startGiveUp="0.1" giveUpIncreaseRate="1.5" maxGiveUp="0.5" minGiveUpBattleChip="50" minGiveUpLose="1" />
+		<CancelRule checkSide="3" cancelTime="0" cancelLost="0.02"/>
+		<DrawRule drawLostRate="0"/>
+	</BettingRule>
+</BattleChipData>

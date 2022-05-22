@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeon continentId="9814" name="@dungeon:9814" startPos="-7854,-149005,6805" exitContinentId="7031" exitPos="15909,9093,6983" destroyWaitMin="0">
+	<Condition type="solo" />
+	<Condition type="maxMemberCount" value="1" />
+	<RestoreTargetQuest id="18211" forceRestore="true"/>
+	<Condition type="levelOver" value="60" />
+	<Condition type="progressQuest" value="18211" taskId="2" />
+		
+	<EventGroup type="initialize">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400006" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+		
+	<!-- 오린의 서를 클릭하면 아크벨리온이 나타남 -->
+	<EventGroup type="questProgress">
+		<Event questId="18211" taskId="3">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="814" territoryId="81400006" next="time" nextValue="1" />
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400001" targetNpcId="814,1000" startAggro="50" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<!-- 아크벨리온의 HP가 0%이 되면 다시 오린의 서와 NPC들이 나타남 -->
+	<EventGroup type="npcHp" uniqueId="814,1000" value="0">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400006" next="none" />
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400004" next="none" />
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400005" next="none" />
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400008" next="none" />
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400009" next="none" />
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400010" next="time" nextValue="0.1" />
+				<EventTask type="doActionScript" targetNpcId="814,2004" actionScriptId="8140002" next="none" />
+				<EventTask type="doActionScript" targetNpcId="814,2005" actionScriptId="8140003" next="none" />
+				<EventTask type="doActionScript" targetNpcId="814,2006" actionScriptId="8140004" next="none" />
+				<EventTask type="doActionScript" targetNpcId="814,2001" actionScriptId="8140005" next="time" nextValue="5" />
+				<EventTask type="despawn" huntingZoneId="814" territoryId="81400001" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	<EventGroup type="questProgress">
+		<Event questId="18211" taskId="4">
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400012" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 베로니쿠스 납치 이벤트 -->
+    <EventGroup type="questProgress">
+		<Event questId="18211" taskId="5">
+			<EventTaskGroup>
+				<EventTask type="flag" name="미션" value="1" next="none" />		  
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+     <EventGroup type="flag" name="미션">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="playMovie" id="2014" next="none" />
+				<EventTask type="despawn" huntingZoneId="814" territoryId="81400006" next="none" />
+				<EventTask type="despawn" huntingZoneId="814" territoryId="81400004" next="none" />
+				<EventTask type="despawn" huntingZoneId="814" territoryId="81400005" next="none" />
+				<EventTask type="despawn" huntingZoneId="814" territoryId="81400008" next="none" />
+				<EventTask type="despawn" huntingZoneId="814" territoryId="81400009" next="none" />
+				<EventTask type="despawn" huntingZoneId="814" territoryId="81400010" next="none" />
+				<EventTask type="despawn" huntingZoneId="814" territoryId="81400012" next="none" />
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400014" next="none" />
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400015" next="none" />
+				<EventTask type="spawn" huntingZoneId="814" territoryId="81400016" next="none" />
+		  </EventTaskGroup>
+		</Event>
+	</EventGroup>
+	  
+</Dungeon>

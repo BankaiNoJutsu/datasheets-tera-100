@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9003" name="@dungeon:9003" startPos="117290,88893,6283" exitContinentId="7004" exitPos="116931,74040,4771" destroyWaitMin="0">
+  <!-- 폭염의 산맥 퀘스트 특수공간 -->
+  <RestoreTargetQuest id="401" forceRestore="true" />
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="47" />
+  <Condition type="progressQuest" value="401" taskId="7" />
+  <Condition type="completeQuest" value="401" />
+  <RestoreTargetQuest id="401" forceRestore="false"/>
+  <EventGroup type="initialize"> <!-- 던전 생성 되자마자 실행되는 이벤트 -->
+    <Event>
+		  <EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="403" territoryId="40300034" next="none" />
+		  </EventTaskGroup>
+	</Event>	
+  </EventGroup>
+ <!-- <EventGroup type="questProgress" >
+	<Event questId="401" taskId="7">
+		  <EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="403" territoryId="40300034" next="none" />
+		  </EventTaskGroup>
+	</Event>	
+  </EventGroup>-->
+  <EventGroup type="talkNpc" uniqueId="403,1103">
+    <!-- 엘리온 쿠벨과 대화하면 진행되는 이벤트 몬스터 스폰  -->  
+    <Event textId="2">
+      <EventTaskGroup>
+        <EventTask type="deSpawn" huntingZoneId="403" territoryId="40300034" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300031" startAggro="100" next="time" nextValue="1"/>
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300039" startAggro="100" next="time" nextValue="1"/>
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300018" startAggro="100" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="403,2006" value="0">
+    <!-- 이벤트 몬스터 사망 시 동영상 재생, 수호대상 스폰 이벤트-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="playMovie" id="55" next="time" nextValue="0" />
+        <EventTask type="deSpawn" huntingZoneId="403" territoryId="40300039" next="time" nextValue="1" />
+        <EventTask type="deSpawn" huntingZoneId="403" territoryId="40300018" next="time" nextValue="0" />
+        <!-- 세리온 & 프레이아 로헨 & 아카샤 스폰 이벤트-->
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300061" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300033" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300473" next="none" />		
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>  
+  <!-- 수호 시작!!  -->
+  <EventGroup type="talkNpc" uniqueId="403,1108">
+    <Event textId="2" questId="401" taskId="9">
+      <EventTaskGroup>
+		<EventTask type="timerUi" time="180" next="none" />
+        <!-- 웨이브 1 -->
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300035" next="time" nextValue="3" />
+		<EventTask type="message" string="@dungeon:90031001" style="default" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="403" territoryId="40300474" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300492" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300475" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300493" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300477" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300494" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300479" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+		
+        <!-- 55초 경과 -->
+		<EventTask type="message" string="@dungeon:90031010" targetNpcId="403,1101" style="default" next="none" />	
+		<EventTask type="spawn" huntingZoneId="403" territoryId="40300480" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300495" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300481" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300496" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300482" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300497" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+		<!-- 1분 40초 경과, 1차 다크리퍼 출현 이벤트-->
+		<EventTask type="spawn" huntingZoneId="403" territoryId="40300498" targetNpcId="403,1108" startAggro="3000" next="complete" />				
+		<EventTask type="message" string="@dungeon:90031002" style="default" next="time" nextValue="3" />	
+		
+        <!-- 2차 웨이브, 1차 다크리퍼 출현 이벤트 완료 후 시간이 남을 경우 추가 소환 -->
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300485" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="403" territoryId="40300499" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300486" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="403" territoryId="40300500" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300487" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="403" territoryId="40300501" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300488" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="403" territoryId="40300502" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300489" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="10" />
+		<EventTask type="spawn" huntingZoneId="403" territoryId="40300503" targetNpcId="403,1108" startAggro="3000" next="time" nextValue="5" />
+
+        <!--2차 다크 리퍼 출현 이벤트 -->
+        <EventTask type="message" string="@dungeon:90031003" style="default" next="time" nextValue="5"/>
+        <EventTask type="spawn" huntingZoneId="403" territoryId="40300046" startAggro="100" next="none" />        
+      </EventTaskGroup>
+    </Event>
+	<!--
+    <Event textId="2" questId="401" taskId="7">
+      <EventTaskGroup>
+        
+      </EventTaskGroup>
+    </Event>-->
+  </EventGroup>
+  <EventGroup type="questProgress">
+	<Event questId="401" taskId="10">
+		<EventTaskGroup>
+			<EventTask type="message" string="@dungeon:90031009" style="default" next="time" nextValue="3" />	
+			<EventTask type="message" string="@dungeon:90031011" targetNpcId="403,1101" style="default" next="none" />	
+		</EventTaskGroup>
+	</Event>
+  </EventGroup>
+  <EventGroup type="questFail">
+    <!-- 수호 퀘스트 실패 시 처리 -->
+    <Event questId="401" taskId="7">
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:90031005" style="alert" next="time" nextValue="3" />
+        <EventTask type="teleport" continentId="7004" pos="116931,74040,4771" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="403,1108" value="80">
+    <!-- 수호대상 체력에 따른 메세지-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:90031006" style="alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="403,1108" value="50">
+    <!-- 수호대상 체력에 따른 메세지-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:90031007" style="alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npchp" uniqueId="403,1108" value="10">
+    <!-- 수호대상 체력에 따른 메세지-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:90031008" style="alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9062" name="@dungeon:9062" startPos="70154,-147367,776" exitContinentId="7014" exitPos="-60043,6366,-617" destroyWaitMin="0">
+  <!-- 광대의 별장 퀘스트 특수공간 퇴장 대륙은 7014-->
+  <RestoreTargetQuest id="3702" forceRestore="true"/>
+  <Condition type="party" value="1" />
+  <Condition type="levelOver" value="53" />
+  <Condition type="progressQuest" value="3702" taskId="7" />
+  <Condition type="completeQuest" value="3702" />
+  <!-- 벽 부서질 때  몬스터 스폰 이벤트-->
+  <!-- 1차 벽 -->
+  <EventGroup type="npcHp" uniqueId="462,5012" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200012" startAggro="50" next="none" />
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200019" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 2차 벽 -->
+  <EventGroup type="npcHp" uniqueId="462,5013" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200026" startAggro="50" next="none" />
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200027" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 3차 벽 -->
+  <EventGroup type="npcHp" uniqueId="462,5014" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200017" startAggro="50" next="none" />
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200044" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 스나우저 관련 이벤트 -->
+  <EventGroup type="npcHp" uniqueId="462,5005" value="36">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9062001" style="default" next="time" nextValue="0" />
+        <EventTask type="despawn" huntingZoneId="462" territoryId="46200028" next="time" nextValue="6" />
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200029" startAggro="50" next="time" nextValue="0" />
+        <!--변신시에는 켈바소환하지 않도록 변경-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="462,5006" value="70">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9062002" style="default" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200047" startAggro="50" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200048" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="462,5006" value="40">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9062003" style="default" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200049" startAggro="50" next="time" nextValue="0" />
+        <EventTask type="spawn" huntingZoneId="462" territoryId="46200050" startAggro="50" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="462,5011" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="playMovie" id="78" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+</Dungeon>
