@@ -18,7 +18,12 @@
 				<EventTask type="spawn" huntingZoneId="3201" territoryId="320100021" next="none" /> <!-- 2입구 차폐문  -->
 				<EventTask type="spawn" huntingZoneId="3201" territoryId="320100031" next="none" /> <!-- 미니입구 차폐문  -->
 				<EventTask type="spawn" huntingZoneId="3201" territoryId="320100032" next="none" /> <!-- 미니출구 차폐문  -->
-				<!--1네임드 길찾기 가이드-->
+
+        <!-- Guide NPC and objects -->
+        <EventTask type="spawn" huntingZoneId="3033" territoryId="303300609" next="none" /> <!-- 1 Lancer NPC-->
+        <EventTask type="spawn" huntingZoneId="3033" territoryId="303300611" next="none" /> <!-- 1 priest NPC -->
+
+        <!--1네임드 길찾기 가이드-->
 				<EventTask type="guideOn" nameId="3201,911" id="1" pos="36225.00000000,-81925.00000000,285.40899658" next="none" />
 				<!--미니게임Flag 설정-->
 				<EventTask type="flag" name="미니게임미완" value="1" next="none" />
@@ -152,6 +157,11 @@
 				<!--1네임드 테리토리 디스폰 후 스폰-->
 				<EventTask type="deSpawn" huntingZoneId="3201" territoryId="320100100" next="time" nextValue="5" />
 				<EventTask type="spawn" huntingZoneId="3201" territoryId="320100100" next="none" />
+        <!-- despawn then spawn allied NPCs -->
+        <EventTask type="despawn" huntingZoneId="3033" territoryId="303300609" next="none" /> <!-- 1네임드 가이드 테리토리(창기사) 디스폰 -->
+        <EventTask type="despawn" huntingZoneId="3033" territoryId="303300611" next="none" /> <!-- 1네임드 창기사 테리토리 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="3033" territoryId="303300609" next="none" /> <!-- 1네임드 창기사 테리토리 디스폰 -->
+        <EventTask type="spawn" huntingZoneId="3033" territoryId="303300611" next="none" /> <!-- 1네임드 창기사 테리토리 디스폰 -->
 			</EventTaskGroup>
 		</Event>
 	</EventGroup>
