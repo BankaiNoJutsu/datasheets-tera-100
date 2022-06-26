@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<DungeonRank continentId="9096">
+  <Settings dbRecord="false" gameRule="point" numOfTopList="10" numOfUITopList="50" numOfUISeasonList="3" />
+  <!--db저장 여부, 게임 방식(point, time, backtime), 던전 종료시 순위 리스트에 나올 개수, UI 리스트에 나올 개수, ui 창에 시즌 개수-->
+  <StageData>
+    <!--한 판 끝나고 보상-->
+    <!-- 등급 및 최저 점수-->
+    <Stage grade="1" minPoint="239999" mailSender="@DungeonRank:909601" mailTitle="@DungeonRank:909602" mailContents="@DungeonRank:909603" result="909604" />
+    <Stage grade="2" minPoint="179999" mailSender="@DungeonRank:909601" mailTitle="@DungeonRank:909602" mailContents="@DungeonRank:909603" result="909605" />
+    <Stage grade="3" minPoint="99999" mailSender="@DungeonRank:909601" mailTitle="@DungeonRank:909602" mailContents="@DungeonRank:909603" result="909606" />
+    <Stage grade="4" minPoint="49999" mailSender="@DungeonRank:909601" mailTitle="@DungeonRank:909602" mailContents="@DungeonRank:909603" result="909607" />
+    <Stage grade="5" minPoint="1" mailSender="@DungeonRank:909601" mailTitle="@DungeonRank:909602" mailContents="@DungeonRank:909603" result="909608" />
+    <!-- 등급 및 최저 점수-->
+  </StageData>
+  <PointData>
+    <TimePointData>
+      <Timer name="타이머A">
+        <remainTime timePoint="0">
+          <Time min="300" max="600" timePoint="50" bonusPoint="10000" />
+        </remainTime>
+      </Timer>
+      <Timer name="타이머B">
+        <remainTime timePoint="0">
+          <Time min="300" max="600" timePoint="50" bonusPoint="20000" />
+        </remainTime>
+      </Timer>
+    </TimePointData>
+    <BonusPointData>
+      <ActionRecordRoot>
+        <Pin id="1" slot="1" repeat="false" bonusPoint="-500" desc="301번이 죽으면 감점">
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="301" />
+        </Pin>
+        <Pin id="2" slot="1" repeat="false" bonusPoint="-2500" desc="303번이 죽으면 감점">
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="303" />
+        </Pin>
+        <Pin id="3" slot="1" repeat="false" bonusPoint="-5000" desc="304번이 죽으면 감점">
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="304" />
+        </Pin>
+        <Pin id="5" slot="5" isPrivate="true" bonusPoint="1000" desc="기본공격으로 몬스터를 킬" msgId="909629">
+          <CompareCondition target="skillCategoryId" kind="include" value="11" />
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeType" kind="npc" />
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="nonEqual" value="9001" />
+          <CompareCondition target="doeeNpcTemplateId" kind="nonEqual" value="809" />
+          <CompareCondition target="doeeNpcTemplateId" kind="nonEqual" value="300" />
+          <CompareCondition target="doeeNpcTemplateId" kind="nonEqual" value="305" />
+        </Pin>
+        <Pin id="4" slot="5" isPrivate="true" bonusPoint="1000" desc="기본공격으로 몬스터를 킬" msgId="909629">
+          <CompareCondition target="skillCategoryId" kind="include" value="21" />
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeType" kind="npc" />
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="nonEqual" value="9001" />
+          <CompareCondition target="doeeNpcTemplateId" kind="nonEqual" value="809" />
+          <CompareCondition target="doeeNpcTemplateId" kind="nonEqual" value="300" />
+          <CompareCondition target="doeeNpcTemplateId" kind="nonEqual" value="305" />
+        </Pin>
+        <Pin id="6" slot="5" next="1" isPrivate="true" bonusPoint="10" desc="점프 사용" msgId="909610">
+          <CompareCondition target="actionType" kind="equal" value="userJump" />
+        </Pin>
+        <Pin id="7" bonusPoint="100" desc="501번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="501" />
+          <CompareCondition target="reactionId" kind="equal" value="2" />
+        </Pin>
+        <Pin id="8" bonusPoint="100" desc="502번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="502" />
+          <CompareCondition target="reactionId" kind="equal" value="2" />
+        </Pin>
+        <Pin id="9" bonusPoint="100" desc="2000번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="2000" />
+          <CompareCondition target="reactionId" kind="equal" value="2" />
+        </Pin>
+        <Pin id="10" bonusPoint="100" desc="2001번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="2001" />
+          <CompareCondition target="reactionId" kind="equal" value="2" />
+        </Pin>
+        <Pin id="11" bonusPoint="100" desc="2006번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="2006" />
+          <CompareCondition target="reactionId" kind="equal" value="2" />
+        </Pin>
+        <Pin id="12" slot="1" next="2" bonusPoint="0" desc="500번 불카누스 리액션 발동시 소셜 사용">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+          <CompareCondition target="reactionId" kind="equal" value="3" />
+        </Pin>
+        <Pin id="13" slot="1" next="3" bonusPoint="0" desc="200번 몬스터 스폰 뒤 5초 뒤 죽인다">
+          <CompareCondition target="spawnNpcTemplateId" kind="equal" value="200" />
+        </Pin>
+        <Pin id="17" slot="1" next="7" bonusPoint="0" desc="2006번 거인이 죽고 2000번 몬스터가 디스폰 된다">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="2006" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+        <Pin id="18" slot="1" next="11" repeat="false" bonusPoint="0" desc="1스테이지 클리어 시 수정 체력 80%">
+          <CompareCondition target="spawnNpcTemplateId" kind="equal" value="303" />
+        </Pin>
+        <Pin id="19" slot="1" next="12" repeat="false" bonusPoint="0" desc="2스테이지 클리어 시 수정 체력 80%">
+          <CompareCondition target="spawnNpcTemplateId" kind="equal" value="304" />
+        </Pin>
+        <Pin id="20" slot="1" next="13" repeat="false" bonusPoint="0" desc="3스테이지 클리어 시 수정 체력 80%">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+        <Pin id="21" slot="1" next="14" bonusPoint="0" desc="죽음의 미즈넬을 15초내에 4마리 처치">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="3001" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+        <Pin id="22" slot="5" bonusPoint="-2500" desc="오크통으로 유저 킬" msgId="909612">
+          <CompareCondition target="doerNpcTemplateId" kind="equal" value="9001" />
+          <CompareCondition target="doeeType" kind="user" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+        <Pin id="23" slot="5" bonusPoint="1000" desc="오크통으로 몬스터 킬" msgId="909613">
+          <CompareCondition target="doerNpcTemplateId" kind="equal" value="9001" />
+          <CompareCondition target="doeeType" kind="npc" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="502" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+        <Pin id="24" next="15" repeat="false" bonusPoint="0" desc="세리온의 자비를 한번도 부여받지 않고 스테이지 클리어">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+        <Pin id="25" slot="1" next="16" repeat="false" bonusPoint="0" desc="뒤틀린 사술 실험체를 5초내에 3마리 킬">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="9002" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+        <Pin id="26" slot="5" next="17" isPrivate="true" bonusPoint="-1000" desc="PC 사망" msgId="909626">
+          <CompareCondition target="doeeType" kind="user" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+        <Pin id="27" slot="5" next="26" isPrivate="true" bonusPoint="2000" desc="세 번째 스테이지 시작 후 PC의 공격 데미지가 50만 이상" msgId="909628">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+          <CompareCondition target="damage" kind="greaterThanEqual" value="500000" />
+        </Pin>
+        <Pin id="28" slot="1" next="20" isPrivate="true" repeat="false" bonusPoint="0" desc="각 스테이지 막타를 동일유저가 함">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="3001" />
+          <CompareCondition target="killCountTracking" kind="equal" value="3" />
+        </Pin>
+        <Pin id="29" slot="1" isPrivate="true" bonusPoint="500" desc="부활 시" msgId="909625">
+          <CompareCondition target="isRebirth" kind="true" />
+          <CompareCondition target="doerType" kind="user" />
+        </Pin>
+        <Pin id="31" slot="1" next="18" isPrivate="true" bonusPoint="0" desc="HP 5% 이하의 유저에게 3초안에 힐 사용">
+          <CompareCondition target="doeeType" kind="user" />
+          <CompareCondition target="damage" kind="greaterThanEqual" value="1" />
+          <CompareCondition target="doeeHpRate" kind="lessThanEqual" value="0.05" />
+        </Pin>
+        <Pin id="32" slot="1" next="25" isPrivate="true" bonusPoint="1000" desc="HP 20%이하 유저에게 회복 사용" msgId="909617">
+          <CompareCondition target="doeeType" kind="user" />
+          <CompareCondition target="doeeHpRateBeforeAction" kind="lessThanEqual" value="0.20" />
+          <CompareCondition target="skillCategoryId" kind="include" value="31" />
+          <CompareCondition target="skillCategoryId" kind="notInclude" value="134" />
+          <CompareCondition target="doerUserClass" kind="notWarrior" />
+          <CompareCondition target="doerUserClass" kind="notLancer" />
+          <CompareCondition target="doerUserClass" kind="notSlayer" />
+          <CompareCondition target="doerUserClass" kind="notBerserker" />
+          <CompareCondition target="doerUserClass" kind="notSorcerer" />
+          <CompareCondition target="doerUserClass" kind="notArcher" />
+        </Pin>
+        <Pin id="33" slot="5" next="27" isPrivate="true" bonusPoint="1000" desc="세 번째 스테이지 시작 후 HP 20%미만일 때 무사 분노의 일격으로 바르쿠드 타격" msgId="909618">
+          <CompareCondition target="doerUserClass" kind="slayer" />
+          <CompareCondition target="skillCategoryId" kind="include" value="3016" />
+          <CompareCondition target="doerHpRateBeforeAction" kind="lessThanEqual" value="0.20" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+        </Pin>
+        <Pin id="34" slot="5" next="27" isPrivate="true" bonusPoint="1000" desc="세 번째 스테이지 시작 후 HP 20%미만일 때 궁수 돌려차기로 바르쿠드 타격" msgId="909620">
+          <CompareCondition target="doerUserClass" kind="archer" />
+          <CompareCondition target="skillCategoryId" kind="include" value="6018" />
+          <CompareCondition target="doerHpRateBeforeAction" kind="lessThanEqual" value="0.20" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+        </Pin>
+        <Pin id="35" slot="5" next="27" isPrivate="true" bonusPoint="1000" desc="세 번째 스테이지 시작 후 HP 20%미만일 때 광전사 늑골 부수기로 바르쿠드 타격" msgId="909621">
+          <CompareCondition target="doerUserClass" kind="berserker" />
+          <CompareCondition target="skillCategoryId" kind="include" value="4024" />
+          <CompareCondition target="doerHpRateBeforeAction" kind="lessThanEqual" value="0.20" />
+          <CompareCondition target="damage" kind="greaterThanEqual" value="1" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+        </Pin>
+        <Pin id="36" slot="5" next="27" isPrivate="true" bonusPoint="1000" desc="세 번째 스테이지 시작 후 HP 20%미만일 때 마법사 고통의 각인으로 바르쿠드 타격" msgId="909619">
+          <CompareCondition target="doerUserClass" kind="sorcerer" />
+          <CompareCondition target="skillCategoryId" kind="include" value="5017" />
+          <CompareCondition target="doerHpRateBeforeAction" kind="lessThanEqual" value="0.20" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+        </Pin>
+        <Pin id="37" slot="5" isPrivate="true" bonusPoint="1000" desc="창기사 신뢰의 오라가 지속시간 종료로 해제" msgId="909623">
+          <CompareCondition target="abnormalityKind" kind="equal" value="14" />
+          <CompareCondition target="abnormalityEndByTimeOut" kind="true" />
+          <CompareCondition target="doerUserClass" kind="lancer" />
+        </Pin>
+        <Pin id="38" slot="5" next="27" isPrivate="true" bonusPoint="1000" desc="세 번째 스테이지 시작 후 HP 20%미만일 때 검투사 회피공격으로 바르쿠드 타격" msgId="909622">
+          <CompareCondition target="doerUserClass" kind="warrior" />
+          <CompareCondition target="skillCategoryId" kind="include" value="1010" />
+          <CompareCondition target="doerHpRateBeforeAction" kind="lessThanEqual" value="0.20" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+        </Pin>
+        <Pin id="39" slot="5" next="19" isPrivate="true" bonusPoint="0" desc="10초내에 받는 데미지가 20만 이상">
+          <CompareCondition target="doeeType" kind="user" />
+          <CompareCondition target="damage" kind="greaterThanEqual" value="1" />
+        </Pin>
+        <Pin id="40" slot="1" bonusPoint="1500" desc="사술체 처치" msgId="909614">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="9002" />
+        </Pin>
+        <Pin id="41" slot="1" bonusPoint="1000" desc="오염된 코어 수정체" msgId="909630">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="300" />
+        </Pin>
+        <Pin id="42" slot="1" bonusPoint="1000" desc="오염된 코어 수정체" msgId="909630">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="809" />
+        </Pin>
+        <Pin id="43" slot="1" bonusPoint="1000" desc="오염된 코어 수정체" msgId="909630">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="305" />
+        </Pin>
+        <Pin id="44" slot="1" bonusPoint="5000" desc="301수정 디스폰">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="301" />
+          <CompareCondition target="abnormalityId" kind="equal" value="47710400" />
+        </Pin>
+        <Pin id="45" slot="1" bonusPoint="5000" desc="303수정 디스폰">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="303" />
+          <CompareCondition target="abnormalityId" kind="equal" value="47710400" />
+        </Pin>
+        <Pin id="46" slot="1" bonusPoint="5000" desc="304수정 디스폰">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="304" />
+          <CompareCondition target="abnormalityId" kind="equal" value="47710400" />
+        </Pin>
+        <Pin id="47" bonusPoint="100" desc="501번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="501" />
+          <CompareCondition target="reactionId" kind="equal" value="3" />
+        </Pin>
+        <Pin id="48" bonusPoint="100" desc="502번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="502" />
+          <CompareCondition target="reactionId" kind="equal" value="3" />
+        </Pin>
+        <Pin id="49" bonusPoint="100" desc="2000번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="2000" />
+          <CompareCondition target="reactionId" kind="equal" value="3" />
+        </Pin>
+        <Pin id="50" bonusPoint="100" desc="2001번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="2001" />
+          <CompareCondition target="reactionId" kind="equal" value="3" />
+        </Pin>
+        <Pin id="51" bonusPoint="100" desc="2006번 몬스터 리액션 발생">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="2006" />
+          <CompareCondition target="reactionId" kind="equal" value="3" />
+        </Pin>
+        <Pin id="12" slot="1" next="2" bonusPoint="0" desc="500번 불카누스 리액션 발동시 소셜 사용">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+          <CompareCondition target="reactionId" kind="equal" value="2" />
+        </Pin>
+      </ActionRecordRoot>
+      <ActionRecord id="1" desc="점프 10초쿨 체크">
+        <Pin id="1000" timeLimit="10000" bonusPoint="0" desc="">
+          <CompareCondition target="neverEnd" kind="always" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="2" desc="돌격소셜사용" >
+        <Pin id="1001" timeLimit="7000" isPrivate="true" bonusPoint="1000" desc="" msgId="909615">
+          <CompareCondition target="socialId" kind="equal" value="27" />
+          <CompareCondition target="doerType" kind="same" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="3" desc="5초내에 200번 몬스터 킬">
+        <Pin id="1002" timeLimit="5000" isPrivate="true" bonusPoint="500" desc="" msgId="909609">
+          <CompareCondition target="doerType" kind="user" />
+          <CompareCondition target="doeeNpcTemplateId" kind="same" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="7" desc="2000번 몬스터가 디스폰">
+        <Pin id="1006" timeLimit="-1" next="8" bonusPoint="1500" desc="" msgId="909631">
+          <CompareCondition target="despawnNpcTemplateId" kind="equal" value="2000" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="8" desc="2000번 몬스터가 디스폰">
+        <Pin id="1007" timeLimit="-1" next="9" bonusPoint="1500" desc="" msgId="909631">
+          <CompareCondition target="despawnNpcTemplateId" kind="equal" value="2000" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="9" desc="2000번 몬스터가 디스폰">
+        <Pin id="1008" timeLimit="-1" next="10" bonusPoint="1500" desc="" msgId="909631">
+          <CompareCondition target="despawnNpcTemplateId" kind="equal" value="2000" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="10" desc="2000번 몬스터가 디스폰">
+        <Pin id="1009" timeLimit="-1" bonusPoint="1500" desc="">
+          <CompareCondition target="despawnNpcTemplateId" kind="equal" value="2000" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="11" desc="1스테이지 클리어 시 수정 체력 80%">
+        <Pin id="1010" slot="1" timeLimit="-1" bonusPoint="2000" desc="수정 피격">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="301" />
+          <CompareCondition target="abnormalityId" kind="equal" value="47710400" />
+          <CompareCondition target="doeeHpRate" kind="greaterThanEqual" value="0.8" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="12" desc="2스테이지 클리어 시 수정 체력 80%">
+        <Pin id="1012" slot="1" timeLimit="-1" bonusPoint="3000" desc="수정 피격">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="303" />
+          <CompareCondition target="abnormalityId" kind="equal" value="47710400" />
+          <CompareCondition target="doeeHpRate" kind="greaterThanEqual" value="0.8" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="13" desc="3스테이지 클리어 시 수정 체력 80%">
+        <Pin id="1014" slot="1" timeLimit="-1" bonusPoint="5000" desc="수정 피격">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="304" />
+          <CompareCondition target="abnormalityId" kind="equal" value="47710400" />
+          <CompareCondition target="doeeHpRate" kind="greaterThanEqual" value="0.8" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="14" desc="죽음의 미즈넬을 15초내에 4마리 처치">
+        <Pin id="1016" slot="1" timeLimit="15000" bonusPoint="2500" desc="" msgId="909611">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="3001" />
+          <CompareCondition target="killCountTracking" kind="equal" value="3" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="15" desc="세리온의 자비를 한번도 부여받지 않고 스테이지 클리어" >
+        <Pin id="1017" timeLimit="-1" bonusPoint="30000" desc="" msgId="909632">
+          <CompareCondition target="despawnNpcTemplateId" kind="equal" value="702" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="16" desc="뒤틀린 사술 실험체를 5초내에 3마리 킬">
+        <Pin id="1018" slot="5" timeLimit="5000" bonusPoint="5000" desc="" msgId="909633">
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="9002" />
+          <CompareCondition target="killCountTracking" kind="equal" value="2" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="17" desc="PC 사망시 파티원이 슬픔소셜 사용" >
+        <Pin id="1019" slot="1" timeLimit="100000" next="26" isPrivate="true" bonusPoint="500" desc="" msgId="909627">
+          <CompareCondition target="socialId" kind="equal" value="18" />
+          <CompareCondition target="doeeDoerId" kind="notSame" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="18" desc="5퍼센트이하 후 3초안에 락온힐 성공">
+        <Pin id="1020" timeLimit="3000" next="25" isPrivate="true" bonusPoint="1000" desc="" msgId="909616">
+          <CompareCondition target="doeeId" kind="same" />
+          <CompareCondition target="doerUserClass" kind="notWarrior" />
+          <CompareCondition target="doerUserClass" kind="notLancer" />
+          <CompareCondition target="doerUserClass" kind="notSlayer" />
+          <CompareCondition target="doerUserClass" kind="notBerserker" />
+          <CompareCondition target="doerUserClass" kind="notSorcerer" />
+          <CompareCondition target="doerUserClass" kind="notArcher" />
+          <CompareCondition target="skillCategoryId" kind="include" value="31" />
+          <CompareCondition target="skillCategoryId" kind="include" value="132" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="19" desc="파티원이 10초내에 20만이상의 데미지 입음 1분 쿨타임">
+        <Pin id="1021" slot="1" timeLimit="10000" next="25" bonusPoint="5000" desc="" msgId="909624">
+          <CompareCondition target="doeeType" kind="user" />
+          <CompareCondition target="damageTracking" kind="greaterThanEqual" value="200000" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="20" desc="각 스테이지 막타를 동일유저가 함">
+        <Pin id="1022" timeLimit="-1" next="21" isPrivate="true" bonusPoint="0" desc="" >
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="3001" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="21" desc="각 스테이지 막타를 동일유저가 함">
+        <Pin id="1023" timeLimit="-1" next="22" isPrivate="true" bonusPoint="0" desc="">
+          <CompareCondition target="doerType" kind="same" />
+          <CompareCondition target="kill" kind="true" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="2006" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="22" desc="각 스테이지 막타를 동일유저가 함">
+        <Pin id="1024" timeLimit="-1" isPrivate="true" bonusPoint="5000" desc=""  msgId="909634">
+          <CompareCondition target="doerType" kind="same" />
+          <CompareCondition target="doeeNpcTemplateId" kind="equal" value="500" />
+          <CompareCondition target="kill" kind="true" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="25" desc="1분 쿨타임">
+        <Pin id="1029" timeLimit="60000" bonusPoint="0" desc="">
+          <CompareCondition target="neverEnd" kind="always" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="26" desc="5분 쿨타임">
+        <Pin id="1030" timeLimit="300000" bonusPoint="0" desc="">
+          <CompareCondition target="neverEnd" kind="always" />
+        </Pin>
+      </ActionRecord>
+      <ActionRecord id="27" desc="30초 쿨타임">
+        <Pin id="1031" timeLimit="30000" bonusPoint="0" desc="">
+          <CompareCondition target="neverEnd" kind="always" />
+        </Pin>
+      </ActionRecord>
+    </BonusPointData>
+    <KillingPointData>
+      <KillingPoint templateId="100" point="300" />
+      <KillingPoint templateId="101" point="300" />
+      <KillingPoint templateId="102" point="300" />
+      <KillingPoint templateId="103" point="300" />
+      <KillingPoint templateId="104" point="400" />
+      <KillingPoint templateId="105" point="500" />
+      <KillingPoint templateId="107" point="500" />
+      <KillingPoint templateId="108" point="500" />
+      <KillingPoint templateId="109" point="3000" />
+      <KillingPoint templateId="111" point="3000" />
+      <KillingPoint templateId="113" point="500" />
+      <KillingPoint templateId="114" point="500" />
+      <KillingPoint templateId="115" point="500" />
+      <KillingPoint templateId="119" point="500" />
+      <KillingPoint templateId="120" point="500" />
+      <KillingPoint templateId="200" point="500" />
+      <KillingPoint templateId="202" point="100" />
+      <KillingPoint templateId="500" point="30000" />
+      <KillingPoint templateId="501" point="2500" />
+      <KillingPoint templateId="502" point="3000" />
+      <KillingPoint templateId="2001" point="2000" />
+      <KillingPoint templateId="2006" point="4000" />
+      <KillingPoint templateId="3001" point="600" />
+      <KillingPoint templateId="3002" point="1000" />
+      <KillingPoint templateId="3003" point="700" />
+    </KillingPointData>
+  </PointData>
+</DungeonRank>

@@ -1,0 +1,1234 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Dungeon continentId="9096" name="@dungeon:9096" startPos="-3253,-155327,6045" exitContinentId="2" exitPos="907,-8137,6841">
+  <!-- 터렛 디펜스-->
+  <Condition type="party" value="5" />
+  <Condition type="notSolo" />
+  <Condition type="levelOver" value="60" />
+  <Condition type="progressQuest" value="7204" taskId="1" />
+  <Condition type="completeQuest" value="7203" />
+  <Condition type="flag" name="dungeonStart" value="0" />
+		<ClearCondition huntingZoneId="496" templateId="202" amount="1" killCount="1" />
+
+
+  <!--NPC 오브젝트 스폰-->
+  <EventGroup type="enterTerritory" uniqueId="496,49600150">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600178" next="none" />
+        <!--첫번째 투명NPC-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600258" next="none" />
+        <!--두번째 투명NPC-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600264" next="time" nextValue="2" />
+        <!--세번째 투명NPC-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600172" targetNpcId="496,700" startAggro="20000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--첫번째 메인 수정-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600267" next="none" />
+        <!--첫번째 스테이지 뒷문-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600432" next="none" />
+        <!--두번째 스테이지 뒷문-->
+        <EventTask type="flag" name="타워생존" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="폭탄마등장,타워생존" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.25">
+        <EventTask type="flag" name="폭탄마등장" value="0" next="none" />
+        <EventTask type="flag" name="1번폭탄마스폰" value="1" next="time" nextValue="30" />
+        <EventTask type="flag" name="폭탄마등장-2" value="1" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.25">
+        <EventTask type="flag" name="폭탄마등장" value="0" next="none" />
+        <EventTask type="flag" name="2번폭탄마스폰" value="1" next="time" nextValue="30" />
+        <EventTask type="flag" name="폭탄마등장-2" value="1" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.25">
+        <EventTask type="flag" name="폭탄마등장" value="0" next="none" />
+        <EventTask type="flag" name="3번폭탄마스폰" value="1" next="time" nextValue="30" />
+        <EventTask type="flag" name="폭탄마등장-2" value="1" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.25">
+        <EventTask type="flag" name="폭탄마등장" value="0" next="none" />
+        <EventTask type="flag" name="4번폭탄마스폰" value="1" next="time" nextValue="30" />
+        <EventTask type="flag" name="폭탄마등장-2" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="폭탄마등장-2,타워생존" repeat="true">
+    <Event>
+      <EventTaskGroup probability="0.25">
+        <EventTask type="flag" name="폭탄마등장-2" value="0" next="none" />
+        <EventTask type="flag" name="1번폭탄마스폰" value="1" next="time" nextValue="30" />
+        <EventTask type="flag" name="폭탄마등장" value="1" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.25">
+        <EventTask type="flag" name="폭탄마등장-2" value="0" next="none" />
+        <EventTask type="flag" name="2번폭탄마스폰" value="1" next="time" nextValue="30" />
+        <EventTask type="flag" name="폭탄마등장" value="1" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.25">
+        <EventTask type="flag" name="폭탄마등장-2" value="0" next="none" />
+        <EventTask type="flag" name="3번폭탄마스폰" value="1" next="time" nextValue="30" />
+        <EventTask type="flag" name="폭탄마등장" value="1" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.25">
+        <EventTask type="flag" name="폭탄마등장-2" value="0" next="none" />
+        <EventTask type="flag" name="4번폭탄마스폰" value="1" next="time" nextValue="30" />
+        <EventTask type="flag" name="폭탄마등장" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="1번폭탄마스폰,타워생존" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600287" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--1 폭탄마-->
+        <EventTask type="flag" name="1번폭탄마스폰" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="2번폭탄마스폰,타워생존" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600342" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--2 폭탄마-->
+        <EventTask type="flag" name="2번폭탄마스폰" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="3번폭탄마스폰,타워생존" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600355" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--3 폭탄마-->
+        <EventTask type="flag" name="3번폭탄마스폰" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="4번폭탄마스폰,타워생존" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600368" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--4 폭탄마-->
+        <EventTask type="flag" name="4번폭탄마스폰" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--첫번째 방 플래그 그룹 시작 -->
+  <!--첫번째 방 이벤트 시작-->
+  <EventGroup type="enterTerritory" uniqueId="496,49600162">
+    <!--첫번째 방 입장 확인(타이머 시작)-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096021" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600295" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600381" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600382" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600384" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600435" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="10" />
+        <!--수정 지킴이-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600435">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="시간종료" value="0" next="none" />
+        <EventTask type="flag" name="첫번째스테이지" value="1" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600266" next="none" />
+        <!--첫번째 스테이지 앞문-->
+        <EventTask type="rankSystem" state="start" startPoint="0" next="none" />
+        <!-- 랭킹 시스템 시작 -->
+        <EventTask type="flag" name="dungeonStart" value="1" next="none" />
+        <!-- 던전 시작 -->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096001" style="combat" next="time" nextValue="2" />
+        <EventTask type="timer" action="start" direction="reverse" value="600" name="타이머A" timerType="rank" next="none" />
+        <!-- 랭킹 타이머 시작 -->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600288" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--1번 자코-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600343" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--2번 자코-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600356" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--3번 자코-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600369" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="10" />
+        <!--4번 자코-->
+        <EventTask type="flag" name="폭탄마등장" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600288, 49600343, 49600356, 49600369">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600284" targetNpcId="496,301" startAggro="200" aggroInterval="10" aggroRange="100000" next="none" />
+        <!--1 일반-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600284">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600386" targetNpcId="496,301" startAggro="200" aggroInterval="10" aggroRange="100000" next="none" />
+        <!--궁수-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600386">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096002" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600350" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="5" />
+        <!--2 폭군-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600350">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096003" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600396" targetNpcId="496,301" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="3" />
+        <!--3비만-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600396">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096027" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600392" targetNpcId="496,301" startAggro="200" aggroInterval="1" aggroRange="100000" next="time" nextValue="3" />
+        <!--4 카이둔-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600392">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8011" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096004" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600299" targetNpcId="496,301" startAggro="200000" aggroInterval="5" aggroRange="100000" next="time" nextValue="10" />
+        <!--1미즈넬-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600351" targetNpcId="496,301" startAggro="200000" aggroInterval="5" aggroRange="100000" next="time" nextValue="10" />
+        <!--2미즈넬-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600364" targetNpcId="496,301" startAggro="200000" aggroInterval="5" aggroRange="100000" next="time" nextValue="10" />
+        <!--3 미즈넬-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600377" targetNpcId="496,301" startAggro="200000" aggroInterval="5" aggroRange="100000" next="time" nextValue="10" />
+        <!--4미즈넬-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600299,49600351,49600364,49600377">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="timer" action="stop" name="타이머A" timerType="rank" next="time" nextValue="5" />
+        <EventTask type="timer" action="stop" value="0" name="타이머A" next="none" />
+        <!-- 랭킹 타이머 종료 -->
+        <EventTask type="flag" name="타워생존" value="0" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096025" style="combat" next="time" nextValue="3" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096022" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600173" targetNpcId="496,701" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="5" />
+        <!--두번째 메인 수정-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600436" targetNpcId="496,303" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--수정 지킴이-->
+        <EventTask type="abnormality" abnormalityId="47710400" target="npc" targetNpcId="496, 301" next="time" nextValue="3" />
+        <!--수정 업노말리티-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600172" next="time" nextValue="3" />
+        <!--첫번째 메인 수정-->
+        <EventTask type="rankSystem" state="pause" next="none" />
+        <!--랭크 시스템 멈춤-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600267" next="none" />
+        <!--첫번째 스테이지 뒷문-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 수정 HP 시스템 메시지-->
+  <EventGroup type="npcHp" uniqueId="496,301" value="75">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096017" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,301" value="50">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096018" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,301" value="25">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096019" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,301" value="5">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096020" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--오염된 코어 수정 파괴-->
+  <EventGroup type="npcHp" uniqueId="496,809" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="99000820" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--메인 수정 파괴 플래그-->
+  <EventGroup type="npcHp" uniqueId="496,301" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="타워생존" value="0" next="none" />
+        <EventTask type="timer" action="stop" name="타이머A" next="time" nextValue="5" />
+        <EventTask type="timer" action="stop" value="0" name="타이머A" next="none" />
+        <!-- 타이머A 종료 -->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600288" next="none" />
+        <!--1번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600343" next="none" />
+        <!--2번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600356" next="none" />
+        <!--3번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600369" next="none" />
+        <!--4번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600284" next="none" />
+        <!--1 일반-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600386" next="none" />
+        <!--궁수-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600350" next="none" />
+        <!--2 폭군-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600396" next="none" />
+        <!--3비만-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600392" next="none" />
+        <!--4 카이둔-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600299" next="none" />
+        <!--1미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600351" next="none" />
+        <!--2미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600364" next="none" />
+        <!--3 미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600377" next="none" />
+        <!--4미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600287" next="none" />
+        <!--1 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600342" next="none" />
+        <!--2 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600355" next="none" />
+        <!--3 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600368" next="none" />
+        <!--4 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600295" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600381" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600382" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600384" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096024" style="combat" next="time" nextValue="3" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096022" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600173" targetNpcId="496,701" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="3" />
+        <!--두번째 메인 수정-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600436" targetNpcId="496,303" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--수정 지킴이-->
+        <EventTask type="rankSystem" state="pause" next="none" />
+        <!--랭크 시스템 멈춤-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600267" next="none" />
+        <!--첫번째 스테이지 뒷문-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--두번째 방 전투 시작-->
+  <EventGroup type="enterTerritory" uniqueId="496,49600163">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600402" next="none" />
+        <!--1 오크-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600428" next="none" />
+        <!--2오크-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600429" next="none" />
+        <!--3오크-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600398" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600399" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600400" next="time" nextValue="5" />
+        <!--123 목책-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600436">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="시간종료" value="0" next="none" />
+        <EventTask type="flag" name="첫번째스테이지" value="0" next="none" />
+        <EventTask type="flag" name="두번째스테이지" value="1" next="none" />
+        <EventTask type="rankSystem" state="start" next="none" />
+        <!--랭크 시스템 시작-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600431" next="none" />
+        <!--두번째 스테이지 앞문-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096005" style="combat" next="none" />
+        <EventTask type="timer" action="start" direction="reverse" value="600" name="타이머B" timerType="rank" next="none" />
+        <!-- 랭킹 타이머 시작 -->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600405" targetNpcId="496,303" startAggro="100000" aggroInterval="8" aggroRange="100000" next="none" />
+        <!--1 화신-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600405">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096013" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600425" targetNpcId="496,303" startAggro="100000" aggroInterval="8" aggroRange="100000" next="time" nextValue="20" />
+        <!--3유안티-->
+        <EventTask type="message" string="@dungeon:9096006" style="alert" next="none" />
+        <EventTask type="flag" name="골램생존" value="1" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600404" targetNpcId="496,303" startAggro="100000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--1 골렘-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600425">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096014" style="alert" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600418" targetNpcId="496,303" startAggro="100000" aggroInterval="8" aggroRange="100000" next="time" nextValue="20" />
+        <!--2지옥불-->
+        <EventTask type="message" string="@dungeon:9096006" style="alert" next="none" />
+        <EventTask type="flag" name="골램생존" value="1" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600420" targetNpcId="496,303" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--3 골렘-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600418">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8011" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096015" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600430" targetNpcId="496,303" startAggro="20000000" aggroInterval="1" aggroRange="100000" next="time" nextValue="20" />
+        <!--1거인-->
+        <EventTask type="message" string="@dungeon:9096006" style="alert" next="none" />
+        <EventTask type="flag" name="골램생존" value="1" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600412" targetNpcId="496,303" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--2 골렘-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600430">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096025" style="combat" next="time" nextValue="3" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096023" style="combat" next="none" />
+        <EventTask type="flag" name="타워생존" value="0" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600402" next="none" />
+        <!--1 오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600428" next="none" />
+        <!--2오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600429" next="none" />
+        <!--3오크-->
+        <EventTask type="timer" action="stop" name="타이머B" timerType="rank" next="time" nextValue="2" />
+        <EventTask type="timer" action="stop" value="0" name="타이머B" next="none" />
+        <!-- 랭킹 타이머 종료 -->
+        <EventTask type="flag" name="카딘사망" value="1" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600404" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600412" next="time" nextValue="2" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600420" next="none" />
+        <!--123 골램-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600174" targetNpcId="496,702" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="2" />
+        <!--세번째 메인 수정-->
+        <EventTask type="abnormality" abnormalityId="47710400" target="npc" targetNpcId="496, 303" next="time" nextValue="2" />
+        <!--수정 업노말리티-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600173" next="time" nextValue="1" />
+        <!--두번째 메인 수정-->
+        <EventTask type="rankSystem" state="pause" next="none" />
+        <!--랭크 시스템 멈춤-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600431" next="none" />
+        <!--두번째 스테이지 앞문-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600432" next="none" />
+        <!--두번째 스테이지 뒷문-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--골램사망-->
+  <EventGroup type="eliminate" territoryId="49600404,49600412,49600420">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="골램생존" value="0" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--오염된 코어 수정 파괴-->
+  <EventGroup type="npcHp" uniqueId="496,300" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="99000820" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 수정 HP 시스템 메시지-->
+  <EventGroup type="npcHp" uniqueId="496,303" value="75">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096017" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,303" value="50">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096018" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,303" value="25">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096019" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,303" value="5">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096020" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--두번째 방 메인 수정 파괴 플래그-->
+  <EventGroup type="npcHp" uniqueId="496,303" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096024" style="combat" next="time" nextValue="3" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096026" style="combat" next="none" />
+        <EventTask type="timer" action="stop" name="타이머B" next="time" nextValue="5" />
+        <EventTask type="timer" action="stop" value="0" name="타이머B" next="none" />
+        <!-- 랭킹 타이머 종료 -->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600398" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600399" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600400" next="none" />
+        <!--123 목책-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600404" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600412" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600420" next="none" />
+        <!--123 골램-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600405" next="none" />
+        <!--1 화신-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600425" next="none" />
+        <!--3유안티-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600418" next="none" />
+        <!--2지옥불-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600430" next="none" />
+        <!--1거인-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600402" next="none" />
+        <!--1 오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600428" next="none" />
+        <!--2오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600429" next="none" />
+        <!--3오크-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600174" targetNpcId="496,702" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="2" />
+        <!--세번째 메인 수정-->
+        <EventTask type="rankSystem" state="pause" next="none" />
+        <!--랭크 시스템 멈춤-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600431" next="none" />
+        <!--두번째 스테이지 앞문-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600432" next="none" />
+        <!--두번째 스테이지 뒷문-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--세번째 방 전투 시작-->
+  <EventGroup type="enterTerritory" uniqueId="496,49600164">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="세리온자비사용" value="1" next="none" />
+        <EventTask type="flag" name="바르쿠드생존" value="1" next="none" />
+        <EventTask type="flag" name="시간종료" value="0" next="none" />
+        <EventTask type="flag" name="두번째스테이지" value="0" next="none" />
+        <EventTask type="flag" name="세번째스테이지" value="1" next="none" />
+        <EventTask type="timer" action="start" direction="reverse" value="300" name="타이머C" timerType="rank" next="none" />
+        <!-- 랭킹 타이머 시작 -->
+        <EventTask type="rankSystem" state="start" next="none" />
+        <!--랭크 시스템 시작-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600269" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600270" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600271" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600439" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600440" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600441" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600261" targetNpcId="496,304" startAggro="150000" aggroInterval="5" aggroRange="100000" next="time" nextValue="30" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600434" next="none" />
+        <!--세번째 스테이지 뒷문-->
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="30" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="30" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="30" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="30" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="30" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="30" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="30" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="30" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="30" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="60" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="60" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710200" target="npc" targetNpcId="496, 500" next="time" nextValue="60" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600439">
+    <Event>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600272" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600275" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600276" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600387" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600388" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600389" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600390" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600391" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600440">
+    <Event>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600272" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600275" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600276" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600387" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600388" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600389" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600390" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600391" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="eliminate" territoryId="49600441">
+    <Event>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600272" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600275" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600276" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600387" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600388" startAggro="200000" targetNpcId="496,304" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600389" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600390" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+      <EventTaskGroup probability="0.125">
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <EventTask type="flag" name="세리온자비사용" value="0" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096012" style="combat" next="time" nextValue="10" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600391" targetNpcId="496,304" startAggro="200000" aggroInterval="5" aggroRange="100000" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 수정 HP 시스템 메시지-->
+  <EventGroup type="npcHp" uniqueId="496,304" value="75">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096017" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,304" value="50">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096018" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,304" value="25">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096019" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,304" value="5">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096020" style="Alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,500" value="10" repeat="true">
+    <!--불카누스 사망-->
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="changePatternList" targetNpcId="496,500" patternListId="2" next="time" nextValue="5" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600171" next="time" nextValue="10" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600171" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="npcHp" uniqueId="496,305" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="abnormality" abnormalityId="47710300" target="player" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 볼카누스 사망 던전 완료 -->
+  <EventGroup type="npcHp" uniqueId="496,500" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="바르쿠드사망" value="1" next="none" />
+        <EventTask type="flag" name="바르쿠드생존" value="0" next="none" />
+        <EventTask type="abnormality" abnormalityId="47710400" target="npc" targetNpcId="496, 304" next="none" />
+        <!--수정 업노말리티-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600434" next="none" />
+        <!--세번째 스테이지 뒷문-->
+        <EventTask type="timer" action="stop" name="타이머C" timerType="rank" next="time" nextValue="5" />
+        <EventTask type="timer" action="stop" value="0" name="타이머C" next="none" />
+        <!-- 랭킹 타이머 종료 -->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600264" next="none" />
+        <!--세번째 투명 NPC 디스폰-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600270" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600271" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600269" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600174" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600439" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600440" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600441" next="none" />
+        <!--세번째 메인 수정-->
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096028" style="combat" next="time" nextValue="5" />
+        <EventTask type="rankSystem" state="end" next="none" />
+        <!--랭킹시스템 종료-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--수정파괴-->
+  <EventGroup type="npcHp" uniqueId="496,304" value="0">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600261" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600434" next="none" />
+        <!--세번째 스테이지 뒷문-->
+        <EventTask type="timer" action="stop" name="타이머C" timerType="rank" next="time" nextValue="5" />
+        <EventTask type="timer" action="stop" value="0" name="타이머C" next="none" />
+        <!-- 랭킹 타이머 종료 -->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600270" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600271" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600269" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600439" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600440" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600441" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096024" style="combat" next="time" nextValue="5" />
+        <EventTask type="rankSystem" state="end" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 파티 전멸시 던전 완료 -->
+  <EventGroup type="annihilated">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="바르쿠드생존" value="0" next="none" />
+        <EventTask type="flag" name="파티전멸" value="1" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096024" style="combat" next="time" nextValue="1" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600172" next="none" />
+        <!--첫번째 메인 수정-->
+        <EventTask type="rankSystem" state="end" next="none" />
+        <!--랭킹시스템 종료-->
+        <EventTask type="flag" name="첫번째스테이지" value="0" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600288" next="none" />
+        <!--1번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600343" next="none" />
+        <!--2번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600356" next="none" />
+        <!--3번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600369" next="none" />
+        <!--4번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600284" next="none" />
+        <!--1 일반-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600386" next="none" />
+        <!--궁수-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600350" next="none" />
+        <!--2 폭군-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600396" next="none" />
+        <!--3비만-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600392" next="none" />
+        <!--4 카이둔-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600299" next="none" />
+        <!--1미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600351" next="none" />
+        <!--2미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600364" next="none" />
+        <!--3 미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600377" next="none" />
+        <!--4미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600287" next="none" />
+        <!--1 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600342" next="none" />
+        <!--2 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600355" next="none" />
+        <!--3 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600368" next="none" />
+        <!--4 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600295" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600381" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600382" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600384" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600398" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600399" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600400" next="none" />
+        <!--123 목책-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600404" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600412" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600420" next="none" />
+        <!--123 골램-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600405" next="none" />
+        <!--1 화신-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600425" next="none" />
+        <!--3유안티-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600418" next="none" />
+        <!--2지옥불-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600430" next="none" />
+        <!--1거인-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600402" next="none" />
+        <!--1 오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600428" next="none" />
+        <!--2오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600429" next="none" />
+        <!--3오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600173" next="none" />
+        <!--두번째 메인 수정-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600398" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600399" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600400" next="none" />
+        <!--123 목책-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600404" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600412" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600420" next="none" />
+        <!--123 골램-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600405" next="none" />
+        <!--1 화신-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600425" next="none" />
+        <!--3유안티-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600418" next="none" />
+        <!--2지옥불-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600430" next="none" />
+        <!--1거인-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600402" next="none" />
+        <!--1 오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600428" next="none" />
+        <!--2오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600429" next="none" />
+        <!--3오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600261" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600269" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600270" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600271" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600439" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600440" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600441" next="none" />
+        <EventTask type="timer" action="stop" name="타이머A" next="time" nextValue="2" />
+        <EventTask type="timer" action="stop" value="0" name="타이머A" next="none" />
+        <!-- 랭킹 타이머 종료 -->
+        <EventTask type="timer" action="stop" name="타이머B" next="time" nextValue="2" />
+        <EventTask type="timer" action="stop" value="0" name="타이머B" next="none" />
+        <!-- 랭킹 타이머 종료 -->
+        <EventTask type="timer" action="stop" name="타이머C" next="time" nextValue="2" />
+        <EventTask type="timer" action="stop" value="0" name="타이머C" next="none" />
+        <!-- 랭킹 타이머 종료 -->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!--타이머 종료-->
+  <EventGroup type="timer" timerName="타이머A" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="시간종료" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+  <EventGroup type="timer" timerName="타이머B" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="시간종료" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+    <EventGroup type="timer" timerName="타이머C" value="0" repeat="true">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="시간종료" value="1" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+
+
+  <EventGroup type="flag" name="첫번째스테이지,시간종료" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="타워생존" value="0" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600267" next="none" />
+        <!--첫번째 스테이지 뒷문-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600288" next="none" />
+        <!--1번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600343" next="none" />
+        <!--2번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600356" next="none" />
+        <!--3번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600369" next="none" />
+        <!--4번 자코-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600284" next="none" />
+        <!--1 일반-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600386" next="none" />
+        <!--궁수-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600350" next="none" />
+        <!--2 폭군-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600396" next="none" />
+        <!--3비만-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600392" next="none" />
+        <!--4 카이둔-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600299" next="none" />
+        <!--1미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600351" next="none" />
+        <!--2미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600364" next="none" />
+        <!--3 미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600377" next="none" />
+        <!--4미즈넬-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600287" next="none" />
+        <!--1 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600342" next="none" />
+        <!--2 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600355" next="none" />
+        <!--3 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600368" next="none" />
+        <!--4 폭탄마-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600295" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600381" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600382" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600384" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096025" style="combat" next="time" nextValue="3" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096022" style="combat" next="none" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600173" targetNpcId="496,701" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="3" />
+        <!--두번째 메인 수정-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600436" targetNpcId="496,303" startAggro="200000" aggroInterval="1" aggroRange="100000" next="none" />
+        <!--수정 지킴이-->
+        <EventTask type="abnormality" abnormalityId="47710400" target="npc" targetNpcId="496, 301" next="time" nextValue="2" />
+        <!--수정 업노말리티-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600172" next="time" nextValue="1" />
+        <!--첫번째 메인 수정-->
+        <EventTask type="rankSystem" state="pause" next="none" />
+        <!--랭크 시스템 멈춤-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="두번째스테이지,시간종료" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096025" style="combat" next="time" nextValue="3" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096026" style="combat" next="none" />
+        <EventTask type="timer" action="stop" name="타이머B" next="time" nextValue="5" />
+        <EventTask type="timer" action="stop" value="0" name="타이머B" next="none" />
+        <!-- 랭킹 타이머 종료 -->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600431" next="none" />
+        <!--두번째 스테이지 앞문-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600432" next="none" />
+        <!--두번째 스테이지 뒷문-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600398" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600399" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600400" next="none" />
+        <!--123 목책-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600404" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600412" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600420" next="none" />
+        <!--123 골램-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600405" next="none" />
+        <!--1 화신-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600425" next="none" />
+        <!--3유안티-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600418" next="none" />
+        <!--2지옥불-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600430" next="none" />
+        <!--1거인-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600402" next="none" />
+        <!--1 오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600428" next="none" />
+        <!--2오크-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600429" next="none" />
+        <!--3오크-->
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600174" targetNpcId="496,702" startAggro="200000" aggroInterval="1" aggroRange="100000" next="time" nextValue="2" />
+        <!--세번째 메인 수정-->
+        <EventTask type="abnormality" abnormalityId="47710400" target="npc" targetNpcId="496, 303" next="time" nextValue="2" />
+        <!--수정 업노말리티-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600173" next="time" nextValue="1" />
+        <!--두번째 메인 수정-->
+        <EventTask type="rankSystem" state="pause" next="none" />
+        <!--랭크 시스템 멈춤-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="세번째스테이지,시간종료" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600261" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600269" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600270" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600271" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600439" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600440" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600441" next="none" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8007" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096028" style="combat" next="time" nextValue="5" />
+        <EventTask type="rankSystem" state="end" next="none" />
+        <!--랭킹시스템 종료-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="첫번째스테이지,파티전멸" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="flag" name="타워생존" value="0" next="none" />
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600266" next="none" />
+        <!--첫번째 스테이지 앞문-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="두번째스테이지,파티전멸" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600266" next="none" />
+        <!--첫번째 스테이지 앞문-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600267" next="none" />
+        <!--첫번째 스테이지 뒷문-->
+        <EventTask type="despawn" huntingZoneId="496" territoryId="49600431" next="none" />
+        <!--두번째 스테이지 앞문-->
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="세번째스테이지,바르쿠드생존" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="Soundon" soundType="effectSound" soundId="8009" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096009" style="combat" next="time" nextValue="2" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8012" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096010" style="combat" next="time" nextValue="30" />
+        <EventTask type="message" string="@dungeon:9096016" style="alert" next="time" nextValue="60" />
+        <EventTask type="message" string="@dungeon:9096007" style="alert" next="time" nextValue="60" />
+        <EventTask type="message" string="@dungeon:9096007" style="alert" next="time" nextValue="60" />
+        <EventTask type="message" string="@dungeon:9096007" style="alert" next="time" nextValue="60" />
+        <EventTask type="Soundon" soundType="effectSound" soundId="8010" playTime="0" next="none" />
+        <EventTask type="message" string="@dungeon:9096008" style="combat" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="골램생존,카딘사망" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096029" style="alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <EventGroup type="flag" name="세리온자비사용,바르쿠드사망" repeat="false">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="message" string="@dungeon:9096030" style="alert" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <!-- 입장 후 제라드, 제르미르 등장 -->
+  <EventGroup type="enterTerritory" uniqueId="496, 49600268">
+    <Event>
+      <EventTaskGroup>
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600176" next="time" nextValue="1" />
+        <EventTask type="spawn" huntingZoneId="496" territoryId="49600177" next="none" />
+      </EventTaskGroup>
+    </Event>
+  </EventGroup>
+  <Condition type="maxMemberCount" value="5" />
+  
+  
+  
+ </Dungeon>

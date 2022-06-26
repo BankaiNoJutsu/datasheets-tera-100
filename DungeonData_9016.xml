@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+ <Dungeon continentId="9016" name="@dungeon:9016" startPos="12791.6074,69247.1484,-6309.0581" exitContinentId="9015" exitPos="11884,-51458,1122" destroyWaitMin="1">
+
+  	<RestoreTargetQuest id="41510,41511,41512,41513,41514,41515,41516,41517"/>
+	<Condition type="solo" value="1"/>
+	<Condition type="levelOver" value="1" />
+
+	<EventGroup type="enterTerritory" uniqueId="416, 41600015">														<!-- 다리올라오면 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600048" next="none" />					<!-- 1단계 전투중인 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="416, 41600021">														<!-- 쿠마스 만날때 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600051" next="none" />					<!-- 3단계 전투중인 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="enterTerritory" uniqueId="416, 41600025">														<!-- 끊어진 다리앞 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9016005" style="default" next="none" />
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<!-- 유저가 창기사 일때 -->
+	<EventGroup triggerUserClass="lancer" type="enterTerritory" uniqueId="416,41600001" >									<!-- 창기사로 처음 진입하면 악령의실험체 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600024" next="time" nextValue="10"/>				<!-- 창기사일때 좀비죄수 추가 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600002" next="none" />							<!-- 창기사일때 악령의 실험체 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600006" next="none" />							<!-- 창기사일때 동료 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600011" next="none"/>							<!-- 창기사일때 청의마인(창) 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+	
+	<EventGroup type="eliminate" territoryId="41600002">																	<!-- 악령의 실험체를 다 죽이면 오칸 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600003" next="time" nextValue="15"/>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600058" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eliminate" territoryId="41600003,41600058">																	<!-- 오칸 죽으면 엘리온쿠벨과 체스군단 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600022" next="none"/>							<!-- 비공정 연출을 위한 돌 디스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600020" next="none"/>							<!-- 체스군단 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600013" targetNpcId="416,2010" startAggro="100" aggroInterval="1" aggroRange="10000" next="none"/>					<!-- 쿠벨 스폰 -->
+				<EventTask type="doActionScript" targetNpcId="416,7002" actionScriptId="4160312" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<!-- 유저가 검투사 일때 -->
+	<EventGroup triggerUserClass="warrior" type="enterTerritory" uniqueId="416,41600001" >									<!-- 검투사로 처음 진입하면 악령의실험체 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600024" next="time" nextValue="10" />			<!-- 검투사일때 좀비죄수 추가 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600031" next="none" />							<!-- 검투사일때 악령의 실험체 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600007" next="none" />							<!-- 검투사일때 동료 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600041" next="none"/>							<!-- 검투사일때 청의마인(검) 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+
+	<EventGroup type="eliminate" territoryId="41600031">																	<!-- 악령의 실험체를 다 죽이면 오칸 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600032" next="time" nextValue="15"/>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600061" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eliminate" territoryId="41600032,41600061">																	<!-- 오칸 죽으면 엘리온 쿠벨과 체스군단 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600022" next="none"/>							<!-- 비공정 연출을 위한 돌 디스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600020" next="time" nextValue="5"/>							<!-- 체스군단 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600013" targetNpcId="416,2010" startAggro="100" aggroInterval="1" aggroRange="10000" next="none"/>					<!-- 쿠벨 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+
+	<!-- 유저가 무사 일때 -->
+	<EventGroup triggerUserClass="slayer" type="enterTerritory" uniqueId="416,41600001" >									<!-- 무사로 처음 진입하면 악령의실험체 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600024" next="time" nextValue="10" />			<!-- 무사일때 좀비죄수 추가 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600018" next="none" />							<!-- 무사일때 악령의 실험체 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600008" next="none" />							<!-- 무사일때 동료 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600042" next="none"/>							<!-- 무사일때 청의마인(무) 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+
+	<EventGroup type="eliminate" territoryId="41600018">																	<!-- 악령의 실험체를 다 죽이면 오칸 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600016" next="time" nextValue="15"/>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600059" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eliminate" territoryId="41600016,41600059">																	<!-- 오칸 죽으면 엘리온 쿠벨과 체스군단 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600022" next="none"/>							<!-- 비공정 연출을 위한 돌 디스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600020" next="none"/>							<!-- 체스군단 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600013" targetNpcId="416,2010" startAggro="100" aggroInterval="1" aggroRange="10000" next="none"/>					<!-- 쿠벨 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	
+	<!-- 유저가 광전사 일때 -->
+	<EventGroup triggerUserClass="berserker" type="enterTerritory" uniqueId="416,41600001" >								<!-- 광전사로 처음 진입하면 악령의실험체 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600024" next="time" nextValue="10" />			<!-- 광전사일때 좀비죄수 추가 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600033" next="none" />							<!-- 광전사일때 악령의 실험체 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600008" next="none" />							<!-- 광전사일때 동료 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600043" next="none"/>							<!-- 광전사일때 청의마인(광) 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+
+	<EventGroup type="eliminate" territoryId="41600033">																	<!-- 악령의 실험체를 다 죽이면 오칸 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600034" next="time" nextValue="15"/>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600062" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eliminate" territoryId="41600034,41600062">																	<!-- 오칸 죽으면 엘리온 쿠벨과 체스군단 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600022" next="none"/>							<!-- 비공정 연출을 위한 돌 디스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600020" next="none"/>							<!-- 체스군단 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600013" targetNpcId="416,2010" startAggro="100" aggroInterval="1" aggroRange="10000" next="none"/>					<!-- 쿠벨 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<!-- 유저가 마법사 일때 -->
+	<EventGroup triggerUserClass="sorcerer" type="enterTerritory" uniqueId="416,41600001" >									<!-- 마법사로 처음 진입하면 악령의실험체 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600024" next="time" nextValue="10" />			<!-- 마법사일때 좀비죄수 추가 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600035" next="none" />							<!-- 마법사일때 악령의 실험체 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600009" next="none" />							<!-- 마법사일때 동료 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600044" next="none"/>							<!-- 마법사일때 청의마인(광) 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+
+	<EventGroup type="eliminate" territoryId="41600035">																	<!-- 악령의 실험체를 다 죽이면 오칸 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600036" next="time" nextValue="15"/>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600063" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eliminate" territoryId="41600036,41600063">																	<!-- 오칸 죽으면 엘리온 쿠벨과  체스군단 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600022" next="none"/>							<!-- 비공정 연출을 위한 돌 디스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600020" next="none"/>							<!-- 체스군단 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600013" targetNpcId="416,2010" startAggro="100" aggroInterval="1" aggroRange="10000" next="none"/>					<!-- 쿠벨 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	
+	
+	<!-- 유저가 궁수 일때 -->
+	<EventGroup triggerUserClass="archer" type="enterTerritory" uniqueId="416,41600001" >									<!-- 궁수로 처음 진입하면 악령의실험체 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600024" next="time" nextValue="10" />			<!-- 궁수일때 좀비죄수 추가 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600037" next="none" />							<!-- 궁수일때 악령의 실험체 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600009" next="none" />							<!-- 궁수일때 동료 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600045" next="none"/>							<!-- 궁수일때 청의마인(궁) 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+
+	<EventGroup type="eliminate" territoryId="41600037">																	<!-- 악령의 실험체를 다 죽이면 오칸 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600038" next="time" nextValue="15"/>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600064" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eliminate" territoryId="41600038,41600064">																	<!-- 오칸 죽으면 엘리온 쿠벨과  체스군단 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600022" next="none"/>							<!-- 비공정 연출을 위한 돌 디스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600020" next="none"/>							<!-- 체스군단 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600013" targetNpcId="416,2010" startAggro="100" aggroInterval="1" aggroRange="10000" next="none"/>					<!-- 쿠벨 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	
+	<!-- 유저가 사제 일때 -->
+	<EventGroup triggerUserClass="priest" type="enterTerritory" uniqueId="416,41600001" >									<!-- 사제로 처음 진입하면 악령의실험체 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600024" next="time" nextValue="10" />			<!-- 사제일때 좀비죄수 추가 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600019" next="none" />							<!-- 사제일때 악령의 실험체 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600010" next="none" />							<!-- 사제일때 동료 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600045" next="none"/>							<!-- 사제일때 청의마인(궁) 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+
+	<EventGroup type="eliminate" territoryId="41600019">																	<!-- 악령의 실험체를 다 죽이면 오칸 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600017" next="time" nextValue="15"/>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600060" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eliminate" territoryId="41600017,41600060">																	<!-- 오칸 죽으면 엘리온 쿠벨과  체스군단 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600022" next="none"/>							<!-- 비공정 연출을 위한 돌 디스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600020" next="none"/>							<!-- 체스군단 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600013" targetNpcId="416,2010" startAggro="100" aggroInterval="1" aggroRange="10000" next="none"/>					<!-- 쿠벨 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+	
+	<!-- 유저가 정령사 일때 -->
+	<EventGroup triggerUserClass="elementalist" type="enterTerritory" uniqueId="416,41600001" >									<!-- 정령사로 처음 진입하면 악령의실험체 스폰 -->
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600024" next="time" nextValue="10" />			<!-- 정령사일때 좀비죄수 추가 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600039" next="none" />							<!-- 정령사일때 악령의 실험체 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600010" next="none" />							<!-- 정령사일때 동료 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600047" next="none"/>							<!-- 정령사일때 청의마인(궁) 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>  
+
+	<EventGroup type="eliminate" territoryId="41600039">																	<!-- 악령의 실험체를 다 죽이면 오칸 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600040" next="time" nextValue="15"/>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600065" next="none"/> 
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="eliminate" territoryId="41600040,41600065">																	<!-- 오칸 죽으면 엘리온 쿠벨과 체스군단 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600022" next="none"/>							<!-- 비공정 연출을 위한 돌 디스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600020" next="none"/>							<!-- 체스군단 스폰 -->
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600013" targetNpcId="416,2010" startAggro="100" aggroInterval="1" aggroRange="10000" next="none"/>					<!-- 쿠벨 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+
+
+	<!-- 3단계 쿠마스를 죽이면 절대 못 죽이는 카라스차 스폰(창) -->
+	<EventGroup type="eliminate" territoryId="41600011">																	<!-- 쿠마스를 죽이면 무적 카라스차 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600012" next="time" nextValue="22"/>
+				<EventTask type="doActionScript" targetNpcId="416,3001" actionScriptId="141630011" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600012" next="none"/>
+				<EventTask type="playMovie" id="88" next="time" nextValue="200" />
+				<EventTask type="tutorialEnd" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 3단계 쿠마스를 죽이면 절대 못 죽이는 카라스차 스폰(검) -->
+	<EventGroup type="eliminate" territoryId="41600041">																	<!-- 쿠마스를 죽이면 무적 카라스차 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600012" next="time" nextValue="22"/>
+				<EventTask type="doActionScript" targetNpcId="416,3001" actionScriptId="141630011" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600012" next="none"/>
+				<EventTask type="playMovie" id="88" next="time" nextValue="200" />
+				<EventTask type="tutorialEnd" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3단계 쿠마스를 죽이면 절대 못 죽이는 카라스차 스폰(무) -->
+	<EventGroup type="eliminate" territoryId="41600042">																	<!-- 쿠마스를 죽이면 무적 카라스차 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600012" next="time" nextValue="22"/>
+				<EventTask type="doActionScript" targetNpcId="416,3001" actionScriptId="141630011" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600012" next="none"/>
+				<EventTask type="playMovie" id="88" next="time" nextValue="200" />
+				<EventTask type="tutorialEnd" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3단계 쿠마스를 죽이면 절대 못 죽이는 카라스차 스폰(광) -->
+	<EventGroup type="eliminate" territoryId="41600043">																	<!-- 쿠마스를 죽이면 무적 카라스차 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600012" next="time" nextValue="22"/>
+				<EventTask type="doActionScript" targetNpcId="416,3001" actionScriptId="141630011" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600012" next="none"/>
+				<EventTask type="playMovie" id="88" next="time" nextValue="200" />
+				<EventTask type="tutorialEnd" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3단계 쿠마스를 죽이면 절대 못 죽이는 카라스차 스폰(마) -->
+	<EventGroup type="eliminate" territoryId="41600044">																	<!-- 쿠마스를 죽이면 무적 카라스차 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600012" next="time" nextValue="22"/>
+				<EventTask type="doActionScript" targetNpcId="416,3001" actionScriptId="141630011" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600012" next="none"/>
+				<EventTask type="playMovie" id="88" next="time" nextValue="200" />
+				<EventTask type="tutorialEnd" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3단계 쿠마스를 죽이면 절대 못 죽이는 카라스차 스폰(궁) -->
+	<EventGroup type="eliminate" territoryId="41600045">																	<!-- 쿠마스를 죽이면 무적 카라스차 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600012" next="time" nextValue="22"/>
+				<EventTask type="doActionScript" targetNpcId="416,3001" actionScriptId="141630011" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600012" next="none"/>
+				<EventTask type="playMovie" id="88" next="time" nextValue="200" />
+				<EventTask type="tutorialEnd" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3단계 쿠마스를 죽이면 절대 못 죽이는 카라스차 스폰(사) -->
+	<EventGroup type="eliminate" territoryId="41600046">																	<!-- 쿠마스를 죽이면 무적 카라스차 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600012" next="time" nextValue="22"/>
+				<EventTask type="doActionScript" targetNpcId="416,3001" actionScriptId="141630011" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600012" next="none"/>
+				<EventTask type="playMovie" id="88" next="time" nextValue="200" />
+				<EventTask type="tutorialEnd" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 3단계 쿠마스를 죽이면 절대 못 죽이는 카라스차 스폰(정) -->
+	<EventGroup type="eliminate" territoryId="41600047">																	<!-- 쿠마스를 죽이면 무적 카라스차 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600012" next="time" nextValue="22"/>
+				<EventTask type="doActionScript" targetNpcId="416,3001" actionScriptId="141630011" next="time" nextValue="3"/>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600012" next="none"/>
+				<EventTask type="playMovie" id="88" next="time" nextValue="200" />
+				<EventTask type="tutorialEnd" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 2단계 바리케이드가 부서지면 엘리온과 탐사대원들이 만나는 연출 실행-->
+	<EventGroup type="questProgress">
+		<Event questId="41510" taskId="8">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600023" next="time" nextValue="8" />
+				<EventTask type="doActionScript" targetNpcId="416,5010" actionScriptId="4160110" next="time" nextValue="10"/>
+				<EventTask type="doActionScript" targetNpcId="416,5000" actionScriptId="4160110" next="time" nextValue="0"/>
+				<EventTask type="npcAi" targetNpcId="416,5000" aiid="39" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5010" aiid="39" next="none"/> 
+				<EventTask type="npcAi" targetNpcId="416,5001" aiid="40" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5002" aiid="41" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5004" aiid="43" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5005" aiid="49" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5006" aiid="45" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5007" aiid="46" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>	
+	<EventGroup type="questProgress">
+		<Event questId="41511" taskId="8">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600023" next="time" nextValue="8" />
+				<EventTask type="doActionScript" targetNpcId="416,5010" actionScriptId="4160110" next="time" nextValue="10"/>
+				<EventTask type="doActionScript" targetNpcId="416,5000" actionScriptId="4160110" next="time" nextValue="0"/>
+				<EventTask type="npcAi" targetNpcId="416,5000" aiid="39" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5010" aiid="39" next="none"/> 
+				<EventTask type="npcAi" targetNpcId="416,5001" aiid="40" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5002" aiid="41" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5004" aiid="43" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5005" aiid="49" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5006" aiid="45" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5007" aiid="46" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<EventGroup type="questProgress">
+		<Event questId="41512" taskId="8">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600023" next="time" nextValue="8" />
+				<EventTask type="doActionScript" targetNpcId="416,5010" actionScriptId="4160110" next="time" nextValue="10"/>
+				<EventTask type="doActionScript" targetNpcId="416,5000" actionScriptId="4160110" next="time" nextValue="0"/>
+				<EventTask type="npcAi" targetNpcId="416,5000" aiid="39" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5010" aiid="39" next="none"/> 
+				<EventTask type="npcAi" targetNpcId="416,5001" aiid="40" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5002" aiid="41" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5004" aiid="43" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5005" aiid="49" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5006" aiid="45" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5007" aiid="46" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="41513" taskId="8">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600023" next="time" nextValue="8" />
+				<EventTask type="doActionScript" targetNpcId="416,5010" actionScriptId="4160110" next="time" nextValue="10"/>
+				<EventTask type="doActionScript" targetNpcId="416,5000" actionScriptId="4160110" next="time" nextValue="0"/>
+				<EventTask type="npcAi" targetNpcId="416,5000" aiid="39" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5010" aiid="39" next="none"/> 
+				<EventTask type="npcAi" targetNpcId="416,5001" aiid="40" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5002" aiid="41" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5004" aiid="43" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5005" aiid="49" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5006" aiid="45" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5007" aiid="46" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="41514" taskId="8">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600023" next="time" nextValue="8" />
+				<EventTask type="doActionScript" targetNpcId="416,5010" actionScriptId="4160110" next="time" nextValue="10"/>
+				<EventTask type="doActionScript" targetNpcId="416,5000" actionScriptId="4160110" next="time" nextValue="0"/>
+				<EventTask type="npcAi" targetNpcId="416,5000" aiid="39" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5010" aiid="39" next="none"/> 
+				<EventTask type="npcAi" targetNpcId="416,5001" aiid="40" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5002" aiid="41" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5004" aiid="43" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5005" aiid="49" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5006" aiid="45" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5007" aiid="46" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="41515" taskId="8">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600023" next="time" nextValue="8" />
+				<EventTask type="doActionScript" targetNpcId="416,5010" actionScriptId="4160110" next="time" nextValue="10"/>
+				<EventTask type="doActionScript" targetNpcId="416,5000" actionScriptId="4160110" next="time" nextValue="0"/>
+				<EventTask type="npcAi" targetNpcId="416,5000" aiid="39" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5010" aiid="39" next="none"/> 
+				<EventTask type="npcAi" targetNpcId="416,5001" aiid="40" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5002" aiid="41" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5004" aiid="43" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5005" aiid="49" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5006" aiid="45" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5007" aiid="46" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="41516" taskId="8">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600023" next="time" nextValue="8" />
+				<EventTask type="doActionScript" targetNpcId="416,5010" actionScriptId="4160110" next="time" nextValue="10"/>
+				<EventTask type="doActionScript" targetNpcId="416,5000" actionScriptId="4160110" next="time" nextValue="0"/>
+				<EventTask type="npcAi" targetNpcId="416,5000" aiid="39" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5010" aiid="39" next="none"/> 
+				<EventTask type="npcAi" targetNpcId="416,5001" aiid="40" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5002" aiid="41" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5004" aiid="43" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5005" aiid="49" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5006" aiid="45" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5007" aiid="46" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="questProgress">
+		<Event questId="41517" taskId="8">
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600023" next="time" nextValue="8" />
+				<EventTask type="doActionScript" targetNpcId="416,5010" actionScriptId="4160110" next="time" nextValue="10"/>
+				<EventTask type="doActionScript" targetNpcId="416,5000" actionScriptId="4160110" next="time" nextValue="0"/>
+				<EventTask type="npcAi" targetNpcId="416,5000" aiid="39" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5010" aiid="39" next="none"/> 
+				<EventTask type="npcAi" targetNpcId="416,5001" aiid="40" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5002" aiid="41" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5004" aiid="43" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5005" aiid="49" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5006" aiid="45" next="none"/>
+				<EventTask type="npcAi" targetNpcId="416,5007" aiid="46" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<!-- 쿠마스(창) Hp 70% 되면 스폰되는 창병사들-->
+	<EventGroup type="npcHp" uniqueId="416,3000" value="70">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="416" territoryId="41600052" targetNpcId="416,3000" startAggro="100" aggroInterval="1" aggroRange="10000" next="none" />		<!-- 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 쿠마스(검) Hp 70% 되면 스폰되는 창병사들-->
+	<EventGroup type="npcHp" uniqueId="416,3002" value="70">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="416" territoryId="41600052" targetNpcId="416,3002" startAggro="100" aggroInterval="1" aggroRange="10000" next="none" />		<!-- 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+		<!-- 쿠마스(광) Hp 70% 되면 스폰되는 창병사들-->
+	<EventGroup type="npcHp" uniqueId="416,3003" value="70">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="416" territoryId="41600052" targetNpcId="416,3003" startAggro="100" aggroInterval="1" aggroRange="10000" next="none" />		<!-- 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+		<!-- 쿠마스(무) Hp 70% 되면 스폰되는 창병사들-->
+	<EventGroup type="npcHp" uniqueId="416,3004" value="70">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="416" territoryId="41600052" targetNpcId="416,3004" startAggro="100" aggroInterval="1" aggroRange="10000" next="none" />		<!-- 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+		<!-- 쿠마스(마) Hp 70% 되면 스폰되는 창병사들-->
+	<EventGroup type="npcHp" uniqueId="416,3005" value="70">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="416" territoryId="41600052" targetNpcId="416,3005" startAggro="100" aggroInterval="1" aggroRange="10000" next="none" />		<!-- 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+		<!-- 쿠마스(궁) Hp 70% 되면 스폰되는 창병사들-->
+	<EventGroup type="npcHp" uniqueId="416,3006" value="70">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="416" territoryId="41600052" targetNpcId="416,3006" startAggro="100" aggroInterval="1" aggroRange="10000" next="none" />		<!-- 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+		<!-- 쿠마스(사) Hp 70% 되면 스폰되는 창병사들-->
+	<EventGroup type="npcHp" uniqueId="416,3007" value="70">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="416" territoryId="41600052" targetNpcId="416,3007" startAggro="100" aggroInterval="1" aggroRange="10000" next="none" />		<!-- 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 쿠마스(정) Hp 70% 되면 스폰되는 창병사들-->
+	<EventGroup type="npcHp" uniqueId="416,3008" value="70">
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="spawn" huntingZoneId="416" territoryId="41600052" targetNpcId="416,3008" startAggro="100" aggroInterval="1" aggroRange="10000" next="none" />		<!-- 창병사 스폰 -->
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+	<!-- 창병사 1 무리 다죽으면 1분후 창병사 2무리 스폰 -->
+	<EventGroup type="eliminate" territoryId="41600052">																	<!-- 창병사 1 다죽으면 1분후 창병사2 스폰 -->	
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="message" string="@dungeon:9016010" style="default" next="time" nextValue="60"/>
+				<EventTask type="Spawn" huntingZoneId="416" territoryId="41600053" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+
+<!-- 테리토리 진입 시 다리 무너지는 연출 -->
+	<EventGroup type="enterTerritory" uniqueId="416,41600055">														
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="despawn" huntingZoneId="416" territoryId="41600054" next="none" />
+				<EventTask type="doActionScript" targetNpcId="416,9003" actionScriptId="4160311" next="none"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="8002" playTime="5000" next="time" nextValue="3"/>
+				<EventTask type="Soundon" soundType="effectSound" soundId="8006" playTime="5000" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+	<EventGroup type="enterTerritory" uniqueId="416,41600073">														
+		<Event>
+			<EventTaskGroup>
+				<EventTask type="doActionScript" targetNpcId="416,9004" actionScriptId="141690041" next="none"/>
+			</EventTaskGroup>
+		</Event>
+	</EventGroup>
+</Dungeon>
